@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-PlantCare.Worker-2caa345d-519c-4db4-a76f-adc233b84b9c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlantCare.Application\PlantCare.Application.csproj" />
+    <ProjectReference Include="..\PlantCare.Infrastructure\PlantCare.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

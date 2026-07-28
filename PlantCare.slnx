@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="PlantCare.Api/PlantCare.Api.csproj" />
+    <Project Path="PlantCare.Application/PlantCare.Application.csproj" />
+    <Project Path="PlantCare.Domain/PlantCare.Domain.csproj" />
+    <Project Path="PlantCare.Infrastructure/PlantCare.Infrastructure.csproj" />
+    <Project Path="PlantCare.Worker/PlantCare.Worker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="PlantCare.Domain.Tests/PlantCare.Domain.Tests.csproj" Id="083e621a-ec3f-4e52-b299-c27688b6b475" />
+  </Folder>
+</Solution>

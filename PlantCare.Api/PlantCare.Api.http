@@ -1,0 +1,9 @@
+@PlantCare_Api_HostAddress = https://localhost:7017
+
+GET {{PlantCare_Api_HostAddress}}/health
+Accept: text/plain
+
+###
+
+GET {{PlantCare_Api_HostAddress}}/api/system/status
+Accept: application/json
