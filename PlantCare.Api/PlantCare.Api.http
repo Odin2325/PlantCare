@@ -1,4 +1,5 @@
 @PlantCare_Api_HostAddress = https://localhost:7017
+@PlantSpeciesId = 3f648883-5ae3-49ba-bdd4-660a53b1bfea
 
 GET {{PlantCare_Api_HostAddress}}/health
 Accept: text/plain
@@ -7,3 +8,38 @@ Accept: text/plain
 
 GET {{PlantCare_Api_HostAddress}}/api/system/status
 Accept: application/json
+
+### Create a Monstera species
+
+POST {{PlantCare_Api_HostAddress}}/api/plant-species
+Content-Type: application/json
+Accept: application/json
+
+{
+  "commonName": "Monstera",
+  "scientificName": "Monstera deliciosa",
+  "description": "A tropical climbing plant known for its split leaves.",
+  "sunlightRequirement": "BrightIndirectLight",
+  "sunlightInstructions": "Place near a bright window without prolonged direct sunlight.",
+  "defaultWateringIntervalDays": 7,
+  "wateringInstructions": "Water when the top layer of soil feels dry.",
+  "defaultFertilizingIntervalDays": 30,
+  "fertilizingInstructions": "Fertilize monthly during spring and summer.",
+  "soilInstructions": "Use a loose, nutrient-rich and well-draining potting mixture.",
+  "humidityInstructions": "Prefers moderate to high humidity.",
+  "minimumTemperatureCelsius": 18,
+  "maximumTemperatureCelsius": 30,
+  "isToxicToPets": true
+}
+
+### Get the complete plant catalog
+
+GET {{PlantCare_Api_HostAddress}}/api/plant-species
+Accept: application/json
+
+### Get one plant species
+
+GET {{PlantCare_Api_HostAddress}}/api/plant-species/{{PlantSpeciesId}}
+Accept: application/json
+
+

@@ -9,4 +9,8 @@
   <Folder Name="/tests/">
     <Project Path="PlantCare.Domain.Tests/PlantCare.Domain.Tests.csproj" Id="083e621a-ec3f-4e52-b299-c27688b6b475" />
   </Folder>
+  <Project Path="plant-care-web/plant-care-web.esproj">
+    <Build />
+    <Deploy />
+  </Project>
 </Solution>

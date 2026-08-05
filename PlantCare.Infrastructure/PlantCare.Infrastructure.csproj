@@ -10,11 +10,11 @@
     <Folder Include="Authentications\" />
     <Folder Include="Calendar\" />
     <Folder Include="Notifications\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Persistence\" />
+    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.10" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
   </ItemGroup>

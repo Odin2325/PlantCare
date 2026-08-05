@@ -7,12 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\" />
     <Folder Include="CareSchedules\" />
     <Folder Include="CareEvents\" />
     <Folder Include="Notifications\" />
     <Folder Include="UserPlants\" />
-    <Folder Include="Plants\" />
   </ItemGroup>
 
   <ItemGroup>

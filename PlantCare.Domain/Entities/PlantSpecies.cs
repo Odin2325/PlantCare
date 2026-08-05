@@ -4,10 +4,10 @@ namespace PlantCare.Domain.Entities;
 
 public sealed class PlantSpecies
 {
-    private const int CommonNameMaxLength = 100;
-    private const int ScientificNameMaxLength = 150;
-    private const int DescriptionMaxLength = 2_000;
-    private const int InstructionsMaxLength = 1_000;
+    public const int CommonNameMaxLength = 100;
+    public const int ScientificNameMaxLength = 150;
+    public const int DescriptionMaxLength = 2_000;
+    public const int InstructionsMaxLength = 1_000;
 
     // Required later by Entity Framework Core when materializing entities.
     // It remains private so normal application code must use Create().
