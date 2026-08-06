@@ -32,6 +32,29 @@ Accept: application/json
   "isToxicToPets": true
 }
 
+### Create a Aloe species
+
+POST {{PlantCare_Api_HostAddress}}/api/plant-species
+Content-Type: application/json
+Accept: application/json
+
+{
+  "commonName": "Aloe Vera",
+  "scientificName": "Aloe vera",
+  "description": "A popular, fleshy-leaved succulent known for its medicinal soothing gel and rosette growth habit.",
+  "sunlightRequirement": "FullSun",
+  "sunlightInstructions": "Requires six to eight hours of direct sunlight daily for robust growth.",
+  "defaultWateringIntervalDays": 14,
+  "wateringInstructions": "Water deeply only when the potting soil is completely dry.",
+  "defaultFertilizingIntervalDays": 60,
+  "fertilizingInstructions": "Apply a diluted succulent fertilizer once every two months during spring and summer.",
+  "soilInstructions": "Use a gritty, well-draining cactus and succulent commercial potting blend.",
+  "humidityInstructions": "Thrives in low humidity environments and tolerates dry indoor air.",
+  "minimumTemperatureCelsius": 10,
+  "maximumTemperatureCelsius": 29,
+  "isToxicToPets": true
+}
+
 ### Get the complete plant catalog
 
 GET {{PlantCare_Api_HostAddress}}/api/plant-species
