@@ -1,0 +1,148 @@
+<section class="catalog-page">
+  <header class="catalog-header">
+    <div>
+      <p class="eyebrow">PlantCare</p>
+
+      <h1>Plant catalog</h1>
+
+      <p class="intro">
+        Browse plants and learn about their sunlight,
+        watering, soil, and fertilizer requirements.
+      </p>
+    </div>
+  </header>
+
+  @if (isLoading()) {
+  <p class="status-message">
+    Loading plant catalog...
+  </p>
+  } @else if (errorMessage()) {
+  <div class="status-message error">
+    <p>{{ errorMessage() }}</p>
+
+    <button type="button"
+            (click)="reload()">
+      Try again
+    </button>
+  </div>
+  } @else if (plantSpecies().length === 0) {
+  <p class="status-message">
+    No plant species have been added yet.
+  </p>
+  } @else {
+  <div class="plant-grid">
+    @for (plant of plantSpecies(); track plant.id) {
+    <article class="plant-card">
+      <div class="plant-card__heading">
+        <div>
+          <h2>{{ plant.commonName }}</h2>
+
+          @if (plant.scientificName) {
+          <p class="scientific-name">
+            {{ plant.scientificName }}
+          </p>
+          }
+        </div>
+
+        @if (plant.isToxicToPets) {
+        <span class="warning-badge">
+          Toxic to pets
+        </span>
+        }
+      </div>
+
+      <p class="description">
+        {{ plant.description }}
+      </p>
+
+      <dl class="care-details">
+        <div>
+          <dt>Sunlight</dt>
+          <dd>
+            {{
+                  formatEnumName(
+                    plant.sunlightRequirement
+                  )
+            }}
+          </dd>
+        </div>
+
+        <div>
+          <dt>Watering</dt>
+          <dd>
+            Every
+            {{ plant.defaultWateringIntervalDays }}
+            days
+          </dd>
+        </div>
+
+        <div>
+          <dt>Fertilizing</dt>
+          <dd>
+            @if (
+            plant.defaultFertilizingIntervalDays !==
+            null
+            ) {
+            Every
+            {{
+                    plant.defaultFertilizingIntervalDays
+            }}
+            days
+            } @else {
+            No default schedule
+            }
+          </dd>
+        </div>
+
+        <div>
+          <dt>Temperature</dt>
+          <dd>
+            @if (
+            plant.minimumTemperatureCelsius !== null &&
+            plant.maximumTemperatureCelsius !== null
+            ) {
+            {{
+                    plant.minimumTemperatureCelsius
+            }}–{{
+                    plant.maximumTemperatureCelsius
+            }} °C
+            } @else {
+            Not specified
+            }
+          </dd>
+        </div>
+      </dl>
+
+      <div class="instruction">
+        <h3>Watering instructions</h3>
+        <p>{{ plant.wateringInstructions }}</p>
+      </div>
+
+      <div class="instruction">
+        <h3>Sunlight instructions</h3>
+        <p>{{ plant.sunlightInstructions }}</p>
+      </div>
+
+      <div class="instruction">
+        <h3>Soil</h3>
+        <p>{{ plant.soilInstructions }}</p>
+      </div>
+
+      @if (plant.fertilizingInstructions) {
+      <div class="instruction">
+        <h3>Fertilizing instructions</h3>
+        <p>{{ plant.fertilizingInstructions }}</p>
+      </div>
+      }
+
+      @if (plant.humidityInstructions) {
+      <div class="instruction">
+        <h3>Humidity</h3>
+        <p>{{ plant.humidityInstructions }}</p>
+      </div>
+      }
+    </article>
+    }
+  </div>
+  }
+</section>
