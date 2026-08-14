@@ -10,7 +10,6 @@
     <Folder Include="CareSchedules\" />
     <Folder Include="CareEvents\" />
     <Folder Include="Notifications\" />
-    <Folder Include="UserPlants\" />
   </ItemGroup>
 
   <ItemGroup>

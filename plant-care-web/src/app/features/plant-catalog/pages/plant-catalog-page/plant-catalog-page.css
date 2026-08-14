@@ -158,3 +158,18 @@ h1 {
     flex-direction: column;
   }
 }
+
+.details-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  background: #377a4b;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+  .details-link:hover {
+    background: #2d663e;
+  }

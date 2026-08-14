@@ -1,27 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Authentications\" />
-    <Folder Include="Calendar\" />
-    <Folder Include="Notifications\" />
-    <Folder Include="Persistence\Migrations\" />
-  </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.10" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Authentications\" />
+        <Folder Include="Calendar\" />
+        <Folder Include="Notifications\" />
+        <Folder Include="Persistence\Migrations\" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PlantCare.Application\PlantCare.Application.csproj" />
-    <ProjectReference Include="..\PlantCare.Domain\PlantCare.Domain.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"
+                          Version="10.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"
+                          Version="10.0.10" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\PlantCare.Application\PlantCare.Application.csproj" />
+        <ProjectReference Include="..\PlantCare.Domain\PlantCare.Domain.csproj" />
+    </ItemGroup>
 
 </Project>

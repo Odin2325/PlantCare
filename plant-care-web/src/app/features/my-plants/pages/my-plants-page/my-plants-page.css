@@ -1,0 +1,144 @@
+:host {
+  display: block;
+}
+
+.my-plants-page {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+  .page-header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .page-header p {
+    color: #68736c;
+  }
+
+.browse-link,
+.empty-state a {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.6rem;
+  background: #377a4b;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.plant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.plant-card {
+  padding: 1.5rem;
+  border: 1px solid #dce5de;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 8px 24px rgb(20 60 30 / 8%);
+}
+
+.species-name {
+  margin: 0;
+  color: #377a4b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plant-card h2 {
+  margin: 0.35rem 0 0;
+}
+
+.scientific-name {
+  margin: 0.25rem 0 1.25rem;
+  color: #68736c;
+  font-style: italic;
+}
+
+.care-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+  .care-summary div {
+    padding: 0.8rem;
+    border-radius: 0.7rem;
+    background: #f2f7f3;
+  }
+
+  .care-summary span,
+  .care-summary strong {
+    display: block;
+  }
+
+  .care-summary span {
+    margin-bottom: 0.3rem;
+    color: #68736c;
+    font-size: 0.75rem;
+  }
+
+  .care-summary strong {
+    font-size: 0.9rem;
+  }
+
+.notes {
+  padding-top: 1rem;
+  border-top: 1px solid #e5ebe6;
+  color: #59655e;
+  line-height: 1.5;
+}
+
+.empty-state {
+  padding: 3rem 2rem;
+  border: 1px dashed #aab9ae;
+  border-radius: 1rem;
+  background: white;
+  text-align: center;
+}
+
+.status-message {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #eef4ef;
+}
+
+  .status-message.error {
+    background: #fff0f0;
+    color: #9d2525;
+  }
+
+  .status-message button {
+    padding: 0.6rem 0.9rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #377a4b;
+    color: white;
+    cursor: pointer;
+  }
+
+@media (max-width: 650px) {
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .care-summary {
+    grid-template-columns: 1fr;
+  }
+}

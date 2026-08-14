@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using PlantCare.Infrastructure.Persistence;
 using PlantCare.Application.Abstractions.Persistence;
 using PlantCare.Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Identity;
+using PlantCare.Infrastructure.Identity;
 
 namespace PlantCare.Infrastructure;
 
@@ -23,9 +25,25 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
 
-        services.AddScoped<
-    IPlantSpeciesRepository,
-    PlantSpeciesRepository>();
+        services.AddIdentityApiEndpoints<ApplicationUser>(options =>
+           {
+               options.User.RequireUniqueEmail = true;
+
+               options.Password.RequiredLength = 10;
+               options.Password.RequireDigit = true;
+               options.Password.RequireLowercase = true;
+               options.Password.RequireUppercase = true;
+               options.Password.RequireNonAlphanumeric = false;
+
+               // TODO: add email confirmation after implementingan email provider.
+               options.SignIn.RequireConfirmedEmail = false;
+           })
+           .AddRoles<IdentityRole<Guid>>()
+           .AddEntityFrameworkStores<PlantCareDbContext>();
+
+        services.AddScoped<IPlantSpeciesRepository, PlantSpeciesRepository>();
+
+        services.AddScoped<IUserPlantRepository, UserPlantRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

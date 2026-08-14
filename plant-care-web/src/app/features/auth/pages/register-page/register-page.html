@@ -1,0 +1,87 @@
+<main class="auth-page">
+  <section class="auth-card">
+    <p class="eyebrow">PlantCare</p>
+    <h1>Create your account</h1>
+
+    <p class="auth-intro">
+      Start building your personal plant-care schedule.
+    </p>
+
+    <form [formGroup]="form"
+          (ngSubmit)="submit()">
+
+      <label for="email">
+        Email address
+      </label>
+
+      <input id="email"
+             type="email"
+             autocomplete="email"
+             formControlName="email">
+
+      @if (
+      form.controls.email.touched &&
+      form.controls.email.invalid
+      ) {
+      <p class="field-error">
+        Enter a valid email address.
+      </p>
+      }
+
+      <label for="password">
+        Password
+      </label>
+
+      <input id="password"
+             type="password"
+             autocomplete="new-password"
+             formControlName="password">
+
+      <p class="field-hint">
+        Use at least 10 characters, including an
+        uppercase letter, lowercase letter, and number.
+      </p>
+
+      @if (
+      form.controls.password.touched &&
+      form.controls.password.invalid
+      ) {
+      <p class="field-error">
+        The password does not meet the requirements.
+      </p>
+      }
+
+      <label for="confirmPassword">
+        Confirm password
+      </label>
+
+      <input id="confirmPassword"
+             type="password"
+             autocomplete="new-password"
+             formControlName="confirmPassword">
+
+      @if (errorMessage()) {
+      <p class="form-error">
+        {{ errorMessage() }}
+      </p>
+      }
+
+      <button type="submit"
+              [disabled]="isSubmitting()">
+
+        @if (isSubmitting()) {
+        Creating account...
+        } @else {
+        Create account
+        }
+      </button>
+    </form>
+
+    <p class="auth-alternative">
+      Already registered?
+      <a routerLink="/login">
+        Log in
+      </a>
+    </p>
+  </section>
+</main>

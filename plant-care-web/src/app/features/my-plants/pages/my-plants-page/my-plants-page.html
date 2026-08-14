@@ -1,0 +1,133 @@
+<main class="my-plants-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">
+        My plants
+      </p>
+
+      <h1>
+        Your plant collection
+      </h1>
+
+      <p>
+        Signed in as
+        <strong>
+          {{ authService.currentUser()?.email }}
+        </strong>
+      </p>
+    </div>
+
+    <a class="browse-link"
+       routerLink="/plants">
+      Add another plant
+    </a>
+  </header>
+
+  @if (isLoading()) {
+  <p class="status-message">
+    Loading your plants...
+  </p>
+  } @else if (errorMessage()) {
+  <div class="status-message error">
+    <p>
+      {{ errorMessage() }}
+    </p>
+
+    <button type="button"
+            (click)="reload()">
+      Try again
+    </button>
+  </div>
+  } @else if (userPlants().length === 0) {
+  <section class="empty-state">
+    <h2>
+      No plants yet
+    </h2>
+
+    <p>
+      Choose a species from the plant catalog
+      to start caring for your first plant.
+    </p>
+
+    <a routerLink="/plants">
+      Browse the plant catalog
+    </a>
+  </section>
+  } @else {
+  <section class="plant-grid">
+    @for (
+    plant of userPlants();
+    track plant.id
+    ) {
+    <article class="plant-card">
+      <p class="species-name">
+        {{ plant.speciesCommonName }}
+      </p>
+
+      <h2>
+        {{ plant.nickname }}
+      </h2>
+
+      @if (plant.speciesScientificName) {
+      <p class="scientific-name">
+        {{ plant.speciesScientificName }}
+      </p>
+      }
+
+      @if (plant.location) {
+      <p>
+        <strong>Location:</strong>
+        {{ plant.location }}
+      </p>
+      }
+
+      @if (plant.acquiredOn) {
+      <p>
+        <strong>Acquired:</strong>
+        {{ plant.acquiredOn }}
+      </p>
+      }
+
+      <div class="care-summary">
+        <div>
+          <span>Watering</span>
+
+          <strong>
+            Every
+            {{
+                  plant.defaultWateringIntervalDays
+            }}
+            days
+          </strong>
+        </div>
+
+        <div>
+          <span>Fertilizing</span>
+
+          <strong>
+            @if (
+            plant.defaultFertilizingIntervalDays !==
+            null
+            ) {
+            Every
+            {{
+                    plant.defaultFertilizingIntervalDays
+            }}
+            days
+            } @else {
+            Not scheduled
+            }
+          </strong>
+        </div>
+      </div>
+
+      @if (plant.notes) {
+      <p class="notes">
+        {{ plant.notes }}
+      </p>
+      }
+    </article>
+    }
+  </section>
+  }
+</main>

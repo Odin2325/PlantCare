@@ -141,6 +141,10 @@
         <p>{{ plant.humidityInstructions }}</p>
       </div>
       }
+      <a class="details-link"
+         [routerLink]="['/plants', plant.id]">
+        View details
+      </a>
     </article>
     }
   </div>
