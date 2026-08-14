@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm",
+    "packageManager": "pnpm",
     "analytics": "23923820-2f73-4a7c-9786-15033100e054"
   },
   "newProjectRoot": "projects",
@@ -69,6 +69,10 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "port": 62018,
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "plant-care-web:build:production"
@@ -77,10 +81,7 @@
               "buildTarget": "plant-care-web:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "port": 62018
-          }
+          "defaultConfiguration": "development"
         },
         "test": {
           "builder": "@angular/build:unit-test",

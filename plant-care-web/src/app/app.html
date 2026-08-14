@@ -1,1 +1,42 @@
+<header class="app-header">
+  <a class="brand"
+     routerLink="/plants">
+    PlantCare
+  </a>
+
+  <nav aria-label="Main navigation">
+    <a routerLink="/plants"
+       routerLinkActive="active">
+      Plant catalog
+    </a>
+
+    @if (authService.isAuthenticated()) {
+    <a routerLink="/my-plants"
+       routerLinkActive="active">
+      My plants
+    </a>
+
+    <span class="account-email">
+      {{ authService.currentUser()?.email }}
+    </span>
+
+    <button type="button"
+            [disabled]="isLoggingOut()"
+            (click)="logout()">
+      Log out
+    </button>
+    } @else {
+    <a routerLink="/login"
+       routerLinkActive="active">
+      Log in
+    </a>
+
+    <a class="register-link"
+       routerLink="/register">
+      Register
+    </a>
+    }
+  </nav>
+</header>
+
 <router-outlet />

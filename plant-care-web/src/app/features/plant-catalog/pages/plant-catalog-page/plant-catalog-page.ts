@@ -4,6 +4,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PlantSpecies } from '../../../../models/plant-species.model';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
@@ -11,7 +12,9 @@ import { PlantSpeciesApiService } from '../../../../core/services/plant-species-
 @Component({
   selector: 'app-plant-catalog-page',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink,
+  ],
   templateUrl: './plant-catalog-page.html',
   styleUrl: './plant-catalog-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

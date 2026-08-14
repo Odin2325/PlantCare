@@ -1,0 +1,257 @@
+<main class="plant-detail-page">
+  <a class="back-link"
+     routerLink="/plants">
+    ← Back to plant catalog
+  </a>
+
+  @if (isLoading()) {
+  <p class="status-message">
+    Loading plant details...
+  </p>
+  } @else if (loadError()) {
+  <div class="status-message error">
+    {{ loadError() }}
+  </div>
+  } @else if (plantSpecies(); as plant) {
+
+  <section class="plant-heading">
+    <div>
+      <p class="eyebrow">
+        Plant species
+      </p>
+
+      <h1>
+        {{ plant.commonName }}
+      </h1>
+
+      @if (plant.scientificName) {
+      <p class="scientific-name">
+        {{ plant.scientificName }}
+      </p>
+      }
+    </div>
+
+    @if (plant.isToxicToPets) {
+    <span class="warning-badge">
+      Toxic to pets
+    </span>
+    }
+  </section>
+
+  <p class="description">
+    {{ plant.description }}
+  </p>
+
+  <section class="care-grid">
+    <article class="care-card">
+      <h2>Sunlight</h2>
+
+      <strong>
+        {{
+            formatEnumName(
+              plant.sunlightRequirement
+            )
+        }}
+      </strong>
+
+      <p>
+        {{ plant.sunlightInstructions }}
+      </p>
+    </article>
+
+    <article class="care-card">
+      <h2>Watering</h2>
+
+      <strong>
+        Every
+        {{ plant.defaultWateringIntervalDays }}
+        days
+      </strong>
+
+      <p>
+        {{ plant.wateringInstructions }}
+      </p>
+    </article>
+
+    <article class="care-card">
+      <h2>Soil</h2>
+
+      <p>
+        {{ plant.soilInstructions }}
+      </p>
+    </article>
+
+    <article class="care-card">
+      <h2>Fertilizing</h2>
+
+      @if (
+      plant.defaultFertilizingIntervalDays !== null
+      ) {
+      <strong>
+        Every
+        {{
+              plant.defaultFertilizingIntervalDays
+        }}
+        days
+      </strong>
+      } @else {
+      <strong>
+        No default schedule
+      </strong>
+      }
+
+      @if (plant.fertilizingInstructions) {
+      <p>
+        {{ plant.fertilizingInstructions }}
+      </p>
+      }
+    </article>
+
+    <article class="care-card">
+      <h2>Temperature</h2>
+
+      @if (
+      plant.minimumTemperatureCelsius !== null &&
+      plant.maximumTemperatureCelsius !== null
+      ) {
+      <strong>
+        {{
+              plant.minimumTemperatureCelsius
+        }}–{{
+              plant.maximumTemperatureCelsius
+        }} °C
+      </strong>
+      } @else {
+      <strong>
+        Not specified
+      </strong>
+      }
+    </article>
+
+    <article class="care-card">
+      <h2>Humidity</h2>
+
+      <p>
+        {{
+            plant.humidityInstructions ??
+            'No special humidity instructions.'
+        }}
+      </p>
+    </article>
+  </section>
+
+  <section class="add-plant-section">
+    <div class="add-plant-intro">
+      <p class="eyebrow">
+        Your collection
+      </p>
+
+      <h2>
+        Start caring for this plant
+      </h2>
+
+      <p>
+        Add your own {{ plant.commonName }} to
+        PlantCare. The default care intervals will
+        be used as the starting point for its
+        schedule.
+      </p>
+    </div>
+
+    @if (!authService.isAuthenticated()) {
+    <div class="login-required">
+      <p>
+        Log in to add this plant to your
+        collection.
+      </p>
+
+      <a [routerLink]="['/login']"
+         [queryParams]="{
+              returnUrl: '/plants/' + plant.id
+            }">
+        Log in
+      </a>
+    </div>
+    } @else {
+    <form class="add-plant-form"
+          [formGroup]="addPlantForm"
+          (ngSubmit)="addToMyPlants()">
+
+      <div class="form-field">
+        <label for="nickname">
+          Nickname
+        </label>
+
+        <input id="nickname"
+               type="text"
+               maxlength="100"
+               formControlName="nickname">
+
+        @if (
+        addPlantForm.controls.nickname.touched &&
+        addPlantForm.controls.nickname.invalid
+        ) {
+        <p class="field-error">
+          Enter a nickname for your plant.
+        </p>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="location">
+          Location
+          <span>Optional</span>
+        </label>
+
+        <input id="location"
+               type="text"
+               maxlength="150"
+               placeholder="e.g. Living room window"
+               formControlName="location">
+      </div>
+
+      <div class="form-field">
+        <label for="acquiredOn">
+          Acquired on
+          <span>Optional</span>
+        </label>
+
+        <input id="acquiredOn"
+               type="date"
+               formControlName="acquiredOn">
+      </div>
+
+      <div class="form-field">
+        <label for="notes">
+          Notes
+          <span>Optional</span>
+        </label>
+
+        <textarea id="notes"
+                  rows="4"
+                  maxlength="2000"
+                  placeholder="Anything useful to remember about this plant..."
+                  formControlName="notes">
+            </textarea>
+      </div>
+
+      @if (submitError()) {
+      <p class="form-error">
+        {{ submitError() }}
+      </p>
+      }
+
+      <button type="submit"
+              [disabled]="isSubmitting()">
+
+        @if (isSubmitting()) {
+        Adding plant...
+        } @else {
+        Add to My Plants
+        }
+      </button>
+    </form>
+    }
+  </section>
+  }
+</main>

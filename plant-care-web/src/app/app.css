@@ -2,3 +2,68 @@
   display: block;
   min-height: 100vh;
 }
+
+.app-header {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem max(1rem, calc((100% - 1200px) / 2));
+  border-bottom: 1px solid #dce5de;
+  background: rgb(255 255 255 / 92%);
+}
+
+.brand {
+  color: #245c36;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+  nav a {
+    color: #435048;
+    text-decoration: none;
+  }
+
+    nav a.active {
+      color: #245c36;
+      font-weight: 700;
+    }
+
+  .register-link,
+  nav button {
+    padding: 0.55rem 0.8rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #377a4b;
+    color: white;
+    cursor: pointer;
+  }
+
+.account-email {
+  color: #68736c;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  nav {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .account-email {
+    display: none;
+  }
+}

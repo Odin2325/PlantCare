@@ -1,9 +1,18 @@
 <Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.5277448">
   <PropertyGroup>
-    <StartupCommand>npm start</StartupCommand>
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+    <!-- Use pnpm for Visual Studio commands -->
+    <BuildCommand>pnpm run build</BuildCommand>
+    <StartupCommand>pnpm run start</StartupCommand>
+    <TestCommand>pnpm run test</TestCommand>
     <!-- Allows the build (or compile) script located on package.json to run on Build -->
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\plant-care-web\browser\</BuildOutputFolder>
   </PropertyGroup>
+  <Target Name="RestorePnpmPackages" BeforeTargets="BeforeRestore" Condition="Exists('$(MSBuildProjectDirectory)\pnpm-lock.yaml')">
+    <Message Importance="high" Text="Restoring dependencies using pnpm. This may take several minutes..." />
+    <Exec Command="pnpm --version" WorkingDirectory="$(MSBuildProjectDirectory)" ContinueOnError="false" />
+    <Exec Command="pnpm install --frozen-lockfile" WorkingDirectory="$(MSBuildProjectDirectory)" ContinueOnError="false" />
+  </Target>
 </Project>
