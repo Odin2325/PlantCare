@@ -10,6 +10,9 @@ public sealed class PlantCareDbContext(DbContextOptions<PlantCareDbContext> opti
 {
     public DbSet<PlantSpecies> PlantSpecies => Set<PlantSpecies>();
     public DbSet<UserPlant> UserPlants => Set<UserPlant>();
+    public DbSet<CareSchedule> CareSchedules => Set<CareSchedule>();
+
+    public DbSet<CareEvent> CareEvents => Set<CareEvent>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

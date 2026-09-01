@@ -100,7 +100,7 @@ export class RegisterPage {
       )
       .subscribe({
         next: () => {
-          void this.router.navigate(['/my-plants']);
+          void this.router.navigate(['/dashboard']);
         },
         error: (error: HttpErrorResponse) => {
           this.errorMessage.set(

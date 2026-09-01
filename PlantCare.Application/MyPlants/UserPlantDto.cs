@@ -1,4 +1,6 @@
-﻿namespace PlantCare.Application.MyPlants;
+﻿using PlantCare.Application.Care;
+
+namespace PlantCare.Application.MyPlants;
 
 public sealed record UserPlantDto(
     Guid Id,
@@ -12,4 +14,5 @@ public sealed record UserPlantDto(
     bool IsActive,
     DateTimeOffset CreatedAtUtc,
     int DefaultWateringIntervalDays,
-    int? DefaultFertilizingIntervalDays);
+    int? DefaultFertilizingIntervalDays,
+    IReadOnlyList<CareScheduleDto> CareSchedules);

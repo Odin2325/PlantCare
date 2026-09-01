@@ -1,4 +1,6 @@
-﻿namespace PlantCare.Domain.Entities;
+﻿using PlantCare.Domain.Enums;
+
+namespace PlantCare.Domain.Entities;
 
 public sealed class UserPlant
 {
@@ -29,6 +31,9 @@ public sealed class UserPlant
     public DateTimeOffset CreatedAtUtc { get; private set; }
 
     public PlantSpecies PlantSpecies { get; private set; } = null!;
+
+    private readonly List<CareSchedule> _careSchedules = [];
+    public IReadOnlyCollection<CareSchedule> CareSchedules => _careSchedules;
 
     public static UserPlant Create(
         Guid userId,
@@ -61,6 +66,20 @@ public sealed class UserPlant
             IsActive = true,
             CreatedAtUtc = createdAtUtc
         };
+    }
+
+    public CareSchedule AddCareSchedule(CareActionType actionType, int intervalDays)
+    {
+        if (_careSchedules.Any(schedule => schedule.ActionType == actionType))
+        {
+            throw new InvalidOperationException($"A {actionType} schedule already exists for this plant.");
+        }
+
+        var schedule = CareSchedule.Create(Id, actionType, intervalDays);
+
+        _careSchedules.Add(schedule);
+
+        return schedule;
     }
 
     public void UpdateDetails(string nickname, string? location, DateOnly? acquiredOn,string? notes)

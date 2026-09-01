@@ -1,0 +1,146 @@
+:host {
+  display: block;
+}
+
+.care-history-page {
+  width: min(900px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #377a4b;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-header > p:last-child {
+  color: #68736c;
+}
+
+.record-card {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #dce5de;
+  border-radius: 1rem;
+  background: #f2f7f3;
+}
+
+  .record-card h2 {
+    margin-top: 0;
+  }
+
+  .record-card form {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .record-card label {
+    margin-top: 0.5rem;
+    font-weight: 650;
+  }
+
+  .record-card input,
+  .record-card select,
+  .record-card textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #bbc9be;
+    border-radius: 0.6rem;
+    background: white;
+    font: inherit;
+  }
+
+  .record-card button {
+    margin-top: 0.75rem;
+    padding: 0.8rem 1rem;
+    border: 0;
+    border-radius: 0.6rem;
+    background: #377a4b;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+    .record-card button:disabled {
+      cursor: wait;
+      opacity: 0.6;
+    }
+
+.field-hint {
+  margin: 0;
+  color: #68736c;
+  font-size: 0.8rem;
+}
+
+.form-error {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: #fff0f0;
+  color: #9d2525;
+}
+
+.history-section {
+  margin-top: 3rem;
+}
+
+.history-entry {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #dce5de;
+}
+
+  .history-entry header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+    .history-entry header strong {
+      color: #285f3a;
+    }
+
+  .history-entry time {
+    color: #68736c;
+  }
+
+.recorded-at {
+  margin: 0.35rem 0 0;
+  color: #7b857f;
+  font-size: 0.8rem;
+}
+
+.event-notes {
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.empty-history {
+  padding: 2rem;
+  border: 1px dashed #aab9ae;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.status-message {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #eef4ef;
+}
+
+  .status-message.error {
+    background: #fff0f0;
+    color: #9d2525;
+  }
+
+@media (max-width: 600px) {
+  .history-entry header {
+    flex-direction: column;
+  }
+}

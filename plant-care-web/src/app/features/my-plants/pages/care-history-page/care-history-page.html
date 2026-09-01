@@ -1,0 +1,176 @@
+<main class="care-history-page">
+  <a class="back-link"
+     routerLink="/my-plants">
+    ← Back to My Plants
+  </a>
+
+  @if (isLoading()) {
+  <p class="status-message">
+    Loading care history...
+  </p>
+  } @else if (errorMessage()) {
+  <div class="status-message error">
+    {{ errorMessage() }}
+  </div>
+  } @else if (userPlant(); as plant) {
+
+  <header class="page-header">
+    <p class="eyebrow">
+      Care history
+    </p>
+
+    <h1>
+      {{ plant.nickname }}
+    </h1>
+
+    <p>
+      {{ plant.speciesCommonName }}
+
+      @if (
+      plant.speciesScientificName
+      ) {
+      ·
+      <em>
+        {{
+              plant.speciesScientificName
+        }}
+      </em>
+      }
+    </p>
+  </header>
+
+  <section class="record-card">
+    <h2>
+      Record care
+    </h2>
+
+    <form [formGroup]="form"
+          (ngSubmit)="submit()">
+
+      <label for="actionType">
+        Care action
+      </label>
+
+      <select id="actionType"
+              formControlName="actionType">
+
+        @for (
+        schedule of plant.careSchedules;
+        track schedule.id
+        ) {
+        @if (schedule.isEnabled) {
+        <option [value]="
+                  schedule.actionType
+                ">
+          {{
+                  getCareActionName(
+                    schedule.actionType
+                  )
+          }}
+        </option>
+        }
+        }
+      </select>
+
+      <label for="completedAtLocal">
+        When was it completed?
+      </label>
+
+      <input id="completedAtLocal"
+             type="datetime-local"
+             formControlName="completedAtLocal">
+
+      <p class="field-hint">
+        Leave this empty to record the
+        care action as happening now.
+      </p>
+
+      <label for="notes">
+        Notes
+      </label>
+
+      <textarea id="notes"
+                rows="4"
+                maxlength="1000"
+                formControlName="notes">
+        </textarea>
+
+      @if (submitError()) {
+      <p class="form-error">
+        {{ submitError() }}
+      </p>
+      }
+
+      <button type="submit"
+              [disabled]="isSubmitting()">
+
+        @if (isSubmitting()) {
+        Saving...
+        } @else {
+        Record care
+        }
+      </button>
+    </form>
+  </section>
+
+  <section class="history-section">
+    <h2>
+      History
+    </h2>
+
+    @for (
+    event of history();
+    track event.id
+    ) {
+    <article class="history-entry">
+      <header>
+        <strong>
+          {{
+                getCareActionName(
+                  event.actionType
+                )
+          }}
+        </strong>
+
+        <time>
+          {{
+                event.completedAtUtc
+                  | date:'medium'
+          }}
+        </time>
+      </header>
+
+      @if (
+      event.recordedAtUtc !==
+      event.completedAtUtc
+      ) {
+      <p class="recorded-at">
+        Recorded
+        {{
+                event.recordedAtUtc
+                  | date:'medium'
+        }}
+      </p>
+      }
+
+      @if (event.notes) {
+      <p class="event-notes">
+        {{ event.notes }}
+      </p>
+      }
+    </article>
+    } @empty {
+    <div class="empty-history">
+      <h3>
+        No care recorded yet
+      </h3>
+
+      <p>
+        Watering and fertilizing actions
+        will appear here.
+      </p>
+    </div>
+    }
+  </section>
+  }
+</main>

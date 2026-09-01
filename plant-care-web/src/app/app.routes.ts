@@ -23,6 +23,18 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'my-plants/:id/care-history',
+    canActivate: [
+      authGuard,
+    ],
+    loadComponent: () =>
+      import(
+        './features/my-plants/pages/care-history-page/care-history-page'
+      ).then(
+        (component) => component.CareHistoryPage,
+      ),
+  },
+  {
     path: 'my-plants',
     canActivate: [
       authGuard,
@@ -56,6 +68,19 @@ export const routes: Routes = [
         './features/auth/pages/register-page/register-page'
       ).then(
         (component) => component.RegisterPage,
+      ),
+  },
+  {
+    path: 'dashboard',
+    canActivate: [
+      authGuard,
+    ],
+    loadComponent: () =>
+      import(
+        './features/dashboard/pages/dashboard-page/dashboard-page'
+      ).then(
+        component =>
+          component.DashboardPage,
       ),
   },
   {
