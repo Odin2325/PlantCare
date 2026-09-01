@@ -91,11 +91,7 @@ internal sealed class CareService(ICareScheduleRepository careScheduleRepository
     }
 
     public async Task<IReadOnlyList<CareEventHistoryDto>>
-    GetHistoryAsync(
-        Guid userId,
-        Guid userPlantId,
-        int take,
-        CancellationToken cancellationToken = default)
+    GetHistoryAsync(Guid userId, Guid userPlantId, int take, CancellationToken cancellationToken = default)
     {
         if (userId == Guid.Empty)
         {

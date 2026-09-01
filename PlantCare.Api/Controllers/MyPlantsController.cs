@@ -1,10 +1,10 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlantCare.Api.Contracts.MyPlants;
 using PlantCare.Application.Care;
 using PlantCare.Application.MyPlants;
 using PlantCare.Domain.Enums;
+using System.Security.Claims;
 
 namespace PlantCare.Api.Controllers;
 

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using PlantCare.Domain.Entities;
+﻿using PlantCare.Domain.Entities;
 using PlantCare.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlantCare.Api.Contracts.PlantTypes;
 

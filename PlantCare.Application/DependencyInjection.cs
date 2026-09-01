@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlantCare.Application.PlantCatalog;
 using PlantCare.Application.Care;
 using PlantCare.Application.MyPlants;
+using PlantCare.Application.PlantCatalog;
 
 namespace PlantCare.Application;
 
