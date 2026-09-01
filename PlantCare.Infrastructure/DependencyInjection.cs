@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PlantCare.Infrastructure.Persistence;
 using PlantCare.Application.Abstractions.Persistence;
-using PlantCare.Infrastructure.Persistence.Repositories;
-using Microsoft.AspNetCore.Identity;
+using PlantCare.Application.Dashboard;
 using PlantCare.Infrastructure.Identity;
+using PlantCare.Infrastructure.Persistence;
+using PlantCare.Infrastructure.Persistence.Repositories;
 
 namespace PlantCare.Infrastructure;
 
@@ -50,6 +51,8 @@ public static class DependencyInjection
         services.AddScoped<ICareScheduleRepository, CareScheduleRepository>();
 
         services.AddScoped<ICareEventRepository, CareEventRepository>();
+
+        services.AddScoped<IDashboardService, DashboardService>();
 
         return services;
     }

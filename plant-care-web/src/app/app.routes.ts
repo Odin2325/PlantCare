@@ -71,6 +71,19 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'dashboard',
+    canActivate: [
+      authGuard,
+    ],
+    loadComponent: () =>
+      import(
+        './features/dashboard/pages/dashboard-page/dashboard-page'
+      ).then(
+        component =>
+          component.DashboardPage,
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'plants',

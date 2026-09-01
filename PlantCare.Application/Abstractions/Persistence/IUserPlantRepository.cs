@@ -9,4 +9,6 @@ public interface IUserPlantRepository
     Task<UserPlant?> GetByIdForUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default);
 
     void Add(UserPlant userPlant);
+
+    Task<IReadOnlyList<PlantCare.Domain.Entities.UserPlant>> GetForDashboardAsync(Guid userId, DateTimeOffset end, CancellationToken cancellationToken = default);
 }

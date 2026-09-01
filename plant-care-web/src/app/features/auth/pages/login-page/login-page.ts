@@ -81,7 +81,7 @@ export class LoginPage {
           const returnUrl =
             requestedReturnUrl?.startsWith('/')
               ? requestedReturnUrl
-              : '/my-plants';
+              : '/dashboard';
 
           void this.router.navigateByUrl(returnUrl);
         },

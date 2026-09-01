@@ -31,6 +31,27 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
                     userPlant.UserId == userId, cancellationToken);
     }
 
+    public async Task<IReadOnlyList<UserPlant>> GetForDashboardAsync(Guid userId, DateTimeOffset end, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.UserPlants
+            .AsNoTracking()
+            .Include(
+                userPlant => userPlant.PlantSpecies)
+            .Include(
+                userPlant => userPlant.CareSchedules)
+            .Where(
+                userPlant =>
+                    userPlant.UserId == userId)
+            .Where(
+                userPlant =>
+                    userPlant.CareSchedules.Any(
+                        schedule =>
+                            schedule.IsEnabled &&
+                            schedule.NextDueAtUtc != null &&
+                            schedule.NextDueAtUtc < end))
+            .ToListAsync(cancellationToken);
+    }
+
     public void Add(UserPlant userPlant)
     {
         ArgumentNullException.ThrowIfNull(userPlant);

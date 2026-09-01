@@ -238,14 +238,10 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         return Ok(history);
     }
 
-    private bool TryGetCurrentUserId(
-        out Guid userId)
+    private bool TryGetCurrentUserId(out Guid userId)
     {
-        var userIdValue = User.FindFirstValue(
-            ClaimTypes.NameIdentifier);
+        var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        return Guid.TryParse(
-            userIdValue,
-            out userId);
+        return Guid.TryParse(userIdValue, out userId);
     }
 }

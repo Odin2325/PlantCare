@@ -1,0 +1,278 @@
+<main class="dashboard">
+  @if (isLoading()) {
+
+  <section class="loading-state">
+    <p>Loading your plants...</p>
+  </section>
+
+  } @else if (errorMessage()) {
+
+  <section class="error-state">
+    <h2>Something went wrong</h2>
+
+    <p>
+      {{ errorMessage() }}
+    </p>
+
+    <button type="button"
+            (click)="loadDashboard()">
+      Try again
+    </button>
+  </section>
+
+  } @else {
+
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">
+        PlantCare
+      </p>
+
+      <h1>
+        Your plants
+      </h1>
+
+      <p class="subtitle">
+        Here is what needs your attention.
+      </p>
+    </div>
+  </header>
+
+  @if (
+  overdue().length === 0 &&
+  dueToday().length === 0
+  ) {
+
+  <section class="all-good">
+    <div class="all-good-icon">
+      ✓
+    </div>
+
+    <div>
+      <h2>
+        Everything is taken care of!
+      </h2>
+
+      <p>
+        Your plants don't need anything
+        right now.
+      </p>
+    </div>
+  </section>
+
+  }
+
+  @if (overdue().length > 0) {
+
+  <section class="care-section overdue">
+    <div class="section-heading">
+      <div>
+        <span class="section-icon">
+          !
+        </span>
+
+        <h2>
+          Overdue
+        </h2>
+      </div>
+
+      <span class="count">
+        {{ overdue().length }}
+      </span>
+    </div>
+
+    <div class="care-list">
+
+      @for (
+      item of overdue();
+      track item.userPlantId + item.actionType
+      ) {
+
+      <article class="care-card">
+
+        <div class="care-card-main">
+          <div class="plant-icon">
+            🌱
+          </div>
+
+          <div>
+            <h3>
+              {{ item.plantName }}
+            </h3>
+
+            <p>
+              {{ item.speciesCommonName }}
+            </p>
+
+            <span class="care-action">
+              {{
+ getActionLabel(
+                      item.actionType
+                    )
+              }}
+              ·
+              {{ getDueLabel(item) }}
+            </span>
+          </div>
+        </div>
+
+        <button type="button"
+                class="care-button"
+                [disabled]="
+    completingCare() === getCareKey(item)
+  "
+                (click)="completeCare(item)">
+          @if (
+          completingCare() === getCareKey(item)
+          ) {
+          Saving...
+          } @else {
+          {{ getActionLabel(item.actionType) }}
+          }
+        </button>
+
+      </article>
+
+      }
+
+    </div>
+  </section>
+  }
+
+  @if (dueToday().length > 0) {
+
+  <section class="care-section today">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-icon">
+          ✓
+        </span>
+
+        <h2>
+          Today
+        </h2>
+      </div>
+
+      <span class="count">
+        {{ dueToday().length }}
+      </span>
+    </div>
+
+    <div class="care-list">
+
+      @for (
+      item of dueToday();
+      track item.userPlantId + item.actionType
+      ) {
+
+      <article class="care-card">
+
+        <div class="care-card-main">
+          <div class="plant-icon">
+            🌱
+          </div>
+
+          <div>
+            <h3>
+              {{ item.plantName }}
+            </h3>
+
+            <p>
+              {{ item.speciesCommonName }}
+            </p>
+
+            <span class="care-action">
+              {{
+ getActionLabel(
+                      item.actionType
+                    )
+              }}
+            </span>
+          </div>
+        </div>
+
+        <button type="button"
+                class="care-button"
+                [disabled]="
+    completingCare() === getCareKey(item)
+  "
+                (click)="completeCare(item)">
+          @if (
+          completingCare() === getCareKey(item)
+          ) {
+          Saving...
+          } @else {
+          {{ getActionLabel(item.actionType) }}
+          }
+        </button>
+
+      </article>
+
+      }
+
+    </div>
+  </section>
+  }
+
+  @if (upcoming().length > 0) {
+
+  <section class="care-section upcoming">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-icon">
+          →
+        </span>
+
+        <h2>
+          Upcoming
+        </h2>
+      </div>
+    </div>
+
+    <div class="care-list">
+
+      @for (
+      item of upcoming();
+      track item.userPlantId + item.actionType
+      ) {
+
+      <article class="care-card upcoming-card">
+
+        <div class="care-card-main">
+          <div class="plant-icon">
+            🌱
+          </div>
+
+          <div>
+            <h3>
+              {{ item.plantName }}
+            </h3>
+
+            <p>
+              {{ item.speciesCommonName }}
+            </p>
+
+            <span class="care-action">
+              {{
+ getActionLabel(
+                      item.actionType
+                    )
+              }}
+              ·
+              {{ getDueLabel(item) }}
+            </span>
+          </div>
+        </div>
+
+      </article>
+
+      }
+
+    </div>
+  </section>
+  }
+
+  }
+</main>
