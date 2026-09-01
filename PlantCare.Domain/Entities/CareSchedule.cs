@@ -24,10 +24,7 @@ public sealed class CareSchedule
 
     public UserPlant UserPlant { get; private set; } = null!;
 
-    public static CareSchedule Create(
-        Guid userPlantId,
-        CareActionType actionType,
-        int intervalDays)
+    public static CareSchedule Create(Guid userPlantId, CareActionType actionType, int intervalDays)
     {
         if (userPlantId == Guid.Empty)
         {

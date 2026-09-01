@@ -1,17 +1,13 @@
 ﻿using PlantCare.Application.Abstractions.Persistence;
+using PlantCare.Application.Care;
 using PlantCare.Domain.Entities;
+using PlantCare.Domain.Enums;
 
 namespace PlantCare.Application.MyPlants;
 
-internal sealed class UserPlantService(
-    IUserPlantRepository userPlantRepository,
-    IPlantSpeciesRepository plantSpeciesRepository,
-    IUnitOfWork unitOfWork)
-    : IUserPlantService
+internal sealed class UserPlantService(IUserPlantRepository userPlantRepository, IPlantSpeciesRepository plantSpeciesRepository, IUnitOfWork unitOfWork): IUserPlantService
 {
-    public async Task<IReadOnlyList<UserPlantDto>> GetAllAsync(
-        Guid userId,
-        CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<UserPlantDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         ValidateUserId(userId);
 
@@ -25,15 +21,11 @@ internal sealed class UserPlantService(
             .ToList();
     }
 
-    public async Task<UserPlantDto?> GetByIdAsync(
-        Guid id,
-        Guid userId,
-        CancellationToken cancellationToken = default)
+    public async Task<UserPlantDto?> GetByIdAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
     {
         ValidateUserId(userId);
 
-        var userPlant =
-            await userPlantRepository.GetByIdForUserAsync(
+        var userPlant = await userPlantRepository.GetByIdForUserAsync(
                 id,
                 userId,
                 cancellationToken);
@@ -43,18 +35,12 @@ internal sealed class UserPlantService(
             : MapToDto(userPlant);
     }
 
-    public async Task<UserPlantDto?> AddAsync(
-        Guid userId,
-        AddUserPlantCommand command,
-        CancellationToken cancellationToken = default)
+    public async Task<UserPlantDto?> AddAsync(Guid userId, AddUserPlantCommand command, CancellationToken cancellationToken = default)
     {
         ValidateUserId(userId);
         ArgumentNullException.ThrowIfNull(command);
 
-        var plantSpecies =
-            await plantSpeciesRepository.GetByIdAsync(
-                command.PlantSpeciesId,
-                cancellationToken);
+        var plantSpecies = await plantSpeciesRepository.GetByIdAsync(command.PlantSpeciesId, cancellationToken);
 
         if (plantSpecies is null)
         {
@@ -70,10 +56,16 @@ internal sealed class UserPlantService(
             notes: command.Notes,
             createdAtUtc: DateTimeOffset.UtcNow);
 
+        userPlant.AddCareSchedule(CareActionType.Watering, plantSpecies.DefaultWateringIntervalDays);
+
+        if (plantSpecies.DefaultFertilizingIntervalDays is int fertilizingIntervalDays)
+        {
+            userPlant.AddCareSchedule(CareActionType.Fertilizing, fertilizingIntervalDays);
+        }
+
         userPlantRepository.Add(userPlant);
 
-        await unitOfWork.SaveChangesAsync(
-            cancellationToken);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new UserPlantDto(
             Id: userPlant.Id,
@@ -90,11 +82,21 @@ internal sealed class UserPlantService(
             DefaultWateringIntervalDays:
                 plantSpecies.DefaultWateringIntervalDays,
             DefaultFertilizingIntervalDays:
-                plantSpecies.DefaultFertilizingIntervalDays);
+                plantSpecies.DefaultFertilizingIntervalDays,
+            CareSchedules:
+        userPlant.CareSchedules
+        .OrderBy(schedule => schedule.ActionType)
+        .Select(schedule => new CareScheduleDto(
+            Id: schedule.Id,
+            ActionType: schedule.ActionType,
+            IntervalDays: schedule.IntervalDays,
+            LastCompletedAtUtc: schedule.LastCompletedAtUtc,
+            NextDueAtUtc: schedule.NextDueAtUtc,
+            IsEnabled: schedule.IsEnabled))
+        .ToList());
     }
 
-    private static UserPlantDto MapToDto(
-        UserPlant userPlant)
+    private static UserPlantDto MapToDto(UserPlant userPlant)
     {
         return new UserPlantDto(
             Id: userPlant.Id,
@@ -114,7 +116,18 @@ internal sealed class UserPlantService(
                     .DefaultWateringIntervalDays,
             DefaultFertilizingIntervalDays:
                 userPlant.PlantSpecies
-                    .DefaultFertilizingIntervalDays);
+                    .DefaultFertilizingIntervalDays,
+            CareSchedules:
+                userPlant.CareSchedules
+                .OrderBy(schedule => schedule.ActionType)
+                .Select(schedule => new CareScheduleDto(
+                    Id: schedule.Id,
+                    ActionType: schedule.ActionType,
+                    IntervalDays: schedule.IntervalDays,
+                    LastCompletedAtUtc: schedule.LastCompletedAtUtc,
+                    NextDueAtUtc: schedule.NextDueAtUtc,
+                    IsEnabled: schedule.IsEnabled))
+                .ToList());
     }
 
     private static void ValidateUserId(Guid userId)

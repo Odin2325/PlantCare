@@ -7,37 +7,28 @@ namespace PlantCare.Infrastructure.Persistence.Repositories;
 internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserPlantRepository
 {
     public async Task<IReadOnlyList<UserPlant>>
-        GetAllForUserAsync(
-            Guid userId,
-            CancellationToken cancellationToken = default)
+        GetAllForUserAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         return await dbContext.UserPlants
             .AsNoTracking()
-            .Include(
-                userPlant => userPlant.PlantSpecies)
-            .Where(
-                userPlant =>
+            .Include(userPlant => userPlant.PlantSpecies)
+            .Include(userPlant => userPlant.CareSchedules)
+            .Where(userPlant =>
                     userPlant.UserId == userId &&
                     userPlant.IsActive)
-            .OrderBy(
-                userPlant => userPlant.Nickname)
+            .OrderBy(userPlant => userPlant.Nickname)
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<UserPlant?> GetByIdForUserAsync(
-        Guid id,
-        Guid userId,
-        CancellationToken cancellationToken = default)
+    public async Task<UserPlant?> GetByIdForUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
     {
         return await dbContext.UserPlants
             .AsNoTracking()
-            .Include(
-                userPlant => userPlant.PlantSpecies)
-            .FirstOrDefaultAsync(
-                userPlant =>
+            .Include(userPlant => userPlant.PlantSpecies)
+            .Include(userPlant => userPlant.CareSchedules)
+            .FirstOrDefaultAsync(userPlant =>
                     userPlant.Id == id &&
-                    userPlant.UserId == userId,
-                cancellationToken);
+                    userPlant.UserId == userId, cancellationToken);
     }
 
     public void Add(UserPlant userPlant)

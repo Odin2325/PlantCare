@@ -21,6 +21,8 @@
        routerLink="/plants">
       Add another plant
     </a>
+
+    
   </header>
 
   @if (isLoading()) {
@@ -38,7 +40,15 @@
       Try again
     </button>
   </div>
-  } @else if (userPlants().length === 0) {
+  }
+
+  @if (careActionError()) {
+  <div class="care-action-error">
+    {{ careActionError() }}
+  </div>
+  }
+
+  @if (userPlants().length === 0) {
   <section class="empty-state">
     <h2>
       No plants yet
@@ -87,39 +97,132 @@
         {{ plant.acquiredOn }}
       </p>
       }
+      <a class="care-history-link"
+         [routerLink]="[
+  '/my-plants',
+  plant.id,
+  'care-history'
+]">
+        View care history
+      </a>
+      <section class="care-schedules">
+        @for (
+        schedule of plant.careSchedules;
+        track schedule.id
+        ) {
+        <article class="care-schedule"
+                 [class.care-schedule--overdue]="
+          getCareStatus(schedule) === 'overdue'
+        "
+                 [class.care-schedule--due-today]="
+          getCareStatus(schedule) === 'due-today'
+        ">
 
-      <div class="care-summary">
-        <div>
-          <span>Watering</span>
+          <header class="care-schedule__header">
+            <div>
+              <span class="care-action-name">
+                {{
+                getCareActionName(
+                  schedule.actionType
+                )
+                }}
+              </span>
 
-          <strong>
-            Every
-            {{
-                  plant.defaultWateringIntervalDays
-            }}
-            days
-          </strong>
-        </div>
+              <strong class="care-status">
+                {{
+                getCareStatusText(
+                  schedule
+                )
+                }}
+              </strong>
+            </div>
 
-        <div>
-          <span>Fertilizing</span>
+            <span class="interval">
+              Every
+              {{ schedule.intervalDays }}
+              days
+            </span>
+          </header>
 
-          <strong>
-            @if (
-            plant.defaultFertilizingIntervalDays !==
-            null
-            ) {
-            Every
-            {{
-                    plant.defaultFertilizingIntervalDays
-            }}
-            days
+          <div class="care-dates">
+            @if (schedule.lastCompletedAtUtc) {
+            <p>
+              <span>Last completed</span>
+
+              <strong>
+                {{
+                  schedule.lastCompletedAtUtc
+                    | date:'mediumDate'
+                }}
+              </strong>
+            </p>
             } @else {
-            Not scheduled
+            <p>
+              <span>Last completed</span>
+              <strong>Never</strong>
+            </p>
             }
-          </strong>
-        </div>
-      </div>
+
+            @if (schedule.nextDueAtUtc) {
+            <p>
+              <span>Next due</span>
+
+              <strong>
+                {{
+                  schedule.nextDueAtUtc
+                    | date:'mediumDate'
+                }}
+              </strong>
+            </p>
+            } @else {
+            <p>
+              <span>Next due</span>
+              <strong>
+                Starts after first completion
+              </strong>
+            </p>
+            }
+          </div>
+
+          <button type="button"
+                  class="complete-care-button"
+                  [disabled]="
+            !schedule.isEnabled ||
+            isCompletingCareAction(
+              plant.id,
+              schedule.actionType
+            )
+          "
+                  (click)="
+            completeCareAction(
+              plant,
+              schedule
+            )
+          ">
+
+            @if (
+            isCompletingCareAction(
+            plant.id,
+            schedule.actionType
+            )
+            ) {
+            Saving...
+            } @else {
+            {{
+              getCompletionButtonText(
+                schedule.actionType
+              )
+            }}
+            }
+          </button>
+        </article>
+        } @empty {
+        <p class="no-schedules">
+          No care schedules have been configured
+          for this plant.
+        </p>
+        }
+      </section>
 
       @if (plant.notes) {
       <p class="notes">
