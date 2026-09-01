@@ -1,6 +1,5 @@
 ﻿using PlantCare.Domain.Entities;
 using PlantCare.Domain.Enums;
-using Xunit;
 
 namespace PlantCare.Domain.Tests.Entities;
 

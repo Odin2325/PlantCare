@@ -1,5 +1,4 @@
 ﻿using PlantCare.Application.Abstractions.Persistence;
-using PlantCare.Domain.Enums;
 
 namespace PlantCare.Application.Dashboard;
 

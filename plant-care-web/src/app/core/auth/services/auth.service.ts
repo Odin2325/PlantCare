@@ -17,7 +17,7 @@ import {
   timer,
 } from 'rxjs';
 
-import {Credentials,CurrentUser} from '../models/auth.models';
+import { Credentials, CurrentUser } from '../models/auth.models';
 import { AntiforgeryService } from '../../security/services/antiforgery.service';
 
 @Injectable({

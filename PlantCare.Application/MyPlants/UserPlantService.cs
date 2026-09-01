@@ -5,7 +5,7 @@ using PlantCare.Domain.Enums;
 
 namespace PlantCare.Application.MyPlants;
 
-internal sealed class UserPlantService(IUserPlantRepository userPlantRepository, IPlantSpeciesRepository plantSpeciesRepository, IUnitOfWork unitOfWork): IUserPlantService
+internal sealed class UserPlantService(IUserPlantRepository userPlantRepository, IPlantSpeciesRepository plantSpeciesRepository, IUnitOfWork unitOfWork) : IUserPlantService
 {
     public async Task<IReadOnlyList<UserPlantDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default)
     {

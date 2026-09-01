@@ -82,7 +82,7 @@ public sealed class UserPlant
         return schedule;
     }
 
-    public void UpdateDetails(string nickname, string? location, DateOnly? acquiredOn,string? notes)
+    public void UpdateDetails(string nickname, string? location, DateOnly? acquiredOn, string? notes)
     {
         Nickname = NormalizeRequired(nickname, nameof(nickname), NicknameMaxLength);
 

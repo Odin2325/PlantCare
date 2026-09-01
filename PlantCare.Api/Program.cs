@@ -1,11 +1,11 @@
-using PlantCare.Application;
-using System.Text.Json.Serialization;
-using PlantCare.Infrastructure;
-using PlantCare.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PlantCare.Api.Security;
+using PlantCare.Application;
+using PlantCare.Infrastructure;
+using PlantCare.Infrastructure.Identity;
+using System.Text.Json.Serialization;
 
 const string AngularDevelopmentCorsPolicy = "AngularDevelopment";
 var builder = WebApplication.CreateBuilder(args);
