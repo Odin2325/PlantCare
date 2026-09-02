@@ -76,6 +76,12 @@
         {{ plant.nickname }}
       </h2>
 
+      <button type="button"
+              class="archive-button"
+              (click)="archivePlant(plant)">
+        Remove plant
+      </button>
+
       @if (plant.speciesScientificName) {
       <p class="scientific-name">
         {{ plant.speciesScientificName }}

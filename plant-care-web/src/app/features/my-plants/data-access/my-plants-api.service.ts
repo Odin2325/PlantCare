@@ -33,10 +33,6 @@ export class MyPlantsApiService {
     );
   }
 
-  archive(userPlantId: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.endpoint}/${userPlantId}`);
-  }
-
   completeCareAction(
     userPlantId: string,
     actionType: CareActionType,
@@ -61,6 +57,10 @@ export class MyPlantsApiService {
     return this.httpClient.get<UserPlant>(
       `${this.endpoint}/${id}`,
     );
+  }
+
+  archive(userPlantId: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.endpoint}/${userPlantId}`);
   }
 
   add(
