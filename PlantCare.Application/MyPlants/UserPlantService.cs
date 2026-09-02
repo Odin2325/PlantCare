@@ -139,4 +139,22 @@ internal sealed class UserPlantService(IUserPlantRepository userPlantRepository,
                 nameof(userId));
         }
     }
+
+    public async Task<bool> ArchiveAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
+    {
+        ValidateUserId(userId);
+
+        var userPlant = await userPlantRepository.GetByIdForUserAsync(
+                id,
+                userId,
+                cancellationToken);
+
+        ArgumentNullException.ThrowIfNull(userPlant);
+
+        userPlant.Archive();
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return true;
+    }
 }

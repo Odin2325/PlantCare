@@ -61,12 +61,7 @@ public sealed class PlantSpecies
         decimal? maximumTemperatureCelsius,
         bool isToxicToPets)
     {
-        ValidateSunlightRequirement(sunlightRequirement);
-        ValidateWateringInterval(defaultWateringIntervalDays);
-        ValidateFertilizingInterval(defaultFertilizingIntervalDays);
-        ValidateTemperatureRange(
-            minimumTemperatureCelsius,
-            maximumTemperatureCelsius);
+        ValidateAll(sunlightRequirement, defaultWateringIntervalDays, defaultFertilizingIntervalDays, minimumTemperatureCelsius, maximumTemperatureCelsius);
 
         return new PlantSpecies
         {
@@ -127,6 +122,42 @@ public sealed class PlantSpecies
 
             IsToxicToPets = isToxicToPets
         };
+    }
+
+    public void Update(
+    string commonName, string? scientificName, string description,
+    SunlightRequirement sunlightRequirement, string sunlightInstructions,
+    int defaultWateringIntervalDays, string wateringInstructions,
+    int? defaultFertilizingIntervalDays, string? fertilizingInstructions,
+    string soilInstructions, string? humidityInstructions,
+    decimal? minimumTemperatureCelsius, decimal? maximumTemperatureCelsius,
+    bool isToxicToPets)
+    {
+        ValidateAll(sunlightRequirement, defaultWateringIntervalDays, defaultFertilizingIntervalDays, minimumTemperatureCelsius, maximumTemperatureCelsius);
+
+        CommonName = NormalizeRequired(commonName, nameof(commonName), CommonNameMaxLength);
+        ScientificName = NormalizeOptional(scientificName, nameof(scientificName), ScientificNameMaxLength);
+        Description = NormalizeRequired(description, nameof(description), DescriptionMaxLength);
+        SunlightRequirement = sunlightRequirement;
+        SunlightInstructions = NormalizeRequired(sunlightInstructions, nameof(sunlightInstructions), InstructionsMaxLength);
+        DefaultWateringIntervalDays = defaultWateringIntervalDays;
+        WateringInstructions = NormalizeRequired(wateringInstructions, nameof(wateringInstructions), InstructionsMaxLength);
+        DefaultFertilizingIntervalDays = defaultFertilizingIntervalDays;
+        FertilizingInstructions = NormalizeOptional(fertilizingInstructions, nameof(fertilizingInstructions), InstructionsMaxLength);
+        SoilInstructions = NormalizeRequired(soilInstructions, nameof(soilInstructions), InstructionsMaxLength);
+        HumidityInstructions = NormalizeOptional(humidityInstructions, nameof(humidityInstructions), InstructionsMaxLength);
+        MinimumTemperatureCelsius = minimumTemperatureCelsius;
+        MaximumTemperatureCelsius = maximumTemperatureCelsius;
+        IsToxicToPets = isToxicToPets;
+    }
+
+    private static void ValidateAll(SunlightRequirement sunlightRequirement, int defaultWateringIntervalDays, int? defaultFertilizingIntervalDays, decimal? minimumTemperatureCelsius,
+        decimal? maximumTemperatureCelsius)
+    {
+        ValidateSunlightRequirement(sunlightRequirement);
+        ValidateWateringInterval(defaultWateringIntervalDays);
+        ValidateFertilizingInterval(defaultFertilizingIntervalDays);
+        ValidateTemperatureRange(minimumTemperatureCelsius, maximumTemperatureCelsius);
     }
 
     private static void ValidateSunlightRequirement(

@@ -14,46 +14,31 @@ namespace PlantCare.Api.Controllers;
 public sealed class MyPlantsController(IUserPlantService userPlantService, ICareService careService) : ControllerBase
 {
     [HttpGet]
-    [ProducesResponseType(
-        typeof(IReadOnlyList<UserPlantDto>),
-        StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IReadOnlyList<UserPlantDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<
-        ActionResult<IReadOnlyList<UserPlantDto>>> GetAll(
-        CancellationToken cancellationToken)
+    public async Task<ActionResult<IReadOnlyList<UserPlantDto>>> GetAll(CancellationToken cancellationToken)
     {
         if (!TryGetCurrentUserId(out var userId))
         {
             return Unauthorized();
         }
 
-        var userPlants =
-            await userPlantService.GetAllAsync(
-                userId,
-                cancellationToken);
+        var userPlants = await userPlantService.GetAllAsync(userId, cancellationToken);
 
         return Ok(userPlants);
     }
 
     [HttpGet("{id:guid}")]
-    [ProducesResponseType(
-        typeof(UserPlantDto),
-        StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UserPlantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UserPlantDto>> GetById(
-        Guid id,
-        CancellationToken cancellationToken)
+    public async Task<ActionResult<UserPlantDto>> GetById(Guid id, CancellationToken cancellationToken)
     {
         if (!TryGetCurrentUserId(out var userId))
         {
             return Unauthorized();
         }
 
-        var userPlant =
-            await userPlantService.GetByIdAsync(
-                id,
-                userId,
-                cancellationToken);
+        var userPlant = await userPlantService.GetByIdAsync(id, userId, cancellationToken);
 
         if (userPlant is null)
         {
@@ -70,19 +55,14 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<CompleteCareActionResult>>
-    CompleteCareAction(
-        Guid id,
-        CareActionType actionType,
-        CompleteCareActionRequest request,
-        CancellationToken cancellationToken)
+    CompleteCareAction(Guid id, CareActionType actionType, CompleteCareActionRequest request, CancellationToken cancellationToken)
     {
         if (!TryGetCurrentUserId(out var userId))
         {
             return Unauthorized();
         }
 
-        if (actionType == CareActionType.Unknown ||
-            !Enum.IsDefined(typeof(CareActionType), actionType))
+        if (actionType == CareActionType.Unknown || !Enum.IsDefined(typeof(CareActionType), actionType))
         {
             return BadRequest(new ProblemDetails
             {
@@ -236,6 +216,17 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
                 cancellationToken);
 
         return Ok(history);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Archive(Guid id, CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+            return Unauthorized();
+
+        var archived = await userPlantService.ArchiveAsync(id, userId, cancellationToken);
+
+        return archived ? NoContent() : NotFound();
     }
 
     private bool TryGetCurrentUserId(out Guid userId)
