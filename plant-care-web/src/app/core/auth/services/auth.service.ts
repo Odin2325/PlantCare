@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {
   catchError,
+  finalize,
   map,
   Observable,
   of,
@@ -25,6 +26,8 @@ import { AntiforgeryService } from '../../security/services/antiforgery.service'
 })
 export class AuthService {
   private readonly httpClient = inject(HttpClient);
+
+  readonly isReconnecting = signal(false);
 
   private readonly antiforgeryService =
     inject(AntiforgeryService);
@@ -48,29 +51,18 @@ export class AuthService {
         map(() => undefined),
 
         retry({
-          count: 60,
-
-          delay: (
-            error: unknown,
-            retryCount: number,
-          ) => {
-            if (
-              error instanceof HttpErrorResponse &&
-              this.isTemporaryStartupError(error)
-            ) {
-              console.warn(
-                `PlantCare API is not ready yet. ` +
-                `Retrying startup (${retryCount}/30)...`,
-              );
-
+          count: 20, // ~10s instead of 30s
+          delay: (error: unknown, retryCount: number) => {
+            if (error instanceof HttpErrorResponse && this.isTemporaryStartupError(error)) {
+              this.isReconnecting.set(true);
               return timer(500);
             }
-
             return throwError(() => error);
           },
         }),
 
         catchError((error: HttpErrorResponse) => {
+
           if (error.status !== 401) {
             console.error(
               'Unable to initialize authentication.',
@@ -82,6 +74,10 @@ export class AuthService {
 
           return of(undefined);
         }),
+
+        finalize(() => {
+          this.isReconnecting.set(false);
+        })
       );
   }
 

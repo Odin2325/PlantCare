@@ -35,4 +35,11 @@ internal sealed class PlantSpeciesRepository(
 
         dbContext.PlantSpecies.Add(plantSpecies);
     }
+
+    public void Remove(PlantSpecies plantSpecies)
+    {
+        ArgumentNullException.ThrowIfNull(plantSpecies);
+
+        dbContext.PlantSpecies.Remove(plantSpecies);
+    }
 }

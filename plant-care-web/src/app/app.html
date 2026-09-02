@@ -1,3 +1,12 @@
+@if (authService.isReconnecting()) {
+<div class="reconnecting-banner" role="status">
+  <span class="reconnecting-spinner" aria-hidden="true"></span>
+  <span>
+    Connection lost. Reconnecting...
+  </span>
+</div>
+}
+
 <header class="app-header">
   <a class="brand"
      routerLink="/plants">

@@ -9,4 +9,6 @@ public interface IPlantSpeciesRepository
     Task<PlantSpecies?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     void Add(PlantSpecies plantSpecies);
+
+    void Remove(PlantSpecies plantSpecies);
 }

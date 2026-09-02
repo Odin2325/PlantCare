@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PlantCare.Api.Contracts.PlantTypes;
 using PlantCare.Application.PlantCatalog;
 
@@ -6,38 +7,23 @@ namespace PlantCare.Api.Controllers;
 
 [ApiController]
 [Route("api/plant-species")]
-public sealed class PlantSpeciesController(
-    IPlantSpeciesService plantSpeciesService)
-    : ControllerBase
+public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesService) : ControllerBase
 {
     [HttpGet]
-    [ProducesResponseType(
-        typeof(IReadOnlyList<PlantSpeciesDto>),
-        StatusCodes.Status200OK)]
-    public async Task<
-        ActionResult<IReadOnlyList<PlantSpeciesDto>>> GetAll(
-        CancellationToken cancellationToken)
+    [ProducesResponseType(typeof(IReadOnlyList<PlantSpeciesDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<PlantSpeciesDto>>> GetAll(CancellationToken cancellationToken)
     {
-        var plantSpecies =
-            await plantSpeciesService.GetAllAsync(
-                cancellationToken);
+        var plantSpecies = await plantSpeciesService.GetAllAsync(cancellationToken);
 
         return Ok(plantSpecies);
     }
 
     [HttpGet("{id:guid}")]
-    [ProducesResponseType(
-        typeof(PlantSpeciesDto),
-        StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PlantSpeciesDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<PlantSpeciesDto>> GetById(
-        Guid id,
-        CancellationToken cancellationToken)
+    public async Task<ActionResult<PlantSpeciesDto>> GetById(Guid id, CancellationToken cancellationToken)
     {
-        var plantSpecies =
-            await plantSpeciesService.GetByIdAsync(
-                id,
-                cancellationToken);
+        var plantSpecies = await plantSpeciesService.GetByIdAsync(id, cancellationToken);
 
         if (plantSpecies is null)
         {
@@ -48,13 +34,11 @@ public sealed class PlantSpeciesController(
     }
 
     [HttpPost]
-    [ProducesResponseType(
-        typeof(PlantSpeciesDto),
-        StatusCodes.Status201Created)]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(typeof(PlantSpeciesDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<PlantSpeciesDto>> Create(
-        CreatePlantSpeciesRequest request,
-        CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<ActionResult<PlantSpeciesDto>> Create(CreatePlantSpeciesRequest request, CancellationToken cancellationToken)
     {
         var command = new CreatePlantSpeciesCommand(
             CommonName: request.CommonName,
@@ -83,14 +67,43 @@ public sealed class PlantSpeciesController(
             IsToxicToPets:
                 request.IsToxicToPets);
 
-        var createdPlantSpecies =
-            await plantSpeciesService.CreateAsync(
-                command,
-                cancellationToken);
+        var createdPlantSpecies = await plantSpeciesService.CreateAsync(command, cancellationToken);
 
-        return CreatedAtAction(
-            nameof(GetById),
-            new { id = createdPlantSpecies.Id },
-            createdPlantSpecies);
+        return CreatedAtAction(nameof(GetById), new { id = createdPlantSpecies.Id }, createdPlantSpecies);
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<PlantSpeciesDto>> Update(Guid id, UpdatePlantSpeciesRequest request, CancellationToken ct)
+    {
+        var updated = await plantSpeciesService.UpdateAsync(id, MapToCommand(request), ct);
+        return updated is null ? NotFound() : Ok(updated);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var deleted = await plantSpeciesService.DeleteAsync(id, ct);
+        return deleted ? NoContent() : NotFound();
+    }
+
+    private static UpdatePlantSpeciesCommand MapToCommand(UpdatePlantSpeciesRequest request)
+    {
+        return new UpdatePlantSpeciesCommand
+        {
+            CommonName = request.CommonName,
+            ScientificName = request.ScientificName,
+            Description = request.Description,
+            SunlightRequirement = request.SunlightRequirement,
+            SunlightInstructions = request.SunlightInstructions,
+            DefaultWateringIntervalDays = request.DefaultWateringIntervalDays,
+            WateringInstructions = request.WateringInstructions,
+            DefaultFertilizingIntervalDays = request.DefaultFertilizingIntervalDays,
+            FertilizingInstructions = request.FertilizingInstructions,
+            SoilInstructions = request.SoilInstructions,
+            HumidityInstructions = request.HumidityInstructions,
+            MinimumTemperatureCelsius = request.MinimumTemperatureCelsius,
+            MaximumTemperatureCelsius = request.MaximumTemperatureCelsius,
+            IsToxicToPets = request.IsToxicToPets
+        };
     }
 }

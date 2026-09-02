@@ -67,3 +67,31 @@ nav {
     display: none;
   }
 }
+
+.reconnecting-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #fff3cd;
+  color: #664d03;
+  border-bottom: 1px solid #ffecb5;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.reconnecting-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: reconnecting-spin 0.8s linear infinite;
+}
+
+@keyframes reconnecting-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

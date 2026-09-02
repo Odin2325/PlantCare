@@ -74,6 +74,11 @@ builder.Services.AddAntiforgery(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    await RoleSeeder.SeedAsync(scope.ServiceProvider);
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
