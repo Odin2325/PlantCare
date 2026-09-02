@@ -339,4 +339,27 @@ export class MyPlantsPage {
       86_400_000,
     );
   }
+
+  archivePlant(plant: UserPlant): void {
+    this.myPlantsApi
+      .archive(plant.id)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: () => {
+          this.userPlants.update(
+            (plants) => plants.filter((p) => p.id !== plant.id),
+          );
+        },
+
+        error: (error: HttpErrorResponse) => {
+          console.error('Unable to archive plant.', error);
+
+          this.errorMessage.set(
+            'The plant could not be removed.',
+          );
+        },
+      });
+  }
 }
