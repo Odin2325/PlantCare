@@ -9,4 +9,5 @@ public interface IUserPlantService
     Task<UserPlantDto?> AddAsync(Guid userId, AddUserPlantCommand command, CancellationToken cancellationToken = default);
 
     Task<bool> ArchiveAsync(Guid id, Guid userId, CancellationToken cancellationToken = default);
+    Task<UserPlantDto?> UpdateAsync(Guid id, Guid userId, UpdateUserPlantCommand command, CancellationToken cancellationToken = default);
 }

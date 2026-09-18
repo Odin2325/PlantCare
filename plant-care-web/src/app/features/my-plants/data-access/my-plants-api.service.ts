@@ -71,4 +71,14 @@ export class MyPlantsApiService {
       request,
     );
   }
+
+  update(
+    userPlantId: string,
+    request: Omit<AddUserPlantRequest, 'plantSpeciesId'>,
+  ): Observable<UserPlant> {
+    return this.httpClient.put<UserPlant>(
+      `${this.endpoint}/${userPlantId}`,
+      request,
+    );
+  }
 }
