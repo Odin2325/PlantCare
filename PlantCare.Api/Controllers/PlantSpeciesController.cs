@@ -6,6 +6,7 @@ using PlantCare.Application.PlantCatalog;
 namespace PlantCare.Api.Controllers;
 
 [ApiController]
+[IgnoreAntiforgeryToken]
 [Route("api/plant-species")]
 public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesService) : ControllerBase
 {

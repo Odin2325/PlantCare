@@ -1,21 +1,37 @@
 @PlantCare_Api_HostAddress = https://localhost:7017
 @PlantSpeciesId = 3f648883-5ae3-49ba-bdd4-660a53b1bfea
-@AccessToken = {{$dotenv ACCESS_TOKEN}}
-@RefreshToken = {{$dotenv REFRESH_TOKEN}}
+
+@AccessToken = CfDJ8Cf8J8XmIFZAu8aCOiYf9OwNHN1seq47EZZ-DIgiD94mZ0myHCmvMYiD9Dge6yvjbk9el_pLAyEVkUEJaX2wEGiU5wEhqYtp17YVfQ7RyJqo4kwr113AhvYtJUDVCKHBTqji2r74rmma4U59DYKO3d_P_l4c1tyfQfIL_E5e2mk86crpIDm-ntlX32i8OAZMjxMPC-0pe4NfUpIdZomkKHQgstyyhURE2t0E4LII8US3mk3RppF4UllEAruTO0AYM34LTm-IDxebVsiBIIW5MQoVTmTaHEgc5YMA5Vpj1N5o21caPTaCpTwVkxVF--x5VVOUzKqMQjv5fRKhF8mEe7PL6ro0E8E-IR8Y_3YAvSp_kGmzQ2BLJuSuH9LIZrLeaWN8w9w0xBXD10feLTq56KthW0e1rkzVFPl5yQG32ehWBNtXjT5CiO160V0y-jnqMOdGWcNko2giC1rASITojeGwpkBvD2r_6G17q6diuXAO-ROkT_aB1kd08Z4EKWH2kac_URyi9IJ75JNyQmf3xXs-X0CgGF96dcd2d8q_i75sBLqaDt5NRY7H_zG3a2yxfBnlJYqewwYN-PT6XcRHL55M_aihXk6iSVkgrpHl9rpYlu3G92DCOUS1j1M-NzoNknFYCHhiJR6wLbvuuvPF-_zELKNJBsOwFFg8wQaA1gSaTGHmQMA9u0UT_5pau6o0n85NUFmphotBuzlzaorOXxR5feMmx8r1qMVzMg-3t0nwQ6uPZ0Aj9TuvdubjPilIIP48C4d0TBRKVzWMFgJmh7I
+
+@RefreshToken = CfDJ8Cf8J8XmIFZAu8aCOiYf9OzZ0HQqfV39yYI8T13VFBYV8Qj6YzXfWo1M55RLwJXh3GyEgEb6PTparAodATTjIGSuBkRP4R5BVVxK2N70QZdtlb4V2yXIWfCAxa7ELQ719G_OkM_A52SGpvZAwKliG_gtnt6ADa9Cs6zMZkJqDI7duaRK3QTzN6Og99miUkJ22k5aFLIdSh1BNv4dnNxA3T3OE0Tppb-5BvdK0U0fxykCae31EJmoUg_Gp2YrDO7Mcqqk6eC2CBYrMAA-LJVW2xY2I0nwT9gNRBoWjpSlc8iCLHBIrIQHiPG9RJJi7E1YOuOTY01TzclKUlTqrqWt0NgF0iDpoQzBb2BPmu7GhJcDymkVNhqeYq5vixvDTXJ120nMvagAqF64MP7j9agw-DUCZBhdYkK41b_V75tiFq62f4AjR_4LsLnvyEml46Gx468G2XFwgxprk8pQH6QDjiAOZ4nlJ-t_JtWTa52Nz1CocF7nTILI3Fda06_D5MSoxjL2H-JL0HDm2Bi_8D0lEY0PZyfIUmYr_dOiIjIDWU8mn7xiq-fF4jpmVAypJIq7DT7TfmPOSXveAy5lTGvKpNuaIiw-jLjStui9LuxoOEd7y8h6mjif9h4fTb7KmEY7DfpsGX1dwKlyy9h3mgPEI6kep0AG9cS5X4e6Es_TO08hM5SDzai-BgSlad1OOnFWNLtWE_S2aFr-NO5e8p0UcyuGoSPtMdHvvXOlLO2w-7wLY0euC_TGpmmwbr21fWMNC8n18sM_Rb2N357VoPwXCBo
+
+
+### Health
 
 GET {{PlantCare_Api_HostAddress}}/health
 Accept: text/plain
 
-###
+
+### System status
 
 GET {{PlantCare_Api_HostAddress}}/api/system/status
 Accept: application/json
+
+
+### Current authenticated user
+### Run this first to verify that AccessToken works.
+
+GET {{PlantCare_Api_HostAddress}}/api/account/me
+Accept: application/json
+Authorization: Bearer {{AccessToken}}
+
 
 ### Create a Monstera species
 
 POST {{PlantCare_Api_HostAddress}}/api/plant-species
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {{AccessToken}}
 
 {
   "commonName": "Monstera",
@@ -34,11 +50,13 @@ Accept: application/json
   "isToxicToPets": true
 }
 
-### Create a Aloe species
+
+### Create an Aloe species
 
 POST {{PlantCare_Api_HostAddress}}/api/plant-species
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {{AccessToken}}
 
 {
   "commonName": "Aloe Vera",
@@ -62,64 +80,64 @@ Accept: application/json
 
 GET {{PlantCare_Api_HostAddress}}/api/plant-species
 Accept: application/json
+Authorization: Bearer {{AccessToken}}
 
 
 ### Get one plant species
 
 GET {{PlantCare_Api_HostAddress}}/api/plant-species/{{PlantSpeciesId}}
 Accept: application/json
+Authorization: Bearer {{AccessToken}}
 
 
-### Current user without authentication
+### Current user WITHOUT authentication
+### This should return 401 if /api/account/me requires authorization.
 
 GET {{PlantCare_Api_HostAddress}}/api/account/me
 Accept: application/json
 
 
-### Register a user
+### Register another test user
 
 POST {{PlantCare_Api_HostAddress}}/api/auth/register
 Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "nico@example.com",
-  "password": "PlantCare2026"
+  "email": "nico@example3.com",
+  "password": "PlantCare2026!"
 }
 
 
 ### Login using token mode
+### Use this request whenever you need fresh access/refresh tokens.
 
 POST {{PlantCare_Api_HostAddress}}/api/auth/login?useCookies=false
 Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "nico@example.com",
-  "password": "PlantCare2026"
+  "email": "nico@example2.com",
+  "password": "PlantCare2026!"
 }
 
 
-### Current authenticated user
-
-GET {{PlantCare_Api_HostAddress}}/api/account/me
-Accept: application/json
-Authorization: Bearer {{AccessToken}}
-
-
 ### Invalid login
+### This should return 401.
 
 POST {{PlantCare_Api_HostAddress}}/api/auth/login?useCookies=false
 Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "nico@example.com",
+  "email": "nico@example2.com",
   "password": "WrongPassword123"
 }
 
 
 ### Refresh authentication tokens
+### Copy the NEW accessToken and refreshToken from the response
+### back into the variables at the top of this file.
 
 POST {{PlantCare_Api_HostAddress}}/api/auth/refresh
 Content-Type: application/json
@@ -129,7 +147,15 @@ Accept: application/json
   "refreshToken": "{{RefreshToken}}"
 }
 
-GET {{PlantCare_Api_HostAddress}}/api/antiforgery/token
-Content-Type: application/json
 
-GET /api/my-plants
+### Get antiforgery token
+
+GET {{PlantCare_Api_HostAddress}}/api/antiforgery/token
+Accept: application/json
+
+
+### Get my plants
+
+GET {{PlantCare_Api_HostAddress}}/api/my-plants
+Accept: application/json
+Authorization: Bearer {{AccessToken}}

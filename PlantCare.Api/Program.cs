@@ -77,6 +77,28 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     await RoleSeeder.SeedAsync(scope.ServiceProvider);
+    /*For DEV only*/
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+    var user = await userManager.FindByEmailAsync("nico@example2.com");
+
+    if (user is null)
+    {
+        throw new InvalidOperationException("User nico@example2.com was not found.");
+    }
+
+    if (!await userManager.IsInRoleAsync(user, "Admin"))
+    {
+        var result = await userManager.AddToRoleAsync(user, "Admin");
+
+        if (!result.Succeeded)
+        {
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+
+            throw new InvalidOperationException($"Could not assign Admin role: {errors}");
+        }
+    }
+    /*For DEV only*/
 }
 
 if (app.Environment.IsDevelopment())
@@ -121,14 +143,13 @@ app.MapGet(
         })
     .AllowAnonymous();
 
-app.MapGroup("/api/auth").MapIdentityApi<ApplicationUser>().RequireAntiforgeryValidation();
+app.MapGroup("/api/auth").MapIdentityApi<ApplicationUser>();
 
 app.MapPost("/api/auth/logout", async (SignInManager<ApplicationUser> signInManager) =>
-    {
-        await signInManager.SignOutAsync();
-
-        return Results.NoContent();
-    })
+        {
+            await signInManager.SignOutAsync();
+            return Results.NoContent();
+        })
     .RequireAuthorization()
     .RequireAntiforgeryValidation();
 
