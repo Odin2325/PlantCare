@@ -144,17 +144,40 @@ internal sealed class UserPlantService(IUserPlantRepository userPlantRepository,
     {
         ValidateUserId(userId);
 
-        var userPlant = await userPlantRepository.GetByIdForUserAsync(
-                id,
-                userId,
-                cancellationToken);
+        var userPlant = await userPlantRepository.GetTrackedByIdForUserAsync(id, userId, cancellationToken);
 
-        ArgumentNullException.ThrowIfNull(userPlant);
+        if (userPlant == null)
+        {
+            return false;
+        }
 
         userPlant.Archive();
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return true;
+    }
+
+    public async Task<UserPlantDto?> UpdateAsync(Guid id, Guid userId, UpdateUserPlantCommand command, CancellationToken cancellationToken = default)
+    {
+        ValidateUserId(userId);
+        ArgumentNullException.ThrowIfNull(command);
+
+        var userPlant = await userPlantRepository.GetTrackedByIdForUserAsync(id, userId, cancellationToken);
+
+        if (userPlant is null)
+        {
+            return null;
+        }
+
+        userPlant.UpdateDetails(
+            command.Nickname,
+            command.Location,
+            command.AcquiredOn,
+            command.Notes);
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return MapToDto(userPlant);
     }
 }

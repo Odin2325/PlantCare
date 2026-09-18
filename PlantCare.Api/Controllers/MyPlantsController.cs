@@ -235,4 +235,25 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
 
         return Guid.TryParse(userIdValue, out userId);
     }
+
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(UserPlantDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<UserPlantDto>> Update(Guid id, UpdateUserPlantRequest request, CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var command = new UpdateUserPlantCommand(
+            Nickname: request.Nickname,
+            Location: request.Location,
+            AcquiredOn: request.AcquiredOn,
+            Notes: request.Notes);
+
+        var updated = await userPlantService.UpdateAsync(id, userId, command, cancellationToken);
+
+        return updated is null ? NotFound() : Ok(updated);
+    }
 }

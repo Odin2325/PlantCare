@@ -73,6 +73,9 @@ public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesServ
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<PlantSpeciesDto>> Update(Guid id, UpdatePlantSpeciesRequest request, CancellationToken ct)
     {
         var updated = await plantSpeciesService.UpdateAsync(id, MapToCommand(request), ct);
@@ -80,6 +83,9 @@ public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesServ
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
         var deleted = await plantSpeciesService.DeleteAsync(id, ct);

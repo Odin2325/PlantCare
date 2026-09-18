@@ -52,6 +52,17 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
             .ToListAsync(cancellationToken);
     }
 
+    // UserPlantRepository.cs
+    public async Task<UserPlant?> GetTrackedByIdForUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.UserPlants
+            .Include(userPlant => userPlant.PlantSpecies)
+            .Include(userPlant => userPlant.CareSchedules)
+            .FirstOrDefaultAsync(
+                userPlant => userPlant.Id == id && userPlant.UserId == userId,
+                cancellationToken);
+    }
+
     public void Add(UserPlant userPlant)
     {
         ArgumentNullException.ThrowIfNull(userPlant);
