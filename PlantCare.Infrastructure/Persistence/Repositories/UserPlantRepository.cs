@@ -20,6 +20,22 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<IReadOnlyList<UserPlant>>
+        GetArchivedForUserAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default)
+    {
+        return await dbContext.UserPlants
+            .AsNoTracking()
+            .Include(userPlant => userPlant.PlantSpecies)
+            .Include(userPlant => userPlant.CareSchedules)
+            .Where(userPlant =>
+                userPlant.UserId == userId &&
+                !userPlant.IsActive)
+            .OrderBy(userPlant => userPlant.Nickname)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<UserPlant?> GetByIdForUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
     {
         return await dbContext.UserPlants

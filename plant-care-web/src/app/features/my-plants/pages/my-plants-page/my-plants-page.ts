@@ -60,6 +60,15 @@ export class MyPlantsPage {
   readonly userPlants =
     signal<UserPlant[]>([]);
 
+  readonly archivedPlants =
+    signal<UserPlant[]>([]);
+
+  readonly showArchived = signal(false);
+
+  readonly isLoadingArchived = signal(false);
+
+  readonly restoringPlantId = signal<string | null>(null);
+
   readonly isLoading =
     signal(true);
 
@@ -87,6 +96,50 @@ export class MyPlantsPage {
 
   reload(): void {
     this.loadPlants();
+  }
+
+  toggleArchivedPlants(): void {
+    if (this.showArchived()) {
+      this.showArchived.set(false);
+      return;
+    }
+
+    this.showArchived.set(true);
+    this.loadArchivedPlants();
+  }
+
+  restorePlant(plant: UserPlant): void {
+    if (this.restoringPlantId()) {
+      return;
+    }
+
+    this.restoringPlantId.set(plant.id);
+    this.errorMessage.set(null);
+
+    this.myPlantsApi
+      .restore(plant.id)
+      .pipe(
+        finalize(() => this.restoringPlantId.set(null)),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: () => {
+          this.archivedPlants.update((plants) =>
+            plants.filter((item) => item.id !== plant.id),
+          );
+          this.userPlants.update((plants) =>
+            [...plants, { ...plant, isActive: true }]
+              .sort((left, right) =>
+                left.nickname.localeCompare(right.nickname),
+              ),
+          );
+        },
+        error: () => {
+          this.errorMessage.set(
+            'The plant could not be restored.',
+          );
+        },
+      });
   }
 
   completeCareAction(
@@ -546,6 +599,25 @@ export class MyPlantsPage {
       });
   }
 
+  private loadArchivedPlants(): void {
+    this.isLoadingArchived.set(true);
+
+    this.myPlantsApi
+      .getArchived()
+      .pipe(
+        finalize(() => this.isLoadingArchived.set(false)),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: (plants) => this.archivedPlants.set(plants),
+        error: () => {
+          this.errorMessage.set(
+            'Archived plants could not be loaded.',
+          );
+        },
+      });
+  }
+
   private createCareActionKey(
     plantId: string,
     actionType: CareActionType,
@@ -658,6 +730,14 @@ export class MyPlantsPage {
           this.userPlants.update(
             (plants) => plants.filter((p) => p.id !== plant.id),
           );
+          if (this.showArchived()) {
+            this.archivedPlants.update((plants) =>
+              [...plants, { ...plant, isActive: false }]
+                .sort((left, right) =>
+                  left.nickname.localeCompare(right.nickname),
+                ),
+            );
+          }
         },
 
         error: (error: HttpErrorResponse) => {

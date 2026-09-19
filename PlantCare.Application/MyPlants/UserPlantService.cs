@@ -25,6 +25,18 @@ internal sealed class UserPlantService(
             .ToList();
     }
 
+    public async Task<IReadOnlyList<UserPlantDto>> GetArchivedAsync(
+        Guid userId,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateUserId(userId);
+
+        var userPlants = await userPlantRepository
+            .GetArchivedForUserAsync(userId, cancellationToken);
+
+        return userPlants.Select(MapToDto).ToList();
+    }
+
     public async Task<UserPlantDto?> GetByIdAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
     {
         ValidateUserId(userId);
@@ -206,6 +218,29 @@ internal sealed class UserPlantService(
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
+        return true;
+    }
+
+    public async Task<bool> RestoreAsync(
+        Guid id,
+        Guid userId,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateUserId(userId);
+
+        var userPlant = await userPlantRepository
+            .GetTrackedByIdForUserAsync(
+                id,
+                userId,
+                cancellationToken);
+
+        if (userPlant is null || userPlant.IsActive)
+        {
+            return false;
+        }
+
+        userPlant.Restore();
+        await unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }
 

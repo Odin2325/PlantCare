@@ -99,6 +99,24 @@ public sealed class UserPlantTests
     }
 
     [Fact]
+    public void Restore_SetsIsActiveToTrue()
+    {
+        var userPlant = UserPlant.Create(
+            userId: Guid.NewGuid(),
+            plantSpeciesId: Guid.NewGuid(),
+            nickname: "My plant",
+            location: null,
+            acquiredOn: null,
+            notes: null,
+            createdAtUtc: DateTimeOffset.UtcNow);
+        userPlant.Archive();
+
+        userPlant.Restore();
+
+        Assert.True(userPlant.IsActive);
+    }
+
+    [Fact]
     public void AddCareSchedule_SetsInitialDueDateFromStartDate()
     {
         var startsAt = new DateTimeOffset(

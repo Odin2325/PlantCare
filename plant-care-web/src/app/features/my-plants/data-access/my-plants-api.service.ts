@@ -107,6 +107,12 @@ export class MyPlantsApiService {
     );
   }
 
+  getArchived(): Observable<UserPlant[]> {
+    return this.httpClient.get<UserPlant[]>(
+      `${this.endpoint}/archived`,
+    );
+  }
+
   getById(id: string): Observable<UserPlant> {
     return this.httpClient.get<UserPlant>(
       `${this.endpoint}/${id}`,
@@ -115,6 +121,13 @@ export class MyPlantsApiService {
 
   archive(userPlantId: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.endpoint}/${userPlantId}`);
+  }
+
+  restore(userPlantId: string): Observable<void> {
+    return this.httpClient.post<void>(
+      `${this.endpoint}/${userPlantId}/restore`,
+      null,
+    );
   }
 
   add(
