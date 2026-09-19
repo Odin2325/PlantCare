@@ -23,7 +23,7 @@ public partial class AddNotifications : Migration
             constraints: table =>
             {
                 table.PrimaryKey("PK_Notifications", x => x.Id);
-                table.ForeignKey("FK_Notifications_AspNetUsers_UserId", x => x.UserId, "AspNetUsers", "Id", onDelete: ReferentialAction.Cascade);
+                table.ForeignKey("FK_Notifications_AspNetUsers_UserId", x => x.UserId, "AspNetUsers", "Id", onDelete: ReferentialAction.NoAction);
                 table.ForeignKey("FK_Notifications_CareSchedules_CareScheduleId", x => x.CareScheduleId, "CareSchedules", "Id", onDelete: ReferentialAction.Cascade);
             });
 
