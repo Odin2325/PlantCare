@@ -14,6 +14,7 @@ public sealed class PlantCareDbContext(DbContextOptions<PlantCareDbContext> opti
 
     public DbSet<CareEvent> CareEvents => Set<CareEvent>();
     public DbSet<Notification> Notifications => Set<Notification>();
+    public DbSet<CalendarSubscription> CalendarSubscriptions => Set<CalendarSubscription>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
