@@ -114,6 +114,28 @@
   gap: 0.4rem;
 }
 
+.care-schedule-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid #dce5de;
+  border-radius: 0.75rem;
+}
+
+  .care-schedule-fields legend {
+    padding: 0 0.35rem;
+    color: #285f3a;
+    font-weight: 700;
+  }
+
+.field-hint {
+  margin: 0;
+  color: #68736c;
+  font-size: 0.8rem;
+}
+
   .form-field label {
     font-weight: 650;
   }
@@ -202,6 +224,10 @@
   }
 
   .add-plant-section {
+    grid-template-columns: 1fr;
+  }
+
+  .care-schedule-fields {
     grid-template-columns: 1fr;
   }
 }

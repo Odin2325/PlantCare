@@ -71,7 +71,8 @@ public sealed class UserPlant
     public CareSchedule AddCareSchedule(
         CareActionType actionType,
         int intervalDays,
-        DateTimeOffset startsAtUtc)
+        DateTimeOffset startsAtUtc,
+        DateTimeOffset? lastCompletedAtUtc = null)
     {
         if (_careSchedules.Any(schedule => schedule.ActionType == actionType))
         {
@@ -82,7 +83,8 @@ public sealed class UserPlant
             Id,
             actionType,
             intervalDays,
-            startsAtUtc);
+            startsAtUtc,
+            lastCompletedAtUtc);
 
         _careSchedules.Add(schedule);
 

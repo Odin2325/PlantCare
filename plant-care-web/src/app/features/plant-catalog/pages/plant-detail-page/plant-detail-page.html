@@ -152,9 +152,9 @@
 
       <p>
         Add your own {{ plant.commonName }} to
-        PlantCare. The default care intervals will
-        be used as the starting point for its
-        schedule.
+        PlantCare. Start with the suggested care
+        intervals or customize them based on your
+        plant's current routine.
       </p>
     </div>
 
@@ -234,6 +234,79 @@
                   formControlName="notes">
             </textarea>
       </div>
+
+      <fieldset class="care-schedule-fields">
+        <legend>Watering schedule</legend>
+
+        <div class="form-field">
+          <label for="wateringIntervalDays">
+            Water every (days)
+          </label>
+
+          <input id="wateringIntervalDays"
+                 type="number"
+                 min="1"
+                 max="3650"
+                 formControlName="wateringIntervalDays">
+
+          @if (
+          addPlantForm.controls.wateringIntervalDays.touched &&
+          addPlantForm.controls.wateringIntervalDays.invalid
+          ) {
+          <p class="field-error">
+            Enter an interval between 1 and 3650 days.
+          </p>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="lastWateredAt">
+            Last watered
+            <span>Optional</span>
+          </label>
+
+          <input id="lastWateredAt"
+                 type="datetime-local"
+                 formControlName="lastWateredAt">
+
+          <p class="field-hint">
+            If left empty, the first reminder starts from today.
+          </p>
+        </div>
+      </fieldset>
+
+      <fieldset class="care-schedule-fields">
+        <legend>Fertilizing schedule</legend>
+
+        <div class="form-field">
+          <label for="fertilizingIntervalDays">
+            Fertilize every (days)
+            <span>Optional</span>
+          </label>
+
+          <input id="fertilizingIntervalDays"
+                 type="number"
+                 min="1"
+                 max="3650"
+                 placeholder="No schedule"
+                 formControlName="fertilizingIntervalDays">
+        </div>
+
+        <div class="form-field">
+          <label for="lastFertilizedAt">
+            Last fertilized
+            <span>Optional</span>
+          </label>
+
+          <input id="lastFertilizedAt"
+                 type="datetime-local"
+                 formControlName="lastFertilizedAt">
+
+          <p class="field-hint">
+            Set an interval above before entering a date.
+          </p>
+        </div>
+      </fieldset>
 
       @if (submitError()) {
       <p class="form-error">

@@ -145,7 +145,15 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
             Nickname: request.Nickname,
             Location: request.Location,
             AcquiredOn: request.AcquiredOn,
-            Notes: request.Notes);
+            Notes: request.Notes,
+            WateringIntervalDays:
+                request.WateringIntervalDays,
+            LastWateredAtUtc:
+                request.LastWateredAtUtc,
+            FertilizingIntervalDays:
+                request.FertilizingIntervalDays,
+            LastFertilizedAtUtc:
+                request.LastFertilizedAtUtc);
 
         var createdUserPlant =
             await userPlantService.AddAsync(

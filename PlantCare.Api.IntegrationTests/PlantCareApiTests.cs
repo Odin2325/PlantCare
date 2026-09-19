@@ -292,6 +292,86 @@ public sealed class PlantCareApiTests
         Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
     }
 
+    [Fact]
+    public async Task AddingPlantUsesCustomInitialCareSchedules()
+    {
+        var plantSpecies = await SeedSpeciesAsync();
+        var userId = Guid.NewGuid();
+        var lastWateredAt = PlantCareApiFactory.UtcNow.AddDays(-2);
+        var lastFertilizedAt = PlantCareApiFactory.UtcNow.AddDays(-5);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var response = await client.PostAsJsonAsync(
+            "/api/my-plants",
+            new
+            {
+                plantSpeciesId = plantSpecies.Id,
+                nickname = "Custom Monstera",
+                location = "Office",
+                acquiredOn = (DateOnly?)null,
+                notes = (string?)null,
+                wateringIntervalDays = 5,
+                lastWateredAtUtc = lastWateredAt,
+                fertilizingIntervalDays = 20,
+                lastFertilizedAtUtc = lastFertilizedAt
+            });
+
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+
+        using var document = JsonDocument.Parse(
+            await response.Content.ReadAsStringAsync());
+        var schedules = document.RootElement
+            .GetProperty("careSchedules")
+            .EnumerateArray()
+            .ToList();
+        var watering = schedules.Single(schedule =>
+            schedule.GetProperty("actionType").GetString() ==
+            "Watering");
+        var fertilizing = schedules.Single(schedule =>
+            schedule.GetProperty("actionType").GetString() ==
+            "Fertilizing");
+
+        Assert.Equal(5, watering.GetProperty("intervalDays").GetInt32());
+        Assert.Equal(
+            lastWateredAt,
+            watering.GetProperty("lastCompletedAtUtc").GetDateTimeOffset());
+        Assert.Equal(
+            lastWateredAt.AddDays(5),
+            watering.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+        Assert.Equal(20, fertilizing.GetProperty("intervalDays").GetInt32());
+        Assert.Equal(
+            lastFertilizedAt.AddDays(20),
+            fertilizing.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+    }
+
+    [Fact]
+    public async Task AddingPlantRejectsFutureInitialCareDate()
+    {
+        var plantSpecies = await SeedSpeciesAsync();
+        using var client = CreateClient();
+        client.AuthenticateAs(Guid.NewGuid());
+        await client.AddAntiforgeryTokenAsync();
+
+        using var response = await client.PostAsJsonAsync(
+            "/api/my-plants",
+            new
+            {
+                plantSpeciesId = plantSpecies.Id,
+                nickname = "Future Monstera",
+                location = (string?)null,
+                acquiredOn = (DateOnly?)null,
+                notes = (string?)null,
+                wateringIntervalDays = 7,
+                lastWateredAtUtc = PlantCareApiFactory.UtcNow.AddMinutes(1),
+                fertilizingIntervalDays = (int?)null,
+                lastFertilizedAtUtc = (DateTimeOffset?)null
+            });
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
     private HttpClient CreateClient()
     {
         return factory.CreateClient(
@@ -328,6 +408,19 @@ public sealed class PlantCareApiTests
         });
 
         return (plantSpecies, userPlant);
+    }
+
+    private async Task<PlantSpecies> SeedSpeciesAsync()
+    {
+        var plantSpecies = CreateSpecies();
+
+        await factory.SeedAsync(dbContext =>
+        {
+            dbContext.PlantSpecies.Add(plantSpecies);
+            return Task.CompletedTask;
+        });
+
+        return plantSpecies;
     }
 
     private static PlantSpecies CreateSpecies()

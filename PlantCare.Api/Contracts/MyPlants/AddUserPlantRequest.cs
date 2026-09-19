@@ -18,4 +18,14 @@ public sealed class AddUserPlantRequest
 
     [MaxLength(UserPlant.NotesMaxLength)]
     public string? Notes { get; init; }
+
+    [Range(1, 3_650)]
+    public int? WateringIntervalDays { get; init; }
+
+    public DateTimeOffset? LastWateredAtUtc { get; init; }
+
+    [Range(1, 3_650)]
+    public int? FertilizingIntervalDays { get; init; }
+
+    public DateTimeOffset? LastFertilizedAtUtc { get; init; }
 }
