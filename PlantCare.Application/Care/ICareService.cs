@@ -18,4 +18,12 @@ public interface ICareService
             Guid userPlantId,
             int take,
             CancellationToken cancellationToken = default);
+
+    Task<CareScheduleDto?> UpdateScheduleAsync(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType,
+        int intervalDays,
+        bool isEnabled,
+        CancellationToken cancellationToken = default);
 }

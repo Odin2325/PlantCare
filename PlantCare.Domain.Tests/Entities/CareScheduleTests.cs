@@ -84,6 +84,40 @@ public sealed class CareScheduleTests
     }
 
     [Fact]
+    public void UpdateInterval_RecalculatesDueDateFromScheduleStart()
+    {
+        var startsAt = new DateTimeOffset(
+            2026, 8, 1, 10, 0, 0, TimeSpan.Zero);
+        var schedule = CareSchedule.Create(
+            Guid.NewGuid(),
+            CareActionType.Watering,
+            7,
+            startsAt);
+
+        schedule.UpdateInterval(10);
+
+        Assert.Equal(10, schedule.IntervalDays);
+        Assert.Equal(startsAt.AddDays(10), schedule.NextDueAtUtc);
+    }
+
+    [Fact]
+    public void UpdateInterval_AfterCompletion_RecalculatesFromLastCompletion()
+    {
+        var schedule = CareSchedule.Create(
+            Guid.NewGuid(),
+            CareActionType.Watering,
+            7,
+            DateTimeOffset.UnixEpoch);
+        var completedAt = new DateTimeOffset(
+            2026, 8, 10, 10, 0, 0, TimeSpan.Zero);
+        schedule.MarkCompleted(completedAt);
+
+        schedule.UpdateInterval(14);
+
+        Assert.Equal(completedAt.AddDays(14), schedule.NextDueAtUtc);
+    }
+
+    [Fact]
     public void MarkCompleted_UsesActualCompletionForNextDueDate()
     {
         var schedule = CareSchedule.Create(

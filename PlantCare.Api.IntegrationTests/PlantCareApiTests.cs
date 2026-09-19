@@ -372,6 +372,89 @@ public sealed class PlantCareApiTests
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
+    [Fact]
+    public async Task OwnerCanEditPauseAndResumeCareSchedule()
+    {
+        var userId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var pauseResponse = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/schedule",
+            new
+            {
+                intervalDays = 10,
+                isEnabled = false
+            });
+        pauseResponse.EnsureSuccessStatusCode();
+
+        using var pauseDocument = JsonDocument.Parse(
+            await pauseResponse.Content.ReadAsStringAsync());
+        Assert.Equal(
+            10,
+            pauseDocument.RootElement
+                .GetProperty("intervalDays")
+                .GetInt32());
+        Assert.False(
+            pauseDocument.RootElement
+                .GetProperty("isEnabled")
+                .GetBoolean());
+        Assert.Equal(
+            PlantCareApiFactory.UtcNow,
+            pauseDocument.RootElement
+                .GetProperty("nextDueAtUtc")
+                .GetDateTimeOffset());
+
+        using var completionResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/complete",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow,
+                notes = (string?)null
+            });
+        Assert.Equal(
+            HttpStatusCode.BadRequest,
+            completionResponse.StatusCode);
+
+        using var resumeResponse = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/schedule",
+            new
+            {
+                intervalDays = 10,
+                isEnabled = true
+            });
+        resumeResponse.EnsureSuccessStatusCode();
+
+        using var resumeDocument = JsonDocument.Parse(
+            await resumeResponse.Content.ReadAsStringAsync());
+        Assert.True(
+            resumeDocument.RootElement
+                .GetProperty("isEnabled")
+                .GetBoolean());
+    }
+
+    [Fact]
+    public async Task UserCannotUpdateAnotherUsersCareSchedule()
+    {
+        var ownerId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(ownerId);
+        using var client = CreateClient();
+        client.AuthenticateAs(Guid.NewGuid());
+        await client.AddAntiforgeryTokenAsync();
+
+        using var response = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/schedule",
+            new
+            {
+                intervalDays = 30,
+                isEnabled = false
+            });
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
     private HttpClient CreateClient()
     {
         return factory.CreateClient(

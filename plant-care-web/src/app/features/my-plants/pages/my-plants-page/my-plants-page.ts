@@ -65,6 +65,12 @@ export class MyPlantsPage {
   readonly completingCareActionKey =
     signal<string | null>(null);
 
+  readonly updatingScheduleKey =
+    signal<string | null>(null);
+
+  readonly intervalDrafts =
+    signal<Record<string, number>>({});
+
   constructor() {
     this.loadPlants();
   }
@@ -173,10 +179,73 @@ export class MyPlantsPage {
     );
   }
 
+  getIntervalDraft(
+    plant: UserPlant,
+    schedule: CareSchedule,
+  ): number {
+    return this.intervalDrafts()[
+      this.createCareActionKey(
+        plant.id,
+        schedule.actionType,
+      )
+    ] ?? schedule.intervalDays;
+  }
+
+  setIntervalDraft(
+    plant: UserPlant,
+    schedule: CareSchedule,
+    event: Event,
+  ): void {
+    const intervalDays = Number(
+      (event.target as HTMLInputElement).value,
+    );
+    const key = this.createCareActionKey(
+      plant.id,
+      schedule.actionType,
+    );
+
+    this.intervalDrafts.update((drafts) => ({
+      ...drafts,
+      [key]: intervalDays,
+    }));
+  }
+
+  saveSchedule(
+    plant: UserPlant,
+    schedule: CareSchedule,
+  ): void {
+    this.updateSchedule(
+      plant,
+      schedule,
+      this.getIntervalDraft(plant, schedule),
+      schedule.isEnabled,
+    );
+  }
+
+  toggleSchedule(
+    plant: UserPlant,
+    schedule: CareSchedule,
+  ): void {
+    this.updateSchedule(
+      plant,
+      schedule,
+      this.getIntervalDraft(plant, schedule),
+      !schedule.isEnabled,
+    );
+  }
+
+  isUpdatingSchedule(
+    plantId: string,
+    actionType: CareActionType,
+  ): boolean {
+    return this.updatingScheduleKey() ===
+      this.createCareActionKey(plantId, actionType);
+  }
+
   getCareStatus(
     schedule: CareSchedule,
   ): CareScheduleStatus {
-    if (!schedule.nextDueAtUtc) {
+    if (!schedule.isEnabled || !schedule.nextDueAtUtc) {
       return 'not-started';
     }
 
@@ -211,6 +280,10 @@ export class MyPlantsPage {
   getCareStatusText(
     schedule: CareSchedule,
   ): string {
+    if (!schedule.isEnabled) {
+      return 'Paused';
+    }
+
     if (!schedule.nextDueAtUtc) {
       return 'Not started';
     }
@@ -302,6 +375,19 @@ export class MyPlantsPage {
       .subscribe({
         next: (plants) => {
           this.userPlants.set(plants);
+          this.intervalDrafts.set(
+            Object.fromEntries(
+              plants.flatMap((plant) =>
+                plant.careSchedules.map((schedule) => [
+                  this.createCareActionKey(
+                    plant.id,
+                    schedule.actionType,
+                  ),
+                  schedule.intervalDays,
+                ]),
+              ),
+            ),
+          );
           this.isLoading.set(false);
         },
 
@@ -325,6 +411,87 @@ export class MyPlantsPage {
     actionType: CareActionType,
   ): string {
     return `${plantId}:${actionType}`;
+  }
+
+  private updateSchedule(
+    plant: UserPlant,
+    schedule: CareSchedule,
+    intervalDays: number,
+    isEnabled: boolean,
+  ): void {
+    if (
+      !Number.isInteger(intervalDays) ||
+      intervalDays < 1 ||
+      intervalDays > 3650 ||
+      this.isUpdatingSchedule(
+        plant.id,
+        schedule.actionType,
+      )
+    ) {
+      this.careActionError.set(
+        'Enter an interval between 1 and 3650 days.',
+      );
+      return;
+    }
+
+    const key = this.createCareActionKey(
+      plant.id,
+      schedule.actionType,
+    );
+    this.updatingScheduleKey.set(key);
+    this.careActionError.set(null);
+
+    this.myPlantsApi
+      .updateCareSchedule(
+        plant.id,
+        schedule.actionType,
+        {
+          intervalDays,
+          isEnabled,
+        },
+      )
+      .pipe(
+        finalize(() => {
+          this.updatingScheduleKey.set(null);
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: (updatedSchedule) => {
+          this.userPlants.update((plants) =>
+            plants.map((currentPlant) =>
+              currentPlant.id === plant.id
+                ? {
+                    ...currentPlant,
+                    careSchedules:
+                      currentPlant.careSchedules.map(
+                        (currentSchedule) =>
+                          currentSchedule.id ===
+                            updatedSchedule.id
+                            ? updatedSchedule
+                            : currentSchedule,
+                      ),
+                  }
+                : currentPlant,
+            ),
+          );
+          this.intervalDrafts.update((drafts) => ({
+            ...drafts,
+            [key]: updatedSchedule.intervalDays,
+          }));
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error(
+            'Unable to update care schedule.',
+            error,
+          );
+          this.careActionError.set(
+            error.status === 404
+              ? 'The care schedule could not be found.'
+              : 'The care schedule could not be updated.',
+          );
+        },
+      });
   }
 
   private getLocalCalendarDayNumber(

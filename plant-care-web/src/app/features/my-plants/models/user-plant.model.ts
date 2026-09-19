@@ -33,6 +33,11 @@ export interface CompleteCareActionRequest {
   notes: string | null;
 }
 
+export interface UpdateCareScheduleRequest {
+  intervalDays: number;
+  isEnabled: boolean;
+}
+
 export interface CareEventHistory {
   id: string;
   careScheduleId: string;

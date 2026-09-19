@@ -173,6 +173,65 @@
   cursor: pointer;
 }
 
+.schedule-controls {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dce5de;
+}
+
+  .schedule-controls label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #59655e;
+    font-size: 0.85rem;
+    font-weight: 650;
+  }
+
+.interval-input {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+  .interval-input input {
+    width: 5rem;
+    padding: 0.45rem;
+    border: 1px solid #bbc9be;
+    border-radius: 0.45rem;
+  }
+
+.schedule-control-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.schedule-button {
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #377a4b;
+  color: white;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.schedule-button--secondary {
+  border: 1px solid #9eb0a3;
+  background: white;
+  color: #285f3a;
+}
+
+  .schedule-button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+  }
+
   .complete-care-button:hover:not(:disabled) {
     background: #2d663e;
   }
@@ -206,27 +265,6 @@
   .care-dates {
     grid-template-columns: 1fr;
   }
-}
-
-.care-summary div {
-  padding: 0.8rem;
-  border-radius: 0.7rem;
-  background: #f2f7f3;
-}
-
-.care-summary span,
-.care-summary strong {
-  display: block;
-}
-
-.care-summary span {
-  margin-bottom: 0.3rem;
-  color: #68736c;
-  font-size: 0.75rem;
-}
-
-.care-summary strong {
-  font-size: 0.9rem;
 }
 
 .notes {
@@ -270,9 +308,6 @@
     flex-direction: column;
   }
 
-  .care-summary {
-    grid-template-columns: 1fr;
-  }
 }
 
 .care-history-link {

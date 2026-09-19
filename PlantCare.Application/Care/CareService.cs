@@ -6,6 +6,51 @@ namespace PlantCare.Application.Care;
 
 internal sealed class CareService(ICareScheduleRepository careScheduleRepository, ICareEventRepository careEventRepository, IUnitOfWork unitOfWork, TimeProvider timeProvider) : ICareService
 {
+    public async Task<CareScheduleDto?> UpdateScheduleAsync(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType,
+        int intervalDays,
+        bool isEnabled,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateIdentifiers(userId, userPlantId, actionType);
+
+        if (intervalDays is < 1 or > 3_650)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(intervalDays),
+                "The interval must be between 1 and 3650 days.");
+        }
+
+        var schedule =
+            await careScheduleRepository.GetForUserAsync(
+                userId,
+                userPlantId,
+                actionType,
+                cancellationToken);
+
+        if (schedule is null)
+        {
+            return null;
+        }
+
+        schedule.UpdateInterval(intervalDays);
+
+        if (isEnabled)
+        {
+            schedule.Enable();
+        }
+        else
+        {
+            schedule.Disable();
+        }
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return MapSchedule(schedule);
+    }
+
     public async Task<CompleteCareActionResult?> CompleteAsync(
     Guid userId,
     Guid userPlantId,
@@ -88,6 +133,34 @@ internal sealed class CareService(ICareScheduleRepository careScheduleRepository
                     careEvent.RecordedAtUtc,
                 Notes:
                     careEvent.Notes));
+    }
+
+    private static void ValidateIdentifiers(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType)
+    {
+        if (userId == Guid.Empty)
+        {
+            throw new ArgumentException(
+                "A valid user ID must be provided.",
+                nameof(userId));
+        }
+
+        if (userPlantId == Guid.Empty)
+        {
+            throw new ArgumentException(
+                "A valid user plant ID must be provided.",
+                nameof(userPlantId));
+        }
+
+        if (actionType == CareActionType.Unknown ||
+            !Enum.IsDefined(typeof(CareActionType), actionType))
+        {
+            throw new ArgumentException(
+                "A valid care action type must be provided.",
+                nameof(actionType));
+        }
     }
 
     public async Task<IReadOnlyList<CareEventHistoryDto>>

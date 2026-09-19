@@ -5,9 +5,11 @@ import { Observable } from 'rxjs';
 import {
   AddUserPlantRequest,
   CareActionType,
+  CareSchedule,
   CareEventHistory,
   CompleteCareActionRequest,
   CompleteCareActionResult,
+  UpdateCareScheduleRequest,
   UpdateUserPlantRequest,
   UserPlant,
 } from '../models/user-plant.model';
@@ -44,6 +46,17 @@ export class MyPlantsApiService {
   ): Observable<CompleteCareActionResult> {
     return this.httpClient.post<CompleteCareActionResult>(
       `${this.endpoint}/${userPlantId}/care/${actionType}/complete`,
+      request,
+    );
+  }
+
+  updateCareSchedule(
+    userPlantId: string,
+    actionType: CareActionType,
+    request: UpdateCareScheduleRequest,
+  ): Observable<CareSchedule> {
+    return this.httpClient.put<CareSchedule>(
+      `${this.endpoint}/${userPlantId}/care/${actionType}/schedule`,
       request,
     );
   }

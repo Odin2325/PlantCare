@@ -116,6 +116,34 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         return Ok(result);
     }
 
+    [HttpPut("{id:guid}/care/{actionType}/schedule")]
+    [ProducesResponseType(
+        typeof(CareScheduleDto),
+        StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<CareScheduleDto>> UpdateCareSchedule(
+        Guid id,
+        CareActionType actionType,
+        UpdateCareScheduleRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var result = await careService.UpdateScheduleAsync(
+            userId,
+            id,
+            actionType,
+            request.IntervalDays,
+            request.IsEnabled,
+            cancellationToken);
+
+        return result is null ? NotFound() : Ok(result);
+    }
+
     [HttpPost]
     [ProducesResponseType(
         typeof(UserPlantDto),
