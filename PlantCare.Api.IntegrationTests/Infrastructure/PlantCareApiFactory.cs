@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,18 +15,20 @@ internal sealed class PlantCareApiFactory
     public static readonly DateTimeOffset UtcNow =
         new(2026, 9, 19, 10, 0, 0, TimeSpan.Zero);
 
-    private readonly string databaseName =
-        $"PlantCareTests-{Guid.NewGuid()}";
+    private readonly SqliteConnection databaseConnection =
+        new("Data Source=:memory:");
 
     private readonly IServiceProvider databaseServiceProvider =
         new ServiceCollection()
-            .AddEntityFrameworkInMemoryDatabase()
+            .AddEntityFrameworkSqlite()
             .BuildServiceProvider();
 
     protected override void ConfigureWebHost(
         IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
+
+        databaseConnection.Open();
 
         builder.ConfigureServices(services =>
         {
@@ -36,7 +39,7 @@ internal sealed class PlantCareApiFactory
 
             services.AddDbContext<PlantCareDbContext>(options =>
                 options
-                    .UseInMemoryDatabase(databaseName)
+                    .UseSqlite(databaseConnection)
                     .UseInternalServiceProvider(
                         databaseServiceProvider));
 

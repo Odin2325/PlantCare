@@ -35,6 +35,49 @@ public sealed class PlantCareApiTests
     }
 
     [Fact]
+    public async Task UserCannotModifyAnotherUsersPlant()
+    {
+        var ownerId = Guid.NewGuid();
+        var otherUserId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(ownerId);
+        using var client = CreateClient();
+        client.AuthenticateAs(otherUserId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var updateResponse = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}",
+            new
+            {
+                nickname = "Stolen plant",
+                location = "Other home",
+                acquiredOn = (DateOnly?)null,
+                notes = (string?)null
+            });
+        using var archiveResponse = await client.DeleteAsync(
+            $"/api/my-plants/{userPlant.Id}");
+
+        Assert.Equal(
+            HttpStatusCode.NotFound,
+            updateResponse.StatusCode);
+        Assert.Equal(
+            HttpStatusCode.NotFound,
+            archiveResponse.StatusCode);
+
+        client.AuthenticateAs(ownerId);
+        using var ownerResponse = await client.GetAsync(
+            $"/api/my-plants/{userPlant.Id}");
+        ownerResponse.EnsureSuccessStatusCode();
+
+        using var document = JsonDocument.Parse(
+            await ownerResponse.Content.ReadAsStringAsync());
+        Assert.Equal(
+            "Kitchen Monstera",
+            document.RootElement.GetProperty("nickname").GetString());
+        Assert.True(
+            document.RootElement.GetProperty("isActive").GetBoolean());
+    }
+
+    [Fact]
     public async Task UpdatingSpeciesPersistsTheChanges()
     {
         var (plantSpecies, _) = await SeedPlantAsync(Guid.NewGuid());
@@ -153,6 +196,100 @@ public sealed class PlantCareApiTests
             historyDocument.RootElement[0]
                 .GetProperty("notes")
                 .GetString());
+    }
+
+    [Fact]
+    public async Task FutureCareCompletionIsRejectedWithoutCreatingHistory()
+    {
+        var userId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var completionResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/complete",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow.AddMinutes(1),
+                notes = "From the future"
+            });
+
+        Assert.Equal(
+            HttpStatusCode.BadRequest,
+            completionResponse.StatusCode);
+
+        using var historyResponse = await client.GetAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history");
+        historyResponse.EnsureSuccessStatusCode();
+
+        using var historyDocument = JsonDocument.Parse(
+            await historyResponse.Content.ReadAsStringAsync());
+        Assert.Equal(0, historyDocument.RootElement.GetArrayLength());
+    }
+
+    [Fact]
+    public async Task OutOfOrderCareCompletionIsRejected()
+    {
+        var userId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var firstResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/complete",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow.AddDays(-1),
+                notes = "Latest care"
+            });
+        firstResponse.EnsureSuccessStatusCode();
+
+        using var secondResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/complete",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow.AddDays(-2),
+                notes = "Older care"
+            });
+
+        Assert.Equal(
+            HttpStatusCode.BadRequest,
+            secondResponse.StatusCode);
+
+        using var historyResponse = await client.GetAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history");
+        historyResponse.EnsureSuccessStatusCode();
+
+        using var historyDocument = JsonDocument.Parse(
+            await historyResponse.Content.ReadAsStringAsync());
+        Assert.Equal(1, historyDocument.RootElement.GetArrayLength());
+        Assert.Equal(
+            "Latest care",
+            historyDocument.RootElement[0]
+                .GetProperty("notes")
+                .GetString());
+    }
+
+    [Fact]
+    public async Task DeletingSpeciesInUseReturnsConflict()
+    {
+        var (plantSpecies, _) = await SeedPlantAsync(Guid.NewGuid());
+        using var client = CreateClient();
+        client.AuthenticateAs(Guid.NewGuid(), "Admin");
+        await client.AddAntiforgeryTokenAsync();
+
+        using var deleteResponse = await client.DeleteAsync(
+            $"/api/plant-species/{plantSpecies.Id}");
+
+        Assert.Equal(
+            HttpStatusCode.Conflict,
+            deleteResponse.StatusCode);
+
+        using var getResponse = await client.GetAsync(
+            $"/api/plant-species/{plantSpecies.Id}");
+        Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
     }
 
     private HttpClient CreateClient()
