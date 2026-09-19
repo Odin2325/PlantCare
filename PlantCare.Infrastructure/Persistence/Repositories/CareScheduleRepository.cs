@@ -21,6 +21,7 @@ internal sealed class CareScheduleRepository(
                     schedule.UserPlantId == userPlantId &&
                     schedule.UserPlant.UserId == userId &&
                     schedule.UserPlant.IsActive &&
+                    !schedule.IsArchived &&
                     schedule.ActionType == actionType,
                 cancellationToken);
     }

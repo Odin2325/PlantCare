@@ -210,6 +210,15 @@
                       (click)="toggleSchedule(plant, schedule)">
                 {{ schedule.isEnabled ? 'Pause' : 'Resume' }}
               </button>
+
+              @if (schedule.actionType !== 'Watering') {
+              <button type="button"
+                      class="schedule-button schedule-button--remove"
+                      [disabled]="isChangingOptionalSchedule(plant.id + ':' + schedule.actionType)"
+                      (click)="removeOptionalSchedule(plant, schedule)">
+                Remove
+              </button>
+              }
             </div>
           </div>
 
@@ -250,6 +259,40 @@
           No care schedules have been configured
           for this plant.
         </p>
+        }
+
+
+        @if (getAvailableCareActionTypes(plant); as availableTypes) {
+        @if (availableTypes.length > 0) {
+        <div class="add-schedule-controls">
+          <strong>Add care schedule</strong>
+
+          <select #newCareAction>
+            @for (actionType of availableTypes; track actionType) {
+            <option [value]="actionType">
+              {{ getCareActionName(actionType) }}
+            </option>
+            }
+          </select>
+
+          <label>
+            Every
+            <input #newCareInterval
+                   type="number"
+                   min="1"
+                   max="3650"
+                   value="30">
+            days
+          </label>
+
+          <button type="button"
+                  class="schedule-button"
+                  [disabled]="isChangingOptionalSchedule(plant.id + ':add')"
+                  (click)="addOptionalSchedule(plant, newCareAction.value, newCareInterval.value)">
+            Add schedule
+          </button>
+        </div>
+        }
         }
       </section>
 

@@ -227,6 +227,43 @@
   color: #285f3a;
 }
 
+.schedule-button--remove {
+  background: #a33b3b;
+}
+
+.add-schedule-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  padding: 1rem;
+  border: 1px dashed #9eb0a3;
+  border-radius: 0.75rem;
+}
+
+  .add-schedule-controls strong,
+  .add-schedule-controls button {
+    grid-column: 1 / -1;
+  }
+
+  .add-schedule-controls select,
+  .add-schedule-controls input {
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid #bbc9be;
+    border-radius: 0.45rem;
+  }
+
+  .add-schedule-controls label {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+  }
+
+  .add-schedule-controls input {
+    width: 4.5rem;
+  }
+
   .schedule-button:disabled {
     cursor: wait;
     opacity: 0.6;

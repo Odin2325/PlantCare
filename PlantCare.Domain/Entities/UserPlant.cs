@@ -91,6 +91,57 @@ public sealed class UserPlant
         return schedule;
     }
 
+    public CareSchedule AddOrRestoreCareSchedule(
+        CareActionType actionType,
+        int intervalDays,
+        DateTimeOffset startsAtUtc)
+    {
+        var existingSchedule = _careSchedules
+            .SingleOrDefault(schedule =>
+                schedule.ActionType == actionType);
+
+        if (existingSchedule is null)
+        {
+            return AddCareSchedule(
+                actionType,
+                intervalDays,
+                startsAtUtc);
+        }
+
+        if (!existingSchedule.IsArchived)
+        {
+            throw new InvalidOperationException(
+                $"A {actionType} schedule already exists for this plant.");
+        }
+
+        existingSchedule.Restore(intervalDays);
+        return existingSchedule;
+    }
+
+    public CareSchedule ArchiveCareSchedule(
+        CareActionType actionType)
+    {
+        if (actionType == CareActionType.Watering)
+        {
+            throw new InvalidOperationException(
+                "The watering schedule cannot be removed.");
+        }
+
+        var schedule = _careSchedules.SingleOrDefault(
+            item =>
+                item.ActionType == actionType &&
+                !item.IsArchived);
+
+        if (schedule is null)
+        {
+            throw new InvalidOperationException(
+                $"An active {actionType} schedule does not exist for this plant.");
+        }
+
+        schedule.Archive();
+        return schedule;
+    }
+
     public void UpdateDetails(string nickname, string? location, DateOnly? acquiredOn, string? notes)
     {
         Nickname = NormalizeRequired(nickname, nameof(nickname), NicknameMaxLength);

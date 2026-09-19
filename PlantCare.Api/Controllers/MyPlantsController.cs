@@ -144,6 +144,58 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         return result is null ? NotFound() : Ok(result);
     }
 
+    [HttpPost("{id:guid}/care/{actionType}/schedule")]
+    [ProducesResponseType(
+        typeof(CareScheduleDto),
+        StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<CareScheduleDto>> AddCareSchedule(
+        Guid id,
+        CareActionType actionType,
+        CreateCareScheduleRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var result = await careService.AddScheduleAsync(
+            userId,
+            id,
+            actionType,
+            request.IntervalDays,
+            cancellationToken);
+
+        return result is null
+            ? NotFound()
+            : StatusCode(StatusCodes.Status201Created, result);
+    }
+
+    [HttpDelete("{id:guid}/care/{actionType}/schedule")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> ArchiveCareSchedule(
+        Guid id,
+        CareActionType actionType,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var archived = await careService.ArchiveScheduleAsync(
+            userId,
+            id,
+            actionType,
+            cancellationToken);
+
+        return archived ? NoContent() : NotFound();
+    }
+
     [HttpPost]
     [ProducesResponseType(
         typeof(UserPlantDto),

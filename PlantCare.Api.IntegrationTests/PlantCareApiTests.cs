@@ -455,6 +455,82 @@ public sealed class PlantCareApiTests
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
+    [Fact]
+    public async Task RemovingAndRestoringOptionalSchedulePreservesHistory()
+    {
+        var userId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var addResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Fertilizing/schedule",
+            new { intervalDays = 30 });
+        Assert.Equal(HttpStatusCode.Created, addResponse.StatusCode);
+
+        using var addDocument = JsonDocument.Parse(
+            await addResponse.Content.ReadAsStringAsync());
+        var scheduleId = addDocument.RootElement
+            .GetProperty("id")
+            .GetGuid();
+
+        using var completionResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Fertilizing/complete",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow,
+                notes = "Spring feed"
+            });
+        completionResponse.EnsureSuccessStatusCode();
+
+        using var removeResponse = await client.DeleteAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Fertilizing/schedule");
+        Assert.Equal(
+            HttpStatusCode.NoContent,
+            removeResponse.StatusCode);
+
+        using var plantResponse = await client.GetAsync(
+            $"/api/my-plants/{userPlant.Id}");
+        plantResponse.EnsureSuccessStatusCode();
+        using var plantDocument = JsonDocument.Parse(
+            await plantResponse.Content.ReadAsStringAsync());
+        Assert.DoesNotContain(
+            plantDocument.RootElement
+                .GetProperty("careSchedules")
+                .EnumerateArray(),
+            schedule =>
+                schedule.GetProperty("actionType").GetString() ==
+                "Fertilizing");
+
+        using var historyResponse = await client.GetAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history");
+        historyResponse.EnsureSuccessStatusCode();
+        using var historyDocument = JsonDocument.Parse(
+            await historyResponse.Content.ReadAsStringAsync());
+        Assert.Contains(
+            historyDocument.RootElement.EnumerateArray(),
+            careEvent =>
+                careEvent.GetProperty("notes").GetString() ==
+                "Spring feed");
+
+        using var restoreResponse = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Fertilizing/schedule",
+            new { intervalDays = 45 });
+        Assert.Equal(HttpStatusCode.Created, restoreResponse.StatusCode);
+
+        using var restoreDocument = JsonDocument.Parse(
+            await restoreResponse.Content.ReadAsStringAsync());
+        Assert.Equal(
+            scheduleId,
+            restoreDocument.RootElement.GetProperty("id").GetGuid());
+        Assert.Equal(
+            45,
+            restoreDocument.RootElement
+                .GetProperty("intervalDays")
+                .GetInt32());
+    }
+
     private HttpClient CreateClient()
     {
         return factory.CreateClient(

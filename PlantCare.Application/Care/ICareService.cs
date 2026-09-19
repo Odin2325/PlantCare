@@ -26,4 +26,17 @@ public interface ICareService
         int intervalDays,
         bool isEnabled,
         CancellationToken cancellationToken = default);
+
+    Task<CareScheduleDto?> AddScheduleAsync(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType,
+        int intervalDays,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> ArchiveScheduleAsync(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType,
+        CancellationToken cancellationToken = default);
 }

@@ -22,6 +22,8 @@ public sealed class CareSchedule
 
     public bool IsEnabled { get; private set; }
 
+    public bool IsArchived { get; private set; }
+
     public UserPlant UserPlant { get; private set; } = null!;
 
     public static CareSchedule Create(
@@ -71,7 +73,8 @@ public sealed class CareSchedule
             IntervalDays = intervalDays,
             LastCompletedAtUtc = lastCompletedAtUtc,
             NextDueAtUtc = scheduleStart.AddDays(intervalDays),
-            IsEnabled = true
+            IsEnabled = true,
+            IsArchived = false
         };
     }
 
@@ -100,6 +103,19 @@ public sealed class CareSchedule
     public void Disable()
     {
         IsEnabled = false;
+    }
+
+    public void Archive()
+    {
+        IsArchived = true;
+        IsEnabled = false;
+    }
+
+    public void Restore(int intervalDays)
+    {
+        IsArchived = false;
+        UpdateInterval(intervalDays);
+        IsEnabled = true;
     }
 
     public void UpdateInterval(int intervalDays)

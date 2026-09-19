@@ -41,6 +41,13 @@ type CareScheduleStatus =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyPlantsPage {
+  readonly optionalCareActionTypes: CareActionType[] = [
+    'Fertilizing',
+    'Misting',
+    'Pruning',
+    'Repotting',
+  ];
+
   private readonly myPlantsApi =
     inject(MyPlantsApiService);
 
@@ -70,6 +77,9 @@ export class MyPlantsPage {
 
   readonly intervalDrafts =
     signal<Record<string, number>>({});
+
+  readonly changingOptionalScheduleKey =
+    signal<string | null>(null);
 
   constructor() {
     this.loadPlants();
@@ -240,6 +250,136 @@ export class MyPlantsPage {
   ): boolean {
     return this.updatingScheduleKey() ===
       this.createCareActionKey(plantId, actionType);
+  }
+
+  getAvailableCareActionTypes(
+    plant: UserPlant,
+  ): CareActionType[] {
+    const existingTypes = new Set(
+      plant.careSchedules.map(
+        (schedule) => schedule.actionType,
+      ),
+    );
+
+    return this.optionalCareActionTypes.filter(
+      (actionType) => !existingTypes.has(actionType),
+    );
+  }
+
+  addOptionalSchedule(
+    plant: UserPlant,
+    actionTypeValue: string,
+    intervalValue: string,
+  ): void {
+    const actionType = actionTypeValue as CareActionType;
+    const intervalDays = Number(intervalValue);
+
+    if (
+      !this.optionalCareActionTypes.includes(actionType) ||
+      !Number.isInteger(intervalDays) ||
+      intervalDays < 1 ||
+      intervalDays > 3650
+    ) {
+      this.careActionError.set(
+        'Choose a care type and an interval between 1 and 3650 days.',
+      );
+      return;
+    }
+
+    const key = `${plant.id}:add`;
+    this.changingOptionalScheduleKey.set(key);
+    this.careActionError.set(null);
+
+    this.myPlantsApi
+      .addCareSchedule(
+        plant.id,
+        actionType,
+        intervalDays,
+      )
+      .pipe(
+        finalize(() => {
+          this.changingOptionalScheduleKey.set(null);
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: (schedule) => {
+          this.userPlants.update((plants) =>
+            plants.map((currentPlant) =>
+              currentPlant.id === plant.id
+                ? {
+                    ...currentPlant,
+                    careSchedules: [
+                      ...currentPlant.careSchedules,
+                      schedule,
+                    ].sort(
+                      (left, right) =>
+                        left.actionType.localeCompare(
+                          right.actionType,
+                        ),
+                    ),
+                  }
+                : currentPlant,
+            ),
+          );
+        },
+        error: () => {
+          this.careActionError.set(
+            'The care schedule could not be added.',
+          );
+        },
+      });
+  }
+
+  removeOptionalSchedule(
+    plant: UserPlant,
+    schedule: CareSchedule,
+  ): void {
+    const key = this.createCareActionKey(
+      plant.id,
+      schedule.actionType,
+    );
+    this.changingOptionalScheduleKey.set(key);
+    this.careActionError.set(null);
+
+    this.myPlantsApi
+      .archiveCareSchedule(
+        plant.id,
+        schedule.actionType,
+      )
+      .pipe(
+        finalize(() => {
+          this.changingOptionalScheduleKey.set(null);
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: () => {
+          this.userPlants.update((plants) =>
+            plants.map((currentPlant) =>
+              currentPlant.id === plant.id
+                ? {
+                    ...currentPlant,
+                    careSchedules:
+                      currentPlant.careSchedules.filter(
+                        (currentSchedule) =>
+                          currentSchedule.id !== schedule.id,
+                      ),
+                  }
+                : currentPlant,
+            ),
+          );
+        },
+        error: () => {
+          this.careActionError.set(
+            'The care schedule could not be removed.',
+          );
+        },
+      });
+  }
+
+  isChangingOptionalSchedule(key: string): boolean {
+    return this.changingOptionalScheduleKey() === key;
   }
 
   getCareStatus(

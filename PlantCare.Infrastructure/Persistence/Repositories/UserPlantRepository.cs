@@ -47,6 +47,7 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
                 userPlant =>
                     userPlant.CareSchedules.Any(
                         schedule =>
+                            !schedule.IsArchived &&
                             schedule.IsEnabled &&
                             schedule.NextDueAtUtc != null &&
                             schedule.NextDueAtUtc < end))

@@ -126,4 +126,41 @@ public sealed class UserPlantTests
 
         Assert.Equal(startsAt.AddDays(7), schedule.NextDueAtUtc);
     }
+
+    [Fact]
+    public void ArchiveAndRestoreCareSchedule_PreservesHistoryState()
+    {
+        var startsAt = new DateTimeOffset(
+            2026, 8, 1, 12, 0, 0, TimeSpan.Zero);
+        var userPlant = UserPlant.Create(
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "My plant",
+            null,
+            null,
+            null,
+            startsAt);
+        var schedule = userPlant.AddCareSchedule(
+            CareActionType.Fertilizing,
+            30,
+            startsAt);
+        var completedAt = startsAt.AddDays(5);
+        schedule.MarkCompleted(completedAt);
+
+        userPlant.ArchiveCareSchedule(
+            CareActionType.Fertilizing);
+        var restored = userPlant.AddOrRestoreCareSchedule(
+            CareActionType.Fertilizing,
+            45,
+            startsAt.AddDays(10));
+
+        Assert.Same(schedule, restored);
+        Assert.False(restored.IsArchived);
+        Assert.True(restored.IsEnabled);
+        Assert.Equal(completedAt, restored.LastCompletedAtUtc);
+        Assert.Equal(45, restored.IntervalDays);
+        Assert.Equal(
+            completedAt.AddDays(45),
+            restored.NextDueAtUtc);
+    }
 }
