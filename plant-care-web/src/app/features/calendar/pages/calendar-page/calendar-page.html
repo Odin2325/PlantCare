@@ -3,7 +3,11 @@
     <div><p class="eyebrow">Plant care plan</p><h1>{{ visibleMonth() | date:'MMMM yyyy' }}</h1></div>
     <div class="controls"><button type="button" (click)="changeMonth(-1)" aria-label="Previous month">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changeMonth(1)" aria-label="Next month">→</button></div>
   </header>
-  <div class="legend"><span><i class="scheduled"></i>Scheduled</span><span><i class="completed"></i>Completed</span></div>
+  <section class="toolbar" aria-label="Calendar filters">
+    <label>Plant<select [ngModel]="selectedPlantId()" (ngModelChange)="selectedPlantId.set($event)"><option value="all">All plants</option>@for (plant of plants(); track plant.id) { <option [value]="plant.id">{{ plant.name }}</option> }</select></label>
+    <label>Status<select [ngModel]="selectedKind()" (ngModelChange)="selectedKind.set($event)"><option value="All">All events</option><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option></select></label>
+    <div class="legend"><span><i class="scheduled"></i>Scheduled</span><span><i class="completed"></i>Completed</span></div>
+  </section>
   @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
   @if (isLoading()) { <p role="status">Loading calendar…</p> }
   <section class="calendar" aria-label="Plant care calendar">
@@ -12,11 +16,20 @@
       <article class="day" [class.outside]="!day.isCurrentMonth">
         <time [attr.datetime]="day.date.toISOString()">{{ day.date.getDate() }}</time>
         @for (entry of day.entries; track entry.id) {
-          <div class="event" [class.completed]="entry.kind === 'Completed'" [title]="entry.plantName + ' · ' + entry.actionType">
+          <button type="button" class="event" [class.completed]="entry.kind === 'Completed'" [title]="entry.plantName + ' · ' + entry.actionType" (click)="selectEntry(entry)">
             <span>{{ entry.plantName }}</span><small>{{ entry.actionType }}</small>
-          </div>
+          </button>
         }
       </article>
     }
   </section>
+  @if (selectedEntry(); as entry) {
+    <aside class="details" aria-live="polite">
+      <div><p class="eyebrow">{{ entry.kind }} care</p><h2>{{ entry.plantName }}</h2></div>
+      <button type="button" class="close" (click)="closeDetails()" aria-label="Close event details">×</button>
+      <dl><div><dt>Care action</dt><dd>{{ entry.actionType }}</dd></div><div><dt>Date and time</dt><dd>{{ entry.startsAtUtc | date:'full' }}</dd></div><div><dt>Status</dt><dd>{{ entry.kind }}</dd></div></dl>
+      @if (canComplete(entry)) { <button type="button" class="complete" [disabled]="completingEntryId() !== null" (click)="completeCare(entry)">{{ completingEntryId() === entry.id ? 'Completing…' : 'Complete care now' }}</button> }
+      @if (entry.kind === 'Scheduled' && !canComplete(entry)) { <p class="hint">This care action can be completed here once it is due.</p> }
+    </aside>
+  }
 </main>
