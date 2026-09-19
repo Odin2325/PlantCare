@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { CalendarApiService } from '../../data-access/calendar-api.service';
-import { CalendarEntry } from '../../models/calendar.model';
+import { CalendarEntry, CalendarShare } from '../../models/calendar.model';
 import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api.service';
 import { CareActionType } from '../../../my-plants/models/user-plant.model';
 
@@ -32,6 +32,13 @@ export class CalendarPage {
   readonly subscriptionUrl = signal<string | null>(null);
   readonly subscriptionBusy = signal(false);
   readonly subscriptionMessage = signal<string | null>(null);
+  readonly shares = signal<CalendarShare[]>([]);
+  readonly viewedShare = signal<CalendarShare | null>(null);
+  readonly recipientEmail = signal('');
+  readonly sharingBusy = signal(false);
+  readonly sharingMessage = signal<string | null>(null);
+  readonly incomingShares = computed(() => this.shares().filter(share => !share.isOwnedByCurrentUser));
+  readonly outgoingShares = computed(() => this.shares().filter(share => share.isOwnedByCurrentUser));
   readonly plants = computed(() => Array.from(
     new Map(this.entries().map(entry => [entry.userPlantId, entry.plantName])).entries(),
   ).map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)));
@@ -41,7 +48,7 @@ export class CalendarPage {
   ));
   readonly days = computed(() => this.buildDays(this.visibleMonth(), this.filteredEntries()));
 
-  constructor() { this.load(); this.loadSubscriptionStatus(); }
+  constructor() { this.load(); this.loadSubscriptionStatus(); this.loadShares(); }
 
   changeMonth(offset: number): void {
     const current = this.visibleMonth();
@@ -56,7 +63,7 @@ export class CalendarPage {
   closeDetails(): void { this.selectedEntry.set(null); }
 
   canComplete(entry: CalendarEntry): boolean {
-    return entry.kind === 'Scheduled' && new Date(entry.startsAtUtc).getTime() <= Date.now();
+    return this.viewedShare() === null && entry.kind === 'Scheduled' && new Date(entry.startsAtUtc).getTime() <= Date.now();
   }
 
   completeCare(entry: CalendarEntry): void {
@@ -98,12 +105,36 @@ export class CalendarPage {
     catch { this.subscriptionMessage.set('Copy failed. Select and copy the link manually.'); }
   }
 
+  viewSharedCalendar(share: CalendarShare): void { this.viewedShare.set(share); this.selectedEntry.set(null); this.load(); }
+  viewOwnCalendar(): void { this.viewedShare.set(null); this.selectedEntry.set(null); this.load(); }
+
+  createShare(): void {
+    const email = this.recipientEmail().trim(); if (!email || this.sharingBusy()) return;
+    this.sharingBusy.set(true); this.sharingMessage.set(null);
+    this.api.createShare(email).pipe(finalize(() => this.sharingBusy.set(false)), takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => { this.recipientEmail.set(''); this.sharingMessage.set('Calendar shared.'); this.loadShares(); },
+      error: () => this.sharingMessage.set('The calendar could not be shared. Check that the account exists and does not already have access.'),
+    });
+  }
+
+  revokeShare(share: CalendarShare): void {
+    if (this.sharingBusy()) return;
+    this.sharingBusy.set(true); this.sharingMessage.set(null);
+    this.api.revokeShare(share.id).pipe(finalize(() => this.sharingBusy.set(false)), takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => { this.sharingMessage.set('Shared access revoked.'); this.loadShares(); },
+      error: () => this.sharingMessage.set('Shared access could not be revoked.'),
+    });
+  }
+
   private load(): void {
     const month = this.visibleMonth();
     const from = new Date(month.getFullYear(), month.getMonth(), 1);
     const to = new Date(month.getFullYear(), month.getMonth() + 1, 1);
     this.isLoading.set(true); this.errorMessage.set(null);
-    this.api.getEntries(from, to).pipe(
+    const request = this.viewedShare()
+      ? this.api.getSharedEntries(this.viewedShare()!.id, from, to)
+      : this.api.getEntries(from, to);
+    request.pipe(
       finalize(() => this.isLoading.set(false)), takeUntilDestroyed(this.destroyRef),
     ).subscribe({
       next: entries => { this.entries.set(entries); this.selectedEntry.set(null); },
@@ -115,6 +146,13 @@ export class CalendarPage {
     this.api.getSubscriptionStatus().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: status => { this.subscriptionActive.set(status.isActive); this.subscriptionCreatedAt.set(status.createdAtUtc); },
       error: () => this.subscriptionMessage.set('Calendar subscription status could not be loaded.'),
+    });
+  }
+
+  private loadShares(): void {
+    this.api.getShares().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: shares => this.shares.set(shares),
+      error: () => this.sharingMessage.set('Shared calendars could not be loaded.'),
     });
   }
 

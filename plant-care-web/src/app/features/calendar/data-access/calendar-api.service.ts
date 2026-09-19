@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CalendarEntry, CalendarSubscriptionCreated, CalendarSubscriptionStatus } from '../models/calendar.model';
+import { CalendarEntry, CalendarShare, CalendarSubscriptionCreated, CalendarSubscriptionStatus } from '../models/calendar.model';
 
 @Injectable({ providedIn: 'root' })
 export class CalendarApiService {
@@ -24,5 +24,12 @@ export class CalendarApiService {
 
   revokeSubscription(): Observable<void> {
     return this.http.delete<void>('/api/calendar/subscription');
+  }
+
+  getShares(): Observable<CalendarShare[]> { return this.http.get<CalendarShare[]>('/api/calendar/shares'); }
+  createShare(recipientEmail: string): Observable<CalendarShare> { return this.http.post<CalendarShare>('/api/calendar/shares', { recipientEmail }); }
+  revokeShare(id: string): Observable<void> { return this.http.delete<void>(`/api/calendar/shares/${id}`); }
+  getSharedEntries(id: string, from: Date, to: Date): Observable<CalendarEntry[]> {
+    return this.http.get<CalendarEntry[]>(`/api/calendar/shares/${id}/entries`, { params: { fromUtc: from.toISOString(), toUtc: to.toISOString() } });
   }
 }

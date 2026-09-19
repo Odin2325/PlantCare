@@ -55,6 +55,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICalendarRepository, CalendarRepository>();
         services.AddScoped<ICalendarSubscriptionRepository, CalendarSubscriptionRepository>();
+        services.AddScoped<ICalendarShareRepository, CalendarShareRepository>();
 
         return services;
     }

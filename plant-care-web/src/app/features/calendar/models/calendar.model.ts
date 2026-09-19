@@ -18,3 +18,11 @@ export interface CalendarSubscriptionCreated {
   subscriptionUrl: string;
   createdAtUtc: string;
 }
+
+export interface CalendarShare {
+  id: string;
+  ownerEmail: string;
+  recipientEmail: string;
+  createdAtUtc: string;
+  isOwnedByCurrentUser: boolean;
+}

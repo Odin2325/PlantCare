@@ -1,8 +1,9 @@
 <main class="calendar-page">
   <header class="calendar-header">
-    <div><p class="eyebrow">Plant care plan</p><h1>{{ visibleMonth() | date:'MMMM yyyy' }}</h1></div>
+    <div><p class="eyebrow">{{ viewedShare() ? 'Shared calendar · ' + viewedShare()!.ownerEmail : 'Plant care plan' }}</p><h1>{{ visibleMonth() | date:'MMMM yyyy' }}</h1></div>
     <div class="controls"><button type="button" (click)="changeMonth(-1)" aria-label="Previous month">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changeMonth(1)" aria-label="Next month">→</button></div>
   </header>
+  @if (viewedShare()) { <div class="shared-banner"><span>You are viewing a read-only shared calendar.</span><button type="button" (click)="viewOwnCalendar()">Return to my calendar</button></div> }
   <section class="toolbar" aria-label="Calendar filters">
     <label>Plant<select [ngModel]="selectedPlantId()" (ngModelChange)="selectedPlantId.set($event)"><option value="all">All plants</option>@for (plant of plants(); track plant.id) { <option [value]="plant.id">{{ plant.name }}</option> }</select></label>
     <label>Status<select [ngModel]="selectedKind()" (ngModelChange)="selectedKind.set($event)"><option value="All">All events</option><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option></select></label>
@@ -45,5 +46,12 @@
       <button type="button" [disabled]="subscriptionBusy()" (click)="createSubscription()">Generate private subscription link</button>
     }
     @if (subscriptionMessage()) { <p role="status">{{ subscriptionMessage() }}</p> }
+  </section>
+  <section class="sharing">
+    <div><p class="eyebrow">PlantCare sharing</p><h2>Share with another account</h2><p>Recipients receive read-only access to your current calendar. You can revoke it at any time.</p></div>
+    <div class="share-form"><label>Recipient email<input type="email" [ngModel]="recipientEmail()" (ngModelChange)="recipientEmail.set($event)" placeholder="gardener@example.com"></label><button type="button" [disabled]="sharingBusy() || !recipientEmail().trim()" (click)="createShare()">Share calendar</button></div>
+    @if (outgoingShares().length) { <h3>Shared by me</h3><ul>@for (share of outgoingShares(); track share.id) { <li><span>{{ share.recipientEmail }}</span><button type="button" class="danger" [disabled]="sharingBusy()" (click)="revokeShare(share)">Revoke</button></li> }</ul> }
+    @if (incomingShares().length) { <h3>Shared with me</h3><ul>@for (share of incomingShares(); track share.id) { <li><span>{{ share.ownerEmail }}</span><button type="button" (click)="viewSharedCalendar(share)">View calendar</button></li> }</ul> }
+    @if (sharingMessage()) { <p role="status">{{ sharingMessage() }}</p> }
   </section>
 </main>
