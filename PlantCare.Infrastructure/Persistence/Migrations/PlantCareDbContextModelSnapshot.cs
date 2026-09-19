@@ -153,6 +153,19 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.CalendarShare", b =>
+                {
+                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<Guid>("OwnerUserId").HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("RecipientUserId").HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset?>("RevokedAtUtc").HasColumnType("datetimeoffset");
+                    b.HasKey("Id");
+                    b.HasIndex("OwnerUserId", "RecipientUserId").IsUnique().HasFilter("[RevokedAtUtc] IS NULL");
+                    b.HasIndex("RecipientUserId", "RevokedAtUtc");
+                    b.ToTable("CalendarShares", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarSubscription", b =>
                 {
                     b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
@@ -490,6 +503,12 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.CalendarShare", b =>
+                {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null).WithMany().HasForeignKey("OwnerUserId").OnDelete(DeleteBehavior.NoAction).IsRequired();
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null).WithMany().HasForeignKey("RecipientUserId").OnDelete(DeleteBehavior.NoAction).IsRequired();
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarSubscription", b =>

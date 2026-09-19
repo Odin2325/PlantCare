@@ -20,6 +20,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICalendarService, CalendarService>();
         services.AddScoped<ICalendarSubscriptionService, CalendarSubscriptionService>();
+        services.AddScoped<ICalendarShareService, CalendarShareService>();
 
         services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<INotificationService, NotificationService>();
