@@ -6,19 +6,29 @@ namespace PlantCare.Domain.Tests.Entities;
 public sealed class CareScheduleTests
 {
     [Fact]
-    public void Create_CreatesEnabledScheduleWithoutDueDate()
+    public void Create_CreatesEnabledScheduleWithInitialDueDate()
     {
+        var startsAt = new DateTimeOffset(
+            2026,
+            8,
+            1,
+            10,
+            0,
+            0,
+            TimeSpan.Zero);
+
         var schedule = CareSchedule.Create(
             Guid.NewGuid(),
             CareActionType.Watering,
-            7);
+            7,
+            startsAt);
 
         Assert.NotEqual(Guid.Empty, schedule.Id);
         Assert.Equal(CareActionType.Watering, schedule.ActionType);
         Assert.Equal(7, schedule.IntervalDays);
         Assert.True(schedule.IsEnabled);
         Assert.Null(schedule.LastCompletedAtUtc);
-        Assert.Null(schedule.NextDueAtUtc);
+        Assert.Equal(startsAt.AddDays(7), schedule.NextDueAtUtc);
     }
 
     [Fact]
@@ -27,7 +37,8 @@ public sealed class CareScheduleTests
         var schedule = CareSchedule.Create(
             Guid.NewGuid(),
             CareActionType.Watering,
-            7);
+            7,
+            DateTimeOffset.UnixEpoch);
 
         var completedAt =
             new DateTimeOffset(
@@ -56,7 +67,8 @@ public sealed class CareScheduleTests
         var schedule = CareSchedule.Create(
             Guid.NewGuid(),
             CareActionType.Watering,
-            7);
+            7,
+            DateTimeOffset.UnixEpoch);
 
         var firstCompletion =
             new DateTimeOffset(

@@ -6,7 +6,6 @@ using PlantCare.Application.PlantCatalog;
 namespace PlantCare.Api.Controllers;
 
 [ApiController]
-[IgnoreAntiforgeryToken]
 [Route("api/plant-species")]
 public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesService) : ControllerBase
 {
@@ -75,7 +74,8 @@ public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesServ
 
     [HttpPut("{id:guid}")]
     [Authorize(Roles = "Admin")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(PlantSpeciesDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<PlantSpeciesDto>> Update(Guid id, UpdatePlantSpeciesRequest request, CancellationToken ct)
     {
@@ -85,7 +85,9 @@ public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesServ
 
     [HttpDelete("{id:guid}")]
     [Authorize(Roles = "Admin")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {

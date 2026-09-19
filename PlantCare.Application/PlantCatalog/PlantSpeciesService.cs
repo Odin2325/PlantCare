@@ -78,7 +78,9 @@ internal sealed class PlantSpeciesService(
 
     public async Task<PlantSpeciesDto?> UpdateAsync(Guid id, UpdatePlantSpeciesCommand command, CancellationToken cancellationToken = default)
     {
-        var plantSpecies = await plantSpeciesRepository.GetByIdAsync(id, cancellationToken);
+        ArgumentNullException.ThrowIfNull(command);
+
+        var plantSpecies = await plantSpeciesRepository.GetTrackedByIdAsync(id, cancellationToken);
 
         if (plantSpecies is null)
             return null;

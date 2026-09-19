@@ -41,7 +41,8 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
                 userPlant => userPlant.CareSchedules)
             .Where(
                 userPlant =>
-                    userPlant.UserId == userId)
+                    userPlant.UserId == userId &&
+                    userPlant.IsActive)
             .Where(
                 userPlant =>
                     userPlant.CareSchedules.Any(

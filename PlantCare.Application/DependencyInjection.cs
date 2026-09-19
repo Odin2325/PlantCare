@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlantCare.Application.Care;
+using PlantCare.Application.Dashboard;
 using PlantCare.Application.MyPlants;
 using PlantCare.Application.PlantCatalog;
 
@@ -14,6 +15,8 @@ public static class DependencyInjection
         services.AddScoped<IUserPlantService, UserPlantService>();
 
         services.AddScoped<ICareService, CareService>();
+
+        services.AddScoped<IDashboardService, DashboardService>();
 
         services.AddSingleton<TimeProvider>(TimeProvider.System);
 
