@@ -102,6 +102,27 @@ public sealed class CareSchedule
         IsEnabled = false;
     }
 
+    public void UpdateInterval(int intervalDays)
+    {
+        if (intervalDays <= 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(intervalDays),
+                "The interval must be greater than zero.");
+        }
+
+        var scheduleStart = LastCompletedAtUtc ??
+            NextDueAtUtc?.AddDays(-IntervalDays);
+
+        IntervalDays = intervalDays;
+
+        if (scheduleStart.HasValue)
+        {
+            NextDueAtUtc =
+                scheduleStart.Value.AddDays(intervalDays);
+        }
+    }
+
     public void Enable()
     {
         IsEnabled = true;
