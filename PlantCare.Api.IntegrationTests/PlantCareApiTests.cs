@@ -157,6 +157,74 @@ public sealed class PlantCareApiTests
     }
 
     [Fact]
+    public async Task OwnerCanViewAndRestoreArchivedPlant()
+    {
+        var ownerId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(ownerId);
+        using var client = CreateClient();
+        client.AuthenticateAs(ownerId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var archiveResponse = await client.DeleteAsync(
+            $"/api/my-plants/{userPlant.Id}");
+        Assert.Equal(
+            HttpStatusCode.NoContent,
+            archiveResponse.StatusCode);
+
+        client.AuthenticateAs(Guid.NewGuid());
+        using var otherUsersArchivedResponse = await client.GetAsync(
+            "/api/my-plants/archived");
+        otherUsersArchivedResponse.EnsureSuccessStatusCode();
+        using var otherUsersDocument = JsonDocument.Parse(
+            await otherUsersArchivedResponse.Content.ReadAsStringAsync());
+        Assert.Equal(
+            0,
+            otherUsersDocument.RootElement.GetArrayLength());
+
+        using var unauthorizedRestoreResponse = await client.PostAsync(
+            $"/api/my-plants/{userPlant.Id}/restore",
+            null);
+        Assert.Equal(
+            HttpStatusCode.NotFound,
+            unauthorizedRestoreResponse.StatusCode);
+
+        client.AuthenticateAs(ownerId);
+        using var archivedResponse = await client.GetAsync(
+            "/api/my-plants/archived");
+        archivedResponse.EnsureSuccessStatusCode();
+        using var archivedDocument = JsonDocument.Parse(
+            await archivedResponse.Content.ReadAsStringAsync());
+        Assert.Contains(
+            archivedDocument.RootElement.EnumerateArray(),
+            plant => plant.GetProperty("id").GetGuid() == userPlant.Id);
+
+        using var restoreResponse = await client.PostAsync(
+            $"/api/my-plants/{userPlant.Id}/restore",
+            null);
+        Assert.Equal(
+            HttpStatusCode.NoContent,
+            restoreResponse.StatusCode);
+
+        using var activeResponse = await client.GetAsync(
+            "/api/my-plants");
+        activeResponse.EnsureSuccessStatusCode();
+        using var activeDocument = JsonDocument.Parse(
+            await activeResponse.Content.ReadAsStringAsync());
+        Assert.Contains(
+            activeDocument.RootElement.EnumerateArray(),
+            plant => plant.GetProperty("id").GetGuid() == userPlant.Id);
+
+        using var dashboardResponse = await client.GetAsync(
+            "/api/dashboard/care?daysAhead=30");
+        dashboardResponse.EnsureSuccessStatusCode();
+        using var dashboardDocument = JsonDocument.Parse(
+            await dashboardResponse.Content.ReadAsStringAsync());
+        Assert.Contains(
+            dashboardDocument.RootElement.EnumerateArray(),
+            item => item.GetProperty("userPlantId").GetGuid() == userPlant.Id);
+    }
+
+    [Fact]
     public async Task CompletingCareCreatesHistoryAndAdvancesSchedule()
     {
         var userId = Guid.NewGuid();

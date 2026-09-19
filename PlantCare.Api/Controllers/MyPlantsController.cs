@@ -28,6 +28,24 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         return Ok(userPlants);
     }
 
+    [HttpGet("archived")]
+    [ProducesResponseType(
+        typeof(IReadOnlyList<UserPlantDto>),
+        StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<UserPlantDto>>>
+        GetArchived(CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var userPlants = await userPlantService
+            .GetArchivedAsync(userId, cancellationToken);
+
+        return Ok(userPlants);
+    }
+
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(UserPlantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -365,6 +383,26 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         var archived = await userPlantService.ArchiveAsync(id, userId, cancellationToken);
 
         return archived ? NoContent() : NotFound();
+    }
+
+    [HttpPost("{id:guid}/restore")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Restore(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var restored = await userPlantService.RestoreAsync(
+            id,
+            userId,
+            cancellationToken);
+
+        return restored ? NoContent() : NotFound();
     }
 
     private bool TryGetCurrentUserId(out Guid userId)

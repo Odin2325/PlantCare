@@ -17,10 +17,18 @@
       </p>
     </div>
 
-    <a class="browse-link"
-       routerLink="/plants">
-      Add another plant
-    </a>
+    <div class="header-actions">
+      <button type="button"
+              class="archived-toggle"
+              (click)="toggleArchivedPlants()">
+        {{ showArchived() ? 'Hide archived' : 'Show archived' }}
+      </button>
+
+      <a class="browse-link"
+         routerLink="/plants">
+        Add another plant
+      </a>
+    </div>
   </header>
 
   @if (isLoading()) {
@@ -305,9 +313,46 @@
       <button type="button"
               class="complete-care-button"
               (click)="archivePlant(plant)">
-        Remove plant
+        Archive plant
       </button>
     </article>
+    }
+  </section>
+  }
+
+  @if (showArchived()) {
+  <section class="archived-section">
+    <h2>Archived plants</h2>
+
+    @if (isLoadingArchived()) {
+    <p class="status-message">
+      Loading archived plants...
+    </p>
+    } @else if (archivedPlants().length === 0) {
+    <p class="archived-empty">
+      You do not have any archived plants.
+    </p>
+    } @else {
+    <div class="archived-grid">
+      @for (plant of archivedPlants(); track plant.id) {
+      <article class="archived-card">
+        <p class="species-name">
+          {{ plant.speciesCommonName }}
+        </p>
+        <h3>{{ plant.nickname }}</h3>
+
+        @if (plant.location) {
+        <p>{{ plant.location }}</p>
+        }
+
+        <button type="button"
+                [disabled]="restoringPlantId() === plant.id"
+                (click)="restorePlant(plant)">
+          {{ restoringPlantId() === plant.id ? 'Restoring...' : 'Restore plant' }}
+        </button>
+      </article>
+      }
+    </div>
     }
   </section>
   }

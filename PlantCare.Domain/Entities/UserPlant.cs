@@ -158,6 +158,11 @@ public sealed class UserPlant
         IsActive = false;
     }
 
+    public void Restore()
+    {
+        IsActive = true;
+    }
+
     private static string NormalizeRequired(string value, string parameterName, int maximumLength)
     {
         if (string.IsNullOrWhiteSpace(value))
