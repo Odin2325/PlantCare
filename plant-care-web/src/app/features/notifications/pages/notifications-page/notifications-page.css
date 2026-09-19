@@ -1,0 +1,11 @@
+.notifications-page { max-width: 56rem; margin: 0 auto; padding: 3rem 1.25rem; }
+.eyebrow { color: #39745a; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+h1 { margin: .25rem 0; }
+ul { list-style: none; padding: 0; display: grid; gap: .75rem; }
+li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem; border: 1px solid #dce5df; border-radius: .75rem; background: #fff; }
+li.unread { border-left: .35rem solid #39745a; background: #f5faf7; }
+li p { margin: .35rem 0 0; }
+button { white-space: nowrap; }
+.empty { margin-top: 2rem; padding: 2rem; text-align: center; border-radius: .75rem; background: #f5faf7; }
+.error { color: #a12c2c; }
+@media (max-width: 36rem) { li { align-items: flex-start; flex-direction: column; } }

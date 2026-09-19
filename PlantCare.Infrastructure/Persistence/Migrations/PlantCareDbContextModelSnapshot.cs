@@ -214,6 +214,36 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("CareSchedules", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CareScheduleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("DueAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ReadAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CareScheduleId", "DueAtUtc")
+                        .IsUnique();
+
+                    b.HasIndex("UserId", "ReadAtUtc", "CreatedAtUtc");
+
+                    b.ToTable("Notifications", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.PlantSpecies", b =>
                 {
                     b.Property<Guid>("Id")
@@ -469,6 +499,23 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("UserPlant");
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.Notification", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.CareSchedule", "CareSchedule")
+                        .WithMany()
+                        .HasForeignKey("CareScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CareSchedule");
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.UserPlant", b =>
