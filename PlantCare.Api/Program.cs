@@ -76,8 +76,10 @@ builder.Services.AddAntiforgery(options =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+if (!app.Environment.IsEnvironment("Testing"))
 {
+    using var scope = app.Services.CreateScope();
+
     await RoleSeeder.SeedAsync(scope.ServiceProvider);
 
     if (app.Environment.IsDevelopment())
@@ -182,3 +184,5 @@ app.MapControllers();
 app.MapHealthChecks("/health");
 
 app.Run();
+
+public partial class Program;
