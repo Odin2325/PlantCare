@@ -11,4 +11,16 @@ public interface ICareEventRepository
         Guid userPlantId,
         int take,
         CancellationToken cancellationToken = default);
+
+    Task<CareEvent?> GetTrackedForUserAsync(
+        Guid userId,
+        Guid userPlantId,
+        Guid careEventId,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<CareEvent>> GetTrackedForScheduleAsync(
+        Guid careScheduleId,
+        CancellationToken cancellationToken = default);
+
+    void Remove(CareEvent careEvent);
 }

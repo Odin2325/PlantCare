@@ -531,6 +531,97 @@ public sealed class PlantCareApiTests
                 .GetInt32());
     }
 
+    [Fact]
+    public async Task UpdatingAndDeletingEventsRecalculatesSchedule()
+    {
+        var userId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        var firstEventId = await CompleteCareAsync(
+            client,
+            userPlant.Id,
+            PlantCareApiFactory.UtcNow.AddDays(-2),
+            "First");
+        var secondEventId = await CompleteCareAsync(
+            client,
+            userPlant.Id,
+            PlantCareApiFactory.UtcNow.AddDays(-1),
+            "Second");
+
+        using var updateResponse = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history/{firstEventId}",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow,
+                notes = "Corrected"
+            });
+        updateResponse.EnsureSuccessStatusCode();
+
+        var schedule = await GetWateringScheduleAsync(
+            client,
+            userPlant.Id);
+        Assert.Equal(
+            PlantCareApiFactory.UtcNow.AddDays(7),
+            schedule.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+
+        using var deleteLatestResponse = await client.DeleteAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history/{firstEventId}");
+        Assert.Equal(
+            HttpStatusCode.NoContent,
+            deleteLatestResponse.StatusCode);
+
+        schedule = await GetWateringScheduleAsync(client, userPlant.Id);
+        Assert.Equal(
+            PlantCareApiFactory.UtcNow.AddDays(6),
+            schedule.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+
+        using var deleteLastResponse = await client.DeleteAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history/{secondEventId}");
+        Assert.Equal(
+            HttpStatusCode.NoContent,
+            deleteLastResponse.StatusCode);
+
+        schedule = await GetWateringScheduleAsync(client, userPlant.Id);
+        Assert.Equal(
+            JsonValueKind.Null,
+            schedule.GetProperty("lastCompletedAtUtc").ValueKind);
+        Assert.Equal(
+            PlantCareApiFactory.UtcNow.AddDays(7),
+            schedule.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+    }
+
+    [Fact]
+    public async Task UserCannotModifyAnotherUsersCareEvent()
+    {
+        var ownerId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(ownerId);
+        using var client = CreateClient();
+        client.AuthenticateAs(ownerId);
+        await client.AddAntiforgeryTokenAsync();
+        var eventId = await CompleteCareAsync(
+            client,
+            userPlant.Id,
+            PlantCareApiFactory.UtcNow,
+            null);
+
+        client.AuthenticateAs(Guid.NewGuid());
+        using var updateResponse = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history/{eventId}",
+            new
+            {
+                completedAtUtc = PlantCareApiFactory.UtcNow,
+                notes = "Unauthorized"
+            });
+        using var deleteResponse = await client.DeleteAsync(
+            $"/api/my-plants/{userPlant.Id}/care/history/{eventId}");
+
+        Assert.Equal(HttpStatusCode.NotFound, updateResponse.StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, deleteResponse.StatusCode);
+    }
+
     private HttpClient CreateClient()
     {
         return factory.CreateClient(
@@ -580,6 +671,44 @@ public sealed class PlantCareApiTests
         });
 
         return plantSpecies;
+    }
+
+    private static async Task<Guid> CompleteCareAsync(
+        HttpClient client,
+        Guid userPlantId,
+        DateTimeOffset completedAtUtc,
+        string? notes)
+    {
+        using var response = await client.PostAsJsonAsync(
+            $"/api/my-plants/{userPlantId}/care/Watering/complete",
+            new { completedAtUtc, notes });
+        response.EnsureSuccessStatusCode();
+
+        using var document = JsonDocument.Parse(
+            await response.Content.ReadAsStringAsync());
+        return document.RootElement
+            .GetProperty("event")
+            .GetProperty("id")
+            .GetGuid();
+    }
+
+    private static async Task<JsonElement> GetWateringScheduleAsync(
+        HttpClient client,
+        Guid userPlantId)
+    {
+        using var response = await client.GetAsync(
+            $"/api/my-plants/{userPlantId}");
+        response.EnsureSuccessStatusCode();
+        using var document = JsonDocument.Parse(
+            await response.Content.ReadAsStringAsync());
+
+        return document.RootElement
+            .GetProperty("careSchedules")
+            .EnumerateArray()
+            .Single(item =>
+                item.GetProperty("actionType").GetString() ==
+                "Watering")
+            .Clone();
     }
 
     private static PlantSpecies CreateSpecies()

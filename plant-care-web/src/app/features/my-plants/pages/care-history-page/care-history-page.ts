@@ -72,6 +72,23 @@ export class CareHistoryPage {
   readonly submitError =
     signal<string | null>(null);
 
+  readonly editingEventId =
+    signal<string | null>(null);
+
+  readonly mutatingEventId =
+    signal<string | null>(null);
+
+  readonly editForm = new FormGroup({
+    completedAtLocal: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    notes: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.maxLength(1000)],
+    }),
+  });
+
   readonly form = new FormGroup({
     actionType: new FormControl<CareActionType>(
       'Watering',
@@ -209,6 +226,128 @@ export class CareHistoryPage {
       /([a-z])([A-Z])/g,
       '$1 $2',
     );
+  }
+
+  beginEdit(event: CareEventHistory): void {
+    this.editingEventId.set(event.id);
+    this.editForm.setValue({
+      completedAtLocal:
+        this.toLocalDateTimeValue(event.completedAtUtc),
+      notes: event.notes ?? '',
+    });
+    this.submitError.set(null);
+  }
+
+  cancelEdit(): void {
+    this.editingEventId.set(null);
+    this.editForm.reset({
+      completedAtLocal: '',
+      notes: '',
+    });
+  }
+
+  saveEdit(event: CareEventHistory): void {
+    const plant = this.userPlant();
+
+    if (!plant || this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
+      return;
+    }
+
+    const value = this.editForm.getRawValue();
+    const completedAt = new Date(value.completedAtLocal);
+
+    if (Number.isNaN(completedAt.getTime())) {
+      this.submitError.set('The completion date is invalid.');
+      return;
+    }
+
+    this.mutatingEventId.set(event.id);
+    this.submitError.set(null);
+
+    this.myPlantsApi
+      .updateCareEvent(
+        plant.id,
+        event.id,
+        {
+          completedAtUtc: completedAt.toISOString(),
+          notes: value.notes.trim() || null,
+        },
+      )
+      .pipe(
+        finalize(() => this.mutatingEventId.set(null)),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: (updatedEvent) => {
+          this.history.update((events) =>
+            events
+              .map((currentEvent) =>
+                currentEvent.id === updatedEvent.id
+                  ? updatedEvent
+                  : currentEvent,
+              )
+              .sort((left, right) =>
+                right.completedAtUtc.localeCompare(
+                  left.completedAtUtc,
+                ),
+              ),
+          );
+          this.cancelEdit();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.submitError.set(
+            error.error?.detail ??
+            'The care entry could not be updated.',
+          );
+        },
+      });
+  }
+
+  deleteEvent(event: CareEventHistory): void {
+    const plant = this.userPlant();
+
+    if (
+      !plant ||
+      !window.confirm('Delete this care entry?')
+    ) {
+      return;
+    }
+
+    this.mutatingEventId.set(event.id);
+    this.submitError.set(null);
+
+    this.myPlantsApi
+      .deleteCareEvent(plant.id, event.id)
+      .pipe(
+        finalize(() => this.mutatingEventId.set(null)),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe({
+        next: () => {
+          this.history.update((events) =>
+            events.filter(
+              (currentEvent) => currentEvent.id !== event.id,
+            ),
+          );
+          if (this.editingEventId() === event.id) {
+            this.cancelEdit();
+          }
+        },
+        error: () => {
+          this.submitError.set(
+            'The care entry could not be deleted.',
+          );
+        },
+      });
+  }
+
+  private toLocalDateTimeValue(value: string): string {
+    const date = new Date(value);
+    const pad = (part: number) =>
+      part.toString().padStart(2, '0');
+
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
   }
 
   private loadData(): void {
