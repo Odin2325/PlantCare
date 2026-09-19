@@ -26,7 +26,7 @@ internal sealed class NotificationConfiguration
         builder.HasOne<ApplicationUser>()
             .WithMany()
             .HasForeignKey(notification => notification.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasIndex(notification => new
         {
