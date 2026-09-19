@@ -24,7 +24,11 @@ public sealed class CareSchedule
 
     public UserPlant UserPlant { get; private set; } = null!;
 
-    public static CareSchedule Create(Guid userPlantId, CareActionType actionType, int intervalDays)
+    public static CareSchedule Create(
+        Guid userPlantId,
+        CareActionType actionType,
+        int intervalDays,
+        DateTimeOffset startsAtUtc)
     {
         if (userPlantId == Guid.Empty)
         {
@@ -54,6 +58,7 @@ public sealed class CareSchedule
             UserPlantId = userPlantId,
             ActionType = actionType,
             IntervalDays = intervalDays,
+            NextDueAtUtc = startsAtUtc.AddDays(intervalDays),
             IsEnabled = true
         };
     }

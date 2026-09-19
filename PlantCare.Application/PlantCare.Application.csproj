@@ -18,4 +18,8 @@
     <ProjectReference Include="..\PlantCare.Domain\PlantCare.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="PlantCare.Application.Tests" />
+  </ItemGroup>
+
 </Project>

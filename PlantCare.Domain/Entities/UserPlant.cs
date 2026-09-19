@@ -68,14 +68,21 @@ public sealed class UserPlant
         };
     }
 
-    public CareSchedule AddCareSchedule(CareActionType actionType, int intervalDays)
+    public CareSchedule AddCareSchedule(
+        CareActionType actionType,
+        int intervalDays,
+        DateTimeOffset startsAtUtc)
     {
         if (_careSchedules.Any(schedule => schedule.ActionType == actionType))
         {
             throw new InvalidOperationException($"A {actionType} schedule already exists for this plant.");
         }
 
-        var schedule = CareSchedule.Create(Id, actionType, intervalDays);
+        var schedule = CareSchedule.Create(
+            Id,
+            actionType,
+            intervalDays,
+            startsAtUtc);
 
         _careSchedules.Add(schedule);
 

@@ -5,7 +5,11 @@ using PlantCare.Domain.Enums;
 
 namespace PlantCare.Application.MyPlants;
 
-internal sealed class UserPlantService(IUserPlantRepository userPlantRepository, IPlantSpeciesRepository plantSpeciesRepository, IUnitOfWork unitOfWork) : IUserPlantService
+internal sealed class UserPlantService(
+    IUserPlantRepository userPlantRepository,
+    IPlantSpeciesRepository plantSpeciesRepository,
+    IUnitOfWork unitOfWork,
+    TimeProvider timeProvider) : IUserPlantService
 {
     public async Task<IReadOnlyList<UserPlantDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default)
     {
@@ -47,6 +51,8 @@ internal sealed class UserPlantService(IUserPlantRepository userPlantRepository,
             return null;
         }
 
+        var createdAtUtc = timeProvider.GetUtcNow();
+
         var userPlant = UserPlant.Create(
             userId: userId,
             plantSpeciesId: plantSpecies.Id,
@@ -54,13 +60,19 @@ internal sealed class UserPlantService(IUserPlantRepository userPlantRepository,
             location: command.Location,
             acquiredOn: command.AcquiredOn,
             notes: command.Notes,
-            createdAtUtc: DateTimeOffset.UtcNow);
+            createdAtUtc: createdAtUtc);
 
-        userPlant.AddCareSchedule(CareActionType.Watering, plantSpecies.DefaultWateringIntervalDays);
+        userPlant.AddCareSchedule(
+            CareActionType.Watering,
+            plantSpecies.DefaultWateringIntervalDays,
+            createdAtUtc);
 
         if (plantSpecies.DefaultFertilizingIntervalDays is int fertilizingIntervalDays)
         {
-            userPlant.AddCareSchedule(CareActionType.Fertilizing, fertilizingIntervalDays);
+            userPlant.AddCareSchedule(
+                CareActionType.Fertilizing,
+                fertilizingIntervalDays,
+                createdAtUtc);
         }
 
         userPlantRepository.Add(userPlant);

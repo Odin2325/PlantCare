@@ -1,4 +1,5 @@
 ﻿using PlantCare.Domain.Entities;
+using PlantCare.Domain.Enums;
 
 namespace PlantCare.Domain.Tests.Entities;
 
@@ -95,5 +96,34 @@ public sealed class UserPlantTests
         userPlant.Archive();
 
         Assert.False(userPlant.IsActive);
+    }
+
+    [Fact]
+    public void AddCareSchedule_SetsInitialDueDateFromStartDate()
+    {
+        var startsAt = new DateTimeOffset(
+            2026,
+            8,
+            6,
+            12,
+            0,
+            0,
+            TimeSpan.Zero);
+
+        var userPlant = UserPlant.Create(
+            userId: Guid.NewGuid(),
+            plantSpeciesId: Guid.NewGuid(),
+            nickname: "My plant",
+            location: null,
+            acquiredOn: null,
+            notes: null,
+            createdAtUtc: startsAt);
+
+        var schedule = userPlant.AddCareSchedule(
+            CareActionType.Watering,
+            7,
+            startsAt);
+
+        Assert.Equal(startsAt.AddDays(7), schedule.NextDueAtUtc);
     }
 }

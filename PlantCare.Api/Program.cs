@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using PlantCare.Api.Errors;
 using PlantCare.Api.Security;
 using PlantCare.Application;
 using PlantCare.Infrastructure;
@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddControllersWithViews(options =>
     {
-        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+        options.Filters.Add<ConditionalAntiforgeryFilter>();
     })
     .AddJsonOptions(options =>
     {
@@ -23,6 +23,8 @@ builder.Services
 
 builder.Services.AddOpenApi();
 builder.Services.AddHealthChecks();
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 
 // Add PlantCare application layers.
 builder.Services.AddApplication();
@@ -77,29 +79,49 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     await RoleSeeder.SeedAsync(scope.ServiceProvider);
-    /*For DEV only*/
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-    var user = await userManager.FindByEmailAsync("nico@example2.com");
-
-    if (user is null)
+    if (app.Environment.IsDevelopment())
     {
-        throw new InvalidOperationException("User nico@example2.com was not found.");
-    }
+        var developmentAdminEmail =
+            app.Configuration["DevelopmentAdmin:Email"];
 
-    if (!await userManager.IsInRoleAsync(user, "Admin"))
-    {
-        var result = await userManager.AddToRoleAsync(user, "Admin");
-
-        if (!result.Succeeded)
+        if (!string.IsNullOrWhiteSpace(developmentAdminEmail))
         {
-            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            var userManager = scope.ServiceProvider
+                .GetRequiredService<UserManager<ApplicationUser>>();
 
-            throw new InvalidOperationException($"Could not assign Admin role: {errors}");
+            var user = await userManager.FindByEmailAsync(
+                developmentAdminEmail);
+
+            if (user is null)
+            {
+                app.Logger.LogWarning(
+                    "Development admin user {Email} was not found. Create the account and restart the API to assign the Admin role.",
+                    developmentAdminEmail);
+            }
+            else if (!await userManager.IsInRoleAsync(user, "Admin"))
+            {
+                var result = await userManager.AddToRoleAsync(
+                    user,
+                    "Admin");
+
+                if (!result.Succeeded)
+                {
+                    var errors = string.Join(
+                        ", ",
+                        result.Errors.Select(error => error.Description));
+
+                    app.Logger.LogError(
+                        "Could not assign the Admin role to development user {Email}: {Errors}",
+                        developmentAdminEmail,
+                        errors);
+                }
+            }
         }
     }
-    /*For DEV only*/
 }
+
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
@@ -143,15 +165,18 @@ app.MapGet(
         })
     .AllowAnonymous();
 
-app.MapGroup("/api/auth").MapIdentityApi<ApplicationUser>();
+var authenticationGroup = app.MapGroup("/api/auth");
 
-app.MapPost("/api/auth/logout", async (SignInManager<ApplicationUser> signInManager) =>
+authenticationGroup.MapIdentityApi<ApplicationUser>();
+
+authenticationGroup.MapPost("/logout", async (SignInManager<ApplicationUser> signInManager) =>
         {
             await signInManager.SignOutAsync();
             return Results.NoContent();
         })
-    .RequireAuthorization()
-    .RequireAntiforgeryValidation();
+    .RequireAuthorization();
+
+authenticationGroup.RequireAntiforgeryValidation();
 
 app.MapControllers();
 app.MapHealthChecks("/health");

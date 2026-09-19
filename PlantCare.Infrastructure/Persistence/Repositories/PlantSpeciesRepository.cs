@@ -29,6 +29,16 @@ internal sealed class PlantSpeciesRepository(
                 cancellationToken);
     }
 
+    public async Task<PlantSpecies?> GetTrackedByIdAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        return await dbContext.PlantSpecies
+            .FirstOrDefaultAsync(
+                plantSpecies => plantSpecies.Id == id,
+                cancellationToken);
+    }
+
     public void Add(PlantSpecies plantSpecies)
     {
         ArgumentNullException.ThrowIfNull(plantSpecies);

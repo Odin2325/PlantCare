@@ -20,6 +20,7 @@ internal sealed class CareScheduleRepository(
                 schedule =>
                     schedule.UserPlantId == userPlantId &&
                     schedule.UserPlant.UserId == userId &&
+                    schedule.UserPlant.IsActive &&
                     schedule.ActionType == actionType,
                 cancellationToken);
     }
