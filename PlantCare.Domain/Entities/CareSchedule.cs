@@ -118,6 +118,16 @@ public sealed class CareSchedule
         IsEnabled = true;
     }
 
+    public void RecalculateAfterHistoryChange(
+        DateTimeOffset? latestCompletedAtUtc,
+        DateTimeOffset resetAtUtc)
+    {
+        LastCompletedAtUtc = latestCompletedAtUtc;
+        NextDueAtUtc =
+            (latestCompletedAtUtc ?? resetAtUtc)
+            .AddDays(IntervalDays);
+    }
+
     public void UpdateInterval(int intervalDays)
     {
         if (intervalDays <= 0)

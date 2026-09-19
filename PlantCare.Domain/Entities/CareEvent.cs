@@ -43,6 +43,14 @@ public sealed class CareEvent
         };
     }
 
+    public void Update(
+        DateTimeOffset completedAtUtc,
+        string? notes)
+    {
+        CompletedAtUtc = completedAtUtc;
+        Notes = NormalizeOptionalNotes(notes);
+    }
+
     private static string? NormalizeOptionalNotes(
         string? value)
     {

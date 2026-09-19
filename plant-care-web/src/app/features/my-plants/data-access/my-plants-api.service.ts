@@ -36,6 +36,26 @@ export class MyPlantsApiService {
     );
   }
 
+  updateCareEvent(
+    userPlantId: string,
+    careEventId: string,
+    request: CompleteCareActionRequest,
+  ): Observable<CareEventHistory> {
+    return this.httpClient.put<CareEventHistory>(
+      `${this.endpoint}/${userPlantId}/care/history/${careEventId}`,
+      request,
+    );
+  }
+
+  deleteCareEvent(
+    userPlantId: string,
+    careEventId: string,
+  ): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${this.endpoint}/${userPlantId}/care/history/${careEventId}`,
+    );
+  }
+
   completeCareAction(
     userPlantId: string,
     actionType: CareActionType,

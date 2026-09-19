@@ -306,6 +306,56 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         return Ok(history);
     }
 
+    [HttpPut("{id:guid}/care/history/{eventId:guid}")]
+    [ProducesResponseType(
+        typeof(CareEventHistoryDto),
+        StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<CareEventHistoryDto>> UpdateCareEvent(
+        Guid id,
+        Guid eventId,
+        UpdateCareEventRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var result = await careService.UpdateEventAsync(
+            userId,
+            id,
+            eventId,
+            request.CompletedAtUtc!.Value,
+            request.Notes,
+            cancellationToken);
+
+        return result is null ? NotFound() : Ok(result);
+    }
+
+    [HttpDelete("{id:guid}/care/history/{eventId:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteCareEvent(
+        Guid id,
+        Guid eventId,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var deleted = await careService.DeleteEventAsync(
+            userId,
+            id,
+            eventId,
+            cancellationToken);
+
+        return deleted ? NoContent() : NotFound();
+    }
+
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Archive(Guid id, CancellationToken cancellationToken)
     {

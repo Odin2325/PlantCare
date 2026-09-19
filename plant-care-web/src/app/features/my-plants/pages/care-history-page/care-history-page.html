@@ -158,6 +158,51 @@
         {{ event.notes }}
       </p>
       }
+
+      @if (editingEventId() === event.id) {
+      <form class="edit-event-form"
+            [formGroup]="editForm"
+            (ngSubmit)="saveEdit(event)">
+        <label>
+          Completed at
+          <input type="datetime-local"
+                 formControlName="completedAtLocal">
+        </label>
+
+        <label>
+          Notes
+          <textarea rows="3"
+                    maxlength="1000"
+                    formControlName="notes"></textarea>
+        </label>
+
+        <div class="event-actions">
+          <button type="submit"
+                  [disabled]="mutatingEventId() === event.id">
+            Save changes
+          </button>
+          <button type="button"
+                  class="secondary-button"
+                  (click)="cancelEdit()">
+            Cancel
+          </button>
+        </div>
+      </form>
+      } @else {
+      <div class="event-actions">
+        <button type="button"
+                class="secondary-button"
+                (click)="beginEdit(event)">
+          Edit
+        </button>
+        <button type="button"
+                class="delete-button"
+                [disabled]="mutatingEventId() === event.id"
+                (click)="deleteEvent(event)">
+          Delete
+        </button>
+      </div>
+      }
     </article>
     } @empty {
     <div class="empty-history">

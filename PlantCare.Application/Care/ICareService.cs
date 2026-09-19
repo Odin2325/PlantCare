@@ -39,4 +39,18 @@ public interface ICareService
         Guid userPlantId,
         CareActionType actionType,
         CancellationToken cancellationToken = default);
+
+    Task<CareEventHistoryDto?> UpdateEventAsync(
+        Guid userId,
+        Guid userPlantId,
+        Guid careEventId,
+        DateTimeOffset completedAtUtc,
+        string? notes,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> DeleteEventAsync(
+        Guid userId,
+        Guid userPlantId,
+        Guid careEventId,
+        CancellationToken cancellationToken = default);
 }

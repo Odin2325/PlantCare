@@ -11,6 +11,99 @@ internal sealed class CareService(
     IUnitOfWork unitOfWork,
     TimeProvider timeProvider) : ICareService
 {
+    public async Task<CareEventHistoryDto?> UpdateEventAsync(
+        Guid userId,
+        Guid userPlantId,
+        Guid careEventId,
+        DateTimeOffset completedAtUtc,
+        string? notes,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateEventIdentifiers(
+            userId,
+            userPlantId,
+            careEventId);
+
+        var now = timeProvider.GetUtcNow();
+        var normalizedCompletedAtUtc =
+            completedAtUtc.ToUniversalTime();
+
+        if (normalizedCompletedAtUtc > now)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(completedAtUtc),
+                "A care action cannot be completed in the future.");
+        }
+
+        var careEvent = await careEventRepository
+            .GetTrackedForUserAsync(
+                userId,
+                userPlantId,
+                careEventId,
+                cancellationToken);
+
+        if (careEvent is null)
+        {
+            return null;
+        }
+
+        careEvent.Update(normalizedCompletedAtUtc, notes);
+
+        var events = await careEventRepository
+            .GetTrackedForScheduleAsync(
+                careEvent.CareScheduleId,
+                cancellationToken);
+        RecalculateSchedule(
+            careEvent.CareSchedule,
+            events,
+            now);
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return MapHistory(careEvent);
+    }
+
+    public async Task<bool> DeleteEventAsync(
+        Guid userId,
+        Guid userPlantId,
+        Guid careEventId,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateEventIdentifiers(
+            userId,
+            userPlantId,
+            careEventId);
+
+        var careEvent = await careEventRepository
+            .GetTrackedForUserAsync(
+                userId,
+                userPlantId,
+                careEventId,
+                cancellationToken);
+
+        if (careEvent is null)
+        {
+            return false;
+        }
+
+        var events = await careEventRepository
+            .GetTrackedForScheduleAsync(
+                careEvent.CareScheduleId,
+                cancellationToken);
+        var remainingEvents = events
+            .Where(item => item.Id != careEventId)
+            .ToList();
+
+        careEventRepository.Remove(careEvent);
+        RecalculateSchedule(
+            careEvent.CareSchedule,
+            remainingEvents,
+            timeProvider.GetUtcNow());
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
     public async Task<CareScheduleDto?> AddScheduleAsync(
         Guid userId,
         Guid userPlantId,
@@ -232,6 +325,59 @@ internal sealed class CareService(
                 nameof(intervalDays),
                 "The interval must be between 1 and 3650 days.");
         }
+    }
+
+    private static void ValidateEventIdentifiers(
+        Guid userId,
+        Guid userPlantId,
+        Guid careEventId)
+    {
+        if (userId == Guid.Empty)
+        {
+            throw new ArgumentException(
+                "A valid user ID must be provided.",
+                nameof(userId));
+        }
+
+        if (userPlantId == Guid.Empty)
+        {
+            throw new ArgumentException(
+                "A valid user plant ID must be provided.",
+                nameof(userPlantId));
+        }
+
+        if (careEventId == Guid.Empty)
+        {
+            throw new ArgumentException(
+                "A valid care event ID must be provided.",
+                nameof(careEventId));
+        }
+    }
+
+    private static void RecalculateSchedule(
+        CareSchedule schedule,
+        IReadOnlyCollection<CareEvent> events,
+        DateTimeOffset resetAtUtc)
+    {
+        var latestCompletedAtUtc = events.Count == 0
+            ? (DateTimeOffset?)null
+            : events.Max(item => item.CompletedAtUtc);
+
+        schedule.RecalculateAfterHistoryChange(
+            latestCompletedAtUtc,
+            resetAtUtc);
+    }
+
+    private static CareEventHistoryDto MapHistory(
+        CareEvent careEvent)
+    {
+        return new CareEventHistoryDto(
+            Id: careEvent.Id,
+            CareScheduleId: careEvent.CareScheduleId,
+            ActionType: careEvent.CareSchedule.ActionType,
+            CompletedAtUtc: careEvent.CompletedAtUtc,
+            RecordedAtUtc: careEvent.RecordedAtUtc,
+            Notes: careEvent.Notes);
     }
 
     public async Task<IReadOnlyList<CareEventHistoryDto>>

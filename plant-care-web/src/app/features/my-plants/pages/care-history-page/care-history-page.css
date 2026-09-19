@@ -121,6 +121,55 @@
   line-height: 1.5;
 }
 
+.event-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+  .event-actions button {
+    padding: 0.5rem 0.8rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: #377a4b;
+    color: white;
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .event-actions .secondary-button {
+    border: 1px solid #9eb0a3;
+    background: white;
+    color: #285f3a;
+  }
+
+  .event-actions .delete-button {
+    background: #a33b3b;
+  }
+
+.edit-event-form {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f2f7f3;
+}
+
+  .edit-event-form label {
+    display: grid;
+    gap: 0.35rem;
+    font-weight: 650;
+  }
+
+  .edit-event-form input,
+  .edit-event-form textarea {
+    padding: 0.7rem;
+    border: 1px solid #bbc9be;
+    border-radius: 0.5rem;
+    font: inherit;
+  }
+
 .empty-history {
   padding: 2rem;
   border: 1px dashed #aab9ae;
