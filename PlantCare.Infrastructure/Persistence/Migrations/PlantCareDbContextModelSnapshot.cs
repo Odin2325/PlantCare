@@ -192,6 +192,9 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<DateTimeOffset?>("LastCompletedAtUtc")
                         .HasColumnType("datetimeoffset");
 

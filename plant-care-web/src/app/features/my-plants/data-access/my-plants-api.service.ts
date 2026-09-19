@@ -61,6 +61,26 @@ export class MyPlantsApiService {
     );
   }
 
+  addCareSchedule(
+    userPlantId: string,
+    actionType: CareActionType,
+    intervalDays: number,
+  ): Observable<CareSchedule> {
+    return this.httpClient.post<CareSchedule>(
+      `${this.endpoint}/${userPlantId}/care/${actionType}/schedule`,
+      { intervalDays },
+    );
+  }
+
+  archiveCareSchedule(
+    userPlantId: string,
+    actionType: CareActionType,
+  ): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${this.endpoint}/${userPlantId}/care/${actionType}/schedule`,
+    );
+  }
+
   getAll(): Observable<UserPlant[]> {
     return this.httpClient.get<UserPlant[]>(
       this.endpoint,

@@ -28,6 +28,9 @@ internal sealed class CareScheduleConfiguration : IEntityTypeConfiguration<CareS
         builder.Property(schedule => schedule.IsEnabled)
             .IsRequired();
 
+        builder.Property(schedule => schedule.IsArchived)
+            .IsRequired();
+
         builder
             .HasOne(schedule => schedule.UserPlant)
             .WithMany(userPlant => userPlant.CareSchedules)

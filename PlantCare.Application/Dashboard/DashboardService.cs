@@ -49,6 +49,7 @@ public sealed class DashboardService(
             foreach (var schedule in plant.CareSchedules)
             {
                 if (!schedule.IsEnabled ||
+                    schedule.IsArchived ||
                     schedule.NextDueAtUtc is null)
                 {
                     continue;

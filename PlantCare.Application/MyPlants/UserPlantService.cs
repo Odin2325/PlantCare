@@ -121,6 +121,7 @@ internal sealed class UserPlantService(
                 plantSpecies.DefaultFertilizingIntervalDays,
             CareSchedules:
         userPlant.CareSchedules
+        .Where(schedule => !schedule.IsArchived)
         .OrderBy(schedule => schedule.ActionType)
         .Select(schedule => new CareScheduleDto(
             Id: schedule.Id,
@@ -155,6 +156,7 @@ internal sealed class UserPlantService(
                     .DefaultFertilizingIntervalDays,
             CareSchedules:
                 userPlant.CareSchedules
+                .Where(schedule => !schedule.IsArchived)
                 .OrderBy(schedule => schedule.ActionType)
                 .Select(schedule => new CareScheduleDto(
                     Id: schedule.Id,

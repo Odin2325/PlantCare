@@ -4,8 +4,74 @@ using PlantCare.Domain.Enums;
 
 namespace PlantCare.Application.Care;
 
-internal sealed class CareService(ICareScheduleRepository careScheduleRepository, ICareEventRepository careEventRepository, IUnitOfWork unitOfWork, TimeProvider timeProvider) : ICareService
+internal sealed class CareService(
+    ICareScheduleRepository careScheduleRepository,
+    ICareEventRepository careEventRepository,
+    IUserPlantRepository userPlantRepository,
+    IUnitOfWork unitOfWork,
+    TimeProvider timeProvider) : ICareService
 {
+    public async Task<CareScheduleDto?> AddScheduleAsync(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType,
+        int intervalDays,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateIdentifiers(userId, userPlantId, actionType);
+        ValidateInterval(intervalDays);
+
+        if (actionType == CareActionType.Watering)
+        {
+            throw new InvalidOperationException(
+                "A watering schedule already exists for every plant.");
+        }
+
+        var userPlant = await userPlantRepository
+            .GetTrackedByIdForUserAsync(
+                userPlantId,
+                userId,
+                cancellationToken);
+
+        if (userPlant is null || !userPlant.IsActive)
+        {
+            return null;
+        }
+
+        var schedule = userPlant.AddOrRestoreCareSchedule(
+            actionType,
+            intervalDays,
+            timeProvider.GetUtcNow());
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return MapSchedule(schedule);
+    }
+
+    public async Task<bool> ArchiveScheduleAsync(
+        Guid userId,
+        Guid userPlantId,
+        CareActionType actionType,
+        CancellationToken cancellationToken = default)
+    {
+        ValidateIdentifiers(userId, userPlantId, actionType);
+
+        var userPlant = await userPlantRepository
+            .GetTrackedByIdForUserAsync(
+                userPlantId,
+                userId,
+                cancellationToken);
+
+        if (userPlant is null || !userPlant.IsActive)
+        {
+            return false;
+        }
+
+        userPlant.ArchiveCareSchedule(actionType);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
     public async Task<CareScheduleDto?> UpdateScheduleAsync(
         Guid userId,
         Guid userPlantId,
@@ -16,12 +82,7 @@ internal sealed class CareService(ICareScheduleRepository careScheduleRepository
     {
         ValidateIdentifiers(userId, userPlantId, actionType);
 
-        if (intervalDays is < 1 or > 3_650)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(intervalDays),
-                "The interval must be between 1 and 3650 days.");
-        }
+        ValidateInterval(intervalDays);
 
         var schedule =
             await careScheduleRepository.GetForUserAsync(
@@ -160,6 +221,16 @@ internal sealed class CareService(ICareScheduleRepository careScheduleRepository
             throw new ArgumentException(
                 "A valid care action type must be provided.",
                 nameof(actionType));
+        }
+    }
+
+    private static void ValidateInterval(int intervalDays)
+    {
+        if (intervalDays is < 1 or > 3_650)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(intervalDays),
+                "The interval must be between 1 and 3650 days.");
         }
     }
 
