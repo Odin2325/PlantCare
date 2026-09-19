@@ -32,4 +32,18 @@
       @if (entry.kind === 'Scheduled' && !canComplete(entry)) { <p class="hint">This care action can be completed here once it is due.</p> }
     </aside>
   }
+  <section class="subscription">
+    <div><p class="eyebrow">Calendar subscription</p><h2>Use PlantCare in your calendar app</h2><p>Generate a private read-only link for Apple Calendar, Google Calendar, Outlook, or another app that supports iCalendar subscriptions.</p></div>
+    @if (subscriptionActive()) {
+      <p class="active">Active @if (subscriptionCreatedAt()) { since {{ subscriptionCreatedAt() | date:'medium' }} }</p>
+      @if (subscriptionUrl(); as url) {
+        <p class="secret-warning">Save this link now. For security, PlantCare stores only its hash and cannot show it again.</p>
+        <div class="url-row"><input readonly [value]="url" aria-label="Private calendar subscription URL"><button type="button" (click)="copySubscriptionUrl()">Copy</button></div>
+      }
+      <div class="subscription-actions"><button type="button" [disabled]="subscriptionBusy()" (click)="createSubscription()">Regenerate link</button><button type="button" class="danger" [disabled]="subscriptionBusy()" (click)="revokeSubscription()">Revoke access</button></div>
+    } @else {
+      <button type="button" [disabled]="subscriptionBusy()" (click)="createSubscription()">Generate private subscription link</button>
+    }
+    @if (subscriptionMessage()) { <p role="status">{{ subscriptionMessage() }}</p> }
+  </section>
 </main>

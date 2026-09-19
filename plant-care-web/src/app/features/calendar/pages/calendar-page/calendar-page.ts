@@ -27,6 +27,11 @@ export class CalendarPage {
   readonly selectedKind = signal('All');
   readonly selectedEntry = signal<CalendarEntry | null>(null);
   readonly completingEntryId = signal<string | null>(null);
+  readonly subscriptionActive = signal(false);
+  readonly subscriptionCreatedAt = signal<string | null>(null);
+  readonly subscriptionUrl = signal<string | null>(null);
+  readonly subscriptionBusy = signal(false);
+  readonly subscriptionMessage = signal<string | null>(null);
   readonly plants = computed(() => Array.from(
     new Map(this.entries().map(entry => [entry.userPlantId, entry.plantName])).entries(),
   ).map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)));
@@ -36,7 +41,7 @@ export class CalendarPage {
   ));
   readonly days = computed(() => this.buildDays(this.visibleMonth(), this.filteredEntries()));
 
-  constructor() { this.load(); }
+  constructor() { this.load(); this.loadSubscriptionStatus(); }
 
   changeMonth(offset: number): void {
     const current = this.visibleMonth();
@@ -65,6 +70,34 @@ export class CalendarPage {
     });
   }
 
+  createSubscription(): void {
+    if (this.subscriptionBusy()) return;
+    this.subscriptionBusy.set(true); this.subscriptionMessage.set(null);
+    this.api.createSubscription().pipe(
+      finalize(() => this.subscriptionBusy.set(false)), takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: result => { this.subscriptionActive.set(true); this.subscriptionCreatedAt.set(result.createdAtUtc); this.subscriptionUrl.set(result.subscriptionUrl); },
+      error: () => this.subscriptionMessage.set('The subscription link could not be created.'),
+    });
+  }
+
+  revokeSubscription(): void {
+    if (this.subscriptionBusy()) return;
+    this.subscriptionBusy.set(true); this.subscriptionMessage.set(null);
+    this.api.revokeSubscription().pipe(
+      finalize(() => this.subscriptionBusy.set(false)), takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: () => { this.subscriptionActive.set(false); this.subscriptionCreatedAt.set(null); this.subscriptionUrl.set(null); this.subscriptionMessage.set('The subscription link has been revoked.'); },
+      error: () => this.subscriptionMessage.set('The subscription link could not be revoked.'),
+    });
+  }
+
+  async copySubscriptionUrl(): Promise<void> {
+    const url = this.subscriptionUrl(); if (!url) return;
+    try { await navigator.clipboard.writeText(url); this.subscriptionMessage.set('Subscription link copied.'); }
+    catch { this.subscriptionMessage.set('Copy failed. Select and copy the link manually.'); }
+  }
+
   private load(): void {
     const month = this.visibleMonth();
     const from = new Date(month.getFullYear(), month.getMonth(), 1);
@@ -75,6 +108,13 @@ export class CalendarPage {
     ).subscribe({
       next: entries => { this.entries.set(entries); this.selectedEntry.set(null); },
       error: () => this.errorMessage.set('The calendar could not be loaded.'),
+    });
+  }
+
+  private loadSubscriptionStatus(): void {
+    this.api.getSubscriptionStatus().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: status => { this.subscriptionActive.set(status.isActive); this.subscriptionCreatedAt.set(status.createdAtUtc); },
+      error: () => this.subscriptionMessage.set('Calendar subscription status could not be loaded.'),
     });
   }
 

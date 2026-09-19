@@ -8,3 +8,13 @@ export interface CalendarEntry {
   startsAtUtc: string;
   kind: CalendarEntryKind;
 }
+
+export interface CalendarSubscriptionStatus {
+  isActive: boolean;
+  createdAtUtc: string | null;
+}
+
+export interface CalendarSubscriptionCreated {
+  subscriptionUrl: string;
+  createdAtUtc: string;
+}

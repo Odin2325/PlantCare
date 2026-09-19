@@ -54,6 +54,7 @@ public static class DependencyInjection
         services.AddScoped<INotificationRepository, NotificationRepository>();
 
         services.AddScoped<ICalendarRepository, CalendarRepository>();
+        services.AddScoped<ICalendarSubscriptionRepository, CalendarSubscriptionRepository>();
 
         return services;
     }
