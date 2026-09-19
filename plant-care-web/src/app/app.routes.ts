@@ -91,6 +91,12 @@ export const routes: Routes = [
         .then(component => component.NotificationsPage),
   },
   {
+    path: 'calendar',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/calendar/pages/calendar-page/calendar-page')
+      .then(component => component.CalendarPage),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'plants',

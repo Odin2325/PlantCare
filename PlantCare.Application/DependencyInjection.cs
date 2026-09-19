@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlantCare.Application.Care;
+using PlantCare.Application.Calendar;
 using PlantCare.Application.Dashboard;
 using PlantCare.Application.MyPlants;
 using PlantCare.Application.Notifications;
@@ -16,6 +17,8 @@ public static class DependencyInjection
         services.AddScoped<IUserPlantService, UserPlantService>();
 
         services.AddScoped<ICareService, CareService>();
+
+        services.AddScoped<ICalendarService, CalendarService>();
 
         services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<INotificationService, NotificationService>();
