@@ -690,6 +690,36 @@ public sealed class PlantCareApiTests
         Assert.Equal(HttpStatusCode.NotFound, deleteResponse.StatusCode);
     }
 
+    [Fact]
+    public async Task CalendarReturnsOnlyCurrentUsersScheduledAndCompletedCare()
+    {
+        var ownerId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(ownerId);
+        using var client = CreateClient();
+        client.AuthenticateAs(ownerId);
+        await client.AddAntiforgeryTokenAsync();
+        await CompleteCareAsync(client, userPlant.Id, PlantCareApiFactory.UtcNow, "Calendar test");
+
+        var from = Uri.EscapeDataString(PlantCareApiFactory.UtcNow.AddDays(-1).ToString("O"));
+        var to = Uri.EscapeDataString(PlantCareApiFactory.UtcNow.AddDays(15).ToString("O"));
+        using var response = await client.GetAsync($"/api/calendar?fromUtc={from}&toUtc={to}");
+        response.EnsureSuccessStatusCode();
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+
+        Assert.Contains(document.RootElement.EnumerateArray(), entry =>
+            entry.GetProperty("kind").GetString() == "Completed" &&
+            entry.GetProperty("userPlantId").GetGuid() == userPlant.Id);
+        Assert.Contains(document.RootElement.EnumerateArray(), entry =>
+            entry.GetProperty("kind").GetString() == "Scheduled" &&
+            entry.GetProperty("startsAtUtc").GetDateTimeOffset() == PlantCareApiFactory.UtcNow.AddDays(7));
+
+        client.AuthenticateAs(Guid.NewGuid());
+        using var otherResponse = await client.GetAsync($"/api/calendar?fromUtc={from}&toUtc={to}");
+        otherResponse.EnsureSuccessStatusCode();
+        using var otherDocument = JsonDocument.Parse(await otherResponse.Content.ReadAsStringAsync());
+        Assert.Equal(0, otherDocument.RootElement.GetArrayLength());
+    }
+
     private HttpClient CreateClient()
     {
         return factory.CreateClient(

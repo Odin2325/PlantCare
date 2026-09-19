@@ -1,0 +1,22 @@
+<main class="calendar-page">
+  <header class="calendar-header">
+    <div><p class="eyebrow">Plant care plan</p><h1>{{ visibleMonth() | date:'MMMM yyyy' }}</h1></div>
+    <div class="controls"><button type="button" (click)="changeMonth(-1)" aria-label="Previous month">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changeMonth(1)" aria-label="Next month">→</button></div>
+  </header>
+  <div class="legend"><span><i class="scheduled"></i>Scheduled</span><span><i class="completed"></i>Completed</span></div>
+  @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
+  @if (isLoading()) { <p role="status">Loading calendar…</p> }
+  <section class="calendar" aria-label="Plant care calendar">
+    @for (weekday of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; track weekday) { <strong class="weekday">{{ weekday }}</strong> }
+    @for (day of days(); track day.date.toISOString()) {
+      <article class="day" [class.outside]="!day.isCurrentMonth">
+        <time [attr.datetime]="day.date.toISOString()">{{ day.date.getDate() }}</time>
+        @for (entry of day.entries; track entry.id) {
+          <div class="event" [class.completed]="entry.kind === 'Completed'" [title]="entry.plantName + ' · ' + entry.actionType">
+            <span>{{ entry.plantName }}</span><small>{{ entry.actionType }}</small>
+          </div>
+        }
+      </article>
+    }
+  </section>
+</main>
