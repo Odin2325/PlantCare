@@ -17,6 +17,11 @@ internal sealed class PlantCareApiFactory
     private readonly string databaseName =
         $"PlantCareTests-{Guid.NewGuid()}";
 
+    private readonly IServiceProvider databaseServiceProvider =
+        new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider();
+
     protected override void ConfigureWebHost(
         IWebHostBuilder builder)
     {
@@ -30,7 +35,10 @@ internal sealed class PlantCareApiFactory
             services.RemoveAll<TimeProvider>();
 
             services.AddDbContext<PlantCareDbContext>(options =>
-                options.UseInMemoryDatabase(databaseName));
+                options
+                    .UseInMemoryDatabase(databaseName)
+                    .UseInternalServiceProvider(
+                        databaseServiceProvider));
 
             services.AddSingleton<TimeProvider>(
                 new FixedTimeProvider(UtcNow));
