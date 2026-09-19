@@ -51,6 +51,8 @@ public static class DependencyInjection
 
         services.AddScoped<ICareEventRepository, CareEventRepository>();
 
+        services.AddScoped<INotificationRepository, NotificationRepository>();
+
         return services;
     }
 }

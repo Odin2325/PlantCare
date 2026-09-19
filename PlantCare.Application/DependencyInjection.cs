@@ -2,6 +2,7 @@
 using PlantCare.Application.Care;
 using PlantCare.Application.Dashboard;
 using PlantCare.Application.MyPlants;
+using PlantCare.Application.Notifications;
 using PlantCare.Application.PlantCatalog;
 
 namespace PlantCare.Application;
@@ -17,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<ICareService, CareService>();
 
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<INotificationService, NotificationService>();
 
         services.AddSingleton<TimeProvider>(TimeProvider.System);
 

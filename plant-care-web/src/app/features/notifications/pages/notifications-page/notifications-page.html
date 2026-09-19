@@ -1,0 +1,24 @@
+<main class="notifications-page">
+  <header>
+    <p class="eyebrow">Care reminders</p>
+    <h1>Notifications</h1>
+    <p>Reminders stay here until you are ready to review them.</p>
+  </header>
+
+  @if (isLoading()) {
+    <p role="status">Loading notifications…</p>
+  } @else if (errorMessage()) {
+    <p class="error" role="alert">{{ errorMessage() }}</p>
+  } @else if (notifications().length === 0) {
+    <section class="empty"><h2>You are all caught up</h2><p>New care reminders will appear here.</p></section>
+  } @else {
+    <ul>
+      @for (notification of notifications(); track notification.id) {
+        <li [class.unread]="!notification.readAtUtc">
+          <div><strong>{{ notification.plantName }}</strong><p>{{ notification.actionType }} was due {{ notification.dueAtUtc | date:'medium' }}.</p></div>
+          @if (!notification.readAtUtc) { <button type="button" (click)="markRead(notification)">Mark as read</button> }
+        </li>
+      }
+    </ul>
+  }
+</main>
