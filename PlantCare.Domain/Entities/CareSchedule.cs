@@ -28,7 +28,8 @@ public sealed class CareSchedule
         Guid userPlantId,
         CareActionType actionType,
         int intervalDays,
-        DateTimeOffset startsAtUtc)
+        DateTimeOffset startsAtUtc,
+        DateTimeOffset? lastCompletedAtUtc = null)
     {
         if (userPlantId == Guid.Empty)
         {
@@ -52,13 +53,24 @@ public sealed class CareSchedule
                 "The interval must be greater than zero.");
         }
 
+        if (lastCompletedAtUtc > startsAtUtc)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(lastCompletedAtUtc),
+                "The last completion cannot be later than the schedule start.");
+        }
+
+        var scheduleStart =
+            lastCompletedAtUtc ?? startsAtUtc;
+
         return new CareSchedule
         {
             Id = Guid.NewGuid(),
             UserPlantId = userPlantId,
             ActionType = actionType,
             IntervalDays = intervalDays,
-            NextDueAtUtc = startsAtUtc.AddDays(intervalDays),
+            LastCompletedAtUtc = lastCompletedAtUtc,
+            NextDueAtUtc = scheduleStart.AddDays(intervalDays),
             IsEnabled = true
         };
     }

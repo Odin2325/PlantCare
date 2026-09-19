@@ -5,4 +5,8 @@ public sealed record AddUserPlantCommand(
     string Nickname,
     string? Location,
     DateOnly? AcquiredOn,
-    string? Notes);
+    string? Notes,
+    int? WateringIntervalDays,
+    DateTimeOffset? LastWateredAtUtc,
+    int? FertilizingIntervalDays,
+    DateTimeOffset? LastFertilizedAtUtc);

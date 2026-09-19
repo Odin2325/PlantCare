@@ -8,6 +8,7 @@ import {
   CareEventHistory,
   CompleteCareActionRequest,
   CompleteCareActionResult,
+  UpdateUserPlantRequest,
   UserPlant,
 } from '../models/user-plant.model';
 
@@ -74,7 +75,7 @@ export class MyPlantsApiService {
 
   update(
     userPlantId: string,
-    request: Omit<AddUserPlantRequest, 'plantSpeciesId'>,
+    request: UpdateUserPlantRequest,
   ): Observable<UserPlant> {
     return this.httpClient.put<UserPlant>(
       `${this.endpoint}/${userPlantId}`,

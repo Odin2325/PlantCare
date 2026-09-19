@@ -53,6 +53,15 @@ internal sealed class UserPlantService(
 
         var createdAtUtc = timeProvider.GetUtcNow();
 
+        ValidateInitialCareDate(
+            command.LastWateredAtUtc,
+            createdAtUtc,
+            nameof(command.LastWateredAtUtc));
+        ValidateInitialCareDate(
+            command.LastFertilizedAtUtc,
+            createdAtUtc,
+            nameof(command.LastFertilizedAtUtc));
+
         var userPlant = UserPlant.Create(
             userId: userId,
             plantSpeciesId: plantSpecies.Id,
@@ -64,15 +73,30 @@ internal sealed class UserPlantService(
 
         userPlant.AddCareSchedule(
             CareActionType.Watering,
-            plantSpecies.DefaultWateringIntervalDays,
-            createdAtUtc);
+            command.WateringIntervalDays ??
+                plantSpecies.DefaultWateringIntervalDays,
+            createdAtUtc,
+            command.LastWateredAtUtc);
 
-        if (plantSpecies.DefaultFertilizingIntervalDays is int fertilizingIntervalDays)
+        var fertilizingIntervalDays =
+            command.FertilizingIntervalDays ??
+            plantSpecies.DefaultFertilizingIntervalDays;
+
+        if (command.LastFertilizedAtUtc.HasValue &&
+            !fertilizingIntervalDays.HasValue)
+        {
+            throw new ArgumentException(
+                "A fertilizing interval is required when a last fertilized date is provided.",
+                nameof(command.FertilizingIntervalDays));
+        }
+
+        if (fertilizingIntervalDays is int intervalDays)
         {
             userPlant.AddCareSchedule(
                 CareActionType.Fertilizing,
-                fertilizingIntervalDays,
-                createdAtUtc);
+                intervalDays,
+                createdAtUtc,
+                command.LastFertilizedAtUtc);
         }
 
         userPlantRepository.Add(userPlant);
@@ -149,6 +173,19 @@ internal sealed class UserPlantService(
             throw new ArgumentException(
                 "A valid user ID must be provided.",
                 nameof(userId));
+        }
+    }
+
+    private static void ValidateInitialCareDate(
+        DateTimeOffset? careDate,
+        DateTimeOffset createdAtUtc,
+        string parameterName)
+    {
+        if (careDate > createdAtUtc)
+        {
+            throw new ArgumentOutOfRangeException(
+                parameterName,
+                "The last care date cannot be in the future.");
         }
     }
 

@@ -87,6 +87,25 @@ export class PlantDetailPage {
         Validators.maxLength(2000),
       ],
     }),
+    wateringIntervalDays: new FormControl<number | null>(null, {
+      validators: [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(3650),
+      ],
+    }),
+    lastWateredAt: new FormControl('', {
+      nonNullable: true,
+    }),
+    fertilizingIntervalDays: new FormControl<number | null>(null, {
+      validators: [
+        Validators.min(1),
+        Validators.max(3650),
+      ],
+    }),
+    lastFertilizedAt: new FormControl('', {
+      nonNullable: true,
+    }),
   });
 
   constructor() {
@@ -137,6 +156,14 @@ export class PlantDetailPage {
           formValue.acquiredOn || null,
         notes:
           formValue.notes.trim() || null,
+        wateringIntervalDays:
+          formValue.wateringIntervalDays,
+        lastWateredAtUtc:
+          this.toUtcIsoString(formValue.lastWateredAt),
+        fertilizingIntervalDays:
+          formValue.fertilizingIntervalDays,
+        lastFertilizedAtUtc:
+          this.toUtcIsoString(formValue.lastFertilizedAt),
       })
       .pipe(
         finalize(() => {
@@ -225,6 +252,18 @@ export class PlantDetailPage {
               plantSpecies.commonName,
             );
 
+          this.addPlantForm.controls
+            .wateringIntervalDays
+            .setValue(
+              plantSpecies.defaultWateringIntervalDays,
+            );
+
+          this.addPlantForm.controls
+            .fertilizingIntervalDays
+            .setValue(
+              plantSpecies.defaultFertilizingIntervalDays,
+            );
+
           this.isLoading.set(false);
         },
         error: (error: unknown) => {
@@ -240,5 +279,19 @@ export class PlantDetailPage {
           this.isLoading.set(false);
         },
       });
+  }
+
+  private toUtcIsoString(
+    localDateTime: string,
+  ): string | null {
+    if (!localDateTime) {
+      return null;
+    }
+
+    const date = new Date(localDateTime);
+
+    return Number.isNaN(date.getTime())
+      ? null
+      : date.toISOString();
   }
 }

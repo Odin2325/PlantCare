@@ -62,6 +62,28 @@ public sealed class CareScheduleTests
     }
 
     [Fact]
+    public void Create_WithLastCompletion_UsesItForSchedule()
+    {
+        var startsAt = new DateTimeOffset(
+            2026, 8, 10, 10, 0, 0, TimeSpan.Zero);
+        var lastCompletedAt = startsAt.AddDays(-3);
+
+        var schedule = CareSchedule.Create(
+            Guid.NewGuid(),
+            CareActionType.Watering,
+            7,
+            startsAt,
+            lastCompletedAt);
+
+        Assert.Equal(
+            lastCompletedAt,
+            schedule.LastCompletedAtUtc);
+        Assert.Equal(
+            lastCompletedAt.AddDays(7),
+            schedule.NextDueAtUtc);
+    }
+
+    [Fact]
     public void MarkCompleted_UsesActualCompletionForNextDueDate()
     {
         var schedule = CareSchedule.Create(

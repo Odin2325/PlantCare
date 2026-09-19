@@ -65,4 +65,15 @@ export interface AddUserPlantRequest {
   location: string | null;
   acquiredOn: string | null;
   notes: string | null;
+  wateringIntervalDays: number | null;
+  lastWateredAtUtc: string | null;
+  fertilizingIntervalDays: number | null;
+  lastFertilizedAtUtc: string | null;
+}
+
+export interface UpdateUserPlantRequest {
+  nickname: string;
+  location: string | null;
+  acquiredOn: string | null;
+  notes: string | null;
 }
