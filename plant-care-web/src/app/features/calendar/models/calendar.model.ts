@@ -26,3 +26,17 @@ export interface CalendarShare {
   createdAtUtc: string;
   isOwnedByCurrentUser: boolean;
 }
+
+export interface ExternalCalendarStatus {
+  isConfigured: boolean;
+  isConnected: boolean;
+  accountEmail: string | null;
+  lastSyncedAtUtc: string | null;
+}
+
+export interface ExternalCalendarSyncResult {
+  created: number;
+  updated: number;
+  deleted: number;
+  syncedAtUtc: string;
+}

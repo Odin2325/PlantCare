@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlantCare.Infrastructure.Persistence;
+using Microsoft.AspNetCore.DataProtection;
 
 const string AngularDevelopmentCorsPolicy = "AngularDevelopment";
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +35,16 @@ builder.Services.AddHealthChecks()
     .AddCheck<DatabaseHealthCheck>("database", tags: ["ready"]);
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
+
+var dataProtectionKeysPath =
+    builder.Configuration["DataProtection:KeysPath"];
+if (!string.IsNullOrWhiteSpace(dataProtectionKeysPath))
+{
+    builder.Services.AddDataProtection()
+        .SetApplicationName("PlantCare")
+        .PersistKeysToFileSystem(
+            new DirectoryInfo(dataProtectionKeysPath));
+}
 
 // Add PlantCare application layers.
 builder.Services.AddApplication();
