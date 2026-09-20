@@ -43,6 +43,17 @@ public sealed class PlantCareApiTests
     }
 
     [Fact]
+    public async Task UnknownApiRouteReturnsNotFoundInsteadOfSpaShell()
+    {
+        using var client = CreateClient();
+
+        using var response = await client.GetAsync(
+            "/api/route-that-does-not-exist");
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
     public async Task UserCannotReadAnotherUsersPlant()
     {
         var ownerId = Guid.NewGuid();

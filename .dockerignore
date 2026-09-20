@@ -1,0 +1,12 @@
+.git
+.github
+.vs
+.vscode
+**/bin
+**/obj
+**/node_modules
+plant-care-web/.angular
+plant-care-web/dist
+.env
+*.user
+*.suo

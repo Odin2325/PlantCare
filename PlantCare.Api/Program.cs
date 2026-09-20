@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PlantCare.Infrastructure.Persistence;
 
 const string AngularDevelopmentCorsPolicy = "AngularDevelopment";
 var builder = WebApplication.CreateBuilder(args);
@@ -70,6 +72,14 @@ builder.Services.AddAuthorization();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+    if (builder.Configuration.GetValue<bool>(
+        "ReverseProxy:TrustForwardedHeaders"))
+    {
+        options.KnownIPNetworks.Clear();
+        options.KnownProxies.Clear();
+        options.ForwardLimit = 1;
+    }
 });
 
 builder.Services.AddRateLimiter(options =>
@@ -111,6 +121,14 @@ var app = builder.Build();
 if (!app.Environment.IsEnvironment("Testing"))
 {
     using var scope = app.Services.CreateScope();
+
+    if (app.Configuration.GetValue<bool>(
+        "Database:ApplyMigrationsOnStartup"))
+    {
+        var database = scope.ServiceProvider
+            .GetRequiredService<PlantCareDbContext>();
+        await database.Database.MigrateAsync();
+    }
 
     await RoleSeeder.SeedAsync(scope.ServiceProvider);
 
@@ -171,6 +189,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRateLimiter();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())
 {
@@ -225,6 +245,11 @@ app.MapControllers();
 app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
 app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = check => check.Tags.Contains("ready") });
 app.MapHealthChecks("/health");
+app.MapMethods(
+    "/api/{**path}",
+    ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    () => Results.NotFound());
+app.MapFallbackToFile("index.html");
 
 app.Run();
 
