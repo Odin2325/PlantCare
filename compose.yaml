@@ -29,6 +29,7 @@ services:
       ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=sa;Password=${SQL_PASSWORD};Encrypt=True;TrustServerCertificate=True
       Database__ApplyMigrationsOnStartup: "true"
       ReverseProxy__TrustForwardedHeaders: "true"
+      Application__ClientBaseUrl: https://${PLANTCARE_DOMAIN}
       DataProtection__KeysPath: /var/lib/plantcare/keys
       GoogleCalendar__Enabled: ${GOOGLE_CALENDAR_ENABLED:-false}
       GoogleCalendar__ClientId: ${GOOGLE_CALENDAR_CLIENT_ID:-}

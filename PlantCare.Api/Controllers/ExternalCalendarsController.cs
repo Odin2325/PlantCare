@@ -10,6 +10,7 @@ namespace PlantCare.Api.Controllers;
 [Route("api/calendar/integrations/google")]
 public sealed class ExternalCalendarsController(
     IExternalCalendarService externalCalendarService,
+    IConfiguration configuration,
     ILogger<ExternalCalendarsController> logger)
     : ControllerBase
 {
@@ -55,12 +56,12 @@ public sealed class ExternalCalendarsController(
     {
         if (User.Identity?.IsAuthenticated != true ||
             !TryGetUserId(out var userId))
-            return Redirect("/login?returnUrl=/calendar");
+            return RedirectToClient("/login?returnUrl=/calendar");
 
         if (!string.IsNullOrWhiteSpace(error) ||
             string.IsNullOrWhiteSpace(code) ||
             string.IsNullOrWhiteSpace(state))
-            return Redirect("/calendar?google=cancelled");
+            return RedirectToClient("/calendar?google=cancelled");
 
         try
         {
@@ -69,7 +70,7 @@ public sealed class ExternalCalendarsController(
                 code,
                 state,
                 cancellationToken);
-            return Redirect("/calendar?google=connected");
+            return RedirectToClient("/calendar?google=connected");
         }
         catch (Exception exception) when (
             exception is InvalidOperationException or
@@ -80,7 +81,7 @@ public sealed class ExternalCalendarsController(
                 exception,
                 "Google Calendar authorization failed for user {UserId}.",
                 userId);
-            return Redirect("/calendar?google=error");
+            return RedirectToClient("/calendar?google=error");
         }
     }
 
@@ -120,4 +121,11 @@ public sealed class ExternalCalendarsController(
         Guid.TryParse(
             User.FindFirstValue(ClaimTypes.NameIdentifier),
             out userId);
+
+    private RedirectResult RedirectToClient(string path)
+    {
+        var clientBaseUrl = configuration["Application:ClientBaseUrl"]
+            ?.TrimEnd('/');
+        return Redirect($"{clientBaseUrl}{path}");
+    }
 }
