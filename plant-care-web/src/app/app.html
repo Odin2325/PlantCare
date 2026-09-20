@@ -7,6 +7,19 @@
 </div>
 }
 
+@if (!pwa.isOnline()) {
+<div class="offline-banner" role="status">
+  You are offline. PlantCare will reconnect when a network is available.
+</div>
+}
+
+@if (pwa.updateAvailable()) {
+<div class="update-banner" role="status">
+  <span>A new PlantCare version is ready.</span>
+  <button type="button" (click)="pwa.activateUpdate()">Update now</button>
+</div>
+}
+
 <header class="app-header">
   <a class="brand"
      routerLink="/plants">
