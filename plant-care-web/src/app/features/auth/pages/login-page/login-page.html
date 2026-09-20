@@ -7,6 +7,19 @@
       Log in to manage your plants and care schedules.
     </p>
 
+    @if (registrationCompleted) {
+    <p class="form-success">
+      Your account was created. If email confirmation is enabled,
+      confirm it using the message we sent before logging in.
+    </p>
+    }
+
+    @if (passwordResetCompleted) {
+    <p class="form-success">
+      Your password has been reset. You can log in now.
+    </p>
+    }
+
     <form [formGroup]="form"
           (ngSubmit)="submit()">
 
@@ -36,6 +49,12 @@
              type="password"
              autocomplete="current-password"
              formControlName="password">
+
+      <p class="field-action">
+        <a routerLink="/forgot-password">
+          Forgot your password?
+        </a>
+      </p>
 
       @if (
       form.controls.password.touched &&
@@ -67,6 +86,13 @@
       New to PlantCare?
       <a routerLink="/register">
         Create an account
+      </a>
+    </p>
+
+    <p class="auth-alternative">
+      Still waiting for your confirmation email?
+      <a routerLink="/resend-confirmation">
+        Send it again
       </a>
     </p>
   </section>

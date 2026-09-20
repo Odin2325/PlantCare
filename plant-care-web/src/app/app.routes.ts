@@ -71,6 +71,36 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'forgot-password',
+    canActivate: [guestGuard],
+    loadComponent: () =>
+      import(
+        './features/auth/pages/forgot-password-page/forgot-password-page'
+      ).then(
+        component => component.ForgotPasswordPage,
+      ),
+  },
+  {
+    path: 'reset-password',
+    canActivate: [guestGuard],
+    loadComponent: () =>
+      import(
+        './features/auth/pages/reset-password-page/reset-password-page'
+      ).then(
+        component => component.ResetPasswordPage,
+      ),
+  },
+  {
+    path: 'resend-confirmation',
+    canActivate: [guestGuard],
+    loadComponent: () =>
+      import(
+        './features/auth/pages/resend-confirmation-page/resend-confirmation-page'
+      ).then(
+        component => component.ResendConfirmationPage,
+      ),
+  },
+  {
     path: 'dashboard',
     canActivate: [
       authGuard,

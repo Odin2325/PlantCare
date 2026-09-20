@@ -97,10 +97,36 @@ export class AuthService {
       .post<void>(
         '/api/auth/register',
         credentials,
-      )
-      .pipe(
-        switchMap(() => this.login(credentials)),
       );
+  }
+
+  requestPasswordReset(email: string): Observable<void> {
+    return this.httpClient.post<void>(
+      '/api/auth/forgotPassword',
+      { email },
+    );
+  }
+
+  resetPassword(
+    email: string,
+    resetCode: string,
+    newPassword: string,
+  ): Observable<void> {
+    return this.httpClient.post<void>(
+      '/api/auth/resetPassword',
+      {
+        email,
+        resetCode,
+        newPassword,
+      },
+    );
+  }
+
+  resendConfirmationEmail(email: string): Observable<void> {
+    return this.httpClient.post<void>(
+      '/api/auth/resendConfirmationEmail',
+      { email },
+    );
   }
 
   login(credentials: Credentials): Observable<void> {

@@ -1,0 +1,33 @@
+<main class="auth-page">
+  <section class="auth-card">
+    <p class="eyebrow">PlantCare</p>
+    <h1>Resend confirmation</h1>
+
+    @if (submitted()) {
+    <p class="form-success">
+      If the account still needs confirmation, a new email is on its way.
+    </p>
+    <p class="auth-alternative"><a routerLink="/login">Return to login</a></p>
+    } @else {
+    <p class="auth-intro">Enter the email address used for your account.</p>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <label for="email">Email address</label>
+      <input id="email"
+             type="email"
+             autocomplete="email"
+             formControlName="email">
+
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+      <p class="field-error">Enter a valid email address.</p>
+      }
+      @if (errorMessage()) {
+      <p class="form-error">{{ errorMessage() }}</p>
+      }
+
+      <button type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Sending...' : 'Send confirmation email' }}
+      </button>
+    </form>
+    }
+  </section>
+</main>
