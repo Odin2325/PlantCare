@@ -20,6 +20,29 @@ public sealed class PlantCareApiTests
         await factory.DisposeAsync();
 
     [Fact]
+    public async Task HealthEndpointsDistinguishLivenessAndReadiness()
+    {
+        using var client = CreateClient();
+        using var liveResponse = await client.GetAsync("/health/live");
+        using var readyResponse = await client.GetAsync("/health/ready");
+
+        liveResponse.EnsureSuccessStatusCode();
+        readyResponse.EnsureSuccessStatusCode();
+    }
+
+    [Fact]
+    public async Task ResponsesIncludeProtectiveSecurityHeaders()
+    {
+        using var client = CreateClient();
+        using var response = await client.GetAsync("/health/live");
+
+        response.EnsureSuccessStatusCode();
+        Assert.Equal("nosniff", response.Headers.GetValues("X-Content-Type-Options").Single());
+        Assert.Equal("DENY", response.Headers.GetValues("X-Frame-Options").Single());
+        Assert.True(response.Headers.Contains("Content-Security-Policy"));
+    }
+
+    [Fact]
     public async Task UserCannotReadAnotherUsersPlant()
     {
         var ownerId = Guid.NewGuid();
