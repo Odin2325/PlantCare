@@ -257,6 +257,9 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ReadAtUtc")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<DateTimeOffset?>("PushSentAtUtc")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -265,9 +268,26 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.HasIndex("CareScheduleId", "DueAtUtc")
                         .IsUnique();
 
+                    b.HasIndex("PushSentAtUtc", "CreatedAtUtc");
+
                     b.HasIndex("UserId", "ReadAtUtc", "CreatedAtUtc");
 
                     b.ToTable("Notifications", (string)null);
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
+                {
+                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
+                    b.Property<string>("Auth").IsRequired().HasMaxLength(256).HasColumnType("nvarchar(256)");
+                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<string>("Endpoint").IsRequired().HasMaxLength(2048).HasColumnType("nvarchar(2048)");
+                    b.Property<string>("P256dh").IsRequired().HasMaxLength(512).HasColumnType("nvarchar(512)");
+                    b.Property<DateTimeOffset>("UpdatedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
+                    b.HasKey("Id");
+                    b.HasIndex("Endpoint").IsUnique();
+                    b.HasIndex("UserId");
+                    b.ToTable("PushSubscriptions", (string)null);
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.PlantSpecies", b =>
@@ -339,6 +359,11 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.HasIndex("ScientificName");
 
                     b.ToTable("PlantSpecies", (string)null);
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
+                {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null).WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.Cascade).IsRequired();
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.UserPlant", b =>

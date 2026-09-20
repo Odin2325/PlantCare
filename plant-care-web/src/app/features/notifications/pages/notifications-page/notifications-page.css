@@ -8,4 +8,5 @@ li p { margin: .35rem 0 0; }
 button { white-space: nowrap; }
 .empty { margin-top: 2rem; padding: 2rem; text-align: center; border-radius: .75rem; background: #f5faf7; }
 .error { color: #a12c2c; }
+.push-settings { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; padding: 1rem; border: 1px solid #dce5df; border-radius: .75rem; background: #f5faf7; flex-wrap: wrap; }.push-settings h2, .push-settings p { margin: .25rem 0; }.muted { color: #68736c; }
 @media (max-width: 36rem) { li { align-items: flex-start; flex-direction: column; } }
