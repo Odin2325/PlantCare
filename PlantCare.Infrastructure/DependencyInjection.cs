@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlantCare.Application.Abstractions.Persistence;
+using PlantCare.Application.Notifications;
 using PlantCare.Infrastructure.Identity;
 using PlantCare.Infrastructure.Persistence;
 using PlantCare.Infrastructure.Persistence.Repositories;
