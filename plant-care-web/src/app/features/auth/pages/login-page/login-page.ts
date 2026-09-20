@@ -39,6 +39,14 @@ export class LoginPage {
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
 
+  readonly registrationCompleted =
+    this.route.snapshot.queryParamMap.get('registered') ===
+    'true';
+
+  readonly passwordResetCompleted =
+    this.route.snapshot.queryParamMap.get('passwordReset') ===
+    'true';
+
   readonly form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -97,7 +105,7 @@ export class LoginPage {
     error: HttpErrorResponse,
   ): string {
     if (error.status === 401) {
-      return 'The email address or password is incorrect.';
+      return 'The credentials are incorrect, or the email address has not been confirmed.';
     }
 
     if (error.status === 0) {

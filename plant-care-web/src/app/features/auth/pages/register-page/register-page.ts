@@ -100,7 +100,14 @@ export class RegisterPage {
       )
       .subscribe({
         next: () => {
-          void this.router.navigate(['/dashboard']);
+          void this.router.navigate(
+            ['/login'],
+            {
+              queryParams: {
+                registered: true,
+              },
+            },
+          );
         },
         error: (error: HttpErrorResponse) => {
           this.errorMessage.set(

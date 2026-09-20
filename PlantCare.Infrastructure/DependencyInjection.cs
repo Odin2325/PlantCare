@@ -27,6 +27,9 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
 
+        var requireConfirmedEmail = configuration.GetValue<bool>(
+            "Authentication:RequireConfirmedEmail");
+
         services.AddIdentityApiEndpoints<ApplicationUser>(options =>
            {
                options.User.RequireUniqueEmail = true;
@@ -37,11 +40,22 @@ public static class DependencyInjection
                options.Password.RequireUppercase = true;
                options.Password.RequireNonAlphanumeric = false;
 
-               // TODO: add email confirmation after implementingan email provider.
-               options.SignIn.RequireConfirmedEmail = false;
+               options.SignIn.RequireConfirmedEmail =
+                   requireConfirmedEmail;
            })
            .AddRoles<IdentityRole<Guid>>()
            .AddEntityFrameworkStores<PlantCareDbContext>();
+
+        services.AddOptions<EmailOptions>()
+            .Bind(configuration.GetSection(EmailOptions.SectionName))
+            .Validate(
+                options =>
+                    !requireConfirmedEmail || options.IsComplete,
+                "Email settings must be configured when confirmed email is required.")
+            .ValidateOnStart();
+        services.AddTransient<
+            IEmailSender<ApplicationUser>,
+            SmtpIdentityEmailSender>();
 
         services.AddScoped<IPlantSpeciesRepository, PlantSpeciesRepository>();
 

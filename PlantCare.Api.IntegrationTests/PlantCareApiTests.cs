@@ -142,6 +142,22 @@ public sealed class PlantCareApiTests
     }
 
     [Fact]
+    public async Task PasswordResetRequestDoesNotRevealUnknownEmail()
+    {
+        using var client = CreateClient();
+        await client.AddAntiforgeryTokenAsync();
+
+        using var response = await client.PostAsJsonAsync(
+            "/api/auth/forgotPassword",
+            new
+            {
+                email = "unknown@example.com"
+            });
+
+        response.EnsureSuccessStatusCode();
+    }
+
+    [Fact]
     public async Task ArchivedPlantIsHiddenAndCannotReceiveCare()
     {
         var userId = Guid.NewGuid();
