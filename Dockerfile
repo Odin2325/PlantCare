@@ -3,7 +3,7 @@
 FROM node:24-bookworm-slim AS frontend
 WORKDIR /src/plant-care-web
 RUN corepack enable
-COPY plant-care-web/package.json plant-care-web/pnpm-lock.yaml ./
+COPY plant-care-web/package.json plant-care-web/pnpm-lock.yaml plant-care-web/pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY plant-care-web/ ./
 RUN pnpm build
