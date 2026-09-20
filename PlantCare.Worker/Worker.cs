@@ -23,6 +23,9 @@ public sealed class Worker(IServiceScopeFactory scopeFactory, IOptions<Notificat
                 var service = scope.ServiceProvider.GetRequiredService<INotificationService>();
                 var created = await service.GenerateDueAsync(settings.BatchSize, stoppingToken);
                 if (created > 0) logger.LogInformation("Created {NotificationCount} care notifications.", created);
+                var pushDelivery = scope.ServiceProvider.GetRequiredService<IPushDeliveryService>();
+                var pushed = await pushDelivery.DeliverPendingAsync(settings.BatchSize, stoppingToken);
+                if (pushed > 0) logger.LogInformation("Processed push delivery for {NotificationCount} notifications.", pushed);
             }
             catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested) { break; }
             catch (Exception exception) { logger.LogError(exception, "Notification generation failed; the worker will retry."); }

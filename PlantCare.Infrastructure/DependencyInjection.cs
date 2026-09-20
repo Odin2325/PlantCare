@@ -6,6 +6,7 @@ using PlantCare.Application.Abstractions.Persistence;
 using PlantCare.Infrastructure.Identity;
 using PlantCare.Infrastructure.Persistence;
 using PlantCare.Infrastructure.Persistence.Repositories;
+using PlantCare.Infrastructure.Notifications;
 
 namespace PlantCare.Infrastructure;
 
@@ -56,6 +57,9 @@ public static class DependencyInjection
         services.AddScoped<ICalendarRepository, CalendarRepository>();
         services.AddScoped<ICalendarSubscriptionRepository, CalendarSubscriptionRepository>();
         services.AddScoped<ICalendarShareRepository, CalendarShareRepository>();
+        services.AddScoped<IPushSubscriptionRepository, PushSubscriptionRepository>();
+        services.AddScoped<IPushDeliveryService, WebPushDeliveryService>();
+        services.Configure<WebPushOptions>(configuration.GetSection("WebPush"));
 
         return services;
     }

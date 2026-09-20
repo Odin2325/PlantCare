@@ -5,6 +5,15 @@
     <p>Reminders stay here until you are ready to review them.</p>
   </header>
 
+  <section class="push-settings">
+    <div><h2>Push reminders</h2><p>Receive care reminders on this device, even when PlantCare is closed.</p></div>
+    @if (pushAvailable()) {
+      @if (pushEnabled()) { <button type="button" [disabled]="pushBusy()" (click)="disablePush()">Disable on this device</button> }
+      @else { <button type="button" [disabled]="pushBusy()" (click)="enablePush()">Enable push reminders</button> }
+    } @else { <p class="muted">Push reminders are unavailable until the installed app and server keys are configured.</p> }
+    @if (pushMessage()) { <p role="status">{{ pushMessage() }}</p> }
+  </section>
+
   @if (isLoading()) {
     <p role="status">Loading notifications…</p>
   } @else if (errorMessage()) {

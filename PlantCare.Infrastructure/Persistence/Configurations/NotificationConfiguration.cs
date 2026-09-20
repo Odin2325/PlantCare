@@ -40,5 +40,6 @@ internal sealed class NotificationConfiguration
             notification.ReadAtUtc,
             notification.CreatedAtUtc
         });
+        builder.HasIndex(notification => new { notification.PushSentAtUtc, notification.CreatedAtUtc });
     }
 }

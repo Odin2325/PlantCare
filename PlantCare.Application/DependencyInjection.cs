@@ -24,6 +24,7 @@ public static class DependencyInjection
 
         services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IPushSubscriptionService, PushSubscriptionService>();
 
         services.AddSingleton<TimeProvider>(TimeProvider.System);
 
