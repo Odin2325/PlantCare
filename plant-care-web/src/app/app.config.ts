@@ -8,6 +8,8 @@ import {
 } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { provideServiceWorker } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { routes } from './app.routes';
 import { credentialsInterceptor } from './core/auth/interceptors/credentials.interceptor';
@@ -17,6 +19,11 @@ import { antiforgeryInterceptor } from './core/security/interceptors/antiforgery
 export const appConfig = {
   providers: [
     provideRouter(routes),
+
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
 
     provideHttpClient(
       withInterceptors([

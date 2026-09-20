@@ -1,0 +1,18 @@
+{
+  "name": "PlantCare",
+  "short_name": "PlantCare",
+  "description": "Plan, track, and share care schedules for your plants.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4fbf6",
+  "theme_color": "#245c36",
+  "icons": [
+    {
+      "src": "plantcare-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable monochrome"
+    }
+  ]
+}

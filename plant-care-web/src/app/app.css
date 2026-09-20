@@ -81,6 +81,32 @@ nav {
   font-weight: 500;
 }
 
+.offline-banner,
+.update-banner {
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.offline-banner {
+  background: #e9ecef;
+  color: #343a40;
+}
+
+.update-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #d1ead6;
+  color: #163d24;
+}
+
+.update-banner button {
+  padding: 5px 10px;
+}
+
 .reconnecting-spinner {
   width: 14px;
   height: 14px;

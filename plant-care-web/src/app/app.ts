@@ -13,6 +13,7 @@ import {
 import { finalize } from 'rxjs';
 
 import { AuthService } from './core/auth/services/auth.service';
+import { PwaUpdateService } from './core/pwa/pwa-update.service';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ import { AuthService } from './core/auth/services/auth.service';
 })
 export class App {
   readonly authService = inject(AuthService);
+  readonly pwa = inject(PwaUpdateService);
 
   private readonly router = inject(Router);
 
