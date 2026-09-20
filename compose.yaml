@@ -29,6 +29,11 @@ services:
       ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=sa;Password=${SQL_PASSWORD};Encrypt=True;TrustServerCertificate=True
       Database__ApplyMigrationsOnStartup: "true"
       ReverseProxy__TrustForwardedHeaders: "true"
+      DataProtection__KeysPath: /var/lib/plantcare/keys
+      GoogleCalendar__Enabled: ${GOOGLE_CALENDAR_ENABLED:-false}
+      GoogleCalendar__ClientId: ${GOOGLE_CALENDAR_CLIENT_ID:-}
+      GoogleCalendar__ClientSecret: ${GOOGLE_CALENDAR_CLIENT_SECRET:-}
+      GoogleCalendar__CallbackUrl: https://${PLANTCARE_DOMAIN}/api/calendar/integrations/google/callback
       Email__Host: ${SMTP_HOST:?Set SMTP_HOST in .env}
       Email__Port: ${SMTP_PORT:-587}
       Email__UseSsl: ${SMTP_USE_SSL:-true}
@@ -43,6 +48,8 @@ services:
     depends_on:
       database:
         condition: service_healthy
+    volumes:
+      - data-protection-keys:/var/lib/plantcare/keys
     healthcheck:
       test: [CMD, curl, --fail, --silent, http://localhost:8080/health/ready]
       interval: 15s
@@ -89,3 +96,4 @@ volumes:
   sql-data:
   caddy-data:
   caddy-config:
+  data-protection-keys:

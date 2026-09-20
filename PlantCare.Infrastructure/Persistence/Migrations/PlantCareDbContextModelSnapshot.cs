@@ -179,6 +179,22 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("CalendarSubscriptions", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarConnection", b =>
+                {
+                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset>("AccessTokenExpiresAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<string>("AccountEmail").IsRequired().HasMaxLength(256).HasColumnType("nvarchar(256)");
+                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<DateTimeOffset?>("LastSyncedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<string>("ProtectedAccessToken").IsRequired().HasMaxLength(4000).HasColumnType("nvarchar(4000)");
+                    b.Property<string>("ProtectedRefreshToken").IsRequired().HasMaxLength(4000).HasColumnType("nvarchar(4000)");
+                    b.Property<string>("Provider").IsRequired().HasMaxLength(32).HasColumnType("nvarchar(32)");
+                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
+                    b.HasKey("Id");
+                    b.HasIndex("UserId", "Provider").IsUnique();
+                    b.ToTable("ExternalCalendarConnections", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.CareEvent", b =>
                 {
                     b.Property<Guid>("Id")
@@ -537,6 +553,15 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarSubscription", b =>
+                {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarConnection", b =>
                 {
                     b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()

@@ -64,3 +64,31 @@ volume before host migrations or destructive maintenance.
 
 The public liveness endpoint is `/health/live`; `/health/ready` additionally
 checks database connectivity.
+
+## Google Calendar synchronization
+
+Google synchronization is optional. In Google Cloud Console, enable the Google
+Calendar API, configure the OAuth consent screen, and create an OAuth 2.0 Web
+application. Add this exact authorized redirect URI:
+
+```text
+https://YOUR_PLANTCARE_DOMAIN/api/calendar/integrations/google/callback
+```
+
+Then set these values in `.env` and recreate the API container:
+
+```dotenv
+GOOGLE_CALENDAR_ENABLED=true
+GOOGLE_CALENDAR_CLIENT_ID=your-client-id
+GOOGLE_CALENDAR_CLIENT_SECRET=your-client-secret
+```
+
+```bash
+docker compose up -d --build api
+```
+
+OAuth access and refresh tokens are encrypted before they enter the database.
+The encryption key ring is stored in the persistent
+`plantcare_data-protection-keys` volume; back it up with the database. PlantCare
+requests only identity, email, and calendar-event access. Synchronization is
+one-way and touches only events tagged as PlantCare exports.

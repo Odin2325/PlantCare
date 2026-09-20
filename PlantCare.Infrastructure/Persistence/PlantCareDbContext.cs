@@ -17,6 +17,7 @@ public sealed class PlantCareDbContext(DbContextOptions<PlantCareDbContext> opti
     public DbSet<CalendarSubscription> CalendarSubscriptions => Set<CalendarSubscription>();
     public DbSet<CalendarShare> CalendarShares => Set<CalendarShare>();
     public DbSet<PushSubscription> PushSubscriptions => Set<PushSubscription>();
+    public DbSet<ExternalCalendarConnection> ExternalCalendarConnections => Set<ExternalCalendarConnection>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

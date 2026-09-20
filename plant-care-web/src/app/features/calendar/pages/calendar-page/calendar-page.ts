@@ -7,6 +7,8 @@ import { CalendarApiService } from '../../data-access/calendar-api.service';
 import { CalendarEntry, CalendarShare } from '../../models/calendar.model';
 import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api.service';
 import { CareActionType } from '../../../my-plants/models/user-plant.model';
+import { ActivatedRoute } from '@angular/router';
+import { ExternalCalendarStatus } from '../../models/calendar.model';
 
 interface CalendarDay { date: Date; isCurrentMonth: boolean; entries: CalendarEntry[]; }
 
@@ -19,6 +21,7 @@ export class CalendarPage {
   private readonly api = inject(CalendarApiService);
   private readonly myPlantsApi = inject(MyPlantsApiService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly route = inject(ActivatedRoute);
   readonly visibleMonth = signal(this.startOfMonth(new Date()));
   readonly entries = signal<CalendarEntry[]>([]);
   readonly isLoading = signal(false);
@@ -37,6 +40,9 @@ export class CalendarPage {
   readonly recipientEmail = signal('');
   readonly sharingBusy = signal(false);
   readonly sharingMessage = signal<string | null>(null);
+  readonly googleStatus = signal<ExternalCalendarStatus | null>(null);
+  readonly googleBusy = signal(false);
+  readonly googleMessage = signal<string | null>(null);
   readonly incomingShares = computed(() => this.shares().filter(share => !share.isOwnedByCurrentUser));
   readonly outgoingShares = computed(() => this.shares().filter(share => share.isOwnedByCurrentUser));
   readonly plants = computed(() => Array.from(
@@ -48,7 +54,17 @@ export class CalendarPage {
   ));
   readonly days = computed(() => this.buildDays(this.visibleMonth(), this.filteredEntries()));
 
-  constructor() { this.load(); this.loadSubscriptionStatus(); this.loadShares(); }
+  constructor() {
+    this.load();
+    this.loadSubscriptionStatus();
+    this.loadShares();
+    this.loadGoogleStatus();
+
+    const googleResult = this.route.snapshot.queryParamMap.get('google');
+    if (googleResult === 'connected') this.googleMessage.set('Google Calendar connected. Synchronize now to export upcoming care events.');
+    if (googleResult === 'cancelled') this.googleMessage.set('Google Calendar connection was cancelled.');
+    if (googleResult === 'error') this.googleMessage.set('Google Calendar could not be connected. Please try again.');
+  }
 
   changeMonth(offset: number): void {
     const current = this.visibleMonth();
@@ -126,6 +142,51 @@ export class CalendarPage {
     });
   }
 
+  connectGoogle(): void {
+    if (this.googleBusy()) return;
+    this.googleBusy.set(true);
+    this.googleMessage.set(null);
+    this.api.connectGoogle().pipe(
+      finalize(() => this.googleBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: result => window.location.assign(result.authorizationUrl),
+      error: () => this.googleMessage.set('Google Calendar authorization could not be started.'),
+    });
+  }
+
+  syncGoogle(): void {
+    if (this.googleBusy()) return;
+    this.googleBusy.set(true);
+    this.googleMessage.set(null);
+    this.api.syncGoogle().pipe(
+      finalize(() => this.googleBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: result => {
+        this.googleMessage.set(`Synchronization complete: ${result.created} created, ${result.updated} updated, ${result.deleted} removed.`);
+        this.loadGoogleStatus();
+      },
+      error: () => this.googleMessage.set('Google Calendar synchronization failed. Reconnect the account if access was revoked.'),
+    });
+  }
+
+  disconnectGoogle(): void {
+    if (this.googleBusy()) return;
+    this.googleBusy.set(true);
+    this.googleMessage.set(null);
+    this.api.disconnectGoogle().pipe(
+      finalize(() => this.googleBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: () => {
+        this.googleMessage.set('Google Calendar disconnected. Existing exported events remain in Google.');
+        this.loadGoogleStatus();
+      },
+      error: () => this.googleMessage.set('Google Calendar could not be disconnected.'),
+    });
+  }
+
   private load(): void {
     const month = this.visibleMonth();
     const from = new Date(month.getFullYear(), month.getMonth(), 1);
@@ -153,6 +214,13 @@ export class CalendarPage {
     this.api.getShares().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: shares => this.shares.set(shares),
       error: () => this.sharingMessage.set('Shared calendars could not be loaded.'),
+    });
+  }
+
+  private loadGoogleStatus(): void {
+    this.api.getGoogleStatus().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: status => this.googleStatus.set(status),
+      error: () => this.googleMessage.set('Google Calendar status could not be loaded.'),
     });
   }
 

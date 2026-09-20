@@ -8,6 +8,8 @@ using PlantCare.Infrastructure.Identity;
 using PlantCare.Infrastructure.Persistence;
 using PlantCare.Infrastructure.Persistence.Repositories;
 using PlantCare.Infrastructure.Notifications;
+using PlantCare.Infrastructure.Calendar;
+using PlantCare.Application.Calendar;
 
 namespace PlantCare.Infrastructure;
 
@@ -72,6 +74,14 @@ public static class DependencyInjection
         services.AddScoped<ICalendarRepository, CalendarRepository>();
         services.AddScoped<ICalendarSubscriptionRepository, CalendarSubscriptionRepository>();
         services.AddScoped<ICalendarShareRepository, CalendarShareRepository>();
+        services.AddScoped<IExternalCalendarConnectionRepository, ExternalCalendarConnectionRepository>();
+        services.AddHttpClient<IExternalCalendarService, GoogleCalendarService>();
+        services.AddOptions<GoogleCalendarOptions>()
+            .Bind(configuration.GetSection(GoogleCalendarOptions.SectionName))
+            .Validate(
+                options => !options.Enabled || options.IsComplete,
+                "Google Calendar OAuth settings are incomplete.")
+            .ValidateOnStart();
         services.AddScoped<IPushSubscriptionRepository, PushSubscriptionRepository>();
         services.AddScoped<IPushDeliveryService, WebPushDeliveryService>();
         services.Configure<WebPushOptions>(configuration.GetSection("WebPush"));

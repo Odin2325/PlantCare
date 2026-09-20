@@ -47,6 +47,28 @@
     }
     @if (subscriptionMessage()) { <p role="status">{{ subscriptionMessage() }}</p> }
   </section>
+  <section class="integration">
+    <div>
+      <p class="eyebrow">External calendar</p>
+      <h2>Google Calendar</h2>
+      <p>Export the next year of scheduled plant-care events. PlantCare remains the source of truth and updates its own exported events without touching your other appointments.</p>
+    </div>
+    @if (googleStatus(); as status) {
+      @if (!status.isConfigured) {
+        <p class="hint">Google Calendar synchronization has not been enabled by the PlantCare administrator.</p>
+      } @else if (status.isConnected) {
+        <p class="active">Connected as {{ status.accountEmail }}</p>
+        @if (status.lastSyncedAtUtc) { <p class="hint">Last synchronized {{ status.lastSyncedAtUtc | date:'medium' }}</p> }
+        <div class="integration-actions">
+          <button type="button" [disabled]="googleBusy()" (click)="syncGoogle()">{{ googleBusy() ? 'Working…' : 'Synchronize now' }}</button>
+          <button type="button" class="danger" [disabled]="googleBusy()" (click)="disconnectGoogle()">Disconnect</button>
+        </div>
+      } @else {
+        <button type="button" [disabled]="googleBusy()" (click)="connectGoogle()">Connect Google Calendar</button>
+      }
+    }
+    @if (googleMessage()) { <p role="status">{{ googleMessage() }}</p> }
+  </section>
   <section class="sharing">
     <div><p class="eyebrow">PlantCare sharing</p><h2>Share with another account</h2><p>Recipients receive read-only access to your current calendar. You can revoke it at any time.</p></div>
     <div class="share-form"><label>Recipient email<input type="email" [ngModel]="recipientEmail()" (ngModelChange)="recipientEmail.set($event)" placeholder="gardener@example.com"></label><button type="button" [disabled]="sharingBusy() || !recipientEmail().trim()" (click)="createShare()">Share calendar</button></div>
