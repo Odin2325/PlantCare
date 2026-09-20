@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using PlantCare.Application.Calendar;
 
 namespace PlantCare.Api.Controllers;
@@ -35,6 +36,7 @@ public sealed class CalendarSubscriptionsController(ICalendarSubscriptionService
     }
 
     [AllowAnonymous]
+    [EnableRateLimiting("public-feed")]
     [HttpGet("{token}.ics")]
     public async Task<IActionResult> Download(string token, CancellationToken cancellationToken)
     {

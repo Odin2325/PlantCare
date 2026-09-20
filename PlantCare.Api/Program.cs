@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Identity;
 using PlantCare.Api.Errors;
+using PlantCare.Api.Health;
 using PlantCare.Api.Security;
 using PlantCare.Application;
 using PlantCare.Infrastructure;
 using PlantCare.Infrastructure.Identity;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.Mvc;
 
 const string AngularDevelopmentCorsPolicy = "AngularDevelopment";
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +28,8 @@ builder.Services
     });
 
 builder.Services.AddOpenApi();
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddCheck<DatabaseHealthCheck>("database", tags: ["ready"]);
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 
@@ -59,6 +66,31 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddAuthorization();
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("authentication", context => RateLimitPartition.GetFixedWindowLimiter(
+        context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+        _ => new FixedWindowRateLimiterOptions { PermitLimit = 10, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
+    options.AddPolicy("public-feed", context => RateLimitPartition.GetFixedWindowLimiter(
+        context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+        _ => new FixedWindowRateLimiterOptions { PermitLimit = 60, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
+    options.OnRejected = async (context, cancellationToken) =>
+    {
+        await context.HttpContext.Response.WriteAsJsonAsync(new ProblemDetails
+        {
+            Status = StatusCodes.Status429TooManyRequests,
+            Title = "Too many requests.",
+            Detail = "Please wait before trying again."
+        }, cancellationToken);
+    };
+});
 
 builder.Services.AddAntiforgery(options =>
 {
@@ -123,7 +155,14 @@ if (!app.Environment.IsEnvironment("Testing"))
     }
 }
 
+app.UseForwardedHeaders();
 app.UseExceptionHandler();
+app.UseMiddleware<SecurityHeadersMiddleware>();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -131,6 +170,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRateLimiter();
 
 if (app.Environment.IsDevelopment())
 {
@@ -168,6 +208,7 @@ app.MapGet(
     .AllowAnonymous();
 
 var authenticationGroup = app.MapGroup("/api/auth");
+authenticationGroup.RequireRateLimiting("authentication");
 
 authenticationGroup.MapIdentityApi<ApplicationUser>();
 
@@ -181,6 +222,8 @@ authenticationGroup.MapPost("/logout", async (SignInManager<ApplicationUser> sig
 authenticationGroup.RequireAntiforgeryValidation();
 
 app.MapControllers();
+app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
+app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = check => check.Tags.Contains("ready") });
 app.MapHealthChecks("/health");
 
 app.Run();
