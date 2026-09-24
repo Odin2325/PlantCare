@@ -43,6 +43,9 @@ export class CalendarPage {
   readonly googleStatus = signal<ExternalCalendarStatus | null>(null);
   readonly googleBusy = signal(false);
   readonly googleMessage = signal<string | null>(null);
+  readonly microsoftStatus = signal<ExternalCalendarStatus | null>(null);
+  readonly microsoftBusy = signal(false);
+  readonly microsoftMessage = signal<string | null>(null);
   readonly incomingShares = computed(() => this.shares().filter(share => !share.isOwnedByCurrentUser));
   readonly outgoingShares = computed(() => this.shares().filter(share => share.isOwnedByCurrentUser));
   readonly plants = computed(() => Array.from(
@@ -59,11 +62,16 @@ export class CalendarPage {
     this.loadSubscriptionStatus();
     this.loadShares();
     this.loadGoogleStatus();
+    this.loadMicrosoftStatus();
 
     const googleResult = this.route.snapshot.queryParamMap.get('google');
     if (googleResult === 'connected') this.googleMessage.set('Google Calendar connected. Synchronize now to export upcoming care events.');
     if (googleResult === 'cancelled') this.googleMessage.set('Google Calendar connection was cancelled.');
     if (googleResult === 'error') this.googleMessage.set('Google Calendar could not be connected. Please try again.');
+    const microsoftResult = this.route.snapshot.queryParamMap.get('microsoft');
+    if (microsoftResult === 'connected') this.microsoftMessage.set('Microsoft Calendar connected. Synchronize now to export upcoming care events.');
+    if (microsoftResult === 'cancelled') this.microsoftMessage.set('Microsoft Calendar connection was cancelled.');
+    if (microsoftResult === 'error') this.microsoftMessage.set('Microsoft Calendar could not be connected. Please try again.');
   }
 
   changeMonth(offset: number): void {
@@ -187,6 +195,51 @@ export class CalendarPage {
     });
   }
 
+  connectMicrosoft(): void {
+    if (this.microsoftBusy()) return;
+    this.microsoftBusy.set(true);
+    this.microsoftMessage.set(null);
+    this.api.connectMicrosoft().pipe(
+      finalize(() => this.microsoftBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: result => window.location.assign(result.authorizationUrl),
+      error: () => this.microsoftMessage.set('Microsoft Calendar authorization could not be started.'),
+    });
+  }
+
+  syncMicrosoft(): void {
+    if (this.microsoftBusy()) return;
+    this.microsoftBusy.set(true);
+    this.microsoftMessage.set(null);
+    this.api.syncMicrosoft().pipe(
+      finalize(() => this.microsoftBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: result => {
+        this.microsoftMessage.set(`Synchronization complete: ${result.created} created, ${result.updated} updated, ${result.deleted} removed.`);
+        this.loadMicrosoftStatus();
+      },
+      error: () => this.microsoftMessage.set('Microsoft Calendar synchronization failed. Reconnect the account if access was revoked.'),
+    });
+  }
+
+  disconnectMicrosoft(): void {
+    if (this.microsoftBusy()) return;
+    this.microsoftBusy.set(true);
+    this.microsoftMessage.set(null);
+    this.api.disconnectMicrosoft().pipe(
+      finalize(() => this.microsoftBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: () => {
+        this.microsoftMessage.set('Microsoft Calendar disconnected. Existing exported events remain in Microsoft Calendar.');
+        this.loadMicrosoftStatus();
+      },
+      error: () => this.microsoftMessage.set('Microsoft Calendar could not be disconnected.'),
+    });
+  }
+
   private load(): void {
     const month = this.visibleMonth();
     const from = new Date(month.getFullYear(), month.getMonth(), 1);
@@ -221,6 +274,13 @@ export class CalendarPage {
     this.api.getGoogleStatus().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: status => this.googleStatus.set(status),
       error: () => this.googleMessage.set('Google Calendar status could not be loaded.'),
+    });
+  }
+
+  private loadMicrosoftStatus(): void {
+    this.api.getMicrosoftStatus().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: status => this.microsoftStatus.set(status),
+      error: () => this.microsoftMessage.set('Microsoft Calendar status could not be loaded.'),
     });
   }
 

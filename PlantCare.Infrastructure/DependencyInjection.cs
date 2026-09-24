@@ -82,6 +82,13 @@ public static class DependencyInjection
                 options => !options.Enabled || options.IsComplete,
                 "Google Calendar OAuth settings are incomplete.")
             .ValidateOnStart();
+        services.AddHttpClient<IMicrosoftCalendarService, MicrosoftCalendarService>();
+        services.AddOptions<MicrosoftCalendarOptions>()
+            .Bind(configuration.GetSection(MicrosoftCalendarOptions.SectionName))
+            .Validate(
+                options => !options.Enabled || options.IsComplete,
+                "Microsoft Calendar OAuth settings are incomplete.")
+            .ValidateOnStart();
         services.AddScoped<IPushSubscriptionRepository, PushSubscriptionRepository>();
         services.AddScoped<IPushDeliveryService, WebPushDeliveryService>();
         services.Configure<WebPushOptions>(configuration.GetSection("WebPush"));

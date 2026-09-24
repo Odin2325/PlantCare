@@ -33,6 +33,25 @@ public sealed class ExternalCalendarConnection
             CreatedAtUtc = createdAtUtc
         };
 
+    public static ExternalCalendarConnection CreateMicrosoft(
+        Guid userId,
+        string accountEmail,
+        string protectedAccessToken,
+        string protectedRefreshToken,
+        DateTimeOffset accessTokenExpiresAtUtc,
+        DateTimeOffset createdAtUtc) =>
+        new()
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            Provider = "Microsoft",
+            AccountEmail = accountEmail,
+            ProtectedAccessToken = protectedAccessToken,
+            ProtectedRefreshToken = protectedRefreshToken,
+            AccessTokenExpiresAtUtc = accessTokenExpiresAtUtc,
+            CreatedAtUtc = createdAtUtc
+        };
+
     public void Reconnect(
         string accountEmail,
         string protectedAccessToken,

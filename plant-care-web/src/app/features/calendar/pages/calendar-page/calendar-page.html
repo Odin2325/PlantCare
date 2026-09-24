@@ -55,7 +55,7 @@
     </div>
     @if (googleStatus(); as status) {
       @if (!status.isConfigured) {
-        <p class="hint">Google Calendar synchronization has not been enabled by the PlantCare administrator.</p>
+        <p class="hint">Google Calendar is not configured for this PlantCare installation yet. Once OAuth credentials are configured, every user can connect their own account without individual approval.</p>
       } @else if (status.isConnected) {
         <p class="active">Connected as {{ status.accountEmail }}</p>
         @if (status.lastSyncedAtUtc) { <p class="hint">Last synchronized {{ status.lastSyncedAtUtc | date:'medium' }}</p> }
@@ -68,6 +68,28 @@
       }
     }
     @if (googleMessage()) { <p role="status">{{ googleMessage() }}</p> }
+  </section>
+  <section class="integration">
+    <div>
+      <p class="eyebrow">External calendar</p>
+      <h2>Outlook and Microsoft 365</h2>
+      <p>Export the next year of scheduled plant-care events to your personal Outlook or Microsoft 365 calendar.</p>
+    </div>
+    @if (microsoftStatus(); as status) {
+      @if (!status.isConfigured) {
+        <p class="hint">Microsoft Calendar is not configured for this PlantCare installation yet. Once OAuth credentials are configured, every user can connect their own account without individual approval.</p>
+      } @else if (status.isConnected) {
+        <p class="active">Connected as {{ status.accountEmail }}</p>
+        @if (status.lastSyncedAtUtc) { <p class="hint">Last synchronized {{ status.lastSyncedAtUtc | date:'medium' }}</p> }
+        <div class="integration-actions">
+          <button type="button" [disabled]="microsoftBusy()" (click)="syncMicrosoft()">{{ microsoftBusy() ? 'Working…' : 'Synchronize now' }}</button>
+          <button type="button" class="danger" [disabled]="microsoftBusy()" (click)="disconnectMicrosoft()">Disconnect</button>
+        </div>
+      } @else {
+        <button type="button" [disabled]="microsoftBusy()" (click)="connectMicrosoft()">Connect Microsoft Calendar</button>
+      }
+    }
+    @if (microsoftMessage()) { <p role="status">{{ microsoftMessage() }}</p> }
   </section>
   <section class="sharing">
     <div><p class="eyebrow">PlantCare sharing</p><h2>Share with another account</h2><p>Recipients receive read-only access to your current calendar. You can revoke it at any time.</p></div>

@@ -72,6 +72,24 @@ public sealed class PlantCareApiTests
     }
 
     [Fact]
+    public async Task MicrosoftCalendarStatusReportsDisabledConfiguration()
+    {
+        using var client = CreateClient();
+        client.AuthenticateAs(Guid.NewGuid());
+
+        using var response = await client.GetAsync(
+            "/api/calendar/integrations/microsoft/status");
+
+        response.EnsureSuccessStatusCode();
+        using var document = JsonDocument.Parse(
+            await response.Content.ReadAsStringAsync());
+        Assert.False(
+            document.RootElement.GetProperty("isConfigured").GetBoolean());
+        Assert.False(
+            document.RootElement.GetProperty("isConnected").GetBoolean());
+    }
+
+    [Fact]
     public async Task UserCannotReadAnotherUsersPlant()
     {
         var ownerId = Guid.NewGuid();
