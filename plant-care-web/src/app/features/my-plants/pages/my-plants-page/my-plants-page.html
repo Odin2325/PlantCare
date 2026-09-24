@@ -54,6 +54,41 @@
   </div>
   }
 
+  @if (userPlants().length > 0) {
+  <section class="collection-tools" aria-label="Collection filters">
+    <label>
+      Search
+      <input type="search"
+             placeholder="Name, species, room, notes, or tag"
+             [value]="searchTerm()"
+             (input)="setSearchTerm($any($event.target).value)">
+    </label>
+    <label>
+      Location
+      <select [value]="locationFilter()" (change)="setLocationFilter($any($event.target).value)">
+        <option value="">All locations</option>
+        @for (location of locations(); track location) { <option [value]="location">{{ location }}</option> }
+      </select>
+    </label>
+    <label>
+      Tag
+      <select [value]="tagFilter()" (change)="setTagFilter($any($event.target).value)">
+        <option value="">All tags</option>
+        @for (tag of availableTags(); track tag) { <option [value]="tag">{{ tag }}</option> }
+      </select>
+    </label>
+    <label>
+      Sort
+      <select [value]="sortBy()" (change)="setSortBy($any($event.target).value)">
+        <option value="nickname">Name A–Z</option>
+        <option value="next-care">Next care due</option>
+        <option value="newest">Recently added</option>
+        <option value="acquired">Recently acquired</option>
+      </select>
+    </label>
+  </section>
+  }
+
   @if (userPlants().length === 0) {
   <section class="empty-state">
     <h2>
@@ -72,7 +107,7 @@
   } @else {
   <section class="plant-grid">
     @for (
-    plant of userPlants();
+    plant of filteredPlants();
     track plant.id
     ) {
     <article class="plant-card">
@@ -103,6 +138,26 @@
         {{ plant.acquiredOn }}
       </p>
       }
+      @if (plant.tags.length > 0) {
+      <div class="tag-list">
+        @for (tag of plant.tags; track tag) { <span>{{ tag }}</span> }
+      </div>
+      }
+      <div class="tag-editor">
+        <label [for]="'tags-' + plant.id">Tags</label>
+        <div>
+          <input [id]="'tags-' + plant.id"
+                 type="text"
+                 placeholder="tropical, favorite"
+                 [value]="getTagDraft(plant)"
+                 (input)="setTagDraft(plant.id, $any($event.target).value)">
+          <button type="button"
+                  [disabled]="savingTagsPlantId() === plant.id"
+                  (click)="saveTags(plant)">
+            {{ savingTagsPlantId() === plant.id ? 'Saving...' : 'Save tags' }}
+          </button>
+        </div>
+      </div>
       <a class="care-history-link"
          [routerLink]="[
   '/my-plants',
@@ -349,6 +404,9 @@
     </article>
     }
   </section>
+  @if (filteredPlants().length === 0) {
+  <p class="no-filter-results">No plants match these filters.</p>
+  }
   }
 
   @if (showArchived()) {

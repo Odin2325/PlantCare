@@ -83,6 +83,8 @@ internal sealed class UserPlantService(
             notes: command.Notes,
             createdAtUtc: createdAtUtc);
 
+        userPlant.ReplaceTags(command.Tags);
+
         userPlant.AddCareSchedule(
             CareActionType.Watering,
             command.WateringIntervalDays ??
@@ -125,6 +127,7 @@ internal sealed class UserPlantService(
             Location: userPlant.Location,
             AcquiredOn: userPlant.AcquiredOn,
             Notes: userPlant.Notes,
+            Tags: userPlant.Tags.Select(tag => tag.Name).Order().ToList(),
             IsActive: userPlant.IsActive,
             CreatedAtUtc: userPlant.CreatedAtUtc,
             DefaultWateringIntervalDays:
@@ -162,6 +165,7 @@ internal sealed class UserPlantService(
             Location: userPlant.Location,
             AcquiredOn: userPlant.AcquiredOn,
             Notes: userPlant.Notes,
+            Tags: userPlant.Tags.Select(tag => tag.Name).Order().ToList(),
             IsActive: userPlant.IsActive,
             CreatedAtUtc: userPlant.CreatedAtUtc,
             DefaultWateringIntervalDays:
@@ -269,6 +273,8 @@ internal sealed class UserPlantService(
             command.Location,
             command.AcquiredOn,
             command.Notes);
+
+        userPlant.ReplaceTags(command.Tags);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

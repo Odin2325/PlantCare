@@ -4,4 +4,5 @@ public sealed record UpdateUserPlantCommand(
     string Nickname,
     string? Location,
     DateOnly? AcquiredOn,
-    string? Notes);
+    string? Notes,
+    IReadOnlyList<string>? Tags);

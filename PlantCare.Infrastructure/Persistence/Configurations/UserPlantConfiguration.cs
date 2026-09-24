@@ -46,6 +46,10 @@ internal sealed class UserPlantConfiguration : IEntityTypeConfiguration<UserPlan
             .UsePropertyAccessMode(PropertyAccessMode.Field);
 
         builder
+            .Navigation(userPlant => userPlant.Tags)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder
             .HasOne(userPlant => userPlant.PlantSpecies)
             .WithMany()
             .HasForeignKey(

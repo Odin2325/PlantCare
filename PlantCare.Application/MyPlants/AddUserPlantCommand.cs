@@ -6,6 +6,7 @@ public sealed record AddUserPlantCommand(
     string? Location,
     DateOnly? AcquiredOn,
     string? Notes,
+    IReadOnlyList<string>? Tags,
     int? WateringIntervalDays,
     DateTimeOffset? LastWateredAtUtc,
     int? FertilizingIntervalDays,
