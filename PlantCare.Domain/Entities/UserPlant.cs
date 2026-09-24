@@ -7,6 +7,7 @@ public sealed class UserPlant
     public const int NicknameMaxLength = 100;
     public const int LocationMaxLength = 150;
     public const int NotesMaxLength = 2_000;
+    public const int MaximumTagCount = 10;
 
     private UserPlant()
     {
@@ -34,6 +35,9 @@ public sealed class UserPlant
 
     private readonly List<CareSchedule> _careSchedules = [];
     public IReadOnlyCollection<CareSchedule> CareSchedules => _careSchedules;
+
+    private readonly List<UserPlantTag> _tags = [];
+    public IReadOnlyCollection<UserPlantTag> Tags => _tags;
 
     public static UserPlant Create(
         Guid userId,
@@ -151,6 +155,28 @@ public sealed class UserPlant
         AcquiredOn = acquiredOn;
 
         Notes = NormalizeOptional(notes, nameof(notes), NotesMaxLength);
+    }
+
+    public void ReplaceTags(IEnumerable<string>? tags)
+    {
+        var normalizedTags = (tags ?? [])
+            .Select(tag => NormalizeRequired(
+                tag,
+                nameof(tags),
+                UserPlantTag.NameMaxLength))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (normalizedTags.Count > MaximumTagCount)
+        {
+            throw new ArgumentException(
+                $"A plant cannot have more than {MaximumTagCount} tags.",
+                nameof(tags));
+        }
+
+        _tags.Clear();
+        _tags.AddRange(normalizedTags.Select(tag =>
+            UserPlantTag.Create(Id, tag)));
     }
 
     public void Archive()

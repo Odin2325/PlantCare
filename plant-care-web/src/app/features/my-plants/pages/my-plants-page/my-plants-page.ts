@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   inject,
   signal,
@@ -28,6 +29,8 @@ type CareScheduleStatus =
   | 'upcoming'
   | 'due-today'
   | 'overdue';
+
+type CollectionSort = 'nickname' | 'newest' | 'acquired' | 'next-care';
 
 @Component({
   selector: 'app-my-plants-page',
@@ -59,6 +62,59 @@ export class MyPlantsPage {
 
   readonly userPlants =
     signal<UserPlant[]>([]);
+
+  readonly searchTerm = signal('');
+  readonly locationFilter = signal('');
+  readonly tagFilter = signal('');
+  readonly sortBy = signal<CollectionSort>('nickname');
+
+  readonly locations = computed(() =>
+    [...new Set(this.userPlants()
+      .map((plant) => plant.location)
+      .filter((location): location is string => Boolean(location)))]
+      .sort((left, right) => left.localeCompare(right)),
+  );
+
+  readonly availableTags = computed(() =>
+    [...new Set(this.userPlants().flatMap((plant) => plant.tags))]
+      .sort((left, right) => left.localeCompare(right)),
+  );
+
+  readonly filteredPlants = computed(() => {
+    const query = this.searchTerm().trim().toLocaleLowerCase();
+    const location = this.locationFilter();
+    const tag = this.tagFilter();
+    const plants = this.userPlants().filter((plant) => {
+      const searchable = [
+        plant.nickname,
+        plant.speciesCommonName,
+        plant.speciesScientificName ?? '',
+        plant.location ?? '',
+        plant.notes ?? '',
+        ...plant.tags,
+      ].join(' ').toLocaleLowerCase();
+
+      return (!query || searchable.includes(query)) &&
+        (!location || plant.location === location) &&
+        (!tag || plant.tags.includes(tag));
+    });
+
+    return [...plants].sort((left, right) => {
+      switch (this.sortBy()) {
+        case 'newest':
+          return right.createdAtUtc.localeCompare(left.createdAtUtc);
+        case 'acquired':
+          return (right.acquiredOn ?? '').localeCompare(left.acquiredOn ?? '');
+        case 'next-care':
+          return this.getNextCareTime(left) - this.getNextCareTime(right);
+        default:
+          return left.nickname.localeCompare(right.nickname);
+      }
+    });
+  });
+
+  readonly tagDrafts = signal<Record<string, string>>({});
+  readonly savingTagsPlantId = signal<string | null>(null);
 
   readonly archivedPlants =
     signal<UserPlant[]>([]);
@@ -111,6 +167,48 @@ export class MyPlantsPage {
 
   constructor() {
     this.loadPlants();
+  }
+
+  setSearchTerm(value: string): void { this.searchTerm.set(value); }
+  setLocationFilter(value: string): void { this.locationFilter.set(value); }
+  setTagFilter(value: string): void { this.tagFilter.set(value); }
+  setSortBy(value: string): void { this.sortBy.set(value as CollectionSort); }
+
+  getTagDraft(plant: UserPlant): string {
+    return this.tagDrafts()[plant.id] ?? plant.tags.join(', ');
+  }
+
+  setTagDraft(plantId: string, value: string): void {
+    this.tagDrafts.update((drafts) => ({ ...drafts, [plantId]: value }));
+  }
+
+  saveTags(plant: UserPlant): void {
+    const tags = [...new Set(this.getTagDraft(plant).split(',')
+      .map((tag) => tag.trim()).filter(Boolean))];
+    if (tags.length > 10 || tags.some((tag) => tag.length > 32)) {
+      this.errorMessage.set('Use no more than 10 tags, with 32 characters per tag.');
+      return;
+    }
+
+    this.savingTagsPlantId.set(plant.id);
+    this.errorMessage.set(null);
+    this.myPlantsApi.update(plant.id, {
+      nickname: plant.nickname,
+      location: plant.location,
+      acquiredOn: plant.acquiredOn,
+      notes: plant.notes,
+      tags,
+    }).pipe(
+      finalize(() => this.savingTagsPlantId.set(null)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: (updated) => {
+        this.userPlants.update((plants) => plants.map((item) =>
+          item.id === updated.id ? updated : item));
+        this.tagDrafts.update((drafts) => ({ ...drafts, [plant.id]: updated.tags.join(', ') }));
+      },
+      error: () => this.errorMessage.set('The plant tags could not be saved.'),
+    });
   }
 
   reload(): void {
@@ -689,6 +787,13 @@ export class MyPlantsPage {
     actionType: CareActionType,
   ): string {
     return `${plantId}:${actionType}`;
+  }
+
+  private getNextCareTime(plant: UserPlant): number {
+    const dates = plant.careSchedules
+      .filter((schedule) => schedule.isEnabled && schedule.nextDueAtUtc)
+      .map((schedule) => new Date(schedule.nextDueAtUtc!).getTime());
+    return dates.length ? Math.min(...dates) : Number.MAX_SAFE_INTEGER;
   }
 
   private updateSchedule(
