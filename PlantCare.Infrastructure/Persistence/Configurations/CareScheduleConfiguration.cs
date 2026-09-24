@@ -25,6 +25,20 @@ internal sealed class CareScheduleConfiguration : IEntityTypeConfiguration<CareS
         builder.Property(schedule => schedule.IntervalDays)
             .IsRequired();
 
+        builder.Property(schedule => schedule.ScheduleMode)
+            .HasConversion<int>()
+            .IsRequired();
+
+        builder.Property(schedule => schedule.WeekDays)
+            .HasConversion<int>()
+            .IsRequired();
+
+        builder.Property(schedule => schedule.PreferredTimeLocal)
+            .HasColumnType("time");
+
+        builder.Property(schedule => schedule.TimeZoneId)
+            .HasMaxLength(100);
+
         builder.Property(schedule => schedule.IsEnabled)
             .IsRequired();
 

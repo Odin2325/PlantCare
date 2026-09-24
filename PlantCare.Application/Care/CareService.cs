@@ -171,11 +171,22 @@ internal sealed class CareService(
         CareActionType actionType,
         int intervalDays,
         bool isEnabled,
+        CareScheduleMode scheduleMode,
+        CareWeekDays weekDays,
+        TimeOnly? preferredTimeLocal,
+        string? timeZoneId,
         CancellationToken cancellationToken = default)
     {
         ValidateIdentifiers(userId, userPlantId, actionType);
 
-        ValidateInterval(intervalDays);
+        if (!Enum.IsDefined(scheduleMode))
+            throw new ArgumentOutOfRangeException(nameof(scheduleMode));
+        if (scheduleMode == CareScheduleMode.Interval)
+            ValidateInterval(intervalDays);
+        else if (preferredTimeLocal is null)
+            throw new ArgumentException(
+                "A preferred time is required for weekday schedules.",
+                nameof(preferredTimeLocal));
 
         var schedule =
             await careScheduleRepository.GetForUserAsync(
@@ -189,7 +200,24 @@ internal sealed class CareService(
             return null;
         }
 
-        schedule.UpdateInterval(intervalDays);
+        if (scheduleMode == CareScheduleMode.Weekdays)
+        {
+            schedule.ConfigureWeekdays(
+                weekDays,
+                preferredTimeLocal!.Value,
+                timeZoneId ?? string.Empty,
+                schedule.LastCompletedAtUtc ?? timeProvider.GetUtcNow());
+        }
+        else if (schedule.ScheduleMode == CareScheduleMode.Weekdays)
+        {
+            schedule.ConfigureInterval(
+                intervalDays,
+                schedule.LastCompletedAtUtc ?? timeProvider.GetUtcNow());
+        }
+        else
+        {
+            schedule.UpdateInterval(intervalDays);
+        }
 
         if (isEnabled)
         {
@@ -436,6 +464,10 @@ internal sealed class CareService(
             IntervalDays: schedule.IntervalDays,
             LastCompletedAtUtc: schedule.LastCompletedAtUtc,
             NextDueAtUtc: schedule.NextDueAtUtc,
-            IsEnabled: schedule.IsEnabled);
+            IsEnabled: schedule.IsEnabled,
+            ScheduleMode: schedule.ScheduleMode,
+            WeekDays: (int)schedule.WeekDays,
+            PreferredTimeLocal: schedule.PreferredTimeLocal,
+            TimeZoneId: schedule.TimeZoneId);
     }
 }

@@ -144,9 +144,7 @@
             </div>
 
             <span class="interval">
-              Every
-              {{ schedule.intervalDays }}
-              days
+              {{ getScheduleRecurrenceText(schedule) }}
             </span>
           </header>
 
@@ -192,6 +190,17 @@
 
           <div class="schedule-controls">
             <label>
+              Schedule
+              <select [value]="getScheduleModeDraft(plant, schedule)"
+                      [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
+                      (change)="setScheduleModeDraft(plant, schedule, $any($event.target).value)">
+                <option value="Interval">Every number of days</option>
+                <option value="Weekdays">Selected weekdays</option>
+              </select>
+            </label>
+
+            @if (getScheduleModeDraft(plant, schedule) === 'Interval') {
+            <label>
               Interval
               <span class="interval-input">
                 <input type="number"
@@ -203,13 +212,35 @@
                 days
               </span>
             </label>
+            } @else {
+            <fieldset class="weekday-picker">
+              <legend>Repeat on</legend>
+              @for (day of weekDayOptions; track day.value) {
+              <label>
+                <input type="checkbox"
+                       [checked]="isWeekDaySelected(plant, schedule, day.value)"
+                       [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
+                       (change)="toggleWeekDayDraft(plant, schedule, day.value)">
+                {{ day.label }}
+              </label>
+              }
+            </fieldset>
+
+            <label>
+              Local reminder time
+              <input type="time"
+                     [value]="getPreferredTimeDraft(plant, schedule)"
+                     [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
+                     (input)="setPreferredTimeDraft(plant, schedule, $any($event.target).value)">
+            </label>
+            }
 
             <div class="schedule-control-buttons">
               <button type="button"
                       class="schedule-button"
                       [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
                       (click)="saveSchedule(plant, schedule)">
-                Save interval
+                Save schedule
               </button>
 
               <button type="button"

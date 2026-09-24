@@ -161,4 +161,49 @@ public sealed class CareScheduleTests
                 TimeSpan.Zero),
             schedule.NextDueAtUtc);
     }
+
+    [Fact]
+    public void WeekdaySchedule_UsesSelectedLocalDaysAndTime()
+    {
+        var schedule = CareSchedule.Create(
+            Guid.NewGuid(),
+            CareActionType.Watering,
+            7,
+            DateTimeOffset.UnixEpoch);
+        var mondayMorningUtc = new DateTimeOffset(
+            2026, 9, 21, 8, 0, 0, TimeSpan.Zero);
+
+        schedule.ConfigureWeekdays(
+            CareWeekDays.Monday | CareWeekDays.Wednesday,
+            new TimeOnly(9, 0),
+            "Europe/Berlin",
+            mondayMorningUtc);
+
+        Assert.Equal(CareScheduleMode.Weekdays, schedule.ScheduleMode);
+        Assert.Equal(
+            new DateTimeOffset(2026, 9, 23, 7, 0, 0, TimeSpan.Zero),
+            schedule.NextDueAtUtc);
+    }
+
+    [Fact]
+    public void WeekdaySchedule_KeepsLocalTimeAcrossDaylightSavingChange()
+    {
+        var schedule = CareSchedule.Create(
+            Guid.NewGuid(),
+            CareActionType.Watering,
+            7,
+            DateTimeOffset.UnixEpoch);
+        schedule.ConfigureWeekdays(
+            CareWeekDays.Monday,
+            new TimeOnly(9, 0),
+            "Europe/Berlin",
+            new DateTimeOffset(2026, 10, 19, 7, 0, 0, TimeSpan.Zero));
+
+        schedule.MarkCompleted(
+            new DateTimeOffset(2026, 10, 19, 7, 0, 0, TimeSpan.Zero));
+
+        Assert.Equal(
+            new DateTimeOffset(2026, 10, 26, 8, 0, 0, TimeSpan.Zero),
+            schedule.NextDueAtUtc);
+    }
 }

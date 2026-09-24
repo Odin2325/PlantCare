@@ -17,13 +17,14 @@ internal sealed class CalendarService(ICalendarRepository repository) : ICalenda
         foreach (var schedule in schedules)
         {
             var occurrence = schedule.NextDueAtUtc!.Value;
-            while (occurrence < fromUtc) occurrence = occurrence.AddDays(schedule.IntervalDays);
+            while (occurrence < fromUtc)
+                occurrence = schedule.GetNextOccurrenceAfter(occurrence);
             while (occurrence < toUtc)
             {
                 entries.Add(new CalendarEntryDto(
                     $"{schedule.Id:N}-scheduled-{occurrence.UtcTicks}", schedule.UserPlantId,
                     schedule.UserPlant.Nickname, schedule.ActionType, occurrence, CalendarEntryKind.Scheduled));
-                occurrence = occurrence.AddDays(schedule.IntervalDays);
+                occurrence = schedule.GetNextOccurrenceAfter(occurrence);
             }
         }
 

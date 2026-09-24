@@ -16,6 +16,14 @@ public sealed class CareSchedule
 
     public int IntervalDays { get; private set; }
 
+    public CareScheduleMode ScheduleMode { get; private set; }
+
+    public CareWeekDays WeekDays { get; private set; }
+
+    public TimeOnly? PreferredTimeLocal { get; private set; }
+
+    public string? TimeZoneId { get; private set; }
+
     public DateTimeOffset? LastCompletedAtUtc { get; private set; }
 
     public DateTimeOffset? NextDueAtUtc { get; private set; }
@@ -71,6 +79,7 @@ public sealed class CareSchedule
             UserPlantId = userPlantId,
             ActionType = actionType,
             IntervalDays = intervalDays,
+            ScheduleMode = CareScheduleMode.Interval,
             LastCompletedAtUtc = lastCompletedAtUtc,
             NextDueAtUtc = scheduleStart.AddDays(intervalDays),
             IsEnabled = true,
@@ -96,8 +105,7 @@ public sealed class CareSchedule
 
         LastCompletedAtUtc = completedAtUtc;
 
-        NextDueAtUtc =
-            completedAtUtc.AddDays(IntervalDays);
+        NextDueAtUtc = GetNextOccurrenceAfter(completedAtUtc);
     }
 
     public void Disable()
@@ -123,9 +131,8 @@ public sealed class CareSchedule
         DateTimeOffset resetAtUtc)
     {
         LastCompletedAtUtc = latestCompletedAtUtc;
-        NextDueAtUtc =
-            (latestCompletedAtUtc ?? resetAtUtc)
-            .AddDays(IntervalDays);
+        NextDueAtUtc = GetNextOccurrenceAfter(
+            latestCompletedAtUtc ?? resetAtUtc);
     }
 
     public void UpdateInterval(int intervalDays)
@@ -141,6 +148,10 @@ public sealed class CareSchedule
             NextDueAtUtc?.AddDays(-IntervalDays);
 
         IntervalDays = intervalDays;
+        ScheduleMode = CareScheduleMode.Interval;
+        WeekDays = CareWeekDays.None;
+        PreferredTimeLocal = null;
+        TimeZoneId = null;
 
         if (scheduleStart.HasValue)
         {
@@ -148,6 +159,105 @@ public sealed class CareSchedule
                 scheduleStart.Value.AddDays(intervalDays);
         }
     }
+
+    public void ConfigureInterval(
+        int intervalDays,
+        DateTimeOffset anchorUtc)
+    {
+        if (intervalDays <= 0)
+            throw new ArgumentOutOfRangeException(nameof(intervalDays));
+
+        IntervalDays = intervalDays;
+        ScheduleMode = CareScheduleMode.Interval;
+        WeekDays = CareWeekDays.None;
+        PreferredTimeLocal = null;
+        TimeZoneId = null;
+        NextDueAtUtc = anchorUtc.AddDays(intervalDays);
+    }
+
+    public void ConfigureWeekdays(
+        CareWeekDays weekDays,
+        TimeOnly preferredTimeLocal,
+        string timeZoneId,
+        DateTimeOffset anchorUtc)
+    {
+        const CareWeekDays allDays =
+            CareWeekDays.Monday |
+            CareWeekDays.Tuesday |
+            CareWeekDays.Wednesday |
+            CareWeekDays.Thursday |
+            CareWeekDays.Friday |
+            CareWeekDays.Saturday |
+            CareWeekDays.Sunday;
+
+        if (weekDays == CareWeekDays.None || (weekDays & ~allDays) != 0)
+            throw new ArgumentOutOfRangeException(
+                nameof(weekDays),
+                "At least one valid weekday must be selected.");
+        if (string.IsNullOrWhiteSpace(timeZoneId))
+            throw new ArgumentException(
+                "A time zone is required for weekday schedules.",
+                nameof(timeZoneId));
+
+        _ = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+        ScheduleMode = CareScheduleMode.Weekdays;
+        WeekDays = weekDays;
+        PreferredTimeLocal = preferredTimeLocal;
+        TimeZoneId = timeZoneId;
+        NextDueAtUtc = CalculateNextWeekdayOccurrence(anchorUtc);
+    }
+
+    public DateTimeOffset GetNextOccurrenceAfter(DateTimeOffset occurrenceUtc)
+    {
+        return ScheduleMode == CareScheduleMode.Weekdays
+            ? CalculateNextWeekdayOccurrence(occurrenceUtc)
+            : occurrenceUtc.AddDays(IntervalDays);
+    }
+
+    private DateTimeOffset CalculateNextWeekdayOccurrence(
+        DateTimeOffset afterUtc)
+    {
+        if (PreferredTimeLocal is null || string.IsNullOrWhiteSpace(TimeZoneId))
+            throw new InvalidOperationException(
+                "The weekday schedule is incomplete.");
+
+        var timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
+        var localAfter = TimeZoneInfo.ConvertTime(afterUtc, timeZone);
+        var localDate = DateOnly.FromDateTime(localAfter.DateTime);
+
+        for (var offset = 1; offset <= 7; offset++)
+        {
+            var candidateDate = localDate.AddDays(offset);
+            if (!WeekDays.HasFlag(ToCareWeekDay(candidateDate.DayOfWeek)))
+                continue;
+
+            var localDateTime = candidateDate.ToDateTime(
+                PreferredTimeLocal.Value,
+                DateTimeKind.Unspecified);
+            while (timeZone.IsInvalidTime(localDateTime))
+                localDateTime = localDateTime.AddMinutes(30);
+
+            return TimeZoneInfo.ConvertTimeToUtc(
+                localDateTime,
+                timeZone);
+        }
+
+        throw new InvalidOperationException(
+            "The weekday schedule has no next occurrence.");
+    }
+
+    private static CareWeekDays ToCareWeekDay(DayOfWeek dayOfWeek) =>
+        dayOfWeek switch
+        {
+            DayOfWeek.Monday => CareWeekDays.Monday,
+            DayOfWeek.Tuesday => CareWeekDays.Tuesday,
+            DayOfWeek.Wednesday => CareWeekDays.Wednesday,
+            DayOfWeek.Thursday => CareWeekDays.Thursday,
+            DayOfWeek.Friday => CareWeekDays.Friday,
+            DayOfWeek.Saturday => CareWeekDays.Saturday,
+            DayOfWeek.Sunday => CareWeekDays.Sunday,
+            _ => CareWeekDays.None
+        };
 
     public void Enable()
     {

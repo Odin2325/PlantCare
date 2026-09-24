@@ -207,6 +207,37 @@
     font-weight: 650;
   }
 
+  .schedule-controls select,
+  .schedule-controls input[type="time"] {
+    padding: 0.45rem;
+    border: 1px solid #bbc9be;
+    border-radius: 0.45rem;
+    background: white;
+  }
+
+.weekday-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.8rem;
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid #dce5de;
+  border-radius: 0.55rem;
+}
+
+  .weekday-picker legend {
+    padding: 0 0.3rem;
+    color: #59655e;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .weekday-picker label {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.3rem;
+  }
+
 .interval-input {
   display: flex;
   align-items: center;
