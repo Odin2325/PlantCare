@@ -874,6 +874,42 @@ public sealed class PlantCareApiTests
             });
     }
 
+    [Fact]
+    public async Task OwnerCanConfigureAWeekdayCareSchedule()
+    {
+        var userId = Guid.NewGuid();
+        var (_, userPlant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+
+        using var response = await client.PutAsJsonAsync(
+            $"/api/my-plants/{userPlant.Id}/care/Watering/schedule",
+            new
+            {
+                intervalDays = 7,
+                isEnabled = true,
+                scheduleMode = "Weekdays",
+                weekDays = 5,
+                preferredTimeLocal = "09:00:00",
+                timeZoneId = "Europe/Berlin"
+            });
+
+        response.EnsureSuccessStatusCode();
+        using var document = JsonDocument.Parse(
+            await response.Content.ReadAsStringAsync());
+        Assert.Equal("Weekdays", document.RootElement
+            .GetProperty("scheduleMode").GetString());
+        Assert.Equal(5, document.RootElement
+            .GetProperty("weekDays").GetInt32());
+        Assert.Equal("Europe/Berlin", document.RootElement
+            .GetProperty("timeZoneId").GetString());
+        Assert.Equal(
+            new DateTimeOffset(2026, 9, 21, 7, 0, 0, TimeSpan.Zero),
+            document.RootElement.GetProperty("nextDueAtUtc")
+                .GetDateTimeOffset());
+    }
+
     private async Task<(PlantSpecies PlantSpecies, UserPlant UserPlant)>
         SeedPlantAsync(Guid userId)
     {

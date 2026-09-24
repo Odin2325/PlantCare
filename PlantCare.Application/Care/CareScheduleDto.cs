@@ -8,4 +8,8 @@ public sealed record CareScheduleDto(
     int IntervalDays,
     DateTimeOffset? LastCompletedAtUtc,
     DateTimeOffset? NextDueAtUtc,
-    bool IsEnabled);
+    bool IsEnabled,
+    CareScheduleMode ScheduleMode,
+    int WeekDays,
+    TimeOnly? PreferredTimeLocal,
+    string? TimeZoneId);

@@ -151,13 +151,32 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
             return Unauthorized();
         }
 
-        var result = await careService.UpdateScheduleAsync(
-            userId,
-            id,
-            actionType,
-            request.IntervalDays,
-            request.IsEnabled,
-            cancellationToken);
+        CareScheduleDto? result;
+        try
+        {
+            result = await careService.UpdateScheduleAsync(
+                userId,
+                id,
+                actionType,
+                request.IntervalDays,
+                request.IsEnabled,
+                request.ScheduleMode,
+                (CareWeekDays)request.WeekDays,
+                request.PreferredTimeLocal,
+                request.TimeZoneId,
+                cancellationToken);
+        }
+        catch (Exception exception) when (exception is
+            ArgumentException or
+            TimeZoneNotFoundException or
+            InvalidTimeZoneException)
+        {
+            return BadRequest(new ProblemDetails
+            {
+                Title = "Invalid care schedule.",
+                Detail = exception.Message
+            });
+        }
 
         return result is null ? NotFound() : Ok(result);
     }

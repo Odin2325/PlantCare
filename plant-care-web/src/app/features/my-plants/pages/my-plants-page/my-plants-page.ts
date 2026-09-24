@@ -87,6 +87,25 @@ export class MyPlantsPage {
   readonly intervalDrafts =
     signal<Record<string, number>>({});
 
+  readonly scheduleModeDrafts =
+    signal<Record<string, 'Interval' | 'Weekdays'>>({});
+
+  readonly weekDaysDrafts =
+    signal<Record<string, number>>({});
+
+  readonly preferredTimeDrafts =
+    signal<Record<string, string>>({});
+
+  readonly weekDayOptions = [
+    { label: 'Mon', value: 1 },
+    { label: 'Tue', value: 2 },
+    { label: 'Wed', value: 4 },
+    { label: 'Thu', value: 8 },
+    { label: 'Fri', value: 16 },
+    { label: 'Sat', value: 32 },
+    { label: 'Sun', value: 64 },
+  ];
+
   readonly changingOptionalScheduleKey =
     signal<string | null>(null);
 
@@ -273,6 +292,44 @@ export class MyPlantsPage {
     }));
   }
 
+  getScheduleModeDraft(plant: UserPlant, schedule: CareSchedule): 'Interval' | 'Weekdays' {
+    return this.scheduleModeDrafts()[this.createCareActionKey(plant.id, schedule.actionType)] ?? schedule.scheduleMode;
+  }
+
+  setScheduleModeDraft(plant: UserPlant, schedule: CareSchedule, value: string): void {
+    const key = this.createCareActionKey(plant.id, schedule.actionType);
+    this.scheduleModeDrafts.update(drafts => ({ ...drafts, [key]: value as 'Interval' | 'Weekdays' }));
+  }
+
+  getWeekDaysDraft(plant: UserPlant, schedule: CareSchedule): number {
+    return this.weekDaysDrafts()[this.createCareActionKey(plant.id, schedule.actionType)] ?? schedule.weekDays;
+  }
+
+  toggleWeekDayDraft(plant: UserPlant, schedule: CareSchedule, value: number): void {
+    const key = this.createCareActionKey(plant.id, schedule.actionType);
+    const current = this.getWeekDaysDraft(plant, schedule);
+    this.weekDaysDrafts.update(drafts => ({ ...drafts, [key]: current ^ value }));
+  }
+
+  isWeekDaySelected(plant: UserPlant, schedule: CareSchedule, value: number): boolean {
+    return (this.getWeekDaysDraft(plant, schedule) & value) !== 0;
+  }
+
+  getPreferredTimeDraft(plant: UserPlant, schedule: CareSchedule): string {
+    return this.preferredTimeDrafts()[this.createCareActionKey(plant.id, schedule.actionType)] ?? schedule.preferredTimeLocal?.slice(0, 5) ?? '09:00';
+  }
+
+  setPreferredTimeDraft(plant: UserPlant, schedule: CareSchedule, value: string): void {
+    const key = this.createCareActionKey(plant.id, schedule.actionType);
+    this.preferredTimeDrafts.update(drafts => ({ ...drafts, [key]: value }));
+  }
+
+  getScheduleRecurrenceText(schedule: CareSchedule): string {
+    if (schedule.scheduleMode === 'Interval') return `Every ${schedule.intervalDays} days`;
+    const days = this.weekDayOptions.filter(day => (schedule.weekDays & day.value) !== 0).map(day => day.label).join(', ');
+    return `${days} at ${schedule.preferredTimeLocal?.slice(0, 5) ?? ''}`;
+  }
+
   saveSchedule(
     plant: UserPlant,
     schedule: CareSchedule,
@@ -282,6 +339,9 @@ export class MyPlantsPage {
       schedule,
       this.getIntervalDraft(plant, schedule),
       schedule.isEnabled,
+      this.getScheduleModeDraft(plant, schedule),
+      this.getWeekDaysDraft(plant, schedule),
+      this.getPreferredTimeDraft(plant, schedule),
     );
   }
 
@@ -294,6 +354,9 @@ export class MyPlantsPage {
       schedule,
       this.getIntervalDraft(plant, schedule),
       !schedule.isEnabled,
+      this.getScheduleModeDraft(plant, schedule),
+      this.getWeekDaysDraft(plant, schedule),
+      this.getPreferredTimeDraft(plant, schedule),
     );
   }
 
@@ -581,6 +644,9 @@ export class MyPlantsPage {
               ),
             ),
           );
+          this.scheduleModeDrafts.set(Object.fromEntries(plants.flatMap(plant => plant.careSchedules.map(schedule => [this.createCareActionKey(plant.id, schedule.actionType), schedule.scheduleMode]))));
+          this.weekDaysDrafts.set(Object.fromEntries(plants.flatMap(plant => plant.careSchedules.map(schedule => [this.createCareActionKey(plant.id, schedule.actionType), schedule.weekDays]))));
+          this.preferredTimeDrafts.set(Object.fromEntries(plants.flatMap(plant => plant.careSchedules.map(schedule => [this.createCareActionKey(plant.id, schedule.actionType), schedule.preferredTimeLocal?.slice(0, 5) ?? '09:00']))));
           this.isLoading.set(false);
         },
 
@@ -630,18 +696,24 @@ export class MyPlantsPage {
     schedule: CareSchedule,
     intervalDays: number,
     isEnabled: boolean,
+    scheduleMode: 'Interval' | 'Weekdays',
+    weekDays: number,
+    preferredTimeLocal: string,
   ): void {
     if (
       !Number.isInteger(intervalDays) ||
       intervalDays < 1 ||
       intervalDays > 3650 ||
+      (scheduleMode === 'Weekdays' && (weekDays === 0 || !preferredTimeLocal)) ||
       this.isUpdatingSchedule(
         plant.id,
         schedule.actionType,
       )
     ) {
       this.careActionError.set(
-        'Enter an interval between 1 and 3650 days.',
+        scheduleMode === 'Weekdays'
+          ? 'Choose at least one weekday and a reminder time.'
+          : 'Enter an interval between 1 and 3650 days.',
       );
       return;
     }
@@ -660,6 +732,10 @@ export class MyPlantsPage {
         {
           intervalDays,
           isEnabled,
+          scheduleMode,
+          weekDays,
+          preferredTimeLocal: scheduleMode === 'Weekdays' ? preferredTimeLocal : null,
+          timeZoneId: scheduleMode === 'Weekdays' ? Intl.DateTimeFormat().resolvedOptions().timeZone : null,
         },
       )
       .pipe(
@@ -691,6 +767,9 @@ export class MyPlantsPage {
             ...drafts,
             [key]: updatedSchedule.intervalDays,
           }));
+          this.scheduleModeDrafts.update(drafts => ({ ...drafts, [key]: updatedSchedule.scheduleMode }));
+          this.weekDaysDrafts.update(drafts => ({ ...drafts, [key]: updatedSchedule.weekDays }));
+          this.preferredTimeDrafts.update(drafts => ({ ...drafts, [key]: updatedSchedule.preferredTimeLocal?.slice(0, 5) ?? '09:00' }));
         },
         error: (error: HttpErrorResponse) => {
           console.error(

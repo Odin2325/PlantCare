@@ -141,7 +141,11 @@ internal sealed class UserPlantService(
             IntervalDays: schedule.IntervalDays,
             LastCompletedAtUtc: schedule.LastCompletedAtUtc,
             NextDueAtUtc: schedule.NextDueAtUtc,
-            IsEnabled: schedule.IsEnabled))
+            IsEnabled: schedule.IsEnabled,
+            ScheduleMode: schedule.ScheduleMode,
+            WeekDays: (int)schedule.WeekDays,
+            PreferredTimeLocal: schedule.PreferredTimeLocal,
+            TimeZoneId: schedule.TimeZoneId))
         .ToList());
     }
 
@@ -176,7 +180,11 @@ internal sealed class UserPlantService(
                     IntervalDays: schedule.IntervalDays,
                     LastCompletedAtUtc: schedule.LastCompletedAtUtc,
                     NextDueAtUtc: schedule.NextDueAtUtc,
-                    IsEnabled: schedule.IsEnabled))
+                    IsEnabled: schedule.IsEnabled,
+                    ScheduleMode: schedule.ScheduleMode,
+                    WeekDays: (int)schedule.WeekDays,
+                    PreferredTimeLocal: schedule.PreferredTimeLocal,
+                    TimeZoneId: schedule.TimeZoneId))
                 .ToList());
     }
 

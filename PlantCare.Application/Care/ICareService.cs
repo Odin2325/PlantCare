@@ -25,6 +25,10 @@ public interface ICareService
         CareActionType actionType,
         int intervalDays,
         bool isEnabled,
+        CareScheduleMode scheduleMode,
+        CareWeekDays weekDays,
+        TimeOnly? preferredTimeLocal,
+        string? timeZoneId,
         CancellationToken cancellationToken = default);
 
     Task<CareScheduleDto?> AddScheduleAsync(

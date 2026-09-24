@@ -243,6 +243,19 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<int>("IntervalDays")
                         .HasColumnType("int");
 
+                    b.Property<TimeOnly?>("PreferredTimeLocal")
+                        .HasColumnType("time");
+
+                    b.Property<int>("ScheduleMode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeZoneId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("WeekDays")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("bit");
 

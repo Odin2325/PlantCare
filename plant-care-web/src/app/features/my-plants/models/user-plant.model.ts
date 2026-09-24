@@ -13,6 +13,10 @@ export interface CareSchedule {
   lastCompletedAtUtc: string | null;
   nextDueAtUtc: string | null;
   isEnabled: boolean;
+  scheduleMode: 'Interval' | 'Weekdays';
+  weekDays: number;
+  preferredTimeLocal: string | null;
+  timeZoneId: string | null;
 }
 
 export interface CareEvent {
@@ -36,6 +40,10 @@ export interface CompleteCareActionRequest {
 export interface UpdateCareScheduleRequest {
   intervalDays: number;
   isEnabled: boolean;
+  scheduleMode: 'Interval' | 'Weekdays';
+  weekDays: number;
+  preferredTimeLocal: string | null;
+  timeZoneId: string | null;
 }
 
 export interface CareEventHistory {
