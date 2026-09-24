@@ -49,6 +49,7 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
 
     public async Task<IReadOnlyList<UserPlant>> GetForDashboardAsync(Guid userId, DateTimeOffset end, CancellationToken cancellationToken = default)
     {
+        // 
         return await dbContext.UserPlants
             .AsNoTracking()
             .Include(
