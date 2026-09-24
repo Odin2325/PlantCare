@@ -92,3 +92,39 @@ The encryption key ring is stored in the persistent
 `plantcare_data-protection-keys` volume; back it up with the database. PlantCare
 requests only identity, email, and calendar-event access. Synchronization is
 one-way and touches only events tagged as PlantCare exports.
+
+## Outlook and Microsoft 365 synchronization
+
+Microsoft calendar synchronization is optional. In Microsoft Entra, register a
+web application and add this exact redirect URI:
+
+```text
+https://YOUR_PLANTCARE_DOMAIN/api/calendar/integrations/microsoft/callback
+```
+
+Create a client secret, then set these values in `.env` and recreate the API
+container:
+
+```dotenv
+MICROSOFT_CALENDAR_ENABLED=true
+MICROSOFT_CALENDAR_CLIENT_ID=your-application-client-id
+MICROSOFT_CALENDAR_CLIENT_SECRET=your-client-secret-value
+MICROSOFT_CALENDAR_TENANT=common
+```
+
+```bash
+docker compose up -d --build api
+```
+
+The `common` tenant permits personal Microsoft accounts as well as work and
+school accounts. Replace it with your tenant ID to restrict sign-in to one
+organization. PlantCare uses authorization-code flow with PKCE and delegated
+`User.Read` and `Calendars.ReadWrite` permissions. Tokens are encrypted with
+the same persistent data-protection key ring used by Google synchronization.
+Each PlantCare user connects and consents to their own calendar; no individual
+approval by a PlantCare administrator is required. An organization's Microsoft
+Entra policies may still require approval from that organization's own admin.
+
+Synchronization is one-way. PlantCare records which Microsoft events it
+created, updates those events on later synchronizations, and does not modify
+unrelated calendar events.

@@ -195,6 +195,18 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("ExternalCalendarConnections", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarEvent", b =>
+                {
+                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("ConnectionId").HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<string>("ExternalEventId").IsRequired().HasMaxLength(512).HasColumnType("nvarchar(512)");
+                    b.Property<string>("PlantCareEntryId").IsRequired().HasMaxLength(200).HasColumnType("nvarchar(200)");
+                    b.HasKey("Id");
+                    b.HasIndex("ConnectionId", "PlantCareEntryId").IsUnique();
+                    b.ToTable("ExternalCalendarEvents", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.CareEvent", b =>
                 {
                     b.Property<Guid>("Id")
@@ -566,6 +578,15 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarEvent", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.ExternalCalendarConnection", null)
+                        .WithMany()
+                        .HasForeignKey("ConnectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

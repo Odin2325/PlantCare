@@ -8,6 +8,16 @@ public interface IExternalCalendarConnectionRepository
         Guid userId,
         CancellationToken cancellationToken = default);
 
+    Task<ExternalCalendarConnection?> GetMicrosoftAsync(
+        Guid userId,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<ExternalCalendarEvent>> GetEventsAsync(
+        Guid connectionId,
+        CancellationToken cancellationToken = default);
+
     void Add(ExternalCalendarConnection connection);
     void Remove(ExternalCalendarConnection connection);
+    void AddEvent(ExternalCalendarEvent calendarEvent);
+    void RemoveEvent(ExternalCalendarEvent calendarEvent);
 }

@@ -48,4 +48,20 @@ export class CalendarApiService {
   disconnectGoogle(): Observable<void> {
     return this.http.delete<void>('/api/calendar/integrations/google');
   }
+
+  getMicrosoftStatus(): Observable<ExternalCalendarStatus> {
+    return this.http.get<ExternalCalendarStatus>('/api/calendar/integrations/microsoft/status');
+  }
+
+  connectMicrosoft(): Observable<{ authorizationUrl: string }> {
+    return this.http.post<{ authorizationUrl: string }>('/api/calendar/integrations/microsoft/connect', null);
+  }
+
+  syncMicrosoft(): Observable<ExternalCalendarSyncResult> {
+    return this.http.post<ExternalCalendarSyncResult>('/api/calendar/integrations/microsoft/sync', null);
+  }
+
+  disconnectMicrosoft(): Observable<void> {
+    return this.http.delete<void>('/api/calendar/integrations/microsoft');
+  }
 }

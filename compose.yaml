@@ -35,6 +35,11 @@ services:
       GoogleCalendar__ClientId: ${GOOGLE_CALENDAR_CLIENT_ID:-}
       GoogleCalendar__ClientSecret: ${GOOGLE_CALENDAR_CLIENT_SECRET:-}
       GoogleCalendar__CallbackUrl: https://${PLANTCARE_DOMAIN}/api/calendar/integrations/google/callback
+      MicrosoftCalendar__Enabled: ${MICROSOFT_CALENDAR_ENABLED:-false}
+      MicrosoftCalendar__ClientId: ${MICROSOFT_CALENDAR_CLIENT_ID:-}
+      MicrosoftCalendar__ClientSecret: ${MICROSOFT_CALENDAR_CLIENT_SECRET:-}
+      MicrosoftCalendar__CallbackUrl: https://${PLANTCARE_DOMAIN}/api/calendar/integrations/microsoft/callback
+      MicrosoftCalendar__Tenant: ${MICROSOFT_CALENDAR_TENANT:-common}
       Email__Host: ${SMTP_HOST:?Set SMTP_HOST in .env}
       Email__Port: ${SMTP_PORT:-587}
       Email__UseSsl: ${SMTP_USE_SSL:-true}
