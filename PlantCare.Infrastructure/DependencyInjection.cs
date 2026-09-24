@@ -83,6 +83,9 @@ public static class DependencyInjection
                 "Google Calendar OAuth settings are incomplete.")
             .ValidateOnStart();
         services.AddHttpClient<IMicrosoftCalendarService, MicrosoftCalendarService>();
+        services.AddScoped<
+            IAutomaticExternalCalendarSyncService,
+            AutomaticExternalCalendarSyncService>();
         services.AddOptions<MicrosoftCalendarOptions>()
             .Bind(configuration.GetSection(MicrosoftCalendarOptions.SectionName))
             .Validate(

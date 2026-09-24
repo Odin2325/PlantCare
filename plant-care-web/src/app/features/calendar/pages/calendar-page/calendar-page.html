@@ -51,7 +51,7 @@
     <div>
       <p class="eyebrow">External calendar</p>
       <h2>Google Calendar</h2>
-      <p>Export the next year of scheduled plant-care events. PlantCare remains the source of truth and updates its own exported events without touching your other appointments.</p>
+      <p>Export the next year of scheduled plant-care events. PlantCare remains the source of truth, keeps its exported events synchronized automatically, and does not touch your other appointments.</p>
     </div>
     @if (googleStatus(); as status) {
       @if (!status.isConfigured) {
@@ -73,7 +73,7 @@
     <div>
       <p class="eyebrow">External calendar</p>
       <h2>Outlook and Microsoft 365</h2>
-      <p>Export the next year of scheduled plant-care events to your personal Outlook or Microsoft 365 calendar.</p>
+      <p>Export the next year of scheduled plant-care events to your personal Outlook or Microsoft 365 calendar. Once connected, PlantCare keeps them synchronized automatically.</p>
     </div>
     @if (microsoftStatus(); as status) {
       @if (!status.isConfigured) {
