@@ -5,6 +5,7 @@ namespace PlantCare.Application.Notifications;
 
 internal sealed class NotificationService(
     INotificationRepository notificationRepository,
+    INotificationPreferenceRepository preferenceRepository,
     IUnitOfWork unitOfWork,
     TimeProvider timeProvider) : INotificationService
 {
@@ -46,7 +47,17 @@ internal sealed class NotificationService(
 
         var notifications = await notificationRepository
             .GetForUserAsync(userId, take, cancellationToken);
-        return notifications.Select(MapToDto).ToList();
+        var preference = await preferenceRepository.GetAsync(
+            userId,
+            cancellationToken);
+        if (preference is not null && !preference.InAppEnabled)
+            return [];
+
+        return notifications
+            .Where(notification => preference is null ||
+                preference.IsActionEnabled(notification.CareSchedule.ActionType))
+            .Select(MapToDto)
+            .ToList();
     }
 
     public async Task<bool> MarkReadAsync(
@@ -67,6 +78,50 @@ internal sealed class NotificationService(
         return true;
     }
 
+    public async Task<NotificationPreferenceDto> GetPreferencesAsync(
+        Guid userId,
+        CancellationToken cancellationToken = default)
+    {
+        if (userId == Guid.Empty)
+            throw new ArgumentException("A valid user ID is required.", nameof(userId));
+
+        var preference = await preferenceRepository.GetAsync(
+            userId,
+            cancellationToken);
+        return MapPreference(preference ??
+            NotificationPreference.CreateDefault(userId));
+    }
+
+    public async Task<NotificationPreferenceDto> UpdatePreferencesAsync(
+        Guid userId,
+        UpdateNotificationPreferenceCommand command,
+        CancellationToken cancellationToken = default)
+    {
+        if (userId == Guid.Empty)
+            throw new ArgumentException("A valid user ID is required.", nameof(userId));
+
+        var preference = await preferenceRepository.GetAsync(
+            userId,
+            cancellationToken);
+        if (preference is null)
+        {
+            preference = NotificationPreference.CreateDefault(userId);
+            preferenceRepository.Add(preference);
+        }
+
+        preference.Update(
+            command.InAppEnabled,
+            command.PushEnabled,
+            command.WateringEnabled,
+            command.FertilizingEnabled,
+            command.MistingEnabled,
+            command.PruningEnabled,
+            command.RepottingEnabled,
+            command.ReminderLeadTimeHours);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        return MapPreference(preference);
+    }
+
     private static NotificationDto MapToDto(Notification notification) =>
         new(
             notification.Id,
@@ -76,4 +131,16 @@ internal sealed class NotificationService(
             notification.DueAtUtc,
             notification.CreatedAtUtc,
             notification.ReadAtUtc);
+
+    private static NotificationPreferenceDto MapPreference(
+        NotificationPreference preference) =>
+        new(
+            preference.InAppEnabled,
+            preference.PushEnabled,
+            preference.WateringEnabled,
+            preference.FertilizingEnabled,
+            preference.MistingEnabled,
+            preference.PruningEnabled,
+            preference.RepottingEnabled,
+            preference.ReminderLeadTimeHours);
 }

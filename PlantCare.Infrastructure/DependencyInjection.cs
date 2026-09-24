@@ -70,6 +70,7 @@ public static class DependencyInjection
         services.AddScoped<ICareEventRepository, CareEventRepository>();
 
         services.AddScoped<INotificationRepository, NotificationRepository>();
+        services.AddScoped<INotificationPreferenceRepository, NotificationPreferenceRepository>();
 
         services.AddScoped<ICalendarRepository, CalendarRepository>();
         services.AddScoped<ICalendarSubscriptionRepository, CalendarSubscriptionRepository>();

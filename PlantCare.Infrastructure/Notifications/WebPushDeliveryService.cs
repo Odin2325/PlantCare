@@ -17,9 +17,21 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
         if (string.IsNullOrWhiteSpace(settings.Subject) || string.IsNullOrWhiteSpace(settings.PublicKey) || string.IsNullOrWhiteSpace(settings.PrivateKey)) return 0;
         var notifications = await dbContext.Notifications.Include(item => item.CareSchedule).ThenInclude(schedule => schedule.UserPlant)
             .Where(item => item.PushSentAtUtc == null).OrderBy(item => item.CreatedAtUtc).Take(batchSize).ToListAsync(cancellationToken);
+        var userIds = notifications.Select(item => item.UserId).Distinct().ToArray();
+        var preferences = await dbContext.NotificationPreferences
+            .Where(item => userIds.Contains(item.UserId))
+            .ToDictionaryAsync(item => item.UserId, cancellationToken);
         using var client = new WebPushClient(); var vapid = new VapidDetails(settings.Subject, settings.PublicKey, settings.PrivateKey); var delivered = 0;
         foreach (var notification in notifications)
         {
+            if (preferences.TryGetValue(notification.UserId, out var preference) &&
+                (!preference.PushEnabled ||
+                 !preference.IsActionEnabled(notification.CareSchedule.ActionType)))
+            {
+                notification.MarkPushSent(timeProvider.GetUtcNow());
+                continue;
+            }
+
             var subscriptions = await dbContext.PushSubscriptions.Where(item => item.UserId == notification.UserId).ToListAsync(cancellationToken); var retryNeeded = false;
             foreach (var item in subscriptions)
             {

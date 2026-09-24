@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CareNotification } from '../models/notification.model';
+import { CareNotification, NotificationPreference } from '../models/notification.model';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsApiService {
@@ -13,6 +13,14 @@ export class NotificationsApiService {
 
   markRead(id: string): Observable<void> {
     return this.http.post<void>(`/api/notifications/${id}/read`, null);
+  }
+
+  getPreferences(): Observable<NotificationPreference> {
+    return this.http.get<NotificationPreference>('/api/notifications/preferences');
+  }
+
+  updatePreferences(preferences: NotificationPreference): Observable<NotificationPreference> {
+    return this.http.put<NotificationPreference>('/api/notifications/preferences', preferences);
   }
 
   getPushConfig(): Observable<{ isEnabled: boolean; publicKey: string }> { return this.http.get<{ isEnabled: boolean; publicKey: string }>('/api/push/config'); }

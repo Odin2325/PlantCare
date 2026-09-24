@@ -303,6 +303,21 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("Notifications", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.NotificationPreference", b =>
+                {
+                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
+                    b.Property<bool>("FertilizingEnabled").HasColumnType("bit");
+                    b.Property<bool>("InAppEnabled").HasColumnType("bit");
+                    b.Property<bool>("MistingEnabled").HasColumnType("bit");
+                    b.Property<bool>("PruningEnabled").HasColumnType("bit");
+                    b.Property<bool>("PushEnabled").HasColumnType("bit");
+                    b.Property<int>("ReminderLeadTimeHours").HasColumnType("int");
+                    b.Property<bool>("RepottingEnabled").HasColumnType("bit");
+                    b.Property<bool>("WateringEnabled").HasColumnType("bit");
+                    b.HasKey("UserId");
+                    b.ToTable("NotificationPreferences", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
                 {
                     b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
@@ -628,6 +643,15 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("CareSchedule");
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.NotificationPreference", b =>
+                {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithOne()
+                        .HasForeignKey("PlantCare.Domain.Entities.NotificationPreference", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.UserPlant", b =>
