@@ -1,29 +1,69 @@
 <main class="calendar-page">
   <header class="calendar-header">
-    <div><p class="eyebrow">{{ viewedShare() ? 'Shared calendar · ' + viewedShare()!.ownerEmail : 'Plant care plan' }}</p><h1>{{ visibleMonth() | date:'MMMM yyyy' }}</h1></div>
-    <div class="controls"><button type="button" (click)="changeMonth(-1)" aria-label="Previous month">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changeMonth(1)" aria-label="Next month">→</button></div>
+    <div><p class="eyebrow">{{ viewedShare() ? 'Shared calendar · ' + viewedShare()!.ownerEmail : 'Plant care plan' }}</p><h1>{{ periodTitle() }}</h1></div>
+    <div class="controls"><button type="button" (click)="changePeriod(-1)" aria-label="Previous period">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changePeriod(1)" aria-label="Next period">→</button></div>
   </header>
   @if (viewedShare()) { <div class="shared-banner"><span>You are viewing a read-only shared calendar.</span><button type="button" (click)="viewOwnCalendar()">Return to my calendar</button></div> }
   <section class="toolbar" aria-label="Calendar filters">
+    <div class="view-switch" role="group" aria-label="Calendar view">
+      @for (view of ['Month', 'Week', 'Agenda']; track view) {
+        <button type="button" [class.active]="calendarView() === view" [attr.aria-pressed]="calendarView() === view" (click)="setCalendarView($any(view))">{{ view }}</button>
+      }
+    </div>
     <label>Plant<select [ngModel]="selectedPlantId()" (ngModelChange)="selectedPlantId.set($event)"><option value="all">All plants</option>@for (plant of plants(); track plant.id) { <option [value]="plant.id">{{ plant.name }}</option> }</select></label>
+    <label>Care action<select [ngModel]="selectedAction()" (ngModelChange)="selectedAction.set($event)"><option value="All">All actions</option>@for (action of actions(); track action) { <option [value]="action">{{ action }}</option> }</select></label>
     <label>Status<select [ngModel]="selectedKind()" (ngModelChange)="selectedKind.set($event)"><option value="All">All events</option><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option></select></label>
     <div class="legend"><span><i class="scheduled"></i>Scheduled</span><span><i class="completed"></i>Completed</span></div>
   </section>
   @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
   @if (isLoading()) { <p role="status">Loading calendar…</p> }
-  <section class="calendar" aria-label="Plant care calendar">
-    @for (weekday of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; track weekday) { <strong class="weekday">{{ weekday }}</strong> }
-    @for (day of days(); track day.date.toISOString()) {
-      <article class="day" [class.outside]="!day.isCurrentMonth">
-        <time [attr.datetime]="day.date.toISOString()">{{ day.date.getDate() }}</time>
-        @for (entry of day.entries; track entry.id) {
-          <button type="button" class="event" [class.completed]="entry.kind === 'Completed'" [title]="entry.plantName + ' · ' + entry.actionType" (click)="selectEntry(entry)">
-            <span>{{ entry.plantName }}</span><small>{{ entry.actionType }}</small>
-          </button>
-        }
-      </article>
-    }
-  </section>
+  @if (calendarView() === 'Month') {
+    <section class="calendar month-calendar" aria-label="Monthly plant care calendar">
+      @for (weekday of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track weekday) { <strong class="weekday">{{ weekday }}</strong> }
+      @for (day of monthDays(); track day.date.toISOString()) {
+        <article class="day" [class.outside]="!day.isCurrentMonth">
+          <time [attr.datetime]="day.date.toISOString()">{{ day.date.getDate() }}</time>
+          @for (entry of day.entries; track entry.id) {
+            <button type="button" class="event" [class.completed]="entry.kind === 'Completed'" [title]="entry.plantName + ' · ' + entry.actionType" (click)="selectEntry(entry)">
+              <span>{{ entry.plantName }}</span><small>{{ entry.actionType }}</small>
+            </button>
+          }
+        </article>
+      }
+    </section>
+  } @else if (calendarView() === 'Week') {
+    <section class="week-calendar" aria-label="Weekly plant care calendar">
+      @for (day of weekDays(); track day.date.toISOString()) {
+        <article class="week-day">
+          <header><span>{{ day.date | date:'EEE' }}</span><time [attr.datetime]="day.date.toISOString()">{{ day.date | date:'MMM d' }}</time></header>
+          @if (day.entries.length === 0) { <p class="no-events">No care events</p> }
+          @for (entry of day.entries; track entry.id) {
+            <button type="button" class="event" [class.completed]="entry.kind === 'Completed'" (click)="selectEntry(entry)">
+              <span>{{ entry.startsAtUtc | date:'shortTime' }} · {{ entry.plantName }}</span><small>{{ entry.actionType }} · {{ entry.kind }}</small>
+            </button>
+          }
+        </article>
+      }
+    </section>
+  } @else {
+    <section class="agenda" aria-label="Plant care agenda">
+      @if (agendaDays().length === 0) {
+        <div class="agenda-empty"><h2>No matching events</h2><p>Try another month or adjust the filters.</p></div>
+      }
+      @for (day of agendaDays(); track day.date.toISOString()) {
+        <article class="agenda-day">
+          <header><time [attr.datetime]="day.date.toISOString()">{{ day.date | date:'EEEE, MMMM d' }}</time></header>
+          <div>
+            @for (entry of day.entries; track entry.id) {
+              <button type="button" class="agenda-event" [class.completed]="entry.kind === 'Completed'" (click)="selectEntry(entry)">
+                <time>{{ entry.startsAtUtc | date:'shortTime' }}</time><span><strong>{{ entry.plantName }}</strong><small>{{ entry.actionType }} · {{ entry.kind }}</small></span>
+              </button>
+            }
+          </div>
+        </article>
+      }
+    </section>
+  }
   @if (selectedEntry(); as entry) {
     <aside class="details" aria-live="polite">
       <div><p class="eyebrow">{{ entry.kind }} care</p><h2>{{ entry.plantName }}</h2></div>

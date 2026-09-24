@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ExternalCalendarStatus } from '../../models/calendar.model';
 
 interface CalendarDay { date: Date; isCurrentMonth: boolean; entries: CalendarEntry[]; }
+type CalendarView = 'Month' | 'Week' | 'Agenda';
 
 @Component({
   selector: 'app-calendar-page', standalone: true, imports: [DatePipe, FormsModule],
@@ -22,12 +23,14 @@ export class CalendarPage {
   private readonly myPlantsApi = inject(MyPlantsApiService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
-  readonly visibleMonth = signal(this.startOfMonth(new Date()));
+  readonly visibleDate = signal(new Date());
+  readonly calendarView = signal<CalendarView>(this.loadSavedView());
   readonly entries = signal<CalendarEntry[]>([]);
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly selectedPlantId = signal('all');
   readonly selectedKind = signal('All');
+  readonly selectedAction = signal('All');
   readonly selectedEntry = signal<CalendarEntry | null>(null);
   readonly completingEntryId = signal<string | null>(null);
   readonly subscriptionActive = signal(false);
@@ -51,11 +54,51 @@ export class CalendarPage {
   readonly plants = computed(() => Array.from(
     new Map(this.entries().map(entry => [entry.userPlantId, entry.plantName])).entries(),
   ).map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name)));
+  readonly actions = computed(() => Array.from(
+    new Set(this.entries().map(entry => entry.actionType)),
+  ).sort((a, b) => a.localeCompare(b)));
   readonly filteredEntries = computed(() => this.entries().filter(entry =>
     (this.selectedPlantId() === 'all' || entry.userPlantId === this.selectedPlantId()) &&
-    (this.selectedKind() === 'All' || entry.kind === this.selectedKind()),
+    (this.selectedKind() === 'All' || entry.kind === this.selectedKind()) &&
+    (this.selectedAction() === 'All' || entry.actionType === this.selectedAction()),
   ));
-  readonly days = computed(() => this.buildDays(this.visibleMonth(), this.filteredEntries()));
+  readonly monthDays = computed(() => this.buildMonthDays(
+    this.visibleDate(),
+    this.filteredEntries(),
+  ));
+  readonly weekDays = computed(() => this.buildRangeDays(
+    this.startOfWeek(this.visibleDate()),
+    7,
+    this.filteredEntries(),
+    this.visibleDate().getMonth(),
+  ));
+  readonly agendaDays = computed(() => {
+    const month = this.visibleDate();
+    const start = this.startOfMonth(month);
+    const end = new Date(start.getFullYear(), start.getMonth() + 1, 1);
+    return this.buildRangeDays(
+      start,
+      Math.round((end.getTime() - start.getTime()) / 86_400_000),
+      this.filteredEntries(),
+      month.getMonth(),
+    ).filter(day => day.entries.length > 0);
+  });
+  readonly periodTitle = computed(() => {
+    const date = this.visibleDate();
+    if (this.calendarView() !== 'Week')
+      return new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' }).format(date);
+
+    const start = this.startOfWeek(date);
+    const end = new Date(start);
+    end.setDate(start.getDate() + 6);
+    const startText = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(start);
+    const endText = new Intl.DateTimeFormat(undefined, {
+      month: start.getMonth() === end.getMonth() ? undefined : 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(end);
+    return `${startText} – ${endText}`;
+  });
 
   constructor() {
     this.load();
@@ -74,13 +117,24 @@ export class CalendarPage {
     if (microsoftResult === 'error') this.microsoftMessage.set('Microsoft Calendar could not be connected. Please try again.');
   }
 
-  changeMonth(offset: number): void {
-    const current = this.visibleMonth();
-    this.visibleMonth.set(new Date(current.getFullYear(), current.getMonth() + offset, 1));
+  changePeriod(offset: number): void {
+    const current = this.visibleDate();
+    const next = new Date(current);
+    if (this.calendarView() === 'Week') next.setDate(current.getDate() + (offset * 7));
+    else next.setMonth(current.getMonth() + offset, 1);
+    this.visibleDate.set(next);
     this.load();
   }
 
-  goToToday(): void { this.visibleMonth.set(this.startOfMonth(new Date())); this.load(); }
+  goToToday(): void { this.visibleDate.set(new Date()); this.load(); }
+
+  setCalendarView(view: CalendarView): void {
+    if (this.calendarView() === view) return;
+    this.calendarView.set(view);
+    localStorage.setItem('plantcare.calendarView', view);
+    this.selectedEntry.set(null);
+    this.load();
+  }
 
   selectEntry(entry: CalendarEntry): void { this.selectedEntry.set(entry); }
 
@@ -241,9 +295,7 @@ export class CalendarPage {
   }
 
   private load(): void {
-    const month = this.visibleMonth();
-    const from = new Date(month.getFullYear(), month.getMonth(), 1);
-    const to = new Date(month.getFullYear(), month.getMonth() + 1, 1);
+    const { from, to } = this.getVisibleRange();
     this.isLoading.set(true); this.errorMessage.set(null);
     const request = this.viewedShare()
       ? this.api.getSharedEntries(this.viewedShare()!.id, from, to)
@@ -284,12 +336,41 @@ export class CalendarPage {
     });
   }
 
-  private buildDays(month: Date, entries: CalendarEntry[]): CalendarDay[] {
-    const first = new Date(month.getFullYear(), month.getMonth(), 1);
-    const gridStart = new Date(first); gridStart.setDate(first.getDate() - first.getDay());
-    return Array.from({ length: 42 }, (_, index) => {
-      const date = new Date(gridStart); date.setDate(gridStart.getDate() + index);
-      return { date, isCurrentMonth: date.getMonth() === month.getMonth(), entries: entries.filter(entry => {
+  private getVisibleRange(): { from: Date; to: Date } {
+    const visible = this.visibleDate();
+    if (this.calendarView() === 'Week') {
+      const from = this.startOfWeek(visible);
+      const to = new Date(from); to.setDate(from.getDate() + 7);
+      return { from, to };
+    }
+
+    const monthStart = this.startOfMonth(visible);
+    if (this.calendarView() === 'Agenda')
+      return { from: monthStart, to: new Date(visible.getFullYear(), visible.getMonth() + 1, 1) };
+
+    const from = this.startOfWeek(monthStart);
+    const to = new Date(from); to.setDate(from.getDate() + 42);
+    return { from, to };
+  }
+
+  private buildMonthDays(month: Date, entries: CalendarEntry[]): CalendarDay[] {
+    return this.buildRangeDays(
+      this.startOfWeek(this.startOfMonth(month)),
+      42,
+      entries,
+      month.getMonth(),
+    );
+  }
+
+  private buildRangeDays(
+    start: Date,
+    count: number,
+    entries: CalendarEntry[],
+    currentMonth: number,
+  ): CalendarDay[] {
+    return Array.from({ length: count }, (_, index) => {
+      const date = new Date(start); date.setDate(start.getDate() + index);
+      return { date, isCurrentMonth: date.getMonth() === currentMonth, entries: entries.filter(entry => {
         const eventDate = new Date(entry.startsAtUtc);
         return eventDate.getFullYear() === date.getFullYear() && eventDate.getMonth() === date.getMonth() && eventDate.getDate() === date.getDate();
       }) };
@@ -297,4 +378,16 @@ export class CalendarPage {
   }
 
   private startOfMonth(date: Date): Date { return new Date(date.getFullYear(), date.getMonth(), 1); }
+
+  private startOfWeek(date: Date): Date {
+    const start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const daysSinceMonday = (start.getDay() + 6) % 7;
+    start.setDate(start.getDate() - daysSinceMonday);
+    return start;
+  }
+
+  private loadSavedView(): CalendarView {
+    const saved = localStorage.getItem('plantcare.calendarView');
+    return saved === 'Week' || saved === 'Agenda' ? saved : 'Month';
+  }
 }
