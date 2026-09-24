@@ -87,6 +87,9 @@ export class PlantDetailPage {
         Validators.maxLength(2000),
       ],
     }),
+    tags: new FormControl('', {
+      nonNullable: true,
+    }),
     wateringIntervalDays: new FormControl<number | null>(null, {
       validators: [
         Validators.required,
@@ -156,6 +159,7 @@ export class PlantDetailPage {
           formValue.acquiredOn || null,
         notes:
           formValue.notes.trim() || null,
+        tags: this.parseTags(formValue.tags),
         wateringIntervalDays:
           formValue.wateringIntervalDays,
         lastWateredAtUtc:
@@ -211,6 +215,14 @@ export class PlantDetailPage {
           );
         },
       });
+  }
+
+  private parseTags(value: string): string[] {
+    return [...new Set(
+      value.split(',')
+        .map((tag) => tag.trim())
+        .filter(Boolean),
+    )].slice(0, 10);
   }
 
   formatEnumName(value: string): string {

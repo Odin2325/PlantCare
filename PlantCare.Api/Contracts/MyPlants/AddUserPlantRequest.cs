@@ -19,6 +19,9 @@ public sealed class AddUserPlantRequest
     [MaxLength(UserPlant.NotesMaxLength)]
     public string? Notes { get; init; }
 
+    [MaxLength(UserPlant.MaximumTagCount)]
+    public IReadOnlyList<string>? Tags { get; init; }
+
     [Range(1, 3_650)]
     public int? WateringIntervalDays { get; init; }
 

@@ -13,6 +13,7 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
             .AsNoTracking()
             .Include(userPlant => userPlant.PlantSpecies)
             .Include(userPlant => userPlant.CareSchedules)
+            .Include(userPlant => userPlant.Tags)
             .Where(userPlant =>
                     userPlant.UserId == userId &&
                     userPlant.IsActive)
@@ -29,6 +30,7 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
             .AsNoTracking()
             .Include(userPlant => userPlant.PlantSpecies)
             .Include(userPlant => userPlant.CareSchedules)
+            .Include(userPlant => userPlant.Tags)
             .Where(userPlant =>
                 userPlant.UserId == userId &&
                 !userPlant.IsActive)
@@ -42,6 +44,7 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
             .AsNoTracking()
             .Include(userPlant => userPlant.PlantSpecies)
             .Include(userPlant => userPlant.CareSchedules)
+            .Include(userPlant => userPlant.Tags)
             .FirstOrDefaultAsync(userPlant =>
                     userPlant.Id == id &&
                     userPlant.UserId == userId, cancellationToken);
@@ -76,6 +79,7 @@ internal sealed class UserPlantRepository(PlantCareDbContext dbContext) : IUserP
         return await dbContext.UserPlants
             .Include(userPlant => userPlant.PlantSpecies)
             .Include(userPlant => userPlant.CareSchedules)
+            .Include(userPlant => userPlant.Tags)
             .FirstOrDefaultAsync(
                 userPlant => userPlant.Id == id && userPlant.UserId == userId,
                 cancellationToken);

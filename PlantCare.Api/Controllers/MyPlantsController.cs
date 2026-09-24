@@ -263,6 +263,7 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
             Location: request.Location,
             AcquiredOn: request.AcquiredOn,
             Notes: request.Notes,
+            Tags: request.Tags,
             WateringIntervalDays:
                 request.WateringIntervalDays,
             LastWateredAtUtc:
@@ -445,7 +446,8 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
             Nickname: request.Nickname,
             Location: request.Location,
             AcquiredOn: request.AcquiredOn,
-            Notes: request.Notes);
+            Notes: request.Notes,
+            Tags: request.Tags);
 
         var updated = await userPlantService.UpdateAsync(id, userId, command, cancellationToken);
 

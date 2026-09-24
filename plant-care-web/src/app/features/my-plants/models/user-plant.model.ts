@@ -64,6 +64,7 @@ export interface UserPlant {
   location: string | null;
   acquiredOn: string | null;
   notes: string | null;
+  tags: string[];
   isActive: boolean;
   createdAtUtc: string;
   defaultWateringIntervalDays: number;
@@ -78,6 +79,7 @@ export interface AddUserPlantRequest {
   location: string | null;
   acquiredOn: string | null;
   notes: string | null;
+  tags: string[];
   wateringIntervalDays: number | null;
   lastWateredAtUtc: string | null;
   fertilizingIntervalDays: number | null;
@@ -89,4 +91,5 @@ export interface UpdateUserPlantRequest {
   location: string | null;
   acquiredOn: string | null;
   notes: string | null;
+  tags: string[];
 }

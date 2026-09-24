@@ -11,6 +11,7 @@ public sealed record UserPlantDto(
     string? Location,
     DateOnly? AcquiredOn,
     string? Notes,
+    IReadOnlyList<string> Tags,
     bool IsActive,
     DateTimeOffset CreatedAtUtc,
     int DefaultWateringIntervalDays,

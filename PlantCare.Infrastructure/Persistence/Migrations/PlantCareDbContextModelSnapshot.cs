@@ -466,6 +466,27 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("UserPlants", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.UserPlantTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<Guid>("UserPlantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserPlantId", "Name")
+                        .IsUnique();
+
+                    b.ToTable("UserPlantTags", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -684,9 +705,20 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Navigation("PlantSpecies");
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.UserPlantTag", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.UserPlant", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("UserPlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.UserPlant", b =>
                 {
                     b.Navigation("CareSchedules");
+
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

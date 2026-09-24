@@ -16,4 +16,7 @@ public sealed class UpdateUserPlantRequest
 
     [MaxLength(UserPlant.NotesMaxLength)]
     public string? Notes { get; init; }
+
+    [MaxLength(UserPlant.MaximumTagCount)]
+    public IReadOnlyList<string>? Tags { get; init; }
 }

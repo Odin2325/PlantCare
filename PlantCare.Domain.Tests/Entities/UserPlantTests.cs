@@ -117,6 +117,34 @@ public sealed class UserPlantTests
     }
 
     [Fact]
+    public void ReplaceTags_NormalizesAndDeduplicatesTags()
+    {
+        var userPlant = UserPlant.Create(
+            Guid.NewGuid(), Guid.NewGuid(), "Fern", null, null, null,
+            DateTimeOffset.UtcNow);
+
+        userPlant.ReplaceTags([" tropical ", "Favorite", "TROPICAL"]);
+
+        Assert.Equal(2, userPlant.Tags.Count);
+        Assert.Contains(userPlant.Tags, tag => tag.Name == "tropical");
+        Assert.Contains(userPlant.Tags, tag => tag.Name == "Favorite");
+    }
+
+    [Fact]
+    public void ReplaceTags_WithTooManyTags_ThrowsException()
+    {
+        var userPlant = UserPlant.Create(
+            Guid.NewGuid(), Guid.NewGuid(), "Fern", null, null, null,
+            DateTimeOffset.UtcNow);
+
+        var action = () => userPlant.ReplaceTags(
+            Enumerable.Range(1, UserPlant.MaximumTagCount + 1)
+                .Select(index => $"tag-{index}"));
+
+        Assert.Throws<ArgumentException>(action);
+    }
+
+    [Fact]
     public void AddCareSchedule_SetsInitialDueDateFromStartDate()
     {
         var startsAt = new DateTimeOffset(
