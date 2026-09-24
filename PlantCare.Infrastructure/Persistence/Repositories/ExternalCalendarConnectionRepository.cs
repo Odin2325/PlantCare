@@ -33,6 +33,25 @@ internal sealed class ExternalCalendarConnectionRepository(
             .Where(calendarEvent => calendarEvent.ConnectionId == connectionId)
             .ToListAsync(cancellationToken);
 
+    public async Task<IReadOnlyList<ExternalCalendarConnection>> GetDueForSyncAsync(
+        IReadOnlyCollection<string> providers,
+        DateTimeOffset syncedBeforeUtc,
+        int batchSize,
+        CancellationToken cancellationToken = default)
+    {
+        var providerList = providers.ToArray();
+        return await dbContext.ExternalCalendarConnections
+            .AsNoTracking()
+            .Where(connection =>
+                providerList.Contains(connection.Provider) &&
+                (connection.LastSyncedAtUtc == null ||
+                 connection.LastSyncedAtUtc <= syncedBeforeUtc))
+            .OrderBy(connection => connection.LastSyncedAtUtc)
+            .ThenBy(connection => connection.CreatedAtUtc)
+            .Take(batchSize)
+            .ToListAsync(cancellationToken);
+    }
+
     public void Add(ExternalCalendarConnection connection) =>
         dbContext.ExternalCalendarConnections.Add(connection);
 

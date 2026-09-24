@@ -128,3 +128,27 @@ Entra policies may still require approval from that organization's own admin.
 Synchronization is one-way. PlantCare records which Microsoft events it
 created, updates those events on later synchronizations, and does not modify
 unrelated calendar events.
+
+## Automatic external-calendar synchronization
+
+The worker automatically synchronizes connected Google and Microsoft calendars.
+By default, it checks every 15 minutes and synchronizes each connection at most
+once every six hours, processing 25 connections per pass. Configure these values
+in `.env` when needed:
+
+```dotenv
+EXTERNAL_CALENDAR_SYNC_ENABLED=true
+EXTERNAL_CALENDAR_SYNC_POLL_MINUTES=15
+EXTERNAL_CALENDAR_SYNC_INTERVAL_HOURS=6
+EXTERNAL_CALENDAR_SYNC_BATCH_SIZE=25
+```
+
+The API and worker must use the same data-protection key ring because calendar
+tokens are encrypted. Docker Compose mounts the shared
+`plantcare_data-protection-keys` volume and supplies the same provider settings
+to both services automatically. Back up this volume together with the database.
+
+For local worker testing, configure the same Google or Microsoft settings in
+both the API and worker user-secrets stores, and give both processes the same
+absolute `DataProtection:KeysPath`. Manual synchronization remains available
+from the calendar page at any time.

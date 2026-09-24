@@ -16,6 +16,12 @@ public interface IExternalCalendarConnectionRepository
         Guid connectionId,
         CancellationToken cancellationToken = default);
 
+    Task<IReadOnlyList<ExternalCalendarConnection>> GetDueForSyncAsync(
+        IReadOnlyCollection<string> providers,
+        DateTimeOffset syncedBeforeUtc,
+        int batchSize,
+        CancellationToken cancellationToken = default);
+
     void Add(ExternalCalendarConnection connection);
     void Remove(ExternalCalendarConnection connection);
     void AddEvent(ExternalCalendarEvent calendarEvent);

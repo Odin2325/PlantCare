@@ -73,12 +73,28 @@ services:
       ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=sa;Password=${SQL_PASSWORD};Encrypt=True;TrustServerCertificate=True
       Notifications__PollIntervalSeconds: ${NOTIFICATION_POLL_SECONDS:-60}
       Notifications__BatchSize: ${NOTIFICATION_BATCH_SIZE:-100}
+      ExternalCalendarSync__Enabled: ${EXTERNAL_CALENDAR_SYNC_ENABLED:-true}
+      ExternalCalendarSync__PollIntervalMinutes: ${EXTERNAL_CALENDAR_SYNC_POLL_MINUTES:-15}
+      ExternalCalendarSync__SyncIntervalHours: ${EXTERNAL_CALENDAR_SYNC_INTERVAL_HOURS:-6}
+      ExternalCalendarSync__BatchSize: ${EXTERNAL_CALENDAR_SYNC_BATCH_SIZE:-25}
+      DataProtection__KeysPath: /var/lib/plantcare/keys
+      GoogleCalendar__Enabled: ${GOOGLE_CALENDAR_ENABLED:-false}
+      GoogleCalendar__ClientId: ${GOOGLE_CALENDAR_CLIENT_ID:-}
+      GoogleCalendar__ClientSecret: ${GOOGLE_CALENDAR_CLIENT_SECRET:-}
+      GoogleCalendar__CallbackUrl: https://${PLANTCARE_DOMAIN}/api/calendar/integrations/google/callback
+      MicrosoftCalendar__Enabled: ${MICROSOFT_CALENDAR_ENABLED:-false}
+      MicrosoftCalendar__ClientId: ${MICROSOFT_CALENDAR_CLIENT_ID:-}
+      MicrosoftCalendar__ClientSecret: ${MICROSOFT_CALENDAR_CLIENT_SECRET:-}
+      MicrosoftCalendar__CallbackUrl: https://${PLANTCARE_DOMAIN}/api/calendar/integrations/microsoft/callback
+      MicrosoftCalendar__Tenant: ${MICROSOFT_CALENDAR_TENANT:-common}
       WebPush__Subject: ${WEB_PUSH_SUBJECT}
       WebPush__PublicKey: ${WEB_PUSH_PUBLIC_KEY}
       WebPush__PrivateKey: ${WEB_PUSH_PRIVATE_KEY}
     depends_on:
       api:
         condition: service_healthy
+    volumes:
+      - data-protection-keys:/var/lib/plantcare/keys
     restart: unless-stopped
 
   proxy:
