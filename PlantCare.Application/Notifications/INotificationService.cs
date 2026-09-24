@@ -15,4 +15,13 @@ public interface INotificationService
         Guid notificationId,
         Guid userId,
         CancellationToken cancellationToken = default);
+
+    Task<NotificationPreferenceDto> GetPreferencesAsync(
+        Guid userId,
+        CancellationToken cancellationToken = default);
+
+    Task<NotificationPreferenceDto> UpdatePreferencesAsync(
+        Guid userId,
+        UpdateNotificationPreferenceCommand command,
+        CancellationToken cancellationToken = default);
 }

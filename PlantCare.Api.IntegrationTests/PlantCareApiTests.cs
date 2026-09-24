@@ -90,6 +90,63 @@ public sealed class PlantCareApiTests
     }
 
     [Fact]
+    public async Task NotificationPreferencesDefaultAndUpdatesAreUserSpecific()
+    {
+        var userId = Guid.NewGuid();
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+
+        using var defaultResponse = await client.GetAsync(
+            "/api/notifications/preferences");
+        defaultResponse.EnsureSuccessStatusCode();
+        using var defaultDocument = JsonDocument.Parse(
+            await defaultResponse.Content.ReadAsStringAsync());
+        Assert.True(defaultDocument.RootElement
+            .GetProperty("inAppEnabled").GetBoolean());
+        Assert.Equal(0, defaultDocument.RootElement
+            .GetProperty("reminderLeadTimeHours").GetInt32());
+
+        await client.AddAntiforgeryTokenAsync();
+        using var updateResponse = await client.PutAsJsonAsync(
+            "/api/notifications/preferences",
+            new
+            {
+                inAppEnabled = true,
+                pushEnabled = false,
+                wateringEnabled = true,
+                fertilizingEnabled = false,
+                mistingEnabled = true,
+                pruningEnabled = false,
+                repottingEnabled = true,
+                reminderLeadTimeHours = 48
+            });
+        updateResponse.EnsureSuccessStatusCode();
+
+        using var savedResponse = await client.GetAsync(
+            "/api/notifications/preferences");
+        savedResponse.EnsureSuccessStatusCode();
+        using var savedDocument = JsonDocument.Parse(
+            await savedResponse.Content.ReadAsStringAsync());
+        Assert.False(savedDocument.RootElement
+            .GetProperty("pushEnabled").GetBoolean());
+        Assert.False(savedDocument.RootElement
+            .GetProperty("fertilizingEnabled").GetBoolean());
+        Assert.Equal(48, savedDocument.RootElement
+            .GetProperty("reminderLeadTimeHours").GetInt32());
+
+        client.AuthenticateAs(Guid.NewGuid());
+        using var otherUserResponse = await client.GetAsync(
+            "/api/notifications/preferences");
+        otherUserResponse.EnsureSuccessStatusCode();
+        using var otherUserDocument = JsonDocument.Parse(
+            await otherUserResponse.Content.ReadAsStringAsync());
+        Assert.True(otherUserDocument.RootElement
+            .GetProperty("pushEnabled").GetBoolean());
+        Assert.Equal(0, otherUserDocument.RootElement
+            .GetProperty("reminderLeadTimeHours").GetInt32());
+    }
+
+    [Fact]
     public async Task UserCannotReadAnotherUsersPlant()
     {
         var ownerId = Guid.NewGuid();

@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { NotificationsApiService } from '../../data-access/notifications-api.service';
-import { CareNotification } from '../../models/notification.model';
+import { CareNotification, NotificationPreference } from '../../models/notification.model';
 import { SwPush } from '@angular/service-worker';
 import { firstValueFrom } from 'rxjs';
 
@@ -26,9 +26,41 @@ export class NotificationsPage {
   readonly pushEnabled = signal(false);
   readonly pushBusy = signal(false);
   readonly pushMessage = signal<string | null>(null);
+  readonly preferences = signal<NotificationPreference | null>(null);
+  readonly preferencesBusy = signal(false);
+  readonly preferencesMessage = signal<string | null>(null);
   private pushPublicKey = '';
 
-  constructor() { this.load(); this.loadPushStatus(); }
+  constructor() { this.load(); this.loadPushStatus(); this.loadPreferences(); }
+
+  setPreference(
+    key: Exclude<keyof NotificationPreference, 'reminderLeadTimeHours'>,
+    value: boolean,
+  ): void {
+    this.preferences.update(current => current ? { ...current, [key]: value } : current);
+  }
+
+  setLeadTime(value: number): void {
+    this.preferences.update(current => current ? { ...current, reminderLeadTimeHours: value } : current);
+  }
+
+  savePreferences(): void {
+    const preferences = this.preferences();
+    if (!preferences || this.preferencesBusy()) return;
+    this.preferencesBusy.set(true);
+    this.preferencesMessage.set(null);
+    this.api.updatePreferences(preferences).pipe(
+      finalize(() => this.preferencesBusy.set(false)),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
+      next: saved => {
+        this.preferences.set(saved);
+        this.preferencesMessage.set('Notification preferences saved.');
+        this.load();
+      },
+      error: () => this.preferencesMessage.set('Notification preferences could not be saved.'),
+    });
+  }
 
   markRead(notification: CareNotification): void {
     if (notification.readAtUtc) return;
@@ -81,6 +113,13 @@ export class NotificationsPage {
         if (this.swPush.isEnabled) this.pushEnabled.set((await firstValueFrom(this.swPush.subscription)) !== null);
       },
       error: () => this.pushMessage.set('Push notification settings could not be loaded.'),
+    });
+  }
+
+  private loadPreferences(): void {
+    this.api.getPreferences().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: preferences => this.preferences.set(preferences),
+      error: () => this.preferencesMessage.set('Notification preferences could not be loaded.'),
     });
   }
 }

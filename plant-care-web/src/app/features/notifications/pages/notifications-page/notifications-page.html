@@ -5,6 +5,45 @@
     <p>Reminders stay here until you are ready to review them.</p>
   </header>
 
+  @if (preferences(); as settings) {
+    <section class="preference-settings">
+      <div>
+        <h2>Reminder preferences</h2>
+        <p>Choose how and when PlantCare reminds you about upcoming care.</p>
+      </div>
+
+      <fieldset>
+        <legend>Delivery</legend>
+        <label><input type="checkbox" [checked]="settings.inAppEnabled" (change)="setPreference('inAppEnabled', $any($event.target).checked)"> Show reminders in PlantCare</label>
+        <label><input type="checkbox" [checked]="settings.pushEnabled" (change)="setPreference('pushEnabled', $any($event.target).checked)"> Send push reminders to enabled devices</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Care actions</legend>
+        <label><input type="checkbox" [checked]="settings.wateringEnabled" (change)="setPreference('wateringEnabled', $any($event.target).checked)"> Watering</label>
+        <label><input type="checkbox" [checked]="settings.fertilizingEnabled" (change)="setPreference('fertilizingEnabled', $any($event.target).checked)"> Fertilizing</label>
+        <label><input type="checkbox" [checked]="settings.mistingEnabled" (change)="setPreference('mistingEnabled', $any($event.target).checked)"> Misting</label>
+        <label><input type="checkbox" [checked]="settings.pruningEnabled" (change)="setPreference('pruningEnabled', $any($event.target).checked)"> Pruning</label>
+        <label><input type="checkbox" [checked]="settings.repottingEnabled" (change)="setPreference('repottingEnabled', $any($event.target).checked)"> Repotting</label>
+      </fieldset>
+
+      <label class="lead-time">Remind me
+        <select [value]="settings.reminderLeadTimeHours" (change)="setLeadTime(+$any($event.target).value)">
+          <option value="0">when care is due</option>
+          <option value="24">1 day beforehand</option>
+          <option value="48">2 days beforehand</option>
+          <option value="72">3 days beforehand</option>
+          <option value="168">7 days beforehand</option>
+        </select>
+      </label>
+
+      <button type="button" [disabled]="preferencesBusy()" (click)="savePreferences()">{{ preferencesBusy() ? 'Saving…' : 'Save preferences' }}</button>
+      @if (preferencesMessage()) { <p role="status">{{ preferencesMessage() }}</p> }
+    </section>
+  } @else if (preferencesMessage()) {
+    <p class="error" role="alert">{{ preferencesMessage() }}</p>
+  }
+
   <section class="push-settings">
     <div><h2>Push reminders</h2><p>Receive care reminders on this device, even when PlantCare is closed.</p></div>
     @if (pushAvailable()) {
@@ -24,7 +63,7 @@
     <ul>
       @for (notification of notifications(); track notification.id) {
         <li [class.unread]="!notification.readAtUtc">
-          <div><strong>{{ notification.plantName }}</strong><p>{{ notification.actionType }} was due {{ notification.dueAtUtc | date:'medium' }}.</p></div>
+          <div><strong>{{ notification.plantName }}</strong><p>{{ notification.actionType }} is due {{ notification.dueAtUtc | date:'medium' }}.</p></div>
           @if (!notification.readAtUtc) { <button type="button" (click)="markRead(notification)">Mark as read</button> }
         </li>
       }
