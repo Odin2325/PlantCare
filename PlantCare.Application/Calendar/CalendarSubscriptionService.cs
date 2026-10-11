@@ -46,7 +46,9 @@ internal sealed class CalendarSubscriptionService(
         var subscription = await repository.GetActiveByTokenHashAsync(HashToken(token), cancellationToken);
         if (subscription is null) return null;
         var now = timeProvider.GetUtcNow();
-        var entries = await calendarService.GetEntriesAsync(subscription.UserId, now.AddDays(-30), now.AddDays(365), cancellationToken);
+        // Include recent history and upcoming care within CalendarService's
+        // maximum range. The previous -30/+365 window always exceeded its limit.
+        var entries = await calendarService.GetEntriesAsync(subscription.UserId, now.AddDays(-30), now.AddDays(335), cancellationToken);
         return BuildCalendar(entries, now);
     }
 

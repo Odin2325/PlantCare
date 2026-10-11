@@ -30,6 +30,8 @@ Push and external calendars are deliberately unconfigured in the generated local
 environment and remain unverified. The extended option provisions a synthetic
 administrator and demo catalog, then executes the core care journey. See
 [bootstrap.md](bootstrap.md) for production setup and SSMS access at `localhost,14330`.
+Run `./scripts/Test-LocalAccountIsolation.ps1` for real-cookie cross-account checks
+against the same SQL Server stack; see [account-isolation.md](account-isolation.md).
 
 To stop the local stack and preserve its data:
 

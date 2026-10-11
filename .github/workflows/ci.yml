@@ -67,6 +67,7 @@ jobs:
   container:
     name: Production container
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs:
       - backend
       - frontend
@@ -82,3 +83,20 @@ jobs:
         run: |
           docker build --target worker --tag plantcare-worker:ci .
           docker run --rm --entrypoint dotnet plantcare-worker:ci --list-runtimes | grep -q '^Microsoft.AspNetCore.App '
+
+      - name: Test real-cookie account isolation on SQL Server
+        shell: pwsh
+        run: |
+          docker tag plantcare:ci plantcare-local-api
+          if ($LASTEXITCODE -ne 0) { throw 'API image tagging failed.' }
+          docker tag plantcare-worker:ci plantcare-local-worker
+          if ($LASTEXITCODE -ne 0) { throw 'Worker image tagging failed.' }
+          ./scripts/Start-LocalDeployment.ps1 -SkipBuild
+          ./scripts/Test-LocalAccountIsolation.ps1
+
+      - name: Remove isolated CI database and containers
+        if: always()
+        run: |
+          if [ -f .env.local ]; then
+            docker compose --env-file .env.local -f compose.yaml -f compose.local.yaml --project-name plantcare-local down --volumes
+          fi

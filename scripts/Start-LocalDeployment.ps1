@@ -1,6 +1,6 @@
 # Requires Docker Desktop running Linux containers and PowerShell 7.
 [CmdletBinding()]
-param()
+param([switch]$SkipBuild)
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
 Push-Location $repoRoot
@@ -32,7 +32,10 @@ try {
             'EXTERNAL_CALENDAR_SYNC_ENABLED=false'
         ) | Set-Content -LiteralPath '.env.local'
     }
-    & docker compose --env-file .env.local -f compose.yaml -f compose.local.yaml --project-name plantcare-local up --build -d --wait --wait-timeout 300
+    $composeArguments = @('compose', '--env-file', '.env.local', '-f', 'compose.yaml', '-f', 'compose.local.yaml', '--project-name', 'plantcare-local', 'up')
+    $composeArguments += if ($SkipBuild) { '--no-build' } else { '--build' }
+    $composeArguments += @('-d', '--wait', '--wait-timeout', '300')
+    & docker @composeArguments
     if ($LASTEXITCODE -ne 0) { throw 'Local deployment failed. Inspect Compose service logs.' }
     Write-Output 'Local app: https://localhost:8443; captured email: http://localhost:8025'
     Write-Output 'Run scripts/Test-LocalDeployment.ps1 next; running state alone does not verify worker processing.'

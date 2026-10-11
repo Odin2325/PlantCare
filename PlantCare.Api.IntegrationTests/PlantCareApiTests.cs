@@ -929,6 +929,53 @@ public sealed class PlantCareApiTests
                 .GetDateTimeOffset());
     }
 
+    [Fact]
+    public async Task CalendarFeedDownloadsOnlyOwnerEntriesAndRevokesTokens()
+    {
+        var ownerId = await factory.CreateUserAsync();
+        var otherId = await factory.CreateUserAsync();
+        var (_, ownerPlant) = await SeedPlantAsync(ownerId);
+        var (_, otherPlant) = await SeedPlantAsync(otherId);
+        using var owner = CreateClient();
+        owner.AuthenticateAs(ownerId);
+        await owner.AddAntiforgeryTokenAsync();
+        using var other = CreateClient();
+        other.AuthenticateAs(otherId);
+        await other.AddAntiforgeryTokenAsync();
+        using var anonymous = CreateClient();
+
+        static async Task<string> CreateFeedAsync(HttpClient client)
+        {
+            using var response = await client.PostAsync("/api/calendar/subscription", null);
+            response.EnsureSuccessStatusCode();
+            using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+            return new Uri(document.RootElement.GetProperty("subscriptionUrl").GetString()!).PathAndQuery;
+        }
+
+        var originalPath = await CreateFeedAsync(owner);
+        var otherPath = await CreateFeedAsync(other);
+        using var download = await anonymous.GetAsync(originalPath);
+        download.EnsureSuccessStatusCode();
+        Assert.Equal("text/calendar", download.Content.Headers.ContentType?.MediaType);
+        Assert.True(download.Headers.CacheControl?.NoStore);
+        var calendar = await download.Content.ReadAsStringAsync();
+        Assert.Contains("BEGIN:VCALENDAR", calendar);
+        Assert.Contains(ownerPlant.CareSchedules.Single().Id.ToString("N"), calendar);
+        Assert.DoesNotContain(otherPlant.CareSchedules.Single().Id.ToString("N"), calendar);
+
+        var replacementPath = await CreateFeedAsync(owner);
+        using var oldDownload = await anonymous.GetAsync(originalPath);
+        Assert.Equal(HttpStatusCode.NotFound, oldDownload.StatusCode);
+        using var replacementDownload = await anonymous.GetAsync(replacementPath);
+        replacementDownload.EnsureSuccessStatusCode();
+        using var revoke = await owner.DeleteAsync("/api/calendar/subscription");
+        Assert.Equal(HttpStatusCode.NoContent, revoke.StatusCode);
+        using var revokedDownload = await anonymous.GetAsync(replacementPath);
+        Assert.Equal(HttpStatusCode.NotFound, revokedDownload.StatusCode);
+        using var unaffectedDownload = await anonymous.GetAsync(otherPath);
+        unaffectedDownload.EnsureSuccessStatusCode();
+    }
+
     private async Task<(PlantSpecies PlantSpecies, UserPlant UserPlant)>
         SeedPlantAsync(Guid userId)
     {

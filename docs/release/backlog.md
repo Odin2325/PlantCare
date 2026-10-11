@@ -24,6 +24,34 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### SQL Server account-isolation follow-up (2026-10-11)
+
+- `Test-LocalAccountIsolation.ps1` passes against `369187f` plus isolation/feed
+  changes using three confirmed ordinary users, real cookies/antiforgery, HTTPS,
+  Mailpit, and Docker SQL Server. Windows SQL Server remains untouched.
+- Bidirectional checks cover account identity and scoped collection/dashboard/
+  calendar/notification lists; plant/tags, schedule, completion, history,
+  mixed plant/event IDs, archive/restore, notification read state, preference
+  ownership, and push subscription takeover/deletion. Rejected requests leave
+  owner state intact. All accounts are denied administrator catalog writes.
+- Calendar shares admit the explicit recipient, deny an unrelated observer,
+  preserve private plant isolation, and stop working after owner revocation.
+  Bearer feed downloads contain only their owner's data; rotation/revocation
+  invalidate old URLs without revoking another account's feed.
+- Found/fixed valid calendar feeds returning 400: their -30/+365-day window
+  exceeded CalendarService's 366-day limit. The window now spans 30 days of
+  history and 335 days ahead. A regression test verifies download, content scope,
+  no-store caching, rotation, revocation, and another feed's continued access.
+- API integration tests pass 33/33. Added the same real-cookie SQL isolation
+  script to production-container CI, with disposable SQL data and cleanup.
+  CI-01 remains open for browser coverage and required merge checks.
+- The harness respects the existing authentication rate limit with bounded
+  waits; no production rate limit was relaxed. Synthetic accounts/archived plants
+  remain locally; successful runs revoke shares/feeds and remove test push data.
+- See [account-isolation.md](account-isolation.md). Real Google/Microsoft
+  credential isolation, real browser push, concurrency, and browser acceptance
+  remain unverified, so the broader acceptance gates remain unchecked.
+
 ### SQLite dependency follow-up (2026-10-11)
 
 - DEP-01 resolved on `48c543a` plus dependency changes. The affected chain was
