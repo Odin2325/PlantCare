@@ -96,6 +96,7 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 | Check | Candidate SHA | Environment/date | Tester | Result | Evidence/defect |
 | --- | --- | --- | --- | --- | --- |
 | Full staging acceptance | pending | No staging host as of 2026-10-11 | pending | NOT RUN | See backlog STAGE-01 |
+| Local database/key-ring recovery and restart | afed937 plus recovery tooling | Docker SQL Server, 2026-10-11 | Codex | PASS | recovery.md; isolated restore/CHECKDB, table/key comparisons, existing cookie/history, worker and restart deduplication; real providers NOT RUN |
 | Bootstrap and core care via real HTTP | b099ddc plus bootstrap changes | Docker SQL Server, 2026-10-11 | Codex | PASS | scripts/Test-LocalDeployment.ps1 -IncludeCareJourney; see bootstrap.md |
 | Bootstrap/API suite | b099ddc plus bootstrap changes | Windows / .NET 10, 2026-10-11 | Codex | PASS | 31/31 API integration tests |
 | Local HTTPS and real-auth smoke | Baseline plus local release fixes | Docker Desktop / SQL Server, 2026-10-11 | Codex | PASS | scripts/Test-LocalDeployment.ps1; registration, confirmation email, login/account/logout |

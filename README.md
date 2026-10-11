@@ -10,6 +10,8 @@ The [release backlog](docs/release/backlog.md) records current blockers and
 the local verification results from 11 October 2026.
 Use the [administrator and catalog bootstrap guide](docs/release/bootstrap.md)
 for first setup, extended care-journey checks, and SSMS connection details.
+Use the [recovery runbook](docs/release/recovery.md) to test database backups,
+key-ring restoration, and worker recovery in isolated Docker stacks.
 
 ## Production deployment
 

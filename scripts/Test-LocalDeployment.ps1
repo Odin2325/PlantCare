@@ -1,9 +1,10 @@
 # Requires PowerShell 7 and the compose.local.yaml stack. Creates one synthetic
 # account per run; confirmation/reset links and passwords are never printed.
 [CmdletBinding()]
-param([switch]$IncludeCareJourney)
+param([switch]$IncludeCareJourney, [switch]$IncludeRecovery)
 
 $ErrorActionPreference = 'Stop'
+if ($IncludeRecovery -and -not $IncludeCareJourney) { throw '-IncludeRecovery requires -IncludeCareJourney.' }
 $baseUrl = 'https://localhost:8443'
 $mailUrl = 'http://localhost:8025'
 $session = [Microsoft.PowerShell.Commands.WebRequestSession]::new()
@@ -128,6 +129,9 @@ if ($IncludeCareJourney) {
     if (-not ($calendar | Where-Object { $_.userPlantId -eq $plant.id -and $_.kind -eq 'Completed' }) -or
         -not ($calendar | Where-Object { $_.userPlantId -eq $plant.id -and $_.kind -eq 'Scheduled' })) {
         throw 'Calendar did not include completed and scheduled care.'
+    }
+    if ($IncludeRecovery) {
+        & (Join-Path $PSScriptRoot 'Invoke-LocalRecoveryDrill.ps1') -Session $session -PlantId $plant.id -EventId $completion.event.id -SpeciesId $species[0].id -Email $email
     }
     $null = Invoke-LocalRequest $plantPath 'DELETE' -Expected 204
     $null = Invoke-LocalRequest "$plantPath/care/Watering/complete" 'POST' @{ completedAtUtc = $completedAt.ToString('O') } -Expected 404

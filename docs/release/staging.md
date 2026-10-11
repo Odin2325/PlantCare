@@ -124,8 +124,10 @@ Allow database/API readiness to recover before repeating the journey. Review
 logs for worker recovery. Run upgrades against preserved staging data, not only
 empty databases. Before an upgrade, take a consistent SQL Server backup plus a
 matching protected copy of the key ring. Restore them into another isolated
-environment and verify recovery. Exact backup/restore commands and retention
-must be supplied and tested under DATA-01 before acceptance.
+environment and verify recovery. The [recovery runbook](recovery.md) supplies an
+executable local SQL/key-ring restore drill and proposed retention. An off-host
+destination, scheduler, alerts, and public-staging recovery evidence remain
+required under DATA-01/OPS-01.
 
 Startup migrations can make an older application incompatible with the new
 schema. Record a schema-compatible rollback or tested database recovery path

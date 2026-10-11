@@ -24,6 +24,27 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Backup and recovery follow-up (2026-10-11)
+
+- DATA-01 local recovery drill passes on `afed937` plus recovery tooling:
+  `Test-LocalDeployment.ps1 -IncludeCareJourney -IncludeRecovery`.
+- Source SQL/API/worker restart preserved an existing real login and care history.
+  The worker created a new overdue reminder and did not duplicate it after restart.
+- Took a SQL `COPY_ONLY` backup with checksums and matching data-protection keys;
+  restored into a fresh isolated Docker project. `DBCC CHECKDB`, every user-table
+  row count/aggregate checksum, and individual key SHA-256 hashes matched.
+- Restored HTTP account/history access worked with the existing cookie without
+  logging in again. The restored worker also generated a new reminder without
+  duplication across restart. Full auth/core-care smoke completed successfully.
+- Private evidence is retained in ignored `recovery-artifacts/a964abebc96a/`;
+  temporary restore containers/volumes were removed. Windows SQL was untouched.
+- Added image-availability preflight after encountering a running worker whose
+  old image had been removed locally; recreated it from the current built image.
+- [recovery.md](recovery.md) documents execution, cleanup, proposed retention,
+  and rollback. Off-host encrypted storage, scheduled jobs/alerts, public staging,
+  measured recovery targets, and real-provider credential recovery remain open;
+  DATA-01/OPS-01 are not fully accepted.
+
 ### Bootstrap and core-care follow-up (2026-10-11)
 
 - BOOT-01 implementation complete: explicit offline `--bootstrap-admin` promotes

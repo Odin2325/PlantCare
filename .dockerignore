@@ -9,5 +9,6 @@ plant-care-web/.angular
 plant-care-web/dist
 .env
 .env.local
+recovery-artifacts
 *.user
 *.suo
