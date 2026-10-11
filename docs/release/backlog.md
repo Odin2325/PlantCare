@@ -11,7 +11,7 @@ release unless the related optional feature is disabled.
 | TEST-01 | P0 | Repair API integration test provider replacement | All 26 existing API tests execute and pass. Test setup removes the production provider configuration before registering SQLite; SQL Server remains the production provider. |
 | ENV-01 | P0 | Restore a usable frontend toolchain | Installed Node satisfies the locked Angular CLI requirement; pinned pnpm installs with a frozen lockfile; frontend tests and production build pass. |
 | STAGE-01 | P0 | Establish an isolated staging environment | Dedicated Linux host/domain, Docker Compose, staging-only SMTP/VAPID credentials, and empty isolated volumes are available; follow staging.md and attach results. |
-| DEP-01 | P1 | Triage SQLite test dependency advisory | Investigate NuGet NU1903 for SQLitePCLRaw.lib.e_sqlite3 2.1.11 / GHSA-2m69-gcr7-jv3q; upgrade the compatible dependency chain and rerun tests, or document a justified disposition. This finding is in the integration-test dependency graph; production exposure has not been established. |
+| DEP-01 | P1, resolved locally 2026-10-11 | Fix SQLite test dependency advisory | SQLitePCLRaw bundle/native library updated from 2.1.11 to 2.1.13; audit reports no known vulnerable test dependencies; native SQLite security baseline and all backend tests pass. See dependency follow-up below. |
 | BOOT-01 | P1 | Define production administrator/catalog bootstrap | Fresh staging can obtain an administrator and initial species through a documented controlled procedure; no public development-mode bootstrap. |
 | CARE-01 | P1 | Decide same-day weekday scheduling behavior | A selected weekday with a preferred time later today has a documented expected result and a regression test. Current loop starts at tomorrow. |
 | PUSH-01 | P1 | Validate and harden partial push failures | Multiple subscriptions, expired endpoints, repeated failures, and restarts do not cause uncontrolled resends or block the pending queue indefinitely. |
@@ -23,6 +23,29 @@ release unless the related optional feature is disabled.
 | RELEASE-01 | P1 | Prepare v1 distribution and user documentation | Version/tag/artifacts, release notes, support/privacy information, license decision, and known limitations are complete. |
 
 ## Local checks performed
+
+### SQLite dependency follow-up (2026-10-11)
+
+- DEP-01 resolved on `48c543a` plus dependency changes. The affected chain was
+  `Microsoft.EntityFrameworkCore.Sqlite 10.0.10` ->
+  `SQLitePCLRaw.bundle_e_sqlite3 2.1.11` -> native library 2.1.11.
+  A direct test-project reference to bundle 2.1.13 upgrades the bundle, provider,
+  core, and native library together without changing EF or production SQL Server.
+- [GHSA-2m69-gcr7-jv3q](https://github.com/advisories/GHSA-2m69-gcr7-jv3q)
+  affects the old native package and identifies SQLite 3.50.2 as the patched
+  baseline. The new runtime test queries `sqlite_version()` through a real
+  connection and rejects engines below that baseline.
+- NuGet restore completes without NU1903. Explicit transitive auditing is enabled
+  for the integration-test project; high/critical audit warnings NU1903/NU1904
+  now fail restore, including the existing backend CI restore step. No advisory
+  suppression was added.
+- `dotnet list PlantCare.Api.IntegrationTests/PlantCare.Api.IntegrationTests.csproj
+  package --vulnerable --include-transitive --no-restore` reports no vulnerable
+  packages against current sources. `dotnet nuget why` confirms native 2.1.13.
+- Release tests pass: API integration 32/32, domain 31/31, application 1/1.
+  The existing CalendarShareService nullable warning CS8602 remains separate.
+  This audit result is time-specific, not a claim that all dependencies are free
+  of undiscovered vulnerabilities.
 
 ### Backup and recovery follow-up (2026-10-11)
 
