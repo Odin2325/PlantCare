@@ -17,6 +17,8 @@ internal sealed class SmtpIdentityEmailSender(
 {
     private readonly EmailOptions options = options.Value;
 
+    // Identity supplies HTML-encoded links; its IEmailSender contract forbids
+    // double encoding. The reset-code URL built below still needs encoding.
     public Task SendConfirmationLinkAsync(
         ApplicationUser user,
         string email,
@@ -25,7 +27,7 @@ internal sealed class SmtpIdentityEmailSender(
             email,
             "Confirm your PlantCare account",
             $"Confirm your email address by opening " +
-            $"<a href=\"{HtmlEncoder.Default.Encode(confirmationLink)}\">this secure link</a>.",
+            $"<a href=\"{confirmationLink}\">this secure link</a>.",
             confirmationLink);
 
     public Task SendPasswordResetLinkAsync(
@@ -36,7 +38,7 @@ internal sealed class SmtpIdentityEmailSender(
             email,
             "Reset your PlantCare password",
             $"Reset your password by opening " +
-            $"<a href=\"{HtmlEncoder.Default.Encode(resetLink)}\">this secure link</a>.",
+            $"<a href=\"{resetLink}\">this secure link</a>.",
             resetLink);
 
     public Task SendPasswordResetCodeAsync(

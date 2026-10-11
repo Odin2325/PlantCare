@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using PlantCare.Api.IntegrationTests.Infrastructure;
 using PlantCare.Domain.Entities;
 using PlantCare.Domain.Enums;
@@ -18,6 +19,21 @@ public sealed class PlantCareApiTests
 
     public async Task DisposeAsync() =>
         await factory.DisposeAsync();
+
+    [Fact]
+    public async Task RecentDeploymentMigrationsAreDiscoverable()
+    {
+        await factory.SeedAsync(dbContext =>
+        {
+            var migrations = dbContext.Database.GetMigrations().ToHashSet();
+            Assert.Contains("20260920190000_AddExternalCalendarConnections", migrations);
+            Assert.Contains("20260924090000_AddMicrosoftCalendarSync", migrations);
+            Assert.Contains("20260924100000_AddNotificationPreferences", migrations);
+            Assert.Contains("20260924110000_AddFlexibleCareSchedules", migrations);
+            Assert.Contains("20260924120000_AddUserPlantTags", migrations);
+            return Task.CompletedTask;
+        });
+    }
 
     [Fact]
     public async Task HealthEndpointsDistinguishLivenessAndReadiness()
@@ -57,7 +73,7 @@ public sealed class PlantCareApiTests
     public async Task GoogleCalendarStatusReportsDisabledConfiguration()
     {
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
 
         using var response = await client.GetAsync(
             "/api/calendar/integrations/google/status");
@@ -75,7 +91,7 @@ public sealed class PlantCareApiTests
     public async Task MicrosoftCalendarStatusReportsDisabledConfiguration()
     {
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
 
         using var response = await client.GetAsync(
             "/api/calendar/integrations/microsoft/status");
@@ -92,7 +108,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task NotificationPreferencesDefaultAndUpdatesAreUserSpecific()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         using var client = CreateClient();
         client.AuthenticateAs(userId);
 
@@ -134,7 +150,7 @@ public sealed class PlantCareApiTests
         Assert.Equal(48, savedDocument.RootElement
             .GetProperty("reminderLeadTimeHours").GetInt32());
 
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
         using var otherUserResponse = await client.GetAsync(
             "/api/notifications/preferences");
         otherUserResponse.EnsureSuccessStatusCode();
@@ -149,8 +165,8 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UserCannotReadAnotherUsersPlant()
     {
-        var ownerId = Guid.NewGuid();
-        var otherUserId = Guid.NewGuid();
+        var ownerId = await factory.CreateUserAsync();
+        var otherUserId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(ownerId);
         using var client = CreateClient();
         client.AuthenticateAs(otherUserId);
@@ -164,8 +180,8 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UserCannotModifyAnotherUsersPlant()
     {
-        var ownerId = Guid.NewGuid();
-        var otherUserId = Guid.NewGuid();
+        var ownerId = await factory.CreateUserAsync();
+        var otherUserId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(ownerId);
         using var client = CreateClient();
         client.AuthenticateAs(otherUserId);
@@ -207,9 +223,9 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UpdatingSpeciesPersistsTheChanges()
     {
-        var (plantSpecies, _) = await SeedPlantAsync(Guid.NewGuid());
+        var (plantSpecies, _) = await SeedPlantAsync(await factory.CreateUserAsync());
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid(), "Admin");
+        client.AuthenticateAs(await factory.CreateUserAsync(), "Admin");
         await client.AddAntiforgeryTokenAsync();
 
         using var updateResponse = await client.PutAsJsonAsync(
@@ -234,9 +250,9 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UnsafeCookieRequestWithoutAntiforgeryTokenIsRejected()
     {
-        var (plantSpecies, _) = await SeedPlantAsync(Guid.NewGuid());
+        var (plantSpecies, _) = await SeedPlantAsync(await factory.CreateUserAsync());
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid(), "Admin");
+        client.AuthenticateAs(await factory.CreateUserAsync(), "Admin");
 
         using var response = await client.PutAsJsonAsync(
             $"/api/plant-species/{plantSpecies.Id}",
@@ -264,7 +280,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task ArchivedPlantIsHiddenAndCannotReceiveCare()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);
@@ -302,7 +318,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task OwnerCanViewAndRestoreArchivedPlant()
     {
-        var ownerId = Guid.NewGuid();
+        var ownerId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(ownerId);
         using var client = CreateClient();
         client.AuthenticateAs(ownerId);
@@ -314,7 +330,8 @@ public sealed class PlantCareApiTests
             HttpStatusCode.NoContent,
             archiveResponse.StatusCode);
 
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
+        await client.AddAntiforgeryTokenAsync();
         using var otherUsersArchivedResponse = await client.GetAsync(
             "/api/my-plants/archived");
         otherUsersArchivedResponse.EnsureSuccessStatusCode();
@@ -332,6 +349,7 @@ public sealed class PlantCareApiTests
             unauthorizedRestoreResponse.StatusCode);
 
         client.AuthenticateAs(ownerId);
+        await client.AddAntiforgeryTokenAsync();
         using var archivedResponse = await client.GetAsync(
             "/api/my-plants/archived");
         archivedResponse.EnsureSuccessStatusCode();
@@ -370,7 +388,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task CompletingCareCreatesHistoryAndAdvancesSchedule()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         var completedAtUtc = PlantCareApiFactory.UtcNow.AddDays(-1);
         using var client = CreateClient();
@@ -412,7 +430,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task FutureCareCompletionIsRejectedWithoutCreatingHistory()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);
@@ -442,7 +460,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task OutOfOrderCareCompletionIsRejected()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);
@@ -486,9 +504,9 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task DeletingSpeciesInUseReturnsConflict()
     {
-        var (plantSpecies, _) = await SeedPlantAsync(Guid.NewGuid());
+        var (plantSpecies, _) = await SeedPlantAsync(await factory.CreateUserAsync());
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid(), "Admin");
+        client.AuthenticateAs(await factory.CreateUserAsync(), "Admin");
         await client.AddAntiforgeryTokenAsync();
 
         using var deleteResponse = await client.DeleteAsync(
@@ -507,7 +525,7 @@ public sealed class PlantCareApiTests
     public async Task AddingPlantUsesCustomInitialCareSchedules()
     {
         var plantSpecies = await SeedSpeciesAsync();
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var lastWateredAt = PlantCareApiFactory.UtcNow.AddDays(-2);
         var lastFertilizedAt = PlantCareApiFactory.UtcNow.AddDays(-5);
         using var client = CreateClient();
@@ -562,7 +580,7 @@ public sealed class PlantCareApiTests
     {
         var plantSpecies = await SeedSpeciesAsync();
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
         await client.AddAntiforgeryTokenAsync();
 
         using var response = await client.PostAsJsonAsync(
@@ -586,7 +604,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task OwnerCanEditPauseAndResumeCareSchedule()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);
@@ -649,10 +667,10 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UserCannotUpdateAnotherUsersCareSchedule()
     {
-        var ownerId = Guid.NewGuid();
+        var ownerId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(ownerId);
         using var client = CreateClient();
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
         await client.AddAntiforgeryTokenAsync();
 
         using var response = await client.PutAsJsonAsync(
@@ -669,7 +687,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task RemovingAndRestoringOptionalSchedulePreservesHistory()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);
@@ -745,7 +763,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UpdatingAndDeletingEventsRecalculatesSchedule()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);
@@ -807,7 +825,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task UserCannotModifyAnotherUsersCareEvent()
     {
-        var ownerId = Guid.NewGuid();
+        var ownerId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(ownerId);
         using var client = CreateClient();
         client.AuthenticateAs(ownerId);
@@ -818,7 +836,8 @@ public sealed class PlantCareApiTests
             PlantCareApiFactory.UtcNow,
             null);
 
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
+        await client.AddAntiforgeryTokenAsync();
         using var updateResponse = await client.PutAsJsonAsync(
             $"/api/my-plants/{userPlant.Id}/care/history/{eventId}",
             new
@@ -836,7 +855,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task CalendarReturnsOnlyCurrentUsersScheduledAndCompletedCare()
     {
-        var ownerId = Guid.NewGuid();
+        var ownerId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(ownerId);
         using var client = CreateClient();
         client.AuthenticateAs(ownerId);
@@ -856,7 +875,7 @@ public sealed class PlantCareApiTests
             entry.GetProperty("kind").GetString() == "Scheduled" &&
             entry.GetProperty("startsAtUtc").GetDateTimeOffset() == PlantCareApiFactory.UtcNow.AddDays(7));
 
-        client.AuthenticateAs(Guid.NewGuid());
+        client.AuthenticateAs(await factory.CreateUserAsync());
         using var otherResponse = await client.GetAsync($"/api/calendar?fromUtc={from}&toUtc={to}");
         otherResponse.EnsureSuccessStatusCode();
         using var otherDocument = JsonDocument.Parse(await otherResponse.Content.ReadAsStringAsync());
@@ -877,7 +896,7 @@ public sealed class PlantCareApiTests
     [Fact]
     public async Task OwnerCanConfigureAWeekdayCareSchedule()
     {
-        var userId = Guid.NewGuid();
+        var userId = await factory.CreateUserAsync();
         var (_, userPlant) = await SeedPlantAsync(userId);
         using var client = CreateClient();
         client.AuthenticateAs(userId);

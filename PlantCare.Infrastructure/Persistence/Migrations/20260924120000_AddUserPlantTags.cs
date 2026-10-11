@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PlantCare.Infrastructure.Persistence.Migrations;
 
+[DbContext(typeof(PlantCareDbContext))]
+[Migration("20260924120000_AddUserPlantTags")]
 public partial class AddUserPlantTags : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)

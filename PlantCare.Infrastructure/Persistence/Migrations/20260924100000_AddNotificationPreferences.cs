@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PlantCare.Infrastructure.Persistence.Migrations;
 
+[DbContext(typeof(PlantCareDbContext))]
+[Migration("20260924100000_AddNotificationPreferences")]
 public partial class AddNotificationPreferences : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)

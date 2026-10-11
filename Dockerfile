@@ -29,6 +29,9 @@ RUN dotnet publish PlantCare.Worker/PlantCare.Worker.csproj \
     --output /app/worker
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS api
+RUN mkdir -p /var/lib/plantcare/keys \
+    && chown app:app /var/lib/plantcare/keys \
+    && chmod 700 /var/lib/plantcare/keys
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
@@ -38,7 +41,10 @@ USER app
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "PlantCare.Api.dll"]
 
-FROM mcr.microsoft.com/dotnet/runtime:10.0 AS worker
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS worker
+RUN mkdir -p /var/lib/plantcare/keys \
+    && chown app:app /var/lib/plantcare/keys \
+    && chmod 700 /var/lib/plantcare/keys
 WORKDIR /app
 COPY --from=build /app/worker ./
 USER app

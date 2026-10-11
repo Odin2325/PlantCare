@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PlantCare.Infrastructure.Persistence.Migrations;
 
+[DbContext(typeof(PlantCareDbContext))]
+[Migration("20260924110000_AddFlexibleCareSchedules")]
 public partial class AddFlexibleCareSchedules : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)

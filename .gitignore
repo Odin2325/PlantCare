@@ -5,6 +5,7 @@
 
 # Local secrets
 .env
+.env.local
 
 # User-specific files
 *.rsuser
@@ -23,6 +24,10 @@ mono_crash.*
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
+
+# Release planning documents are source files, not build output.
+!docs/release/
+!docs/release/*.md
 [Rr]eleases/
 x64/
 x86/

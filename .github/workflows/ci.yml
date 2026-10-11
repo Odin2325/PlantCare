@@ -77,3 +77,8 @@ jobs:
 
       - name: Build production image
         run: docker build --target api --tag plantcare:ci .
+
+      - name: Build and check worker runtime
+        run: |
+          docker build --target worker --tag plantcare-worker:ci .
+          docker run --rm --entrypoint dotnet plantcare-worker:ci --list-runtimes | grep -q '^Microsoft.AspNetCore.App '

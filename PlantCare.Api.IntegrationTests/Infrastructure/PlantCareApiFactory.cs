@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PlantCare.Infrastructure.Persistence;
+using PlantCare.Infrastructure.Identity;
 
 namespace PlantCare.Api.IntegrationTests.Infrastructure;
 
@@ -21,6 +23,7 @@ internal sealed class PlantCareApiFactory
     private readonly IServiceProvider databaseServiceProvider =
         new ServiceCollection()
             .AddEntityFrameworkSqlite()
+            .AddSingleton<IModelCustomizer, SqliteTestModelCustomizer>()
             .BuildServiceProvider();
 
     protected override void ConfigureWebHost(
@@ -32,6 +35,10 @@ internal sealed class PlantCareApiFactory
 
         builder.ConfigureServices(services =>
         {
+            // AddDbContext stores provider setup separately from the options instance.
+            // Remove SQL Server's callback before registering the test provider.
+            services.RemoveAll<
+                IDbContextOptionsConfiguration<PlantCareDbContext>>();
             services.RemoveAll<
                 DbContextOptions<PlantCareDbContext>>();
             services.RemoveAll<PlantCareDbContext>();
@@ -72,6 +79,23 @@ internal sealed class PlantCareApiFactory
 
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();
+    }
+
+    public async Task<Guid> CreateUserAsync()
+    {
+        var userId = Guid.NewGuid();
+        await SeedAsync(dbContext =>
+        {
+            dbContext.Users.Add(new ApplicationUser
+            {
+                Id = userId,
+                UserName = $"{userId:N}@example.test",
+                Email = $"{userId:N}@example.test",
+                EmailConfirmed = true
+            });
+            return Task.CompletedTask;
+        });
+        return userId;
     }
 
     public async Task SeedAsync(

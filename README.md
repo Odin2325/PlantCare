@@ -2,6 +2,13 @@
 
 PlantCare is an Angular and ASP.NET Core plant-care scheduling application.
 
+## Release preparation
+
+Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
+then follow the [staging runbook](docs/release/staging.md).
+The [release backlog](docs/release/backlog.md) records current blockers and
+the local verification results from 11 October 2026.
+
 ## Production deployment
 
 The Docker deployment runs four containers:
