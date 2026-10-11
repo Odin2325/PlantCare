@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+
 namespace PlantCare.Api.Security;
 
 internal static class AntiforgeryRequestPolicy
@@ -10,8 +13,9 @@ internal static class AntiforgeryRequestPolicy
         HttpMethods.Trace
     ];
 
-    public static bool RequiresValidation(HttpRequest request)
+    public static async ValueTask<bool> RequiresValidationAsync(HttpContext context)
     {
+        var request = context.Request;
         if (SafeMethods.Contains(request.Method))
         {
             return false;
@@ -19,8 +23,17 @@ internal static class AntiforgeryRequestPolicy
 
         var authorization = request.Headers.Authorization.ToString();
 
-        return !authorization.StartsWith(
+        if (!authorization.StartsWith(
             "Bearer ",
-            StringComparison.OrdinalIgnoreCase);
+            StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        // A header alone does not prove bearer authentication. In particular,
+        // anonymous Identity endpoints must not accept an invalid token as a
+        // substitute for antiforgery validation.
+        var result = await context.AuthenticateAsync(IdentityConstants.BearerScheme);
+        return !result.Succeeded;
     }
 }

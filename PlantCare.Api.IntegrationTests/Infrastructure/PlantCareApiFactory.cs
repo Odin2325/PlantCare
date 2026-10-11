@@ -11,7 +11,7 @@ using PlantCare.Infrastructure.Identity;
 
 namespace PlantCare.Api.IntegrationTests.Infrastructure;
 
-internal sealed class PlantCareApiFactory
+internal sealed class PlantCareApiFactory(bool useRealAuthentication = false)
     : WebApplicationFactory<Program>
 {
     public static readonly DateTimeOffset UtcNow =
@@ -49,6 +49,12 @@ internal sealed class PlantCareApiFactory
                     .UseSqlite(databaseConnection)
                     .UseInternalServiceProvider(
                         databaseServiceProvider));
+
+            if (useRealAuthentication)
+            {
+                services.AddSingleton(TimeProvider.System);
+                return;
+            }
 
             services.AddSingleton<TimeProvider>(
                 new FixedTimeProvider(UtcNow));

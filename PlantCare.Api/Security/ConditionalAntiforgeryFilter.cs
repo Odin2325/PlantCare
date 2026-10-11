@@ -13,8 +13,8 @@ public sealed class ConditionalAntiforgeryFilter(
     {
         var httpContext = context.HttpContext;
 
-        if (!AntiforgeryRequestPolicy.RequiresValidation(
-                httpContext.Request))
+        if (!await AntiforgeryRequestPolicy.RequiresValidationAsync(
+                httpContext))
         {
             return;
         }

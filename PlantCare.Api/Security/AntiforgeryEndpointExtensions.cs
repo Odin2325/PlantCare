@@ -11,8 +11,8 @@ public static class AntiforgeryEndpointExtensions
         builder.AddEndpointFilter(
             async (context, next) =>
             {
-                if (!AntiforgeryRequestPolicy.RequiresValidation(
-                        context.HttpContext.Request))
+                if (!await AntiforgeryRequestPolicy.RequiresValidationAsync(
+                        context.HttpContext))
                 {
                     return await next(context);
                 }

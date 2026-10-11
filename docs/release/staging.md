@@ -32,6 +32,8 @@ administrator and demo catalog, then executes the core care journey. See
 [bootstrap.md](bootstrap.md) for production setup and SSMS access at `localhost,14330`.
 Run `./scripts/Test-LocalAccountIsolation.ps1` for real-cookie cross-account checks
 against the same SQL Server stack; see [account-isolation.md](account-isolation.md).
+Run `./scripts/Test-LocalAuthenticationSecurity.ps1` for reset email and browser
+session checks; see [authentication-security.md](authentication-security.md).
 
 To stop the local stack and preserve its data:
 

@@ -51,6 +51,11 @@ if (!string.IsNullOrWhiteSpace(dataProtectionKeysPath))
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
+// Password resets and security-stamp changes revoke browser sessions on their
+// next request, rather than leaving a default revalidation grace period.
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+    options.ValidationInterval = TimeSpan.Zero);
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "PlantCare.Authentication";

@@ -94,6 +94,10 @@ jobs:
           ./scripts/Start-LocalDeployment.ps1 -SkipBuild
           ./scripts/Test-LocalAccountIsolation.ps1
 
+      - name: Test password resets and session security on SQL Server
+        shell: pwsh
+        run: ./scripts/Test-LocalAuthenticationSecurity.ps1
+
       - name: Remove isolated CI database and containers
         if: always()
         run: |

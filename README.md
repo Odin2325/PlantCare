@@ -14,6 +14,8 @@ Use the [recovery runbook](docs/release/recovery.md) to test database backups,
 key-ring restoration, and worker recovery in isolated Docker stacks.
 Run the [SQL Server account-isolation checks](docs/release/account-isolation.md)
 to verify private data boundaries with real sign-in sessions.
+Use the [password-reset and session-security checks](docs/release/authentication-security.md)
+to verify reset emails, session invalidation, and antiforgery protection.
 
 ## Production deployment
 

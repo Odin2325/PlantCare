@@ -12,6 +12,7 @@ release unless the related optional feature is disabled.
 | ENV-01 | P0 | Restore a usable frontend toolchain | Installed Node satisfies the locked Angular CLI requirement; pinned pnpm installs with a frozen lockfile; frontend tests and production build pass. |
 | STAGE-01 | P0 | Establish an isolated staging environment | Dedicated Linux host/domain, Docker Compose, staging-only SMTP/VAPID credentials, and empty isolated volumes are available; follow staging.md and attach results. |
 | DEP-01 | P1, resolved locally 2026-10-11 | Fix SQLite test dependency advisory | SQLitePCLRaw bundle/native library updated from 2.1.11 to 2.1.13; audit reports no known vulnerable test dependencies; native SQLite security baseline and all backend tests pass. See dependency follow-up below. |
+| AUTH-01 | P1, resolved locally 2026-10-11 | Validate reset/session security and fix bearer antiforgery exemption | Real SQL/SMTP reset checks pass; invalid bearer headers cannot bypass antiforgery; reset invalidates browser sessions on their next request; real-Identity regression tests pass. |
 | BOOT-01 | P1 | Define production administrator/catalog bootstrap | Fresh staging can obtain an administrator and initial species through a documented controlled procedure; no public development-mode bootstrap. |
 | CARE-01 | P1 | Decide same-day weekday scheduling behavior | A selected weekday with a preferred time later today has a documented expected result and a regression test. Current loop starts at tomorrow. |
 | PUSH-01 | P1 | Validate and harden partial push failures | Multiple subscriptions, expired endpoints, repeated failures, and restarts do not cause uncontrolled resends or block the pending queue indefinitely. |
@@ -23,6 +24,33 @@ release unless the related optional feature is disabled.
 | RELEASE-01 | P1 | Prepare v1 distribution and user documentation | Version/tag/artifacts, release notes, support/privacy information, license decision, and known limitations are complete. |
 
 ## Local checks performed
+
+### Password-reset and session-security follow-up (2026-10-11)
+
+- `Test-LocalAuthenticationSecurity.ps1` passes on `7bb2422` plus auth changes:
+  real SQL Server, HTTPS, captured SMTP links, confirmed/unconfirmed login,
+  two browser cookie jars, Secure/HttpOnly/SameSite flags, antiforgery failures,
+  neutral forgot-password responses, reset-page routing, invalid/wrong-account/
+  weak/reused-code rejection, old/new password behavior, and protected logout.
+- Confirmed two failures before fixing them: a bogus Bearer header bypassed
+  antiforgery on anonymous Identity endpoints; old cookies remained authenticated
+  after reset during the default security-stamp validation interval.
+- Antiforgery exemption now requires successful Identity bearer authentication.
+  Cookie security stamps are checked each request so reset/stamp changes revoke
+  old browser sessions immediately. This adds an Identity DB validation cost per
+  authenticated cookie request; production sizing should account for it.
+- API suite passes 39/39. Six added tests use real Identity rather than simulated
+  users, covering invalid/valid bearer requests, reset cookie/refresh-token
+  revocation and reuse, cross-confirmed-account codes, expired reset codes,
+  and expired cookies. Expiry tests do not change host clocks or production TTLs.
+- CI now runs the SQL/SMTP security script after account isolation. Existing IP
+  rate limits are preserved; the scripts use bounded waits. Windows SQL is
+  untouched. Synthetic accounts and messages remain locally.
+- [authentication-security.md](authentication-security.md) records limits:
+  normal logout clears the current browser cookie, while copied-ticket/per-device
+  server-side revocation is not added; old bearer access tokens can last until
+  expiry although their refresh tokens fail after reset. Browser form UX and
+  real-provider tests remain open.
 
 ### SQL Server account-isolation follow-up (2026-10-11)
 
