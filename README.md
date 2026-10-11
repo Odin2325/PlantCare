@@ -8,6 +8,8 @@ Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
 then follow the [staging runbook](docs/release/staging.md).
 The [release backlog](docs/release/backlog.md) records current blockers and
 the local verification results from 11 October 2026.
+Use the [administrator and catalog bootstrap guide](docs/release/bootstrap.md)
+for first setup, extended care-journey checks, and SSMS connection details.
 
 ## Production deployment
 

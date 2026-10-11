@@ -108,4 +108,10 @@ internal sealed class PlantCareApiFactory
         await seed(dbContext);
         await dbContext.SaveChangesAsync();
     }
+
+    public async Task RunOperatorCommandAsync(params string[] args)
+    {
+        await using var scope = Services.CreateAsyncScope();
+        await PlantCare.Api.Operations.BootstrapCommands.ExecuteAsync(scope.ServiceProvider, args);
+    }
 }

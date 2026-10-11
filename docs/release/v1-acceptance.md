@@ -96,6 +96,8 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 | Check | Candidate SHA | Environment/date | Tester | Result | Evidence/defect |
 | --- | --- | --- | --- | --- | --- |
 | Full staging acceptance | pending | No staging host as of 2026-10-11 | pending | NOT RUN | See backlog STAGE-01 |
+| Bootstrap and core care via real HTTP | b099ddc plus bootstrap changes | Docker SQL Server, 2026-10-11 | Codex | PASS | scripts/Test-LocalDeployment.ps1 -IncludeCareJourney; see bootstrap.md |
+| Bootstrap/API suite | b099ddc plus bootstrap changes | Windows / .NET 10, 2026-10-11 | Codex | PASS | 31/31 API integration tests |
 | Local HTTPS and real-auth smoke | Baseline plus local release fixes | Docker Desktop / SQL Server, 2026-10-11 | Codex | PASS | scripts/Test-LocalDeployment.ps1; registration, confirmation email, login/account/logout |
 | API integration suite | Baseline plus local release fixes | Windows / .NET 10, 2026-10-11 | Codex | PASS | 27/27, including migration discovery; SQLite remains a test substitute |
 | Frontend unit test and build | Baseline plus local release fixes | Docker Node image, 2026-10-11 | Codex | PASS | 1/1 frontend test; production build succeeded |

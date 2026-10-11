@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlantCare.Infrastructure.Persistence;
 using Microsoft.AspNetCore.DataProtection;
+using PlantCare.Api.Operations;
 
 const string AngularDevelopmentCorsPolicy = "AngularDevelopment";
 var builder = WebApplication.CreateBuilder(args);
@@ -128,6 +129,25 @@ builder.Services.AddAntiforgery(options =>
 });
 
 var app = builder.Build();
+
+// Explicit offline operations exit before starting HTTP or running startup
+// migrations. Operators must migrate/validate the target database first.
+if (BootstrapCommands.IsOperatorCommand(args))
+{
+    try
+    {
+        await using var operatorScope = app.Services.CreateAsyncScope();
+        await BootstrapCommands.ExecuteAsync(operatorScope.ServiceProvider, args);
+        app.Logger.LogInformation("Operator command {Command} completed.", args[0]);
+    }
+    catch (Exception exception)
+    {
+        app.Logger.LogError("Operator command failed: {Message}", exception.Message);
+        Environment.ExitCode = 1;
+    }
+    await app.DisposeAsync();
+    return;
+}
 
 if (!app.Environment.IsEnvironment("Testing"))
 {

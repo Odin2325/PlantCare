@@ -12,6 +12,8 @@ from the repository root:
 ```powershell
 ./scripts/Start-LocalDeployment.ps1
 ./scripts/Test-LocalDeployment.ps1
+# Include explicit bootstrap and the real SQL Server care journey:
+./scripts/Test-LocalDeployment.ps1 -IncludeCareJourney
 ```
 
 The start script creates a private, ignored `.env.local` with a random SQL password
@@ -25,8 +27,9 @@ The smoke script creates synthetic accounts and captures their confirmation emai
 locally. It verifies HTTPS, readiness, SPA serving, API routing, production email
 confirmation enforcement, real cookie login, account identity, and protected logout.
 Push and external calendars are deliberately unconfigured in the generated local
-environment and remain unverified. The core plant-care journey still needs an
-initial administrator and catalog bootstrap (BOOT-01).
+environment and remain unverified. The extended option provisions a synthetic
+administrator and demo catalog, then executes the core care journey. See
+[bootstrap.md](bootstrap.md) for production setup and SSMS access at `localhost,14330`.
 
 To stop the local stack and preserve its data:
 
@@ -63,9 +66,8 @@ apply migrations over preexisting tables.
 4. Provision staging SMTP delivery and separate VAPID keys. Store credentials in
    the host's private `.env` or secret store. Keep optional calendar providers
    disabled for the first core-care validation.
-5. Arrange a controlled administrator assignment and initial species import.
-   The current code seeds the Admin role but only automatically assigns a user
-   in Development. This is an unresolved prerequisite, not an automated step.
+5. Follow [bootstrap.md](bootstrap.md) to promote a confirmed administrator and
+   import reviewed catalog data through explicit operator commands.
 
 ## Start a candidate
 

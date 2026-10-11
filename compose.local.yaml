@@ -1,6 +1,9 @@
 # Local acceptance environment: preserve production settings, capture email,
 # and expose only loopback ports. Use with compose.yaml and .env.local.
 services:
+  database:
+    ports:
+      - "127.0.0.1:14330:1433"
   api:
     environment:
       Email__Host: mailpit
@@ -12,6 +15,9 @@ services:
   proxy:
     ports: !override
       - "127.0.0.1:8443:8443"
+  worker:
+    environment:
+      Notifications__PollIntervalSeconds: "5"
   mailpit:
     image: axllent/mailpit:v1.27
     ports:

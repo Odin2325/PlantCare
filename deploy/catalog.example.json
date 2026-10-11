@@ -1,0 +1,13 @@
+[
+  {
+    "commonName": "Demo houseplant",
+    "scientificName": null,
+    "description": "Synthetic setup example. Replace with reviewed species data before public release.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Demonstration value; provide species-specific instructions for launch.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Demonstration interval; replace with reviewed guidance for the species and conditions.",
+    "soilInstructions": "Demonstration value; provide species-specific instructions for launch.",
+    "isToxicToPets": false
+  }
+]

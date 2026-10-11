@@ -24,6 +24,24 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Bootstrap and core-care follow-up (2026-10-11)
+
+- BOOT-01 implementation complete: explicit offline `--bootstrap-admin` promotes
+  only a confirmed existing account; `--import-catalog` validates JSON and imports
+  transactionally without overwriting existing species. Reviewed production
+  catalog content still needs to be supplied; the included example is synthetic.
+- API integration suite passes 31/31, including missing/unconfirmed-account
+  rejection, repeatable promotion/import, and invalid-input non-write behavior.
+- `Test-LocalDeployment.ps1 -IncludeCareJourney` passes against Docker SQL Server:
+  ordinary-user catalog denial, Admin promotion and catalog update, repeated
+  import, plant/tags, overdue dashboard, worker reminder/read acknowledgement,
+  completion, next due date, history, calendar, and archive behavior.
+- Existing Windows SQL Server at `localhost` was inspected with Windows
+  authentication and already contains PlantCare. No changes were made there.
+  The isolated Docker database is exposed only at `localhost,14330` for SSMS.
+- Push/calendar provider checks, cross-user checks on real SQL Server, browser
+  usability, restart/recovery drills, and the SQLite advisory remain open.
+
 ### Follow-up after Docker installation (2026-10-11)
 
 - TEST-01 fixed locally: remove retained provider configuration, seed actual

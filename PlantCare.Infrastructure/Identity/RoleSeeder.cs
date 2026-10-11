@@ -13,7 +13,10 @@ public static class RoleSeeder
 
         if (!await roleManager.RoleExistsAsync(adminRoleName))
         {
-            await roleManager.CreateAsync(new IdentityRole<Guid>(adminRoleName));
+            var result = await roleManager.CreateAsync(new IdentityRole<Guid>(adminRoleName));
+            if (!result.Succeeded)
+                throw new InvalidOperationException("Admin role creation failed: " +
+                    string.Join(", ", result.Errors.Select(error => error.Code)));
         }
     }
 }
