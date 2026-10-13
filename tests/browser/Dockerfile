@@ -2,5 +2,5 @@ FROM mcr.microsoft.com/playwright:v1.64.0-noble
 WORKDIR /tests
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
-COPY playwright.config.ts journey.spec.ts pwa.spec.ts pwa-server.mjs generate-icons.mjs ./
+COPY playwright.config.ts journey.spec.ts pwa.spec.ts pwa-server.mjs generate-icons.mjs accessibility.ts accessibility.spec.ts ./
 CMD ["npm", "test"]

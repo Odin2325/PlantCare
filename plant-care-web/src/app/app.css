@@ -37,7 +37,7 @@ nav {
       font-weight: 700;
     }
 
-  .register-link,
+  nav a.register-link,
   nav button {
     padding: 0.55rem 0.8rem;
     border: 0;

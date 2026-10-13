@@ -24,7 +24,7 @@ try {
     # the real https://localhost:8443 origin. Mailpit resolves on the Compose network.
     docker run --rm --init --ipc=host --network container:plantcare-local-proxy-1 plantcare-browser-tests:local
     if ($LASTEXITCODE -ne 0) { throw 'Local browser journey failed.' }
-    Write-Output 'PASS: Chromium desktop/mobile and Firefox core journeys on HTTPS/SQL/SMTP plus real-worker PWA offline/update/failure checks on isolated loopback.'
+    Write-Output 'PASS: Chromium desktop/mobile and Firefox core journeys, axe/keyboard/reflow checks and real-worker PWA offline/update/failure checks.'
     Write-Output 'Synthetic accounts, messages and archived plants remain in Docker only; no traces or credentials are exported.'
 }
 finally { Pop-Location }

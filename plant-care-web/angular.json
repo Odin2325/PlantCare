@@ -39,6 +39,10 @@
           },
           "configurations": {
             "production": {
+              "optimization": {
+                "scripts": true,
+                "styles": { "minify": true, "inlineCritical": false }
+              },
               "serviceWorker": "ngsw-config.json",
               "budgets": [
                 {

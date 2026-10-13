@@ -1,4 +1,4 @@
-<main class="auth-page">
+<main id="main-content" tabindex="-1" class="auth-page">
   <section class="auth-card">
     <p class="eyebrow">PlantCare</p>
     <h1>Welcome back</h1>
@@ -8,14 +8,14 @@
     </p>
 
     @if (registrationCompleted) {
-    <p class="form-success">
+    <p class="form-success" role="status">
       Your account was created. If email confirmation is enabled,
       confirm it using the message we sent before logging in.
     </p>
     }
 
     @if (passwordResetCompleted) {
-    <p class="form-success">
+    <p class="form-success" role="status">
       Your password has been reset. You can log in now.
     </p>
     }
@@ -28,6 +28,9 @@
       </label>
 
       <input id="email"
+             required
+             [attr.aria-invalid]="form.controls.email.touched && form.controls.email.invalid ? true : null"
+             [attr.aria-describedby]="form.controls.email.touched && form.controls.email.invalid ? 'email-error' : null"
              type="email"
              autocomplete="email"
              formControlName="email">
@@ -36,7 +39,7 @@
       form.controls.email.touched &&
       form.controls.email.invalid
       ) {
-      <p class="field-error">
+      <p class="field-error" id="email-error" role="alert">
         Enter a valid email address.
       </p>
       }
@@ -46,6 +49,9 @@
       </label>
 
       <input id="password"
+             required
+             [attr.aria-invalid]="form.controls.password.touched && form.controls.password.invalid ? true : null"
+             [attr.aria-describedby]="form.controls.password.touched && form.controls.password.invalid ? 'password-error' : null"
              type="password"
              autocomplete="current-password"
              formControlName="password">
@@ -60,13 +66,13 @@
       form.controls.password.touched &&
       form.controls.password.invalid
       ) {
-      <p class="field-error">
+      <p class="field-error" id="password-error" role="alert">
         Enter your password.
       </p>
       }
 
       @if (errorMessage()) {
-      <p class="form-error">
+      <p class="form-error" role="alert">
         {{ errorMessage() }}
       </p>
       }

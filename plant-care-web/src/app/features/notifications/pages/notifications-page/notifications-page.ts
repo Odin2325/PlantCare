@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { NotificationsApiService } from '../../data-access/notifications-api.service';
 import { CareNotification, NotificationPreference } from '../../models/notification.model';
 import { SwPush } from '@angular/service-worker';
@@ -108,9 +108,16 @@ export class NotificationsPage {
 
   private loadPushStatus(): void {
     this.api.getPushConfig().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: async config => {
+      next: config => {
         this.pushPublicKey = config.publicKey; this.pushAvailable.set(config.isEnabled && this.swPush.isEnabled);
-        if (this.swPush.isEnabled) this.pushEnabled.set((await firstValueFrom(this.swPush.subscription)) !== null);
+        if (!this.pushAvailable()) { this.pushEnabled.set(false); return; }
+        this.swPush.subscription.pipe(take(1), takeUntilDestroyed(this.destroyRef)).subscribe({
+          next: subscription => this.pushEnabled.set(subscription !== null),
+          error: () => {
+            this.pushEnabled.set(false);
+            this.pushMessage.set('Push status could not be checked. In-app reminders are still available.');
+          },
+        });
       },
       error: () => this.pushMessage.set('Push notification settings could not be loaded.'),
     });

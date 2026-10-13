@@ -6,6 +6,9 @@ It does not mock application requests, seed authentication cookies, or disable
 antiforgery. All tested users register through the UI and remain ordinary users.
 The same runner includes a separate anonymous loopback fixture for real-worker
 offline/update checks; see [pwa.md](pwa.md) for its isolation and acceptance limits.
+It also includes strict axe scans and keyboard/reflow checks; see
+[accessibility-beta.md](accessibility-beta.md). This does not replace a manual
+screen-reader/device evaluation or the two normal beta care cycles.
 
 ```powershell
 ./scripts/Start-LocalDeployment.ps1

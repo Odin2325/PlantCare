@@ -1,12 +1,14 @@
 import { randomBytes, randomUUID } from 'node:crypto';
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
+import { auditAccessibility } from './accessibility';
 
 const origin = 'https://localhost:8443';
 const mailpit = 'http://mailpit:8025';
 
-async function step(title: string, body: () => Promise<void>) {
+async function step(title: string, page: Page, body: () => Promise<void>) {
   console.info(`Browser step: ${title}`);
   await test.step(title, body);
+  await auditAccessibility(page, title);
 }
 
 // Submit actual browser forms. Respect the production IP rate limit without
@@ -69,11 +71,12 @@ test('register, confirm, care for a plant, recover password and log out', async 
   const pageErrors: string[] = [];
   page.on('pageerror', error => pageErrors.push(error.name));
 
-  await step('Protected route, registration and real confirmation email', async () => {
+  await step('Protected route, registration and real confirmation email', page, async () => {
     await page.goto('/my-plants');
     await expect(page).toHaveURL(/\/login\?returnUrl=/);
     await page.getByRole('link', { name: 'Create an account', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Create your account', exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Registration form');
     await page.getByLabel('Email address', { exact: true }).fill(email);
     await page.getByLabel('Password', { exact: true }).fill(password);
     await page.getByLabel('Confirm password', { exact: true }).fill(password);
@@ -91,10 +94,14 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.getByRole('heading', { name: 'Your plant collection' })).toBeVisible();
   });
 
-  await step('Catalog, plant creation, schedule and persisted tags', async () => {
+  await step('Catalog, plant creation, schedule and persisted tags', page, async () => {
     await page.getByRole('link', { name: 'Browse the plant catalog', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Demo houseplant', exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Catalog');
     const species = page.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Demo houseplant', exact: true }) });
     await species.getByRole('link', { name: 'View details' }).click();
+    await expect(page.getByLabel('Nickname', { exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Plant detail form');
     await page.getByLabel('Nickname', { exact: true }).fill(nickname);
     await page.getByLabel('Location', { exact: false }).fill('Browser test room');
     await page.getByLabel('Tags', { exact: false }).fill('browser, favorite');
@@ -123,17 +130,22 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(watering.locator('.interval')).toHaveText('Every 2 days');
   });
 
-  await step('Overdue dashboard completion, history and calendar', async () => {
+  await step('Overdue dashboard completion, history and calendar', page, async () => {
     const nav = page.getByRole('navigation', { name: 'Main navigation' });
+    await nav.getByRole('link', { name: 'Notifications', exact: true }).click();
+    await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Notification preferences');
     await nav.getByRole('link', { name: 'Dashboard', exact: true }).click();
     const overdue = page.locator('.care-section.overdue');
     await expect(overdue).toContainText(nickname);
+    await auditAccessibility(page, 'Overdue dashboard');
     await overdue.getByRole('button', { name: 'Water', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Everything is taken care of!' })).toBeVisible();
     await nav.getByRole('link', { name: 'My plants', exact: true }).click();
     await page.getByRole('link', { name: 'View care history', exact: true }).click();
     await expect(page.locator('.history-entry')).toHaveCount(1);
     await expect(page.locator('.history-entry')).toContainText('Watering');
+    await auditAccessibility(page, 'Care history');
     await page.getByLabel('Notes', { exact: true }).fill('Recorded in the browser');
     await page.getByRole('button', { name: 'Record care', exact: true }).click();
     const entry = page.locator('.history-entry').filter({ hasText: 'Recorded in the browser' });
@@ -151,6 +163,10 @@ test('register, confirm, care for a plant, recover password and log out', async 
     // A pending response clears the selection when it replaces the entries.
     const calendarLoading = page.getByRole('status').filter({ hasText: 'Loading calendar' });
     await expect(calendarLoading).toBeHidden();
+    await auditAccessibility(page, 'Calendar month');
+    await page.getByRole('button', { name: 'Week', exact: true }).click();
+    await expect(calendarLoading).toBeHidden();
+    await auditAccessibility(page, 'Calendar week');
     await page.getByRole('button', { name: 'Agenda', exact: true }).click();
     await expect(calendarLoading).toBeHidden();
     await page.getByLabel(/^Status/).selectOption('Completed');
@@ -160,7 +176,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.locator('.details')).toContainText('Completed');
   });
 
-  await step('Weekday settings retain their time zone in a travelling browser', async () => {
+  await step('Weekday settings retain their time zone in a travelling browser', page, async () => {
     await page.getByRole('navigation').getByRole('link', { name: 'My plants', exact: true }).click();
     const watering = page.locator('.care-schedule').filter({ hasText: 'Watering' });
     await watering.getByRole('combobox', { name: /Schedule/ }).selectOption('Weekdays');
@@ -198,7 +214,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
   });
 
-  await step('Archive and restore survive reload', async () => {
+  await step('Archive and restore survive reload', page, async () => {
     await page.getByRole('navigation').getByRole('link', { name: 'My plants', exact: true }).click();
     await page.getByRole('button', { name: 'Archive plant', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'No plants yet' })).toBeVisible();
@@ -212,10 +228,11 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
   });
 
-  await step('Forgot/reset forms, confirmation validation and new-password login', async () => {
+  await step('Forgot/reset forms, confirmation validation and new-password login', page, async () => {
     await page.goto('/login');
     await page.getByRole('link', { name: 'Forgot your password?', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Reset your password', exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Forgot-password form');
     await page.getByLabel('Email address', { exact: true }).fill(email);
     await submitAuth(page, 'Send reset link', 'forgotPassword');
     await expect(page.getByText('If an account exists for that address', { exact: false })).toBeVisible();
@@ -225,6 +242,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await page.getByLabel('Confirm new password', { exact: true }).fill('Different9!');
     await page.getByRole('button', { name: 'Reset password', exact: true }).click();
     await expect(page.getByText('The password confirmation does not match.')).toBeVisible();
+    await auditAccessibility(page, 'Password-reset mismatch feedback');
     await page.getByLabel('Confirm new password', { exact: true }).fill(newPassword);
     await submitAuth(page, 'Reset password', 'resetPassword');
     await expect(page.getByText('Your password has been reset. You can log in now.')).toBeVisible();

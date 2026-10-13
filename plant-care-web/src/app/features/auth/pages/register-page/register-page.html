@@ -1,4 +1,4 @@
-<main class="auth-page">
+<main id="main-content" tabindex="-1" class="auth-page">
   <section class="auth-card">
     <p class="eyebrow">PlantCare</p>
     <h1>Create your account</h1>
@@ -15,6 +15,9 @@
       </label>
 
       <input id="email"
+             required
+             [attr.aria-invalid]="form.controls.email.touched && form.controls.email.invalid ? true : null"
+             [attr.aria-describedby]="form.controls.email.touched && form.controls.email.invalid ? 'email-error' : null"
              type="email"
              autocomplete="email"
              formControlName="email">
@@ -23,7 +26,7 @@
       form.controls.email.touched &&
       form.controls.email.invalid
       ) {
-      <p class="field-error">
+      <p class="field-error" id="email-error" role="alert">
         Enter a valid email address.
       </p>
       }
@@ -33,11 +36,14 @@
       </label>
 
       <input id="password"
+             required
+             [attr.aria-invalid]="form.controls.password.touched && form.controls.password.invalid ? true : null"
+             [attr.aria-describedby]="form.controls.password.touched && form.controls.password.invalid ? 'password-hint password-error' : 'password-hint'"
              type="password"
              autocomplete="new-password"
              formControlName="password">
 
-      <p class="field-hint">
+      <p class="field-hint" id="password-hint">
         Use at least 10 characters, including an
         uppercase letter, lowercase letter, and number.
       </p>
@@ -46,7 +52,7 @@
       form.controls.password.touched &&
       form.controls.password.invalid
       ) {
-      <p class="field-error">
+      <p class="field-error" id="password-error" role="alert">
         The password does not meet the requirements.
       </p>
       }
@@ -56,12 +62,19 @@
       </label>
 
       <input id="confirmPassword"
+             required
+             [attr.aria-invalid]="(form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid) || errorMessage() === 'The password confirmation does not match.' ? true : null"
+             [attr.aria-describedby]="form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid ? 'confirm-password-error' : errorMessage() === 'The password confirmation does not match.' ? 'form-error' : null"
              type="password"
              autocomplete="new-password"
              formControlName="confirmPassword">
 
+      @if (form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid) {
+      <p class="field-error" id="confirm-password-error" role="alert">Confirm your password.</p>
+      }
+
       @if (errorMessage()) {
-      <p class="form-error">
+      <p class="form-error" role="alert" id="form-error">
         {{ errorMessage() }}
       </p>
       }

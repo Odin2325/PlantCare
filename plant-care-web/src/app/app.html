@@ -1,3 +1,5 @@
+<a class="skip-link" href="#main-content" (click)="skipToContent($event)">Skip to main content</a>
+
 @if (authService.isReconnecting()) {
 <div class="reconnecting-banner" role="status">
   <span class="reconnecting-spinner" aria-hidden="true"></span>
@@ -28,28 +30,28 @@
 
   <nav aria-label="Main navigation">
     <a routerLink="/plants"
-       routerLinkActive="active">
+       routerLinkActive="active" ariaCurrentWhenActive="page">
       Plant catalog
     </a>
 
     @if (authService.isAuthenticated()) {
     <a routerLink="/my-plants"
-       routerLinkActive="active">
+       routerLinkActive="active" ariaCurrentWhenActive="page">
       My plants
     </a>
 
     <a routerLink="/dashboard"
-       routerLinkActive="active">
+       routerLinkActive="active" ariaCurrentWhenActive="page">
       Dashboard
     </a>
 
     <a routerLink="/notifications"
-       routerLinkActive="active">
+       routerLinkActive="active" ariaCurrentWhenActive="page">
       Notifications
     </a>
 
     <a routerLink="/calendar"
-       routerLinkActive="active">
+       routerLinkActive="active" ariaCurrentWhenActive="page">
       Calendar
     </a>
 
@@ -64,7 +66,7 @@
     </button>
     } @else {
     <a routerLink="/login"
-       routerLinkActive="active">
+       routerLinkActive="active" ariaCurrentWhenActive="page">
       Log in
     </a>
 

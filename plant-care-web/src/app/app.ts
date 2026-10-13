@@ -1,16 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  afterNextRender,
+  Injector,
   inject,
   signal,
 } from '@angular/core';
 import {
   Router,
+  NavigationEnd,
   RouterLink,
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { finalize } from 'rxjs';
+import { filter, finalize } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AuthService } from './core/auth/services/auth.service';
 import { PwaUpdateService } from './core/pwa/pwa-update.service';
@@ -34,6 +38,23 @@ export class App {
   private readonly router = inject(Router);
 
   readonly isLoggingOut = signal(false);
+
+  constructor() {
+    const injector = inject(Injector);
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntilDestroyed(),
+    ).subscribe(() => afterNextRender(() => {
+      const main = document.getElementById('main-content');
+      const target = main?.querySelector('h1') ?? main;
+      if (target instanceof HTMLElement) { target.tabIndex = -1; target.focus(); }
+    }, { injector }));
+  }
+
+  skipToContent(event: Event): void {
+    event.preventDefault();
+    document.getElementById('main-content')?.focus();
+  }
 
   logout(): void {
     if (this.isLoggingOut()) {

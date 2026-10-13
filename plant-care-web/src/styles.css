@@ -14,6 +14,34 @@ body {
   margin: 0;
 }
 
+:focus-visible {
+  outline: 3px solid #174f99 !important;
+  outline-offset: 3px !important;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 1000;
+  transform: translateY(-200%);
+  padding: 0.75rem 1rem;
+  border-radius: 0.4rem;
+  background: #fff;
+  color: #17221a;
+  font-weight: 700;
+}
+.skip-link:focus { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 button,
 input,
 textarea,
@@ -59,6 +87,7 @@ select {
 }
 
 .auth-card input {
+  min-width: 0;
   width: 100%;
   padding: 0.8rem 0.9rem;
   border: 1px solid #becac1;

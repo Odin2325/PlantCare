@@ -1,4 +1,4 @@
-<main class="my-plants-page">
+<main id="main-content" tabindex="-1" class="my-plants-page">
   <header class="page-header">
     <div>
       <p class="eyebrow">
@@ -368,13 +368,16 @@
         <div class="add-schedule-controls">
           <strong>Add care schedule</strong>
 
-          <select #newCareAction>
-            @for (actionType of availableTypes; track actionType) {
-            <option [value]="actionType">
-              {{ getCareActionName(actionType) }}
-            </option>
-            }
-          </select>
+          <label>
+            Care action
+            <select #newCareAction>
+              @for (actionType of availableTypes; track actionType) {
+              <option [value]="actionType">
+                {{ getCareActionName(actionType) }}
+              </option>
+              }
+            </select>
+          </label>
 
           <label>
             Every

@@ -1,4 +1,5 @@
 import { expect, test, type Page, type BrowserContext, type APIRequestContext } from '@playwright/test';
+import { auditAccessibility } from './accessibility';
 
 const origin = 'http://localhost:4173';
 async function offline(page: Page, context: BrowserContext, request: APIRequestContext, value: boolean) {
@@ -45,6 +46,7 @@ test('manifest icons, offline cold reload and uncached account API', async ({ pa
   await offline(page, context, request, true);
   await page.reload();
   await expect(page.locator('.offline-banner')).toContainText('Care changes need a connection', { timeout: 3000 });
+  await auditAccessibility(page, 'Offline shell');
   await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
   const status = await page.evaluate(async () => { try { return (await fetch('/api/account/me')).status; } catch { return 0; } });
   expect(status).not.toBe(200);
@@ -74,6 +76,7 @@ test('real worker stages an update and changes version only after consent', asyn
   await expect(page.locator('.offline-banner')).toBeVisible();
   await offline(page, context, request, false);
   await expect(page.getByRole('button', { name: 'Update now', exact: true })).toBeVisible({ timeout: 30_000 });
+  await auditAccessibility(page, 'PWA ready-update prompt');
   await expect(page.locator('meta[name="plantcare-pwa-probe"]')).toHaveAttribute('content', 'A');
   await expect(page.getByLabel('Email address', { exact: true })).toHaveValue('unfinished@example.test');
   await offline(page, context, request, true);

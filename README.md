@@ -28,6 +28,8 @@ See [encrypted local backups](docs/release/local-backups.md) for the external-dr
 snapshot, Windows schedule, health checks and separate recovery-key requirements.
 See [PWA acceptance](docs/release/pwa.md) for offline behavior, controlled updates
 and the remaining physical-device installation checks.
+See [accessibility and beta checks](docs/release/accessibility-beta.md) for keyboard
+navigation, automated scans and the manual device/two-care-cycle record.
 
 ## Production deployment
 

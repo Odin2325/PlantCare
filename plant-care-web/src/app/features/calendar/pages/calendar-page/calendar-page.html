@@ -1,4 +1,4 @@
-<main class="calendar-page">
+<main id="main-content" tabindex="-1" class="calendar-page">
   <header class="calendar-header">
     <div><p class="eyebrow">{{ viewedShare() ? 'Shared calendar · ' + viewedShare()!.ownerEmail : 'Plant care plan' }}</p><h1>{{ periodTitle() }}</h1></div>
     <div class="controls"><button type="button" (click)="changePeriod(-1)" aria-label="Previous period">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changePeriod(1)" aria-label="Next period">→</button></div>

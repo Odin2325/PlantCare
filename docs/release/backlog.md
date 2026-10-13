@@ -25,6 +25,32 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Keyboard/accessibility and beta follow-up (2026-10-13)
+
+- Added a keyboard-visible skip link, route main landmarks, post-render heading
+  focus (main fallback while loading), active navigation announcements, strong
+  focus indicators and reduced-motion styling. Auth fields expose required/invalid
+  states and associated instructions/errors; feedback uses alert/status roles.
+- Fixed Register-link, helper/schedule and calendar-date/completed-entry contrast,
+  and labelled the add-care-action selector. Browser checks cover 320-pixel reflow,
+  keyboard navigation/Enter, inline error descriptions and visible focus.
+- Found Angular's generated print-media stylesheet activation handler being
+  blocked by the script CSP. Disabled critical-CSS inlining while retaining
+  script/style minification and the existing CSP; no script permission was relaxed.
+  Public-page tests assert no policy violations.
+- Added pinned axe 4.13.0 scans to real-auth collection, notifications, dashboard,
+  history, all calendar views and reset forms, plus public pages and PWA prompts.
+  Selected WCAG A/AA rules fail on any violation, with no ignored rules/regions.
+  Only rule IDs/impact/counts are logged; private page/field data is withheld.
+- Visiting notifications exposed Firefox rejecting an unnecessary push-status
+  query while server push was disabled. Disabled push now skips the query;
+  enabled lookup errors are handled and lookups cancelled on page destruction.
+  Three regression tests cover those cases; frontend suite passes 9/9.
+- [accessibility-beta.md](accessibility-beta.md) records scope, manual device/
+  screen-reader/zoom checks and two actual care-cycle evidence slots. Headless
+  audits do not establish complete WCAG conformance or native/mobile acceptance.
+  UX-01, physical-device/provider tests and public staging remain open.
+
 ### PWA offline/update follow-up (2026-10-13)
 
 - Added 192/512 PNG manifest icons and an Apple touch icon rendered from the
