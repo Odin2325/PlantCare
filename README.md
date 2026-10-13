@@ -22,6 +22,8 @@ See the [weekday and time-zone policy](docs/release/weekday-scheduling.md)
 for same-day care and daylight-saving behavior.
 Use the [push retry and reliability checks](docs/release/push-reliability.md)
 to verify partial failures, bounded retries, and queue progress on SQL Server.
+See [restricted database access](docs/release/database-access.md) for runtime
+principals, explicit migrations, permission checks and restored login mapping.
 
 ## Production deployment
 
@@ -49,10 +51,17 @@ The Docker deployment runs four containers:
 
 2. Replace every placeholder in `.env`. Keep this file private; Git ignores it.
 
-3. Build and start PlantCare:
+3. Build, migrate/provision with the operator job, then start runtime services
+   (stop on any failure):
 
    ```bash
-   docker compose up --build -d
+   docker compose config --quiet
+   docker compose build api worker
+   docker compose up -d --wait database
+   docker compose stop api worker
+   docker compose run --rm --no-deps migrate --migrate-database
+   docker compose run --rm --no-deps migrate --provision-runtime-users
+   docker compose up --no-build -d --wait --wait-timeout 300
    ```
 
 4. Follow startup and migration logs:
@@ -61,9 +70,10 @@ The Docker deployment runs four containers:
    docker compose logs -f api worker proxy
    ```
 
-Caddy obtains and renews the TLS certificate automatically. On startup, the API
-waits for SQL Server, applies pending Entity Framework migrations, seeds roles,
-and then becomes healthy. The worker starts only after that health check passes.
+Caddy obtains and renews the TLS certificate automatically. The one-shot operator
+job applies migrations/seeds roles and provisions separate API/worker SQL users.
+Runtime containers do not receive the operator connection or migrate at startup.
+The worker starts after API readiness passes.
 
 ### Operations
 

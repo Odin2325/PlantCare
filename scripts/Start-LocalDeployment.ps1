@@ -32,10 +32,28 @@ try {
             'EXTERNAL_CALENDAR_SYNC_ENABLED=false'
         ) | Set-Content -LiteralPath '.env.local'
     }
-    $composeArguments = @('compose', '--env-file', '.env.local', '-f', 'compose.yaml', '-f', 'compose.local.yaml', '--project-name', 'plantcare-local', 'up')
-    $composeArguments += if ($SkipBuild) { '--no-build' } else { '--build' }
-    $composeArguments += @('-d', '--wait', '--wait-timeout', '300')
-    & docker @composeArguments
+    foreach ($name in @('SQL_API_PASSWORD', 'SQL_WORKER_PASSWORD')) {
+        if (-not (Get-Content -LiteralPath '.env.local' | Where-Object { $_.StartsWith($name + '=') })) {
+            $password = 'Pc9!' + [Convert]::ToHexString([Security.Cryptography.RandomNumberGenerator]::GetBytes(24))
+            ($name + '=' + $password) | Add-Content -LiteralPath '.env.local'
+        }
+    }
+    $composeArguments = @('compose', '--env-file', '.env.local', '-f', 'compose.yaml', '-f', 'compose.local.yaml', '--project-name', 'plantcare-local')
+    if (-not $SkipBuild) {
+        & docker @composeArguments build api worker
+        if ($LASTEXITCODE -ne 0) { throw 'Image build failed; the existing deployment was not stopped.' }
+    }
+    & docker @composeArguments up -d --wait --wait-timeout 300 database mailpit
+    if ($LASTEXITCODE -ne 0) { throw 'Database/email startup failed.' }
+    & docker @composeArguments stop api worker
+    if ($LASTEXITCODE -ne 0) { throw 'Could not stop application writers before migration.' }
+    foreach ($command in @('--migrate-database', '--provision-runtime-users')) {
+        & docker @composeArguments run --rm --no-deps migrate $command
+        if ($LASTEXITCODE -ne 0) { throw 'Database operator step failed; application writers remain stopped.' }
+    }
+    & docker @composeArguments up --no-build --force-recreate --no-deps -d --wait --wait-timeout 300 api worker
+    if ($LASTEXITCODE -ne 0) { throw 'Restricted runtime container startup failed.' }
+    & docker @composeArguments up --no-build -d --wait --wait-timeout 300
     if ($LASTEXITCODE -ne 0) { throw 'Local deployment failed. Inspect Compose service logs.' }
     Write-Output 'Local app: https://localhost:8443; captured email: http://localhost:8025'
     Write-Output 'Run scripts/Test-LocalDeployment.ps1 next; running state alone does not verify worker processing.'

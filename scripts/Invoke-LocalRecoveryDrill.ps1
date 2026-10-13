@@ -100,6 +100,9 @@ services:
   api:
     image: $apiImage
     pull_policy: never
+  migrate:
+    image: $apiImage
+    pull_policy: never
   worker:
     image: $workerImage
     pull_policy: never
@@ -144,6 +147,9 @@ services:
     $null = Invoke-DockerChecked ($target + @('run', '--rm', '--no-deps', '--user', 'root', '--entrypoint', 'sh', '-v', "${backupDir}:/recovery:ro", 'api', '-c', 'tar -xf /recovery/keys.tar -C /var/lib/plantcare/keys && chown -R app:app /var/lib/plantcare/keys && chmod 700 /var/lib/plantcare/keys'))
     $restoredKeys = @(Invoke-DockerChecked ($target + @('run', '--rm', '--no-deps', '--user', 'root', '--entrypoint', 'sh', 'api', '-c', 'cd /var/lib/plantcare/keys && sha256sum key-*.xml')) | Where-Object { "$_" -match '^[0-9a-f]{64}\s+key-' })
     if (Compare-Object $keyHashes $restoredKeys) { throw 'Restored data-protection key hashes differ.' }
+    # SQL logins live in master, outside the restored application backup. Map
+    # restored database users to fresh logins using the matching private config.
+    $null = Invoke-DockerChecked ($target + @('run', '--rm', '--no-deps', 'migrate', '--provision-runtime-users'))
     $null = Invoke-DockerChecked ($target + @('up', '-d', '--no-build', '--wait', '--wait-timeout', '300'))
     Test-RecoveredJourney 'https://localhost:9443' $target
     Write-Output 'PASS: isolated SQL restore/CHECKDB, all table counts/checksums, exact key hashes, existing cookie/history, restored worker and deduplication.'

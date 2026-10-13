@@ -20,14 +20,15 @@ services:
     restart: unless-stopped
 
   api:
+    image: ${PLANTCARE_API_IMAGE:-plantcare-local-api}
     build:
       context: .
       target: api
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=sa;Password=${SQL_PASSWORD};Encrypt=True;TrustServerCertificate=True
-      Database__ApplyMigrationsOnStartup: "true"
+      ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=plantcare_api;Password=${SQL_API_PASSWORD:?Set SQL_API_PASSWORD};Encrypt=True;TrustServerCertificate=True
+      Database__ApplyMigrationsOnStartup: "false"
       ReverseProxy__TrustForwardedHeaders: "true"
       Application__ClientBaseUrl: https://${PLANTCARE_DOMAIN}
       DataProtection__KeysPath: /var/lib/plantcare/keys
@@ -65,13 +66,14 @@ services:
     restart: unless-stopped
 
   worker:
+    image: ${PLANTCARE_WORKER_IMAGE:-plantcare-local-worker}
     # Use one worker replica: cross-process queue leases are not implemented.
     build:
       context: .
       target: worker
     environment:
       DOTNET_ENVIRONMENT: Production
-      ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=sa;Password=${SQL_PASSWORD};Encrypt=True;TrustServerCertificate=True
+      ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=plantcare_worker;Password=${SQL_WORKER_PASSWORD:?Set SQL_WORKER_PASSWORD};Encrypt=True;TrustServerCertificate=True
       Notifications__PollIntervalSeconds: ${NOTIFICATION_POLL_SECONDS:-60}
       Notifications__BatchSize: ${NOTIFICATION_BATCH_SIZE:-100}
       ExternalCalendarSync__Enabled: ${EXTERNAL_CALENDAR_SYNC_ENABLED:-true}
@@ -97,6 +99,32 @@ services:
     volumes:
       - data-protection-keys:/var/lib/plantcare/keys
     restart: unless-stopped
+
+  migrate:
+    image: ${PLANTCARE_API_IMAGE:-plantcare-local-api}
+    profiles: [operations]
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=sa;Password=${SQL_PASSWORD};Encrypt=True;TrustServerCertificate=True
+      DatabaseRuntime__ApiPassword: ${SQL_API_PASSWORD:?Set SQL_API_PASSWORD}
+      DatabaseRuntime__WorkerPassword: ${SQL_WORKER_PASSWORD:?Set SQL_WORKER_PASSWORD}
+      Logging__LogLevel__Microsoft.EntityFrameworkCore.Database.Command: Warning
+    command: [--migrate-database]
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ./deploy:/operator:ro
+    restart: "no"
+
+  worker-db-check:
+    image: ${PLANTCARE_API_IMAGE:-plantcare-local-api}
+    profiles: [operations]
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=plantcare_worker;Password=${SQL_WORKER_PASSWORD:?Set SQL_WORKER_PASSWORD};Encrypt=True;TrustServerCertificate=True
+    command: [--check-runtime-access, worker]
+    restart: "no"
 
   proxy:
     image: caddy:2-alpine

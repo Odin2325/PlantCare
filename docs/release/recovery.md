@@ -34,6 +34,8 @@ The drill:
    restores without `REPLACE`, and runs `DBCC CHECKDB`.
 6. Compares all table counts/checksums before starting target writers, restores
    the key ring with `app` ownership, and compares individual key SHA-256 hashes.
+   Recreates SQL logins and remaps restored runtime users with the private matched
+   configuration; application backups do not include logins in `master`.
 7. Starts the restored API/worker/proxy on `https://localhost:9443` and repeats
    cookie, history, reminder, and worker-restart checks. The existing cookie must
    work without logging in again, exercising the restored keys and Identity data.

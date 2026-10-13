@@ -1,6 +1,6 @@
 # First staging deployment
 
-Status on 2026-10-11: local Docker validation is available; no public staging host
+Status on 2026-10-13: local Docker validation is available; no public staging host
 exists. The public-host guide below uses the existing production Compose definition
 on a dedicated staging host so that production behavior is exercised.
 
@@ -40,6 +40,8 @@ The [weekday policy](weekday-scheduling.md) defines same-day, clock-change and
 saved time-zone behavior; the browser suite also checks travelling contexts.
 Run `./scripts/Test-LocalPushDelivery.ps1` for encrypted HTTP provider-failure
 tests on disposable Docker SQL databases; see [push-reliability.md](push-reliability.md).
+Run `./scripts/Test-LocalDatabaseAccess.ps1` to check runtime grants and denied
+administrative operations; see [database-access.md](database-access.md).
 
 To stop the local stack and preserve its data:
 
@@ -98,10 +100,20 @@ record. Commands below use a separate project name to isolate volume names:
 
 ```bash
 docker compose --project-name plantcare-staging config --quiet
-docker compose --project-name plantcare-staging up --build -d --wait --wait-timeout 300
+docker compose --project-name plantcare-staging build api worker
+docker compose --project-name plantcare-staging up -d --wait database
+docker compose --project-name plantcare-staging stop api worker
+docker compose --project-name plantcare-staging run --rm --no-deps migrate --migrate-database
+docker compose --project-name plantcare-staging run --rm --no-deps migrate --provision-runtime-users
+docker compose --project-name plantcare-staging up --no-build -d --wait --wait-timeout 300
 docker compose --project-name plantcare-staging ps
 docker compose --project-name plantcare-staging logs --tail=100 api worker proxy
 ```
+
+Stop on any failed command. Supply separate `SQL_API_PASSWORD` and
+`SQL_WORKER_PASSWORD` alongside the operator `SQL_PASSWORD`; runtime containers
+no longer use `sa`. API startup migrations are disabled. Operator jobs use the
+candidate API image and exit without serving HTTP.
 
 `--wait` checks available service health checks/running state; the worker has no
 health check, so inspect its logs and verify actual reminder processing.
@@ -139,7 +151,7 @@ executable local SQL/key-ring restore drill and proposed retention. An off-host
 destination, scheduler, alerts, and public-staging recovery evidence remain
 required under DATA-01/OPS-01.
 
-Startup migrations can make an older application incompatible with the new
+Operator-applied migrations can make an older application incompatible with the new
 schema. Record a schema-compatible rollback or tested database recovery path
 before upgrading; switching only the source commit is not a recovery plan.
 

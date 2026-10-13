@@ -137,12 +137,14 @@ var app = builder.Build();
 
 // Explicit offline operations exit before starting HTTP or running startup
 // migrations. Operators must migrate/validate the target database first.
-if (BootstrapCommands.IsOperatorCommand(args))
+if (BootstrapCommands.IsOperatorCommand(args) || DatabaseCommands.IsCommand(args))
 {
     try
     {
         await using var operatorScope = app.Services.CreateAsyncScope();
-        await BootstrapCommands.ExecuteAsync(operatorScope.ServiceProvider, args);
+        if (DatabaseCommands.IsCommand(args))
+            await DatabaseCommands.ExecuteAsync(operatorScope.ServiceProvider, app.Configuration, args);
+        else await BootstrapCommands.ExecuteAsync(operatorScope.ServiceProvider, args);
         app.Logger.LogInformation("Operator command {Command} completed.", args[0]);
     }
     catch (Exception exception)

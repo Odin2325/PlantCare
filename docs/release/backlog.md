@@ -18,12 +18,35 @@ release unless the related optional feature is disabled.
 | PUSH-01 | P1, failure handling verified locally 2026-10-13 | Validate and harden partial push failures | Durable per-device outcomes, expiry/removal, bounded retries/fanout and interrupted-pass persistence pass SQLite/SQL fault-injection tests. Real browser/provider delivery remains open; see push-reliability.md. |
 | DATA-01 | P1 | Validate migrations and recovery on SQL Server | Empty-database and upgrade migration checks pass; database plus key-ring restore drill succeeds. |
 | CI-01 | P1 | Add executable release gates | Browser core journey, real-auth coverage, SQL Server migrations, API/worker startup smoke tests, and required merge checks are in place. |
-| OPS-01 | P1 | Prepare production access and operations | Restricted runtime DB credentials, controlled migrations, alerts, backup schedule, and rollback procedure are documented and tested. |
+| OPS-01 | P1, database access verified locally 2026-10-13 | Prepare production access and operations | Restricted runtime DB credentials, controlled migrations, alerts, backup schedule, and rollback procedure are documented and tested. See database-access.md; scheduled backups/alerts and public-host drills remain open. |
 | UX-01 | P1 | Complete beta acceptance | Supported-device matrix, accessibility/core journey, PWA update, and two normal care cycles pass with no open blockers. |
 | CAL-01 | P1 if enabled | Validate external calendar providers | Both real-provider success and failure paths pass; otherwise leave the unvalidated provider disabled at launch. |
 | RELEASE-01 | P1 | Prepare v1 distribution and user documentation | Version/tag/artifacts, release notes, support/privacy information, license decision, and known limitations are complete. |
 
 ## Local checks performed
+
+### Restricted database access follow-up (2026-10-13)
+
+- Replaced runtime `sa` connections with separate API/worker logins and explicit
+  table grants. Neither can change schema, migration history or Identity roles;
+  the worker cannot read Identity accounts or update the species catalog.
+- Migrations/role seeding, credential provisioning and administrator/catalog
+  bootstrap run through an explicit operator-only one-shot service. Normal
+  Compose API startup migrations are disabled. Local startup builds first,
+  stops writers, runs operator steps and recreates runtime containers only
+  after success. Repeat provisioning succeeds; unexpected grants/roles fail closed.
+- Real SQL checks validate both principals, required grants, denied operations,
+  invalid passwords and rejection/cleanup of a temporary unmanaged grant.
+  CI runs the same permission checks before real-cookie account isolation.
+- The full core-care and isolated recovery journey passed with restricted
+  accounts: CHECKDB, table counts/checksums, key hashes, existing session/history,
+  worker processing and restart deduplication. Restore recreates server logins
+  and remaps database users before application startup. Private evidence remains
+  in ignored `recovery-artifacts/d343d58ebb44/`. Windows SQL was untouched.
+- [database-access.md](database-access.md) records policies, staging sequence and
+  recovery requirements. The owner reconfirmed no host/domain and requested local
+  preparation. Scheduled encrypted off-host backups, alerts, secret storage,
+  physical-device/provider acceptance and public staging remain open.
 
 ### Push failure/retry follow-up (2026-10-13)
 

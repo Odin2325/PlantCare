@@ -97,6 +97,7 @@ jobs:
           docker tag plantcare-worker:ci plantcare-local-worker
           if ($LASTEXITCODE -ne 0) { throw 'Worker image tagging failed.' }
           ./scripts/Start-LocalDeployment.ps1 -SkipBuild
+          ./scripts/Test-LocalDatabaseAccess.ps1
           ./scripts/Test-LocalAccountIsolation.ps1
 
       - name: Test password resets and session security on SQL Server

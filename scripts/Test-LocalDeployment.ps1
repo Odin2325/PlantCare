@@ -81,12 +81,11 @@ if ($IncludeCareJourney) {
     $fixturePath = Join-Path (Split-Path $PSScriptRoot -Parent) 'deploy\catalog.example.json'
     $speciesRequest = (Get-Content -Raw $fixturePath | ConvertFrom-Json)[0]
     $null = Invoke-LocalRequest '/api/plant-species' 'POST' $speciesRequest -Expected 403
-    $operatorOutput = & $docker exec plantcare-local-api-1 dotnet PlantCare.Api.dll --bootstrap-admin $email 2>&1
+    $operatorArgs = @('compose', '--env-file', (Join-Path (Split-Path $PSScriptRoot -Parent) '.env.local'), '-f', (Join-Path (Split-Path $PSScriptRoot -Parent) 'compose.yaml'), '-f', (Join-Path (Split-Path $PSScriptRoot -Parent) 'compose.local.yaml'), '--project-name', 'plantcare-local', 'run', '--rm', '--no-deps', 'migrate')
+    $operatorOutput = & $docker @operatorArgs --bootstrap-admin $email 2>&1
     if ($LASTEXITCODE -ne 0) { throw 'Local administrator provisioning failed.' }
-    $operatorOutput = & $docker cp $fixturePath 'plantcare-local-api-1:/tmp/plantcare-catalog.json' 2>&1
-    if ($LASTEXITCODE -ne 0) { throw 'Local catalog fixture copy failed.' }
     for ($import = 0; $import -lt 2; $import++) {
-        $operatorOutput = & $docker exec plantcare-local-api-1 dotnet PlantCare.Api.dll --import-catalog /tmp/plantcare-catalog.json 2>&1
+        $operatorOutput = & $docker @operatorArgs --import-catalog /operator/catalog.example.json 2>&1
         if ($LASTEXITCODE -ne 0) { throw 'Local catalog import failed.' }
     }
     $null = Invoke-LocalRequest '/api/auth/login?useCookies=true' 'POST' @{ email = $email; password = $password }

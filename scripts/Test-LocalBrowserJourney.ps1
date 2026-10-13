@@ -18,9 +18,7 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Browser test image build failed.' }
     }
     # Operator import is transactional/repeatable and does not promote test users.
-    docker cp deploy/catalog.example.json plantcare-local-api-1:/tmp/plantcare-browser-catalog.json
-    if ($LASTEXITCODE -ne 0) { throw 'Browser catalog fixture copy failed.' }
-    $importOutput = docker exec plantcare-local-api-1 dotnet PlantCare.Api.dll --import-catalog /tmp/plantcare-browser-catalog.json 2>&1
+    $importOutput = docker compose --env-file .env.local -f compose.yaml -f compose.local.yaml --project-name plantcare-local run --rm --no-deps migrate --import-catalog /operator/catalog.example.json 2>&1
     if ($LASTEXITCODE -ne 0) { throw 'Browser catalog fixture import failed; inspect local operator logs.' }
     # Share the proxy network namespace: both email URLs and the browser retain
     # the real https://localhost:8443 origin. Mailpit resolves on the Compose network.
