@@ -929,6 +929,87 @@ public sealed class PlantCareApiTests
                 .GetDateTimeOffset());
     }
 
+    [Theory]
+    [InlineData("Europe/Berlin", "13:00:00", "2026-09-19T11:00:00Z")]
+    [InlineData("America/New_York", "09:00:00", "2026-09-19T13:00:00Z")]
+    public async Task WeekdaySchedulePersistsTodayAndCalendarUsesTheSameInstant(
+        string zone, string time, string expectedUtc)
+    {
+        var userId = await factory.CreateUserAsync();
+        var (_, plant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+        using var update = await client.PutAsJsonAsync(
+            $"/api/my-plants/{plant.Id}/care/Watering/schedule",
+            new { intervalDays = 7, isEnabled = true, scheduleMode = "Weekdays",
+                weekDays = 32, preferredTimeLocal = time, timeZoneId = zone });
+        update.EnsureSuccessStatusCode();
+        var expected = DateTimeOffset.Parse(expectedUtc);
+        var stored = await GetWateringScheduleAsync(client, plant.Id);
+        Assert.Equal(expected, stored.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+        Assert.Equal(zone, stored.GetProperty("timeZoneId").GetString());
+        using var calendar = await client.GetAsync(
+            "/api/calendar?fromUtc=2026-09-19T00:00:00Z&toUtc=2026-09-27T00:00:00Z");
+        calendar.EnsureSuccessStatusCode();
+        using var entries = JsonDocument.Parse(await calendar.Content.ReadAsStringAsync());
+        var scheduled = entries.RootElement.EnumerateArray()
+            .Where(entry => entry.GetProperty("kind").GetString() == "Scheduled").ToArray();
+        Assert.Equal(2, scheduled.Length);
+        Assert.Equal(expected, scheduled[0].GetProperty("startsAtUtc").GetDateTimeOffset());
+        Assert.Equal(expected.AddDays(7), scheduled[1].GetProperty("startsAtUtc").GetDateTimeOffset());
+
+        // Today is satisfied even if care is completed before the preferred time.
+        await CompleteCareAsync(client, plant.Id, PlantCareApiFactory.UtcNow, null);
+        stored = await GetWateringScheduleAsync(client, plant.Id);
+        Assert.Equal(expected.AddDays(7), stored.GetProperty("nextDueAtUtc").GetDateTimeOffset());
+    }
+
+    [Fact]
+    public async Task InvalidWeekdayTimeZoneIsRejectedWithoutChangingStoredSchedule()
+    {
+        var userId = await factory.CreateUserAsync();
+        var (_, plant) = await SeedPlantAsync(userId);
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        await client.AddAntiforgeryTokenAsync();
+        var before = await GetWateringScheduleAsync(client, plant.Id);
+        using var update = await client.PutAsJsonAsync(
+            $"/api/my-plants/{plant.Id}/care/Watering/schedule",
+            new { intervalDays = 7, isEnabled = true, scheduleMode = "Weekdays",
+                weekDays = 32, preferredTimeLocal = "13:00:00", timeZoneId = "Invalid/PlantCare" });
+        Assert.Equal(HttpStatusCode.BadRequest, update.StatusCode);
+        var after = await GetWateringScheduleAsync(client, plant.Id);
+        Assert.Equal(before.GetRawText(), after.GetRawText());
+    }
+
+    [Theory]
+    [InlineData("Europe/Berlin", "2026-03-28T12:00:00Z", "02:15", "2026-03-29T01:00:00Z", "2026-04-05T00:15:00Z")]
+    [InlineData("Europe/Berlin", "2026-10-24T12:00:00Z", "02:30", "2026-10-25T01:30:00Z", "2026-11-01T01:30:00Z")]
+    [InlineData("Australia/Lord_Howe", "2026-10-03T12:00:00Z", "02:15", "2026-10-03T15:30:00Z", "2026-10-10T15:15:00Z")]
+    [InlineData("Australia/Lord_Howe", "2026-04-04T12:00:00Z", "01:45", "2026-04-04T15:15:00Z", "2026-04-11T15:15:00Z")]
+    public async Task PersistedWeekdayCalendarHasOneOccurrencePerSelectedDateAcrossDst(
+        string zone, string anchorText, string time, string firstText, string nextText)
+    {
+        var userId = await factory.CreateUserAsync();
+        var (_, plant) = await SeedPlantAsync(userId);
+        var anchor = DateTimeOffset.Parse(anchorText);
+        await factory.SeedAsync(async db =>
+        {
+            var schedule = await db.CareSchedules.SingleAsync(item => item.UserPlantId == plant.Id);
+            schedule.ConfigureWeekdays(CareWeekDays.Sunday, TimeOnly.Parse(time), zone, anchor);
+        });
+        using var client = CreateClient();
+        client.AuthenticateAs(userId);
+        using var response = await client.GetAsync(
+            $"/api/calendar?fromUtc={Uri.EscapeDataString(anchor.ToString("O"))}&toUtc={Uri.EscapeDataString(anchor.AddDays(9).ToString("O"))}");
+        response.EnsureSuccessStatusCode();
+        using var entries = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        var dates = entries.RootElement.EnumerateArray()
+            .Select(entry => entry.GetProperty("startsAtUtc").GetDateTimeOffset()).ToArray();
+        Assert.Equal(new[] { DateTimeOffset.Parse(firstText), DateTimeOffset.Parse(nextText) }, dates);
+    }
+
     [Fact]
     public async Task CalendarFeedDownloadsOnlyOwnerEntriesAndRevokesTokens()
     {

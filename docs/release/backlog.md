@@ -14,7 +14,7 @@ release unless the related optional feature is disabled.
 | DEP-01 | P1, resolved locally 2026-10-11 | Fix SQLite test dependency advisory | SQLitePCLRaw bundle/native library updated from 2.1.11 to 2.1.13; audit reports no known vulnerable test dependencies; native SQLite security baseline and all backend tests pass. See dependency follow-up below. |
 | AUTH-01 | P1, resolved locally 2026-10-11 | Validate reset/session security and fix bearer antiforgery exemption | Real SQL/SMTP reset checks pass; invalid bearer headers cannot bypass antiforgery; reset invalidates browser sessions on their next request; real-Identity regression tests pass. |
 | BOOT-01 | P1 | Define production administrator/catalog bootstrap | Fresh staging can obtain an administrator and initial species through a documented controlled procedure; no public development-mode bootstrap. |
-| CARE-01 | P1 | Decide same-day weekday scheduling behavior | A selected weekday with a preferred time later today has a documented expected result and a regression test. Current loop starts at tomorrow. |
+| CARE-01 | P1, resolved locally 2026-10-13 | Define same-day and clock-change scheduling behavior | Today's future time is eligible without prior care; completion satisfies its local date; gap/repeated-time rules, saved-zone preservation and calendar agreement have regression coverage. See weekday-scheduling.md. |
 | PUSH-01 | P1 | Validate and harden partial push failures | Multiple subscriptions, expired endpoints, repeated failures, and restarts do not cause uncontrolled resends or block the pending queue indefinitely. |
 | DATA-01 | P1 | Validate migrations and recovery on SQL Server | Empty-database and upgrade migration checks pass; database plus key-ring restore drill succeeds. |
 | CI-01 | P1 | Add executable release gates | Browser core journey, real-auth coverage, SQL Server migrations, API/worker startup smoke tests, and required merge checks are in place. |
@@ -24,6 +24,36 @@ release unless the related optional feature is disabled.
 | RELEASE-01 | P1 | Prepare v1 distribution and user documentation | Version/tag/artifacts, release notes, support/privacy information, license decision, and known limitations are complete. |
 
 ## Local checks performed
+
+### Weekday/time-zone follow-up (2026-10-13)
+
+- Defined same-day behavior: new schedules can use today's selected future time;
+  exact/past instants move forward. Completion/history recalculation satisfies
+  the entire completed local date, so early care does not create a second
+  reminder that day. Prior care remains the anchor for overdue schedules.
+- Spring gaps advance to the first valid local minute; repeated autumn times
+  use one later UTC occurrence. Calendar recurrence must always advance strictly
+  in UTC. Historical date-line changes remain outside this acceptance matrix.
+- Fixed saving/pausing weekday schedules silently replacing the saved zone with
+  the current browser's zone. The UI now preserves and displays the saved zone
+  and explains same-day/clock-change behavior.
+- Added 19 domain cases, including Berlin/New York, Lord Howe half-hour changes,
+  local/UTC midnight, month/year changes, completion/history, explicit zone change,
+  and interval conversion. Added seven API cases for stored
+  same-day instants/calendar agreement, completion, invalid-zone non-write and
+  recurring spring/fall calendar dates. See [weekday-scheduling.md](weekday-scheduling.md).
+- Added the previously omitted API integration project to `PlantCare.slnx` so
+  the normal backend CI command executes those checks on Linux too.
+- Local backend checks pass: domain 50/50, API integration 46/46, application
+  1/1. Desktop Chromium, mobile Chromium and Firefox pass the extended SQL/SMTP
+  journey (3/3, about 3.4 minutes), including a second real sign-in from a New
+  York context and saved Berlin-zone pause/resume. Production images build.
+  No host clock or Windows SQL changes were made. Public staging, physical
+  device clock changes and real push timing remain unverified.
+- Feature implementation should resume after stable beta acceptance, keeping v1
+  scope fixed until its tag. Remaining priorities: reminder/push failure handling,
+  public staging and operations, supported-device/PWA checks and two care cycles,
+  then release packaging. Collect and prioritize feature ideas during this work.
 
 ### Browser core-journey follow-up (2026-10-13)
 

@@ -61,7 +61,7 @@ async function login(page: Page, email: string, password: string, expected = 200
   await submitAuth(page, 'Log in', 'login', expected);
 }
 
-test('register, confirm, care for a plant, recover password and log out', async ({ page, request }) => {
+test('register, confirm, care for a plant, recover password and log out', async ({ page, request, browser }) => {
   const email = `browser-${randomUUID()}@example.test`;
   const password = `Pc9!${randomBytes(20).toString('hex')}`;
   const newPassword = `Pc9!${randomBytes(20).toString('hex')}`;
@@ -153,6 +153,44 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(event).toHaveCount(1);
     await event.click();
     await expect(page.locator('.details')).toContainText('Completed');
+  });
+
+  await step('Weekday settings retain their time zone in a travelling browser', async () => {
+    await page.getByRole('navigation').getByRole('link', { name: 'My plants', exact: true }).click();
+    const watering = page.locator('.care-schedule').filter({ hasText: 'Watering' });
+    await watering.getByRole('combobox', { name: /Schedule/ }).selectOption('Weekdays');
+    await watering.getByRole('checkbox', { name: 'Mon', exact: true }).check();
+    await watering.getByLabel('Local reminder time', { exact: true }).fill('09:00');
+    await watering.getByRole('button', { name: 'Save schedule', exact: true }).click();
+    await expect(watering.locator('.interval')).toHaveText('Mon at 09:00');
+    await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
+    const travelling = await browser.newContext({
+      baseURL: origin, ignoreHTTPSErrors: true, timezoneId: 'America/New_York',
+    });
+    try {
+      const otherPage = await travelling.newPage();
+      otherPage.on('pageerror', error => pageErrors.push(error.name));
+      await otherPage.goto('/my-plants');
+      await login(otherPage, email, password);
+      await expect(otherPage.getByRole('heading', { name: 'Your plant collection' })).toBeVisible();
+      const otherWatering = otherPage.locator('.care-schedule').filter({ hasText: 'Watering' });
+      await expect(otherWatering).toContainText('Reminder time zone: Europe/Berlin');
+      const saved = otherPage.waitForResponse(response =>
+        response.url().endsWith('/care/Watering/schedule') && response.request().method() === 'PUT');
+      await otherWatering.getByRole('button', { name: 'Pause', exact: true }).click();
+      const result = await saved;
+      expect(result.status()).toBe(200);
+      const schedule = await result.json();
+      expect(schedule.timeZoneId).toBe('Europe/Berlin');
+      expect(schedule.isEnabled).toBe(false);
+      await expect(otherWatering.getByRole('button', { name: 'Resume', exact: true })).toBeVisible();
+      await submitAuth(otherPage, 'Log out', 'logout', 204);
+      await expect(otherPage.getByRole('heading', { name: 'Welcome back' })).toBeVisible();
+    } finally { await travelling.close(); }
+    await page.reload();
+    await watering.getByRole('button', { name: 'Resume', exact: true }).click();
+    await expect(watering.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+    await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
   });
 
   await step('Archive and restore survive reload', async () => {

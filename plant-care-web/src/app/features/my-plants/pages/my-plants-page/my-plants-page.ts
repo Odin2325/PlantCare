@@ -428,6 +428,10 @@ export class MyPlantsPage {
     return `${days} at ${schedule.preferredTimeLocal?.slice(0, 5) ?? ''}`;
   }
 
+  getScheduleTimeZone(schedule: CareSchedule): string {
+    return schedule.timeZoneId ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
+  }
+
   saveSchedule(
     plant: UserPlant,
     schedule: CareSchedule,
@@ -840,7 +844,7 @@ export class MyPlantsPage {
           scheduleMode,
           weekDays,
           preferredTimeLocal: scheduleMode === 'Weekdays' ? preferredTimeLocal : null,
-          timeZoneId: scheduleMode === 'Weekdays' ? Intl.DateTimeFormat().resolvedOptions().timeZone : null,
+          timeZoneId: scheduleMode === 'Weekdays' ? this.getScheduleTimeZone(schedule) : null,
         },
       )
       .pipe(

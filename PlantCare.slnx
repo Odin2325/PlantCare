@@ -7,6 +7,7 @@
     <Project Path="PlantCare.Worker/PlantCare.Worker.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="PlantCare.Api.IntegrationTests/PlantCare.Api.IntegrationTests.csproj" />
     <Project Path="PlantCare.Application.Tests/PlantCare.Application.Tests.csproj" />
     <Project Path="PlantCare.Domain.Tests/PlantCare.Domain.Tests.csproj" Id="083e621a-ec3f-4e52-b299-c27688b6b475" />
   </Folder>

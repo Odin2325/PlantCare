@@ -288,6 +288,13 @@
                      [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
                      (input)="setPreferredTimeDraft(plant, schedule, $any($event.target).value)">
             </label>
+            <p class="field-hint">
+              Reminder time zone: {{ getScheduleTimeZone(schedule) }}.
+              A new schedule can start today if its selected time is still ahead. Completing
+              care moves the next reminder to a later selected date. During clock
+              changes, skipped times move to the first valid time and repeated
+              times use the later occurrence.
+            </p>
             }
 
             <div class="schedule-control-buttons">

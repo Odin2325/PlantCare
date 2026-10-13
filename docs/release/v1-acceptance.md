@@ -9,6 +9,15 @@ installation/updates. Google and Microsoft synchronization are optional launch
 features: keep them disabled until their provider-specific checks pass.
 Defer new features until these gates pass.
 
+Feature planning can continue during stabilization. Resume implementation after
+the release candidate passes public staging, recovery/operations, supported-device
+and PWA checks, and a beta completes two normal care cycles with no open release
+blockers. Keep v1 scope stable through its tag; use beta feedback to choose one
+small v1.1 feature at a time, retaining the automated release checks. Current
+next priorities are reminder/push failure handling, public staging/operations,
+then beta acceptance and release packaging. A required v1 defect fix is still
+appropriate before that point.
+
 Unchecked means not yet accepted, even when supporting code or unit tests exist.
 For each executed check, record the candidate SHA, environment, date, tester,
 result, evidence link, and associated defect. Use two ordinary accounts A/B and
@@ -96,6 +105,7 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 | Check | Candidate SHA | Environment/date | Tester | Result | Evidence/defect |
 | --- | --- | --- | --- | --- | --- |
 | Full staging acceptance | pending | No staging host as of 2026-10-11 | pending | NOT RUN | See backlog STAGE-01 |
+| Weekday same-day/DST and saved-zone policy | 37714ea plus weekday changes | Windows backend tests; Docker SQL/SMTP browsers, 2026-10-13 | Codex | PASS | Domain 50/50, API 46/46, application 1/1; extended browsers 3/3; weekday-scheduling.md; public staging/physical devices NOT RUN |
 | Browser core care and password-reset forms | 203a0f1 application images plus browser tooling | Docker HTTPS / SQL Server / Mailpit, 2026-10-13 | Codex | PASS | Test-LocalBrowserJourney.ps1; desktop Chromium, mobile Chromium, Firefox: 3/3; browser-journey.md; physical devices, accessibility, PWA and real providers NOT RUN |
 | Password reset and session security | 7bb2422 plus auth changes | Docker SQL Server / Windows, 2026-10-11 | Codex | PASS | Test-LocalAuthenticationSecurity.ps1; real SMTP/cookies, reset revocation, antiforgery; API 39/39 includes expiry/real Identity; browser form UX NOT RUN |
 | Real-cookie SQL Server account isolation and feed regression | 369187f plus isolation/feed changes | Docker SQL Server / Windows, 2026-10-11 | Codex | PASS | Test-LocalAccountIsolation.ps1; account-isolation.md; API 33/33; provider credential isolation NOT RUN |

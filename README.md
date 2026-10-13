@@ -18,6 +18,8 @@ Use the [password-reset and session-security checks](docs/release/authentication
 to verify reset emails, session invalidation, and antiforgery protection.
 Run the [desktop/mobile browser journey](docs/release/browser-journey.md)
 to verify the account, plant-care, history, calendar, and password-reset forms.
+See the [weekday and time-zone policy](docs/release/weekday-scheduling.md)
+for same-day care and daylight-saving behavior.
 
 ## Production deployment
 

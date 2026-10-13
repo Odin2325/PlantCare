@@ -36,6 +36,9 @@ executes a fresh journey with a separate generated account:
 - Archive/restore, persistence after reload, password-reset email and forms,
   mismatched confirmation feedback, old-password rejection, new-password sign-in,
   retained collection, logout/protected-route rejection and incomplete reset link.
+- Weekday configuration and displayed time zone, then a second context in
+  America/New_York signing in normally and pausing a Europe/Berlin schedule
+  without changing its zone; original-browser reload and resume.
 - No uncaught browser exceptions during the journey.
 
 Production authentication limits remain enabled. Only rejected (429) form
@@ -54,5 +57,5 @@ the failed step without publishing sensitive payloads.
 This is functional browser regression coverage. Mobile emulation does not prove
 real Android/iOS behavior. Safari/WebKit, accessibility and visual review, native
 PWA install/update/offline behavior, real push and calendar providers, weekday/DST
-boundaries, concurrent submissions and two normal care cycles remain separate
+boundaries on physical devices, concurrent submissions and two normal care cycles remain separate
 acceptance work. Public staging and the broader v1 checklist remain open.

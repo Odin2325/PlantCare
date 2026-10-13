@@ -105,7 +105,10 @@ public sealed class CareSchedule
 
         LastCompletedAtUtc = completedAtUtc;
 
-        NextDueAtUtc = GetNextOccurrenceAfter(completedAtUtc);
+        // Completing care early still satisfies this local care date.
+        NextDueAtUtc = ScheduleMode == CareScheduleMode.Weekdays
+            ? CalculateNextWeekdayOccurrence(completedAtUtc, includeAnchorDate: false)
+            : GetNextOccurrenceAfter(completedAtUtc);
     }
 
     public void Disable()
@@ -131,8 +134,10 @@ public sealed class CareSchedule
         DateTimeOffset resetAtUtc)
     {
         LastCompletedAtUtc = latestCompletedAtUtc;
-        NextDueAtUtc = GetNextOccurrenceAfter(
-            latestCompletedAtUtc ?? resetAtUtc);
+        var anchor = latestCompletedAtUtc ?? resetAtUtc;
+        NextDueAtUtc = ScheduleMode == CareScheduleMode.Weekdays
+            ? CalculateNextWeekdayOccurrence(anchor, includeAnchorDate: latestCompletedAtUtc is null)
+            : GetNextOccurrenceAfter(anchor);
     }
 
     public void UpdateInterval(int intervalDays)
@@ -204,7 +209,8 @@ public sealed class CareSchedule
         WeekDays = weekDays;
         PreferredTimeLocal = preferredTimeLocal;
         TimeZoneId = timeZoneId;
-        NextDueAtUtc = CalculateNextWeekdayOccurrence(anchorUtc);
+        NextDueAtUtc = CalculateNextWeekdayOccurrence(
+            anchorUtc, includeAnchorDate: LastCompletedAtUtc != anchorUtc);
     }
 
     public DateTimeOffset GetNextOccurrenceAfter(DateTimeOffset occurrenceUtc)
@@ -215,7 +221,8 @@ public sealed class CareSchedule
     }
 
     private DateTimeOffset CalculateNextWeekdayOccurrence(
-        DateTimeOffset afterUtc)
+        DateTimeOffset afterUtc,
+        bool includeAnchorDate = true)
     {
         if (PreferredTimeLocal is null || string.IsNullOrWhiteSpace(TimeZoneId))
             throw new InvalidOperationException(
@@ -225,7 +232,8 @@ public sealed class CareSchedule
         var localAfter = TimeZoneInfo.ConvertTime(afterUtc, timeZone);
         var localDate = DateOnly.FromDateTime(localAfter.DateTime);
 
-        for (var offset = 1; offset <= 7; offset++)
+        // A second week also accommodates a completely skipped local date.
+        for (var offset = includeAnchorDate ? 0 : 1; offset <= 14; offset++)
         {
             var candidateDate = localDate.AddDays(offset);
             if (!WeekDays.HasFlag(ToCareWeekDay(candidateDate.DayOfWeek)))
@@ -234,12 +242,28 @@ public sealed class CareSchedule
             var localDateTime = candidateDate.ToDateTime(
                 PreferredTimeLocal.Value,
                 DateTimeKind.Unspecified);
-            while (timeZone.IsInvalidTime(localDateTime))
-                localDateTime = localDateTime.AddMinutes(30);
+            if (timeZone.IsInvalidTime(localDateTime))
+            {
+                localDateTime = localDateTime.AddTicks(
+                    -(localDateTime.Ticks % TimeSpan.TicksPerMinute));
+                do { localDateTime = localDateTime.AddMinutes(1); }
+                while (DateOnly.FromDateTime(localDateTime) == candidateDate &&
+                    timeZone.IsInvalidTime(localDateTime));
+                if (DateOnly.FromDateTime(localDateTime) != candidateDate)
+                    continue;
+            }
 
-            return TimeZoneInfo.ConvertTimeToUtc(
-                localDateTime,
-                timeZone);
+            // Choose one instant in a repeated hour: the smaller offset gives
+            // the later UTC occurrence, including zones with half-hour changes.
+            var occurrence = timeZone.IsAmbiguousTime(localDateTime)
+                ? new DateTimeOffset(localDateTime,
+                    timeZone.GetAmbiguousTimeOffsets(localDateTime).Min()).ToUniversalTime()
+                : new DateTimeOffset(TimeZoneInfo.ConvertTimeToUtc(localDateTime, timeZone));
+            // Keep the resolved occurrence on its selected local date.
+            if (DateOnly.FromDateTime(TimeZoneInfo.ConvertTime(occurrence, timeZone).DateTime) != candidateDate)
+                continue;
+            if (occurrence > afterUtc)
+                return occurrence;
         }
 
         throw new InvalidOperationException(
