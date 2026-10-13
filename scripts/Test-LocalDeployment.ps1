@@ -4,6 +4,7 @@
 param([switch]$IncludeCareJourney, [switch]$IncludeRecovery)
 
 $ErrorActionPreference = 'Stop'
+Import-Module Microsoft.PowerShell.Utility -ErrorAction Stop
 if ($IncludeRecovery -and -not $IncludeCareJourney) { throw '-IncludeRecovery requires -IncludeCareJourney.' }
 $baseUrl = 'https://localhost:8443'
 $mailUrl = 'http://localhost:8025'

@@ -55,6 +55,11 @@ release unless the related optional feature is disabled.
   or exactly-once guarantee across provider acceptance and database commit.
   Real provider credentials/browser permissions and physical-device delivery,
   production alerts and retention remain open. The whole reminder gate is not accepted.
+- First pushed CI run passed backend/frontend and SQL isolation, then exposed a
+  fresh PowerShell-session dependency in the existing reset-security harness:
+  WebRequestSession was used before its module was loaded. The HTTP harnesses
+  now explicitly import Microsoft.PowerShell.Utility before constructing it.
+  No application authentication policy was relaxed.
 
 ### Weekday/time-zone follow-up (2026-10-13)
 

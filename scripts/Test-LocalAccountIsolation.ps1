@@ -2,6 +2,7 @@
 [CmdletBinding()]
 param()
 $ErrorActionPreference = 'Stop'
+Import-Module Microsoft.PowerShell.Utility -ErrorAction Stop
 $origin = 'https://localhost:8443'
 $runId = [Guid]::NewGuid().ToString('N')
 

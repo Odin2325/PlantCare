@@ -2,6 +2,8 @@
 [CmdletBinding()]
 param()
 $ErrorActionPreference = 'Stop'
+# Load the WebRequestSession type explicitly in fresh/no-profile CI sessions.
+Import-Module Microsoft.PowerShell.Utility -ErrorAction Stop
 $origin = 'https://localhost:8443'
 $runId = [Guid]::NewGuid().ToString('N')
 $email = "auth-security-$runId@example.test"
