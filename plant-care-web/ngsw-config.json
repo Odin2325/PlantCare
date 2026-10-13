@@ -11,11 +11,13 @@
           "/index.html",
           "/manifest.webmanifest",
           "/plantcare-icon.svg",
+          "/icons/*.png",
           "/*.css",
           "/*.js"
         ]
       }
     }
   ],
-  "navigationRequestStrategy": "freshness"
+  "navigationRequestStrategy": "performance",
+  "navigationUrls": ["/**", "!/**/*.*", "!/**/*__*", "!/**/*__*/**", "!/api/**", "!/health/**"]
 }

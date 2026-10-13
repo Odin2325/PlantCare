@@ -108,7 +108,7 @@ jobs:
         shell: pwsh
         run: ./scripts/Test-LocalPushDelivery.ps1
 
-      - name: Test desktop and mobile browser journeys
+      - name: Test browser journeys and PWA offline updates
         shell: pwsh
         run: ./scripts/Test-LocalBrowserJourney.ps1
 

@@ -9,14 +9,14 @@
 
 @if (!pwa.isOnline()) {
 <div class="offline-banner" role="status">
-  You are offline. PlantCare will reconnect when a network is available.
+  You are offline. Care changes need a connection. Reconnect to load your account and latest plant data.
 </div>
 }
 
-@if (pwa.updateAvailable()) {
+@if (pwa.updateAvailable() || pwa.recoveryRequired()) {
 <div class="update-banner" role="status">
-  <span>A new PlantCare version is ready.</span>
-  <button type="button" (click)="pwa.activateUpdate()">Update now</button>
+  <span>{{ pwa.recoveryRequired() ? 'PlantCare needs to reload to recover. Save any unfinished work before reloading.' : 'A new PlantCare version is ready. Save any unfinished work before updating.' }}</span>
+  <button type="button" [disabled]="!pwa.isOnline()" (click)="pwa.reloadForUpdate()">{{ pwa.recoveryRequired() ? 'Reload PlantCare' : 'Update now' }}</button>
 </div>
 }
 

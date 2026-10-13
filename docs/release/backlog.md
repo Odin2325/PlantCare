@@ -25,6 +25,36 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### PWA offline/update follow-up (2026-10-13)
+
+- Added 192/512 PNG manifest icons and an Apple touch icon rendered from the
+  existing SVG; stable app ID and explicit offline/cache policy are documented.
+- Offline cold startup renders without authentication retry delay or cached
+  identity. No API data is cached or care writes queued. API/health navigations
+  are excluded from cached HTML fallback; app navigation stays with the verified
+  cached version rather than a live network index.
+- Updates use a consented full reload, with unfinished-input guidance and
+  disabled offline controls. Reconnect/foreground checks coalesce and retry
+  failures; foreground reconciles missed network events. Unrecoverable state
+  offers reload. Destroyed services remove browser listeners/subscriptions.
+- Nine real-worker checks passed across desktop Chromium, mobile-sized Chromium
+  and Firefox using verified production assets with controlled A/B index variants:
+  offline cold reload, PNG sizes, API non-caching, version-ready/consent, input
+  preservation before reload, corrupt candidate rejection and corrected-deployment
+  recovery. Six frontend tests and production image builds pass.
+- Initial fixtures were corrected to wait for a worker-served document and to
+  refuse connections for worker-owned requests. Firefox offline emulation omits
+  online events after a cold reload; the fixture explicitly exercises foreground
+  reconciliation, not physical-device event delivery. A corrupt Angular manifest
+  enters EXISTING_CLIENTS_ONLY: old open tabs survive, while cold launches may
+  fail until assets are corrected. This limit is documented, not treated as an
+  unconditional offline recovery guarantee.
+- The combined core/PWA runner is part of CI. [pwa.md](pwa.md) provides manual
+  beta checks for native installation, physical Android/iOS, actual separately
+  built release upgrades, public HTTPS, cache eviction and accessibility.
+  UX-01 and the complete PWA acceptance gate remain open. No Windows SQL,
+  user clock, production authentication limits or external providers were changed.
+
 ### Encrypted scheduled-backup follow-up (2026-10-13)
 
 - Initialized a restic-encrypted repository on the owner's selected external USB

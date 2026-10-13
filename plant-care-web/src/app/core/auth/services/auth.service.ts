@@ -43,6 +43,11 @@ export class AuthService {
   );
 
   initialize(): Observable<void> {
+    // Load the cached shell promptly offline, without inferring an identity.
+    if (!navigator.onLine) {
+      this.currentUserState.set(null);
+      return of(undefined);
+    }
     return this.antiforgeryService
       .refreshToken()
       .pipe(

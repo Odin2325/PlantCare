@@ -1,9 +1,11 @@
 # Local browser release checks
 
-The dedicated `tests/browser` package runs Playwright against the production
+The core journey in the dedicated `tests/browser` package runs Playwright against the production
 Angular assets and API through local Caddy HTTPS, with SQL Server and Mailpit.
 It does not mock application requests, seed authentication cookies, or disable
 antiforgery. All tested users register through the UI and remain ordinary users.
+The same runner includes a separate anonymous loopback fixture for real-worker
+offline/update checks; see [pwa.md](pwa.md) for its isolation and acceptance limits.
 
 ```powershell
 ./scripts/Start-LocalDeployment.ps1
