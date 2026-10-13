@@ -38,6 +38,8 @@ Run `./scripts/Test-LocalBrowserJourney.ps1` for the desktop Chromium, mobile
 Chromium and Firefox UI flows; see [browser-journey.md](browser-journey.md).
 The [weekday policy](weekday-scheduling.md) defines same-day, clock-change and
 saved time-zone behavior; the browser suite also checks travelling contexts.
+Run `./scripts/Test-LocalPushDelivery.ps1` for encrypted HTTP provider-failure
+tests on disposable Docker SQL databases; see [push-reliability.md](push-reliability.md).
 
 To stop the local stack and preserve its data:
 

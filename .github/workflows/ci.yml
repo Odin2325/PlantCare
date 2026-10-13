@@ -76,6 +76,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up .NET for SQL Server push checks
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
       - name: Build production image
         run: docker build --target api --tag plantcare:ci .
 
@@ -97,6 +102,10 @@ jobs:
       - name: Test password resets and session security on SQL Server
         shell: pwsh
         run: ./scripts/Test-LocalAuthenticationSecurity.ps1
+
+      - name: Test push failures and retries on SQL Server
+        shell: pwsh
+        run: ./scripts/Test-LocalPushDelivery.ps1
 
       - name: Test desktop and mobile browser journeys
         shell: pwsh

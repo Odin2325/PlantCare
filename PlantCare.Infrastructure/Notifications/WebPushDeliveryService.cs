@@ -1,48 +1,106 @@
-using System.Net;
 using System.Text.Json;
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PlantCare.Application.Notifications;
+using PlantCare.Domain.Entities;
 using PlantCare.Infrastructure.Persistence;
-using WebPush;
 
 namespace PlantCare.Infrastructure.Notifications;
 
-internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOptions<WebPushOptions> options, TimeProvider timeProvider, ILogger<WebPushDeliveryService> logger) : IPushDeliveryService
+internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOptions<WebPushOptions> options,
+    IWebPushTransport transport, TimeProvider timeProvider, ILogger<WebPushDeliveryService> logger) : IPushDeliveryService
 {
     public async Task<int> DeliverPendingAsync(int batchSize = 100, CancellationToken cancellationToken = default)
     {
+        if (batchSize is < 1 or > 1_000) throw new ArgumentOutOfRangeException(nameof(batchSize));
         var settings = options.Value;
         if (string.IsNullOrWhiteSpace(settings.Subject) || string.IsNullOrWhiteSpace(settings.PublicKey) || string.IsNullOrWhiteSpace(settings.PrivateKey)) return 0;
+        var now = timeProvider.GetUtcNow();
         var notifications = await dbContext.Notifications.Include(item => item.CareSchedule).ThenInclude(schedule => schedule.UserPlant)
-            .Where(item => item.PushSentAtUtc == null).OrderBy(item => item.CreatedAtUtc).Take(batchSize).ToListAsync(cancellationToken);
-        var userIds = notifications.Select(item => item.UserId).Distinct().ToArray();
-        var preferences = await dbContext.NotificationPreferences
-            .Where(item => userIds.Contains(item.UserId))
-            .ToDictionaryAsync(item => item.UserId, cancellationToken);
-        using var client = new WebPushClient(); var vapid = new VapidDetails(settings.Subject, settings.PublicKey, settings.PrivateKey); var delivered = 0;
+            .Where(item => item.PushSentAtUtc == null && (item.PushNextAttemptAtUtc == null || item.PushNextAttemptAtUtc <= now))
+            .OrderBy(item => item.PushNextAttemptAtUtc ?? item.CreatedAtUtc).ThenBy(item => item.Id)
+            .Take(batchSize).ToListAsync(cancellationToken);
+        var processed = 0;
+        var passTime = Stopwatch.StartNew();
         foreach (var notification in notifications)
         {
-            if (preferences.TryGetValue(notification.UserId, out var preference) &&
-                (!preference.PushEnabled ||
-                 !preference.IsActionEnabled(notification.CareSchedule.ActionType)))
+            if (passTime.Elapsed >= TimeSpan.FromMinutes(1)) break;
+            cancellationToken.ThrowIfCancellationRequested();
+            now = timeProvider.GetUtcNow();
+            var schedule = notification.CareSchedule;
+            var preference = await dbContext.NotificationPreferences.AsNoTracking()
+                .SingleOrDefaultAsync(item => item.UserId == notification.UserId, cancellationToken);
+            var deliveries = await dbContext.PushDeliveries.Where(item => item.NotificationId == notification.Id).ToListAsync(cancellationToken);
+            if (!schedule.IsEnabled || schedule.IsArchived || !schedule.UserPlant.IsActive ||
+                schedule.NextDueAtUtc != notification.DueAtUtc || notification.CreatedAtUtc.AddDays(1) <= now ||
+                (preference is not null && (!preference.PushEnabled || !preference.IsActionEnabled(schedule.ActionType))))
             {
-                notification.MarkPushSent(timeProvider.GetUtcNow());
+                foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending)) delivery.Skip(now);
+                notification.MarkPushSent(now);
+                await dbContext.SaveChangesAsync(cancellationToken);
+                processed++;
                 continue;
             }
 
-            var subscriptions = await dbContext.PushSubscriptions.Where(item => item.UserId == notification.UserId).ToListAsync(cancellationToken); var retryNeeded = false;
-            foreach (var item in subscriptions)
+            var subscriptions = await dbContext.PushSubscriptions.Where(item => item.UserId == notification.UserId).ToDictionaryAsync(item => item.Id, cancellationToken);
+            if (deliveries.Count == 0)
             {
-                var payload = JsonSerializer.Serialize(new { notification = new { title = $"{notification.CareSchedule.ActionType} reminder", options = new { body = $"{notification.CareSchedule.UserPlant.Nickname} needs care.", icon = "/plantcare-icon.svg", data = new { onActionClick = new { @default = new { operation = "navigateLastFocusedOrOpen", url = "/notifications" } } } } } });
-                try { await client.SendNotificationAsync(new WebPush.PushSubscription(item.Endpoint, item.P256dh, item.Auth), payload, vapid, cancellationToken); }
-                catch (WebPushException exception) when (exception.StatusCode is HttpStatusCode.Gone or HttpStatusCode.NotFound) { dbContext.PushSubscriptions.Remove(item); }
-                catch (Exception exception) { retryNeeded = true; logger.LogWarning(exception, "Push delivery failed for notification {NotificationId}.", notification.Id); }
+                deliveries = subscriptions.Keys.Select(id => PushDelivery.Create(notification.Id, id, now)).ToList();
+                dbContext.PushDeliveries.AddRange(deliveries);
+                await dbContext.SaveChangesAsync(cancellationToken);
             }
-            if (!retryNeeded) { notification.MarkPushSent(timeProvider.GetUtcNow()); delivered++; }
+            var payload = JsonSerializer.Serialize(new { notification = new { title = $"{schedule.ActionType} reminder", options = new {
+                body = $"{schedule.UserPlant.Nickname} needs care.", icon = "/plantcare-icon.svg",
+                tag = $"plantcare-{notification.Id:N}",
+                data = new { onActionClick = new { @default = new { operation = "navigateLastFocusedOrOpen", url = "/notifications" } } }
+            } } });
+            var attempts = 0;
+            foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending))
+            {
+                if (attempts >= 16 || passTime.Elapsed >= TimeSpan.FromMinutes(1)) break;
+                cancellationToken.ThrowIfCancellationRequested();
+                now = timeProvider.GetUtcNow();
+                if (!subscriptions.TryGetValue(delivery.SubscriptionId, out var subscription)) delivery.Skip(now);
+                else if (delivery.NextAttemptAtUtc > now) continue;
+                else
+                {
+                    attempts++;
+                    try
+                    {
+                        var result = await transport.SendAsync(subscription, payload, cancellationToken);
+                        var code = (int)result.StatusCode;
+                        delivery.RecordAttempt(timeProvider.GetUtcNow(), code, code is 408 or 429 || code >= 500, result.RetryAfter);
+                        if (code is 404 or 410) dbContext.PushSubscriptions.Remove(subscription);
+                    }
+                    catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+                    catch (Exception exception)
+                    {
+                        delivery.RecordAttempt(timeProvider.GetUtcNow(), null,
+                            exception is not (ArgumentException or FormatException));
+                        // Provider exceptions can contain endpoint URLs and keys.
+                        logger.LogWarning("Push attempt failed for notification {NotificationId}, device {SubscriptionId}: {FailureType}.",
+                            notification.Id, subscription.Id, exception.GetType().Name);
+                    }
+                    if (delivery.Status == PushDeliveryStatus.Failed)
+                        logger.LogWarning("Push delivery stopped for notification {NotificationId}, device {SubscriptionId}, status {StatusCode}, attempts {AttemptCount}.",
+                            notification.Id, subscription.Id, delivery.LastStatusCode, delivery.AttemptCount);
+                }
+                // Persist each device result before another send; ordinary
+                // restarts must not resend to devices that already accepted it.
+                await dbContext.SaveChangesAsync(cancellationToken);
+            }
+            var pending = deliveries.Where(item => item.Status == PushDeliveryStatus.Pending).ToArray();
+            if (pending.Length == 0) { notification.MarkPushSent(timeProvider.GetUtcNow()); processed++; }
+            else
+            {
+                var next = pending.Min(item => item.NextAttemptAtUtc)!.Value;
+                var current = timeProvider.GetUtcNow();
+                notification.DeferPush(next > current ? next : current.AddMinutes(1));
+            }
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
-        if (notifications.Count > 0) await dbContext.SaveChangesAsync(cancellationToken);
-        return delivered;
+        return processed;
     }
 }

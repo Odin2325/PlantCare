@@ -155,56 +155,61 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarShare", b =>
                 {
-                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
-                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<Guid>("OwnerUserId").HasColumnType("uniqueidentifier");
-                    b.Property<Guid>("RecipientUserId").HasColumnType("uniqueidentifier");
-                    b.Property<DateTimeOffset?>("RevokedAtUtc").HasColumnType("datetimeoffset");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RecipientUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("RevokedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("Id");
-                    b.HasIndex("OwnerUserId", "RecipientUserId").IsUnique().HasFilter("[RevokedAtUtc] IS NULL");
+
+                    b.HasIndex("OwnerUserId", "RecipientUserId")
+                        .IsUnique()
+                        .HasFilter("[RevokedAtUtc] IS NULL");
+
                     b.HasIndex("RecipientUserId", "RevokedAtUtc");
+
                     b.ToTable("CalendarShares", (string)null);
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarSubscription", b =>
                 {
-                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
-                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<DateTimeOffset?>("RevokedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<string>("TokenHash").IsRequired().HasMaxLength(64).HasColumnType("nvarchar(64)");
-                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("RevokedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
-                    b.HasIndex("TokenHash").IsUnique();
-                    b.HasIndex("UserId").IsUnique().HasFilter("[RevokedAtUtc] IS NULL");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[RevokedAtUtc] IS NULL");
+
                     b.ToTable("CalendarSubscriptions", (string)null);
-                });
-
-            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarConnection", b =>
-                {
-                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
-                    b.Property<DateTimeOffset>("AccessTokenExpiresAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<string>("AccountEmail").IsRequired().HasMaxLength(256).HasColumnType("nvarchar(256)");
-                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<DateTimeOffset?>("LastSyncedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<string>("ProtectedAccessToken").IsRequired().HasMaxLength(4000).HasColumnType("nvarchar(4000)");
-                    b.Property<string>("ProtectedRefreshToken").IsRequired().HasMaxLength(4000).HasColumnType("nvarchar(4000)");
-                    b.Property<string>("Provider").IsRequired().HasMaxLength(32).HasColumnType("nvarchar(32)");
-                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
-                    b.HasKey("Id");
-                    b.HasIndex("UserId", "Provider").IsUnique();
-                    b.ToTable("ExternalCalendarConnections", (string)null);
-                });
-
-            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarEvent", b =>
-                {
-                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
-                    b.Property<Guid>("ConnectionId").HasColumnType("uniqueidentifier");
-                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<string>("ExternalEventId").IsRequired().HasMaxLength(512).HasColumnType("nvarchar(512)");
-                    b.Property<string>("PlantCareEntryId").IsRequired().HasMaxLength(200).HasColumnType("nvarchar(200)");
-                    b.HasKey("Id");
-                    b.HasIndex("ConnectionId", "PlantCareEntryId").IsUnique();
-                    b.ToTable("ExternalCalendarEvents", (string)null);
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CareEvent", b =>
@@ -243,6 +248,18 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<int>("IntervalDays")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LastCompletedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("NextDueAtUtc")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<TimeOnly?>("PreferredTimeLocal")
                         .HasColumnType("time");
 
@@ -253,23 +270,11 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("WeekDays")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LastCompletedAtUtc")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("NextDueAtUtc")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<Guid>("UserPlantId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("WeekDays")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -279,6 +284,82 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("CareSchedules", (string)null);
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarConnection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("AccessTokenExpiresAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("AccountEmail")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("LastSyncedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ProtectedAccessToken")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("ProtectedRefreshToken")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId", "Provider")
+                        .IsUnique();
+
+                    b.ToTable("ExternalCalendarConnections");
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConnectionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ExternalEventId")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("PlantCareEntryId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConnectionId", "PlantCareEntryId")
+                        .IsUnique();
+
+                    b.ToTable("ExternalCalendarEvents");
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.Notification", b =>
@@ -295,10 +376,13 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset>("DueAtUtc")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset?>("ReadAtUtc")
+                    b.Property<DateTimeOffset?>("PushNextAttemptAtUtc")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("PushSentAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ReadAtUtc")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("UserId")
@@ -311,6 +395,8 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("PushSentAtUtc", "CreatedAtUtc");
 
+                    b.HasIndex("PushSentAtUtc", "PushNextAttemptAtUtc");
+
                     b.HasIndex("UserId", "ReadAtUtc", "CreatedAtUtc");
 
                     b.ToTable("Notifications", (string)null);
@@ -318,32 +404,36 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PlantCare.Domain.Entities.NotificationPreference", b =>
                 {
-                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
-                    b.Property<bool>("FertilizingEnabled").HasColumnType("bit");
-                    b.Property<bool>("InAppEnabled").HasColumnType("bit");
-                    b.Property<bool>("MistingEnabled").HasColumnType("bit");
-                    b.Property<bool>("PruningEnabled").HasColumnType("bit");
-                    b.Property<bool>("PushEnabled").HasColumnType("bit");
-                    b.Property<int>("ReminderLeadTimeHours").HasColumnType("int");
-                    b.Property<bool>("RepottingEnabled").HasColumnType("bit");
-                    b.Property<bool>("WateringEnabled").HasColumnType("bit");
-                    b.HasKey("UserId");
-                    b.ToTable("NotificationPreferences", (string)null);
-                });
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
-                {
-                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
-                    b.Property<string>("Auth").IsRequired().HasMaxLength(256).HasColumnType("nvarchar(256)");
-                    b.Property<DateTimeOffset>("CreatedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<string>("Endpoint").IsRequired().HasMaxLength(2048).HasColumnType("nvarchar(2048)");
-                    b.Property<string>("P256dh").IsRequired().HasMaxLength(512).HasColumnType("nvarchar(512)");
-                    b.Property<DateTimeOffset>("UpdatedAtUtc").HasColumnType("datetimeoffset");
-                    b.Property<Guid>("UserId").HasColumnType("uniqueidentifier");
-                    b.HasKey("Id");
-                    b.HasIndex("Endpoint").IsUnique();
-                    b.HasIndex("UserId");
-                    b.ToTable("PushSubscriptions", (string)null);
+                    b.Property<bool>("FertilizingEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("InAppEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("MistingEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PruningEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PushEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ReminderLeadTimeHours")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("RepottingEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("WateringEnabled")
+                        .HasColumnType("bit");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("NotificationPreferences", (string)null);
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.PlantSpecies", b =>
@@ -417,9 +507,71 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("PlantSpecies", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.PushDelivery", b =>
+                {
+                    b.Property<Guid>("NotificationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SubscriptionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AttemptCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("FinishedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("LastStatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("NextAttemptAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotificationId", "SubscriptionId");
+
+                    b.ToTable("PushDeliveries", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
                 {
-                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null).WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.Cascade).IsRequired();
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Auth")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Endpoint")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("P256dh")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<DateTimeOffset>("UpdatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Endpoint")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PushSubscriptions", (string)null);
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.UserPlant", b =>
@@ -609,8 +761,17 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarShare", b =>
                 {
-                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null).WithMany().HasForeignKey("OwnerUserId").OnDelete(DeleteBehavior.NoAction).IsRequired();
-                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null).WithMany().HasForeignKey("RecipientUserId").OnDelete(DeleteBehavior.NoAction).IsRequired();
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("RecipientUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarSubscription", b =>
@@ -618,24 +779,6 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarConnection", b =>
-                {
-                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarEvent", b =>
-                {
-                    b.HasOne("PlantCare.Domain.Entities.ExternalCalendarConnection", null)
-                        .WithMany()
-                        .HasForeignKey("ConnectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -662,6 +805,24 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Navigation("UserPlant");
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarConnection", b =>
+                {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.ExternalCalendarEvent", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.ExternalCalendarConnection", null)
+                        .WithMany()
+                        .HasForeignKey("ConnectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.Notification", b =>
                 {
                     b.HasOne("PlantCare.Domain.Entities.CareSchedule", "CareSchedule")
@@ -684,6 +845,24 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
                         .WithOne()
                         .HasForeignKey("PlantCare.Domain.Entities.NotificationPreference", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PushDelivery", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.Notification", null)
+                        .WithMany()
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
+                {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

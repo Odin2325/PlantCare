@@ -19,6 +19,7 @@ public sealed class PlantCareDbContext(DbContextOptions<PlantCareDbContext> opti
     public DbSet<CalendarSubscription> CalendarSubscriptions => Set<CalendarSubscription>();
     public DbSet<CalendarShare> CalendarShares => Set<CalendarShare>();
     public DbSet<PushSubscription> PushSubscriptions => Set<PushSubscription>();
+    public DbSet<PushDelivery> PushDeliveries => Set<PushDelivery>();
     public DbSet<ExternalCalendarConnection> ExternalCalendarConnections => Set<ExternalCalendarConnection>();
     public DbSet<ExternalCalendarEvent> ExternalCalendarEvents => Set<ExternalCalendarEvent>();
 

@@ -20,6 +20,8 @@ Run the [desktop/mobile browser journey](docs/release/browser-journey.md)
 to verify the account, plant-care, history, calendar, and password-reset forms.
 See the [weekday and time-zone policy](docs/release/weekday-scheduling.md)
 for same-day care and daylight-saving behavior.
+Use the [push retry and reliability checks](docs/release/push-reliability.md)
+to verify partial failures, bounded retries, and queue progress on SQL Server.
 
 ## Production deployment
 

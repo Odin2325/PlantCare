@@ -105,6 +105,7 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 | Check | Candidate SHA | Environment/date | Tester | Result | Evidence/defect |
 | --- | --- | --- | --- | --- | --- |
 | Full staging acceptance | pending | No staging host as of 2026-10-11 | pending | NOT RUN | See backlog STAGE-01 |
+| Push failure handling and additive SQL migration | 3214fe0 plus push changes | SQLite/backend and isolated Docker SQL Server, 2026-10-13 | Codex | PASS | 24 encrypted HTTP fault-injection cases on both providers; backend 121/121; existing SQL row counts preserved; push-reliability.md; real device/provider delivery NOT RUN |
 | Weekday same-day/DST and saved-zone policy | 37714ea plus weekday changes | Windows backend tests; Docker SQL/SMTP browsers, 2026-10-13 | Codex | PASS | Domain 50/50, API 46/46, application 1/1; extended browsers 3/3; weekday-scheduling.md; public staging/physical devices NOT RUN |
 | Browser core care and password-reset forms | 203a0f1 application images plus browser tooling | Docker HTTPS / SQL Server / Mailpit, 2026-10-13 | Codex | PASS | Test-LocalBrowserJourney.ps1; desktop Chromium, mobile Chromium, Firefox: 3/3; browser-journey.md; physical devices, accessibility, PWA and real providers NOT RUN |
 | Password reset and session security | 7bb2422 plus auth changes | Docker SQL Server / Windows, 2026-10-11 | Codex | PASS | Test-LocalAuthenticationSecurity.ps1; real SMTP/cookies, reset revocation, antiforgery; API 39/39 includes expiry/real Identity; browser form UX NOT RUN |

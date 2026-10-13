@@ -31,6 +31,7 @@ public sealed class PlantCareApiTests
             Assert.Contains("20260924100000_AddNotificationPreferences", migrations);
             Assert.Contains("20260924110000_AddFlexibleCareSchedules", migrations);
             Assert.Contains("20260924120000_AddUserPlantTags", migrations);
+            Assert.Contains("20261013110834_AddPushDeliveryRetries", migrations);
             return Task.CompletedTask;
         });
     }

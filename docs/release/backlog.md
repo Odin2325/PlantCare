@@ -15,7 +15,7 @@ release unless the related optional feature is disabled.
 | AUTH-01 | P1, resolved locally 2026-10-11 | Validate reset/session security and fix bearer antiforgery exemption | Real SQL/SMTP reset checks pass; invalid bearer headers cannot bypass antiforgery; reset invalidates browser sessions on their next request; real-Identity regression tests pass. |
 | BOOT-01 | P1 | Define production administrator/catalog bootstrap | Fresh staging can obtain an administrator and initial species through a documented controlled procedure; no public development-mode bootstrap. |
 | CARE-01 | P1, resolved locally 2026-10-13 | Define same-day and clock-change scheduling behavior | Today's future time is eligible without prior care; completion satisfies its local date; gap/repeated-time rules, saved-zone preservation and calendar agreement have regression coverage. See weekday-scheduling.md. |
-| PUSH-01 | P1 | Validate and harden partial push failures | Multiple subscriptions, expired endpoints, repeated failures, and restarts do not cause uncontrolled resends or block the pending queue indefinitely. |
+| PUSH-01 | P1, failure handling verified locally 2026-10-13 | Validate and harden partial push failures | Durable per-device outcomes, expiry/removal, bounded retries/fanout and interrupted-pass persistence pass SQLite/SQL fault-injection tests. Real browser/provider delivery remains open; see push-reliability.md. |
 | DATA-01 | P1 | Validate migrations and recovery on SQL Server | Empty-database and upgrade migration checks pass; database plus key-ring restore drill succeeds. |
 | CI-01 | P1 | Add executable release gates | Browser core journey, real-auth coverage, SQL Server migrations, API/worker startup smoke tests, and required merge checks are in place. |
 | OPS-01 | P1 | Prepare production access and operations | Restricted runtime DB credentials, controlled migrations, alerts, backup schedule, and rollback procedure are documented and tested. |
@@ -24,6 +24,37 @@ release unless the related optional feature is disabled.
 | RELEASE-01 | P1 | Prepare v1 distribution and user documentation | Version/tag/artifacts, release notes, support/privacy information, license decision, and known limitations are complete. |
 
 ## Local checks performed
+
+### Push failure/retry follow-up (2026-10-13)
+
+- Found notification-level retries resending to already successful devices and
+  repeatedly failing oldest notifications retaining eligible batch slots.
+  Added per-notification/device outcome persistence, deferred queue eligibility,
+  five-attempt backoff, Retry-After support, 15-second HTTP timeout, fanout/pass
+  budgets, stale/preference suppression and one-hour provider retention TTL.
+- Provider acceptance, expired subscriptions, permanent failure and skipped
+  devices are terminal. Caller cancellation propagates. Each result is committed
+  before sending to another device; an interrupted pass preserves earlier successes.
+- 24 fault-injection cases pass on SQLite and generated disposable Docker SQL
+  databases, using real WebPush encryption/HTTP mapping with a local handler.
+  Coverage includes mixed success, 404/410, 4xx/redirects, repeated 5xx, batch-one
+  fairness/large fanout, network/timeout failures, both Retry-After formats,
+  new/removed devices, disabled push, stale/preference state and cancellation.
+- Backend checks: API 70/70, domain 50/50, application 1/1 (121 total).
+  SQL tests apply all migrations and remove only their generated databases.
+  CI runs both provider variants plus the existing security/browser suites.
+- Upgraded the preserved local database with additive migration
+  `20261013110834_AddPushDeliveryRetries`. Before/after counts matched: 38 users,
+  29 plants, 27 care events, 18 notifications. API/worker production images built
+  and restarted successfully. Windows SQL was untouched.
+- Post-upgrade production smoke passed real SMTP/cookie sign-in, ordinary/Admin
+  bootstrap boundaries, core care/history/calendar, worker reminder generation
+  and protected logout (`Test-LocalDeployment.ps1 -IncludeCareJourney`).
+- [push-reliability.md](push-reliability.md) records migration/rollback, safe
+  monitoring queries and limits. Use one worker; there is no cross-process lease
+  or exactly-once guarantee across provider acceptance and database commit.
+  Real provider credentials/browser permissions and physical-device delivery,
+  production alerts and retention remain open. The whole reminder gate is not accepted.
 
 ### Weekday/time-zone follow-up (2026-10-13)
 

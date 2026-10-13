@@ -65,6 +65,7 @@ services:
     restart: unless-stopped
 
   worker:
+    # Use one worker replica: cross-process queue leases are not implemented.
     build:
       context: .
       target: worker

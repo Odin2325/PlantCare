@@ -13,6 +13,7 @@ public sealed class Notification
     public DateTimeOffset CreatedAtUtc { get; private set; }
     public DateTimeOffset? ReadAtUtc { get; private set; }
     public DateTimeOffset? PushSentAtUtc { get; private set; }
+    public DateTimeOffset? PushNextAttemptAtUtc { get; private set; }
     public CareSchedule CareSchedule { get; private set; } = null!;
 
     public static Notification Create(
@@ -41,5 +42,11 @@ public sealed class Notification
         ReadAtUtc ??= readAtUtc;
     }
 
-    public void MarkPushSent(DateTimeOffset sentAtUtc) => PushSentAtUtc ??= sentAtUtc;
+    public void MarkPushSent(DateTimeOffset sentAtUtc)
+    {
+        PushSentAtUtc ??= sentAtUtc;
+        PushNextAttemptAtUtc = null;
+    }
+
+    public void DeferPush(DateTimeOffset nextAttemptAtUtc) => PushNextAttemptAtUtc = nextAttemptAtUtc;
 }

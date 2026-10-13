@@ -95,6 +95,9 @@ public static class DependencyInjection
             .ValidateOnStart();
         services.AddScoped<IPushSubscriptionRepository, PushSubscriptionRepository>();
         services.AddScoped<IPushDeliveryService, WebPushDeliveryService>();
+        services.AddHttpClient<IWebPushTransport, WebPushTransport>(client => client.Timeout = TimeSpan.FromSeconds(15))
+            .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler { AllowAutoRedirect = false })
+            .RemoveAllLoggers(); // Push endpoints are capability URLs, not safe log fields.
         services.Configure<WebPushOptions>(configuration.GetSection("WebPush"));
 
         return services;

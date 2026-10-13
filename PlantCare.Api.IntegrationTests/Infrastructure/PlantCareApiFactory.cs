@@ -11,9 +11,11 @@ using PlantCare.Infrastructure.Identity;
 
 namespace PlantCare.Api.IntegrationTests.Infrastructure;
 
-internal sealed class PlantCareApiFactory(bool useRealAuthentication = false)
+internal sealed class PlantCareApiFactory(bool useRealAuthentication = false,
+    Action<IServiceCollection>? customizeServices = null, string? pushTestSqlPassword = null)
     : WebApplicationFactory<Program>
 {
+    private readonly string pushTestDatabase = "PlantCarePushTests_" + Guid.NewGuid().ToString("N");
     public static readonly DateTimeOffset UtcNow =
         new(2026, 9, 19, 10, 0, 0, TimeSpan.Zero);
 
@@ -31,7 +33,7 @@ internal sealed class PlantCareApiFactory(bool useRealAuthentication = false)
     {
         builder.UseEnvironment("Testing");
 
-        databaseConnection.Open();
+        if (pushTestSqlPassword is null) databaseConnection.Open();
 
         builder.ConfigureServices(services =>
         {
@@ -45,14 +47,21 @@ internal sealed class PlantCareApiFactory(bool useRealAuthentication = false)
             services.RemoveAll<TimeProvider>();
 
             services.AddDbContext<PlantCareDbContext>(options =>
-                options
-                    .UseSqlite(databaseConnection)
-                    .UseInternalServiceProvider(
-                        databaseServiceProvider));
+            {
+                if (pushTestSqlPassword is null)
+                    options.UseSqlite(databaseConnection).UseInternalServiceProvider(databaseServiceProvider);
+                else
+                    options.UseSqlServer(new Microsoft.Data.SqlClient.SqlConnectionStringBuilder
+                    {
+                        DataSource = "127.0.0.1,14330", InitialCatalog = pushTestDatabase,
+                        UserID = "sa", Password = pushTestSqlPassword, TrustServerCertificate = true
+                    }.ConnectionString);
+            });
 
             if (useRealAuthentication)
             {
                 services.AddSingleton(TimeProvider.System);
+                customizeServices?.Invoke(services);
                 return;
             }
 
@@ -74,6 +83,7 @@ internal sealed class PlantCareApiFactory(bool useRealAuthentication = false)
                     TestAuthenticationHandler>(
                     TestAuthenticationHandler.SchemeName,
                     _ => { });
+            customizeServices?.Invoke(services);
         });
     }
 
@@ -83,8 +93,23 @@ internal sealed class PlantCareApiFactory(bool useRealAuthentication = false)
         var dbContext = scope.ServiceProvider
             .GetRequiredService<PlantCareDbContext>();
 
-        await dbContext.Database.EnsureDeletedAsync();
-        await dbContext.Database.EnsureCreatedAsync();
+        if (pushTestSqlPassword is null)
+        {
+            await dbContext.Database.EnsureDeletedAsync();
+            await dbContext.Database.EnsureCreatedAsync();
+        }
+        else await dbContext.Database.MigrateAsync();
+    }
+
+    public async Task DeletePushTestDatabaseAsync()
+    {
+        if (pushTestSqlPassword is null) return;
+        using var scope = Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+        var connection = db.Database.GetDbConnection();
+        if (connection.DataSource != "127.0.0.1,14330" || connection.Database != pushTestDatabase)
+            throw new InvalidOperationException("Refusing cleanup outside this generated Docker push-test database.");
+        await db.Database.EnsureDeletedAsync();
     }
 
     public async Task<Guid> CreateUserAsync()
