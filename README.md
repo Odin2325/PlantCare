@@ -6,6 +6,8 @@ PlantCare is an Angular and ASP.NET Core plant-care scheduling application.
 
 Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
 then follow the [staging runbook](docs/release/staging.md).
+The [domain and hosting handoff](docs/release/domain-hosting.md) covers
+`plantacare.org`, the staging DNS record and choosing a compatible server.
 The [release backlog](docs/release/backlog.md) records current blockers and
 the local verification results.
 Use the [administrator and catalog bootstrap guide](docs/release/bootstrap.md)

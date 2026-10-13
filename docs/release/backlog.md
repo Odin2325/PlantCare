@@ -25,6 +25,20 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Domain and public-staging handoff (2026-10-13)
+
+- Owner purchased `plantacare.org` at Porkbun. Public DNS still points the apex
+  and staging name at Porkbun parking. No public app host is provisioned.
+- Prepared [domain-hosting.md](domain-hosting.md) with a compatible x86-64 server
+  recommendation, staging-only A record, firewall, SMTP and access requirements.
+- Added a read-only `Test-StagingEndpoint.ps1` check that requires the actual
+  server IPv4 before checking DNS, trusted HTTPS, redirects, readiness and SPA/API
+  routing. PowerShell parsing, invalid-IP/URL rejection and refusal of the current
+  parking DNS passed. Public success-path execution is NOT RUN until a server
+  exists. STAGE-01 stays open.
+- Prior candidate `2c00bb2` completed Frontend, Backend and Production container
+  CI successfully in run `38468089723`; this does not establish public acceptance.
+
 ### Keyboard/accessibility and beta follow-up (2026-10-13)
 
 - Added a keyboard-visible skip link, route main landmarks, post-render heading

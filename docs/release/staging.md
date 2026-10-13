@@ -1,7 +1,9 @@
 # First staging deployment
 
-Status on 2026-10-13: local Docker validation is available; no public staging host
-exists. The public-host guide below uses the existing production Compose definition
+Status on 2026-10-13: the owner purchased `plantacare.org`; no public staging host
+exists. Follow [domain-hosting.md](domain-hosting.md) for the server choice,
+Porkbun DNS handoff and read-only endpoint check for `staging.plantacare.org`.
+The public-host guide below uses the existing production Compose definition
 on a dedicated staging host so that production behavior is exercised.
 
 ## Local validation on Windows
