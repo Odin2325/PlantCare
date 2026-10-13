@@ -71,6 +71,11 @@ only for the fixed localhost test origins.
 
 ## Before public staging or production
 
+For the Windows development stack, [local-backups.md](local-backups.md) adds
+encrypted external-drive snapshots, a daily task, health checks and encrypted
+SQL restore verification. It requires a separately preserved recovery key and
+does not replace independent production monitoring/off-site recovery.
+
 This is a local full-backup recovery drill, not a scheduled production backup
 system. Recovery of real Google/Microsoft OAuth credentials is not validated:
 providers remain disabled until their dedicated checks pass.

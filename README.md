@@ -24,6 +24,8 @@ Use the [push retry and reliability checks](docs/release/push-reliability.md)
 to verify partial failures, bounded retries, and queue progress on SQL Server.
 See [restricted database access](docs/release/database-access.md) for runtime
 principals, explicit migrations, permission checks and restored login mapping.
+See [encrypted local backups](docs/release/local-backups.md) for the external-drive
+snapshot, Windows schedule, health checks and separate recovery-key requirements.
 
 ## Production deployment
 

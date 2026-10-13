@@ -25,6 +25,32 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Encrypted scheduled-backup follow-up (2026-10-13)
+
+- Initialized a restic-encrypted repository on the owner's selected external USB
+  drive. A pinned official Windows binary is SHA-256 checked. The random password
+  is DPAPI-protected in an ACL-restricted, ignored local state directory.
+- Captured SQL COPY_ONLY/CHECKSUM/VERIFYONLY backup, matching key ring and private
+  configuration in one encrypted snapshot. Application writers stop only during
+  capture and restart before encryption; per-run plaintext is cleaned up.
+- Registered a daily 03:00 Berlin Windows task under the logged-in owner.
+  Its first real scheduled run completed with result 0. Decrypted that snapshot,
+  verified all file SHA-256 hashes, restored SQL in a fresh isolated container,
+  passed CHECKDB and compared every user table's counts/checksums.
+- Failure probes passed for stale backups, missing destinations, disk pressure,
+  failed jobs and wrong passwords; a healthy-state probe also passed with only
+  the known source-capacity warning threshold temporarily overridden for testing.
+  The default threshold remains active. No Windows SQL or source restore target
+  was modified. Private plaintext scratch and disposable SQL resources were removed.
+- Found actual source-disk free space below 5 GiB. The owner must free reviewed
+  files/caches; no unrelated files were deleted. An hourly local Codex heartbeat
+  checks health and sends deduplicated failure/recovery emails through the
+  connected Gmail account. A minimal warning/test email was sent successfully.
+- [local-backups.md](local-backups.md) records requirements and limitations.
+  The owner still needs a separately preserved portable recovery password and
+  separate-machine recovery test. Off-site/immutable copies, independent outage
+  alerting, accepted recovery targets and public-host drills remain open.
+
 ### Restricted database access follow-up (2026-10-13)
 
 - Replaced runtime `sa` connections with separate API/worker logins and explicit
