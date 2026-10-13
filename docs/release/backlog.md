@@ -25,6 +25,34 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Browser core-journey follow-up (2026-10-13)
+
+- `Test-LocalBrowserJourney.ps1` passes all three projects against `203a0f1`
+  production application images plus browser tooling: desktop Chromium,
+  Pixel 7-sized mobile Chromium and desktop Firefox. Final local run: 3/3,
+  approximately 1.3 minutes, real local HTTPS/SQL Server/Mailpit.
+- Ordinary users register and follow captured confirmation links through the
+  browser; login before confirmation is rejected. Coverage includes guarded
+  routes, sign-in/reload, catalog/details, plant creation with past care date,
+  persisted tags/interval, overdue dashboard completion, history record/edit/
+  delete, completed agenda entry, archive/restore/reload, forgot/reset forms,
+  mismatched confirmation, old/new passwords and logout.
+- Added a separate locked Playwright 1.64.0 package and matching Docker runner,
+  independent of the incompatible host Angular toolchain. CI runs the same
+  journey after HTTP security checks, with existing disposable-volume cleanup.
+- Initial failures identified harness timing/locator problems: fields shared
+  between routes could be filled before navigation finished; reload could abort
+  restore; the calendar's wrapping label required a prefix match. Explicit
+  destination/saved-state checks fixed these; no production code changed.
+- Authentication rate limits remain enabled; only rejected form submissions
+  have bounded waits. No uncaught page exceptions occurred in the final run.
+  No authentication captures are exported. Synthetic accounts/messages and
+  archived plants remain locally; Windows SQL is untouched.
+- [browser-journey.md](browser-journey.md) records execution and scope. CI-01
+  now has core browser coverage; required merge checks remain open. UX-01 still
+  needs physical-device/accessibility/visual review, PWA behavior, date boundaries
+  and two normal care cycles. Public staging and real providers remain open.
+
 ### Password-reset and session-security follow-up (2026-10-11)
 
 - `Test-LocalAuthenticationSecurity.ps1` passes on `7bb2422` plus auth changes:

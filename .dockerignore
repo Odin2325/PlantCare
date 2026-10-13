@@ -10,5 +10,7 @@ plant-care-web/dist
 .env
 .env.local
 recovery-artifacts
+tests/browser/test-results
+tests/browser/playwright-report
 *.user
 *.suo

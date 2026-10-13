@@ -34,6 +34,8 @@ Run `./scripts/Test-LocalAccountIsolation.ps1` for real-cookie cross-account che
 against the same SQL Server stack; see [account-isolation.md](account-isolation.md).
 Run `./scripts/Test-LocalAuthenticationSecurity.ps1` for reset email and browser
 session checks; see [authentication-security.md](authentication-security.md).
+Run `./scripts/Test-LocalBrowserJourney.ps1` for the desktop Chromium, mobile
+Chromium and Firefox UI flows; see [browser-journey.md](browser-journey.md).
 
 To stop the local stack and preserve its data:
 

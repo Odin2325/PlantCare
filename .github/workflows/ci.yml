@@ -67,7 +67,7 @@ jobs:
   container:
     name: Production container
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     needs:
       - backend
       - frontend
@@ -97,6 +97,10 @@ jobs:
       - name: Test password resets and session security on SQL Server
         shell: pwsh
         run: ./scripts/Test-LocalAuthenticationSecurity.ps1
+
+      - name: Test desktop and mobile browser journeys
+        shell: pwsh
+        run: ./scripts/Test-LocalBrowserJourney.ps1
 
       - name: Remove isolated CI database and containers
         if: always()

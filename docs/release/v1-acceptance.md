@@ -96,6 +96,7 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 | Check | Candidate SHA | Environment/date | Tester | Result | Evidence/defect |
 | --- | --- | --- | --- | --- | --- |
 | Full staging acceptance | pending | No staging host as of 2026-10-11 | pending | NOT RUN | See backlog STAGE-01 |
+| Browser core care and password-reset forms | 203a0f1 application images plus browser tooling | Docker HTTPS / SQL Server / Mailpit, 2026-10-13 | Codex | PASS | Test-LocalBrowserJourney.ps1; desktop Chromium, mobile Chromium, Firefox: 3/3; browser-journey.md; physical devices, accessibility, PWA and real providers NOT RUN |
 | Password reset and session security | 7bb2422 plus auth changes | Docker SQL Server / Windows, 2026-10-11 | Codex | PASS | Test-LocalAuthenticationSecurity.ps1; real SMTP/cookies, reset revocation, antiforgery; API 39/39 includes expiry/real Identity; browser form UX NOT RUN |
 | Real-cookie SQL Server account isolation and feed regression | 369187f plus isolation/feed changes | Docker SQL Server / Windows, 2026-10-11 | Codex | PASS | Test-LocalAccountIsolation.ps1; account-isolation.md; API 33/33; provider credential isolation NOT RUN |
 | SQLite dependency remediation and backend tests | 48c543a plus dependency changes | Windows / .NET 10, 2026-10-11 | Codex | PASS | Native security baseline; no known vulnerable test dependencies; API 32/32, domain 31/31, application 1/1; see DEP-01 |

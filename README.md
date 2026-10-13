@@ -7,7 +7,7 @@ PlantCare is an Angular and ASP.NET Core plant-care scheduling application.
 Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
 then follow the [staging runbook](docs/release/staging.md).
 The [release backlog](docs/release/backlog.md) records current blockers and
-the local verification results from 11 October 2026.
+the local verification results.
 Use the [administrator and catalog bootstrap guide](docs/release/bootstrap.md)
 for first setup, extended care-journey checks, and SSMS connection details.
 Use the [recovery runbook](docs/release/recovery.md) to test database backups,
@@ -16,6 +16,8 @@ Run the [SQL Server account-isolation checks](docs/release/account-isolation.md)
 to verify private data boundaries with real sign-in sessions.
 Use the [password-reset and session-security checks](docs/release/authentication-security.md)
 to verify reset emails, session invalidation, and antiforgery protection.
+Run the [desktop/mobile browser journey](docs/release/browser-journey.md)
+to verify the account, plant-care, history, calendar, and password-reset forms.
 
 ## Production deployment
 
