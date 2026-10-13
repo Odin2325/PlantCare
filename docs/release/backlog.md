@@ -47,6 +47,11 @@ release unless the related optional feature is disabled.
   recovery requirements. The owner reconfirmed no host/domain and requested local
   preparation. Scheduled encrypted off-host backups, alerts, secret storage,
   physical-device/provider acceptance and public staging remain open.
+- The first candidate CI passed fresh SQL deployment/permissions, isolation,
+  authentication and push checks, then exposed a mobile browser-harness race:
+  it selected an event while an outstanding calendar view load could clear the
+  selection. The journey now waits for initial/view loading to finish before
+  selecting the event, without increasing timeouts or enabling retries.
 
 ### Push failure/retry follow-up (2026-10-13)
 

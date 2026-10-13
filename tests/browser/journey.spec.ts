@@ -147,7 +147,12 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await edited.getByRole('button', { name: 'Delete', exact: true }).click();
     await expect(page.locator('.history-entry')).toHaveCount(1);
     await nav.getByRole('link', { name: 'Calendar', exact: true }).click();
+    // Wait for each calendar load before changing view/selecting an entry.
+    // A pending response clears the selection when it replaces the entries.
+    const calendarLoading = page.getByRole('status').filter({ hasText: 'Loading calendar' });
+    await expect(calendarLoading).toBeHidden();
     await page.getByRole('button', { name: 'Agenda', exact: true }).click();
+    await expect(calendarLoading).toBeHidden();
     await page.getByLabel(/^Status/).selectOption('Completed');
     const event = page.getByRole('button').filter({ hasText: nickname });
     await expect(event).toHaveCount(1);
