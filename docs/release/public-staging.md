@@ -13,6 +13,10 @@ verified image activation, API/worker database access and trusted public endpoin
 checks passed. No schema migration was required. Physical dashboard taps remain
 pending; see [public browser acceptance](public-browser-acceptance.md) for the
 completed automated account/care/reset samples.
+Subsequent physical-device report: fresh installed Android dashboard reminder
+taps, offline cold launch and reconnect passed on this candidate. See
+[android-beta.md](android-beta.md) for the owner-reported scope and remaining
+frontend upgrade/two-cycle checks.
 
 Earlier operational update 2026-10-14: the runtime was
 `d3d81f30cc2a6bbd06d92cb2781d7b5e40a3924d`, with worker/disk operations health

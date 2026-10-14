@@ -9,11 +9,17 @@ Record results as owner-reported unless independently observed.
 | --- | --- |
 | Installation and app launch | Owner reported working |
 | Notification opens installed app | Owner reported working on previous payload |
-| Fresh notification opens Dashboard | Pending on current runtime |
-| Offline cold launch and explanation | Pending |
-| Reconnect, sign-in if needed and fresh plant data | Pending |
+| Fresh notification opens Dashboard | Passed, owner-reported on current runtime |
+| Offline cold launch and explanation | Passed, owner-reported on current runtime |
+| Reconnect, sign-in if needed and fresh plant data | Passed, owner-reported on current runtime |
 | Consented frontend update in the installed app | Pending |
 | Two normal elapsed care cycles | Pending |
+
+On 2026-10-14 the owner answered "All 3 passed" to the installed-app dashboard
+tap, airplane-mode cold launch/offline message, and reconnect/account-data checks.
+This accepts those three reported scenarios on the stated Android/Chrome versions;
+it does not establish a frontend upgrade, offline write behavior, every supported
+device, or either normal elapsed care cycle.
 
 ## Fresh reminder and dashboard action
 

@@ -27,6 +27,12 @@ the new operation. No reinstall is required; already displayed/provider-queued
 notifications retain their earlier payload. A fresh physical dashboard tap is
 still needed before accepting the destination on Android.
 
+Subsequent owner report on 2026-10-14: the fresh installed-app reminder opened
+Dashboard successfully on Android 17 / Chrome 155.0.8059.79, alongside passed
+offline cold-launch and reconnect checks. This accepts the reported tap scenario
+on `cfbc073`; other devices and two ordinary elapsed care cycles remain open.
+See [android-beta.md](android-beta.md).
+
 Physical Android 17 / Chrome 155.0.8059.79 testing reported successful
 installation and app launch, but installed-app notification taps did nothing.
 Browser-tab push receipt/tapping had previously been reported as working.

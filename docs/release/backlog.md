@@ -39,6 +39,9 @@ release unless the related optional feature is disabled.
   open the installed app but reached the catalog; the requested direct dashboard
   destination remains a physical retest. See [public-browser-acceptance.md](public-browser-acceptance.md)
   for exact scope, safe tooling, failed harness attempts and remaining beta work.
+- Subsequent owner report: all three installed Android checks passed on `cfbc073`
+  (fresh reminder to Dashboard, offline cold launch/message, reconnect/data).
+  Frontend upgrade, physical accessibility and two normal care cycles remain open.
 
 ### Worker progress monitoring and bounded capacity (2026-10-14)
 

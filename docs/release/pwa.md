@@ -82,8 +82,10 @@ and offline authentication startup.
 
 Use the [physical Android checklist](android-beta.md) for the current staging
 candidate, fresh dashboard reminder taps, offline/reconnect, a real frontend
-upgrade and two elapsed care cycles. Installation/app launch is owner-reported
-working; the other phone checks remain pending. A server-only reminder fix does
+upgrade and two elapsed care cycles. Installation/app launch, a fresh dashboard
+notification tap, offline cold launch and reconnect are owner-reported passed
+on Android 17 / Chrome 155.0.8059.79. Frontend upgrade and the two elapsed care
+cycles remain pending. A server-only reminder fix does
 not exercise the frontend update prompt.
 
 Do not mark the complete PWA/device gate accepted from headless tests alone.

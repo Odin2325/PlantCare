@@ -35,10 +35,12 @@ Earlier form-based registration and real confirmation of both approved aliases
 passed on `d3d81f3`; public keyboard/reflow/axe checks passed in all three browser
 projects there. Preserve those historical candidate labels. The owner reports
 Android 17 / Chrome 155.0.8059.79 installation and app launch working. Push taps
-now open the installed app but were reported to land on the catalog. The requested
-direct dashboard launch remains a separate physical retest after deployment;
-see [push-reliability.md](push-reliability.md). Two ordinary care cycles, physical
-offline/reconnect/update checks and release packaging remain open.
+initially opened the installed app at the catalog. After the direct-dashboard
+deployment, the owner reported all three phone checks passed: a fresh reminder
+opened Dashboard, offline cold launch showed the offline explanation, and
+reconnect restored account/plant data. See [android-beta.md](android-beta.md)
+and [push-reliability.md](push-reliability.md). Two ordinary care cycles, a real
+installed frontend upgrade and release packaging remain open.
 
 ## Runbook
 
