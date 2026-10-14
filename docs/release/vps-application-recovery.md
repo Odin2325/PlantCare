@@ -12,6 +12,13 @@ reset links or cookies into chat or logs.
 pwsh -NoProfile -File scripts/Test-VpsApplicationRecovery.ps1
 ```
 
+To test a new exported runtime and its actual Compose configuration against the
+existing encrypted data before VPS activation, add `-RuntimeCandidate <40-char-sha>`.
+The tool checks allowlisted payload hashes and image IDs, records snapshot and
+tested runtime candidates separately, and keeps all networks internal with no
+published ports. This compatibility mode also checks the operations endpoint.
+It passed for `d3d81f30cc2a6bbd06d92cb2781d7b5e40a3924d` on 2026-10-14.
+
 ## Verified result (2026-10-14)
 
 The drill passed against the encrypted snapshot of runtime candidate

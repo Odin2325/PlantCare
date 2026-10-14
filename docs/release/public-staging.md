@@ -1,5 +1,12 @@
 # Public staging deployment and verification
 
+Operational update 2026-10-14: the current runtime is
+`d3d81f30cc2a6bbd06d92cb2781d7b5e40a3924d`, with worker/disk operations health
+and a patched cryptography dependency. See [worker-capacity.md](worker-capacity.md)
+for exact-candidate CI, isolated compatibility, activation and bounded read
+evidence. The original deployment/auth/browser table below records `0acdb2d`;
+do not relabel those historical checks as a full new-candidate public acceptance.
+
 Verified 2026-10-14 at <https://staging.plantacare.org>. This is a synthetic
 staging environment, not an accepted production release. The apex domain is
 reserved for release. Runtime bundle candidate:

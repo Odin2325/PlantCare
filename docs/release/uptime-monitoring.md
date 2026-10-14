@@ -52,12 +52,14 @@ configuration for one controlled incident, not every failure mode.
 
 ## Limits and next acceptance work
 
-The public endpoint checks API/database readiness, not authenticated workflows,
-worker progress or backup freshness. Keep the weekly backup email monitor as a
-separate, PC-dependent check. Worker/disk alerts and a complete isolated restored
-application/login/data/key-ring drill remain open, followed by a tested
-schema-compatible deployment rollback. Do not run external integration sends
-from a restored copy of production/staging secrets.
+The readiness endpoint checks API/database availability, not authenticated
+workflows, worker progress or backup freshness. A separate operations endpoint
+and owner-configured monitor now cover notification-worker progress and disk
+pressure; see [worker-capacity.md](worker-capacity.md) for delivery evidence and
+limits. Keep the weekly backup email monitor as a separate, PC-dependent check.
+The [isolated application recovery drill](vps-application-recovery.md) now passes
+copied-account recovery and same-schema failed-activation rollback. Replacement
+VPS, schema downgrade and real integration recovery remain open.
 
 The apex `plantacare.org` is reserved for release. Add a separate production
 monitor when that deployment exists; preserve staging coverage.

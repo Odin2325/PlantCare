@@ -6,13 +6,18 @@ $lock=Enter-BackupLock
 $client=[Net.Http.HttpClient]::new()
 $client.Timeout=[TimeSpan]::FromSeconds(10)
 $cancellation=[Threading.CancellationTokenSource]::new([TimeSpan]::FromSeconds(90))
+function Read-Metric([object]$Vps,[string]$Name,[string]$Command) {
+    for($attempt=0;$attempt -lt 2;$attempt++){
+        try{return Invoke-VpsSsh $Vps $Command}catch{if($attempt -eq 1){throw "Read-only capacity metric unavailable: $Name."};Start-Sleep -Seconds 1}
+    }
+}
 function Metrics {
     $vps=Get-VpsBackupConfiguration
-    $memoryLine=@(Invoke-VpsSsh $vps 'cat /proc/meminfo'|Where-Object {$_ -match '^MemAvailable:'})[0]
+    $memoryLine=@(Read-Metric $vps 'memory' 'cat /proc/meminfo'|Where-Object {$_ -match '^MemAvailable:'})[0]
     $memory=[regex]::Match($memoryLine,'\d+').Value
-    $disk=(Invoke-VpsSsh $vps 'df -B1 --output=avail /home/ubuntu/plantcare-staging | tail -1').ToString().Trim()
-    $states=@(Invoke-VpsSsh $vps "sudo -n docker inspect --format '{{.Name}} {{.RestartCount}} {{.State.OOMKilled}} {{.State.Running}}' plantcare-staging-api-1 plantcare-staging-worker-1 plantcare-staging-database-1 plantcare-staging-proxy-1")
-    $stats=@(Invoke-VpsSsh $vps "sudo -n docker stats --no-stream --format '{{.Name}} {{.MemUsage}} {{.CPUPerc}}' plantcare-staging-api-1 plantcare-staging-worker-1 plantcare-staging-database-1 plantcare-staging-proxy-1")
+    $disk=(Read-Metric $vps 'disk' 'df -B1 --output=avail /home/ubuntu/plantcare-staging | tail -1').ToString().Trim()
+    $states=@(Read-Metric $vps 'container-state' "sudo -n docker inspect --format '{{.Name}} {{.RestartCount}} {{.State.OOMKilled}} {{.State.Running}}' plantcare-staging-api-1 plantcare-staging-worker-1 plantcare-staging-database-1 plantcare-staging-proxy-1")
+    $stats=@(Read-Metric $vps 'container-stats' "sudo -n docker stats --no-stream --format '{{.Name}} {{.MemUsage}} {{.CPUPerc}}' plantcare-staging-api-1 plantcare-staging-worker-1 plantcare-staging-database-1 plantcare-staging-proxy-1")
     return @{availableMemoryKiB=[long]$memory;freeDiskBytes=[long]$disk;containerStates=$states;containerStats=$stats}
 }
 try {

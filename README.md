@@ -38,6 +38,8 @@ public outage drill and [catalog roadmap](docs/release/catalog-roadmap.md) for
 reviewed species content and deferred image features.
 See [VPS application recovery](docs/release/vps-application-recovery.md) for
 the isolated restored-account, worker, care-data and failed-activation drill.
+See [worker health and capacity](docs/release/worker-capacity.md) for the separate
+operations monitor, stalled-worker checks and limits of the 4 GB read sample.
 See [PWA acceptance](docs/release/pwa.md) for offline behavior, controlled updates
 and the remaining physical-device installation checks.
 See [accessibility and beta checks](docs/release/accessibility-beta.md) for keyboard

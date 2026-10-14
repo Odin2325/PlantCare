@@ -25,6 +25,28 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Worker progress monitoring and bounded capacity (2026-10-14)
+
+- Added a separate `/health/operations` check for successful notification-pass
+  freshness/failure and disk space. Read-only API/writable non-root worker volume;
+  API readiness remains independent. Missing/corrupt/future/stale state fails
+  closed with a generic public response. All 125 backend tests pass.
+- CI caught vulnerable transitive Pkcs 9.0.4 before activation. Pinned patched
+  9.0.21; current audit clear. New .NET 10.0.13 images and actual Compose passed
+  isolated snapshot compatibility/activation rollback, then all exact-candidate
+  CI gates. Activated `d3d81f3` with verified payload/runtime IDs and restricted
+  DB access; no schema migration. Fresh encrypted VPS backup passed.
+- Before/after samples each read the public one-species catalog 200 times at
+  concurrency five, with zero errors and no OOM/restarts. Patched P95 49.9 ms,
+  about 2.2 GiB available RAM and 31.27 GiB free disk afterward. This does not
+  establish authenticated/fanout/sustained/backup-time capacity.
+- Owner configured independent operations monitoring. Freezing the running
+  worker made operations 503 while API readiness stayed 200; real Down email
+  arrived in INBOX. Worker/endpoint recovery and real Up email also passed;
+  fresh encrypted snapshot SQL/key/config restore verified afterward. See
+  [worker-capacity.md](worker-capacity.md). Optional calendar/provider, sustained
+  capacity and device acceptance remain open.
+
 ### Full isolated VPS application recovery (2026-10-14)
 
 - Decrypted the recorded VPS snapshot into a new local project. All-file hashes,

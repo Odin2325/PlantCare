@@ -1,7 +1,7 @@
 # Restore the encrypted VPS snapshot only into a new local Docker project.
 # No source writes/deployment, external sends, migrations or schema rollback.
 [CmdletBinding()]
-param()
+param([ValidatePattern('^[a-f0-9]{40}$')][string]$RuntimeCandidate)
 . "$PSScriptRoot/VpsBackup.Common.ps1"
 $lock=Enter-BackupLock
 $run=[Guid]::NewGuid().ToString('N')
@@ -61,6 +61,28 @@ try {
         $path=[IO.Path]::GetFullPath((Join-Path $scratch $file.name))
         if(-not $path.StartsWith($scratch+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Manifest escapes private scratch.'}
         if((Get-FileHash $path -Algorithm SHA256).Hash -ne $file.sha256){throw 'Restored file hash mismatch.'}
+    }
+    $testedCandidate=$manifest.candidate
+    $composeFile=Join-Path $scratch 'config/compose.yaml'
+    $imageEnvironment=Join-Path $scratch 'config/images.env'
+    if($RuntimeCandidate){
+        # Validate a new prebuilt runtime against the existing encrypted data
+        # before any VPS activation. Snapshot files/hashes remain unmodified.
+        $bundleRoot=Join-Path $BackupState "deployment-bundles/$RuntimeCandidate"
+        $bundle=Get-Content (Join-Path $bundleRoot 'manifest.json') -Raw|ConvertFrom-Json
+        if($bundle.candidate -ne $RuntimeCandidate){throw 'Prebuilt test runtime candidate mismatch.'}
+        foreach($line in Get-Content (Join-Path $bundleRoot 'SHA256SUMS')){
+            if($line -notmatch '^([a-f0-9]{64})  (images.tar|compose.yaml|environment.example|images.env|manifest.json|deploy/Caddyfile|deploy/catalog.example.json)$'){throw 'Unexpected prebuilt checksum entry.'}
+            if((Get-FileHash (Join-Path $bundleRoot $Matches[2]) -Algorithm SHA256).Hash -ne $Matches[1]){throw 'Prebuilt payload hash mismatch.'}
+        }
+        foreach($name in @('api','worker')){
+            $image=@($bundle.images|Where-Object tag -eq "plantcare-${name}:$RuntimeCandidate")
+            if($image.Count -ne 1){throw 'Prebuilt test runtime image missing.'}
+            $manifest.images.$name=$image[0].id
+        }
+        $testedCandidate=$RuntimeCandidate
+        $composeFile=Join-Path $bundleRoot 'compose.yaml'
+        $imageEnvironment=Join-Path $bundleRoot 'images.env'
     }
     foreach($name in @('api','worker')){
         $id=$manifest.images.$name
@@ -141,7 +163,7 @@ services:
     pull_policy: never
     ports: []
 "@|Set-Content $override
-    $target=@('compose','--env-file',(Join-Path $scratch 'config/.env'),'--env-file',(Join-Path $scratch 'config/images.env'),'-f',(Join-Path $scratch 'config/compose.yaml'),'-f',(Join-Path $scratch 'config/compose.budget.yaml'),'-f',$override,'--project-name',$project)
+    $target=@('compose','--env-file',(Join-Path $scratch 'config/.env'),'--env-file',$imageEnvironment,'-f',$composeFile,'-f',(Join-Path $scratch 'config/compose.budget.yaml'),'-f',$override,'--project-name',$project)
     $started=$true
     $null=Invoke-BackupDocker ($target+@('up','-d','--no-build','--wait','--wait-timeout','300','database'))
     $internal=(Invoke-BackupDocker @('network','inspect',"${project}_default",'--format','{{.Internal}}')).ToString().Trim()
@@ -190,6 +212,7 @@ services:
     if(-not $species){throw 'Recovered synthetic catalog unavailable.'}
     $plant=Request '/api/my-plants' 'POST' @{plantSpeciesId=$species.id;nickname='Isolated recovery probe';wateringIntervalDays=7;lastWateredAtUtc=[DateTimeOffset]::UtcNow.AddDays(-8).ToString('O')} -Expected 201
     $reminder=@(Wait-Reminder $plant.id)
+    if($RuntimeCandidate){$null=Request '/health/operations'}
     if($reminder.Count -ne 1){throw 'Recovered worker produced duplicate reminders.'}
     $null=Invoke-BackupDocker ($target+@('restart','worker'))
     Start-Sleep -Seconds 12
@@ -224,7 +247,7 @@ services:
     $null=Request '/api/auth/logout' 'POST' -Expected 204
     $null=Request '/api/account/me' -Expected 401
     $passed=$true
-    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
+    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
     'PASS: failed API activation rejected; pinned runtime restored with session/history/keys intact; logout enforced.'
 } finally {
     try {

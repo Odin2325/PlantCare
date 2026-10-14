@@ -39,6 +39,13 @@ rollback() {
 }
 trap rollback EXIT
 dc up --no-build --pull never --no-deps --force-recreate -d --wait --wait-timeout 180 api worker >/dev/null 2>&1
+python3 - <<'PY'
+import json,subprocess
+for service in ('api','worker'):
+    expected=next(i['id'] for i in json.load(open('manifest.json'))['images'] if i['tag'].startswith('plantcare-'+service+':'))
+    actual=subprocess.check_output(['docker','inspect','--format','{{.Image}}','plantcare-staging-'+service+'-1'],text=True).strip()
+    assert actual==expected
+PY
 for i in $(seq 1 36); do
     if curl --fail --silent --max-time 10 https://staging.plantacare.org/health/ready >/dev/null && curl --fail --silent --max-time 10 https://staging.plantacare.org/health/operations >/dev/null; then
         docker exec plantcare-staging-api-1 dotnet PlantCare.Api.dll --check-runtime-access api >/dev/null 2>&1
