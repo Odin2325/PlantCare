@@ -25,6 +25,20 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### VPS encrypted backups and monitoring (2026-10-14)
+
+- Captured SQL/key/config consistently from the public `0acdb2d` runtime;
+  resumed writers before transfer and encrypted to the existing external drive.
+  Manual and daily 04:00 task runs passed; task result 0, repository data checks
+  and public readiness passed. Existing local backup schedule stays unchanged.
+- Isolated local SQL restore passed decryption/file hashes, CHECKDB and all-table
+  counts/checksums; key/config hashes match. No restored app/provider was started.
+  Failure probes passed and restored actual health to healthy.
+- Extended the existing email monitor to both backup types while preserving the
+  owner's weekly Sunday 09:00 schedule and alert baseline. Independent uptime
+  monitoring, portable-key/replacement-host app recovery and worker outage drills
+  remain open. See [vps-backups.md](vps-backups.md).
+
 ### First public staging deployment (2026-10-14)
 
 - Deployed the prebuilt `0acdb2d` bundle on the prepared OVHcloud VPS, with

@@ -64,8 +64,10 @@ No marketing campaign was created. Tests sent only the two authorized app emails
 
 ## Still open
 
-- Independent VPS SQL/key-ring/config backups, off-host recovery and outage alerts.
-  The Windows local backup scheduler does not cover this VPS.
+- VPS SQL/key/config encrypted backups and an isolated SQL restore now pass;
+  see [vps-backups.md](vps-backups.md). Full replacement-host app recovery and
+  independent outage/backup alerts remain open. The daily external-drive task
+  and weekly Codex alert checks depend on the owner's PC.
 - Sustained load, backup-time memory/disk headroom, worker failure and public-host
   recovery/rollback drills. Current idle/light measurements do not establish scale.
 - Authenticated public-browser/account-isolation acceptance, real-device push,

@@ -31,6 +31,8 @@ See [restricted database access](docs/release/database-access.md) for runtime
 principals, explicit migrations, permission checks and restored login mapping.
 See [encrypted local backups](docs/release/local-backups.md) for the external-drive
 snapshot, Windows schedule, health checks and separate recovery-key requirements.
+See [VPS backups and monitoring](docs/release/vps-backups.md) for encrypted
+off-server snapshots, the tested SQL restore and remaining independent alerts.
 See [PWA acceptance](docs/release/pwa.md) for offline behavior, controlled updates
 and the remaining physical-device installation checks.
 See [accessibility and beta checks](docs/release/accessibility-beta.md) for keyboard
