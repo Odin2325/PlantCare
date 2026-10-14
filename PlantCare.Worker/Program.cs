@@ -2,6 +2,7 @@ using PlantCare.Worker;
 using PlantCare.Application;
 using PlantCare.Infrastructure;
 using Microsoft.AspNetCore.DataProtection;
+using PlantCare.Infrastructure.Operations;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddApplication();
@@ -10,6 +11,8 @@ builder.Services.Configure<NotificationWorkerOptions>(builder.Configuration.GetS
 builder.Services.Configure<ExternalCalendarSyncOptions>(
     builder.Configuration.GetSection("ExternalCalendarSync"));
 builder.Services.AddHostedService<Worker>();
+builder.Services.Configure<WorkerHealthOptions>(builder.Configuration.GetSection("Operations"));
+builder.Services.AddSingleton<WorkerHeartbeatStore>();
 builder.Services.AddHostedService<ExternalCalendarSyncWorker>();
 
 var dataProtectionKeysPath =

@@ -29,6 +29,7 @@ RUN dotnet publish PlantCare.Worker/PlantCare.Worker.csproj \
     --output /app/worker
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS api
+RUN mkdir -p /var/lib/plantcare/worker-health && chown app:app /var/lib/plantcare/worker-health
 RUN mkdir -p /var/lib/plantcare/keys \
     && chown app:app /var/lib/plantcare/keys \
     && chmod 700 /var/lib/plantcare/keys
@@ -42,6 +43,7 @@ EXPOSE 8080
 ENTRYPOINT ["dotnet", "PlantCare.Api.dll"]
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS worker
+RUN mkdir -p /var/lib/plantcare/worker-health && chown app:app /var/lib/plantcare/worker-health
 RUN mkdir -p /var/lib/plantcare/keys \
     && chown app:app /var/lib/plantcare/keys \
     && chmod 700 /var/lib/plantcare/keys

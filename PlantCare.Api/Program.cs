@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlantCare.Infrastructure.Persistence;
 using Microsoft.AspNetCore.DataProtection;
+using PlantCare.Infrastructure.Operations;
 using PlantCare.Api.Operations;
 
 const string AngularDevelopmentCorsPolicy = "AngularDevelopment";
@@ -33,7 +34,9 @@ builder.Services
 
 builder.Services.AddOpenApi();
 builder.Services.AddHealthChecks()
-    .AddCheck<DatabaseHealthCheck>("database", tags: ["ready"]);
+    .AddCheck<DatabaseHealthCheck>("database", tags: ["ready"])
+    .AddCheck<OperationsHealthCheck>("operations", tags: ["operations"]);
+builder.Services.Configure<WorkerHealthOptions>(builder.Configuration.GetSection("Operations"));
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 
@@ -282,7 +285,8 @@ authenticationGroup.RequireAntiforgeryValidation();
 app.MapControllers();
 app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
 app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = check => check.Tags.Contains("ready") });
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/health/operations", new HealthCheckOptions { Predicate = check => check.Tags.Contains("operations") });
+app.MapHealthChecks("/health", new HealthCheckOptions { Predicate = check => !check.Tags.Contains("operations") });
 app.MapMethods(
     "/api/{**path}",
     ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],

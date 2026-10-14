@@ -32,6 +32,9 @@ services:
       ReverseProxy__TrustForwardedHeaders: "true"
       Application__ClientBaseUrl: https://${PLANTCARE_DOMAIN}
       DataProtection__KeysPath: /var/lib/plantcare/keys
+      Operations__HeartbeatPath: /var/lib/plantcare/worker-health/notifications.json
+      Operations__MaxWorkerAgeSeconds: ${WORKER_HEALTH_MAX_AGE_SECONDS:-180}
+      Operations__MinFreeBytes: ${OPERATIONS_MIN_FREE_BYTES:-5368709120}
       GoogleCalendar__Enabled: ${GOOGLE_CALENDAR_ENABLED:-false}
       GoogleCalendar__ClientId: ${GOOGLE_CALENDAR_CLIENT_ID:-}
       GoogleCalendar__ClientSecret: ${GOOGLE_CALENDAR_CLIENT_SECRET:-}
@@ -57,6 +60,7 @@ services:
         condition: service_healthy
     volumes:
       - data-protection-keys:/var/lib/plantcare/keys
+      - worker-health:/var/lib/plantcare/worker-health:ro
     healthcheck:
       test: [CMD, curl, --fail, --silent, http://localhost:8080/health/ready]
       interval: 15s
@@ -76,6 +80,7 @@ services:
       ConnectionStrings__PlantCareDatabase: Server=database,1433;Database=PlantCare;User Id=plantcare_worker;Password=${SQL_WORKER_PASSWORD:?Set SQL_WORKER_PASSWORD};Encrypt=True;TrustServerCertificate=True
       Notifications__PollIntervalSeconds: ${NOTIFICATION_POLL_SECONDS:-60}
       Notifications__BatchSize: ${NOTIFICATION_BATCH_SIZE:-100}
+      Operations__HeartbeatPath: /var/lib/plantcare/worker-health/notifications.json
       ExternalCalendarSync__Enabled: ${EXTERNAL_CALENDAR_SYNC_ENABLED:-true}
       ExternalCalendarSync__PollIntervalMinutes: ${EXTERNAL_CALENDAR_SYNC_POLL_MINUTES:-15}
       ExternalCalendarSync__SyncIntervalHours: ${EXTERNAL_CALENDAR_SYNC_INTERVAL_HOURS:-6}
@@ -98,6 +103,7 @@ services:
         condition: service_healthy
     volumes:
       - data-protection-keys:/var/lib/plantcare/keys
+      - worker-health:/var/lib/plantcare/worker-health
     restart: unless-stopped
 
   migrate:
@@ -148,3 +154,4 @@ volumes:
   caddy-data:
   caddy-config:
   data-protection-keys:
+  worker-health:
