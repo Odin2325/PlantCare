@@ -1,7 +1,9 @@
 # Physical Android beta
 
 Target: installed PlantCare at `https://staging.plantacare.org`.
-Current runtime: `dbf65b828bc9a749675929ad30dc82a60f0b265a`.
+Current runtime: `82de1584291f7238e9e2fd5d6a677d0fa6808257` (Care details button styling).
+The installed Android frontend upgrade was accepted on `dbf65b8`; the small
+button-styling follow-up is verified in public desktop Chromium only.
 The earlier phone checks below were reported on `cfbc073`; do not relabel them
 as a full physical acceptance of the new calendar frontend.
 Device versions supplied by the owner: Android 17, Chrome 155.0.8059.79.

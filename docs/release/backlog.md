@@ -32,7 +32,8 @@ release unless the related optional feature is disabled.
   CI, 12 frontend tests, isolated recovery, actual old-to-new desktop PWA upgrade
   and three public browser journeys passed. Owner confirmed the physical Android
   upgrade, working nickname links and preserved data. Follow-up styling makes
-  Care details a plain button instead of an underlined link.
+  Care details a bordered, non-underlined button on `82de158`; exact-candidate CI,
+  backup/recovery, activation and a targeted public browser check passed.
 
 - Three browser projects passed real staging catalog/collection, tags,
   cross-account plant denials, worker reminder, dashboard completion,

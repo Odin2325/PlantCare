@@ -1,5 +1,16 @@
 # Calendar names and personal plant links
 
+Follow-up deployed on 2026-10-14 as
+`82de1584291f7238e9e2fd5d6a677d0fa6808257`: Care details now has a visible
+button border and no underline. It keeps opening the care panel; the main event
+link opens the personal plant page. Exact-candidate
+[CI run 38636717845](https://github.com/Odin2325/PlantCare/actions/runs/38636717845),
+fresh encrypted pre-update backup, isolated runtime recovery/rollback, verified
+activation and public DNS/TLS/health passed. A public desktop Chromium check
+confirmed computed button styling, care-panel opening, personal plant navigation
+and logout. The owner-reported physical upgrade below remains evidence for
+`dbf65b8`; this small styling follow-up has not been physically retested.
+
 Deployed on 2026-10-14 as `dbf65b828bc9a749675929ad30dc82a60f0b265a`.
 All 12 frontend tests, the production build, local desktop care/calendar journey,
 exact-candidate [CI run 38634142739](https://github.com/Odin2325/PlantCare/actions/runs/38634142739),

@@ -1,6 +1,19 @@
 # Public staging deployment and verification
 
-Latest runtime update 2026-10-14:
+Current runtime: `82de1584291f7238e9e2fd5d6a677d0fa6808257` styles Care details
+as a non-underlined bordered button. Exact-candidate CI, fresh encrypted backup,
+isolated recovery/rollback, pinned activation and public DNS/TLS/health passed.
+A public desktop browser check verified the rendered button styling, event panel,
+personal plant link and logout. See [calendar-plant-details.md](calendar-plant-details.md).
+
+Previous frontend update: `dbf65b828bc9a749675929ad30dc82a60f0b265a` adds
+calendar nickname/action links and owner-scoped personal plant details. Exact
+candidate CI, backup/recovery/activation and real old-to-new desktop PWA upgrade
+passed; see [calendar-plant-details.md](calendar-plant-details.md). The previous
+candidate's phone checks remain historical; Android Update now confirmation is
+pending for this frontend change.
+
+Previous runtime update 2026-10-14:
 `cfbc073cb79fb228149f98fa21e2b257e5a651a5` sends new reminder taps directly
 to the dashboard using Angular's `openWindow` operation. See [push-reliability.md](push-reliability.md)
 for CI/recovery/activation evidence and the pending physical Android tap retest.
