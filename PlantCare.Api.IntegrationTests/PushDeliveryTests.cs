@@ -62,7 +62,7 @@ public sealed class PushDeliveryTests : IAsyncLifetime
         Assert.Equal("/plantcare-icon.svg", notification.GetProperty("icon").GetString());
         Assert.Equal($"plantcare-{id:N}", notification.GetProperty("tag").GetString());
         var click = notification.GetProperty("data").GetProperty("onActionClick").GetProperty("default");
-        Assert.Equal("navigateLastFocusedOrOpen", click.GetProperty("operation").GetString());
+        Assert.Equal("openWindow", click.GetProperty("operation").GetString());
         Assert.Equal("/dashboard", click.GetProperty("url").GetString());
         Assert.False(notification.TryGetProperty("options", out _));
         Assert.Equal(1, provider.EncryptedRequests);

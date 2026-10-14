@@ -8,6 +8,14 @@ actions are available. The regression checks that destination. The previously
 deployed `/notifications` payload and old displayed notifications are historical;
 the requested dashboard destination still needs a fresh physical-device retest
 after its deployment. App opening is user-reported, not independently observed.
+The tap operation now uses Angular's `openWindow` with an explicit dashboard
+destination. This delegates launching to the browser, including installed-app
+handling, instead of choosing the last focused client. Session initialization
+already completes before routing, so no authentication guard was weakened.
+Chrome Android may reuse an installed standalone app for
+[`Clients.openWindow`](https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow).
+This is the next behavior to verify physically, not proof of the observed
+catalog landing's platform-level cause.
 
 Physical Android 17 / Chrome 155.0.8059.79 testing reported successful
 installation and app launch, but installed-app notification taps did nothing.
