@@ -1,5 +1,12 @@
 # Worker progress monitoring and capacity
 
+CI caught an existing WebPush transitive dependency, Pkcs 9.0.4, affected by
+[CVE-2026-84008](https://github.com/advisories/GHSA-846f-f764-76mx) and
+[CVE-2026-70162](https://github.com/advisories/GHSA-2fmv-rv2c-59x7).
+Infrastructure now explicitly selects the patched same-major Pkcs 9.0.21;
+the high/critical audit gate remains enabled. Rebuild/redeploy images to apply
+the package fix; changing source alone does not update a running container.
+
 `/health/ready` checks API/database availability. The separate public
 `/health/operations` endpoint returns only Healthy (200) or Unhealthy (503),
 without exposing paths, credentials, timestamps or workload counts.
