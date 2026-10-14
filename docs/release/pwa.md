@@ -80,6 +80,12 @@ and offline authentication startup.
 
 ## Manual beta checks still required
 
+Use the [physical Android checklist](android-beta.md) for the current staging
+candidate, fresh dashboard reminder taps, offline/reconnect, a real frontend
+upgrade and two elapsed care cycles. Installation/app launch is owner-reported
+working; the other phone checks remain pending. A server-only reminder fix does
+not exercise the frontend update prompt.
+
 Do not mark the complete PWA/device gate accepted from headless tests alone.
 Record the actual OS/browser/device versions and candidate SHA for:
 

@@ -51,7 +51,7 @@ cookies, reset links or raw browser traces to results.
 | --- | --- | --- | --- |
 | Windows desktop Chromium | Install/standalone/update/uninstall | Keyboard-only; screen reader of choice | Manual NOT RUN |
 | Windows Firefox | Web app and worker behavior | Keyboard-only; screen reader of choice | Manual NOT RUN |
-| Physical Android Chromium | Install/standalone/update | Touch, zoom, screen-reader navigation | NOT RUN |
+| Physical Android Chromium | Install/standalone/update | Touch, zoom, screen-reader navigation | Installation/app launch owner-reported working; dashboard tap, offline/update and accessibility checks pending; see android-beta.md |
 | Physical iPhone/iPad Safari, if advertised | Add to Home Screen/standalone/update | Touch, zoom, VoiceOver | NOT RUN |
 
 Desktop browser automation and a mobile-sized viewport do not verify a physical
