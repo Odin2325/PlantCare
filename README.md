@@ -9,6 +9,8 @@ then follow the [staging runbook](docs/release/staging.md).
 The [domain and hosting handoff](docs/release/domain-hosting.md) covers
 `plantacare.org`, the staging DNS record and choosing a compatible server.
 For the selected 4 GB OVHcloud VPS, use the [prebuilt-image deployment guide](docs/release/budget-staging.md).
+The [public staging record](docs/release/public-staging.md) covers the running
+synthetic environment at <https://staging.plantacare.org> and remaining release gates.
 The [release backlog](docs/release/backlog.md) records current blockers and
 the local verification results.
 Use the [administrator and catalog bootstrap guide](docs/release/bootstrap.md)

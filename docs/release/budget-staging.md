@@ -5,7 +5,9 @@ Status 2026-10-14: owner purchased OVHcloud VPS-1 2027, 2 vCores, 4 GB RAM,
 VAT and an included promotional automated backup. Budget is EUR 15/month total.
 Initial order validation/delivery was pending when this guide was prepared.
 Update 2026-10-14: host setup, reboot/key access, Docker and bundle import now
-pass; see [staging-host.md](staging-host.md). App startup awaits SMTP configuration.
+pass; see [staging-host.md](staging-host.md). Later on 2026-10-14 the app and real
+SMTP checks also passed; [public-staging.md](public-staging.md) records the scope
+and remaining gates.
 Confirm IPv4 inclusion and renewal pricing when delivery completes. UK is the
 selected location; Europe and EU are not interchangeable descriptions.
 
@@ -73,14 +75,19 @@ These commands are for the uploaded bundle directory on the Linux VPS:
 ```bash
 set -euo pipefail
 sha256sum --check SHA256SUMS
+# The non-root catalog operator needs access to these non-secret mount files.
+chmod 755 deploy
+chmod 644 deploy/Caddyfile deploy/catalog.example.json
 sudo docker image load --input images.tar
 # Compare both loaded IDs/tags against manifest.json before proceeding.
 sudo docker image inspect --format '{{.Id}}' 'plantcare-api:<candidate-sha>'
 sudo docker image inspect --format '{{.Id}}' 'plantcare-worker:<candidate-sha>'
 ```
 
-Create the staging-only private `.env` from `environment.example`, using mode
-600. Set `PLANTCARE_DOMAIN=staging.plantacare.org`, three fresh distinct SQL
+Create the staging-only private `../../.env` in the owner-only staging root
+from `environment.example`, using mode 600. Preserve this file across candidate
+directories; do not overwrite an existing deployment configuration.
+Set `PLANTCARE_DOMAIN=staging.plantacare.org`, three fresh distinct SQL
 passwords, real SMTP settings and separate VAPID keys (or leave push disabled
 until ready). Keep optional calendar providers disabled. Do not reuse the
 local database or credentials. Configure the staging DNS A record as described
@@ -89,7 +96,13 @@ in [domain-hosting.md](domain-hosting.md) before starting Caddy.
 In the same Bash session:
 
 ```bash
-dc() { sudo docker compose --project-name plantcare-staging --env-file .env --env-file images.env "$@"; }
+cat > compose.budget.yaml <<'EOF'
+services:
+  database:
+    environment:
+      MSSQL_MEMORY_LIMIT_MB: '2048'
+EOF
+dc() { sudo docker compose --project-name plantcare-staging --env-file ../../.env --env-file images.env -f compose.yaml -f compose.budget.yaml "$@"; }
 dc config --quiet
 dc pull database proxy
 dc up --no-build --pull never -d --wait --wait-timeout 300 database
@@ -98,6 +111,8 @@ dc run --rm --no-deps --pull never migrate --migrate-database
 dc run --rm --no-deps --pull never migrate --provision-runtime-users
 dc up --no-build --pull never --force-recreate --no-deps -d --wait --wait-timeout 300 api worker
 dc up --no-build --pull never -d --wait --wait-timeout 300
+dc exec -T api dotnet PlantCare.Api.dll --check-runtime-access api
+dc run --rm --no-deps --pull never worker-db-check
 dc ps
 sudo docker stats --no-stream
 free -h

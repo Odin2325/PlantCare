@@ -25,6 +25,28 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### First public staging deployment (2026-10-14)
+
+- Deployed the prebuilt `0acdb2d` bundle on the prepared OVHcloud VPS, with
+  fresh private credentials, Brevo STARTTLS/SMTP authentication, staging VAPID
+  keys and a 2048 MiB SQL memory setting. All migrations/runtime provisioning
+  passed. Actual restricted API/worker permission checks and trusted public
+  HTTPS/DNS/SPA/health routing passed. See [public-staging.md](public-staging.md).
+- Owner authorized both app test emails to their address. Confirmation and reset
+  arrived in Gmail INBOX; confirmation/login, password change, old password/reused
+  reset rejection, old-session revocation and logout passed. No secrets/links
+  are published. Provider tracking redirects are a privacy-configuration follow-up.
+- Synthetic demo species and care journey passed: catalog write denied to the
+  ordinary test account, plant/dashboard, worker reminder, completion/next due,
+  history/calendar, archive. Fixed read permissions only on the non-secret deploy
+  mount so the non-root catalog operator can read it.
+- Existing public-page keyboard/reflow/axe browser checks passed 3/3 on actual
+  HTTPS staging with certificate verification. SQL/API/worker restart preserved
+  reminders and the existing login session. Roughly 2.5 GiB host RAM available
+  and 32 GiB disk free after light tests; no observed OOM/automatic restarts.
+- Public staging exists; full acceptance, real devices/push, sustained capacity,
+  VPS backups/recovery/outage monitoring and release packaging remain open.
+
 ### Delivered VPS preparation (2026-10-14)
 
 - Configured the purchased OVHcloud Ubuntu 26.04 x86-64 host: Ubuntu/kernel

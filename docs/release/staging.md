@@ -11,6 +11,9 @@ building on the selected 4 GB host. The source-build commands below remain an
 alternative for hosts with adequate build resources.
 Later update: [host preparation](staging-host.md) passed on the delivered VPS;
 SMTP and application/public acceptance remain pending.
+Subsequent same-day deployment: [public-staging.md](public-staging.md) records
+working HTTPS, real confirmation/reset email, core care/worker, public browser
+checks and restart persistence; full release acceptance remains open.
 
 ## Local validation on Windows
 

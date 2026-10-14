@@ -3,6 +3,7 @@
 Verified 2026-10-14. The VPS is delivered and key-based SSH works. The selected
 UK VPS-1 has Ubuntu 26.04, x86-64, 3814 MiB RAM and a 38 GiB root filesystem.
 This record establishes host readiness, not PlantCare release acceptance.
+Subsequent app/SMTP deployment checks passed; see [public-staging.md](public-staging.md).
 
 ## Configuration and evidence
 
