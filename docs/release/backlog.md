@@ -25,6 +25,24 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Budget VPS and prebuilt-image handoff (2026-10-14)
+
+- Owner selected OVHcloud VPS-1 2027 in the UK with Ubuntu 26.04, 4 GB RAM,
+  40 GB NVMe and one-month checkout EUR 5.34 including VAT. Total monthly budget
+  is EUR 15. Delivery/validation is pending; remote access and tests are NOT RUN.
+- Added [budget-staging.md](budget-staging.md) and `Export-StagingBundle.ps1`:
+  committed-source-only Linux amd64 API/worker images, allowlisted runtime files,
+  image IDs and Linux-compatible SHA-256 checksums. No local data/secrets are
+  copied; no source-build fallback in exported Compose. Existing bundles are
+  preserved. Staging continues to require SMTP, public DNS and remote operations.
+- Exported candidate `0acdb2db70a343d1aae977bf4bb19150deaaaf7a` locally: 110.6 MiB
+  image archive. Both builds, all seven Linux payload checksums, archive reload,
+  image ID/runtime checks, eight-file allowlist, build-free Compose validation
+  (including operator profile) and existing-bundle refusal passed. Temporary
+  exporter scratch was removed. Local application services were not restarted.
+- Capacity on 4 GB/40 GB, public journeys and VPS backups/recovery remain open;
+  local Windows backups do not cover the new host. STAGE-01/OPS-01 remain open.
+
 ### Domain and public-staging handoff (2026-10-13)
 
 - Owner purchased `plantacare.org` at Porkbun. Public DNS still points the apex

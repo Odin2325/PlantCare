@@ -2,7 +2,12 @@
 
 Recorded 2026-10-13: the owner purchased `plantacare.org` at Porkbun. The
 management screenshot shows auto-renew, domain lock and contact privacy enabled.
-No hosting server or public deployment exists yet. Public DNS currently resolves
+Update 2026-10-14: the owner purchased an OVHcloud VPS-1 (4 GB RAM/40 GB NVMe,
+UK, Ubuntu 26.04, checkout EUR 5.34/month including VAT). Delivery is pending.
+Follow [budget-staging.md](budget-staging.md) for prebuilt images and deployment
+within the EUR 15/month budget. The earlier 8 GB Hetzner recommendation below
+is superseded for this deployment; its CX plans were unavailable.
+No public deployment exists yet. Public DNS checked on 2026-10-13 resolves
 the apex and `staging.plantacare.org` to Porkbun's parking service; that is not
 PlantCare. The prior application candidate `2c00bb2` passed all three CI jobs
 (Frontend, Backend and Production container), run `38468089723`.

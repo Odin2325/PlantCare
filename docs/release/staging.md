@@ -5,6 +5,10 @@ exists. Follow [domain-hosting.md](domain-hosting.md) for the server choice,
 Porkbun DNS handoff and read-only endpoint check for `staging.plantacare.org`.
 The public-host guide below uses the existing production Compose definition
 on a dedicated staging host so that production behavior is exercised.
+Update 2026-10-14: OVHcloud order validation is pending. Use the
+[budget VPS runbook](budget-staging.md) to transfer prebuilt images instead of
+building on the selected 4 GB host. The source-build commands below remain an
+alternative for hosts with adequate build resources.
 
 ## Local validation on Windows
 
