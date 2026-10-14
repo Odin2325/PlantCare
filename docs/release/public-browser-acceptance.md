@@ -2,6 +2,14 @@
 
 ## Verified on 2026-10-14
 
+Calendar frontend `dbf65b8` subsequently passed the three-browser public core
+journey, including nickname/action links, personal details and another account's
+private-detail denial. The real public installed-worker desktop upgrade from
+`cfbc073` passed without losing session, collection IDs or completed calendar
+history. The owner confirmed the physical Android Update now flow, working links
+and intact plant/history data; see [calendar-plant-details.md](calendar-plant-details.md).
+Two actual elapsed care cycles remain separately pending.
+
 The real HTTPS staging runtime `7c78c9426aa423e32b980a6f195434840612e384`
 passed the authenticated core journey in desktop Chromium, mobile-sized Chromium
 and desktop Firefox (3/3). These are automated browser checks, not three physical
@@ -59,6 +67,17 @@ writers. Keep the default polling/worker thresholds. The runner verifies public
 DNS contains the fixed VPS address before mapping that hostname inside Docker;
 this avoids intermittent Docker DNS failures without bypassing HTTPS validation.
 Tests use the real service worker and actual authenticated backend.
+
+`-Phase Upgrade` is an operator-coordinated real deployment test in desktop
+Chromium. It logs into dedicated A, caches the previous public frontend and
+records its main bundle, collection IDs and existing calendar history. A unique
+restricted `upgrade-<run>` directory prevents stale signals. The runner writes
+`ready.json` there, then waits for the operator to write `deployed.json` only
+after approved candidate activation and verification. It then exercises the real
+Update now prompt, verifies the old document remained until consent, checks
+changed production bundles, session/data preservation and the new detail link.
+Never write the deployment signal to simulate an upgrade or bypass CI/recovery.
+This phase sends no email or push and does not mutate plant/history data.
 
 Non-public phases require an owner-only
 `.operations-local/browser-acceptance/accounts.json`, with two distinct approved

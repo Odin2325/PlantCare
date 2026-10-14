@@ -31,7 +31,6 @@
 .event-link { display: block; width: 100%; padding: .3rem .1rem; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; text-decoration: none; overflow-wrap: anywhere; cursor: pointer; }
 .event-link small { display: block; }
 .event-link:hover { text-decoration: underline; }
-.event-details { padding: .25rem .1rem; border: 0; background: transparent; color: #245c36; font-size: .75rem; text-decoration: underline; cursor: pointer; }
+.event-details { margin-top: .2rem; padding: .25rem .4rem; border: 1px solid #77a98d; border-radius: .25rem; background: #fff; color: #245c36; font-size: .75rem; text-decoration: none; cursor: pointer; }
 .event-link:focus-visible, .event-details:focus-visible { outline: 2px solid #245c36; outline-offset: 2px; }
 .agenda-event > div { min-width: 0; }
-

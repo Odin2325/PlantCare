@@ -1,5 +1,24 @@
 # Calendar names and personal plant links
 
+Deployed on 2026-10-14 as `dbf65b828bc9a749675929ad30dc82a60f0b265a`.
+All 12 frontend tests, the production build, local desktop care/calendar journey,
+exact-candidate [CI run 38634142739](https://github.com/Odin2325/PlantCare/actions/runs/38634142739),
+fresh encrypted pre-update backup and isolated runtime restore/rollback passed.
+Pinned activation, restricted database access and public DNS/TLS/health passed.
+
+The real public frontend upgrade from `cfbc073` to this candidate passed in
+desktop Chromium with a dedicated account: the installed service worker offered
+Update now, the old document stayed loaded before consent, new production main
+and lazy chunks loaded afterward, and the authenticated session, collection IDs
+and completed calendar history stayed intact. A new calendar link opened the
+personal detail page and passed sampled axe checks. This used two actual builds,
+not the same-build A/B fixture. All three public staging core journeys passed
+after deployment, including another account's private-detail page denial.
+The owner also confirmed the installed Android update, nickname/action links,
+personal detail navigation and preserved plants/history. Follow-up feedback:
+Care details looked like a link, so it is now styled as a non-underlined button;
+it retains the event care panel while the primary event opens the plant page.
+
 Calendar events display the individual plant nickname supplied by the calendar
 API, together with the care action and scheduled/completed status. Nicknames are
 required for saved plants. Month/week labels now wrap instead of truncating the

@@ -34,6 +34,16 @@ This is asset preparation, not evidence of a native install on a physical device
 
 ## Automated acceptance
 
+The real public upgrade from `cfbc073` to calendar candidate `dbf65b8` also
+passed in desktop Chromium on 2026-10-14: installed worker update offer,
+consent before changed main/lazy bundles, session/collection/history preservation
+and the new personal-plant link. See [calendar-plant-details.md](calendar-plant-details.md).
+This supplements the synthetic A/B tests below and does not substitute for the
+physical Android installed-app upgrade. The owner subsequently confirmed that
+physical upgrade, new nickname/calendar links and preserved collection/history
+on Android 17 / Chrome 155.0.8059.79. Two real care cycles and broader physical
+accessibility checks remain open.
+
 ```powershell
 ./scripts/Start-LocalDeployment.ps1
 ./scripts/Test-LocalBrowserJourney.ps1

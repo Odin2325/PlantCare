@@ -1,7 +1,9 @@
 # Physical Android beta
 
 Target: installed PlantCare at `https://staging.plantacare.org`.
-Current runtime: `cfbc073cb79fb228149f98fa21e2b257e5a651a5`.
+Current runtime: `dbf65b828bc9a749675929ad30dc82a60f0b265a`.
+The earlier phone checks below were reported on `cfbc073`; do not relabel them
+as a full physical acceptance of the new calendar frontend.
 Device versions supplied by the owner: Android 17, Chrome 155.0.8059.79.
 Record results as owner-reported unless independently observed.
 
@@ -9,12 +11,21 @@ Record results as owner-reported unless independently observed.
 | --- | --- |
 | Installation and app launch | Owner reported working |
 | Notification opens installed app | Owner reported working on previous payload |
-| Fresh notification opens Dashboard | Passed, owner-reported on current runtime |
-| Offline cold launch and explanation | Passed, owner-reported on current runtime |
-| Reconnect, sign-in if needed and fresh plant data | Passed, owner-reported on current runtime |
+| Fresh notification opens Dashboard | Passed, owner-reported on cfbc073 |
+| Offline cold launch and explanation | Passed, owner-reported on cfbc073 |
+| Reconnect, sign-in if needed and fresh plant data | Passed, owner-reported on cfbc073 |
 | Immediate care completion, history/calendar and next-due behavior | Owner reported working; elapsed-cycle evidence separate |
-| Consented frontend update in the installed app | Pending |
+| Consented frontend update in the installed app | Passed, owner-reported cfbc073 → dbf65b8; nickname links and data intact |
 | Two normal elapsed care cycles | Pending |
+
+The calendar frontend deployment now allows the real phone update check from
+`cfbc073` to `dbf65b8`. Return to the installed app online, save unfinished work,
+choose Update now when offered, then check nickname/action links, the personal
+plant page, collection/history and offline/reconnect. Desktop automation passed
+this real old-to-new build upgrade. The owner subsequently confirmed Update now,
+nickname/action links, personal-plant navigation and preserved plants/history.
+The small follow-up Care details button styling is separate from that accepted
+upgrade; preserve the tested candidate labels.
 
 On 2026-10-14 the owner answered "All 3 passed" to the installed-app dashboard
 tap, airplane-mode cold launch/offline message, and reconnect/account-data checks.

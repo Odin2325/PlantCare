@@ -272,5 +272,3 @@ test('register, confirm, care for a plant, recover password and log out', async 
   });
   expect(pageErrors, 'Uncaught browser exceptions').toEqual([]);
 });
-
-

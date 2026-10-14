@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { expect, test, type Page } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
@@ -195,6 +195,66 @@ test('request the approved account reset through the browser', async ({ page }) 
   await expect(page.getByText('If an account exists for that address', { exact: false })).toBeVisible();
 });
 
+test('installed-worker upgrade preserves session and calendar data across real releases', async ({ page, context }) => {
+  test.skip(phase !== 'upgrade');
+  test.setTimeout(900_000);
+  const run = process.env.STAGING_UPGRADE_RUN;
+  if (!run || !/^[a-f0-9]{32}$/.test(run)) throw new Error('Private upgrade run missing.');
+  const directory = `/private/upgrade-${run}`;
+  const data = accounts();
+  stage('upgrade-previous-launch');
+  await login(page, data.a);
+  await page.goto('/calendar');
+  await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
+  await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller)), { timeout: 60_000 }).toBe(true);
+  await page.reload();
+  await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
+  const script = () => page.locator('script[src]').evaluateAll(elements =>
+    elements.map(e => e.getAttribute('src') ?? '').find(src => /(?:^|\/)main-[^/]+\.js$/.test(src)));
+  const previousScript = await script();
+  expect(previousScript, 'Previous production main bundle exists').toBeTruthy();
+  const collection = await (await context.request.get('/api/my-plants')).json();
+  const collectionIds = collection.map((p: { id: string }) => p.id).sort();
+  // The dedicated fixture history is already in this month; do not mutate it.
+  const completedBefore = (await (await context.request.get('/api/calendar?' + new URLSearchParams({
+    fromUtc: new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString(),
+    toUtc: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1).toISOString(),
+  }))).json()).filter((e: { kind: string }) => e.kind === 'Completed').map((e: { id: string }) => e.id).sort();
+  expect(completedBefore.length, 'Existing dedicated history is available').toBeGreaterThan(0);
+  writeFileSync(`${directory}/ready.json`, JSON.stringify({ previousScript, ready: true }));
+  stage('upgrade-await-deployment');
+  await expect.poll(() => existsSync(`${directory}/deployed.json`), { timeout: 720_000, intervals: [5_000] }).toBe(true);
+  stage('upgrade-ready-prompt');
+  await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+  const update = page.getByRole('button', { name: 'Update now', exact: true });
+  await expect(update).toBeVisible({ timeout: 60_000 });
+  expect(await script(), 'Old document remains before update consent').toBe(previousScript);
+  await update.click();
+  await expect.poll(script, { timeout: 60_000 }).not.toBe(previousScript);
+  stage('upgrade-preserved-session');
+  await expect(page).toHaveURL(`${origin}/calendar`);
+  await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
+  const me = await context.request.get('/api/account/me');
+  expect(me.status(), 'Existing cookie remains valid after frontend/API upgrade').toBe(200);
+  expect((await (await context.request.get('/api/my-plants')).json()).map((p: { id: string }) => p.id).sort()).toEqual(collectionIds);
+  const completedAfter = (await (await context.request.get('/api/calendar?' + new URLSearchParams({
+    fromUtc: new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString(),
+    toUtc: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1).toISOString(),
+  }))).json()).filter((e: { kind: string }) => e.kind === 'Completed').map((e: { id: string }) => e.id).sort();
+  expect(completedAfter).toEqual(completedBefore);
+  await page.getByRole('button', { name: 'Agenda', exact: true }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
+  await page.getByLabel(/^Status/).selectOption('Completed');
+  const link = page.locator('.agenda-event a.event-link').first();
+  await expect(link).toBeVisible();
+  await link.click();
+  await expect(page).toHaveURL(/\/my-plants\/[a-f0-9-]+$/);
+  await expect(page.getByRole('heading', { level: 1 })).not.toHaveText('Plant details');
+  await auditAccessibility(page, 'Upgraded personal plant details');
+  await submit(page, 'Log out', 'logout', 204);
+  writeFileSync(`${directory}/passed.json`, JSON.stringify({ passed: true, nextScript: await script() }));
+});
+
 test('resend the missing approved account confirmation', async ({ page }) => {
   test.skip(phase !== 'resend');
   const data = accounts();
@@ -235,4 +295,3 @@ test('consume real reset link, reject old password, sign in and log out', async 
   await submit(page, 'Log out', 'logout', 204);
   } finally { await oldContext.close(); }
 });
-
