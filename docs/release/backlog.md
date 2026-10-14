@@ -25,6 +25,22 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Full isolated VPS application recovery (2026-10-14)
+
+- Decrypted the recorded VPS snapshot into a new local project. All-file hashes,
+  CHECKDB/table comparisons, restored keys and SQL login remapping passed with
+  captured API/worker image IDs. Every network stayed internal; no ports published.
+- Saved test credentials were rejected. Recovered only the copied account using
+  internal Mailpit reset mail; reset-code reuse rejected, fresh sign-in and care
+  history passed. Worker reminder/restart deduplication passed; no external sends.
+- Deliberate exit-42 API activation failed as intended. Reapplying pinned original
+  configuration recovered readiness and preserved session/history/key hashes;
+  logout rejected the old session. Disposable resources/scratch were cleaned.
+- See [vps-application-recovery.md](vps-application-recovery.md). This accepts
+  same-schema activation rollback on a restored copy, not migration downgrade,
+  live-cookie/old-password continuity or a replacement VPS/provider recovery.
+  Next operations work is worker-progress/failure alerts and realistic capacity.
+
 ### Independent public uptime alert drill (2026-10-14)
 
 - Owner confirmed UptimeRobot `/health/ready` monitor and email contact. A bounded

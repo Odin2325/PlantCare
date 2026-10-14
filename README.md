@@ -36,6 +36,8 @@ off-server snapshots, the tested SQL restore and remaining independent alerts.
 See [uptime monitoring](docs/release/uptime-monitoring.md) for the controlled
 public outage drill and [catalog roadmap](docs/release/catalog-roadmap.md) for
 reviewed species content and deferred image features.
+See [VPS application recovery](docs/release/vps-application-recovery.md) for
+the isolated restored-account, worker, care-data and failed-activation drill.
 See [PWA acceptance](docs/release/pwa.md) for offline behavior, controlled updates
 and the remaining physical-device installation checks.
 See [accessibility and beta checks](docs/release/accessibility-beta.md) for keyboard

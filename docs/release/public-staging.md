@@ -64,6 +64,14 @@ No marketing campaign was created. Tests sent only the two authorized app emails
 
 ## Still open
 
+The encrypted VPS snapshot also passed a full local isolated application drill
+on 2026-10-14: account recovery through captured mail, sign-in, runtime login
+remapping, care/worker/restart behavior and same-schema failed-activation rollback
+with session/history/keys preserved. See
+[vps-application-recovery.md](vps-application-recovery.md) for evidence and limits.
+Live-cookie/saved-password continuity, real providers and replacement-VPS
+recovery are not accepted by that drill.
+
 - VPS SQL/key/config encrypted backups and an isolated SQL restore now pass;
   see [vps-backups.md](vps-backups.md). Full replacement-host app recovery and
   independent backup alerts remain open. The daily external-drive task

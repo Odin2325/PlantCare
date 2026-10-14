@@ -79,7 +79,11 @@ Codex/the PC/Gmail connector must be available.
   Original private state was restored and actual health passed afterward.
 - The restore drill starts only SQL, so it sends no email/push and does not
   contact integrations. Restored app login/cookies, SQL login remapping and
-  integration behavior on a replacement VPS still need a full recovery drill.
+  integration behavior on a replacement VPS remain open. A separate
+  [full isolated application drill](vps-application-recovery.md) now passes
+  restored-account recovery/sign-in, runtime remapping, care/worker behavior
+  and a same-schema failed-activation rollback; it does not accept live cookies
+  or external integrations.
 - The external drive is separate from the VPS but not an immutable backup.
   Separate-machine recovery, a portable recovery key held outside this PC,
   retention/capacity planning and independent backup monitoring remain open.
