@@ -164,20 +164,29 @@ test('register, confirm, care for a plant, recover password and log out', async 
     const calendarLoading = page.getByRole('status').filter({ hasText: 'Loading calendar' });
     await expect(calendarLoading).toBeHidden();
     await auditAccessibility(page, 'Calendar month');
+    await expect(page.locator('.event-link').filter({ hasText: nickname }).first()).toContainText('Watering');
+    await expect(page.locator('.event-link').filter({ hasText: nickname }).first()).toHaveAttribute('href', /\/my-plants\/[a-f0-9-]+$/);
     await page.getByRole('button', { name: 'Week', exact: true }).click();
     await expect(calendarLoading).toBeHidden();
     await auditAccessibility(page, 'Calendar week');
+    await expect(page.locator('.event-link').filter({ hasText: nickname }).first()).toContainText('Watering');
+    await expect(page.locator('.event-link').filter({ hasText: nickname }).first()).toHaveAttribute('href', /\/my-plants\/[a-f0-9-]+$/);
     await page.getByRole('button', { name: 'Agenda', exact: true }).click();
     await expect(calendarLoading).toBeHidden();
     await page.getByLabel(/^Status/).selectOption('Completed');
-    const event = page.getByRole('button').filter({ hasText: nickname });
+    const event = page.locator('.agenda-event .event-link').filter({ hasText: nickname });
     await expect(event).toHaveCount(1);
-    await event.click();
+    await expect(event).toContainText('Watering');
+    await page.getByRole('button', { name: `Care details for ${nickname} · Watering`, exact: true }).click();
     await expect(page.locator('.details')).toContainText('Completed');
+    await event.click();
+    await expect(page).toHaveURL(/\/my-plants\/[a-f0-9-]+$/);
+    await expect(page.getByRole('heading', { name: nickname, exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Personal plant details');
   });
 
   await step('Weekday settings retain their time zone in a travelling browser', page, async () => {
-    await page.getByRole('navigation').getByRole('link', { name: 'My plants', exact: true }).click();
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'My plants', exact: true }).click();
     const watering = page.locator('.care-schedule').filter({ hasText: 'Watering' });
     await watering.getByRole('combobox', { name: /Schedule/ }).selectOption('Weekdays');
     await watering.getByRole('checkbox', { name: 'Mon', exact: true }).check();
@@ -215,7 +224,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
   });
 
   await step('Archive and restore survive reload', page, async () => {
-    await page.getByRole('navigation').getByRole('link', { name: 'My plants', exact: true }).click();
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'My plants', exact: true }).click();
     await page.getByRole('button', { name: 'Archive plant', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'No plants yet' })).toBeVisible();
     await page.getByRole('button', { name: 'Show archived', exact: true }).click();
@@ -250,7 +259,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.locator('.form-error')).toContainText('credentials are incorrect');
     await login(page, email, newPassword);
     await expect(page.getByRole('heading', { name: 'Your plants', exact: true })).toBeVisible();
-    await page.getByRole('navigation').getByRole('link', { name: 'My plants', exact: true }).click();
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'My plants', exact: true }).click();
     await expect(page.getByRole('heading', { name: nickname, exact: true })).toBeVisible();
     // Leave successful runs with only an archived synthetic plant.
     await page.getByRole('button', { name: 'Archive plant', exact: true }).click();
@@ -263,3 +272,5 @@ test('register, confirm, care for a plant, recover password and log out', async 
   });
   expect(pageErrors, 'Uncaught browser exceptions').toEqual([]);
 });
+
+

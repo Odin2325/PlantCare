@@ -13,8 +13,8 @@
 .day { min-height: 7.5rem; padding: .45rem; border-right: 1px solid #e1e8e3; border-bottom: 1px solid #e1e8e3; overflow: hidden; }.day:nth-child(7n) { border-right: 0; }
 .day.outside { background: #fafafa; color: #647268; }.day time { display: block; margin-bottom: .35rem; font-weight: 700; }
 .event { display: block; width: 100%; margin: .25rem 0; padding: .3rem .4rem; border: 0; border-left: .25rem solid #77a98d; border-radius: .25rem; background: #edf7f1; color: #214a36; font: inherit; font-size: .78rem; overflow: hidden; text-align: left; cursor: pointer; }
-.event.completed { border-color: #39745a; background: #dbeee3; text-decoration: line-through; }.event span, .event small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }.event small { opacity: 1; }
-.event:focus-visible { outline: 2px solid #214a36; outline-offset: 1px; }
+.event.completed { border-color: #39745a; background: #dbeee3; }.event span, .event small { display: block; white-space: normal; overflow-wrap: anywhere; }.event small { opacity: 1; }
+
 .week-calendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .65rem; }.week-day { min-height: 13rem; padding: .75rem; border: 1px solid #d6e1da; border-radius: .65rem; background: #fff; }.week-day > header { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: .75rem; padding-bottom: .5rem; border-bottom: 1px solid #e1e8e3; }.week-day > header span { color: #39745a; font-weight: 700; }.week-day > header time { color: #607269; }.no-events { color: #596b60; font-size: .8rem; }
 .agenda { display: grid; gap: .75rem; }.agenda-day { display: grid; grid-template-columns: minmax(11rem, 14rem) 1fr; gap: 1rem; padding: 1rem; border: 1px solid #d6e1da; border-radius: .65rem; background: #fff; }.agenda-day > header { color: #39745a; font-weight: 700; }.agenda-day > div { display: grid; gap: .5rem; }.agenda-event { display: grid; grid-template-columns: 5rem 1fr; gap: .75rem; width: 100%; padding: .7rem; border: 0; border-left: .3rem solid #77a98d; border-radius: .3rem; background: #edf7f1; color: #214a36; text-align: left; }.agenda-event.completed { border-color: #39745a; background: #dbeee3; }.agenda-event span, .agenda-event small { display: block; }.agenda-event small { margin-top: .2rem; opacity: 1; }.agenda-empty { padding: 2rem; border-radius: .75rem; background: #f5faf7; text-align: center; }.agenda-empty h2 { margin-top: 0; }
 .details { position: relative; margin-top: 1rem; padding: 1.25rem; border: 1px solid #ccd9d0; border-radius: .75rem; background: #f8fbf9; }.details h2 { margin: .2rem 0 1rem; }.details .close { position: absolute; top: .75rem; right: .75rem; font-size: 1.35rem; }.details dl { display: flex; gap: 2rem; flex-wrap: wrap; }.details dl div { min-width: 10rem; }.details dt { color: #607269; font-size: .8rem; font-weight: 700; text-transform: uppercase; }.details dd { margin: .2rem 0; }.details .complete { margin-top: .75rem; }.hint { color: #607269; }
@@ -25,3 +25,13 @@
 @media (max-width: 60rem) { .week-calendar { grid-template-columns: repeat(2, minmax(0, 1fr)); }.week-day:last-child { grid-column: 1 / -1; } }
 @media (max-width: 44rem) { .calendar-header { align-items: flex-start; flex-direction: column; }.legend { width: 100%; margin-left: 0; }.calendar { overflow-x: auto; grid-template-columns: repeat(7, minmax(7rem, 1fr)); }.weekday, .day { min-width: 7rem; }.agenda-day { grid-template-columns: 1fr; }.view-switch { width: 100%; }.view-switch button { flex: 1; } }
 @media (max-width: 32rem) { .week-calendar { grid-template-columns: 1fr; }.week-day:last-child { grid-column: auto; } }
+/* Keep nickname and action readable, and separate navigation from care controls. */
+
+
+.event-link { display: block; width: 100%; padding: .3rem .1rem; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; text-decoration: none; overflow-wrap: anywhere; cursor: pointer; }
+.event-link small { display: block; }
+.event-link:hover { text-decoration: underline; }
+.event-details { padding: .25rem .1rem; border: 0; background: transparent; color: #245c36; font-size: .75rem; text-decoration: underline; cursor: pointer; }
+.event-link:focus-visible, .event-details:focus-visible { outline: 2px solid #245c36; outline-offset: 2px; }
+.agenda-event > div { min-width: 0; }
+

@@ -12,6 +12,7 @@ Record results as owner-reported unless independently observed.
 | Fresh notification opens Dashboard | Passed, owner-reported on current runtime |
 | Offline cold launch and explanation | Passed, owner-reported on current runtime |
 | Reconnect, sign-in if needed and fresh plant data | Passed, owner-reported on current runtime |
+| Immediate care completion, history/calendar and next-due behavior | Owner reported working; elapsed-cycle evidence separate |
 | Consented frontend update in the installed app | Pending |
 | Two normal elapsed care cycles | Pending |
 
@@ -20,6 +21,9 @@ tap, airplane-mode cold launch/offline message, and reconnect/account-data check
 This accepts those three reported scenarios on the stated Android/Chrome versions;
 it does not establish a frontend upgrade, offline write behavior, every supported
 device, or either normal elapsed care cycle.
+The subsequent care-flow confirmation is recorded as immediate functional
+behavior. Both actual future daily due times have not been supplied, so the two
+elapsed-cycle rows remain pending.
 
 ## Fresh reminder and dashboard action
 

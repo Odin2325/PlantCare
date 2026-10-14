@@ -35,6 +35,12 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'my-plants/:id',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/my-plants/pages/my-plant-detail-page/my-plant-detail-page')
+      .then(component => component.MyPlantDetailPage),
+  },
+  {
     path: 'my-plants',
     canActivate: [
       authGuard,

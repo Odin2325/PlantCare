@@ -1,0 +1,8 @@
+.plant-details-page { max-width: 56rem; margin: auto; padding: 2rem 1rem; overflow-wrap: anywhere; }
+nav, .actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+a { color: #245c36; text-underline-offset: .2em; }
+.eyebrow { color: #39745a; font-weight: 700; }
+dl { display: grid; gap: 1rem; } dt { font-weight: 700; } dd { margin: .25rem 0; }
+.notes { white-space: pre-wrap; }
+.schedule { padding: 1rem; margin-bottom: 1rem; border: 1px solid #ccd9d0; border-radius: .6rem; }
+.schedule h3 { margin-top: 0; } .actions { margin-top: 1.5rem; }

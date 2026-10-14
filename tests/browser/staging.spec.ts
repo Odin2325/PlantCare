@@ -118,6 +118,9 @@ test('public staging core journey, sampled accessibility and two-account isolati
       expect((await other.request.delete(`/api/my-plants/${plantId}`, { headers })).status()).toBe(404);
       const list = await (await other.request.get('/api/my-plants')).json();
       expect(list.some((item: { id: string }) => item.id === plantId), 'Other account cannot list probe').toBe(false);
+      await b.goto(`/my-plants/${plantId}`);
+      await expect(b.getByRole('alert')).toHaveText('This plant could not be found.');
+      await expect(b.getByRole('heading', { name: nickname, exact: true })).toBeHidden();
       await submit(b, 'Log out', 'logout', 204);
     } finally { await other.close(); }
 
@@ -148,8 +151,14 @@ test('public staging core journey, sampled accessibility and two-account isolati
     await page.getByRole('button', { name: 'Agenda', exact: true }).click();
     await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
     await page.getByLabel(/^Status/).selectOption('Completed');
-    await expect(page.getByRole('button').filter({ hasText: nickname })).toHaveCount(1);
+    const event = page.locator('.agenda-event .event-link').filter({ hasText: nickname });
+    await expect(event).toHaveCount(1);
+    await expect(event).toContainText('Watering');
     await auditAccessibility(page, 'Public staging calendar');
+    await event.click();
+    await expect(page).toHaveURL(new RegExp('/my-plants/' + plantId + '$'));
+    await expect(page.getByRole('heading', { name: nickname, exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Public staging plant details');
     stage('archive-restore');
     await page.goto('/my-plants'); await card.getByRole('button', { name: 'Archive plant', exact: true }).click();
     await expect(card).toBeHidden();
@@ -226,3 +235,4 @@ test('consume real reset link, reject old password, sign in and log out', async 
   await submit(page, 'Log out', 'logout', 204);
   } finally { await oldContext.close(); }
 });
+

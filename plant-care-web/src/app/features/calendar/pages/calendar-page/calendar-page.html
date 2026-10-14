@@ -24,9 +24,14 @@
         <article class="day" [class.outside]="!day.isCurrentMonth">
           <time [attr.datetime]="day.date.toISOString()">{{ day.date.getDate() }}</time>
           @for (entry of day.entries; track entry.id) {
-            <button type="button" class="event" [class.completed]="entry.kind === 'Completed'" [title]="entry.plantName + ' · ' + entry.actionType" (click)="selectEntry(entry)">
-              <span>{{ entry.plantName }}</span><small>{{ entry.actionType }}</small>
-            </button>
+            <div class="event" [class.completed]="entry.kind === 'Completed'">
+              @if (!viewedShare()) {
+                <a class="event-link" [routerLink]="['/my-plants', entry.userPlantId]"><span>{{ entry.plantName }}</span><small>{{ entry.actionType }} · {{ entry.kind }}</small></a>
+                <button type="button" class="event-details" (click)="selectEntry(entry)" [attr.aria-label]="'Care details for ' + entry.plantName + ' · ' + entry.actionType">Care details</button>
+              } @else {
+                <button type="button" class="event-link" (click)="selectEntry(entry)"><span>{{ entry.plantName }}</span><small>{{ entry.actionType }} · {{ entry.kind }}</small></button>
+              }
+            </div>
           }
         </article>
       }
@@ -38,9 +43,14 @@
           <header><span>{{ day.date | date:'EEE' }}</span><time [attr.datetime]="day.date.toISOString()">{{ day.date | date:'MMM d' }}</time></header>
           @if (day.entries.length === 0) { <p class="no-events">No care events</p> }
           @for (entry of day.entries; track entry.id) {
-            <button type="button" class="event" [class.completed]="entry.kind === 'Completed'" (click)="selectEntry(entry)">
-              <span>{{ entry.startsAtUtc | date:'shortTime' }} · {{ entry.plantName }}</span><small>{{ entry.actionType }} · {{ entry.kind }}</small>
-            </button>
+            <div class="event" [class.completed]="entry.kind === 'Completed'">
+              @if (!viewedShare()) {
+                <a class="event-link" [routerLink]="['/my-plants', entry.userPlantId]"><span>{{ entry.plantName }}</span><small>{{ entry.startsAtUtc | date:'shortTime' }} · {{ entry.actionType }} · {{ entry.kind }}</small></a>
+                <button type="button" class="event-details" (click)="selectEntry(entry)" [attr.aria-label]="'Care details for ' + entry.plantName + ' · ' + entry.actionType">Care details</button>
+              } @else {
+                <button type="button" class="event-link" (click)="selectEntry(entry)"><span>{{ entry.plantName }}</span><small>{{ entry.startsAtUtc | date:'shortTime' }} · {{ entry.actionType }} · {{ entry.kind }}</small></button>
+              }
+            </div>
           }
         </article>
       }
@@ -55,9 +65,16 @@
           <header><time [attr.datetime]="day.date.toISOString()">{{ day.date | date:'EEEE, MMMM d' }}</time></header>
           <div>
             @for (entry of day.entries; track entry.id) {
-              <button type="button" class="agenda-event" [class.completed]="entry.kind === 'Completed'" (click)="selectEntry(entry)">
-                <time>{{ entry.startsAtUtc | date:'shortTime' }}</time><span><strong>{{ entry.plantName }}</strong><small>{{ entry.actionType }} · {{ entry.kind }}</small></span>
-              </button>
+              <div class="agenda-event" [class.completed]="entry.kind === 'Completed'">
+                <time>{{ entry.startsAtUtc | date:'shortTime' }}</time><div>
+                  @if (!viewedShare()) {
+                    <a class="event-link" [routerLink]="['/my-plants', entry.userPlantId]"><strong>{{ entry.plantName }}</strong><small>{{ entry.actionType }} · {{ entry.kind }}</small></a>
+                    <button type="button" class="event-details" (click)="selectEntry(entry)" [attr.aria-label]="'Care details for ' + entry.plantName + ' · ' + entry.actionType">Care details</button>
+                  } @else {
+                    <button type="button" class="event-link" (click)="selectEntry(entry)"><strong>{{ entry.plantName }}</strong><small>{{ entry.actionType }} · {{ entry.kind }}</small></button>
+                  }
+                </div>
+              </div>
             }
           </div>
         </article>

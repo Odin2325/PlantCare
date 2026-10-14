@@ -7,14 +7,14 @@ import { CalendarApiService } from '../../data-access/calendar-api.service';
 import { CalendarEntry, CalendarShare } from '../../models/calendar.model';
 import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api.service';
 import { CareActionType } from '../../../my-plants/models/user-plant.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ExternalCalendarStatus } from '../../models/calendar.model';
 
 interface CalendarDay { date: Date; isCurrentMonth: boolean; entries: CalendarEntry[]; }
 type CalendarView = 'Month' | 'Week' | 'Agenda';
 
 @Component({
-  selector: 'app-calendar-page', standalone: true, imports: [DatePipe, FormsModule],
+  selector: 'app-calendar-page', standalone: true, imports: [DatePipe, FormsModule, RouterLink],
   templateUrl: './calendar-page.html', styleUrl: './calendar-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

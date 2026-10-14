@@ -1,0 +1,28 @@
+<main id="main-content" tabindex="-1" class="plant-details-page">
+  <nav aria-label="Plant navigation"><a routerLink="/calendar">Back to calendar</a><a routerLink="/my-plants">My plants</a></nav>
+  <header><p class="eyebrow">My plant</p><h1>{{ plant()?.nickname || plant()?.speciesCommonName || 'Plant details' }}</h1></header>
+  @if (plant(); as item) {
+    <p>{{ item.speciesCommonName }} @if (item.speciesScientificName) { · <i>{{ item.speciesScientificName }}</i> }</p>
+    @if (!item.isActive) { <p role="status">This plant is archived.</p> }
+    <dl>
+      <div><dt>Location</dt><dd>{{ item.location || 'Not set' }}</dd></div>
+      <div><dt>Acquired</dt><dd>{{ item.acquiredOn ? (item.acquiredOn | date:'mediumDate') : 'Not set' }}</dd></div>
+      <div><dt>Tags</dt><dd>{{ item.tags.length ? item.tags.join(', ') : 'None' }}</dd></div>
+      @if (item.notes) { <div><dt>Notes</dt><dd class="notes">{{ item.notes }}</dd></div> }
+    </dl>
+    <section aria-labelledby="care-heading"><h2 id="care-heading">Care plan</h2>
+      @for (schedule of item.careSchedules; track schedule.id) {
+        <article class="schedule"><h3>{{ schedule.actionType }}</h3>
+          <p>{{ schedule.isEnabled ? 'Active' : 'Paused' }} · {{ schedule.scheduleMode === 'Weekdays' ? 'Selected weekdays' : 'Every ' + schedule.intervalDays + ' days' }}</p>
+          <p>Next due: {{ schedule.nextDueAtUtc ? (schedule.nextDueAtUtc | date:'medium') : 'Not scheduled' }}</p>
+          <p>Last completed: {{ schedule.lastCompletedAtUtc ? (schedule.lastCompletedAtUtc | date:'medium') : 'Not recorded' }}</p>
+          @if (schedule.timeZoneId) { <p>Reminder time zone: {{ schedule.timeZoneId }}</p> }
+        </article>
+      } @empty { <p>No care schedules.</p> }
+    </section>
+    <div class="actions"><a routerLink="/dashboard">Complete care on Dashboard</a><a [routerLink]="['/my-plants', item.id, 'care-history']">View care history</a><a [routerLink]="['/plants', item.plantSpeciesId]">Species information</a></div>
+  } @else {
+    @if (loading()) { <p role="status">Loading plant details…</p> }
+    @if (error()) { <p role="alert">{{ error() }}</p> }
+  }
+</main>
