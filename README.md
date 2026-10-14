@@ -33,6 +33,9 @@ See [encrypted local backups](docs/release/local-backups.md) for the external-dr
 snapshot, Windows schedule, health checks and separate recovery-key requirements.
 See [VPS backups and monitoring](docs/release/vps-backups.md) for encrypted
 off-server snapshots, the tested SQL restore and remaining independent alerts.
+See [uptime monitoring](docs/release/uptime-monitoring.md) for the controlled
+public outage drill and [catalog roadmap](docs/release/catalog-roadmap.md) for
+reviewed species content and deferred image features.
 See [PWA acceptance](docs/release/pwa.md) for offline behavior, controlled updates
 and the remaining physical-device installation checks.
 See [accessibility and beta checks](docs/release/accessibility-beta.md) for keyboard

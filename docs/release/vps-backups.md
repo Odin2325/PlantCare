@@ -86,9 +86,8 @@ Codex/the PC/Gmail connector must be available.
 
 ## Next: independent public uptime monitoring
 
-Create a free [UptimeRobot account](https://uptimerobot.com/pricing/), then add
-an HTTP(S) monitor for `https://staging.plantacare.org/health/ready`, expected
-status 200, at the free five-minute interval, with owner email alerts. No app
-password, token or paid add-on is needed. This monitor has **not** been configured.
-It will operate outside the PC/VPS; it does not prove worker processing or backup
-freshness. Test outage/recovery notification delivery before accepting it.
+The owner created a free UptimeRobot account and confirmed a monitor for
+`https://staging.plantacare.org/health/ready` with owner email alerts on
+2026-10-14. See [uptime-monitoring.md](uptime-monitoring.md) for the controlled
+outage/recovery drill and delivery evidence. It operates outside the PC/VPS;
+it does not prove worker processing or backup freshness. No paid add-on is needed.

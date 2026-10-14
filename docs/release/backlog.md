@@ -25,6 +25,24 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Independent public uptime alert drill (2026-10-14)
+
+- Owner confirmed UptimeRobot `/health/ready` monitor and email contact. A bounded
+  six-minute API outage had a verified independent server restart timer; public
+  readiness returned 502. Actual readiness-monitor Down email reached Gmail
+  INBOX at 13:44:58 Berlin; API/readiness recovered at 13:47:01 and Up email
+  arrived at 13:50:04. These were real incident messages, not provider tests.
+- Provider dashboard was inaccessible through the browser tool. Extra unrelated
+  URL monitors produced duplicate alerts; owner should pause those and retain
+  readiness monitoring. No dashboard configuration was modified.
+- See [uptime-monitoring.md](uptime-monitoring.md). Full isolated application
+  recovery/rollback, worker-progress alerts and beta gates remain open.
+
+Owner follow-up: replace the synthetic one-entry catalog with reviewed real
+species before release. Small plant images and healthy growth-stage imagery are
+deferred features; see [catalog-roadmap.md](catalog-roadmap.md). Current work
+continues with uptime-alert verification and full recovery/rollback.
+
 ### VPS encrypted backups and monitoring (2026-10-14)
 
 - Captured SQL/key/config consistently from the public `0acdb2d` runtime;

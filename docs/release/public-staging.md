@@ -66,8 +66,11 @@ No marketing campaign was created. Tests sent only the two authorized app emails
 
 - VPS SQL/key/config encrypted backups and an isolated SQL restore now pass;
   see [vps-backups.md](vps-backups.md). Full replacement-host app recovery and
-  independent outage/backup alerts remain open. The daily external-drive task
+  independent backup alerts remain open. The daily external-drive task
   and weekly Codex alert checks depend on the owner's PC.
+- Owner configured independent UptimeRobot readiness monitoring; see
+  [uptime-monitoring.md](uptime-monitoring.md) for real outage/recovery evidence
+  and extra monitor cleanup. Worker-progress monitoring remains separate.
 - Sustained load, backup-time memory/disk headroom, worker failure and public-host
   recovery/rollback drills. Current idle/light measurements do not establish scale.
 - Authenticated public-browser/account-isolation acceptance, real-device push,
