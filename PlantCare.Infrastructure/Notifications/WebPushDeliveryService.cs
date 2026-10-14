@@ -56,7 +56,7 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
             var payload = JsonSerializer.Serialize(new { notification = new { title = $"{schedule.ActionType} reminder",
                 body = $"{schedule.UserPlant.Nickname} needs care.", icon = "/plantcare-icon.svg",
                 tag = $"plantcare-{notification.Id:N}",
-                data = new { onActionClick = new { @default = new { operation = "navigateLastFocusedOrOpen", url = "/notifications" } } }
+                data = new { onActionClick = new { @default = new { operation = "navigateLastFocusedOrOpen", url = "/dashboard" } } }
             } });
             var attempts = 0;
             foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending))

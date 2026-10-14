@@ -2,6 +2,13 @@
 
 ## Notification tap correction (2026-10-14)
 
+Follow-up: the owner reports installed notification taps now open the app, but
+land on the catalog. New reminder payloads now target `/dashboard`, where care
+actions are available. The regression checks that destination. The previously
+deployed `/notifications` payload and old displayed notifications are historical;
+the requested dashboard destination still needs a fresh physical-device retest
+after its deployment. App opening is user-reported, not independently observed.
+
 Physical Android 17 / Chrome 155.0.8059.79 testing reported successful
 installation and app launch, but installed-app notification taps did nothing.
 Browser-tab push receipt/tapping had previously been reported as working.
