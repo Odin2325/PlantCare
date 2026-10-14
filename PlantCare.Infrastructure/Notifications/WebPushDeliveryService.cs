@@ -51,11 +51,13 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
                 dbContext.PushDeliveries.AddRange(deliveries);
                 await dbContext.SaveChangesAsync(cancellationToken);
             }
-            var payload = JsonSerializer.Serialize(new { notification = new { title = $"{schedule.ActionType} reminder", options = new {
+            // Angular reads NotificationOptions directly from notification, not
+            // from an options child. Nesting them drops body, tag and tap action.
+            var payload = JsonSerializer.Serialize(new { notification = new { title = $"{schedule.ActionType} reminder",
                 body = $"{schedule.UserPlant.Nickname} needs care.", icon = "/plantcare-icon.svg",
                 tag = $"plantcare-{notification.Id:N}",
                 data = new { onActionClick = new { @default = new { operation = "navigateLastFocusedOrOpen", url = "/notifications" } } }
-            } } });
+            } });
             var attempts = 0;
             foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending))
             {

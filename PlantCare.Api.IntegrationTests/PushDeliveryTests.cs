@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -24,6 +25,7 @@ public sealed class PushDeliveryTests : IAsyncLifetime
     private readonly PlantCareApiFactory factory;
     private readonly VapidDetails keys = VapidHelper.GenerateVapidKeys();
     private readonly MutableOptions settings = new();
+    private readonly List<string> payloads = [];
 
     public PushDeliveryTests()
     {
@@ -33,6 +35,9 @@ public sealed class PushDeliveryTests : IAsyncLifetime
         {
             services.Replace(ServiceDescriptor.Singleton<TimeProvider>(clock));
             services.Replace(ServiceDescriptor.Singleton<IOptions<WebPushOptions>>(settings));
+            var transport = services.Last(item => item.ServiceType == typeof(IWebPushTransport));
+            services.Replace(ServiceDescriptor.Transient<IWebPushTransport>(provider =>
+                new RecordingTransport((IWebPushTransport)transport.ImplementationFactory!(provider), payloads)));
             services.Configure<HttpClientFactoryOptions>(nameof(IWebPushTransport), options =>
                 options.HttpMessageHandlerBuilderActions.Add(builder => builder.PrimaryHandler = provider));
         }, pushTestSqlPassword: Environment.GetEnvironmentVariable("PLANTCARE_PUSH_TEST_SQL_PASSWORD"));
@@ -43,6 +48,24 @@ public sealed class PushDeliveryTests : IAsyncLifetime
     {
         try { await factory.DeletePushTestDatabaseAsync(); }
         finally { await factory.DisposeAsync(); }
+    }
+
+    [Fact]
+    public async Task ReminderContainsAngularNotificationBodyAndClickDestination()
+    {
+        var id = await SeedAsync("payload-contract");
+        Assert.Equal(1, await DeliverAsync());
+        using var document = JsonDocument.Parse(Assert.Single(payloads));
+        var notification = document.RootElement.GetProperty("notification");
+        Assert.Equal("Watering reminder", notification.GetProperty("title").GetString());
+        Assert.Equal("Push test plant needs care.", notification.GetProperty("body").GetString());
+        Assert.Equal("/plantcare-icon.svg", notification.GetProperty("icon").GetString());
+        Assert.Equal($"plantcare-{id:N}", notification.GetProperty("tag").GetString());
+        var click = notification.GetProperty("data").GetProperty("onActionClick").GetProperty("default");
+        Assert.Equal("navigateLastFocusedOrOpen", click.GetProperty("operation").GetString());
+        Assert.Equal("/notifications", click.GetProperty("url").GetString());
+        Assert.False(notification.TryGetProperty("options", out _));
+        Assert.Equal(1, provider.EncryptedRequests);
     }
 
     [Fact]
@@ -309,6 +332,15 @@ public sealed class PushDeliveryTests : IAsyncLifetime
     private PushSubscription Device(Guid userId, string name) => PushSubscription.Create(userId,
         $"https://push.example.test/{name}", keys.PublicKey,
         Convert.ToBase64String(RandomNumberGenerator.GetBytes(16)).TrimEnd('=').Replace('+', '-').Replace('/', '_'), clock.Now);
+
+    private sealed class RecordingTransport(IWebPushTransport inner, List<string> payloads) : IWebPushTransport
+    {
+        public Task<PushSendResult> SendAsync(PushSubscription subscription, string payload, CancellationToken cancellationToken)
+        {
+            payloads.Add(payload);
+            return inner.SendAsync(subscription, payload, cancellationToken);
+        }
+    }
 
     private sealed class MutableClock : TimeProvider
     {

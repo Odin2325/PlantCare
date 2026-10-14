@@ -1,5 +1,26 @@
 # Push retry and queue policy
 
+## Notification tap correction (2026-10-14)
+
+Physical Android 17 / Chrome 155.0.8059.79 testing reported successful
+installation and app launch, but installed-app notification taps did nothing.
+Browser-tab push receipt/tapping had previously been reported as working.
+The worker serialized body/icon/tag/data inside `notification.options`;
+Angular reads these fields directly from `notification`, so it discarded the
+tap action as well as the body and deduplication tag. The corrected payload
+places them alongside the title. Its default action navigates/focuses an open
+client or opens `/notifications` when no client exists, following
+[Angular's payload contract](https://angular.dev/ecosystem/service-workers/push-notifications).
+
+The regression captures the actual delivery-service payload before passing it
+through the real encryption transport and verifies the click action, route,
+body and stable tag. Existing displayed/provider-queued notifications keep their
+old payload; retest with a newly generated reminder after deployment. No
+subscription replacement, permission reset or reinstall is required by this fix.
+Physical taps with the installed app both backgrounded and fully closed remain
+pending until the owner confirms the corrected behavior. Headless tests cannot
+certify Android's app-launch behavior.
+
 `WebPushDeliveryService` now keeps a durable outcome for each notification/device
 pair in `PushDeliveries`. A notification's target devices are snapshotted before
 its first network attempt. Newly registered devices receive future reminders;
