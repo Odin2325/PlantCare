@@ -25,6 +25,23 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Delivered VPS preparation (2026-10-14)
+
+- Configured the purchased OVHcloud Ubuntu 26.04 x86-64 host: Ubuntu/kernel
+  updates and verified reboot, official Docker Engine 29.9.0/Compose v5.6.0,
+  hello-world container, automatic security updates, owner-only staging directory.
+- Verified key-based administrative SSH before disabling password/root login.
+  Enabled UFW with SSH restricted to the current administrator source and web
+  ports allowed; cancelled a timed rollback only after fresh login succeeded.
+  Rebooted and rechecked effective SSH settings, firewall and Docker boot startup.
+- Uploaded the original `0acdb2d` runtime bundle; all seven SHA-256 checks and
+  both remote image IDs match the original manifest. Staging DNS points to the
+  server. No SQL/API/worker/Caddy app containers are running yet.
+- [staging-host.md](staging-host.md) records evidence and access maintenance.
+  SMTP/domain authentication, public HTTPS/app acceptance, capacity under load,
+  provider firewall and independent host backups/monitoring remain open. Owner
+  requested a free SMTP option; Brevo is recommended, not yet configured.
+
 ### Budget VPS and prebuilt-image handoff (2026-10-14)
 
 - Owner selected OVHcloud VPS-1 2027 in the UK with Ubuntu 26.04, 4 GB RAM,

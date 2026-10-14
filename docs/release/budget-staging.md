@@ -3,7 +3,9 @@
 Status 2026-10-14: owner purchased OVHcloud VPS-1 2027, 2 vCores, 4 GB RAM,
 40 GB NVMe, UK, Ubuntu 26.04. Checkout showed one month at EUR 5.34 including
 VAT and an included promotional automated backup. Budget is EUR 15/month total.
-Order validation/delivery is pending; no IP, SSH access or remote tests yet.
+Initial order validation/delivery was pending when this guide was prepared.
+Update 2026-10-14: host setup, reboot/key access, Docker and bundle import now
+pass; see [staging-host.md](staging-host.md). App startup awaits SMTP configuration.
 Confirm IPv4 inclusion and renewal pricing when delivery completes. UK is the
 selected location; Europe and EU are not interchangeable descriptions.
 
@@ -71,10 +73,10 @@ These commands are for the uploaded bundle directory on the Linux VPS:
 ```bash
 set -euo pipefail
 sha256sum --check SHA256SUMS
-docker image load --input images.tar
+sudo docker image load --input images.tar
 # Compare both loaded IDs/tags against manifest.json before proceeding.
-docker image inspect --format '{{.Id}}' 'plantcare-api:<candidate-sha>'
-docker image inspect --format '{{.Id}}' 'plantcare-worker:<candidate-sha>'
+sudo docker image inspect --format '{{.Id}}' 'plantcare-api:<candidate-sha>'
+sudo docker image inspect --format '{{.Id}}' 'plantcare-worker:<candidate-sha>'
 ```
 
 Create the staging-only private `.env` from `environment.example`, using mode
@@ -87,7 +89,7 @@ in [domain-hosting.md](domain-hosting.md) before starting Caddy.
 In the same Bash session:
 
 ```bash
-dc() { docker compose --project-name plantcare-staging --env-file .env --env-file images.env "$@"; }
+dc() { sudo docker compose --project-name plantcare-staging --env-file .env --env-file images.env "$@"; }
 dc config --quiet
 dc pull database proxy
 dc up --no-build --pull never -d --wait --wait-timeout 300 database
@@ -97,7 +99,7 @@ dc run --rm --no-deps --pull never migrate --provision-runtime-users
 dc up --no-build --pull never --force-recreate --no-deps -d --wait --wait-timeout 300 api worker
 dc up --no-build --pull never -d --wait --wait-timeout 300
 dc ps
-docker stats --no-stream
+sudo docker stats --no-stream
 free -h
 df -h
 ```

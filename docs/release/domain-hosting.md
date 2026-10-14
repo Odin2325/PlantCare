@@ -3,7 +3,9 @@
 Recorded 2026-10-13: the owner purchased `plantacare.org` at Porkbun. The
 management screenshot shows auto-renew, domain lock and contact privacy enabled.
 Update 2026-10-14: the owner purchased an OVHcloud VPS-1 (4 GB RAM/40 GB NVMe,
-UK, Ubuntu 26.04, checkout EUR 5.34/month including VAT). Delivery is pending.
+UK, Ubuntu 26.04, checkout EUR 5.34/month including VAT).
+Delivery, SSH/Docker preparation and runtime-image import completed;
+see [staging-host.md](staging-host.md). Staging DNS now resolves to the VPS.
 Follow [budget-staging.md](budget-staging.md) for prebuilt images and deployment
 within the EUR 15/month budget. The earlier 8 GB Hetzner recommendation below
 is superseded for this deployment; its CX plans were unavailable.

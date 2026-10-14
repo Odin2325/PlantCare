@@ -9,6 +9,8 @@ Update 2026-10-14: OVHcloud order validation is pending. Use the
 [budget VPS runbook](budget-staging.md) to transfer prebuilt images instead of
 building on the selected 4 GB host. The source-build commands below remain an
 alternative for hosts with adequate build resources.
+Later update: [host preparation](staging-host.md) passed on the delivered VPS;
+SMTP and application/public acceptance remain pending.
 
 ## Local validation on Windows
 
