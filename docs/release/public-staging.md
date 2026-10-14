@@ -1,6 +1,14 @@
 # Public staging deployment and verification
 
-Operational update 2026-10-14: the current runtime is
+Latest runtime update 2026-10-14:
+`7c78c9426aa423e32b980a6f195434840612e384` corrects the Angular push payload
+so notification taps carry a destination. See [push-reliability.md](push-reliability.md)
+for CI/recovery/activation evidence and the pending physical Android tap retest.
+Installation and app launch were reported working by the owner; this does not
+close the remaining PWA/device acceptance checks. The records below remain
+historical evidence for their stated candidates.
+
+Earlier operational update 2026-10-14: the runtime was
 `d3d81f30cc2a6bbd06d92cb2781d7b5e40a3924d`, with worker/disk operations health
 and a patched cryptography dependency. See [worker-capacity.md](worker-capacity.md)
 for exact-candidate CI, isolated compatibility, activation and bounded read

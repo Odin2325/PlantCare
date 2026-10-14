@@ -21,6 +21,23 @@ Physical taps with the installed app both backgrounded and fully closed remain
 pending until the owner confirms the corrected behavior. Headless tests cannot
 certify Android's app-launch behavior.
 
+Candidate `7c78c9426aa423e32b980a6f195434840612e384` is active on staging.
+All 126 backend tests and 25 isolated SQL push tests passed. Exact-candidate
+[CI run 38595333804](https://github.com/Odin2325/PlantCare/actions/runs/38595333804)
+passed on attempt 2: attempt 1 had a Firefox login-page axe scan timeout with
+14 other browser checks passing; the identical failed scenario passed locally
+in 10 seconds, and the job retry passed without source/assertion changes.
+An additional local probe exercised the real Angular push/click handlers and
+observed navigation, with only the headless notification display stubbed; this
+does not validate native notification display or physical focus.
+
+A fresh encrypted pre-update backup and isolated new-runtime application
+restore/rollback drill passed. Activation's local SSH wrapper stalled after its
+remote process ended; it was closed, and exact active image IDs, API/worker
+restricted database access and public readiness/operations health were verified
+independently before updating the private backup candidate pointer. No migration
+or credential change was needed. Android notification-tap acceptance remains open.
+
 `WebPushDeliveryService` now keeps a durable outcome for each notification/device
 pair in `PushDeliveries`. A notification's target devices are snapshotted before
 its first network attempt. Newly registered devices receive future reminders;
