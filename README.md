@@ -1,5 +1,9 @@
 # PlantCare
 
+See the [public browser acceptance record](docs/release/public-browser-acceptance.md)
+for the authenticated staging care journey, two-account sample and real email-reset
+checks, including the remaining physical-device beta work.
+
 PlantCare is an Angular and ASP.NET Core plant-care scheduling application.
 
 ## Release preparation

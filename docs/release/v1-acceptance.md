@@ -19,6 +19,11 @@ then beta acceptance and release packaging. A required v1 defect fix is still
 appropriate before that point.
 
 Unchecked means not yet accepted, even when supporting code or unit tests exist.
+The [public browser acceptance record](public-browser-acceptance.md) contains
+the three-engine authenticated staging sample and real dedicated-account reset
+checks completed on 2026-10-14. Keep broader bullets open where only a sample
+was executed; installed Android dashboard taps and two normal care cycles still
+need physical acceptance.
 For each executed check, record the candidate SHA, environment, date, tester,
 result, evidence link, and associated defect. Use two ordinary accounts A/B and
 one administrator, synthetic plants, and dedicated test email addresses.

@@ -49,7 +49,7 @@ PY
 for i in $(seq 1 36); do
     if curl --fail --silent --max-time 10 https://staging.plantacare.org/health/ready >/dev/null && curl --fail --silent --max-time 10 https://staging.plantacare.org/health/operations >/dev/null; then
         docker exec plantcare-staging-api-1 dotnet PlantCare.Api.dll --check-runtime-access api >/dev/null 2>&1
-        dc run --rm --no-deps --pull never worker-db-check >/dev/null 2>&1
+        dc run -T --interactive=false --rm --no-deps --pull never worker-db-check >/dev/null 2>&1
         printf 'PASS: pinned API/worker activation, readiness, operations and restricted runtime access.\n'
         exit 0
     fi

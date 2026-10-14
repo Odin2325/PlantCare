@@ -25,6 +25,18 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Public authenticated browser acceptance (2026-10-14)
+
+- Three browser projects passed real staging catalog/collection, tags,
+  cross-account plant denials, worker reminder, dashboard completion,
+  history/calendar, archive/restore and logout on `7c78c94`.
+- Real dedicated-account reset mail reached INBOX; browser reset rejected the
+  old password/session and reused code, then accepted fresh login/logout.
+- Android installation/app launch is owner-reported working. Reminder taps
+  open the installed app but reached the catalog; the requested direct dashboard
+  destination remains a physical retest. See [public-browser-acceptance.md](public-browser-acceptance.md)
+  for exact scope, safe tooling, failed harness attempts and remaining beta work.
+
 ### Worker progress monitoring and bounded capacity (2026-10-14)
 
 - Added a separate `/health/operations` check for successful notification-pass

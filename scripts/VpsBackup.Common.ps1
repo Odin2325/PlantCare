@@ -6,7 +6,7 @@ function Get-VpsBackupConfiguration {
     return $c
 }
 function Invoke-VpsSsh([object]$Config,[string]$Command) {
-    $result=& ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -o ConnectTimeout=15 -i $Config.identityFile ($Config.user+'@'+$Config.host) $Command 2>&1
+    $result=& ssh -n -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -o ConnectTimeout=15 -i $Config.identityFile ($Config.user+'@'+$Config.host) $Command 2>&1
     if($LASTEXITCODE -ne 0){throw 'VPS SSH operation failed; raw output withheld. Check agent, firewall and server health.'}
     return $result
 }
