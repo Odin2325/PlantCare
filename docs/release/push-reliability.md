@@ -17,6 +17,16 @@ Chrome Android may reuse an installed standalone app for
 This is the next behavior to verify physically, not proof of the observed
 catalog landing's platform-level cause.
 
+Deployed follow-up: `cfbc073cb79fb228149f98fa21e2b257e5a651a5` passed
+[CI run 38604044126](https://github.com/Odin2325/PlantCare/actions/runs/38604044126),
+isolated encrypted-backup runtime restore/rollback, exact image activation,
+restricted API/worker database access and trusted public health/routing checks.
+The noninteractive SSH/Compose activation returned successfully. There was no
+schema migration or frontend asset change; existing installed workers understand
+the new operation. No reinstall is required; already displayed/provider-queued
+notifications retain their earlier payload. A fresh physical dashboard tap is
+still needed before accepting the destination on Android.
+
 Physical Android 17 / Chrome 155.0.8059.79 testing reported successful
 installation and app launch, but installed-app notification taps did nothing.
 Browser-tab push receipt/tapping had previously been reported as working.
@@ -36,7 +46,7 @@ Physical taps with the installed app both backgrounded and fully closed remain
 pending until the owner confirms the corrected behavior. Headless tests cannot
 certify Android's app-launch behavior.
 
-Candidate `7c78c9426aa423e32b980a6f195434840612e384` is active on staging.
+Earlier candidate `7c78c9426aa423e32b980a6f195434840612e384` was activated on staging.
 All 126 backend tests and 25 isolated SQL push tests passed. Exact-candidate
 [CI run 38595333804](https://github.com/Odin2325/PlantCare/actions/runs/38595333804)
 passed on attempt 2: attempt 1 had a Firefox login-page axe scan timeout with

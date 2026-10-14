@@ -1,12 +1,18 @@
 # Public staging deployment and verification
 
 Latest runtime update 2026-10-14:
-`7c78c9426aa423e32b980a6f195434840612e384` corrects the Angular push payload
-so notification taps carry a destination. See [push-reliability.md](push-reliability.md)
+`cfbc073cb79fb228149f98fa21e2b257e5a651a5` sends new reminder taps directly
+to the dashboard using Angular's `openWindow` operation. See [push-reliability.md](push-reliability.md)
 for CI/recovery/activation evidence and the pending physical Android tap retest.
 Installation and app launch were reported working by the owner; this does not
 close the remaining PWA/device acceptance checks. The records below remain
 historical evidence for their stated candidates.
+Exact-candidate [CI](https://github.com/Odin2325/PlantCare/actions/runs/38604044126),
+fresh encrypted pre-update backup, isolated runtime restore/rollback,
+verified image activation, API/worker database access and trusted public endpoint
+checks passed. No schema migration was required. Physical dashboard taps remain
+pending; see [public browser acceptance](public-browser-acceptance.md) for the
+completed automated account/care/reset samples.
 
 Earlier operational update 2026-10-14: the runtime was
 `d3d81f30cc2a6bbd06d92cb2781d7b5e40a3924d`, with worker/disk operations health

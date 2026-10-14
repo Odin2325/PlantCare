@@ -24,6 +24,13 @@ session and reuse of the reset code; fresh login and logout passed. The normal
 owner account/password was unchanged. Expired-reset, calendar-sharing, all schedule
 editing and every cross-account endpoint are not established by this sample.
 
+After activating direct-dashboard candidate
+`cfbc073cb79fb228149f98fa21e2b257e5a651a5`, a targeted desktop Chromium
+journey passed again, including a new browser context with the signed-in cookie
+opening `/dashboard` directly and retaining that URL, followed by the core care
+and two-account checks above. This verifies ordinary cold-link/session routing;
+it does not certify Android's native notification launch or focus behavior.
+
 Earlier form-based registration and real confirmation of both approved aliases
 passed on `d3d81f3`; public keyboard/reflow/axe checks passed in all three browser
 projects there. Preserve those historical candidate labels. The owner reports
@@ -82,7 +89,9 @@ a new distinct `nextPassword` before repeating a reset.
 
 Traces, screenshots and videos are disabled. The reporter suppresses raw runner
 errors/stdout/stderr; only fixed stage/category codes and static test results
-are emitted. Results are private JSON summaries. An earlier reporter exposed a
+are emitted. Results are private JSON summaries with the runtime pointer and
+separate per-run evidence files, so later targeted reruns preserve earlier results.
+An earlier reporter exposed a
 dedicated test session cookie; both dedicated sessions were revoked and the
 reporter was replaced. No normal-owner session was revoked.
 

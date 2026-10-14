@@ -32,6 +32,9 @@ release unless the related optional feature is disabled.
   history/calendar, archive/restore and logout on `7c78c94`.
 - Real dedicated-account reset mail reached INBOX; browser reset rejected the
   old password/session and reused code, then accepted fresh login/logout.
+- Direct-dashboard runtime `cfbc073` passed exact-candidate CI, isolated recovery,
+  verified activation and a targeted public desktop journey including cold
+  dashboard-link/session routing. No migration or reinstall is required.
 - Android installation/app launch is owner-reported working. Reminder taps
   open the installed app but reached the catalog; the requested direct dashboard
   destination remains a physical retest. See [public-browser-acceptance.md](public-browser-acceptance.md)

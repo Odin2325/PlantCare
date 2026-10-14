@@ -23,4 +23,12 @@ elseif($Phase -in @('Register','Request-Reset','Reset','Resend')){$arguments+='-
 & $docker @arguments
 if($LASTEXITCODE){throw 'Public browser acceptance failed; only sanitized errors are shown.'}
 $results=Get-Content (Join-Path $private 'browser-results.json') -Raw|ConvertFrom-Json
-Write-BackupStatus ('public-browser-'+$Phase.ToLowerInvariant()) @{atUtc=[DateTimeOffset]::UtcNow.ToString('O');phase=$Phase;results=@($results);target='https://staging.plantacare.org';certificateVerification=$true}
+$candidate=$null
+$pointer=Join-Path $BackupState 'vps-backup-config.json'
+if(Test-Path $pointer){$candidate=(Get-Content $pointer -Raw|ConvertFrom-Json).candidate}
+if($candidate -and $candidate -notmatch '^[a-f0-9]{40}$'){throw 'Invalid private runtime candidate pointer.'}
+$evidence=@{atUtc=[DateTimeOffset]::UtcNow.ToString('O');phase=$Phase;results=@($results);target='https://staging.plantacare.org';certificateVerification=$true;runtimeCandidate=$candidate}
+Write-BackupStatus ('public-browser-'+$Phase.ToLowerInvariant()) $evidence
+# Keep each successful run as well as the latest status; targeted reruns should
+# not overwrite evidence from earlier browser projects or candidate versions.
+$evidence|ConvertTo-Json -Depth 8|Set-Content (Join-Path $private ('evidence-'+$Phase.ToLowerInvariant()+'-'+[Guid]::NewGuid().ToString('N')+'.json'))
