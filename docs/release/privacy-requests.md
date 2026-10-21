@@ -39,4 +39,6 @@ email messages, account deletions, provider deletions or retention-policy change
 Source: [European Commission request-handling guidance](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en),
 reviewed 2026-10-21. This written procedure has not been tested as a complete
 human support workflow; existing automated Account tests cover only their stated
-technical scope. A synthetic tabletop exercise remains required before launch.
+technical scope. An [agent-led synthetic tabletop review](privacy-request-tabletop.md)
+has now walked through eight fictional scenarios. Owner-led mailbox/process
+acceptance remains required before wider launch.

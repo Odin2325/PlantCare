@@ -25,6 +25,17 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Privacy workflow and operator-notice follow-up (2026-10-21)
+
+- Completed the logging record after all fcd2927 CI gates passed (39602840172).
+- Continued the next privacy step with an incomplete operator-notice draft and
+  an agent-led walkthrough of eight fictional private-request scenarios. No live
+  request, message, account deletion or provider change was performed; owner-led
+  support acceptance and the public-notice gates remain open.
+- Browser inventory exposed no signed-in Brevo tab; tracking values and the
+  operator's preferred address approach were requested rather than inferred.
+  No home address was copied from account screenshots or published.
+
 ### Bounded container logging and Brevo confirmation (2026-10-21)
 
 - Owner confirmed saving the approved Brevo one-month transactional-log and no-new-

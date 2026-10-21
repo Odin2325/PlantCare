@@ -18,6 +18,11 @@ subsequent documentation commits are not new application deployments.
   [private-request procedure](privacy-requests.md) and
   [provider checklist](provider-privacy-checklist.md). Operator name/city/country
   are owner-approved; service address and provider settings remain open.
+- [Operator notice draft](../legal-notice.draft.md): approved identity/contact
+  separated from missing postal address and service-specific legal review.
+- [Privacy-request tabletop](privacy-request-tabletop.md): eight fictional
+  decision scenarios reviewed without sending messages or modifying accounts;
+  owner-led operational acceptance remains open.
 - [LICENSE](../../LICENSE): owner chose rights reserved on 2026-10-21; no
   open-source grant. Third-party license/notice review remains part of packaging.
 
