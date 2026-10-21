@@ -11,6 +11,11 @@ cd "$base/releases/$next"
 test -f "$base/releases/$previous/compose.budget.yaml"
 test "$(df --output=avail -B1 "$base" | tail -1)" -gt 5368709120
 sha256sum -c SHA256SUMS >/dev/null
+# Windows transfers can retain owner-only modes from the private bundle folder.
+# These four files are public bundle inputs; the non-root operator must read them.
+# Keep the separate staging .env and all other private configuration untouched.
+chmod 0755 deploy
+chmod 0644 deploy/Caddyfile deploy/catalog.example.json deploy/catalog.houseplants.json deploy/catalog-images.json
 python3 - "$next" <<'PY'
 import json,sys
 manifest=json.load(open('manifest.json'))

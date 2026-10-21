@@ -1,6 +1,6 @@
 # English houseplant starter catalog
 
-Prepared 2026-10-21. The owner asked for common houseplants kept in Germany and
+Deployed to staging 2026-10-21. The owner asked for common houseplants kept in Germany and
 then explicitly required an English-only application. Germany guides selection;
 all catalog names, guidance, search labels, alternative text and UI are English.
 This is a curated starter selection, not a statistically ranked German top 15.
@@ -80,5 +80,32 @@ starting the target app. Old erasure-aware runtime bundles remain recoverable.
 - Docker frontend production build passed. All 17 frontend tests passed, including
   image-failure attribution/fallback and recovery when a photo path changes.
 - EF reported no pending model changes after the additive migration.
-- Full SQL, browser, deployment and public-image results are recorded after they
-  complete. Preparing this document does not claim the feature is live.
+- Local SQL Server import and catalog browser checks passed in desktop Chromium,
+  mobile Chromium and Firefox. Both full CI runs passed for candidate
+  `20cb8e5560b9b6dc9b2fea3f2a54980f8d91c295`:
+  [run 39631970202](https://github.com/Odin2325/PlantCare/actions/runs/39631970202)
+  and [run 39631974194](https://github.com/Odin2325/PlantCare/actions/runs/39631974194).
+- The isolated VPS recovery drill restored an encrypted pre-update backup into
+  the candidate, applied the migration and catalog, and passed account/session,
+  worker restart, care-history, failed-activation recovery and logout checks.
+- The pinned API/worker images are active at https://staging.plantacare.org.
+  Readiness, operations and restricted runtime database checks passed. The public
+  API contains 15 reviewed entries plus the preserved legacy demo entry. All 15
+  served photo files match the committed SHA256 hashes over trusted HTTPS.
+- A browser held the previous release open through activation. Accepting
+  **Update now** loaded the new release while preserving the approved test
+  account's session, personal plant IDs and completed calendar history; the
+  calendar link and personal detail accessibility check also passed.
+- Public catalog search, image loading/credits, care details, no-results feedback
+  and sampled accessibility passed in all three browsers. Desktop/phone layouts
+  were visually reviewed. These public checks were rerun after the backup's
+  intentional application pause. No new physical Android test is claimed.
+- A fresh encrypted VPS backup completed after activation. Local and VPS backup
+  health were checked separately from the feature tests.
+
+The first activation rejected an unreadable catalog file and restored the
+previous runtime. Windows transfer modes had made the public `deploy` directory
+owner-only. The activation helper now sets that directory to 0755 and its four
+public bundle inputs to 0644 after checksum validation. The same correction was
+applied on staging; the complete activation then passed. Credential-file modes
+are not part of that correction.

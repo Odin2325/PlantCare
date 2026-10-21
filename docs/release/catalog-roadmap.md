@@ -1,14 +1,14 @@
 # Plant catalog and image roadmap
 
 Owner request recorded 2026-10-14. Follow-up 2026-10-21: an English-only starter
-catalog of 15 common houseplants and licensed photographs is prepared; see
+catalog of 15 common houseplants and licensed photographs is implemented; see
 [houseplant-starter-catalog.md](houseplant-starter-catalog.md) for verification and
 deployment status. Existing `Demo houseplant` references are preserved as legacy
 synthetic content; they are not converted into reviewed botanical guidance.
 
 ## Release content: reviewed real species
 
-After the current reliability work, prepare an attributed catalog of common
+The first 15 entries are implemented. Expand the attributed catalog of common
 houseplants and flowering plants. Review scientific/common names, light needs,
 watering guidance, temperature/humidity, seasonality and care notes against
 reliable botanical sources. Record source links and review dates, and distinguish
@@ -20,13 +20,13 @@ references and owner care history. Validate duplicates, required fields and
 updates in staging before importing. Reviewed catalog content remains a release
 requirement, rather than waiting for the image features.
 
-## Later feature: species thumbnails
+## Implemented: species photos
 
-Show a small accessible image on species choices and relevant plant pages.
-Decide storage, attribution, licenses, alt text, responsive sizes, caching and a
-fallback for missing images before implementation. Use licensed or original
-photos; do not copy arbitrary search-result images. Keep image delivery within
-the owner's hosting budget. Schema/UI/storage changes are deferred.
+The first 15 entries have local licensed photos on catalog and personal plant
+pages, English alternative text, visible source/license credits and missing-image
+fallbacks. Original files and attribution are checked together in CI. Add future
+species through the same reviewed dataset and photo-manifest procedure. Keep
+image delivery within the owner's hosting budget.
 
 ## Later exploration: healthy growth progression
 
