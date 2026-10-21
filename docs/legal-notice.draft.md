@@ -23,6 +23,8 @@ Use email for private requests; issues are public.
 - Service/contact postal address suitable for the intended offering, explicitly
   approved for publication by the operator. City and email alone are not a
   completed DDG service-provider notice where its requirements apply.
+  The owner chose to [review address options first](release/operator-address-options.md);
+  no address or address-service purchase has been approved.
 - Applicability of [DDG §5](https://www.gesetze-im-internet.de/ddg/__5.html) and
   any other relevant operator disclosures for the actual service. Personal,
   free-at-use and commercial/advertising-funded are not interchangeable labels.

@@ -35,6 +35,11 @@ release unless the related optional feature is disabled.
 - Browser inventory exposed no signed-in Brevo tab; tracking values and the
   operator's preferred address approach were requested rather than inferred.
   No home address was copied from account screenshots or published.
+- Owner subsequently reported Anonymous email tracking=No as the only tracking
+  control, with an optional website tracker offered. Recommended anonymization
+  without calling it tracking suppression; no tracker was installed. Prepared a
+  private provider-support question, not sent. Owner chose address-options review;
+  compared genuine operating-address options without selecting a paid service.
 
 ### Bounded container logging and Brevo confirmation (2026-10-21)
 

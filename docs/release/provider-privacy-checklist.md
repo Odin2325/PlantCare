@@ -37,6 +37,34 @@ Official sources:
 [Provider tracking behavior](https://help.brevo.com/hc/en-us/articles/37114679474706-About-email-tracking-pixels-and-the-CNIL-recommendation-in-Brevo).
 These documents describe capabilities/defaults, not this account's current state.
 
+### Tracking state reported by the owner
+
+On 2026-10-21 the owner reported that Tracking exposes only **Anonymous email
+tracking**, currently **No**. An optional **Brevo tracker** installation is also
+offered under Automations. Do not install the website tracker: the current account
+email flow uses SMTP and does not require website analytics/visitor tracking.
+
+Recommended next setting: **Anonymous email tracking → Yes**. This has not yet
+been confirmed saved. Brevo documents that anonymization stops associating future
+open/click statistics with individual contacts, but still measures opens/clicks.
+Do not call it disabled tracking, removed pixels or guaranteed removal of tracking
+redirects. The application must not claim there is no provider tracking. A
+previously branded tracking domain is not evidence of disabled tracking either.
+
+To investigate complete suppression, the owner can ask Brevo privately using
+the following text (prepared only; no support message was sent):
+
+> PlantCare uses Brevo SMTP only for account-confirmation and password-reset
+> emails. Our Tracking screen offers only Anonymous email tracking. Can you
+> disable open tracking pixels and click-tracking link rewriting for these
+> transactional SMTP messages, and confirm the scope and any remaining delivery
+> records? Please distinguish complete suppression from anonymized statistics.
+
+Keep the account's credentials and actual reset/confirmation links out of that
+request. If Brevo can only provide anonymized tracking, document the remaining
+behavior and its privacy/legal basis rather than adding website analytics or
+inventing an unsupported SMTP header. No provider migration is authorized here.
+
 ## Hosting and other recipients
 
 - Initial read-only staging inspection found all four running containers using
@@ -66,6 +94,8 @@ These documents describe capabilities/defaults, not this account's current state
   Review applicability of [DDG §5](https://www.gesetze-im-internet.de/ddg/__5.html)
   for the intended offering, including future monetization. Do not infer or publish
   a home address from account screenshots.
+  The owner chose to [review address options first](operator-address-options.md);
+  no postal address or paid address-service contract has been approved.
 - Confirm the proposed legal bases and legitimate-interest assessment in
   [the notice draft](../privacy-notice.draft.md); finalize support/log/marker
   retention criteria and provider disclosures. Keep missing items visible.

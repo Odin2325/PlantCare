@@ -74,8 +74,12 @@ owner-only backup alert emails support operations.
 **Complete before publication:** identify the contracted provider entities,
 applicable processor agreements, processing locations, subprocessors and transfer
 mechanisms. Do not infer that all processing stays in Germany or the EU from
-the operator's location. Brevo tracking settings must be verified; application
-code alone does not prevent provider-added tracking links or pixels.
+the operator's location. The owner reported Brevo's Anonymous email tracking
+setting as No on 2026-10-21. Enabling anonymization is recommended but not yet
+confirmed; anonymization still measures opens/clicks. Complete tracking
+suppression remains unverified. Application code alone does not prevent
+provider-added tracking links or pixels. The optional Brevo website tracker is
+not required for SMTP and has not been added to PlantCare.
 
 ## How long information remains
 
