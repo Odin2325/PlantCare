@@ -25,6 +25,18 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### User documentation and distribution review (2026-10-21)
+
+- Added the user guide, GitHub Issues general-support instructions, known
+  limitations and draft release notes/distribution checklist. Owner chose rights
+  reserved for original source/docs; added LICENSE without an open-source grant.
+- Reviewed actual account/storage/sharing behavior for a privacy preparation
+  document. Archiving is not erasure, and account deletion/export are absent.
+  Confidential contact/operator identity, retention and tested data-request
+  handling remain launch work. No personal contact was published.
+- Documentation only; no runtime deployment, version tag or production release.
+  See distribution.md and privacy-review.md. RELEASE-01 remains partially open.
+
 ### Public authenticated browser acceptance (2026-10-14)
 
 - Subsequent owner confirmation on 2026-10-21: reminders work and multiple care

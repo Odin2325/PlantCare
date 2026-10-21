@@ -92,6 +92,13 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 
 ## Gate 4: release operations and usability
 
+Documentation review on 2026-10-21 prepared the user guide, GitHub Issues support,
+known limitations, rights-reserved notice and draft release notes. See
+[distribution.md](distribution.md). The documentation gate below stays open:
+confidential contact/operator identity, privacy notice, retention/data-request
+handling and third-party distribution notices remain unfinished. No release tag
+or production cutover has been made.
+
 - [ ] SQL Server migrations pass on both an empty database and a copy of the
   previous staging database. Data survives API/worker/database restarts.
 - [ ] Database and data-protection keys are backed up together and restored onto
