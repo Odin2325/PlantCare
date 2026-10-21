@@ -1,5 +1,7 @@
 ﻿using PlantCare.Domain.Enums;
 
+using PlantCare.Domain.ValueObjects;
+
 namespace PlantCare.Application.PlantCatalog;
 
 public sealed record CreatePlantSpeciesCommand(
@@ -16,4 +18,5 @@ public sealed record CreatePlantSpeciesCommand(
     string? HumidityInstructions,
     decimal? MinimumTemperatureCelsius,
     decimal? MaximumTemperatureCelsius,
-    bool IsToxicToPets);
+    bool IsToxicToPets,
+    PlantCatalogProfile? CatalogProfile = null);

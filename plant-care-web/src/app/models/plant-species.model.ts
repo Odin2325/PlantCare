@@ -7,6 +7,7 @@ export type SunlightRequirement =
   | 'FullSun';
 
 export interface PlantSpecies {
+  catalogProfile?: PlantCatalogProfile | null;
   id: string;
   commonName: string;
   scientificName: string | null;
@@ -22,4 +23,20 @@ export interface PlantSpecies {
   minimumTemperatureCelsius: number | null;
   maximumTemperatureCelsius: number | null;
   isToxicToPets: boolean;
+}
+
+export interface PlantCatalogProfile {
+  careSourceUrl: string;
+  reviewedOn: string;
+  photo: PlantCatalogPhoto | null;
+}
+
+export interface PlantCatalogPhoto {
+  title?: string | null;
+  path: string;
+  altText: string;
+  credit: string;
+  sourceUrl: string;
+  licenseName: string;
+  licenseUrl: string;
 }

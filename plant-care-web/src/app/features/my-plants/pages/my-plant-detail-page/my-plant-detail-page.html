@@ -2,6 +2,7 @@
   <nav aria-label="Plant navigation"><a routerLink="/calendar">Back to calendar</a><a routerLink="/my-plants">My plants</a></nav>
   <header><p class="eyebrow">My plant</p><h1>{{ plant()?.nickname || plant()?.speciesCommonName || 'Plant details' }}</h1></header>
   @if (plant(); as item) {
+    <app-plant-photo [profile]="item.speciesCatalogProfile" [detail]="true" />
     <p>{{ item.speciesCommonName }} @if (item.speciesScientificName) { · <i>{{ item.speciesScientificName }}</i> }</p>
     @if (!item.isActive) { <p role="status">This plant is archived.</p> }
     <dl>

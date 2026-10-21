@@ -12,6 +12,9 @@
   margin-bottom: 2rem;
 }
 
+.catalog-search { display: block; max-width: 32rem; font-weight: 600; }
+.catalog-search input { display: block; width: 100%; box-sizing: border-box; margin-top: .4rem; padding: .8rem; border: 1px solid #83978a; border-radius: .5rem; font: inherit; }
+
 .eyebrow {
   margin: 0 0 0.4rem;
   color: #377a4b;

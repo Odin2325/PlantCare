@@ -111,6 +111,7 @@
     track plant.id
     ) {
     <article class="plant-card">
+      <app-plant-photo [profile]="plant.speciesCatalogProfile" />
       <p class="species-name">
         {{ plant.speciesCommonName }}
       </p>

@@ -1,5 +1,7 @@
 ﻿using PlantCare.Domain.Enums;
 
+using PlantCare.Domain.ValueObjects;
+
 namespace PlantCare.Domain.Entities;
 
 public sealed class PlantSpecies
@@ -44,6 +46,15 @@ public sealed class PlantSpecies
     public decimal? MaximumTemperatureCelsius { get; private set; }
 
     public bool IsToxicToPets { get; private set; }
+
+    public PlantCatalogProfile? CatalogProfile { get; private set; }
+
+    public void SetCatalogProfile(PlantCatalogProfile profile)
+    {
+        ArgumentNullException.ThrowIfNull(profile);
+        profile.Validate();
+        CatalogProfile = profile;
+    }
 
     public static PlantSpecies Create(
         string commonName,

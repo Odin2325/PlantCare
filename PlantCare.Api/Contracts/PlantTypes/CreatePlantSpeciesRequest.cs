@@ -2,6 +2,8 @@
 using PlantCare.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
+using PlantCare.Domain.ValueObjects;
+
 namespace PlantCare.Api.Contracts.PlantTypes;
 
 public sealed class CreatePlantSpeciesRequest
@@ -51,6 +53,8 @@ public sealed class CreatePlantSpeciesRequest
     public decimal? MaximumTemperatureCelsius { get; init; }
 
     public bool IsToxicToPets { get; init; }
+
+    public PlantCatalogProfile? CatalogProfile { get; init; }
 
     public IEnumerable<ValidationResult> Validate(
         ValidationContext validationContext)

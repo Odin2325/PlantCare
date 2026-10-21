@@ -68,6 +68,7 @@ internal sealed class PlantSpeciesService(
                 isToxicToPets:
                     command.IsToxicToPets);
 
+        if (command.CatalogProfile is not null) plantSpecies.SetCatalogProfile(command.CatalogProfile);
         plantSpeciesRepository.Add(plantSpecies);
 
         await unitOfWork.SaveChangesAsync(
@@ -101,6 +102,7 @@ internal sealed class PlantSpeciesService(
             command.MaximumTemperatureCelsius,
             command.IsToxicToPets);
 
+        if (command.CatalogProfile is not null) plantSpecies.SetCatalogProfile(command.CatalogProfile);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return MapToDto(plantSpecies);
@@ -149,6 +151,7 @@ internal sealed class PlantSpeciesService(
             MaximumTemperatureCelsius:
                 plantSpecies.MaximumTemperatureCelsius,
             IsToxicToPets:
-                plantSpecies.IsToxicToPets);
+                plantSpecies.IsToxicToPets,
+            CatalogProfile: plantSpecies.CatalogProfile);
     }
 }

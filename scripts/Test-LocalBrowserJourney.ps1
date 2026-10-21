@@ -20,6 +20,8 @@ try {
     # Operator import is transactional/repeatable and does not promote test users.
     $importOutput = docker compose --env-file .env.local -f compose.yaml -f compose.local.yaml --project-name plantcare-local run --rm --no-deps migrate --import-catalog /operator/catalog.example.json 2>&1
     if ($LASTEXITCODE -ne 0) { throw 'Browser catalog fixture import failed; inspect local operator logs.' }
+    $reviewedImport = docker compose --env-file .env.local -f compose.yaml -f compose.local.yaml --project-name plantcare-local run --rm --no-deps migrate --upsert-catalog /operator/catalog.houseplants.json 2>&1
+    if ($LASTEXITCODE -ne 0) { throw 'Reviewed houseplant catalog import failed; inspect local operator logs.' }
     # Share the proxy network namespace: both email URLs and the browser retain
     # the real https://localhost:8443 origin. Mailpit resolves on the Compose network.
     docker run --rm --init --ipc=host --network container:plantcare-local-proxy-1 plantcare-browser-tests:local

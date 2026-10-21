@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: '.',
-  testMatch: ['journey.spec.ts', 'pwa.spec.ts', 'accessibility.spec.ts'],
+  testMatch: ['journey.spec.ts', 'pwa.spec.ts', 'accessibility.spec.ts', 'catalog.spec.ts'],
   webServer: {
     command: 'node pwa-server.mjs',
     url: 'http://127.0.0.1:4173/__test/ready',

@@ -1,0 +1,437 @@
+[
+  {
+    "commonName": "Swiss cheese plant",
+    "scientificName": "Monstera deliciosa",
+    "description": "A climbing foliage plant with large split leaves. Give it space and a sturdy support; younger leaves may have fewer holes.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright filtered daylight, sheltered from harsh afternoon sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the upper quarter of the potting mix dry, then water thoroughly and drain. Check less often in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use an airy houseplant mix with drainage; never leave the pot standing in water.",
+    "humidityInstructions": "Prefers humid air and a warm room. Keep away from cold drafts and radiators.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/monstera-deliciosa.jpg",
+        "altText": "Swiss cheese plant reference photo",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Potted form"
+      }
+    }
+  },
+  {
+    "commonName": "Golden pothos",
+    "scientificName": "Epipremnum aureum",
+    "description": "A trailing or climbing plant with heart-shaped leaves, often marked with gold. A useful choice for shelves and hanging pots.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Filtered daylight supports good growth. Lower light is tolerated; avoid scorching direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the mix to dry between thorough waterings, and empty the outer pot. Growth slows in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a freely draining indoor potting mix in a pot with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is tolerated; protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/epipremnum-aureum.jpg",
+        "altText": "Golden pothos reference photo",
+        "credit": "Dell Enecks (Pitt County)",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Epipremnum aureum (Pothos) houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Snake plant",
+    "scientificName": "Dracaena trifasciata",
+    "description": "An upright succulent with stiff, patterned leaves. Also sold under its former name, Sansevieria trifasciata.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "A bright position is useful, but it tolerates lower light. Introduce stronger sun gradually.",
+    "defaultWateringIntervalDays": 21,
+    "wateringInstructions": "Let the potting mix dry before watering. In winter it may need water only every month or two; check first.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a very well-drained succulent mix and a pot that releases excess water.",
+    "humidityInstructions": "Tolerates dry room air. Keep out of frost and cold, wet conditions.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-trifasciata/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/dracaena-trifasciata.jpg",
+        "altText": "Snake plant reference photo",
+        "credit": "Dell Enecks (Pitt County)",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-trifasciata/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Dracaena trifasciata (Snake Plant) houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "ZZ plant",
+    "scientificName": "Zamioculcas zamiifolia",
+    "description": "A slow-growing plant with glossy leaflets and water-storing rhizomes. Too much water is a greater risk than an occasional missed check.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight is ideal; lower light is tolerated. Protect from hot direct sun.",
+    "defaultWateringIntervalDays": 21,
+    "wateringInstructions": "Water only after the mix dries. Winter checks may be spaced further apart; do not water a still-damp pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Choose a well-drained mix and a container with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is suitable. Keep in a warm room, away from cold windows.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/zamioculcas-zamiifolia.jpg",
+        "altText": "ZZ plant reference photo",
+        "credit": "Susan Broderick",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Zamioculcas zamiifolia. Potted."
+      }
+    }
+  },
+  {
+    "commonName": "Spider plant",
+    "scientificName": "Chlorophytum comosum",
+    "description": "A cascading plant with narrow arching leaves and hanging plantlets. Variegated forms are common indoors.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Choose filtered daylight; keep leaves out of strong direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix lightly moist rather than saturated. Let the surface begin to dry and reduce watering in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a moisture-retentive but draining houseplant mix.",
+    "humidityInstructions": "Average indoor humidity is usually suitable. Keep away from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/chlorophytum-comosum.jpg",
+        "altText": "Spider plant reference photo",
+        "credit": "Joanne Kollar (Pitt County)",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Chlorophytum comosum, Spider Plant, houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Rubber plant",
+    "scientificName": "Ficus elastica",
+    "description": "An upright indoor tree with thick, glossy leaves. Keep its position stable and handle the irritating milky sap carefully.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect light, with protection from strong afternoon sun.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Check the mix before watering and avoid keeping it continually wet. Water less during slower winter growth.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a draining houseplant mix and empty any water left in the cover pot.",
+    "humidityInstructions": "Average room humidity suits it. Avoid drafts and sudden temperature changes.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/ficus-elastica.jpg",
+        "altText": "Rubber plant reference photo",
+        "credit": "Margaret Shear",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Houseplant"
+      }
+    }
+  },
+  {
+    "commonName": "Weeping fig",
+    "scientificName": "Ficus benjamina",
+    "description": "A small indoor tree with slender branches and many pointed leaves. Moving it or changing its light abruptly can cause leaf drop.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose a bright, stable position with indirect daylight.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water before the entire root ball dries, while allowing excess water to drain. Check less frequently in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a well-drained, moisture-retentive indoor potting mix.",
+    "humidityInstructions": "Protect from cold drafts, heating vents and sudden changes in conditions.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-benjamina/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/ficus-benjamina.jpg",
+        "altText": "Weeping fig reference photo",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-benjamina/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Mature houseplant form (NC)"
+      }
+    }
+  },
+  {
+    "commonName": "Corn plant",
+    "scientificName": "Dracaena fragrans",
+    "description": "A cane-forming foliage plant with broad strap-shaped leaves. Cultivars may have green, cream or yellow striping.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Moderate to bright filtered light works well; harsh sun can damage leaves.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Keep the mix moderately moist during active growth, without leaving it waterlogged. Reduce watering in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a draining indoor potting mix and a pot with drainage holes.",
+    "humidityInstructions": "Very dry heated air can brown leaf tips. Avoid cold drafts and hot radiators.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-fragrans/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/dracaena-fragrans.jpg",
+        "altText": "Corn plant reference photo",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-fragrans/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Dracaena fragrans, Corn Plant, houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Peace lily",
+    "scientificName": "Spathiphyllum (houseplant hybrids)",
+    "description": "A group of houseplants with glossy foliage and white flower-like spathes. This entry gives general guidance for common indoor hybrids.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Use filtered daylight or partial shade; avoid direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix evenly moist, not soggy. Check the surface and pot weight rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a moisture-retentive houseplant mix that still drains freely.",
+    "humidityInstructions": "Prefers a warm room with humid air. Keep away from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/spathiphyllum/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/spathiphyllum.jpg",
+        "altText": "Peace lily reference photo",
+        "credit": "Sherri Barras",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/spathiphyllum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Potted specimen."
+      }
+    }
+  },
+  {
+    "commonName": "Moth orchid",
+    "scientificName": "Phalaenopsis (houseplant hybrids)",
+    "description": "Common flowering orchid hybrids with arching stems and long-lasting blooms. Their exposed roots need air as well as moisture.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright filtered light, such as a sheltered east-facing window.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Run tepid water through the bark and drain completely. Let the bark partly dry; avoid water sitting in the crown.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a bark-based orchid medium, not ordinary dense potting soil.",
+    "humidityInstructions": "Keep warm with gentle airflow and moderate humidity; avoid cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/phalaenopsis/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/phalaenopsis.jpg",
+        "altText": "Moth orchid reference photo",
+        "credit": "sunoochi",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/phalaenopsis/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "Aloe vera",
+    "scientificName": "Aloe vera",
+    "description": "A rosette-forming succulent with fleshy, toothed leaves. Keep it ornamental; this catalog is not guidance for eating or applying plant material.",
+    "sunlightRequirement": "PartialSun",
+    "sunlightInstructions": "Provide strong daylight with some sun; introduce brighter conditions gradually.",
+    "defaultWateringIntervalDays": 21,
+    "wateringInstructions": "Wait for the mix to dry before watering thoroughly and draining. Water much less during winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a gritty, fast-draining succulent mix and drainage holes.",
+    "humidityInstructions": "Dry indoor air is suitable. Protect from frost and cold, wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/aloe-vera.jpg",
+        "altText": "Aloe vera reference photo",
+        "credit": "K. Andre",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Form in a pot"
+      }
+    }
+  },
+  {
+    "commonName": "Jade plant",
+    "scientificName": "Crassula ovata",
+    "description": "A branching succulent with rounded, fleshy leaves. Older plants can develop a small tree-like form.",
+    "sunlightRequirement": "PartialSun",
+    "sunlightInstructions": "Give it a bright position with some sun, sheltered from very harsh afternoon exposure.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Water moderately only when the mix has dried. Reduce watering from autumn through winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a freely draining succulent mix; do not leave water in the saucer.",
+    "humidityInstructions": "Ordinary dry room air is suitable. Keep protected from frost.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/crassula-ovata.jpg",
+        "altText": "Jade plant reference photo",
+        "credit": "Orange Harvey",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form of a 40 year old plant"
+      }
+    }
+  },
+  {
+    "commonName": "Chinese money plant",
+    "scientificName": "Pilea peperomioides",
+    "description": "A compact plant with round leaves on long stalks. It often forms small offsets around the parent plant.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Use bright indirect daylight, away from harsh sun and heating vents.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix lightly moist and well drained; do not keep the roots saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a light, draining houseplant mix in a pot with drainage holes.",
+    "humidityInstructions": "Average home humidity is tolerated. Avoid cold drafts and direct heat.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/pilea-peperomioides/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/pilea-peperomioides.jpg",
+        "altText": "Chinese money plant reference photo",
+        "credit": "Kevin Walsh",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pilea-peperomioides/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Potted plant."
+      }
+    }
+  },
+  {
+    "commonName": "Areca palm",
+    "scientificName": "Chrysalidocarpus lutescens",
+    "description": "A clumping indoor palm with arching feathery fronds. Also commonly sold as Dypsis lutescens; it needs room as it grows.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect daylight in a warm room.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist but not soggy during growth. Check moisture before watering and drain the pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a well-drained indoor potting mix and a pot that drains freely.",
+    "humidityInstructions": "Prefers humid air. Dry heating conditions can be challenging; keep away from radiators.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/chrysalidocarpus-lutescens/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/chrysalidocarpus-lutescens.jpg",
+        "altText": "Areca palm reference photo",
+        "credit": "Kathleen Moore",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/chrysalidocarpus-lutescens/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "leaves"
+      }
+    }
+  },
+  {
+    "commonName": "White bird of paradise",
+    "scientificName": "Strelitzia nicolai",
+    "description": "A large foliage plant with broad banana-like leaves. It can outgrow a small room; the reference photo shows a mature flowering plant.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide a very bright position with filtered daylight.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water after the top layer of mix dries, then let excess water escape. Adjust checks as growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a draining, loam-based indoor potting mix in a sturdy pot.",
+    "humidityInstructions": "Prefers warm, humid conditions. Protect leaves from cold drafts and sudden temperature changes.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
+      "reviewedOn": "2026-10-21",
+      "photo": {
+        "path": "/images/plants/strelitzia-nicolai.jpg",
+        "altText": "White bird of paradise reference photo",
+        "credit": "Jorge Franganillo",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Strelitzia nicolai. Form and flowers."
+      }
+    }
+  }
+]

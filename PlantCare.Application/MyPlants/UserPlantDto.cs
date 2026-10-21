@@ -1,5 +1,7 @@
 ﻿using PlantCare.Application.Care;
 
+using PlantCare.Domain.ValueObjects;
+
 namespace PlantCare.Application.MyPlants;
 
 public sealed record UserPlantDto(
@@ -16,4 +18,5 @@ public sealed record UserPlantDto(
     DateTimeOffset CreatedAtUtc,
     int DefaultWateringIntervalDays,
     int? DefaultFertilizingIntervalDays,
-    IReadOnlyList<CareScheduleDto> CareSchedules);
+    IReadOnlyList<CareScheduleDto> CareSchedules,
+    PlantCatalogProfile? SpeciesCatalogProfile = null);

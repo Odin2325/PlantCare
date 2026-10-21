@@ -77,7 +77,7 @@ try {
         $bundle=Get-Content (Join-Path $bundleRoot 'manifest.json') -Raw|ConvertFrom-Json
         if($bundle.candidate -ne $RuntimeCandidate -or $bundle.accountErasureProtocol -ne 1){throw 'Recovery requires a matching erasure-aware runtime bundle.'}
         foreach($line in Get-Content (Join-Path $bundleRoot 'SHA256SUMS')){
-            if($line -notmatch '^([a-f0-9]{64})  (images.tar|compose.yaml|environment.example|images.env|manifest.json|deploy/Caddyfile|deploy/catalog.example.json)$'){throw 'Unexpected prebuilt checksum entry.'}
+            if($line -notmatch '^([a-f0-9]{64})  (images.tar|compose.yaml|environment.example|images.env|manifest.json|deploy/Caddyfile|deploy/catalog.example.json|deploy/catalog.houseplants.json|deploy/catalog-images.json)$'){throw 'Unexpected prebuilt checksum entry.'}
             if((Get-FileHash (Join-Path $bundleRoot $Matches[2]) -Algorithm SHA256).Hash -ne $Matches[1]){throw 'Prebuilt payload hash mismatch.'}
         }
         foreach($name in @('api','worker')){
@@ -185,6 +185,9 @@ services:
     Export-CurrentAccountErasureLedger -Source Vps -Destination (Join-Path $authority 'current-erasures.json')
     $null=Invoke-BackupDocker ($target+@('run','--rm','--no-deps','--user','root','-e','Recovery__AllowAccountErasureApply=true','-e','Recovery__AccountErasureSource=plantcare-vps-staging','-v',"${authority}:/erasure-authority:ro",'migrate','--apply-account-erasures','/erasure-authority/current-erasures.json'))
     $null=Invoke-BackupDocker ($target+@('run','--rm','--no-deps','migrate','--provision-runtime-users'))
+    if($RuntimeCandidate -and $bundle.catalogDataset -eq 'houseplants-en-v1'){
+        $null=Invoke-BackupDocker ($target+@('run','--rm','--no-deps','migrate','--upsert-catalog','/operator/catalog.houseplants.json'))
+    }
     $null=Invoke-BackupDocker ($target+@('up','-d','--no-build','--wait','--wait-timeout','300','api','worker','proxy','client','mailpit'))
     $ready=$false
     for($n=0;$n -lt 15;$n++){

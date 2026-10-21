@@ -1,5 +1,7 @@
 ﻿using PlantCare.Domain.Enums;
 
+using PlantCare.Domain.ValueObjects;
+
 namespace PlantCare.Application.PlantCatalog;
 
 public sealed class UpdatePlantSpeciesCommand
@@ -24,4 +26,5 @@ public sealed class UpdatePlantSpeciesCommand
     public decimal? MaximumTemperatureCelsius { get; init; }
 
     public bool IsToxicToPets { get; init; }
+    public PlantCatalogProfile? CatalogProfile { get; init; }
 }

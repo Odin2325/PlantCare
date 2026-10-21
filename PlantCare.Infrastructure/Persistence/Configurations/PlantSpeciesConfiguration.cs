@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PlantCare.Domain.Entities;
 
+using System.Text.Json;
+using PlantCare.Domain.ValueObjects;
+
 namespace PlantCare.Infrastructure.Persistence.Configurations;
 
 internal sealed class PlantSpeciesConfiguration : IEntityTypeConfiguration<PlantSpecies>
@@ -61,6 +64,11 @@ internal sealed class PlantSpeciesConfiguration : IEntityTypeConfiguration<Plant
 
         builder.Property(plantSpecies => plantSpecies.IsToxicToPets)
             .IsRequired();
+
+        builder.Property(plantSpecies => plantSpecies.CatalogProfile)
+            .HasConversion(
+                profile => JsonSerializer.Serialize(profile, (JsonSerializerOptions?)null),
+                json => JsonSerializer.Deserialize<PlantCatalogProfile>(json, (JsonSerializerOptions?)null));
 
         builder.HasIndex(plantSpecies => plantSpecies.CommonName);
 

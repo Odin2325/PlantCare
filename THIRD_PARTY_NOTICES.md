@@ -18,6 +18,16 @@ It includes notices for Angular, RxJS and tslib. Preserve the actual generated
 notices with every build instead of replacing them with this summary. Generated
 notices may change when dependencies change.
 
+## Plant reference photos
+
+The starter catalog includes individually licensed CC BY / CC BY-SA photographs.
+See [photo credits](plant-care-web/public/images/plants/README.md) and
+[the exact image manifest](deploy/catalog-images.json). Each photo retains its
+own license; the original application's rights-reserved notice does not cover it.
+The UI displays the supplied title, author, source and license. Original image
+bytes are preserved and are scaled for display. See
+[catalog review](docs/release/houseplant-starter-catalog.md) for the care sources.
+
 ## Backend and container software
 
 The [runtime inventory](docs/release/dependencies/runtime-inventory.json) records

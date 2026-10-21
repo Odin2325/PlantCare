@@ -63,15 +63,15 @@ try {
     Set-Content -LiteralPath (Join-Path $payload 'compose.yaml') -Value $compose -Encoding utf8NoBOM
     Copy-Item -LiteralPath (Join-Path $source '.env.example') -Destination (Join-Path $payload 'environment.example')
     $null = New-Item -ItemType Directory -Path (Join-Path $payload 'deploy')
-    foreach ($file in @('Caddyfile', 'catalog.example.json')) {
+    foreach ($file in @('Caddyfile', 'catalog.example.json', 'catalog.houseplants.json', 'catalog-images.json')) {
         Copy-Item -LiteralPath (Join-Path $source "deploy/$file") -Destination (Join-Path $payload "deploy/$file")
     }
     Set-Content -LiteralPath (Join-Path $payload 'images.env') -Encoding utf8NoBOM -Value @(
         "PLANTCARE_API_IMAGE=$api", "PLANTCARE_WORKER_IMAGE=$worker"
     )
-    @{candidate=$sha;platform='linux/amd64';accountErasureProtocol=1;createdAtUtc=[DateTimeOffset]::UtcNow.ToString('O');images=$images} |
+    @{candidate=$sha;platform='linux/amd64';accountErasureProtocol=1;catalogDataset='houseplants-en-v1';createdAtUtc=[DateTimeOffset]::UtcNow.ToString('O');images=$images} |
         ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding utf8NoBOM
-    $checksums = foreach ($file in @('images.tar', 'compose.yaml', 'environment.example', 'images.env', 'manifest.json', 'deploy/Caddyfile', 'deploy/catalog.example.json')) {
+    $checksums = foreach ($file in @('images.tar', 'compose.yaml', 'environment.example', 'images.env', 'manifest.json', 'deploy/Caddyfile', 'deploy/catalog.example.json', 'deploy/catalog.houseplants.json', 'deploy/catalog-images.json')) {
         (Get-FileHash -LiteralPath (Join-Path $payload $file) -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + $file
     }
     # Linux sha256sum expects LF line endings, including when exported on Windows.

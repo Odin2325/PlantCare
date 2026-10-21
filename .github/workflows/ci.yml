@@ -34,6 +34,10 @@ jobs:
         shell: pwsh
         run: ./scripts/Test-BackupRetention.ps1
 
+      - name: Check catalog image attribution and integrity
+        shell: pwsh
+        run: ./scripts/Test-CatalogAssets.ps1
+
   frontend:
     name: Frontend
     runs-on: ubuntu-latest

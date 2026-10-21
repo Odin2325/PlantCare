@@ -51,6 +51,10 @@ PY
 trap rollback EXIT
 dc run -T --interactive=false --rm --no-deps --pull never migrate --migrate-database >/dev/null 2>&1
 dc run -T --interactive=false --rm --no-deps --pull never migrate --provision-runtime-users >/dev/null 2>&1
+
+# Add/update the reviewed shared catalog only; personal plants/schedules/history
+# retain their IDs and values. The operator import is atomic and repeatable.
+dc run -T --interactive=false --rm --no-deps --pull never migrate --upsert-catalog /operator/catalog.houseplants.json >/dev/null 2>&1
 dc up --no-build --pull never --no-deps --force-recreate -d --wait --wait-timeout 180 api worker >/dev/null 2>&1
 python3 - <<'PY'
 import json,subprocess

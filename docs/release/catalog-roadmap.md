@@ -1,7 +1,10 @@
 # Plant catalog and image roadmap
 
-Owner request recorded 2026-10-14. The current single `Demo houseplant` entry is
-synthetic test content. Do not present it as reviewed botanical guidance.
+Owner request recorded 2026-10-14. Follow-up 2026-10-21: an English-only starter
+catalog of 15 common houseplants and licensed photographs is prepared; see
+[houseplant-starter-catalog.md](houseplant-starter-catalog.md) for verification and
+deployment status. Existing `Demo houseplant` references are preserved as legacy
+synthetic content; they are not converted into reviewed botanical guidance.
 
 ## Release content: reviewed real species
 

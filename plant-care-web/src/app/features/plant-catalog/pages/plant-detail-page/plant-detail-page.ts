@@ -27,6 +27,7 @@ import {
 
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { PlantSpecies } from '../../../../models/plant-species.model';
+import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
 import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api.service';
 
@@ -36,6 +37,7 @@ import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api
   imports: [
     ReactiveFormsModule,
     RouterLink,
+    PlantPhoto,
   ],
   templateUrl: './plant-detail-page.html',
   styleUrl: './plant-detail-page.css',

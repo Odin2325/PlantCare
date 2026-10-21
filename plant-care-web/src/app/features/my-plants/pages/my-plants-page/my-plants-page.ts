@@ -14,6 +14,7 @@ import {
   takeUntilDestroyed,
 } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { finalize } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/services/auth.service';
@@ -37,6 +38,7 @@ type CollectionSort = 'nickname' | 'newest' | 'acquired' | 'next-care';
   standalone: true,
   imports: [
     RouterLink,
+    PlantPhoto,
     DatePipe,
   ],
   templateUrl: './my-plants-page.html',

@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PlantSpecies } from '../../../../models/plant-species.model';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
@@ -14,6 +16,7 @@ import { PlantSpeciesApiService } from '../../../../core/services/plant-species-
   standalone: true,
   imports: [
     RouterLink,
+    PlantPhoto,
   ],
   templateUrl: './plant-catalog-page.html',
   styleUrl: './plant-catalog-page.css',
@@ -24,6 +27,12 @@ export class PlantCatalogPage {
     inject(PlantSpeciesApiService);
 
   readonly plantSpecies = signal<PlantSpecies[]>([]);
+  readonly query = signal('');
+  readonly visibleSpecies = computed(() => {
+    const query = this.query().trim().toLowerCase();
+    return this.plantSpecies().filter(plant => !query ||
+      [plant.commonName, plant.scientificName, plant.description].join(' ').toLowerCase().includes(query));
+  });
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
 

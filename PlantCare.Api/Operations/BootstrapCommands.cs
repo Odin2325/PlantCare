@@ -13,12 +13,12 @@ namespace PlantCare.Api.Operations;
 public static class BootstrapCommands
 {
     public static bool IsOperatorCommand(string[] args) =>
-        args.Length > 0 && args[0] is "--bootstrap-admin" or "--import-catalog";
+        args.Length > 0 && args[0] is "--bootstrap-admin" or "--import-catalog" or "--upsert-catalog";
 
     public static async Task ExecuteAsync(IServiceProvider services, string[] args)
     {
         if (!IsOperatorCommand(args) || args.Length != 2 || string.IsNullOrWhiteSpace(args[1]))
-            throw new ArgumentException("Use --bootstrap-admin EMAIL or --import-catalog JSON_PATH.");
+            throw new ArgumentException("Use --bootstrap-admin EMAIL, --import-catalog JSON_PATH or --upsert-catalog JSON_PATH.");
 
         if (args[0] == "--bootstrap-admin")
         {
@@ -55,22 +55,40 @@ public static class BootstrapCommands
         {
             if (entry is null) throw new ArgumentException("Catalog cannot contain null entries.");
             Validator.ValidateObject(entry, new ValidationContext(entry), validateAllProperties: true);
+            entry.CatalogProfile?.Validate();
         }
 
         var database = services.GetRequiredService<PlantCareDbContext>();
         var catalog = services.GetRequiredService<IPlantSpeciesService>();
         await using var transaction = await database.Database.BeginTransactionAsync();
-        var existing = (await catalog.GetAllAsync()).Select(species =>
-            Key(species.ScientificName, species.CommonName)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var current = (await catalog.GetAllAsync()).ToDictionary(species => Key(species.ScientificName, species.CommonName), StringComparer.OrdinalIgnoreCase);
+        var existing = current.Keys.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        if (args[0] == "--upsert-catalog" && entries.Select(e => Key(e.ScientificName, e.CommonName)).Distinct(StringComparer.OrdinalIgnoreCase).Count() != entries.Count)
+            throw new ArgumentException("An update catalog must not contain duplicate species keys.");
         foreach (var entry in entries)
         {
-            if (!existing.Add(Key(entry.ScientificName, entry.CommonName))) continue;
+            var key = Key(entry.ScientificName, entry.CommonName);
+            if (!existing.Add(key))
+            {
+                if (args[0] == "--upsert-catalog")
+                    await catalog.UpdateAsync(current[key].Id, new UpdatePlantSpeciesCommand
+                    {
+                        CommonName=entry.CommonName, ScientificName=entry.ScientificName, Description=entry.Description,
+                        SunlightRequirement=entry.SunlightRequirement, SunlightInstructions=entry.SunlightInstructions,
+                        DefaultWateringIntervalDays=entry.DefaultWateringIntervalDays, WateringInstructions=entry.WateringInstructions,
+                        DefaultFertilizingIntervalDays=entry.DefaultFertilizingIntervalDays, FertilizingInstructions=entry.FertilizingInstructions,
+                        SoilInstructions=entry.SoilInstructions, HumidityInstructions=entry.HumidityInstructions,
+                        MinimumTemperatureCelsius=entry.MinimumTemperatureCelsius, MaximumTemperatureCelsius=entry.MaximumTemperatureCelsius,
+                        IsToxicToPets=entry.IsToxicToPets, CatalogProfile=entry.CatalogProfile
+                    });
+                continue;
+            }
             await catalog.CreateAsync(new CreatePlantSpeciesCommand(
                 entry.CommonName, entry.ScientificName, entry.Description, entry.SunlightRequirement,
                 entry.SunlightInstructions, entry.DefaultWateringIntervalDays, entry.WateringInstructions,
                 entry.DefaultFertilizingIntervalDays, entry.FertilizingInstructions, entry.SoilInstructions,
                 entry.HumidityInstructions, entry.MinimumTemperatureCelsius,
-                entry.MaximumTemperatureCelsius, entry.IsToxicToPets));
+                entry.MaximumTemperatureCelsius, entry.IsToxicToPets, entry.CatalogProfile));
         }
         await transaction.CommitAsync();
     }

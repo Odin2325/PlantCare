@@ -454,6 +454,9 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CatalogProfile")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CommonName")
                         .IsRequired()
                         .HasMaxLength(100)

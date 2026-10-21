@@ -149,7 +149,8 @@ internal sealed class UserPlantService(
             WeekDays: (int)schedule.WeekDays,
             PreferredTimeLocal: schedule.PreferredTimeLocal,
             TimeZoneId: schedule.TimeZoneId))
-        .ToList());
+        .ToList(),
+            SpeciesCatalogProfile: plantSpecies.CatalogProfile);
     }
 
     private static UserPlantDto MapToDto(UserPlant userPlant)
@@ -189,7 +190,8 @@ internal sealed class UserPlantService(
                     WeekDays: (int)schedule.WeekDays,
                     PreferredTimeLocal: schedule.PreferredTimeLocal,
                     TimeZoneId: schedule.TimeZoneId))
-                .ToList());
+                .ToList(),
+            SpeciesCatalogProfile: userPlant.PlantSpecies.CatalogProfile);
     }
 
     private static void ValidateUserId(Guid userId)

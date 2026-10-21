@@ -9,6 +9,7 @@
         Browse plants and learn about their sunlight,
         watering, soil, and fertilizer requirements.
       </p>
+      <p class="intro">Suggested intervals are reminders to check your plant. Water only when needed, adjusting for light, potting mix and season.</p>
     </div>
   </header>
 
@@ -30,9 +31,15 @@
     No plant species have been added yet.
   </p>
   } @else {
+  <label class="catalog-search" for="plant-search">Find a plant
+    <input #search id="plant-search" type="search" placeholder="Search common or scientific names" (input)="query.set(search.value)">
+  </label>
+  <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
+  @if (visibleSpecies().length === 0) { <p>No plants match your search. Try another name.</p> }
   <div class="plant-grid">
-    @for (plant of plantSpecies(); track plant.id) {
+    @for (plant of visibleSpecies(); track plant.id) {
     <article class="plant-card">
+      <app-plant-photo [profile]="plant.catalogProfile" />
       <div class="plant-card__heading">
         <div>
           <h2>{{ plant.commonName }}</h2>
@@ -70,7 +77,7 @@
         <div>
           <dt>Watering</dt>
           <dd>
-            Every
+            Check about every
             {{ plant.defaultWateringIntervalDays }}
             days
           </dd>

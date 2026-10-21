@@ -65,7 +65,8 @@ public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesServ
             MaximumTemperatureCelsius:
                 request.MaximumTemperatureCelsius,
             IsToxicToPets:
-                request.IsToxicToPets);
+                request.IsToxicToPets,
+            CatalogProfile: request.CatalogProfile);
 
         var createdPlantSpecies = await plantSpeciesService.CreateAsync(command, cancellationToken);
 
@@ -112,7 +113,8 @@ public sealed class PlantSpeciesController(IPlantSpeciesService plantSpeciesServ
             HumidityInstructions = request.HumidityInstructions,
             MinimumTemperatureCelsius = request.MinimumTemperatureCelsius,
             MaximumTemperatureCelsius = request.MaximumTemperatureCelsius,
-            IsToxicToPets = request.IsToxicToPets
+            IsToxicToPets = request.IsToxicToPets,
+            CatalogProfile = request.CatalogProfile
         };
     }
 }

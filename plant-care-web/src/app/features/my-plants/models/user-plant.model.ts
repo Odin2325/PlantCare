@@ -56,6 +56,7 @@ export interface CareEventHistory {
 }
 
 export interface UserPlant {
+  speciesCatalogProfile?: import('../../../models/plant-species.model').PlantCatalogProfile | null;
   id: string;
   plantSpeciesId: string;
   speciesCommonName: string;
