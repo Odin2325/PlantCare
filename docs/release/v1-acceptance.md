@@ -23,10 +23,12 @@ The [public browser acceptance record](public-browser-acceptance.md) contains
 the three-engine authenticated staging sample and real dedicated-account reset
 checks completed on 2026-10-14. Keep broader bullets open where only a sample
 was executed. Installed Android dashboard taps, offline cold launch and reconnect
-are now owner-reported passed; a real frontend upgrade and two normal care cycles
-still need physical acceptance. Subsequent update: the owner confirmed the real
+are now owner-reported passed. The owner also confirmed the real
 `cfbc073` → `dbf65b8` installed Android frontend upgrade, calendar links and
-preserved data. The two actual elapsed care cycles remain pending.
+preserved data. On 2026-10-21 the owner confirmed working reminders and multiple
+completed care cycles; the normal-cycle check is accepted as owner-reported.
+Per-cycle timestamps and running build were not supplied. Broader unchecked gates
+still require their own evidence; this report does not accept the whole release.
 For each executed check, record the candidate SHA, environment, date, tester,
 result, evidence link, and associated defect. Use two ordinary accounts A/B and
 one administrator, synthetic plants, and dedicated test email addresses.

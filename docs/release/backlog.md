@@ -27,6 +27,16 @@ release unless the related optional feature is disabled.
 
 ### Public authenticated browser acceptance (2026-10-14)
 
+- Subsequent owner confirmation on 2026-10-21: reminders work and multiple care
+  cycles have been completed. Accept the normal-cycle beta check as owner-reported;
+  exact cycle timestamps/build were not supplied. See android-beta.md.
+
+- Backup recovery on 2026-10-21: after the owner reconnected the external drive,
+  both existing Windows backup tasks were run sequentially and returned result 0.
+  Fresh local/VPS encrypted captures and default health checks passed with no
+  problem codes. One recovery email was delivered and the private alert baseline
+  updated after successful sending. Schedules and thresholds were unchanged.
+
 - Calendar `dbf65b8`: nickname/action labels and owner-scoped personal detail
   links in all views, retained event panel and read-only shared calendar behavior.
   CI, 12 frontend tests, isolated recovery, actual old-to-new desktop PWA upgrade
@@ -49,7 +59,8 @@ release unless the related optional feature is disabled.
   for exact scope, safe tooling, failed harness attempts and remaining beta work.
 - Subsequent owner report: all three installed Android checks passed on `cfbc073`
   (fresh reminder to Dashboard, offline cold launch/message, reconnect/data).
-  Frontend upgrade, physical accessibility and two normal care cycles remain open.
+  Later owner reports accept the frontend upgrade and multiple normal care cycles;
+  physical accessibility and the broader release gates remain separate.
 
 ### Worker progress monitoring and bounded capacity (2026-10-14)
 

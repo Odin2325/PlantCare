@@ -9,7 +9,7 @@ as a full physical acceptance of the new calendar frontend.
 Device versions supplied by the owner: Android 17, Chrome 155.0.8059.79.
 Record results as owner-reported unless independently observed.
 
-| Check | Result as of 2026-10-14 |
+| Check | Result as of 2026-10-21 |
 | --- | --- |
 | Installation and app launch | Owner reported working |
 | Notification opens installed app | Owner reported working on previous payload |
@@ -18,7 +18,7 @@ Record results as owner-reported unless independently observed.
 | Reconnect, sign-in if needed and fresh plant data | Passed, owner-reported on cfbc073 |
 | Immediate care completion, history/calendar and next-due behavior | Owner reported working; elapsed-cycle evidence separate |
 | Consented frontend update in the installed app | Passed, owner-reported cfbc073 → dbf65b8; nickname links and data intact |
-| Two normal elapsed care cycles | Pending |
+| Two normal elapsed care cycles | Passed, owner-reported multiple care cycles and working reminders on 2026-10-21; individual timestamps not supplied |
 
 The calendar frontend deployment now allows the real phone update check from
 `cfbc073` to `dbf65b8`. Return to the installed app online, save unfinished work,
@@ -34,9 +34,11 @@ tap, airplane-mode cold launch/offline message, and reconnect/account-data check
 This accepts those three reported scenarios on the stated Android/Chrome versions;
 it does not establish a frontend upgrade, offline write behavior, every supported
 device, or either normal elapsed care cycle.
-The subsequent care-flow confirmation is recorded as immediate functional
-behavior. Both actual future daily due times have not been supplied, so the two
-elapsed-cycle rows remain pending.
+The earlier care-flow confirmation covered immediate functional behavior.
+On 2026-10-21 the owner confirmed that reminders work and multiple care cycles
+have already been completed. Accept the normal-cycle beta check as owner-reported.
+Exact per-cycle due times, saved zone and running build were not supplied; do not
+invent those details or describe this as independently observed testing.
 
 ## Fresh reminder and dashboard action
 
@@ -90,6 +92,10 @@ from automated A/B shell fixtures or a server-only deployment.
 
 ## Two actual care cycles
 
+Status on 2026-10-21: passed by owner report of working reminders and multiple
+completed care cycles. The procedure below remains a repeatable test guide;
+individual cycle metadata was not collected in that report.
+
 After the immediate checks pass, use the temporary daily test plant above. Record
 the displayed next-due time and saved time zone. Let that time actually arrive;
 do not change the host/device clock or mark future care complete. Observe the
@@ -98,11 +104,10 @@ after reload. Repeat after the following real due time.
 
 | Evidence | Cycle 1 | Cycle 2 |
 | --- | --- | --- |
-| Candidate, device/browser, actual due time and saved zone | Pending | Pending |
-| Reminder arrival and dashboard destination | Pending | Pending |
-| One completion and matching history/calendar entry | Pending | Pending |
-| Correct next due time after reload | Pending | Pending |
-| Duplicate/stale reminders or other defects | Pending | Pending |
+| Normal care-cycle completion | Owner-reported passed | Owner-reported passed |
+| Individual candidate, due time and saved zone | Not supplied | Not supplied |
+| Per-cycle reminder, history/calendar and next-due observations | Not itemized; reminders and multiple cycles reported working | Not itemized; reminders and multiple cycles reported working |
+| Duplicate/stale reminders or other defects | None reported | None reported |
 
 Archive the temporary plant after the test. No recurring automation or changed
 care/backup schedule is implied by this checklist. Keep the broader
