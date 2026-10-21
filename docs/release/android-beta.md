@@ -1,9 +1,12 @@
 # Physical Android beta
 
 Target: installed PlantCare at `https://staging.plantacare.org`.
-Current runtime: `82de1584291f7238e9e2fd5d6a677d0fa6808257` (Care details button styling).
+Current runtime: `e5d8131872aac7998e25c6f5d060234b564fa85c` (Account data controls).
+The real desktop PWA upgrade from `82de158` preserved session/plants/calendar;
+Account export and safeguards passed a public desktop smoke. The new controls
+have not been physically tested on Android; see account-data.md.
 The installed Android frontend upgrade was accepted on `dbf65b8`; the small
-button-styling follow-up is verified in public desktop Chromium only.
+button-styling follow-up `82de158` was verified in public desktop Chromium only.
 The earlier phone checks below were reported on `cfbc073`; do not relabel them
 as a full physical acceptance of the new calendar frontend.
 Device versions supplied by the owner: Android 17, Chrome 155.0.8059.79.

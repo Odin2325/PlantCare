@@ -95,8 +95,8 @@ Never include passwords, reset links, OAuth tokens, or calendar-feed tokens in e
 Documentation review on 2026-10-21 prepared the user guide, GitHub Issues support,
 known limitations, rights-reserved notice and draft release notes. See
 [distribution.md](distribution.md). The documentation gate below stays open:
-operator identity, privacy notice, backup retention/restore suppression,
-handling and third-party distribution notices remain unfinished. No release tag
+operator identity, privacy notice, backup retention/restore suppression
+and third-party distribution notices remain unfinished. No release tag
 or production cutover has been made.
 Subsequent account-data work adds password-verified export/deletion and the
 owner-authorized Gmail private contact; see [account-data.md](account-data.md).

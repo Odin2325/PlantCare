@@ -1,6 +1,15 @@
 # Public staging deployment and verification
 
-Current runtime: `82de1584291f7238e9e2fd5d6a677d0fa6808257` styles Care details
+Current runtime: `e5d8131872aac7998e25c6f5d060234b564fa85c` adds password-verified
+account export/deletion and real bearer-session revalidation. Exact-candidate CI,
+fresh encrypted backup, isolated recovery/rollback, controlled grants and pinned
+activation passed on 2026-10-21. Public HTTPS/health, actual old-to-new desktop PWA
+upgrade/session/data continuity and Account export/accessibility/safeguards passed.
+Destructive deletion was tested with generated local accounts, not an existing
+public account. See [account-data.md](account-data.md); backup expiry, restored
+erasure suppression and final privacy disclosures remain open.
+
+Previous runtime: `82de1584291f7238e9e2fd5d6a677d0fa6808257` styles Care details
 as a non-underlined bordered button. Exact-candidate CI, fresh encrypted backup,
 isolated recovery/rollback, pinned activation and public DNS/TLS/health passed.
 A public desktop browser check verified the rendered button styling, event panel,
@@ -10,8 +19,8 @@ Previous frontend update: `dbf65b828bc9a749675929ad30dc82a60f0b265a` adds
 calendar nickname/action links and owner-scoped personal plant details. Exact
 candidate CI, backup/recovery/activation and real old-to-new desktop PWA upgrade
 passed; see [calendar-plant-details.md](calendar-plant-details.md). The previous
-candidate's phone checks remain historical; Android Update now confirmation is
-pending for this frontend change.
+candidate's phone checks remain historical. The owner confirmed the installed
+Android update, nickname links and preserved plants/history on this candidate.
 
 Previous runtime update 2026-10-14:
 `cfbc073cb79fb228149f98fa21e2b257e5a651a5` sends new reminder taps directly

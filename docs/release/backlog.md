@@ -36,6 +36,11 @@ release unless the related optional feature is disabled.
   untouched; backup expiry/restore suppression and the full notice are still open.
 - See account-data.md for exact verification and deployment status. No launch tag
   or production acceptance is implied by implementing these controls.
+- Activated `e5d8131` after exact-candidate CI success, fresh encrypted VPS backup,
+  isolated recovery/rollback and hash verification. Restricted grants/access and
+  public HTTPS/health passed. The actual `82de158` to `e5d8131` desktop PWA upgrade
+  preserved session/collection/calendar. Public Account export/axe/safeguards
+  passed; destructive account deletion was verified locally with synthetic users.
 
 ### User documentation and distribution review (2026-10-21)
 

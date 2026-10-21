@@ -1,9 +1,21 @@
 # Account export and deletion
 
-Implementation prepared 2026-10-21. Deployment status: candidate under local
-verification; public staging remains `82de1584291f7238e9e2fd5d6a677d0fa6808257`
-until a separately recorded successful activation. No normal owner account has
-been deleted to test this feature; checks use generated local accounts only.
+Deployed on 2026-10-21 as `e5d8131872aac7998e25c6f5d060234b564fa85c` at
+https://staging.plantacare.org. Exact-candidate
+[CI run 39575030789](https://github.com/Odin2325/PlantCare/actions/runs/39575030789)
+passed all gates. Fresh encrypted pre-update backup, isolated runtime recovery/
+rollback, bundle hashes, controlled grant provisioning, pinned activation and
+restricted runtime access passed. Trusted public DNS/TLS/routing/health passed.
+No normal owner account was deleted: destructive checks used generated local
+accounts; the public smoke used the approved dedicated test account for export only.
+
+The real desktop service-worker upgrade from `82de158` preserved the dedicated
+account's session, collection and completed calendar history. Public desktop
+Chromium verified the Account route, sampled axe rules, the private JSON download,
+deletion safeguards and logout. Public account deletion was deliberately not
+submitted. Android installation/previous update/care-cycle reports remain tied
+to their earlier scope; the new Account controls have not had a physical phone
+acceptance check. This does not accept a production release or full privacy notice.
 
 ## User behavior and security
 
@@ -88,3 +100,12 @@ Test-LocalPushDelivery.ps1, which preserves the existing push regression checks.
 Browser journeys exercise the actual download, archived data/history, disabled
 confirmation control, deletion and protected-route rejection, with axe sampling.
 No traces, screenshots or external recipient messages are required for this check.
+
+Local candidate `e5d8131872aac7998e25c6f5d060234b564fa85c`: production build and
+all 15 frontend tests passed; all 131 backend tests passed. All five account-data
+cases passed on isolated SQL Server, including forced deletion failure/rollback;
+the existing SQL push-delivery regressions also passed. Mobile-sized Chromium and
+Firefox journeys passed; desktop Chromium passed after correcting an existing
+service-worker response-body assertion to independently read the committed schedule.
+This harness correction does not bypass the persisted-zone assertion. Exact-SHA
+CI subsequently passed the full suite, including all three browser projects.

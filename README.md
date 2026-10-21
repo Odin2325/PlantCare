@@ -20,8 +20,10 @@ Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
 then follow the [staging runbook](docs/release/staging.md).
 The [distribution review](docs/release/distribution.md) collects draft release
 notes and the remaining launch decisions. The [privacy review](docs/release/privacy-review.md)
-is a draft with unresolved contact, retention and account-data handling work;
+is a draft with unresolved operator disclosures, backup retention and restore handling;
 it is not a finished public privacy notice.
+See [account export/deletion](docs/release/account-data.md) for the new protected
+Account controls, published private contact and proposed retention policy.
 The [domain and hosting handoff](docs/release/domain-hosting.md) covers
 `plantacare.org`, the staging DNS record and choosing a compatible server.
 For the selected 4 GB OVHcloud VPS, use the [prebuilt-image deployment guide](docs/release/budget-staging.md).
