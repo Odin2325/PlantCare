@@ -41,14 +41,21 @@ export class App {
 
   constructor() {
     const injector = inject(Injector);
+    let previousPath: string | undefined;
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       takeUntilDestroyed(),
-    ).subscribe(() => afterNextRender(() => {
-      const main = document.getElementById('main-content');
-      const target = main?.querySelector('h1') ?? main;
-      if (target instanceof HTMLElement) { target.tabIndex = -1; target.focus(); }
-    }, { injector }));
+    ).subscribe(event => {
+      const path = event.urlAfterRedirects.split(/[?#]/, 1)[0];
+      // Updating a page's filters must retain focus in the active control.
+      if (path === previousPath) return;
+      previousPath = path;
+      afterNextRender(() => {
+        const main = document.getElementById('main-content');
+        const target = main?.querySelector('h1') ?? main;
+        if (target instanceof HTMLElement) { target.tabIndex = -1; target.focus(); }
+      }, { injector });
+    });
   }
 
   skipToContent(event: Event): void {

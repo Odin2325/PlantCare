@@ -31,11 +31,32 @@
     No plant species have been added yet.
   </p>
   } @else {
-  <label class="catalog-search" for="plant-search">Find a plant
-    <input #search id="plant-search" type="search" placeholder="Search common or scientific names" (input)="query.set(search.value)">
-  </label>
+  <section class="catalog-tools" aria-label="Catalog filters">
+    <div class="catalog-field catalog-search">
+      <label for="plant-search">Find a plant</label>
+      <input #search id="plant-search" type="search" maxlength="100"
+             placeholder="Search common or scientific names" [value]="query()" (input)="setQuery(search.value)">
+    </div>
+    <div class="catalog-field">
+      <label for="plant-light">Light requirement</label>
+      <select id="plant-light" [ngModel]="light()" (ngModelChange)="setLight($event)">
+        <option value="">All light requirements</option>
+        @for (option of lightOptions; track option.value) { <option [value]="option.value">{{ option.label }}</option> }
+      </select>
+    </div>
+    <div class="catalog-field">
+      <label for="plant-sort">Sort by</label>
+      <select id="plant-sort" [ngModel]="sort()" (ngModelChange)="setSort($event)">
+        <option value="name-asc">Name A–Z</option>
+        <option value="name-desc">Name Z–A</option>
+      </select>
+    </div>
+    <button type="button" class="clear-filters" [disabled]="!hasFilters()" (click)="clearFilters()">Clear filters</button>
+  </section>
   <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
-  @if (visibleSpecies().length === 0) { <p>No plants match your search. Try another name.</p> }
+  @if (visibleSpecies().length === 0) {
+    <p class="status-message">No plants match your search. Try another name or clear the filters.</p>
+  }
   <div class="plant-grid">
     @for (plant of visibleSpecies(); track plant.id) {
     <article class="plant-card">
@@ -83,73 +104,10 @@
           </dd>
         </div>
 
-        <div>
-          <dt>Fertilizing</dt>
-          <dd>
-            @if (
-            plant.defaultFertilizingIntervalDays !==
-            null
-            ) {
-            Every
-            {{
-                    plant.defaultFertilizingIntervalDays
-            }}
-            days
-            } @else {
-            No default schedule
-            }
-          </dd>
-        </div>
-
-        <div>
-          <dt>Temperature</dt>
-          <dd>
-            @if (
-            plant.minimumTemperatureCelsius !== null &&
-            plant.maximumTemperatureCelsius !== null
-            ) {
-            {{
-                    plant.minimumTemperatureCelsius
-            }}–{{
-                    plant.maximumTemperatureCelsius
-            }} °C
-            } @else {
-            Not specified
-            }
-          </dd>
-        </div>
       </dl>
 
-      <div class="instruction">
-        <h3>Watering instructions</h3>
-        <p>{{ plant.wateringInstructions }}</p>
-      </div>
-
-      <div class="instruction">
-        <h3>Sunlight instructions</h3>
-        <p>{{ plant.sunlightInstructions }}</p>
-      </div>
-
-      <div class="instruction">
-        <h3>Soil</h3>
-        <p>{{ plant.soilInstructions }}</p>
-      </div>
-
-      @if (plant.fertilizingInstructions) {
-      <div class="instruction">
-        <h3>Fertilizing instructions</h3>
-        <p>{{ plant.fertilizingInstructions }}</p>
-      </div>
-      }
-
-      @if (plant.humidityInstructions) {
-      <div class="instruction">
-        <h3>Humidity</h3>
-        <p>{{ plant.humidityInstructions }}</p>
-      </div>
-      }
       <a class="details-link"
-         [routerLink]="['/plants', plant.id]">
+         [routerLink]="['/plants', plant.id]" [queryParams]="filterQueryParams()">
         View details
       </a>
     </article>

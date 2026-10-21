@@ -5,16 +5,19 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PlantSpecies } from '../../../../models/plant-species.model';
+import { PlantSpecies, SunlightRequirement } from '../../../../models/plant-species.model';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
 
 @Component({
   selector: 'app-plant-catalog-page',
   standalone: true,
   imports: [
+    FormsModule,
     RouterLink,
     PlantPhoto,
   ],
@@ -23,21 +26,76 @@ import { PlantSpeciesApiService } from '../../../../core/services/plant-species-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlantCatalogPage {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly plantSpeciesApi =
     inject(PlantSpeciesApiService);
 
   readonly plantSpecies = signal<PlantSpecies[]>([]);
   readonly query = signal('');
+  readonly light = signal<SunlightRequirement | ''>('');
+  readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
+  readonly lightOptions: { value: SunlightRequirement; label: string }[] = [
+    { value: 'LowLight', label: 'Low light' },
+    { value: 'MediumIndirectLight', label: 'Medium indirect light' },
+    { value: 'BrightIndirectLight', label: 'Bright indirect light' },
+    { value: 'PartialSun', label: 'Partial sun' },
+    { value: 'FullSun', label: 'Full sun' },
+    { value: 'Unknown', label: 'Not specified' },
+  ];
+  readonly filterQueryParams = computed(() => ({
+    q: this.query() || null,
+    light: this.light() || null,
+    sort: this.sort() === 'name-desc' ? 'name-desc' : null,
+  }));
+  readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = this.query().trim().toLowerCase();
-    return this.plantSpecies().filter(plant => !query ||
-      [plant.commonName, plant.scientificName, plant.description].join(' ').toLowerCase().includes(query));
+    return this.plantSpecies().filter(plant =>
+      (!this.light() || plant.sunlightRequirement === this.light()) &&
+      (!query || [plant.commonName, plant.scientificName, plant.description].join(' ').toLowerCase().includes(query)))
+      .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en', { sensitivity: 'base' }) *
+        (this.sort() === 'name-desc' ? -1 : 1));
   });
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
 
   constructor() {
+    this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe(params => {
+      this.query.set((params.get('q') ?? '').slice(0, 100));
+      const light = params.get('light');
+      this.light.set(this.lightOptions.find(option => option.value === light)?.value ?? '');
+      this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
+    });
     this.loadPlantSpecies();
+  }
+
+  setQuery(value: string): void {
+    this.query.set(value.slice(0, 100));
+    this.saveFilters();
+  }
+
+  setLight(value: string): void {
+    this.light.set(this.lightOptions.find(option => option.value === value)?.value ?? '');
+    this.saveFilters();
+  }
+
+  setSort(value: string): void {
+    this.sort.set(value === 'name-desc' ? 'name-desc' : 'name-asc');
+    this.saveFilters();
+  }
+
+  clearFilters(): void {
+    this.query.set('');
+    this.light.set('');
+    this.sort.set('name-asc');
+    this.saveFilters();
+  }
+
+  private saveFilters(): void {
+    void this.router.navigate([], {
+      relativeTo: this.route, queryParams: this.filterQueryParams(), replaceUrl: true,
+    });
   }
 
   reload(): void {

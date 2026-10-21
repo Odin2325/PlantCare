@@ -12,8 +12,14 @@
   margin-bottom: 2rem;
 }
 
-.catalog-search { display: block; max-width: 32rem; font-weight: 600; }
-.catalog-search input { display: block; width: 100%; box-sizing: border-box; margin-top: .4rem; padding: .8rem; border: 1px solid #83978a; border-radius: .5rem; font: inherit; }
+.catalog-tools { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
+.catalog-field { flex: 1 1 12rem; min-width: 0; }
+.catalog-tools label { display: block; font-weight: 600; }
+.catalog-tools .catalog-search { flex: 2 1 20rem; }
+.catalog-tools input, .catalog-tools select { display: block; width: 100%; box-sizing: border-box; margin-top: .4rem; padding: .8rem; border: 1px solid #83978a; border-radius: .5rem; font: inherit; background: white; color: #19251d; }
+.clear-filters { padding: .8rem; border: 1px solid #377a4b; border-radius: .5rem; background: white; color: #235b37; font: inherit; cursor: pointer; }
+.clear-filters:disabled { opacity: .55; cursor: default; }
+.catalog-tools :is(input, select, button):focus-visible, .details-link:focus-visible { outline: 3px solid #235b37; outline-offset: 3px; }
 
 .eyebrow {
   margin: 0 0 0.4rem;
@@ -67,11 +73,14 @@ h1 {
 
 .plant-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
   gap: 1.25rem;
 }
 
 .plant-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   padding: 1.5rem;
   border: 1px solid #dce5de;
   border-radius: 1rem;
@@ -81,6 +90,7 @@ h1 {
 
 .plant-card__heading {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
@@ -89,6 +99,7 @@ h1 {
 .plant-card h2 {
   margin: 0;
   font-size: 1.5rem;
+  overflow-wrap: anywhere;
 }
 
 .scientific-name {
@@ -108,6 +119,7 @@ h1 {
 }
 
 .description {
+  flex-grow: 1;
   margin: 1.25rem 0;
   line-height: 1.6;
 }
@@ -137,21 +149,6 @@ h1 {
     margin: 0;
   }
 
-.instruction + .instruction {
-  margin-top: 1rem;
-}
-
-.instruction h3 {
-  margin: 0 0 0.35rem;
-  font-size: 0.9rem;
-}
-
-.instruction p {
-  margin: 0;
-  color: #536059;
-  line-height: 1.5;
-}
-
 @media (max-width: 500px) {
   .care-details {
     grid-template-columns: 1fr;
@@ -164,7 +161,8 @@ h1 {
 
 .details-link {
   display: inline-block;
-  margin-top: 1.5rem;
+  margin-top: auto;
+  align-self: flex-start;
   padding: 0.7rem 1rem;
   border-radius: 0.6rem;
   background: #377a4b;
