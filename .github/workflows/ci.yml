@@ -30,6 +30,10 @@ jobs:
       - name: Test
         run: dotnet test PlantCare.slnx --configuration Release --no-build
 
+      - name: Test backup retention safety
+        shell: pwsh
+        run: ./scripts/Test-BackupRetention.ps1
+
   frontend:
     name: Frontend
     runs-on: ubuntu-latest

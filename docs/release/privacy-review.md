@@ -6,6 +6,15 @@ or enable wider signups on its basis. On 2026-10-21 the owner authorized publish
 [nico.arevalo2325@gmail.com](mailto:nico.arevalo2325@gmail.com) for private requests.
 GitHub Issues remains the general-support channel.
 
+Follow-up: [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
+records the new guarded expiry and reconciliation implementation/enabling status.
+Deletion retains a minimal ID/time marker to prevent restoration; transient private
+recovery authority also includes current account IDs, never emails/passwords.
+Backup cleanup targets 30 days but can be delayed by offline storage or failed
+verification. Independent recovery authority replication, provider/log/support
+retention and the complete operator notice remain open. The proposal/history below
+must not be read as a hard 30-day guarantee or as a finished privacy notice.
+
 The owner accepted the proposed policy of account data kept until account
 deletion and backups retained up to 30 days. This is a proposal, not an enforced
 backup retention guarantee: no existing snapshots were deleted. Account deletion

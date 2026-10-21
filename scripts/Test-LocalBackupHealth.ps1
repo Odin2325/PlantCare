@@ -13,6 +13,8 @@ try {
     if ($attempt.status -eq 'running' -and ([DateTimeOffset]::UtcNow - [DateTimeOffset]$attempt.atUtc).TotalMinutes -gt 30) { $problems.Add('backup-running-over-30-minutes') }
     $snapshots = (Invoke-BackupRestic @('snapshots', '--json', '--tag', 'plantcare-local') $config.repository) -join "`n" | ConvertFrom-Json
     if (-not ($snapshots | Where-Object { $_.id -eq $last.snapshotId })) { $problems.Add('verified-snapshot-missing') }
+    $retention=Join-Path $BackupState 'retention-last-attempt.json'
+    if((Test-Path $retention) -and (Get-Content $retention -Raw|ConvertFrom-Json).status -eq 'failed'){$problems.Add('backup-retention-failed')}
 }
 catch { $problems.Add('backup-repository-or-status-unavailable') }
 $status = @{ checkedAtUtc = [DateTimeOffset]::UtcNow.ToString('O'); healthy = $problems.Count -eq 0; problems = @($problems.ToArray()) }

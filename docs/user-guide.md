@@ -90,8 +90,10 @@ Enter your current password for either action; deletion additionally requires
 typing DELETE. Export first if you want a private copy. A successful deletion
 signs you out and removes active account/plant/care records. Connected external
 calendars must be disconnected first. Existing encrypted backups, delivered
-messages and copies held by calendar clients are separate; the proposed 30-day
-backup limit is not yet enforced. See [deployment status](release/account-data.md).
+messages and copies held by calendar clients are separate. Backup cleanup targets
+30 days but can be delayed if storage is unavailable or verification fails.
+A minimal deletion marker is kept to prevent restoration during managed recovery.
+See [deployment/enabling status](release/retention-and-erasure-recovery.md).
 
 ## Getting help
 

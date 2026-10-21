@@ -85,13 +85,19 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
         if (user is null) return BadRequest(new ProblemDetails { Title = "Current password could not be verified. Try again later or reset your password." });
         var deleted = await db.Database.CreateExecutionStrategy().ExecuteAsync(async () =>
         {
+            db.ChangeTracker.Clear();
             await using var transaction = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, ct);
             // Disconnect providers first so their remote cleanup is not silently skipped.
             if (await db.ExternalCalendarConnections.AnyAsync(c => c.UserId == user.Id, ct)) return false;
-            await db.CalendarShares.Where(s => s.OwnerUserId == user.Id || s.RecipientUserId == user.Id).ExecuteDeleteAsync(ct);
+            if (!await db.AccountErasures.AnyAsync(e => e.UserId == user.Id, ct))
+            {
+                db.AccountErasures.Add(PlantCare.Domain.Entities.AccountErasure.Create(user.Id, DateTimeOffset.UtcNow));
+                await db.SaveChangesAsync(ct);
+            }
+            await db.CalendarShares.IgnoreQueryFilters().Where(s => s.OwnerUserId == user.Id || s.RecipientUserId == user.Id).ExecuteDeleteAsync(ct);
             // Existing foreign keys cascade plants/history, notification deliveries,
             // preferences, devices, subscriptions and Identity children atomically.
-            await db.Users.Where(u => u.Id == user.Id).ExecuteDeleteAsync(ct);
+            await db.Users.IgnoreQueryFilters().Where(u => u.Id == user.Id).ExecuteDeleteAsync(ct);
             await transaction.CommitAsync(ct);
             return true;
         });

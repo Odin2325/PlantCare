@@ -10,6 +10,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
+. "$PSScriptRoot/LocalBackup.Common.ps1"
 $docker = (Get-Command docker -ErrorAction SilentlyContinue).Source
 if (-not $docker) {
     $docker = Join-Path $env:LOCALAPPDATA 'Programs\DockerDesktop\resources\bin\docker.exe'
@@ -19,7 +20,8 @@ $env:Path = (Split-Path $docker -Parent) + ';' + $env:Path
 $runId = [Guid]::NewGuid().ToString('N').Substring(0, 12)
 $project = 'plantcare-recovery-' + $runId
 $backupDir = Join-Path $repoRoot "recovery-artifacts/$runId"
-$null = New-Item -ItemType Directory -Path $backupDir
+$authority=Join-Path $BackupState "scratch/erasure-authority-$runId"
+Protect-BackupDirectory $backupDir
 $override = Join-Path $backupDir 'compose.recovery.yaml'
 $compose = @('compose', '--env-file', (Join-Path $repoRoot '.env.local'), '-f', (Join-Path $repoRoot 'compose.yaml'), '-f', (Join-Path $repoRoot 'compose.local.yaml'))
 $source = $compose + @('--project-name', 'plantcare-local')
@@ -85,6 +87,8 @@ $sourceStopped = $false
 $success = $false
 Push-Location $repoRoot
 try {
+    Protect-BackupDirectory $authority
+    Export-CurrentAccountErasureLedger -Source Local -Destination (Join-Path $authority 'preflight-erasures.json')
     $apiImage = (Invoke-DockerChecked @('inspect', '--format', '{{.Image}}', 'plantcare-local-api-1')).ToString().Trim()
     $workerImage = (Invoke-DockerChecked @('inspect', '--format', '{{.Image}}', 'plantcare-local-worker-1')).ToString().Trim()
     $databaseImage = (Invoke-DockerChecked @('inspect', '--format', '{{.Image}}', 'plantcare-local-database-1')).ToString().Trim()
@@ -149,6 +153,9 @@ services:
     if (Compare-Object $keyHashes $restoredKeys) { throw 'Restored data-protection key hashes differ.' }
     # SQL logins live in master, outside the restored application backup. Map
     # restored database users to fresh logins using the matching private config.
+    $null = Invoke-DockerChecked ($target + @('run', '--rm', '--no-deps', 'migrate', '--migrate-database'))
+    Export-CurrentAccountErasureLedger -Source Local -Destination (Join-Path $authority 'current-erasures.json')
+    $null = Invoke-DockerChecked ($target + @('run', '--rm', '--no-deps', '--user', 'root', '-e', 'Recovery__AllowAccountErasureApply=true', '-e', 'Recovery__AccountErasureSource=plantcare-local', '-v', "${authority}:/erasure-authority:ro", 'migrate', '--apply-account-erasures', '/erasure-authority/current-erasures.json'))
     $null = Invoke-DockerChecked ($target + @('run', '--rm', '--no-deps', 'migrate', '--provision-runtime-users'))
     $null = Invoke-DockerChecked ($target + @('up', '-d', '--no-build', '--wait', '--wait-timeout', '300'))
     Test-RecoveredJourney 'https://localhost:9443' $target
@@ -160,9 +167,17 @@ services:
     if ($success) {
         # Only this randomly named drill project is removed; source volumes and backups remain.
         $null = Invoke-DockerChecked ($target + @('down', '--volumes'))
+        if($runId -notmatch '^[a-f0-9]{12}$'){throw 'Unexpected recovery payload cleanup identity.'}
+        foreach($name in @('database.bak','keys.tar')){
+            $payloadPath=[IO.Path]::GetFullPath((Join-Path $backupDir $name))
+            if((Split-Path $payloadPath -Parent) -ne [IO.Path]::GetFullPath((Join-Path $repoRoot "recovery-artifacts/$runId"))){throw 'Unexpected recovery payload cleanup path.'}
+            Remove-Item -LiteralPath $payloadPath -Force
+        }
+        $null=Invoke-DockerChecked @('exec','plantcare-local-database-1','rm','-f','--',"/var/opt/mssql/plantcare-$runId.bak")
         Write-Output "Recovery evidence retained privately in recovery-artifacts/$runId; temporary restore stack removed."
     } else {
         Write-Output "Recovery failed; backup/evidence and project $project retained for diagnosis."
     }
     Pop-Location
+    Remove-BackupScratch $authority
 }

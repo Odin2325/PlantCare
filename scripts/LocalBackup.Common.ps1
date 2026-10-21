@@ -69,6 +69,9 @@ function Write-BackupStatus([string]$Name, [object]$Value) {
     Move-Item -LiteralPath ($path + '.tmp') -Destination $path -Force
 }
 
+. "$PSScriptRoot/BackupRetention.Common.ps1"
+. "$PSScriptRoot/AccountErasure.Common.ps1"
+
 $BackupSnapshotSql = @'
 USE [PlantCare]; SET NOCOUNT ON;
 CREATE TABLE #state (TableName nvarchar(300), [RowCount] bigint, RowChecksum int);

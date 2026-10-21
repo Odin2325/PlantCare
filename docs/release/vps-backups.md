@@ -9,7 +9,9 @@ preparation; production recovery acceptance remains open.
 `Invoke-VpsBackup.ps1` uses the existing encrypted restic repository on the
 owner's external `D:\PlantCareBackups` drive. VPS snapshots have the distinct
 host/tag `plantcare-vps-staging`. Local and VPS operations share an exclusive
-lock. No retention deletion or generic Docker pruning is performed.
+lock. Capture itself does not prune Docker data. The optional guarded 30-day
+snapshot expiry is described in [retention and erasure recovery](retention-and-erasure-recovery.md),
+including its enabling record, safety checks and offline limitations.
 
 The fixed-target SSH helper briefly stops API/worker writers, captures SQL with
 COPY_ONLY/CHECKSUM and VERIFYONLY, all-table counts/checksums, data-protection

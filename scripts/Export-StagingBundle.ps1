@@ -69,7 +69,7 @@ try {
     Set-Content -LiteralPath (Join-Path $payload 'images.env') -Encoding utf8NoBOM -Value @(
         "PLANTCARE_API_IMAGE=$api", "PLANTCARE_WORKER_IMAGE=$worker"
     )
-    @{candidate=$sha;platform='linux/amd64';createdAtUtc=[DateTimeOffset]::UtcNow.ToString('O');images=$images} |
+    @{candidate=$sha;platform='linux/amd64';accountErasureProtocol=1;createdAtUtc=[DateTimeOffset]::UtcNow.ToString('O');images=$images} |
         ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding utf8NoBOM
     $checksums = foreach ($file in @('images.tar', 'compose.yaml', 'environment.example', 'images.env', 'manifest.json', 'deploy/Caddyfile', 'deploy/catalog.example.json')) {
         (Get-FileHash -LiteralPath (Join-Path $payload $file) -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + $file

@@ -153,6 +153,19 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.AccountErasure", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ErasedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AccountErasures", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.CalendarShare", b =>
                 {
                     b.Property<Guid>("Id")

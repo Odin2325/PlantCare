@@ -17,8 +17,9 @@
     <h2 id="delete-heading">Permanently delete your account</h2>
     <p>Deletion removes your account and its plants, care history, notifications, device subscriptions and calendar access
       from the active service. You will be signed out. This action cannot be undone in the app.</p>
-    <p>Existing encrypted backups may still contain earlier data. Backup expiry and suppression after a restore are still
-      being prepared; the proposed 30-day backup limit is not yet enforced. External calendar copies, downloaded exports
+    <p>Existing encrypted backups may still contain earlier data and become eligible for removal after 30 days.
+      Cleanup may be delayed if backup storage is unavailable or verification fails. A minimal deletion marker is retained
+      to prevent your account returning during managed recovery. External calendar copies, downloaded exports
       and messages already delivered are not erased by this action. A reminder already in delivery may still arrive.</p>
     <p>If an external calendar is connected, <a routerLink="/calendar">disconnect it on Calendar</a> first.
       Archiving a plant is different from account deletion and preserves its records.</p>

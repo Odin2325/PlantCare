@@ -13,7 +13,7 @@ public static class DatabaseCommands
         "PlantSpecies", "UserPlants", "UserPlantTags", "CareSchedules", "CareEvents", "NotificationPreferences",
         "CalendarSubscriptions", "CalendarShares", "PushSubscriptions", "ExternalCalendarConnections", "ExternalCalendarEvents"];
     private static readonly string[] ApiReads = ["AspNetRoles", "AspNetRoleClaims", "AspNetUserRoles", "PushDeliveries", "__EFMigrationsHistory"];
-    private static readonly string[] WorkerReads = ["UserPlants", "CareSchedules", "NotificationPreferences"];
+    private static readonly string[] WorkerReads = ["UserPlants", "CareSchedules", "NotificationPreferences", "AccountErasures"];
     private static readonly string[] WorkerWrites = ["ExternalCalendarEvents"];
 
     public static bool IsCommand(string[] args) => args.Length > 0 &&
@@ -56,6 +56,7 @@ public static class DatabaseCommands
     {
         var policy = ApiWrites.ToDictionary(table => table, _ => new[] { "SELECT", "INSERT", "UPDATE", "DELETE" });
         foreach (var table in ApiReads) policy[table] = ["SELECT"];
+        policy["AccountErasures"] = ["SELECT", "INSERT"];
         policy["Notifications"] = ["SELECT", "UPDATE"];
         return policy;
     }
@@ -161,6 +162,7 @@ public static class DatabaseCommands
             "BEGIN TRANSACTION; CREATE TABLE dbo.PlantCarePermissionProbe (Id int); ROLLBACK;",
             "UPDATE dbo.__EFMigrationsHistory SET ProductVersion=ProductVersion WHERE 1=0;",
             "INSERT dbo.AspNetUserRoles DEFAULT VALUES;",
+            "DELETE dbo.AccountErasures WHERE 1=0;",
             role == "worker" ? "SELECT TOP(1) Id FROM dbo.AspNetUsers;" : "UPDATE dbo.AspNetRoles SET Name=Name WHERE 1=0;",
             role == "worker" ? "UPDATE dbo.PlantSpecies SET CommonName=CommonName WHERE 1=0;" : "UPDATE dbo.AspNetUserRoles SET UserId=UserId WHERE 1=0;"
         })

@@ -24,6 +24,9 @@ is a draft with unresolved operator disclosures, backup retention and restore ha
 it is not a finished public privacy notice.
 See [account export/deletion](docs/release/account-data.md) for the new protected
 Account controls, published private contact and proposed retention policy.
+See [retention and erasure-safe recovery](docs/release/retention-and-erasure-recovery.md)
+for guarded snapshot expiry, current account/deletion authority and the mandatory
+reconciliation step before starting a restored application.
 The [domain and hosting handoff](docs/release/domain-hosting.md) covers
 `plantacare.org`, the staging DNS record and choosing a compatible server.
 For the selected 4 GB OVHcloud VPS, use the [prebuilt-image deployment guide](docs/release/budget-staging.md).

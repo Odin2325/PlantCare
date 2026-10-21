@@ -46,6 +46,7 @@ try {
     $success=@{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$summary.snapshot_id;repository=$repo.repository;candidate=$vps.candidate}
     Write-BackupStatus 'vps-last-success' $success
     Write-BackupStatus 'vps-last-attempt' $success
+    Invoke-ConfiguredBackupRetention
     'PASS: VPS SQL/key/config backup transferred, encrypted and repository checked; app resumed before transfer.'
 } catch {
     Write-BackupStatus 'vps-last-attempt' @{status='failed';atUtc=[DateTimeOffset]::UtcNow.ToString('O');message='VPS backup failed; previous encrypted snapshots retained. Check SSH, drive and source readiness.'}

@@ -64,6 +64,12 @@ operator records. Do not commit requests, account exports or recipient details.
 
 ## Retention proposal and remaining launch work
 
+Follow-up implementation: [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
+adds minimal transactional markers, current-source membership reconciliation and
+guarded 30-day expiry. See its verification/enabling record. Offline storage and
+verification failures can delay cleanup, so the target is not a strict maximum.
+The earlier proposal below records the prior state, not the new enabling status.
+
 The owner selected account data until deletion, with encrypted backups for up to
 30 days, as the proposed policy. Active-service deletion is implemented, but
 snapshot expiry is not enabled and no existing backup was removed. Do not
@@ -81,7 +87,9 @@ basis/recipient disclosures in privacy-review.md. The current notice stays a dra
 
 ## Deployment and verification
 
-No schema migration is needed. Runtime provisioning gains API SELECT on
+The original account-data release below needed no schema migration. The follow-up
+marker release requires the additive migration and controlled grants described in
+retention-and-erasure-recovery.md. For the original release, provisioning gained API SELECT on
 PushDeliveries for the owner-scoped export. Re-run the existing controlled
 `--provision-runtime-users` operator job from the new image before activating it;
 the ordinary API/worker must retain their restricted credentials. Verify runtime

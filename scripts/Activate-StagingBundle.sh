@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Fixed synthetic staging host. Refresh controlled runtime grants; no schema
-# migrations, secret changes or pruning.
+# Fixed synthetic staging host. Apply additive schema/controlled grants. Never
+# downgrade the erasure journal or fall back to an erasure-unaware application.
 set -euo pipefail
 test "$(id -u)" = 0
 next=$1
@@ -13,7 +13,8 @@ test "$(df --output=avail -B1 "$base" | tail -1)" -gt 5368709120
 sha256sum -c SHA256SUMS >/dev/null
 python3 - "$next" <<'PY'
 import json,sys
-assert json.load(open('manifest.json'))['candidate']==sys.argv[1]
+manifest=json.load(open('manifest.json'))
+assert manifest['candidate']==sys.argv[1] and manifest.get('accountErasureProtocol')==1
 PY
 docker load --input images.tar >/dev/null
 python3 - <<'PY'
@@ -29,6 +30,15 @@ rollback() {
     code=$?
     trap - EXIT
     if test "$code" != 0; then
+        if ! python3 - "$base/releases/$previous/manifest.json" <<'PY'
+import json,sys
+assert json.load(open(sys.argv[1])).get('accountErasureProtocol')==1
+PY
+        then
+            dc stop api worker >/dev/null 2>&1 || true
+            printf 'Activation failed; application stopped. Erasure-aware forward recovery is required.\n' >&2
+            exit 1
+        fi
         cd "$base/releases/$previous"
         if ! dc up --no-build --pull never --no-deps --force-recreate -d --wait --wait-timeout 180 api worker >/dev/null 2>&1; then
             printf 'Staging activation and previous-runtime recovery failed. Operator action required.\n' >&2
@@ -39,6 +49,7 @@ rollback() {
     exit "$code"
 }
 trap rollback EXIT
+dc run -T --interactive=false --rm --no-deps --pull never migrate --migrate-database >/dev/null 2>&1
 dc run -T --interactive=false --rm --no-deps --pull never migrate --provision-runtime-users >/dev/null 2>&1
 dc up --no-build --pull never --no-deps --force-recreate -d --wait --wait-timeout 180 api worker >/dev/null 2>&1
 python3 - <<'PY'

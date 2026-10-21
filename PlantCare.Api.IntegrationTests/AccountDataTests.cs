@@ -134,6 +134,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.Empty(await db.Notifications.ToListAsync()); Assert.Empty(await db.PushDeliveries.ToListAsync());
         Assert.Empty(await db.CalendarShares.ToListAsync()); Assert.Empty(await db.CalendarSubscriptions.ToListAsync());
         Assert.Empty(await db.PushSubscriptions.ToListAsync()); Assert.Empty(await db.NotificationPreferences.ToListAsync());
+        Assert.Single(await db.AccountErasures.Where(e => e.UserId == a.Id).ToListAsync());
     }
 
     [Fact]
@@ -155,6 +156,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.Equal(2, await check.Users.CountAsync()); Assert.Equal(2, await check.CalendarShares.CountAsync());
         Assert.Single(await check.Notifications.ToListAsync()); Assert.Single(await check.PushDeliveries.ToListAsync());
         Assert.Single(await check.CareEvents.ToListAsync()); Assert.Equal(2, await check.UserPlants.CountAsync());
+        Assert.Empty(await check.AccountErasures.ToListAsync());
     }
 
     [Fact]

@@ -69,6 +69,7 @@ try {
     $success = @{ status = 'success'; atUtc = [DateTimeOffset]::UtcNow.ToString('O'); snapshotId = $summary.snapshot_id; repository = $config.repository }
     Write-BackupStatus 'last-success' $success
     Write-BackupStatus 'last-attempt' $success
+    Invoke-ConfiguredBackupRetention
     Write-Output 'PASS: SQL/key/config snapshot encrypted and repository data checked; writers restarted.'
 }
 catch {

@@ -118,9 +118,11 @@ This validates SQL restoration and the exact matched key/config bytes. The
 existing [full recovery drill](recovery.md) separately tests restored cookies,
 history and worker behavior. Integration credential recovery remains unverified.
 
-No automated snapshot deletion is enabled. Review a retention policy such as
-seven daily, four weekly and six monthly snapshots, and use restic `forget`
-`--dry-run` before enabling pruning. Keep pre-upgrade backups. Monitor capacity;
+The new guarded policy targets 30-day expiry after verified backups; see
+[retention and erasure recovery](retention-and-erasure-recovery.md) for enabling
+status, latest-copy protection, offline delays and restore requirements. Older
+daily/weekly/monthly retention suggestions are superseded by the owner's selected
+30-day target. Monitor capacity;
 encryption does not prevent deletion by a compromised host with write access.
 Disconnect/rotate or replicate the external drive and store a copy off-site.
 Retain reviewed application images/source as well as the recorded IDs; a hash

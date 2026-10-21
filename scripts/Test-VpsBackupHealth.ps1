@@ -20,6 +20,8 @@ try {
     }
     if(([IO.DriveInfo]::new([IO.Path]::GetPathRoot($repo.repository))).AvailableFreeSpace -lt 5GB){$problems.Add('vps-backup-destination-low-space')}
     if(([IO.DriveInfo]::new([IO.Path]::GetPathRoot($BackupState))).AvailableFreeSpace -lt 5GB){$problems.Add('vps-backup-source-low-space')}
+    $retention=Join-Path $BackupState 'retention-last-attempt.json'
+    if((Test-Path $retention) -and (Get-Content $retention -Raw|ConvertFrom-Json).status -eq 'failed'){$problems.Add('backup-retention-failed')}
     $task=Get-ScheduledTask -TaskName 'PlantCare-VpsEncryptedBackup' -ErrorAction SilentlyContinue
     if(-not $task){$problems.Add('vps-backup-task-missing')}
     elseif($task.State -eq 'Disabled'){$problems.Add('vps-backup-task-disabled')}

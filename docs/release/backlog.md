@@ -25,6 +25,20 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Guarded expiry and account-erasure reconciliation (2026-10-21)
+
+- Prepared a guarded 30-day policy, exact-state preview/enabling, durable prune
+  retry and retention health reporting. A disposable encrypted repository proved
+  expiry/pruning and retained-copy restoration; real preview had no expired copies.
+- Added transactional minimal deletion markers, filtered identities/private data,
+  fresh complete live-membership authority and before-start reconciliation in the
+  managed local/VPS app restore paths. Marker-aware runtime/schema/grant handling
+  is required; unavailable authority blocks recovery instead of using stale data.
+- Full backend regression before the final legacy-deletion case passed 138 tests;
+  final targeted recovery tests passed 8. Isolated SQL suite passed all 38 after
+  running separately from the restart drill. Final deployment/enabling evidence
+  is tracked in retention-and-erasure-recovery.md. Production gates remain open.
+
 ### Private account data controls (2026-10-21)
 
 - Added Account export and explicit deletion with current-password verification,

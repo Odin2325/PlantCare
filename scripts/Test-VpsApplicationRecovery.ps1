@@ -1,5 +1,6 @@
 # Restore the encrypted VPS snapshot only into a new local Docker project.
-# No source writes/deployment, external sends, migrations or schema rollback.
+# No source data changes/deployment, external sends or schema rollback. Apply
+# additive migrations and the freshly exported live erasure ledger only to target.
 [CmdletBinding()]
 param([ValidatePattern('^[a-f0-9]{40}$')][string]$RuntimeCandidate)
 . "$PSScriptRoot/VpsBackup.Common.ps1"
@@ -7,6 +8,7 @@ $lock=Enter-BackupLock
 $run=[Guid]::NewGuid().ToString('N')
 $project='plantcare-app-recovery-'+$run.Substring(0,12)
 $scratch=Join-Path $BackupState "scratch/app-recovery-$run"
+$authority=Join-Path $BackupState "scratch/erasure-authority-$run"
 $target=@()
 $started=$false
 $passed=$false
@@ -55,6 +57,8 @@ try {
     $snapshots=Invoke-BackupRestic @('snapshots','--json','--host','plantcare-vps-staging') $repo.repository|ConvertFrom-Json
     if(-not($snapshots|Where-Object id -eq $last.snapshotId)){throw 'Snapshot is not a VPS backup.'}
     Protect-BackupDirectory $scratch
+    Protect-BackupDirectory $authority
+    Export-CurrentAccountErasureLedger -Source Vps -Destination (Join-Path $authority 'preflight-erasures.json')
     $null=Invoke-BackupRestic @('restore',$last.snapshotId,'--target',$scratch,'--verify') $repo.repository
     $manifest=Get-Content (Join-Path $scratch 'manifest.json') -Raw|ConvertFrom-Json
     foreach($file in $manifest.files){
@@ -63,6 +67,7 @@ try {
         if((Get-FileHash $path -Algorithm SHA256).Hash -ne $file.sha256){throw 'Restored file hash mismatch.'}
     }
     $testedCandidate=$manifest.candidate
+    if(-not $RuntimeCandidate){$RuntimeCandidate=(Get-VpsBackupConfiguration).candidate}
     $composeFile=Join-Path $scratch 'config/compose.yaml'
     $imageEnvironment=Join-Path $scratch 'config/images.env'
     if($RuntimeCandidate){
@@ -70,7 +75,7 @@ try {
         # before any VPS activation. Snapshot files/hashes remain unmodified.
         $bundleRoot=Join-Path $BackupState "deployment-bundles/$RuntimeCandidate"
         $bundle=Get-Content (Join-Path $bundleRoot 'manifest.json') -Raw|ConvertFrom-Json
-        if($bundle.candidate -ne $RuntimeCandidate){throw 'Prebuilt test runtime candidate mismatch.'}
+        if($bundle.candidate -ne $RuntimeCandidate -or $bundle.accountErasureProtocol -ne 1){throw 'Recovery requires a matching erasure-aware runtime bundle.'}
         foreach($line in Get-Content (Join-Path $bundleRoot 'SHA256SUMS')){
             if($line -notmatch '^([a-f0-9]{64})  (images.tar|compose.yaml|environment.example|images.env|manifest.json|deploy/Caddyfile|deploy/catalog.example.json)$'){throw 'Unexpected prebuilt checksum entry.'}
             if((Get-FileHash (Join-Path $bundleRoot $Matches[2]) -Algorithm SHA256).Hash -ne $Matches[1]){throw 'Prebuilt payload hash mismatch.'}
@@ -176,6 +181,9 @@ services:
     $keyCommand=@('run','--rm','--no-deps','--entrypoint','sh','api','-c','cd /var/lib/plantcare/keys && sha256sum key-*.xml')
     $keyHashes=@(Invoke-BackupDocker ($target+$keyCommand)|Where-Object {"$_" -match '^[a-f0-9]{64}\s+key-'})
     if(-not $keyHashes.Count){throw 'Restored keys unavailable.'}
+    $null=Invoke-BackupDocker ($target+@('run','--rm','--no-deps','migrate','--migrate-database'))
+    Export-CurrentAccountErasureLedger -Source Vps -Destination (Join-Path $authority 'current-erasures.json')
+    $null=Invoke-BackupDocker ($target+@('run','--rm','--no-deps','--user','root','-e','Recovery__AllowAccountErasureApply=true','-e','Recovery__AccountErasureSource=plantcare-vps-staging','-v',"${authority}:/erasure-authority:ro",'migrate','--apply-account-erasures','/erasure-authority/current-erasures.json'))
     $null=Invoke-BackupDocker ($target+@('run','--rm','--no-deps','migrate','--provision-runtime-users'))
     $null=Invoke-BackupDocker ($target+@('up','-d','--no-build','--wait','--wait-timeout','300','api','worker','proxy','client','mailpit'))
     $ready=$false
@@ -247,7 +255,7 @@ services:
     $null=Request '/api/auth/logout' 'POST' -Expected 204
     $null=Request '/api/account/me' -Expected 401
     $passed=$true
-    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
+    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
     'PASS: failed API activation rejected; pinned runtime restored with session/history/keys intact; logout enforced.'
 } finally {
     try {
@@ -256,6 +264,7 @@ services:
             $null=Invoke-BackupDocker ($target+@('down','--volumes'))
         }
         Remove-BackupScratch $scratch
+        Remove-BackupScratch $authority
         if(-not $passed){Write-BackupStatus 'vps-last-app-recovery' @{status='failed';atUtc=[DateTimeOffset]::UtcNow.ToString('O');message='Isolated application recovery failed; details withheld.'}}
         $account=$null;$session=$null;$newPassword=$null;$reset=$null;$message=$null;$query=$null
     } finally {$lock.Dispose()}
