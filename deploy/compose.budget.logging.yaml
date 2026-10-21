@@ -1,0 +1,23 @@
+# Operational override for existing pinned staging bundles. Also carried by backups
+# and copied forward by Activate-StagingBundle.sh. No application image changes.
+x-bounded-logging: &bounded-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  database:
+    environment:
+      MSSQL_MEMORY_LIMIT_MB: '2048'
+    logging: *bounded-logging
+  api:
+    logging: *bounded-logging
+  worker:
+    logging: *bounded-logging
+  proxy:
+    logging: *bounded-logging
+  migrate:
+    logging: *bounded-logging
+  worker-db-check:
+    logging: *bounded-logging

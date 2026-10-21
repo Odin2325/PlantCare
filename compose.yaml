@@ -1,7 +1,14 @@
 name: plantcare
 
+x-bounded-logging: &bounded-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   database:
+    logging: *bounded-logging
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       ACCEPT_EULA: "Y"
@@ -20,6 +27,7 @@ services:
     restart: unless-stopped
 
   api:
+    logging: *bounded-logging
     image: ${PLANTCARE_API_IMAGE:-plantcare-local-api}
     build:
       context: .
@@ -70,6 +78,7 @@ services:
     restart: unless-stopped
 
   worker:
+    logging: *bounded-logging
     image: ${PLANTCARE_WORKER_IMAGE:-plantcare-local-worker}
     # Use one worker replica: cross-process queue leases are not implemented.
     build:
@@ -107,6 +116,7 @@ services:
     restart: unless-stopped
 
   migrate:
+    logging: *bounded-logging
     image: ${PLANTCARE_API_IMAGE:-plantcare-local-api}
     profiles: [operations]
     environment:
@@ -124,6 +134,7 @@ services:
     restart: "no"
 
   worker-db-check:
+    logging: *bounded-logging
     image: ${PLANTCARE_API_IMAGE:-plantcare-local-api}
     profiles: [operations]
     environment:
@@ -133,6 +144,7 @@ services:
     restart: "no"
 
   proxy:
+    logging: *bounded-logging
     image: caddy:2-alpine
     environment:
       PLANTCARE_DOMAIN: ${PLANTCARE_DOMAIN:?Set PLANTCARE_DOMAIN in .env}

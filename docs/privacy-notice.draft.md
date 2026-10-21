@@ -94,12 +94,12 @@ as authority for reopening deleted accounts. Downloaded exports, delivered
 messages, external calendar copies and separately retained recovery artifacts
 are not all covered by the encrypted-repository expiry rule.
 
-**Provider policy approved, application pending:** Brevo transactional logs should
-be kept for one month, with no previews stored for future messages. The log rule
-also applies to existing logs; disabling previews does not remove old previews.
-Actual settings and provider processing delays must be verified before presenting
-this as implemented. Existing application/container logs, support correspondence
-and erasure markers do not yet have verified automatic time-based expiry.
+The operator reports configuring Brevo transactional logs for one month, with no
+previews stored for future messages, on 2026-10-21. The log rule also applies to
+existing logs; disabling previews does not remove old previews. Provider deletion
+is asynchronous. Actual expiry and tracking behavior remain to be verified.
+Application/container logs, support correspondence and erasure markers do not
+yet have verified automatic time-based expiry.
 Resolve their retention criteria in the operator review before publication.
 
 ## Your requests and rights

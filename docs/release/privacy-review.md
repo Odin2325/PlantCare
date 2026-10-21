@@ -9,8 +9,8 @@ GitHub Issues remains the general-support channel.
 Owner clarification on 2026-10-21: approved public operator identity is Nicolas
 Arevalo Hoelscher, Munich, Germany. This is currently a personal learning project;
 advertising may be introduced in future. The owner also approved a one-month
-Brevo log policy with no previews of future messages; provider application is
-pending. The concrete [notice draft](../privacy-notice.draft.md),
+Brevo log policy with no previews of future messages, then confirmed saving these
+settings on 2026-10-21 (owner-reported, not independently verified). The concrete [notice draft](../privacy-notice.draft.md),
 [private-request procedure](privacy-requests.md) and
 [provider/publication checklist](provider-privacy-checklist.md) record the work
 and unresolved settings. No runtime or provider setting changed in this review.

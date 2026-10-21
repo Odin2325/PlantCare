@@ -4,11 +4,14 @@ Reviewed 2026-10-21. These are specific publication gates, not proof that provid
 settings have already changed. Keep contract references/settings evidence private;
 record only non-secret status in this repository.
 
-## Brevo: approved policy, owner configuration required
+## Brevo: owner-reported settings applied
 
 The owner approved **one month of transactional logs and no previews of future
 emails** on 2026-10-21, including retrospective expiry of older existing logs.
-No Brevo setting was changed during this review.
+The owner confirmed saving these settings on 2026-10-21. This is owner-reported
+dashboard evidence; automated delivery/expiry and tracking settings have not been
+independently verified. Existing preview removal was not requested. The steps
+below document the configuration and remaining verification.
 
 1. In Brevo, open the account dropdown, then **Settings → Transactional emails →
    Retention rules**. Confirm whether the account is dedicated to PlantCare.
