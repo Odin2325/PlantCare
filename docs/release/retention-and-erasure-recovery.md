@@ -1,9 +1,10 @@
 # Backup expiry and erasure-safe managed recovery
 
-Prepared 2026-10-21. This change requires an additive AccountErasures migration
-and an erasure-aware runtime. Deployment/enabling results are recorded below only
-after verification. It does not finish the public privacy notice or certify a
-production launch.
+Deployed on 2026-10-21 as `677b91a0083cdfec6e5f2656a82c9594e49d07b0` after
+exact-candidate [CI run 39584072953](https://github.com/Odin2325/PlantCare/actions/runs/39584072953)
+passed all gates. The additive AccountErasures migration and restricted grants
+were applied on staging. The guarded 30-day policy is enabled. It does not finish
+the public privacy notice or certify a production launch.
 
 ## Thirty-day expiry
 
@@ -101,4 +102,26 @@ Schema downgrade and journal deletion are not recovery procedures.
 - Generated-account tests cover transactional markers, replayed older rows,
   pre-marker deletion via full current membership, other-account preservation,
   stale/missing/duplicate/wrong-source/disabled reconciliation and filtered access.
-- Real local SQL/application and final deployment results are appended when complete.
+- All 38 isolated SQL push/account/erasure checks passed. Full backend regression
+  and final targeted recovery cases passed; exact-candidate CI passed backend,
+  frontend, retention safety, SQL security/push/recovery and browser/PWA gates.
+  The initial parallel restart drill interrupted SQL test connections; the full
+  SQL suite was rerun separately and passed, without weakening assertions.
+- The final local full SQL/key/application drill passed fresh complete authority,
+  reconciliation before startup, restored session/history, worker/restart behavior
+  and generated SQL/key-payload cleanup.
+- Fresh encrypted pre-migration VPS backup and transferred bundle hashes passed.
+  Staging migration, marker-aware activation, runtime positive/negative access
+  probes and trusted public DNS/TLS/health passed. Real desktop frontend update
+  from e5d8131 preserved session/collection/calendar. Public Account export/axe/
+  safeguards passed; no existing public account was deleted for testing.
+- The pre-migration e5d8131 VPS snapshot restored in an isolated new-runtime stack.
+  Raw SQL/key checks, target migration, freshly exported current authority and
+  before-start reconciliation passed, followed by copied-account recovery/login,
+  history/worker/restart deduplication and failed-activation recovery/logout.
+- Enabled only after reviewing a 15-snapshot, zero-expiry plan. Existing local
+  and VPS scheduled tasks each subsequently returned 0 with configured retention;
+  the VPS task captured the new schema. Final preview: enabled, 17 snapshots,
+  zero expired. Both backup health reports and public service checks were clear.
+  No existing real backup was removed; destructive expiry/prune proof used only
+  the disposable encrypted fixture. Schedules and thresholds were unchanged.

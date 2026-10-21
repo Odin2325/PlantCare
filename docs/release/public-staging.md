@@ -1,6 +1,17 @@
 # Public staging deployment and verification
 
-Current runtime: `e5d8131872aac7998e25c6f5d060234b564fa85c` adds password-verified
+Current runtime: `677b91a0083cdfec6e5f2656a82c9594e49d07b0` adds transactional
+erasure markers and erasure-aware managed recovery. Exact CI, fresh encrypted
+backup, additive migration, restricted grants/activation and public health passed
+on 2026-10-21. The real e5d8131-to-677b91a desktop PWA upgrade preserved session
+and plant/calendar data. The pre-migration snapshot passed isolated new-runtime
+restore, current-authority reconciliation before startup and the application drill.
+Guarded 30-day expiry is enabled; both backup tasks/health passed, 17 snapshots
+remain and none expired. See [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
+for offline/current-authority limitations and exact scope. No public account was
+deleted for destructive testing; no production release was made.
+
+Previous runtime: `e5d8131872aac7998e25c6f5d060234b564fa85c` adds password-verified
 account export/deletion and real bearer-session revalidation. Exact-candidate CI,
 fresh encrypted backup, isolated recovery/rollback, controlled grants and pinned
 activation passed on 2026-10-21. Public HTTPS/health, actual old-to-new desktop PWA

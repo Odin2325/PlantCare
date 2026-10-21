@@ -100,7 +100,10 @@ and third-party distribution notices remain unfinished. No release tag
 or production cutover has been made.
 Subsequent account-data work adds password-verified export/deletion and the
 owner-authorized Gmail private contact; see [account-data.md](account-data.md).
-The 30-day backup policy is proposed and not enforced yet.
+Subsequent runtime 677b91a adds minimal markers and current-authority reconciliation
+before managed restore startup. Guarded 30-day expiry is enabled and both scheduled
+backup tasks/health passed. See [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
+for offline delays, independent-authority gaps and exact verification scope.
 
 - [ ] SQL Server migrations pass on both an empty database and a copy of the
   previous staging database. Data survives API/worker/database restarts.

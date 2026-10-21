@@ -38,6 +38,12 @@ release unless the related optional feature is disabled.
   final targeted recovery tests passed 8. Isolated SQL suite passed all 38 after
   running separately from the restart drill. Final deployment/enabling evidence
   is tracked in retention-and-erasure-recovery.md. Production gates remain open.
+- Final: exact-candidate CI 39584072953 passed and 677b91a activated with additive
+  migration/restricted grants. Actual desktop upgrade and public Account/health
+  passed. The pre-migration VPS snapshot passed new-runtime isolated recovery with
+  current authority/reconciliation before startup. Policy enabled from a zero-expiry
+  plan; both existing scheduled tasks returned 0, health clear, 17 snapshots retained.
+  No real existing snapshot or public account was deleted for testing.
 
 ### Private account data controls (2026-10-21)
 

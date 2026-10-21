@@ -1,5 +1,10 @@
 # Account export and deletion
 
+Current follow-up runtime: `677b91a0083cdfec6e5f2656a82c9594e49d07b0` adds durable
+markers and guarded recovery. Thirty-day encrypted-repository expiry is enabled;
+see [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md). The
+original account-data implementation and verification below remain tied to e5d8131.
+
 Deployed on 2026-10-21 as `e5d8131872aac7998e25c6f5d060234b564fa85c` at
 https://staging.plantacare.org. Exact-candidate
 [CI run 39575030789](https://github.com/Odin2325/PlantCare/actions/runs/39575030789)
@@ -68,22 +73,18 @@ Follow-up implementation: [retention-and-erasure-recovery.md](retention-and-eras
 adds minimal transactional markers, current-source membership reconciliation and
 guarded 30-day expiry. See its verification/enabling record. Offline storage and
 verification failures can delay cleanup, so the target is not a strict maximum.
-The earlier proposal below records the prior state, not the new enabling status.
 
-The owner selected account data until deletion, with encrypted backups for up to
-30 days, as the proposed policy. Active-service deletion is implemented, but
-snapshot expiry is not enabled and no existing backup was removed. Do not
-promise that all earlier copies disappear within 30 days yet.
+The owner selected account data until deletion and a 30-day backup target.
+Guarded expiry now runs after verified backups. Offline storage or failed safety
+checks can delay cleanup; do not promise that all earlier copies disappear within
+30 days. No existing real snapshot was expired at enabling time.
 
-Before broader launch, prepare a read-only expiry plan for both local/VPS backup
-sets and review the exact snapshots before enabling cleanup. Define how a private
-minimal erasure record survives restoring an older database and is reapplied
-before exposing the recovered service. Test that suppression without changing
-normal owner data, then implement/verify expiry. Until that exists, a restore must
-remain isolated and be reconciled against verified deletion requests before use.
-No production-ready automated erasure/suppression process is claimed here.
-Set separate log, support-request and provider retention; finish operator/legal
-basis/recipient disclosures in privacy-review.md. The current notice stays a draft.
+Managed application restore fetches a fresh complete current account/deletion
+authority outside the old snapshot, reconciles before startup and refuses missing
+authority. If the source/authority is lost, independent replication and verified
+request reconciliation are still needed before reopening. Set separate log,
+support-request, marker and provider retention criteria; finish operator/legal
+basis/recipient disclosures in privacy-review.md. The notice remains a draft.
 
 ## Deployment and verification
 

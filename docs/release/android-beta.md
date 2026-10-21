@@ -1,7 +1,10 @@
 # Physical Android beta
 
 Target: installed PlantCare at `https://staging.plantacare.org`.
-Current runtime: `e5d8131872aac7998e25c6f5d060234b564fa85c` (Account data controls).
+Current runtime: `677b91a0083cdfec6e5f2656a82c9594e49d07b0` (erasure markers/recovery).
+Its real desktop PWA upgrade from e5d8131 preserved session and plant/calendar data;
+public Account export/safeguards passed. These are desktop checks, not new physical
+Android acceptance. See retention-and-erasure-recovery.md.
 The real desktop PWA upgrade from `82de158` preserved session/plants/calendar;
 Account export and safeguards passed a public desktop smoke. The new controls
 have not been physically tested on Android; see account-data.md.

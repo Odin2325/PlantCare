@@ -23,7 +23,7 @@ notes and the remaining launch decisions. The [privacy review](docs/release/priv
 is a draft with unresolved operator disclosures, backup retention and restore handling;
 it is not a finished public privacy notice.
 See [account export/deletion](docs/release/account-data.md) for the new protected
-Account controls, published private contact and proposed retention policy.
+Account controls, published private contact and retention policy.
 See [retention and erasure-safe recovery](docs/release/retention-and-erasure-recovery.md)
 for guarded snapshot expiry, current account/deletion authority and the mandatory
 reconciliation step before starting a restored application.

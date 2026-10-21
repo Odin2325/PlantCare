@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
 Reviewed 2026-10-21. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `e5d8131872aac7998e25c6f5d060234b564fa85c`;
+this preparation. The staging runtime is `677b91a0083cdfec6e5f2656a82c9594e49d07b0`;
 subsequent documentation commits are not new application deployments.
 
 ## Documentation prepared
@@ -34,10 +34,11 @@ while the catalog is synthetic. See the known-limitations document.
 
 ## Before a release tag
 
-1. Complete the operator identity/privacy notice and implement backup expiry and
-   restore suppression. The owner selected Gmail for private requests and proposed
-   data-until-deletion/30-day-backup retention; Account export/deletion now has a
-   deployed staging candidate in [account-data.md](account-data.md).
+1. Complete operator identity/privacy disclosures and remaining log/provider/
+   support/marker retention criteria. Guarded encrypted-backup expiry and managed
+   erasure reconciliation are verified in [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md).
+   Independent current-authority replication and replacement-host acceptance are
+   still open; missing authority must not be bypassed during recovery.
 2. Replace demo catalog content with reviewed, attributed real species through
    the controlled import procedure. Thumbnails/growth images remain later work.
 3. Reconcile each acceptance gate with its recorded evidence, execute remaining

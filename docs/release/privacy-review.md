@@ -15,11 +15,11 @@ verification. Independent recovery authority replication, provider/log/support
 retention and the complete operator notice remain open. The proposal/history below
 must not be read as a hard 30-day guarantee or as a finished privacy notice.
 
-The owner accepted the proposed policy of account data kept until account
-deletion and backups retained up to 30 days. This is a proposal, not an enforced
-backup retention guarantee: no existing snapshots were deleted. Account deletion
-removes active data; backup expiry, post-restore suppression, log/provider/support
-retention and full operator disclosures remain unfinished. See
+The owner selected account data until deletion and a 30-day backup target. Guarded
+expiry is now enabled and managed recovery reconciles current authority before
+startup. Offline storage/failed checks can defer cleanup, so this is not a strict
+30-day maximum. Independent authority replication, marker/log/provider/support
+retention criteria and full operator disclosures remain unfinished. See
 [account-data.md](account-data.md) for the implementation and acceptance record.
 
 ## Verified implementation facts
