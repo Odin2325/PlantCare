@@ -13,7 +13,11 @@ subsequent documentation commits are not new application deployments.
 - [Known limitations](../known-limitations.md): actual beta/device/content and
   operations scope, separate from planned features.
 - [Privacy review](privacy-review.md): implementation facts and decisions/work
-  required before publishing a complete notice.
+  required before publishing a complete notice, with a concrete
+  [notice draft](../privacy-notice.draft.md),
+  [private-request procedure](privacy-requests.md) and
+  [provider checklist](provider-privacy-checklist.md). Operator name/city/country
+  are owner-approved; service address and provider settings remain open.
 - [LICENSE](../../LICENSE): owner chose rights reserved on 2026-10-21; no
   open-source grant. Third-party license/notice review remains part of packaging.
 

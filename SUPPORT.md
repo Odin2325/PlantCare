@@ -30,5 +30,8 @@ on 2026-10-21. Do not send a password, reset link or private calendar URL.
 Plant archiving preserves data; it does not delete an account or erase its data.
 The new Account page provides password-verified export and deletion from the
 active service. See [account-data handling](docs/release/account-data.md) for
-verification and deployment status; backup expiry and restore suppression remain
-launch work.
+verification and deployment status. Guarded backup expiry and managed restore
+reconciliation are implemented, with availability limits described there. The
+[privacy notice draft](docs/privacy-notice.draft.md) and
+[private-request procedure](docs/release/privacy-requests.md) track the remaining
+operator/provider review before wider launch.

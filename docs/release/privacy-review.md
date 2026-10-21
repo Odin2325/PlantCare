@@ -6,6 +6,15 @@ or enable wider signups on its basis. On 2026-10-21 the owner authorized publish
 [nico.arevalo2325@gmail.com](mailto:nico.arevalo2325@gmail.com) for private requests.
 GitHub Issues remains the general-support channel.
 
+Owner clarification on 2026-10-21: approved public operator identity is Nicolas
+Arevalo Hoelscher, Munich, Germany. This is currently a personal learning project;
+advertising may be introduced in future. The owner also approved a one-month
+Brevo log policy with no previews of future messages; provider application is
+pending. The concrete [notice draft](../privacy-notice.draft.md),
+[private-request procedure](privacy-requests.md) and
+[provider/publication checklist](provider-privacy-checklist.md) record the work
+and unresolved settings. No runtime or provider setting changed in this review.
+
 Follow-up: [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
 records the new guarded expiry and reconciliation implementation/enabling status.
 Deletion retains a minimal ID/time marker to prevent restoration; transient private
@@ -32,7 +41,8 @@ retention criteria and full operator disclosures remain unfinished. See
 | Calendar subscription hashes and shares between accounts | Optional private feeds and recipient access. The full generated feed URL is shown once; a hash is retained. Recipients can see calendar entries; external clients may retain copies. |
 | Authentication and antiforgery cookies | Essential account session and request protection. Authentication has a configured seven-day sliding expiry; do not describe it as guaranteed deletion after seven days. |
 | Calendar view and push subscription identifier in browser local storage; service worker/cache | Remember view/device settings and deliver the installed-app shell/update/offline behavior. Browser storage is separate from server account data. |
-| Encrypted backup copies | Recovery of application data and keys. Archiving a plant does not erase it; backups are not currently subject to automated snapshot deletion. |
+| Encrypted backup copies | Recovery of application data and keys. Guarded expiry targets 30 days after verified capture; unavailable storage or safety failures may delay cleanup. Archiving a plant does not erase it. |
+| Minimal erased-account ID/time markers and temporary current-account authority | Prevent deleted accounts from returning after managed recovery. Markers currently have no automatic expiry; temporary authority is restricted and cleaned by managed recovery. |
 
 The source reviewed does not add an analytics SDK or advertising tracker. This
 is not a claim about all hosting, email or browser-provider telemetry. Review
@@ -48,21 +58,22 @@ must be reviewed separately from application transactional email.
 
 ## Required owner decisions and launch work
 
-- Identify the service operator/controller for the final notice. The owner selected
-  the published Gmail address for confidential requests and GitHub Issues for
-  general support; monitor both through the actual operator process.
+- Operator name/city/country and private email are approved above. Complete any
+  required service address/legal notice; monitor private email and GitHub Issues
+  through the actual operator process.
 - Define each processing purpose and its applicable legal basis. Review provider
   arrangements, recipients and international transfers for the deployed service.
 - Choose actual retention periods/criteria for accounts, history, notifications,
   support requests, logs and backups; implement and verify them before promising
   deletion dates. No retention deletion is authorized by this document.
-- Establish and test identity verification, access/export, correction and erasure
-  handling. Include sessions, plants/history, notifications, shares/feed access,
-  push subscriptions and any external integrations; inspect the actual schema
-  before implementation. Disabling sign-in or archiving is not account erasure.
-- Define how backup expiry and restored-data suppression handle an accepted
-  erasure request. Do not promise selective removal from immutable snapshots
-  without a tested procedure.
+- Use the tested password-verified Account export/deletion and the written
+  private-request procedure. Exercise the wider human workflow for access,
+  correction, restriction/objection, support records and provider-held copies;
+  automated Account tests do not accept that whole process.
+- Keep the verified guarded expiry/current-authority recovery safeguards. Close
+  independent authority replication, marker retention criteria and separately
+  retained recovery-artifact handling. Do not promise selective removal from
+  immutable snapshots or a guaranteed 30-day maximum.
 - Describe relevant rights, how to request them, and the complaint route; verify
   which authority and contact details apply to the operator.
 - Put the completed notice and contact where users can find them before signup,

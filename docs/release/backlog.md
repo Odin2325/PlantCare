@@ -25,6 +25,20 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Operator and privacy publication preparation (2026-10-21)
+
+- Owner approved Nicolas Arevalo Hoelscher, Munich, Germany as public operator
+  identity, alongside the already approved Gmail contact. Current personal
+  learning project; future advertising requires a separate review before enabling.
+- Prepared an implementation-specific notice draft, private-request procedure
+  and provider/publication checklist. Corrected stale backup-expiry wording.
+- Owner approved Brevo one-month logs/no future previews, including old-log
+  expiry; dashboard application remains pending. Checked official provider and
+  EU/German sources. Read-only VPS inspection found json-file logs without
+  configured rotation; no raw logs, secrets or environment content were read.
+- Documentation only. Provider settings, service address/legal notice, retention
+  criteria and final notice publication remain open; no runtime deployment.
+
 ### Guarded expiry and account-erasure reconciliation (2026-10-21)
 
 - Prepared a guarded 30-day policy, exact-state preview/enabling, durable prune
