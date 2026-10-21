@@ -239,6 +239,23 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthentication();
+// Identity bearer tickets otherwise outlive deleted users/security-stamp changes.
+// Revalidate real bearer credentials before authorization, as cookies already do.
+app.Use(async (context, next) =>
+{
+    if (context.Request.Headers.Authorization.ToString().StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+    {
+        var bearer = await Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions
+            .AuthenticateAsync(context, IdentityConstants.BearerScheme);
+        if (bearer.Succeeded && bearer.Principal is not null)
+        {
+            var manager = context.RequestServices.GetRequiredService<SignInManager<ApplicationUser>>();
+            if (await manager.ValidateSecurityStampAsync(bearer.Principal) is null)
+                context.User = new System.Security.Claims.ClaimsPrincipal(new System.Security.Claims.ClaimsIdentity());
+        }
+    }
+    await next(context);
+});
 app.UseAuthorization();
 app.UseAntiforgery();
 

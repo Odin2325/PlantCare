@@ -25,6 +25,18 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Private account data controls (2026-10-21)
+
+- Added Account export and explicit deletion with current-password verification,
+  throttling and antiforgery. Generated-account tests cover secret exclusion,
+  cross-account isolation, cascades, provider blocking, transaction failure/rollback
+  and cookie/bearer/refresh invalidation. No real owner account was deleted.
+- Owner authorized publishing Gmail for confidential requests and accepted the
+  proposed data-until-deletion / 30-day backup policy. Existing snapshots remain
+  untouched; backup expiry/restore suppression and the full notice are still open.
+- See account-data.md for exact verification and deployment status. No launch tag
+  or production acceptance is implied by implementing these controls.
+
 ### User documentation and distribution review (2026-10-21)
 
 - Added the user guide, GitHub Issues general-support instructions, known

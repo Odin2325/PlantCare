@@ -165,6 +165,18 @@ export class AuthService {
       );
   }
 
+  clearDeletedAccount(): void {
+    this.currentUserState.set(null);
+    localStorage.removeItem('plantcare.pushSubscriptionId');
+    localStorage.removeItem('plantcare.calendarView');
+    if ('serviceWorker' in navigator) {
+      void navigator.serviceWorker.getRegistration()
+        .then(registration => registration?.pushManager.getSubscription())
+        .then(subscription => subscription?.unsubscribe())
+        .catch(() => undefined);
+    }
+  }
+
   loadCurrentUser(): Observable<CurrentUser> {
     return this.httpClient
       .get<CurrentUser>('/api/account/me')

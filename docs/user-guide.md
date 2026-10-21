@@ -83,8 +83,20 @@ calendar-client import/revocation acceptance remains a release check.
 Google and Microsoft account synchronization are disabled in this staging setup
 and are not part of the current launch commitment.
 
+## Your account and data
+
+The new Account page offers Download my data and Permanently delete my account.
+Enter your current password for either action; deletion additionally requires
+typing DELETE. Export first if you want a private copy. A successful deletion
+signs you out and removes active account/plant/care records. Connected external
+calendars must be disconnected first. Existing encrypted backups, delivered
+messages and copies held by calendar clients are separate; the proposed 30-day
+backup limit is not yet enforced. See [deployment status](release/account-data.md).
+
 ## Getting help
 
 Use [GitHub Issues for general support](../SUPPORT.md). Never post a password,
 reset/confirmation link or calendar-feed URL there. See
 [known limitations](known-limitations.md) for the supported beta scope.
+For private account/privacy requests, email
+[nico.arevalo2325@gmail.com](mailto:nico.arevalo2325@gmail.com).

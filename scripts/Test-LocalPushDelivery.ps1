@@ -13,9 +13,10 @@ try {
     if (@($passwordLine).Count -ne 1) { throw 'Expected one SQL password in the private local Docker configuration.' }
     $env:PLANTCARE_PUSH_TEST_SQL_PASSWORD = $passwordLine.Substring('SQL_PASSWORD='.Length)
     if ([string]::IsNullOrWhiteSpace($env:PLANTCARE_PUSH_TEST_SQL_PASSWORD)) { throw 'Local Docker SQL password is missing.' }
-    dotnet test PlantCare.Api.IntegrationTests/PlantCare.Api.IntegrationTests.csproj --configuration Release --filter FullyQualifiedName~PushDeliveryTests --verbosity minimal -p:UseSharedCompilation=false -m:1
+    dotnet test PlantCare.Api.IntegrationTests/PlantCare.Api.IntegrationTests.csproj --configuration Release --filter 'FullyQualifiedName~PushDeliveryTests|FullyQualifiedName~AccountDataTests' --verbosity minimal -p:UseSharedCompilation=false -m:1
     if ($LASTEXITCODE -ne 0) { throw 'SQL Server push delivery checks failed.' }
     Write-Output 'PASS: encrypted push transport, per-device persistence, bounded retries, expiry and queue progress on isolated SQL Server databases.'
+    Write-Output 'PASS: private account export and transactional deletion, confirmation/password/antiforgery checks, owner isolation and session revocation on isolated SQL Server databases.'
 }
 finally {
     $env:PLANTCARE_PUSH_TEST_SQL_PASSWORD = $previousPassword

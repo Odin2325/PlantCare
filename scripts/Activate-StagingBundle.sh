@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Fixed synthetic staging host. No schema migrations, secret changes or pruning.
+# Fixed synthetic staging host. Refresh controlled runtime grants; no schema
+# migrations, secret changes or pruning.
 set -euo pipefail
 test "$(id -u)" = 0
 next=$1
@@ -38,6 +39,7 @@ rollback() {
     exit "$code"
 }
 trap rollback EXIT
+dc run -T --interactive=false --rm --no-deps --pull never migrate --provision-runtime-users >/dev/null 2>&1
 dc up --no-build --pull never --no-deps --force-recreate -d --wait --wait-timeout 180 api worker >/dev/null 2>&1
 python3 - <<'PY'
 import json,subprocess

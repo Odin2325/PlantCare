@@ -59,6 +59,8 @@
       {{ authService.currentUser()?.email }}
     </span>
 
+    <a routerLink="/account" routerLinkActive="active" ariaCurrentWhenActive="page">Account</a>
+
     <button type="button"
             [disabled]="isLoggingOut()"
             (click)="logout()">

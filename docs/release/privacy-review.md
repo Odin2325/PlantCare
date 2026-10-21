@@ -2,8 +2,16 @@
 
 Prepared 2026-10-21 from the current implementation. This is an operator review
 document, not a finished privacy notice. Do not present it as an approved policy
-or enable wider signups on its basis. No personal operator contact is published
-by this document.
+or enable wider signups on its basis. On 2026-10-21 the owner authorized publishing
+[nico.arevalo2325@gmail.com](mailto:nico.arevalo2325@gmail.com) for private requests.
+GitHub Issues remains the general-support channel.
+
+The owner accepted the proposed policy of account data kept until account
+deletion and backups retained up to 30 days. This is a proposal, not an enforced
+backup retention guarantee: no existing snapshots were deleted. Account deletion
+removes active data; backup expiry, post-restore suppression, log/provider/support
+retention and full operator disclosures remain unfinished. See
+[account-data.md](account-data.md) for the implementation and acceptance record.
 
 ## Verified implementation facts
 
@@ -31,8 +39,9 @@ must be reviewed separately from application transactional email.
 
 ## Required owner decisions and launch work
 
-- Identify the service operator/controller and publish a monitored confidential
-  support/privacy contact. GitHub Issues was selected for general support only.
+- Identify the service operator/controller for the final notice. The owner selected
+  the published Gmail address for confidential requests and GitHub Issues for
+  general support; monitor both through the actual operator process.
 - Define each processing purpose and its applicable legal basis. Review provider
   arrangements, recipients and international transfers for the deployed service.
 - Choose actual retention periods/criteria for accounts, history, notifications,

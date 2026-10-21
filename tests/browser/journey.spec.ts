@@ -210,7 +210,14 @@ test('register, confirm, care for a plant, recover password and log out', async 
       await otherWatering.getByRole('button', { name: 'Pause', exact: true }).click();
       const result = await saved;
       expect(result.status()).toBe(200);
-      const schedule = await result.json();
+      // A service-worker-owned response body may be unavailable through CDP.
+      // Verify the committed schedule with an independent authenticated API read.
+      const persisted = await travelling.request.get('/api/my-plants');
+      expect(persisted.status()).toBe(200);
+      const savedPlants = await persisted.json();
+      const schedule = savedPlants.find((p: { nickname: string }) => p.nickname === nickname)
+        ?.careSchedules.find((s: { actionType: string }) => s.actionType === 'Watering');
+      expect(Boolean(schedule), 'Persisted watering schedule exists').toBe(true);
       expect(schedule.timeZoneId).toBe('Europe/Berlin');
       expect(schedule.isEnabled).toBe(false);
       await expect(otherWatering.getByRole('button', { name: 'Resume', exact: true })).toBeVisible();
@@ -269,6 +276,40 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
     await page.goto('/reset-password');
     await expect(page.getByText('This reset link is incomplete.', { exact: false })).toBeVisible();
+  });
+  await step('Private export and explicit account deletion', page, async () => {
+    await page.goto('/login');
+    await login(page, email, newPassword);
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Account', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Your account and data', exact: true })).toBeVisible();
+    await auditAccessibility(page, 'Account data controls');
+    const remove = page.getByRole('button', { name: 'Permanently delete my account', exact: true });
+    await expect(remove).toBeDisabled();
+    await page.getByLabel('Current password', { exact: true }).fill(newPassword);
+    await page.getByLabel('Type DELETE to confirm', { exact: true }).fill('delete');
+    await expect(remove).toBeDisabled();
+    const downloadReady = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'Download my data', exact: true }).click();
+    const download = await downloadReady;
+    expect(download.suggestedFilename()).toBe('plantcare-account.json');
+    const stream = await download.createReadStream();
+    if (!stream) throw new Error('Account export stream missing.');
+    const chunks: Buffer[] = []; for await (const chunk of stream) chunks.push(Buffer.from(chunk));
+    const data = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+    expect(data.account.email === email, 'Export belongs to the signed-in test account').toBe(true);
+    expect(data.plants.some((p: { nickname: string; isActive: boolean }) => p.nickname === nickname && !p.isActive), 'Export includes archived fixture').toBe(true);
+    expect(data.history.length).toBeGreaterThan(0);
+    expect('passwordHash' in data.account).toBe(false);
+    await download.delete();
+    // Keep normal authentication throttling; export/delete share the same policy.
+    await page.waitForTimeout(60_000);
+    await page.getByLabel('Current password', { exact: true }).fill(newPassword);
+    await page.getByLabel('Type DELETE to confirm', { exact: true }).fill('DELETE');
+    const deleted = page.waitForResponse(r => new URL(r.url()).pathname === '/api/account/delete' && r.request().method() === 'POST');
+    await remove.click(); expect((await deleted).status()).toBe(204);
+    await expect(page.getByText('Your account was deleted from the active service. You are signed out.', { exact: true })).toBeVisible();
+    await page.goto('/account');
+    await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
   });
   expect(pageErrors, 'Uncaught browser exceptions').toEqual([]);
 });

@@ -20,6 +20,10 @@
     </p>
     }
 
+    @if (accountDeleted) {
+    <p class="form-success" role="status">Your account was deleted from the active service. You are signed out.</p>
+    }
+
     <form [formGroup]="form"
           (ngSubmit)="submit()">
 

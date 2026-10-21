@@ -9,7 +9,7 @@ subsequent documentation commits are not new application deployments.
 - [User guide](../user-guide.md): accounts, first plant, daily care, nickname
   calendar links, notifications, Android install/update, offline and sharing.
 - [Support](../../SUPPORT.md): GitHub Issues for general support, safe report
-  contents and the unresolved confidential contact.
+  contents and the owner-authorized Gmail address for private requests.
 - [Known limitations](../known-limitations.md): actual beta/device/content and
   operations scope, separate from planned features.
 - [Privacy review](privacy-review.md): implementation facts and decisions/work
@@ -34,8 +34,10 @@ while the catalog is synthetic. See the known-limitations document.
 
 ## Before a release tag
 
-1. Resolve the confidential contact/operator identity, complete the privacy
-   notice, choose/implement retention and test account-data request handling.
+1. Complete the operator identity/privacy notice and implement backup expiry and
+   restore suppression. The owner selected Gmail for private requests and proposed
+   data-until-deletion/30-day-backup retention; Account export/deletion now has a
+   separately tracked candidate in [account-data.md](account-data.md).
 2. Replace demo catalog content with reviewed, attributed real species through
    the controlled import procedure. Thumbnails/growth images remain later work.
 3. Reconcile each acceptance gate with its recorded evidence, execute remaining

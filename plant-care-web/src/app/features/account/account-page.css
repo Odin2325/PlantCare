@@ -1,0 +1,9 @@
+.account-page { max-width: 48rem; margin: 2rem auto; padding: 0 1rem; overflow-wrap: anywhere; }
+section { border-top: 1px solid #b8c9bd; margin-top: 1.5rem; padding-top: .75rem; }
+label { display: block; font-weight: 600; margin: 1rem 0 .4rem; }
+input { box-sizing: border-box; width: 100%; max-width: 26rem; padding: .65rem; border: 1px solid #5c7063; border-radius: .3rem; }
+button { display: block; margin-top: 1rem; padding: .7rem 1rem; border: 1px solid #245c36; border-radius: .3rem; background: #245c36; color: white; cursor: pointer; }
+button.danger { background: #8b2020; border-color: #8b2020; }
+button:disabled { opacity: .6; cursor: default; }
+a { color: #245c36; }
+:is(a, button, input):focus-visible { outline: 3px solid #245c36; outline-offset: 3px; }

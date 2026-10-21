@@ -1,0 +1,176 @@
+using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text.Json;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PlantCare.Api.IntegrationTests.Infrastructure;
+using PlantCare.Domain.Entities;
+using PlantCare.Domain.Enums;
+using PlantCare.Infrastructure.Identity;
+using PlantCare.Infrastructure.Persistence;
+
+namespace PlantCare.Api.IntegrationTests;
+
+public sealed class AccountDataTests : IAsyncLifetime
+{
+    private const string Password = "SyntheticPassword9!";
+    private readonly PlantCareApiFactory factory = new(useRealAuthentication: true,
+        pushTestSqlPassword: Environment.GetEnvironmentVariable("PLANTCARE_PUSH_TEST_SQL_PASSWORD"));
+    public Task InitializeAsync() => factory.ResetDatabaseAsync();
+    public async Task DisposeAsync()
+    {
+        try { await factory.DeletePushTestDatabaseAsync(); }
+        finally { await factory.DisposeAsync(); }
+    }
+    private HttpClient Client() => factory.CreateClient(new WebApplicationFactoryClientOptions
+        { BaseAddress = new Uri("https://localhost"), AllowAutoRedirect = false });
+    private async Task<ApplicationUser> UserAsync()
+    {
+        await using var scope = factory.Services.CreateAsyncScope();
+        var manager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var email = $"account-{Guid.NewGuid():N}@example.test";
+        var user = new ApplicationUser { Email = email, UserName = email, EmailConfirmed = true };
+        Assert.True((await manager.CreateAsync(user, Password)).Succeeded);
+        return user;
+    }
+    private async Task Login(HttpClient client, ApplicationUser user)
+    {
+        await client.AddAntiforgeryTokenAsync();
+        (await client.PostAsJsonAsync("/api/auth/login?useCookies=true", new { email = user.Email, password = Password })).EnsureSuccessStatusCode();
+        await client.AddAntiforgeryTokenAsync();
+    }
+    private async Task Seed(ApplicationUser a, ApplicationUser b)
+    {
+        var now = DateTimeOffset.UtcNow.AddDays(-2);
+        var species = PlantSpecies.Create("Synthetic account species", null, "Test", SunlightRequirement.BrightIndirectLight,
+            "Test", 1, "Test", null, null, "Test", null, null, null, false);
+        var plant = UserPlant.Create(a.Id, species.Id, "Private A plant", "Test room", null, "Private A notes", now);
+        var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, now);
+        plant.ReplaceTags(["Synthetic tag"]);
+        plant.Archive();
+        var notification = Notification.Create(a.Id, schedule.Id, now, now);
+        var device = PushSubscription.Create(a.Id, "https://push.example.test/private-endpoint", "private-key", "private-auth", now);
+        await factory.SeedAsync(db =>
+        {
+            db.PlantSpecies.Add(species); db.UserPlants.Add(plant);
+            db.UserPlants.Add(UserPlant.Create(b.Id, species.Id, "Private B plant", null, null, "Private B notes", now));
+            db.CareEvents.Add(CareEvent.Create(schedule.Id, now, now));
+            db.Notifications.Add(notification); db.PushSubscriptions.Add(device);
+            db.PushDeliveries.Add(PushDelivery.Create(notification.Id, device.Id, now));
+            db.NotificationPreferences.Add(NotificationPreference.CreateDefault(a.Id));
+            db.CalendarSubscriptions.Add(CalendarSubscription.Create(a.Id, new string('a', 64), now));
+            db.CalendarShares.AddRange(CalendarShare.Create(a.Id, b.Id, now), CalendarShare.Create(b.Id, a.Id, now));
+            return Task.CompletedTask;
+        });
+    }
+
+    [Fact]
+    public async Task AnonymousRequestsCannotExportOrDelete()
+    {
+        using var client = Client();
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await client.PostAsJsonAsync("/api/account/export", new { password = Password })).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "DELETE" })).StatusCode);
+    }
+
+    [Fact]
+    public async Task ExportIsPrivatePasswordProtectedAndExcludesCredentials()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        using var client = Client(); await Login(client, a);
+        using var wrong = await client.PostAsJsonAsync("/api/account/export", new { password = "wrong" });
+        Assert.Equal(HttpStatusCode.BadRequest, wrong.StatusCode);
+        using var response = await client.PostAsJsonAsync("/api/account/export", new { password = Password, userId = b.Id });
+        response.EnsureSuccessStatusCode();
+        Assert.True(response.Headers.CacheControl?.NoStore);
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+        Assert.Contains("attachment", response.Content.Headers.ContentDisposition!.ToString());
+        var text = await response.Content.ReadAsStringAsync();
+        using var json = JsonDocument.Parse(text);
+        Assert.Equal(a.Email, json.RootElement.GetProperty("account").GetProperty("email").GetString());
+        Assert.Single(json.RootElement.GetProperty("plants").EnumerateArray());
+        Assert.Single(json.RootElement.GetProperty("history").EnumerateArray());
+        Assert.Single(json.RootElement.GetProperty("tags").EnumerateArray());
+        Assert.False(json.RootElement.GetProperty("plants")[0].GetProperty("isActive").GetBoolean());
+        Assert.Contains("Private A notes", text);
+        foreach (var secret in new[] { "Private B notes", "Private B plant", "private-endpoint", "private-key", "private-auth", new string('a',64), "passwordHash", "securityStamp", Password })
+            Assert.DoesNotContain(secret, text);
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsJsonAsync("/api/account/export", new { password = Password })).StatusCode);
+    }
+
+    [Fact]
+    public async Task DeleteRequiresConfirmationAndPasswordThenRemovesOnlyOwnerAndRevokesSessions()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        using var client = Client(); using var oldBrowser = Client(); using var bearer = Client();
+        await Login(client, a); await Login(oldBrowser, a);
+        await bearer.AddAntiforgeryTokenAsync();
+        using var login = await bearer.PostAsJsonAsync("/api/auth/login", new { email = a.Email, password = Password });
+        login.EnsureSuccessStatusCode();
+        using var tokens = JsonDocument.Parse(await login.Content.ReadAsStringAsync());
+        bearer.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.RootElement.GetProperty("accessToken").GetString());
+        bearer.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "no" })).StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsJsonAsync("/api/account/delete", new { password = "wrong", confirmation = "DELETE" })).StatusCode);
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "DELETE" })).StatusCode);
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.NoContent, (await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "DELETE", userId = b.Id })).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/account/me")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await oldBrowser.GetAsync("/api/account/me")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await bearer.GetAsync("/api/my-plants")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await bearer.PostAsJsonAsync("/api/auth/refresh", new { refreshToken = tokens.RootElement.GetProperty("refreshToken").GetString() })).StatusCode);
+        using var fresh = Client(); await fresh.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await fresh.PostAsJsonAsync("/api/auth/login?useCookies=true", new { email = a.Email, password = Password })).StatusCode);
+        await using var scope = factory.Services.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+        Assert.False(await db.Users.AnyAsync(u => u.Id == a.Id)); Assert.True(await db.Users.AnyAsync(u => u.Id == b.Id));
+        Assert.Single(await db.UserPlants.ToListAsync()); Assert.Single(await db.PlantSpecies.ToListAsync());
+        Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.CareEvents.ToListAsync());
+        Assert.Empty(await db.Notifications.ToListAsync()); Assert.Empty(await db.PushDeliveries.ToListAsync());
+        Assert.Empty(await db.CalendarShares.ToListAsync()); Assert.Empty(await db.CalendarSubscriptions.ToListAsync());
+        Assert.Empty(await db.PushSubscriptions.ToListAsync()); Assert.Empty(await db.NotificationPreferences.ToListAsync());
+    }
+
+    [Fact]
+    public async Task FailureDuringDeletionRollsBackSharesAndAllAccountData()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        await using (var scope = factory.Services.CreateAsyncScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+            var sql = db.Database.IsSqlServer()
+                ? "CREATE TRIGGER FailSyntheticAccountDelete ON dbo.AspNetUsers AFTER DELETE AS BEGIN THROW 51042, 'Synthetic failure', 1; END;"
+                : "CREATE TRIGGER FailSyntheticAccountDelete BEFORE DELETE ON AspNetUsers BEGIN SELECT RAISE(ABORT, 'Synthetic failure'); END;";
+            await db.Database.ExecuteSqlRawAsync(sql);
+        }
+        using var client = Client(); await Login(client, a);
+        Assert.Equal(HttpStatusCode.InternalServerError, (await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "DELETE" })).StatusCode);
+        await using var checkScope = factory.Services.CreateAsyncScope();
+        var check = checkScope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+        Assert.Equal(2, await check.Users.CountAsync()); Assert.Equal(2, await check.CalendarShares.CountAsync());
+        Assert.Single(await check.Notifications.ToListAsync()); Assert.Single(await check.PushDeliveries.ToListAsync());
+        Assert.Single(await check.CareEvents.ToListAsync()); Assert.Equal(2, await check.UserPlants.CountAsync());
+    }
+
+    [Fact]
+    public async Task ConnectedCalendarBlocksDeletionWithoutPartialChanges()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        await factory.SeedAsync(db => { db.ExternalCalendarConnections.Add(ExternalCalendarConnection.CreateGoogle(a.Id, a.Email!, "secret-access", "secret-refresh", DateTimeOffset.UtcNow.AddHours(1), DateTimeOffset.UtcNow)); return Task.CompletedTask; });
+        using var client = Client(); await Login(client, a);
+        using var response = await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "DELETE" });
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+        await using var scope = factory.Services.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+        Assert.Equal(2, await db.CalendarShares.CountAsync()); Assert.Equal(2, await db.Users.CountAsync());
+        Assert.Equal(2, await db.UserPlants.CountAsync());
+        using var export = await client.PostAsJsonAsync("/api/account/export", new { password = Password });
+        var text = await export.Content.ReadAsStringAsync();
+        Assert.Contains("Google", text); Assert.DoesNotContain("secret-access", text); Assert.DoesNotContain("secret-refresh", text);
+    }
+}

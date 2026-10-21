@@ -5,6 +5,10 @@ import { guestGuard } from './core/auth/guards/guest.guard';
 
 export const routes: Routes = [
   {
+    path: 'account', canActivate: [authGuard],
+    loadComponent: () => import('./features/account/account-page').then(c => c.AccountPage),
+  },
+  {
     path: 'plants',
     loadComponent: () =>
       import(

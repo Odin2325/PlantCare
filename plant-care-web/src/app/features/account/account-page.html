@@ -1,0 +1,31 @@
+<main id="main-content" tabindex="-1" class="account-page">
+  <h1>Your account and data</h1>
+  <p>Export a copy before deletion if you want to keep your records. Both actions require your current password.</p>
+  <p>Private support and privacy requests: <a href="mailto:nico.arevalo2325@gmail.com">nico.arevalo2325@gmail.com</a>.
+    Do not send passwords, reset links or private calendar URLs.</p>
+  <label for="current-password">Current password</label>
+  <input id="current-password" type="password" autocomplete="current-password" maxlength="1024"
+    [(ngModel)]="password" [disabled]="busy()" required>
+  <section aria-labelledby="export-heading">
+    <h2 id="export-heading">Export your data</h2>
+    <p>Download JSON containing your account profile, plants including archived plants, tags, care schedules/history,
+      notification preferences and calendar/device metadata. Passwords, tokens and device encryption keys are excluded.
+      This is a data copy, not an automatic restore file.</p>
+    <button type="button" [disabled]="busy() || !password" (click)="exportData()">Download my data</button>
+  </section>
+  <section aria-labelledby="delete-heading">
+    <h2 id="delete-heading">Permanently delete your account</h2>
+    <p>Deletion removes your account and its plants, care history, notifications, device subscriptions and calendar access
+      from the active service. You will be signed out. This action cannot be undone in the app.</p>
+    <p>Existing encrypted backups may still contain earlier data. Backup expiry and suppression after a restore are still
+      being prepared; the proposed 30-day backup limit is not yet enforced. External calendar copies, downloaded exports
+      and messages already delivered are not erased by this action. A reminder already in delivery may still arrive.</p>
+    <p>If an external calendar is connected, <a routerLink="/calendar">disconnect it on Calendar</a> first.
+      Archiving a plant is different from account deletion and preserves its records.</p>
+    <label for="delete-confirmation">Type DELETE to confirm</label>
+    <input id="delete-confirmation" autocomplete="off" [(ngModel)]="confirmation" [disabled]="busy()">
+    <button type="button" class="danger" [disabled]="busy() || !password || confirmation !== 'DELETE'"
+      (click)="deleteAccount()">Permanently delete my account</button>
+  </section>
+  @if (message()) { <p [attr.role]="failed() ? 'alert' : 'status'">{{ message() }}</p> }
+</main>

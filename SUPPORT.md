@@ -22,9 +22,13 @@ There is no guaranteed response time for this learning project.
 ## Account, privacy and security requests
 
 Do not post private account information, data-access/deletion requests, or
-exploitable security details in public issues. A confidential contact channel is
-not yet published. Establishing that channel and a tested account-data handling
-procedure is a requirement before opening the service to a wider audience.
+exploitable security details in public issues. Email
+[nico.arevalo2325@gmail.com](mailto:nico.arevalo2325@gmail.com) for private support,
+privacy or security requests. The owner authorized publication of this address
+on 2026-10-21. Do not send a password, reset link or private calendar URL.
 
 Plant archiving preserves data; it does not delete an account or erase its data.
-There is currently no self-service account deletion or account-data export.
+The new Account page provides password-verified export and deletion from the
+active service. See [account-data handling](docs/release/account-data.md) for
+verification and deployment status; backup expiry and restore suppression remain
+launch work.

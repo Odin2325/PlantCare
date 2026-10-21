@@ -47,6 +47,8 @@ export class LoginPage {
     this.route.snapshot.queryParamMap.get('passwordReset') ===
     'true';
 
+  readonly accountDeleted = this.route.snapshot.queryParamMap.get('accountDeleted') === 'true';
+
   readonly form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
