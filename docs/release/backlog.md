@@ -25,6 +25,21 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Bounded container logging and Brevo confirmation (2026-10-21)
+
+- Owner confirmed saving the approved Brevo one-month transactional-log and no-new-
+  preview settings; recorded as owner-reported. Existing previews and provider
+  tracking/actual expiry remain separate verification work.
+- Added json-file 10m/3-file defaults for all Compose services and a guarded
+  logging-only maintenance path for the existing pinned staging bundle. Verified
+  resolved config equivalence beyond logging, current image IDs and health before
+  application. Fresh encrypted pre-maintenance VPS backup passed.
+- Applied on staging without changing the application SHA or schema; all four
+  live log configurations, readiness/operations, runtime database permissions and
+  public DNS/TLS/routing checks passed. No fixed maximum log age is claimed.
+- See container-logging.md. Final notice, service address/legal notice, provider
+  tracking and remaining retention criteria continue to block wider launch.
+
 ### Operator and privacy publication preparation (2026-10-21)
 
 - Owner approved Nicolas Arevalo Hoelscher, Munich, Germany as public operator

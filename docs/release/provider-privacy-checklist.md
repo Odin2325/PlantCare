@@ -39,12 +39,13 @@ These documents describe capabilities/defaults, not this account's current state
 
 ## Hosting and other recipients
 
-- Read-only staging inspection found all four running API/worker/proxy/database
-  containers use Docker `json-file` with an empty log-options object. No container
-  rotation is configured. Compose also defines no rotation. Do not claim a fixed
-  log expiry. Plan bounded rotation and separately assess time-based expiry,
-  host/security logs, database internal logs, raw recovery artifacts and copied
-  diagnostic records; size rotation does not establish a maximum age.
+- Initial read-only staging inspection found all four running containers using
+  `json-file` with empty options. The subsequent
+  [logging maintenance](container-logging.md) applied and verified 10m/3-file
+  rotation on all four; Compose defaults now cover operations services too.
+  Separately assess time-based expiry, host/security logs, database internal logs,
+  raw recovery artifacts and copied diagnostics. Size rotation does not establish
+  a maximum age; do not claim a fixed log expiry.
 - Caddy's checked-in configuration does not enable request access logging; this
   does not rule out error, host or upstream records. Raw logs were not read.
 - Verify OVHcloud's contracted entity/DPA and actual UK location/transfer position.

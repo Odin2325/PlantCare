@@ -13,7 +13,9 @@ Brevo log policy with no previews of future messages, then confirmed saving thes
 settings on 2026-10-21 (owner-reported, not independently verified). The concrete [notice draft](../privacy-notice.draft.md),
 [private-request procedure](privacy-requests.md) and
 [provider/publication checklist](provider-privacy-checklist.md) record the work
-and unresolved settings. No runtime or provider setting changed in this review.
+and unresolved settings. The original document review made no runtime/provider
+change. Subsequent [container logging maintenance](container-logging.md) applied
+size-based rotation; fixed maximum log age and other retention criteria remain open.
 
 Follow-up: [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
 records the new guarded expiry and reconciliation implementation/enabling status.

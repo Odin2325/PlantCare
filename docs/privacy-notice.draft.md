@@ -100,6 +100,8 @@ existing logs; disabling previews does not remove old previews. Provider deletio
 is asynchronous. Actual expiry and tracking behavior remain to be verified.
 Application/container logs, support correspondence and erasure markers do not
 yet have verified automatic time-based expiry.
+Container console logs have size-based rotation (three 10 MB files per container),
+which limits disk use but does not establish a maximum age.
 Resolve their retention criteria in the operator review before publication.
 
 ## Your requests and rights

@@ -1,13 +1,20 @@
 # Public staging deployment and verification
 
+Configuration-only maintenance on 2026-10-21 applied 10m/3-file container logging
+from `fcd2927`, preserving the existing pinned application images and SQL memory
+setting. Fresh encrypted backup, exact resolved-config comparison, all four live
+log-option inspections, readiness/operations, restricted database access and public
+DNS/TLS/routing passed. See [container-logging.md](container-logging.md). This is
+size-based rotation, not a guaranteed retention period in days.
+
 Current runtime: `677b91a0083cdfec6e5f2656a82c9594e49d07b0` adds transactional
 erasure markers and erasure-aware managed recovery. Exact CI, fresh encrypted
 backup, additive migration, restricted grants/activation and public health passed
 on 2026-10-21. The real e5d8131-to-677b91a desktop PWA upgrade preserved session
 and plant/calendar data. The pre-migration snapshot passed isolated new-runtime
 restore, current-authority reconciliation before startup and the application drill.
-Guarded 30-day expiry is enabled; both backup tasks/health passed, 17 snapshots
-remain and none expired. See [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
+Guarded 30-day expiry is enabled; at its original rollout both backup tasks/health
+passed, all 17 snapshots were retained and none expired. See [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md)
 for offline/current-authority limitations and exact scope. No public account was
 deleted for destructive testing; no production release was made.
 
