@@ -77,7 +77,7 @@ set -euo pipefail
 sha256sum --check SHA256SUMS
 # The non-root catalog operator needs access to these non-secret mount files.
 chmod 755 deploy
-chmod 644 deploy/Caddyfile deploy/catalog.example.json
+chmod 644 deploy/Caddyfile deploy/catalog.example.json deploy/catalog.houseplants.json deploy/catalog-images.json
 sudo docker image load --input images.tar
 # Compare both loaded IDs/tags against manifest.json before proceeding.
 sudo docker image inspect --format '{{.Id}}' 'plantcare-api:<candidate-sha>'

@@ -28,7 +28,7 @@ fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep
 image delivery within the owner's hosting budget.
 
-## Current step: catalog browsing
+## Implemented: catalog browsing
 
 Compact cards, light filtering, name sorting and preserved navigation state are
 tracked in [catalog-browsing.md](catalog-browsing.md). All copy remains English.

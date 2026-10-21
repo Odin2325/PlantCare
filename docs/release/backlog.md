@@ -25,6 +25,20 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### English houseplant catalog and browsing (2026-10-21)
+
+- Deployed 15 reviewed real houseplants with English care guidance, source links
+  and licensed local photographs. Existing demo references and personal data
+  were preserved. See [houseplant-starter-catalog.md](houseplant-starter-catalog.md).
+- Compact cards, light filtering, English name sorting and retained search state
+  passed six local browser checks and 17 frontend tests. All six public browser
+  checks and the real frontend upgrade also passed; see
+  [catalog-browsing.md](catalog-browsing.md).
+- Frontend attribution packaging is included in the deployed catalog runtime;
+  the earlier not-yet-deployed notice below is historical. Broader dependency
+  distribution review remains open.
+
+
 ### Email anonymization confirmation and dependency notices (2026-10-21)
 
 - Owner confirmed setting Anonymous email tracking to Yes; recorded as owner-

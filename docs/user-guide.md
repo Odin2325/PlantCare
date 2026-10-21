@@ -3,8 +3,9 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The catalog's current demo
-entry is not reviewed botanical guidance.
+data while the launch requirements remain open. The catalog includes 15 real
+houseplants with linked care references and licensed photos. Its preserved
+legacy demo entry is synthetic and is not botanical guidance.
 
 ## Your first plant
 
@@ -19,6 +20,15 @@ entry is not reviewed botanical guidance.
    Suggested intervals are starting points; actual needs depend on the plant
    and its conditions.
 5. Find the plant in My plants using search, location/tag filters or sorting.
+
+## Browse the catalog
+
+Use Find a plant to search common/scientific names or descriptions. Combine it
+with Light requirement and Name A–Z / Name Z–A sorting. These are the listed care
+requirements; open View details for placement advice and full care instructions.
+Your search and filters remain when you return from details or reload. Clear
+filters restores the full catalog in A–Z order. Suggested watering intervals are
+prompts to check moisture, not instructions to water an already wet pot.
 
 ## Daily care and calendar
 

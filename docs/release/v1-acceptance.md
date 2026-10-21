@@ -2,6 +2,12 @@
 
 Baseline: `969d8c074b8a399d05a32cffc33c2cb1d3eeff52`, assessed 2026-10-11.
 
+Owner direction on 2026-10-21: continue English catalog content, photos and
+feature work while deferring the public contact-address decision. This overrides
+the original feature-freeze planning below; it does not close unchecked public
+release gates. See [the catalog record](houseplant-starter-catalog.md) and
+[catalog browsing](catalog-browsing.md) for the current feature evidence.
+
 Proposed v1 scope: accounts, plant catalog, personal collections and tags,
 interval/weekday care schedules, care history, dashboard, calendar views,
 in-app reminders, browser push, calendar subscriptions and sharing, and PWA

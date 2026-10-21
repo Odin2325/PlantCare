@@ -34,21 +34,38 @@ this work and has not been migrated or modified by these checks.
 
 ## Populate the catalog
 
-Prepare a JSON array matching `deploy/catalog.example.json`. That file contains
-synthetic demonstration data, not reviewed botanical guidance or a launch catalog.
-Replace it with reviewed species data before public release, including care
-instructions and toxicity information. Place `reviewed-catalog.json` in `deploy/`,
-which the operator service mounts read-only, then import it:
+The reviewed English starter dataset is `deploy/catalog.houseplants.json`, with
+15 real houseplants, linked care references and licensed photo metadata. See
+[the content and verification record](houseplant-starter-catalog.md).
+`deploy/catalog.example.json` remains a synthetic test fixture.
+
+After migration, apply the reviewed dataset through the privileged one-shot job
+using the intended project's environment and pinned images:
+
+```bash
+docker compose run --rm --no-deps migrate --upsert-catalog /operator/catalog.houseplants.json
+```
+
+This validates the complete dataset, rejects duplicate scientific-name keys and
+atomically adds/updates shared species while preserving their IDs and existing
+personal plant references, schedules, notes and care history. Do not run concurrent
+imports. Staging activation runs this command automatically. Its public `deploy`
+directory must be traversable and the JSON readable by the container's non-root
+user; the activation helper sets the four known public input files to mode 0644
+and `deploy` to 0755 after validating checksums.
+
+For future entries, prepare a reviewed JSON array using the same schema and
+attribution checks. The existing add-only importer also remains available:
 
 ```bash
 docker compose run --rm --no-deps migrate --import-catalog /operator/reviewed-catalog.json
 ```
 
 The importer validates all input, rejects unknown JSON fields, and uses a
-transaction so failures do not leave partial imports. Reimports skip existing
+transaction so failures do not leave partial imports. Add-only reimports skip existing
 species by trimmed, case-insensitive scientific name, or common name if scientific
-name is absent. They do not overwrite existing records; use the administrator API
-to edit them. Do not run concurrent imports. A nonzero exit code means failure.
+name is absent. They do not overwrite existing records; use the reviewed upsert
+procedure or administrator API to edit them. A nonzero exit code means failure.
 
 ## Repeatable local acceptance
 

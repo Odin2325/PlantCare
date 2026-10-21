@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
 Reviewed 2026-10-21. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `677b91a0083cdfec6e5f2656a82c9594e49d07b0`;
+this preparation. The staging runtime is `61d1382b7903813b085a0300b2d19f637b5a938a`;
 subsequent documentation commits are not new application deployments.
 
 ## Documentation prepared
@@ -28,7 +28,8 @@ subsequent documentation commits are not new application deployments.
 - [Third-party notices](../../THIRD_PARTY_NOTICES.md) and
   [dependency review](dependency-notices.md): corrected frontend-notice packaging
   verified in a rebuilt image, plus a 29-package shipped NuGet inventory. Backend,
-  container and full distribution review remain open; this correction is not yet live.
+  container and full distribution review remain open. The frontend packaging
+  correction is included in the deployed English catalog candidate.
 
 ## Proposed release notes (draft)
 
@@ -42,8 +43,13 @@ transactional email.
 The current beta also includes private calendar feeds and read-only account
 sharing. Their remaining acceptance checks must pass before advertising them as
 accepted launch capabilities. Google/Microsoft synchronization stays disabled.
-Real plant content and images must not be implied by screenshots or release notes
-while the catalog is synthetic. See the known-limitations document.
+The beta includes 15 reviewed English houseplant entries and licensed local
+reference photos. This is a starter selection; healthy growth-stage imagery is
+still future work. See [the catalog record](houseplant-starter-catalog.md) and the
+known-limitations document.
+Catalog browsing now includes compact photo cards, light filtering, name sorting
+and search state retained through details and reload; see
+[catalog browsing acceptance](catalog-browsing.md).
 
 ## Before a release tag
 
@@ -52,8 +58,10 @@ while the catalog is synthetic. See the known-limitations document.
    erasure reconciliation are verified in [retention-and-erasure-recovery.md](retention-and-erasure-recovery.md).
    Independent current-authority replication and replacement-host acceptance are
    still open; missing authority must not be bypassed during recovery.
-2. Replace demo catalog content with reviewed, attributed real species through
-   the controlled import procedure. Thumbnails/growth images remain later work.
+2. Retain and review the attributed starter catalog through the controlled
+   import/update procedure, expanding it as needed. Keep the preserved synthetic
+   demo distinct from reviewed botanical content. Growth-stage imagery remains
+   later work; the initial real entries and reference photos are implemented.
 3. Reconcile each acceptance gate with its recorded evidence, execute remaining
    required checks (including real calendar client and wider usability scope),
    and decide explicitly whether to disable any unaccepted optional capability.
