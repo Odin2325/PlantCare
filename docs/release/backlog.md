@@ -25,6 +25,20 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Email anonymization confirmation and dependency notices (2026-10-21)
+
+- Owner confirmed setting Anonymous email tracking to Yes; recorded as owner-
+  reported, without claiming tracking is disabled. No website tracker was added.
+- Found the current API image omitted Angular's generated notice file because
+  only the browser output directory was copied. Enabled explicit extraction,
+  corrected Docker packaging and added a final-image CI check. Actual rebuilt
+  production image and the exact attribution check passed; no deployment yet.
+- Added original/third-party rights separation and generated frontend notices.
+  Collected 29 shipped NuGet package metadata records from the actual pinned
+  runtime manifests, checked cache content/archive associations, tested stable
+  output and rejection of a deliberately altered manifest hash. Backend/vendor/
+  OS distribution review remains open. See dependency-notices.md.
+
 ### Privacy workflow and operator-notice follow-up (2026-10-21)
 
 - Completed the logging record after all fcd2927 CI gates passed (39602840172).

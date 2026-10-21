@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "applicationCandidate": "677b91a0083cdfec6e5f2656a82c9594e49d07b0",
+  "scope": "NuGet packages listed by the supplied shipped application dependency manifests; excludes shared frameworks, base-image OS packages, SQL Server, Caddy and build/test-only tools.",
+  "packageCount": 29,
+  "packages": [
+    {
+      "id": "Azure.Core",
+      "version": "1.47.1",
+      "restoreContentHash": "sha512-oPcncSsDHuxB8SC522z47xbp2+ttkcKv2YZ90KXhRKN0YQd2+7l1UURT9EBzUNEXtkLZUOAB5xbByMTrYRh3yA==",
+      "archiveSha512": "mUPFxQSvECkwh4MtYrozC4yjWWmTrU1B4aYn1JVTysqPenVUKU2BCpJhdpCv2VS1R0QM0x08TvBGWm5akDj5Bg==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.47.1/sdk/core/Azure.Core/README.md",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Azure.Identity",
+      "version": "1.14.2",
+      "restoreContentHash": "sha512-YhNMwOTwT+I2wIcJKSdP0ADyB2aK+JaYWZxO8LSRDm5w77LFr0ykR9xmt2ZV5T1gaI7xU6iNFIh/yW1dAlpddQ==",
+      "archiveSha512": "wvhM/Q8oBixWfvawGJvJejr9PKKdyaY+IaG1JvwfdiL3PGOV+u9MVpRMqovB1dzMzyBgFzXKrtYX1UJAGeoQag==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.2/sdk/identity/Azure.IdentityREADME.md",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+      "version": "10.0.10",
+      "restoreContentHash": "sha512-/ZV8RMWbWob1ZGsF5f1wVJNNlFLPKCf2ba834PpQiNhirVQ/ksup5SujtuUsvByHEZgv+9dmjC/4Xdi75axmXQ==",
+      "archiveSha512": "f0puMjVOeCR+kVf4XJmAUtCkNMHwxQrLwYxXRPBzWSjSkrF44Pib6ZcX/NjKY2UW6qITLwLyaWACCCT+OIC0jQ==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://asp.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 55637,
+          "normalizedTextSha256": "52af3d603b6d069e635f8afd08ec44ec01559255b5f3afd161ae9e6fe7e7aa54"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "Microsoft.AspNetCore.OpenApi",
+      "version": "10.0.10",
+      "restoreContentHash": "sha512-d4Atx9IHq7JgX0F/h7Db+m9zAUzC+cKdI9k+OWnnyQIOUQtfvjIEuhvbjPigVMkAmPUgCbJ8Yp6M9ghUqHtJSQ==",
+      "archiveSha512": "L1r6ygVsP1iKZGMbq7mynIrJtVPUz1QVD0eKpdJGiKNC7i2tTRKV+zMNgKevbCkfQkWW2KyZhNI5TXjfzVpccQ==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://asp.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 55637,
+          "normalizedTextSha256": "52af3d603b6d069e635f8afd08ec44ec01559255b5f3afd161ae9e6fe7e7aa54"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "Microsoft.Bcl.AsyncInterfaces",
+      "version": "8.0.0",
+      "restoreContentHash": "sha512-3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw==",
+      "archiveSha512": "ecsHc9lEZZJM7k5HHZA1PV2N+ELEarLFcssV2bn7XQIJoaiNZDkplTNcX+VKANfDGURAuEyVFCcRu7aFy16VUg==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "LICENSE.TXT",
+          "characters": 1116,
+          "normalizedTextSha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310"
+        },
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 67632,
+          "normalizedTextSha256": "7238e7fd468427aa3fe45b1d0cee1c3e2d93ff96692820768521e9780225d473"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "Microsoft.Bcl.Cryptography",
+      "version": "9.0.4",
+      "restoreContentHash": "sha512-YgZYAWzyNuPVtPq6WNm0bqOWNjYaWgl5mBWTGZyNoXitYBUYSp6iUB9AwK0V1mo793qRJUXz2t6UZrWITZSvuQ==",
+      "archiveSha512": "kW8lmoTixHb3aun81axcHYTzki7yYa0ebMyF3YLCGdHWzlyaMEN4gxl0lmGGJYcZgzXSuuZNQ/u0DohHk5anSA==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "LICENSE.TXT",
+          "characters": 1116,
+          "normalizedTextSha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310"
+        },
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 74235,
+          "normalizedTextSha256": "fa3e9d0a2c52476f04fe798d7dc4f6e7edb7b68a3d2f4d5f59a39bce957eedc8"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "Microsoft.Data.SqlClient.SNI.runtime",
+      "version": "6.0.2",
+      "restoreContentHash": "sha512-f+pRODTWX7Y67jXO3T5S2dIPZ9qMJNySjlZT/TKmWVNWe19N8jcWmHaqHnnchaq3gxEKv1SWVY5EFzOD06l41w==",
+      "archiveSha512": "idUS1/rcybmQb1kQE8koC+KKKvMaFQUp6KS6i5AwM/10flT/QIoVJhF54refMUDvTYVx5oeRoymKFK9LNwqHJA==",
+      "declaredLicenseType": "file",
+      "declaredLicense": "LICENSE.txt",
+      "licenseUrl": "https://aka.ms/deprecateLicenseUrl",
+      "projectUrl": "https://aka.ms/sqlclientproject",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "LICENSE.txt",
+          "characters": 8348,
+          "normalizedTextSha256": "46098530fc59d16670b6de391079c2fb46145328118ab1e451d7cc2881a7846a"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "Microsoft.Data.SqlClient",
+      "version": "6.1.1",
+      "restoreContentHash": "sha512-syGQmIUPAYYHAHyTD8FCkTNThpQWvoA7crnIQRMfp8dyB5A2cWU3fQexlRTFkVmV7S0TjVmthi0LJEFVjHo8AQ==",
+      "archiveSha512": "mcMjw1+ftJGZIMvoSW2WcMkW1V2it9eUyepFK4EoNLTzCG4e2M1oM81u5T5lBgxkKpDnHUlOOp9LrokRt4PWng==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://aka.ms/sqlclientproject",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.EntityFrameworkCore.Abstractions",
+      "version": "10.0.10",
+      "restoreContentHash": "sha512-bOzrFCl6uZCjaSh2bG1ToRQRdx+iXvxosCg9hFyG9OWeAzOFI4xev9OqKeWfKf/kAHyox2JnbcvLVf2ceA7sqA==",
+      "archiveSha512": "d1JCBgukvu6+FjVOl2KI36sj6n3U9SWveoG97SoGG/qNAwx1jgYFoBV50z1wfik6mRJ4q7IbJMPIeROYRU68dw==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://docs.microsoft.com/ef/core/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.EntityFrameworkCore.Relational",
+      "version": "10.0.10",
+      "restoreContentHash": "sha512-wNonj40aZxia+GtuBiiD6ZqVh4h6y5Nje1bGdmzZ8/ui0QRsAN+S0SIrLHFCEGbG9cDbeaE40sh+Lr7o9rRs6g==",
+      "archiveSha512": "vAYQ+MGKKPvlHpwGr8H0vp7Z6cr8gMpoxlVYiOaQUDg4fK8gQAKz1XZLExPRmB5Q1dNV75SFc4lYZtKyurjIMA==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://docs.microsoft.com/ef/core/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.EntityFrameworkCore.SqlServer",
+      "version": "10.0.10",
+      "restoreContentHash": "sha512-xwAOvQ1WCfWyA4sRkoYVHyTm8UJ7NDYpRo++2oWuXGQ9g60Z1yepaQBmoPDT2nX24q4ISWnktAW9zARFTiSVvg==",
+      "archiveSha512": "g/6Dwzt67IaS0ML2ZrKKYhke1Cl31uDBdHmzmmoGGZczSNX0Wq7LJGrheVvvXbW51PfLFsKO4iAIErDRWwdJgg==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://docs.microsoft.com/ef/core/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.EntityFrameworkCore",
+      "version": "10.0.10",
+      "restoreContentHash": "sha512-a0V7zj/VbYP6dTdWpUgE/r2PuLKtUGe2aJ0lVKkn/wP9ZhaxUz2kQydVfvOjCv2SKxlrqdBfHhPD4Cvlf+4ffA==",
+      "archiveSha512": "Do9G6gGsPiafdPCn3H6iLFaoOh7m0wgITVPuAGpHztJu505RbBwL7AHNtzndocOWEgrbvarJR2d+efJGcXrONA==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://docs.microsoft.com/ef/core/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.Identity.Client.Extensions.Msal",
+      "version": "4.73.1",
+      "restoreContentHash": "sha512-xDztAiV2F0wI0W8FLKv5cbaBefyLD6JVaAsvgSN7bjWNCzGYzHbcOEIP5s4TJXUpQzMfUyBsFl1mC6Zmgpz0PQ==",
+      "archiveSha512": "2ebc/0MfGIpSYIJv7Sj9eZ6BQmyCXp2SLX6/E8ebOkm2R/P/fHQP62fQxGhIvQx9HBi9UDxN/r+1fjVbWKlJIw==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://go.microsoft.com/fwlink/?linkid=844761",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.Identity.Client",
+      "version": "4.73.1",
+      "restoreContentHash": "sha512-NnDLS8QwYqO5ZZecL2oioi1LUqjh5Ewk4bMLzbgiXJbQmZhDLtKwLxL3DpGMlQAJ2G4KgEnvGPKa+OOgffeJbw==",
+      "archiveSha512": "pohB/1KwguTo+uZp3r/5MVyqpT0IBi9rOLTg5RwE3bcyq5nexlVqhYmR6WyuVEurKgXsX+ia4t7moUYIk1WKwQ==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://go.microsoft.com/fwlink/?linkid=844761",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Abstractions",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-S7sHg6gLg7oFqNGLwN1qSbJDI+QcRRj8SuJ1jHyCmKSipnF6ZQL+tFV2NzVfGj/xmGT9TykQdQiBN+p5Idl4TA==",
+      "archiveSha512": "bBGz3hVmwwNWz2U/aHDhQnosf5eFZMrDT4NPoafAFC9fPybnxAcUBev0wdblBfE6194GyrYdKntgPGWARbH84w==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.IdentityModel.JsonWebTokens",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-3Izi75UCUssvo8LPx3OVnEeZay58qaFicrtSnbtUt7q8qQi0gy46gh4V8VUTkMVMKXV6VMyjBVmeNNgeCUJuIw==",
+      "archiveSha512": "/esJxZj66hQsFRkV9NnTAQWEMmTrRLFWsYRcfGUYbITVFqN0oJIBWgCIsGwLtzqUu91HS26c6iMHbzSb7QwMag==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Logging",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-BZNgSq/o8gsKExdYoBKPR65fdsxW0cTF8PsdqB8y011AGUJJW300S/ZIsEUD0+sOmGc003Gwv3FYbjrVjvsLNQ==",
+      "archiveSha512": "6zxzwrVP8sm0ZcMH68TahJWY6olxZw/JrDYoGwydTPEvWQGf3Axqtsi2Yo8TxGlDi+dTk59HG3zL37x/ZE7Plg==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Protocols.OpenIdConnect",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-yT2Hdj8LpPbcT9C9KlLVxXl09C8zjFaVSaApdOwuecMuoV4s6Sof/mnTDz/+F/lILPIBvrWugR9CC7iRVZgbfQ==",
+      "archiveSha512": "eb1EaKmeleyxN+jjs+lJYcBxdChOfww4pgNzarxiAMC6wyGxUmBJh/fFpG47xLZ1gknCn2eNxSEYweBowC75Bw==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Protocols",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-h+fHHBGokepmCX+QZXJk4Ij8OApCb2n2ktoDkNX5CXteXsOxTHMNgjPGpAwdJMFvAL7TtGarUnk3o97NmBq2QQ==",
+      "archiveSha512": "GeU+oaRJV8zsBTleJ9mEALOO8xDOd6NBZI3VyCDGd+E/yqmU9p0o4Sjmj+OQxmqLVEcMqxXLFgLKEsX0FUq+Gg==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Tokens",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-fQ0VVCba75lknUHGldi3iTKAYUQqbzp1Un8+d9cm9nON0Gs8NAkXddNg8iaUB0qi/ybtAmNWizTR4avdkCJ9pQ==",
+      "archiveSha512": "foxh3jXTfe898DWbuwHEqY/96N7vtEX+uEf1vAD+p1afKNFH3ep36myKCGawtMRqvPpuUH7HOheoIi+pWGk8tw==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.OpenApi",
+      "version": "2.11.0",
+      "restoreContentHash": "sha512-/ignjfdeKT2SGLIR7QEv19KnI0rvoxRG/TYDOZdK9EsWLjKK9IK8i1Mo5NRm9PRV3i64DzlTqnIflWvoyfljLg==",
+      "archiveSha512": "NZaYYfguGzTp2aVOvMlbY/DiHZ8GLJEvtX0cRulrsLuPJQfSJJ73PbvbSZSP5izS3thMa4lWNoPIDqEirnvi2Q==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/Microsoft/OpenAPI.NET",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Microsoft.SqlServer.Server",
+      "version": "1.0.0",
+      "restoreContentHash": "sha512-N4KeF3cpcm1PUHym1RmakkzfkEv3GRMyofVv40uXsQhCQeglr2OHNcUk2WOG51AKpGO8ynGpo9M/kFXSzghwug==",
+      "archiveSha512": "G9kLCMlPrfO7YRLJX200puElH0cQgj+plcui7NZXFGoeWU3jOO224YrTUeMABS6CTsge0C9I0/8thYUWmppCYA==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://aka.ms/sqlclientproject",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "Portable.BouncyCastle",
+      "version": "1.9.0",
+      "restoreContentHash": "sha512-eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "archiveSha512": "JzUKh1aM8WpTvbTYmU3LFKxQLxhZ0Ow6rp5nH45aXWAyUuEQLc035niHAEdmgi5BJcXcFQy5/M/HxRKFyehazQ==",
+      "declaredLicenseType": null,
+      "declaredLicense": null,
+      "licenseUrl": "https://www.bouncycastle.org/csharp/licence.html",
+      "projectUrl": "https://www.bouncycastle.org/csharp/",
+      "authors": "Claire Novotny",
+      "copyright": "© 2000-2021 Legion of the Bouncy Castle Inc.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "System.ClientModel",
+      "version": "1.5.1",
+      "restoreContentHash": "sha512-k2jKSO0X45IqhVOT9iQB4xralNN9foRQsRvXBTyRpAVxyzCJlG895T9qYrQWbcJ6OQXxOouJQ37x5nZH5XKK+A==",
+      "archiveSha512": "Dqzi6RClaY6NtjLnJg+4ox//ey/8CJW5b2Yp/0O3Y47ezFlWOBqUAn6BNqk/AAtGw6wJisIjvNx9ryieN8MEdg==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/Azure/azure-sdk-for-net/blob/System.ClientModel_1.5.1/sdk/core/System.ClientModel/README.md",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "System.Configuration.ConfigurationManager",
+      "version": "9.0.4",
+      "restoreContentHash": "sha512-dvjqKp+2LpGid6phzrdrS/2mmEPxFl3jE1+L7614q4ZChKbLJCpHXg6sBILlCCED1t//EE+un/UdAetzIMpqnw==",
+      "archiveSha512": "Zz94ynE1iIHE9jaeUDaSAcRDEVK4K7xIuKyF3Aue8QQI1Cj8UGomr36MB7B1QXVJrArgZWmq3b7Imad7wO7Iww==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "LICENSE.TXT",
+          "characters": 1116,
+          "normalizedTextSha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310"
+        },
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 74235,
+          "normalizedTextSha256": "fa3e9d0a2c52476f04fe798d7dc4f6e7edb7b68a3d2f4d5f59a39bce957eedc8"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "System.IdentityModel.Tokens.Jwt",
+      "version": "7.7.1",
+      "restoreContentHash": "sha512-rQkO1YbAjLwnDJSMpRhRtrc6XwIcEOcUvoEcge+evurpzSZM3UNK+MZfD3sKyTlYsvknZ6eJjSBfnmXqwOsT9Q==",
+      "archiveSha512": "X2bJpdudZTZMHCF58QaeNcwAMHYdHDsprWaikwfjl15BlS4SdossHCHtAraxlOo26MKr2UPFX+6Cu5XS3uh12Q==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    },
+    {
+      "id": "System.Memory.Data",
+      "version": "8.0.1",
+      "restoreContentHash": "sha512-BVYuec3jV23EMRDeR7Dr1/qhx7369dZzJ9IWy2xylvb4YfXsrUxspWc4UWYid/tj4zZK58uGZqn2WQiaDMhmAg==",
+      "archiveSha512": "rz+4OvVEwrdWE4FhM7P97n8CYjb5v0Y0ioQfmvI7Lsir2auU+zfqxKH3e9DEsibBADT4LurcyEND4NDhliVMqw==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "LICENSE.TXT",
+          "characters": 1116,
+          "normalizedTextSha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310"
+        },
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 67631,
+          "normalizedTextSha256": "97c1a7b3da6a4c6ad516448719f45114b41a4d4c5aa300a944476e2e4f5da438"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "System.Security.Cryptography.ProtectedData",
+      "version": "9.0.4",
+      "restoreContentHash": "sha512-o94k2RKuAce3GeDMlUvIXlhVa1kWpJw95E6C9LwW0KlG0nj5+SgCiIxJ2Eroqb9sLtG1mEMbFttZIBZ13EJPvQ==",
+      "archiveSha512": "0rr4GEpjMucPgC7uUISv9tH3nmDNnjFDymEhvnVMEZEsjrHs7FPtMYCfxI4GRfeKTutIaUxRySlMiVnBLu5AdQ==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "authors": "Microsoft",
+      "copyright": "© Microsoft Corporation. All rights reserved.",
+      "packagedNotices": [
+        {
+          "path": "LICENSE.TXT",
+          "characters": 1116,
+          "normalizedTextSha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310"
+        },
+        {
+          "path": "THIRD-PARTY-NOTICES.TXT",
+          "characters": 74235,
+          "normalizedTextSha256": "fa3e9d0a2c52476f04fe798d7dc4f6e7edb7b68a3d2f4d5f59a39bce957eedc8"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "WebPush",
+      "version": "1.0.13",
+      "restoreContentHash": "sha512-Qyypsk6j+GqncCa/IgbmZLnL7DxqKFGz3jIdquGSLeiD3NtN+HPnIFBMwIJHffDU9ZEztTkaMMYxvW3PJxJL7Q==",
+      "archiveSha512": "AqxECrEb9n6+CLRLpCIR3WLjMp/F54GwglnRPZkHZZCZwdq7Dc6qQkRPYeQFFcRPCBt8VWA+ZWStMS4QxJc7UA==",
+      "declaredLicenseType": null,
+      "declaredLicense": null,
+      "licenseUrl": "https://github.com/web-push-libs/web-push-csharp/blob/master/LICENSE",
+      "projectUrl": "https://github.com/web-push-libs/web-push-csharp/",
+      "authors": "Cory Thompson",
+      "copyright": null,
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    }
+  ]
+}

@@ -40,12 +40,13 @@ These documents describe capabilities/defaults, not this account's current state
 ### Tracking state reported by the owner
 
 On 2026-10-21 the owner reported that Tracking exposes only **Anonymous email
-tracking**, currently **No**. An optional **Brevo tracker** installation is also
+tracking**, initially **No**. An optional **Brevo tracker** installation is also
 offered under Automations. Do not install the website tracker: the current account
 email flow uses SMTP and does not require website analytics/visitor tracking.
 
-Recommended next setting: **Anonymous email tracking → Yes**. This has not yet
-been confirmed saved. Brevo documents that anonymization stops associating future
+The owner subsequently confirmed saving **Anonymous email tracking → Yes** on
+2026-10-21. This is owner-reported dashboard evidence, not independent delivery
+verification. Brevo documents that anonymization stops associating future
 open/click statistics with individual contacts, but still measures opens/clicks.
 Do not call it disabled tracking, removed pixels or guaranteed removal of tracking
 redirects. The application must not claim there is no provider tracking. A

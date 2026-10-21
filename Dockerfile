@@ -19,6 +19,7 @@ RUN dotnet restore PlantCare.Api/PlantCare.Api.csproj \
     && dotnet restore PlantCare.Worker/PlantCare.Worker.csproj
 COPY . ./
 COPY --from=frontend /src/plant-care-web/dist/plant-care-web/browser/ PlantCare.Api/wwwroot/
+COPY --from=frontend /src/plant-care-web/dist/plant-care-web/3rdpartylicenses.txt PlantCare.Api/wwwroot/3rdpartylicenses.txt
 RUN dotnet publish PlantCare.Api/PlantCare.Api.csproj \
     --configuration Release \
     --no-restore \

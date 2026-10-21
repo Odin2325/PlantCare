@@ -25,6 +25,10 @@ subsequent documentation commits are not new application deployments.
   owner-led operational acceptance remains open.
 - [LICENSE](../../LICENSE): owner chose rights reserved on 2026-10-21; no
   open-source grant. Third-party license/notice review remains part of packaging.
+- [Third-party notices](../../THIRD_PARTY_NOTICES.md) and
+  [dependency review](dependency-notices.md): corrected frontend-notice packaging
+  verified in a rebuilt image, plus a 29-package shipped NuGet inventory. Backend,
+  container and full distribution review remain open; this correction is not yet live.
 
 ## Proposed release notes (draft)
 

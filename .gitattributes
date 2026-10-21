@@ -61,3 +61,5 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+# Preserve generated upstream license text, including its whitespace.
+docs/release/dependencies/frontend-notices.txt -whitespace
