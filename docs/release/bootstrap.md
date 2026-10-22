@@ -35,8 +35,8 @@ this work and has not been migrated or modified by these checks.
 ## Populate the catalog
 
 The reviewed English starter dataset is `deploy/catalog.houseplants.json`, with
-15 real houseplants, linked care references and licensed photo metadata. See
-[the content and verification record](houseplant-starter-catalog.md).
+20 real houseplants, linked care references and licensed photo metadata. See
+[the starter record](houseplant-starter-catalog.md) and [flowering additions](flowering-houseplant-batch.md).
 `deploy/catalog.example.json` remains a synthetic test fixture.
 
 After migration, apply the reviewed dataset through the privileged one-shot job

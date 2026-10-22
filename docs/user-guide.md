@@ -3,7 +3,7 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The catalog includes 15 real
+data while the launch requirements remain open. The catalog includes 20 real
 houseplants with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 

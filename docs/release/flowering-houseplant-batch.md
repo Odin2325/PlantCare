@@ -1,6 +1,6 @@
 # Flowering houseplant catalog batch
 
-Prepared 2026-10-22. Five English entries expand the reviewed dataset from 15 to
+Deployed to staging 2026-10-22. Five English entries expand the reviewed dataset from 15 to
 20 plants. The original 15 records and image bytes are unchanged. This is a
 curated indoor-plant selection, not a German popularity ranking. Existing legacy
 Demo houseplant references remain intact.
@@ -55,4 +55,30 @@ browser checks passed in desktop/mobile Chromium and Firefox, including the five
 new care pages, photos, attribution, pet flags and seasonal guidance. The
 production application image built successfully, and desktop/phone layouts were
 visually reviewed. Public deployment and identity-comparison results will be
-recorded after they finish.
+recorded below.
+
+The pinned staging candidate is `0394b3b123a919870dbea59cdaeaca714cbcd5a9`, following
+`61d1382b7903813b085a0300b2d19f637b5a938a`.
+[Full CI](https://github.com/Odin2325/PlantCare/actions/runs/39769265238) passed
+for that exact commit, including frontend/backend, SQL authentication/isolation,
+push handling, browser journeys, accessibility and PWA checks. Bundle hashes,
+runtime image IDs, activation, restricted database access and public readiness/
+operations checks passed. The public catalog now has 20 reviewed entries plus
+the preserved demo; the original 16 IDs/common/scientific names are unchanged,
+with exactly five added records. All 20 served photo SHA256 hashes match.
+
+This is a data/photo-only release: the main JavaScript filename is unchanged.
+A session opened before activation with the existing service worker loaded the
+new catalog online afterward. Its private plant IDs and completed calendar IDs
+matched before/after, its cookie stayed valid, both florist photos rendered, and
+logout passed. New content does not require reinstalling the app. This is browser
+evidence, not a new physical Android test or a claimed JavaScript-version change.
+
+All nine catalog browser checks also passed against public trusted HTTPS in
+desktop Chromium, mobile Chromium and Firefox, covering the five new entries,
+all 20 image responses, search/filter navigation, photo rendering, attribution,
+toxicity badges, seasonal guidance and sampled accessibility.
+
+Fresh encrypted off-server backups passed before and after activation. The
+post-update capture ran after the live browser checks; both local and VPS backup
+health checks reported healthy with no problems afterward.

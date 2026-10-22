@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
-Reviewed 2026-10-21. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `61d1382b7903813b085a0300b2d19f637b5a938a`;
+Reviewed 2026-10-22. No v1 tag, GitHub release or production launch is created by
+this preparation. The staging runtime is `0394b3b123a919870dbea59cdaeaca714cbcd5a9`;
 subsequent documentation commits are not new application deployments.
 
 ## Documentation prepared
@@ -43,10 +43,11 @@ transactional email.
 The current beta also includes private calendar feeds and read-only account
 sharing. Their remaining acceptance checks must pass before advertising them as
 accepted launch capabilities. Google/Microsoft synchronization stays disabled.
-The beta includes 15 reviewed English houseplant entries and licensed local
+The beta includes 20 reviewed English houseplant entries and licensed local
 reference photos. This is a starter selection; healthy growth-stage imagery is
 still future work. See [the catalog record](houseplant-starter-catalog.md) and the
-known-limitations document.
+known-limitations document. The five [flowering additions](flowering-houseplant-batch.md)
+include seasonal care guidance and individual photo credits.
 Catalog browsing now includes compact photo cards, light filtering, name sorting
 and search state retained through details and reload; see
 [catalog browsing acceptance](catalog-browsing.md).
