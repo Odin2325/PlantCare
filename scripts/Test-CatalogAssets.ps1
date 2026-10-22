@@ -4,7 +4,7 @@ $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 $entries=@(Get-Content (Join-Path $root 'deploy/catalog.houseplants.json') -Raw|ConvertFrom-Json)
 $photos=@(Get-Content (Join-Path $root 'deploy/catalog-images.json') -Raw|ConvertFrom-Json)
-if($entries.Count -lt 15 -or $entries.Count -ne $photos.Count){throw 'Catalog/image manifest count mismatch.'}
+if($entries.Count -lt 20 -or $entries.Count -ne $photos.Count){throw 'Catalog/image manifest count mismatch.'}
 if(@($photos.path|Sort-Object -Unique).Count -ne $photos.Count){throw 'Duplicate catalog image paths.'}
 foreach($entry in $entries){
     $photo=$entry.catalogProfile.photo

@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed.length).toBeGreaterThanOrEqual(15);
+  expect(reviewed.length).toBeGreaterThanOrEqual(20);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
@@ -62,13 +62,43 @@ test('catalog light filters combine with search, survive detail navigation and r
   await expect(page.getByRole('searchbox', { name: 'Find a plant' })).toHaveValue('');
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('');
   await expect(page.getByLabel('Sort by', { exact: true })).toHaveValue('name-asc');
-  await expect(names.first()).toHaveText('Aloe vera');
+  await expect(names.first()).toHaveText('African violet');
   await expect(page.getByRole('button', { name: 'Clear filters', exact: true })).toBeDisabled();
   await auditAccessibility(page, 'Catalog filter controls and compact cards');
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   // Unsupported URL values fall back to the complete, English A–Z catalog.
   await page.goto('/plants?light=invalid&sort=invalid');
-  await expect(names.first()).toHaveText('Aloe vera');
+  await expect(names.first()).toHaveText('African violet');
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('');
+});
+
+test('flowering additions have identifiable photos, attributed care and seasonal guidance', async ({ page }) => {
+  for (const [scientific, common, toxic] of [
+    ['streptocarpus-ionanthus', 'African violet', false],
+    ['anthurium-andraeanum', 'Flamingo flower', true],
+    ['kalanchoe-blossfeldiana', 'Florist kalanchoe', true],
+    ['schlumbergera-truncata', 'Thanksgiving cactus', false],
+    ['cyclamen-persicum', "Florist's cyclamen", true],
+  ] as const) {
+    await page.goto('/plants?q=' + encodeURIComponent(common));
+    const card = page.locator('.plant-card');
+    await expect(card).toHaveCount(1);
+    await expect(card.getByRole('heading', { name: common, exact: true })).toBeVisible();
+    const photo = card.getByRole('img');
+    await photo.scrollIntoViewIfNeeded();
+    await expect.poll(() => photo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    await expect(card.locator('.warning-badge')).toHaveCount(toxic ? 1 : 0);
+    await expect(card.locator('figcaption a').first()).toHaveAttribute('href', `https://plants.ces.ncsu.edu/plants/${scientific}/`);
+    await card.getByRole('link', { name: 'View details' }).click();
+    await expect(page.getByRole('heading', { level: 1, name: common, exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Care reference', exact: true })).toHaveAttribute('href', `https://plants.ces.ncsu.edu/plants/${scientific}/`);
+    if (scientific === 'cyclamen-persicum') {
+      await expect(page.getByText('Reduce water during summer dormancy', { exact: false })).toBeVisible();
+    }
+    if (scientific === 'schlumbergera-truncata') {
+      await expect(page.getByText('Long uninterrupted autumn nights', { exact: false })).toBeVisible();
+    }
+  }
+  await auditAccessibility(page, 'Flowering plant care detail');
 });

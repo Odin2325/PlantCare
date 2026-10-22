@@ -157,7 +157,7 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(15,species.Count);
+            Assert.Equal(20,species.Count);
             foreach(var plant in species)
             {
                 var profile=Assert.IsType<PlantCatalogProfile>(plant.CatalogProfile);

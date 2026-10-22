@@ -6,6 +6,10 @@ catalog of 15 common houseplants and licensed photographs is implemented; see
 deployment status. Existing `Demo houseplant` references are preserved as legacy
 synthetic content; they are not converted into reviewed botanical guidance.
 
+Follow-up 2026-10-22: five flowering houseplants are prepared, bringing the
+reviewed dataset to 20 entries. See [flowering-houseplant-batch.md](flowering-houseplant-batch.md)
+for care sources, photo rights and deployment status.
+
 ## Release content: reviewed real species
 
 The first 15 entries are implemented. Expand the attributed catalog of common

@@ -433,5 +433,150 @@
         "title": "Strelitzia nicolai. Form and flowers."
       }
     }
+  },
+  {
+    "commonName": "African violet",
+    "scientificName": "Streptocarpus ionanthus",
+    "description": "A compact flowering houseplant with fuzzy leaves and pink, purple or blue blooms. Often sold under its former name, Saintpaulia ionantha; indoor cultivars vary.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight supports flowering; protect the leaves from harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the surface begin to dry, then water from below with room-temperature water and drain. Keep water off the leaves and crown.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a suitable African violet fertilizer during active growth, following its label. Reduce feeding when growth slows.",
+    "soilInstructions": "Use a light, freely draining African violet mix. Keep the crown above the mix.",
+    "humidityInstructions": "Prefers humid air and steady warmth. Avoid cold drafts and wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-ionanthus/",
+      "reviewedOn": "2026-10-22",
+      "photo": {
+        "path": "/images/plants/streptocarpus-ionanthus.jpg",
+        "altText": "African violet in flower, reference photo",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-ionanthus/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Streptocarpus ionanthus, Cabarrus County, NC"
+      }
+    }
+  },
+  {
+    "commonName": "Flamingo flower",
+    "scientificName": "Anthurium andraeanum",
+    "description": "Glossy heart-shaped leaves surround colourful, long-lasting spathes. Small flowers grow along the central spike; indoor cultivars differ in colour and size.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright indirect light. Strong direct sun can scorch the leaves.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water after the top layer of mix dries, then allow excess water to escape. Keep the roots moist without leaving them saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth with a suitable houseplant fertilizer at its labelled strength; avoid feeding stressed or waterlogged roots.",
+    "soilInstructions": "Use an airy, well-drained houseplant mix in a pot with drainage holes.",
+    "humidityInstructions": "Needs warmth and humid air with gentle circulation. Protect from cold drafts and sudden temperature changes.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/anthurium-andraeanum/",
+      "reviewedOn": "2026-10-22",
+      "photo": {
+        "path": "/images/plants/anthurium-andraeanum.jpg",
+        "altText": "Flamingo flower in flower, reference photo",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/anthurium-andraeanum/",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "Form in bloom in a container"
+      }
+    }
+  },
+  {
+    "commonName": "Florist kalanchoe",
+    "scientificName": "Kalanchoe blossfeldiana",
+    "description": "A compact succulent with thick leaves and clusters of colourful flowers. Single and double-flowered cultivars are sold as indoor flowering plants.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright filtered daylight, sheltered from strong afternoon sun. Long uninterrupted autumn nights help initiate new flowers.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Let the potting mix dry between thorough waterings, then drain fully. Reduce watering during slower growth; do not keep the roots wet.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a suitable fertilizer during active growth according to its label; reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a fast-draining succulent mix and a container that releases excess water.",
+    "humidityInstructions": "Ordinary indoor humidity is suitable. Keep frost-free with good airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/kalanchoe-blossfeldiana/",
+      "reviewedOn": "2026-10-22",
+      "photo": {
+        "path": "/images/plants/kalanchoe-blossfeldiana.jpg",
+        "altText": "Florist kalanchoe in flower, reference photo",
+        "credit": "Lyubo Gadzhev",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/kalanchoe-blossfeldiana/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Kalanchoe blossfeldiana. Potted."
+      }
+    }
+  },
+  {
+    "commonName": "Thanksgiving cactus",
+    "scientificName": "Schlumbergera truncata",
+    "description": "A flowering forest cactus with flattened stems and pointed segment edges. Often sold as a holiday cactus; it differs from the round-edged Christmas cactus hybrid.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright filtered light and shade from hot summer sun. Long uninterrupted autumn nights help flower buds develop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the surface begin to dry, then water and drain. Avoid waterlogged roots; adjust checks when growth and flowering slow.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during spring and summer growth following the product label; reduce or pause feeding in autumn and early winter.",
+    "soilInstructions": "Use an airy, moisture-retentive but freely draining mix. This forest cactus needs different care from a desert cactus.",
+    "humidityInstructions": "Prefers humid air with gentle circulation. Avoid abrupt light or temperature changes while buds develop.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/schlumbergera-truncata/",
+      "reviewedOn": "2026-10-22",
+      "photo": {
+        "path": "/images/plants/schlumbergera-truncata.jpg",
+        "altText": "Thanksgiving cactus in flower, reference photo",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/schlumbergera-truncata/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Schlumbergera truncata"
+      }
+    }
+  },
+  {
+    "commonName": "Florist's cyclamen",
+    "scientificName": "Cyclamen persicum",
+    "description": "A cool-season flowering plant with patterned leaves and swept-back petals. Leaves may die back during summer dormancy; pause routine care reminders during rest.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Use bright indirect daylight in a cool room, away from hot direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "During leafy growth, water at the pot edge or from below when the surface dries, then drain. Keep the crown dry. Reduce water during summer dormancy and resume gradually as new growth returns.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active leafy growth or flowering according to the product label. Stop feeding during dormancy.",
+    "soilInstructions": "Use a rich, freely draining potting mix; avoid burying or soaking the crown.",
+    "humidityInstructions": "Keep cool with moderate humidity and gentle airflow. Protect from frost and radiators.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/cyclamen-persicum/",
+      "reviewedOn": "2026-10-22",
+      "photo": {
+        "path": "/images/plants/cyclamen-persicum.jpg",
+        "altText": "Florist's cyclamen in flower, reference photo",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cyclamen-persicum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Plant in Pot (Cabarrus County,NC)"
+      }
+    }
   }
 ]

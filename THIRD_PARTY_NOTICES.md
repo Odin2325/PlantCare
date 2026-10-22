@@ -9,8 +9,7 @@ or restrictions of third-party software.
 The production Angular build generates `3rdpartylicenses.txt`. The API image build
 now copies that file into `wwwroot/3rdpartylicenses.txt` alongside the browser
 assets; CI checks that the packaged file is nonempty and contains license terms.
-This packaging correction is prepared in source and verified in a rebuilt image;
-it has not yet been deployed to public staging.
+This packaging correction is included in the deployed English catalog runtime.
 
 A reviewed build-output snapshot is in
 [frontend-notices.txt](docs/release/dependencies/frontend-notices.txt).
@@ -26,7 +25,8 @@ See [photo credits](plant-care-web/public/images/plants/README.md) and
 own license; the original application's rights-reserved notice does not cover it.
 The UI displays the supplied title, author, source and license. Original image
 bytes are preserved and are scaled for display. See
-[catalog review](docs/release/houseplant-starter-catalog.md) for the care sources.
+[catalog review](docs/release/houseplant-starter-catalog.md) and
+[flowering batch](docs/release/flowering-houseplant-batch.md) for the care sources.
 
 ## Backend and container software
 
