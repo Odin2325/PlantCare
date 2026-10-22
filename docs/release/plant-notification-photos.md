@@ -11,6 +11,10 @@ matching and all species/plant identities remain unchanged.
 
 ## Notification images
 
+Superseded by the owner's 2026-10-22 revision to
+[care action icons](care-notification-icons.md). The following describes the
+earlier photo implementation and its historical acceptance.
+
 The push delivery query loads each reminder's own species. A validated local
 catalog cover photo becomes its notification `icon`; missing or invalid metadata
 uses the packaged `/icons/plantcare-192.png` app icon. Validation rejects external

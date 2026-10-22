@@ -25,6 +25,14 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Care action notification icons (2026-10-22)
+
+- Owner revised the notification design to original cartoon care-action icons,
+  replacing species photos in new reminders. Five local PNGs and editable SVG
+  sources cover watering, fertilizing, misting, pruning and repotting. Nicknames,
+  common-name fallback, Dashboard taps and catalog photos remain. See
+  [care-notification-icons.md](care-notification-icons.md) for verification.
+
 ### Growth-reference expansion (2026-10-22)
 
 - Added compact/trailing golden pothos and aloe rosette/flower-stalk examples.

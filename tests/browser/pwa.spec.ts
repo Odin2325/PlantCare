@@ -44,6 +44,19 @@ test('manifest icons, offline cold reload and uncached account API', async ({ pa
     expect(bytes.readUInt32BE(16)).toBe(size); expect(bytes.readUInt32BE(20)).toBe(size);
   }
   await offline(page, context, request, true);
+  // Care icons are application assets: an installed worker must retain them
+  // offline, independently of species photos fetched from catalog data.
+  for (const action of ['watering', 'fertilizing', 'misting', 'pruning', 'repotting']) {
+    const icon = await page.evaluate(async (name) => {
+      const response = await fetch(`/icons/care-${name}.png`);
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      return { status: response.status, signature: [...bytes.slice(0, 8)],
+        size: [new DataView(bytes.buffer).getUint32(16), new DataView(bytes.buffer).getUint32(20)] };
+    }, action);
+    expect(icon.status).toBe(200);
+    expect(icon.signature).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
+    expect(icon.size).toEqual([192, 192]);
+  }
   await page.reload();
   await expect(page.locator('.offline-banner')).toContainText('Care changes need a connection', { timeout: 3000 });
   await auditAccessibility(page, 'Offline shell');

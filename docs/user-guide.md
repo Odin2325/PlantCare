@@ -74,11 +74,11 @@ settings, network access and the push provider can delay or prevent delivery.
 Review Dashboard even if no push arrives. Disable on this device removes that
 device's subscription; browser/site settings also control notification permission.
 
-New care reminders use the relevant species photo where the device supports it,
-with photographer/license credit in the text. Plants without suitable photo
-metadata use the PlantCare icon. A phone may keep its separate app/status-bar
-symbol, and a picture can be omitted if it cannot load. The reminder still opens
-Dashboard. Already delivered notifications keep their original appearance.
+New care reminders use a cartoon-style icon for the action: a water drop, plant
+food, misting spray, pruning shears or a pot with soil. These are static drawings;
+the phone controls how they appear and its separate app/status-bar symbol.
+The reminder still opens Dashboard. Already delivered notifications keep their
+original appearance.
 
 ## Install on Android and update
 

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PlantCare.Application.Notifications;
 using PlantCare.Domain.Entities;
-using PlantCare.Domain.ValueObjects;
+using PlantCare.Domain.Enums;
 using PlantCare.Infrastructure.Persistence;
 
 namespace PlantCare.Infrastructure.Notifications;
@@ -55,16 +55,13 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
             }
             // Angular reads NotificationOptions directly from notification, not
             // from an options child. Nesting them drops body, tag and tap action.
-            var photo = GetReminderPhoto(schedule.UserPlant.PlantSpecies.CatalogProfile);
             var plantName = string.IsNullOrWhiteSpace(schedule.UserPlant.Nickname)
                 ? schedule.UserPlant.PlantSpecies.CommonName : schedule.UserPlant.Nickname;
             var body = $"{plantName} needs care.";
-            if (photo is not null) body += $" Photo: {photo.Credit} · {photo.LicenseName}.";
             var payload = JsonSerializer.Serialize(new { notification = new { title = $"{schedule.ActionType} reminder",
-                body, icon = photo?.Path ?? "/icons/plantcare-192.png",
+                body, icon = GetReminderIcon(schedule.ActionType),
                 tag = $"plantcare-{notification.Id:N}",
                 data = new {
-                    photo = photo is null ? null : new { photo.Title, photo.Credit, photo.SourceUrl, photo.LicenseName, photo.LicenseUrl },
                     onActionClick = new { @default = new { operation = "openWindow", url = "/dashboard" } }
                 }
             } });
@@ -116,12 +113,13 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
         return processed;
     }
 
-    private static PlantCatalogPhoto? GetReminderPhoto(PlantCatalogProfile? profile)
+    private static string GetReminderIcon(CareActionType action) => action switch
     {
-        if (profile?.Photo is null) return null;
-        // Only validated, local catalog pictures may be fetched by a device.
-        // Legacy or invalid metadata must never block delivery of the reminder.
-        try { profile.Validate(); return profile.Photo; }
-        catch (ArgumentException) { return null; }
-    }
+        CareActionType.Watering => "/icons/care-watering.png",
+        CareActionType.Fertilizing => "/icons/care-fertilizing.png",
+        CareActionType.Misting => "/icons/care-misting.png",
+        CareActionType.Pruning => "/icons/care-pruning.png",
+        CareActionType.Repotting => "/icons/care-repotting.png",
+        _ => "/icons/plantcare-192.png"
+    };
 }

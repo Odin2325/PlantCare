@@ -63,14 +63,10 @@ personal care views and reminder text lead with nickname or common name;
 scientific names remain available without dominating the label. Search continues
 to find both common and scientific names. Existing links, IDs and history remain.
 
-## Implemented: plant pictures in care notifications
+## Implemented: care action pictures in notifications
 
-The worker uses the care plant's validated species photo as its notification icon,
-with attribution and an app-icon fallback for missing/invalid metadata. Reminder
-text and the Dashboard tap destination remain. See
-[plant-notification-photos.md](plant-notification-photos.md) for runtime permissions,
-verification and deployment status. Actual rendering is platform-dependent; broken
-network images do not have an automatic app-photo replacement. The owner confirmed
-the correct photo and Dashboard tap destination in the installed Android app
-on a newly received reminder. Closed-app state and image-failure rendering were
-not separately rechecked for this photo update.
+Owner revision 2026-10-22: the worker now uses original cartoon-style action icons
+instead of species photos. Reminder text and the Dashboard tap destination remain.
+See [care-notification-icons.md](care-notification-icons.md) for mapping, tests and
+deployment status. Actual rendering is platform-dependent. The earlier plant-photo
+acceptance is historical; physical acceptance of the new icons is still pending.
