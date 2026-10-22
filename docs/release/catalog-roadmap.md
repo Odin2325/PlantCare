@@ -68,5 +68,7 @@ with attribution and an app-icon fallback for missing/invalid metadata. Reminder
 text and the Dashboard tap destination remain. See
 [plant-notification-photos.md](plant-notification-photos.md) for runtime permissions,
 verification and deployment status. Actual rendering is platform-dependent; broken
-network images do not have an automatic app-photo replacement. Physical installed
-Android/Chrome checks for appearance, closed-app delivery and tapping remain required.
+network images do not have an automatic app-photo replacement. The owner confirmed
+the correct photo and Dashboard tap destination in the installed Android app
+on a newly received reminder. Closed-app state and image-failure rendering were
+not separately rechecked for this photo update.

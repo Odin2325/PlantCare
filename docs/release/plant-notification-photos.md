@@ -51,8 +51,8 @@ rejecting catalog writes. A local headless Chromium probe could not establish
 notification display permission for the worker; it is not counted as a pass or
 as physical-device acceptance.
 
-Final CI and deployment verification is recorded below. Physical Android photo
-appearance remains pending owner confirmation.
+Final CI, deployment verification and owner-reported Android photo/tap acceptance
+are recorded below.
 
 Local verification passed: production API/worker builds, all 42 selected real SQL
 Server push/account-data/erasure checks, and the restricted worker permission
@@ -88,10 +88,12 @@ No extra phone pushes or emails were sent for acceptance; existing normal
 reminders will use the new payload when next delivered. Previously delivered
 notifications retain their original appearance.
 
-The owner was asked to check a newly received real-catalog reminder in the
-installed Android app for the correct plant picture and Dashboard tap behavior.
-This manual result is still pending; automated payload/transport results are not
-claimed as proof of physical photo rendering.
+The owner confirmed that a newly received real-catalog reminder in the installed
+Android app showed the correct plant photo and tapping opened Dashboard. This is
+owner-reported physical acceptance for photo selection/rendering and the tap
+destination, separate from automated payload/transport checks. The report did not
+separately recheck closed-app state, multiple species, failed image loading or
+current Android/Chrome version numbers; those are not inferred from this result.
 
 Fresh encrypted off-server VPS backups passed before and after activation. The
 post-deployment capture ran after live browser/session checks completed. Local

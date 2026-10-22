@@ -32,7 +32,8 @@ release unless the related optional feature is disabled.
 - Implemented per-species photo icons with attribution, safe metadata fallback
   and the existing Dashboard tap destination. The worker's catalog access is
   read-only. See [plant-notification-photos.md](plant-notification-photos.md) for
-  verification, deployment status and the pending physical Android check.
+  verification and deployment status. Owner subsequently confirmed the correct
+  photo and Dashboard tap destination in a newly received installed Android reminder.
 
 ### Future naming and notification requests (2026-10-22)
 
