@@ -11,6 +11,7 @@ using PlantCare.Api.IntegrationTests.Infrastructure;
 using PlantCare.Application.Notifications;
 using PlantCare.Domain.Entities;
 using PlantCare.Domain.Enums;
+using PlantCare.Domain.ValueObjects;
 using PlantCare.Infrastructure.Notifications;
 using PlantCare.Infrastructure.Persistence;
 using WebPush;
@@ -59,13 +60,84 @@ public sealed class PushDeliveryTests : IAsyncLifetime
         var notification = document.RootElement.GetProperty("notification");
         Assert.Equal("Watering reminder", notification.GetProperty("title").GetString());
         Assert.Equal("Push test plant needs care.", notification.GetProperty("body").GetString());
-        Assert.Equal("/plantcare-icon.svg", notification.GetProperty("icon").GetString());
+        Assert.Equal("/icons/plantcare-192.png", notification.GetProperty("icon").GetString());
         Assert.Equal($"plantcare-{id:N}", notification.GetProperty("tag").GetString());
         var click = notification.GetProperty("data").GetProperty("onActionClick").GetProperty("default");
         Assert.Equal("openWindow", click.GetProperty("operation").GetString());
         Assert.Equal("/dashboard", click.GetProperty("url").GetString());
         Assert.False(notification.TryGetProperty("options", out _));
         Assert.Equal(1, provider.EncryptedRequests);
+    }
+
+    [Fact]
+    public async Task EachReminderUsesItsOwnSpeciesPhotoAndKeepsNicknameCreditsAndDashboardAction()
+    {
+        foreach (var path in new[] { "/images/plants/monstera-deliciosa.jpg", "/images/plants/chlorophytum-comosum.jpg" })
+        {
+            var id = await SeedAsync("pictured-" + payloads.Count);
+            await InspectAsync(async db =>
+            {
+                var notification = await db.Notifications.Include(n => n.CareSchedule).ThenInclude(s => s.UserPlant)
+                    .ThenInclude(p => p.PlantSpecies).SingleAsync(n => n.Id == id);
+                notification.CareSchedule.UserPlant.PlantSpecies.SetCatalogProfile(new PlantCatalogProfile(
+                    "https://example.org/care", new(2026, 10, 22), new PlantCatalogPhoto(path,
+                        "Plant reference", "Test photographer", "https://example.org/photo",
+                        "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/", "Original photo title")));
+                await db.SaveChangesAsync();
+            });
+            Assert.Equal(1, await DeliverAsync());
+            using var document = JsonDocument.Parse(payloads.Last());
+            var notification = document.RootElement.GetProperty("notification");
+            Assert.Equal(path, notification.GetProperty("icon").GetString());
+            Assert.StartsWith("Push test plant needs care.", notification.GetProperty("body").GetString());
+            Assert.Contains("Test photographer · CC BY 4.0", notification.GetProperty("body").GetString());
+            var data = notification.GetProperty("data");
+            Assert.Equal("https://example.org/photo", data.GetProperty("photo").GetProperty("SourceUrl").GetString());
+            Assert.Equal("https://creativecommons.org/licenses/by/4.0/", data.GetProperty("photo").GetProperty("LicenseUrl").GetString());
+            Assert.Equal("/dashboard", data.GetProperty("onActionClick").GetProperty("default").GetProperty("url").GetString());
+            Assert.True(System.Text.Encoding.UTF8.GetByteCount(payloads.Last()) < 3_000);
+        }
+        Assert.Equal(2, provider.EncryptedRequests);
+    }
+
+    [Theory]
+    [InlineData("https://example.org/tracker.jpg")]
+    [InlineData("/images/plants/../../private.jpg")]
+    public async Task InvalidLegacyPhotoFallsBackWithoutBlockingPush(string path)
+    {
+        var id = await SeedAsync("invalid-photo");
+        await InspectAsync(async db =>
+        {
+            var notification = await db.Notifications.Include(n => n.CareSchedule).ThenInclude(s => s.UserPlant)
+                .ThenInclude(p => p.PlantSpecies).SingleAsync(n => n.Id == id);
+            // Simulate pre-validation persisted metadata, bypassing the domain setter.
+            db.Entry(notification.CareSchedule.UserPlant.PlantSpecies).Property(p => p.CatalogProfile).CurrentValue =
+                new PlantCatalogProfile("https://example.org/care", new(2026, 10, 22), new PlantCatalogPhoto(path,
+                    "Plant", "Photographer", "https://example.org/photo", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/"));
+            await db.SaveChangesAsync();
+        });
+        Assert.Equal(1, await DeliverAsync());
+        using var document = JsonDocument.Parse(Assert.Single(payloads));
+        var notification = document.RootElement.GetProperty("notification");
+        Assert.Equal("/icons/plantcare-192.png", notification.GetProperty("icon").GetString());
+        Assert.Equal("Push test plant needs care.", notification.GetProperty("body").GetString());
+        Assert.Equal(JsonValueKind.Null, notification.GetProperty("data").GetProperty("photo").ValueKind);
+    }
+
+    [Fact]
+    public async Task LegacyBlankNicknameFallsBackToCommonNameInReminder()
+    {
+        await SeedAsync("common-name-fallback");
+        await InspectAsync(async db =>
+        {
+            var plant = await db.UserPlants.SingleAsync();
+            db.Entry(plant).Property(p => p.Nickname).CurrentValue = " ";
+            await db.SaveChangesAsync();
+        });
+        Assert.Equal(1, await DeliverAsync());
+        using var document = JsonDocument.Parse(Assert.Single(payloads));
+        Assert.Equal("Synthetic push plant needs care.",
+            document.RootElement.GetProperty("notification").GetProperty("body").GetString());
     }
 
     [Fact]

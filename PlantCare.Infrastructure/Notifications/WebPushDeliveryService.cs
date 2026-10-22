@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PlantCare.Application.Notifications;
 using PlantCare.Domain.Entities;
+using PlantCare.Domain.ValueObjects;
 using PlantCare.Infrastructure.Persistence;
 
 namespace PlantCare.Infrastructure.Notifications;
@@ -19,6 +20,7 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
         if (string.IsNullOrWhiteSpace(settings.Subject) || string.IsNullOrWhiteSpace(settings.PublicKey) || string.IsNullOrWhiteSpace(settings.PrivateKey)) return 0;
         var now = timeProvider.GetUtcNow();
         var notifications = await dbContext.Notifications.Include(item => item.CareSchedule).ThenInclude(schedule => schedule.UserPlant)
+            .ThenInclude(plant => plant.PlantSpecies)
             .Where(item => item.PushSentAtUtc == null && (item.PushNextAttemptAtUtc == null || item.PushNextAttemptAtUtc <= now))
             .OrderBy(item => item.PushNextAttemptAtUtc ?? item.CreatedAtUtc).ThenBy(item => item.Id)
             .Take(batchSize).ToListAsync(cancellationToken);
@@ -53,10 +55,18 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
             }
             // Angular reads NotificationOptions directly from notification, not
             // from an options child. Nesting them drops body, tag and tap action.
+            var photo = GetReminderPhoto(schedule.UserPlant.PlantSpecies.CatalogProfile);
+            var plantName = string.IsNullOrWhiteSpace(schedule.UserPlant.Nickname)
+                ? schedule.UserPlant.PlantSpecies.CommonName : schedule.UserPlant.Nickname;
+            var body = $"{plantName} needs care.";
+            if (photo is not null) body += $" Photo: {photo.Credit} · {photo.LicenseName}.";
             var payload = JsonSerializer.Serialize(new { notification = new { title = $"{schedule.ActionType} reminder",
-                body = $"{schedule.UserPlant.Nickname} needs care.", icon = "/plantcare-icon.svg",
+                body, icon = photo?.Path ?? "/icons/plantcare-192.png",
                 tag = $"plantcare-{notification.Id:N}",
-                data = new { onActionClick = new { @default = new { operation = "openWindow", url = "/dashboard" } } }
+                data = new {
+                    photo = photo is null ? null : new { photo.Title, photo.Credit, photo.SourceUrl, photo.LicenseName, photo.LicenseUrl },
+                    onActionClick = new { @default = new { operation = "openWindow", url = "/dashboard" } }
+                }
             } });
             var attempts = 0;
             foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending))
@@ -104,5 +114,14 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
             await dbContext.SaveChangesAsync(cancellationToken);
         }
         return processed;
+    }
+
+    private static PlantCatalogPhoto? GetReminderPhoto(PlantCatalogProfile? profile)
+    {
+        if (profile?.Photo is null) return null;
+        // Only validated, local catalog pictures may be fetched by a device.
+        // Legacy or invalid metadata must never block delivery of the reminder.
+        try { profile.Validate(); return profile.Photo; }
+        catch (ArgumentException) { return null; }
     }
 }

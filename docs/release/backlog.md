@@ -25,6 +25,15 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Plant notification photos and name audit (2026-10-22)
+
+- Verified English common-name-first species labels and nickname-first personal
+  care views. Added a common-name push fallback for legacy blank nicknames.
+- Implemented per-species photo icons with attribution, safe metadata fallback
+  and the existing Dashboard tap destination. The worker's catalog access is
+  read-only. See [plant-notification-photos.md](plant-notification-photos.md) for
+  verification, deployment status and the pending physical Android check.
+
 ### Future naming and notification requests (2026-10-22)
 
 - Recorded English common names as the primary species label, keeping personal

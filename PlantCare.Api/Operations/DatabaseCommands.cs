@@ -13,7 +13,7 @@ public static class DatabaseCommands
         "PlantSpecies", "UserPlants", "UserPlantTags", "CareSchedules", "CareEvents", "NotificationPreferences",
         "CalendarSubscriptions", "CalendarShares", "PushSubscriptions", "ExternalCalendarConnections", "ExternalCalendarEvents"];
     private static readonly string[] ApiReads = ["AspNetRoles", "AspNetRoleClaims", "AspNetUserRoles", "PushDeliveries", "__EFMigrationsHistory"];
-    private static readonly string[] WorkerReads = ["UserPlants", "CareSchedules", "NotificationPreferences", "AccountErasures"];
+    private static readonly string[] WorkerReads = ["UserPlants", "CareSchedules", "NotificationPreferences", "AccountErasures", "PlantSpecies"];
     private static readonly string[] WorkerWrites = ["ExternalCalendarEvents"];
 
     public static bool IsCommand(string[] args) => args.Length > 0 &&
