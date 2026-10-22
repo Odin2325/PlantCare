@@ -54,7 +54,9 @@ common names, with scientific names secondary. The catalog already leads with
 nickname-first personal care views and secondary scientific names. Push reminders
 now also fall back to the common name for legacy blank nicknames. Scientific-name
 catalog import matching, searchable names and stable species IDs are preserved.
-Additional familiar English aliases remain a possible catalog refinement.
+Sixteen reviewed English alternative names for eight species are now implemented
+in catalog and collection search; see [common-name-aliases.md](common-name-aliases.md)
+for sources, punctuation matching, ambiguity and deployment verification.
 
 Acceptance: catalog cards/details and plant selectors lead with a common name;
 personal care views and reminder text lead with nickname or common name;

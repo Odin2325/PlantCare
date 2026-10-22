@@ -25,6 +25,14 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Familiar-name search (2026-10-22)
+
+- Added 16 reviewed English common-name aliases for eight existing species, with
+  punctuation-tolerant catalog/collection search and secondary detail labels.
+  Primary names, nicknames, scientific-name matching and plant IDs remain.
+- Shared common names return distinct species rather than merging them. See
+  [common-name-aliases.md](common-name-aliases.md) for sources and verification.
+
 ### Plant notification photos and name audit (2026-10-22)
 
 - Verified English common-name-first species labels and nickname-first personal

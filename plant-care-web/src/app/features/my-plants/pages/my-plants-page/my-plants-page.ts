@@ -15,6 +15,7 @@ import {
 } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
+import { normalizePlantSearch } from '../../../../shared/plant-search';
 import { finalize } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/services/auth.service';
@@ -83,7 +84,7 @@ export class MyPlantsPage {
   );
 
   readonly filteredPlants = computed(() => {
-    const query = this.searchTerm().trim().toLocaleLowerCase();
+    const query = normalizePlantSearch(this.searchTerm());
     const location = this.locationFilter();
     const tag = this.tagFilter();
     const plants = this.userPlants().filter((plant) => {
@@ -91,12 +92,13 @@ export class MyPlantsPage {
         plant.nickname,
         plant.speciesCommonName,
         plant.speciesScientificName ?? '',
+        ...(plant.speciesCatalogProfile?.commonNameAliases ?? []),
         plant.location ?? '',
         plant.notes ?? '',
         ...plant.tags,
-      ].join(' ').toLocaleLowerCase();
+      ].join(' ');
 
-      return (!query || searchable.includes(query)) &&
+      return (!query || normalizePlantSearch(searchable).includes(query)) &&
         (!location || plant.location === location) &&
         (!tag || plant.tags.includes(tag));
     });

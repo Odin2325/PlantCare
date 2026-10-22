@@ -73,7 +73,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/epipremnum-aureum.jpg",
         "altText": "Golden pothos reference photo",
@@ -82,7 +82,11 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Epipremnum aureum (Pothos) houseplant view"
-      }
+      },
+      "commonNameAliases": [
+        "Devil's ivy",
+        "Pothos"
+      ]
     }
   },
   {
@@ -102,7 +106,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-trifasciata/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/dracaena-trifasciata.jpg",
         "altText": "Snake plant reference photo",
@@ -111,7 +115,10 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Dracaena trifasciata (Snake Plant) houseplant view"
-      }
+      },
+      "commonNameAliases": [
+        "Mother-in-law's tongue"
+      ]
     }
   },
   {
@@ -131,7 +138,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/zamioculcas-zamiifolia.jpg",
         "altText": "ZZ plant reference photo",
@@ -140,7 +147,11 @@
         "licenseName": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
         "title": "Zamioculcas zamiifolia. Potted."
-      }
+      },
+      "commonNameAliases": [
+        "Zanzibar gem",
+        "Eternity plant"
+      ]
     }
   },
   {
@@ -197,6 +208,10 @@
             "title": "Roots forming on plantlet"
           }
         }
+      ],
+      "commonNameAliases": [
+        "Ribbon plant",
+        "Spider ivy"
       ]
     }
   },
@@ -217,7 +232,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/ficus-elastica.jpg",
         "altText": "Rubber plant reference photo",
@@ -226,7 +241,10 @@
         "licenseName": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
         "title": "Houseplant"
-      }
+      },
+      "commonNameAliases": [
+        "Indian rubber plant"
+      ]
     }
   },
   {
@@ -275,7 +293,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-fragrans/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/dracaena-fragrans.jpg",
         "altText": "Corn plant reference photo",
@@ -284,7 +302,12 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Dracaena fragrans, Corn Plant, houseplant view"
-      }
+      },
+      "commonNameAliases": [
+        "Cornstalk plant",
+        "Dragon tree",
+        "Ribbon plant"
+      ]
     }
   },
   {
@@ -362,7 +385,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/aloe-vera.jpg",
         "altText": "Aloe vera reference photo",
@@ -371,7 +394,11 @@
         "licenseName": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
         "title": "Form in a pot"
-      }
+      },
+      "commonNameAliases": [
+        "Barbados aloe",
+        "Medicinal aloe"
+      ]
     }
   },
   {
@@ -391,7 +418,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/crassula-ovata.jpg",
         "altText": "Jade plant reference photo",
@@ -400,7 +427,12 @@
         "licenseName": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
         "title": "Form of a 40 year old plant"
-      }
+      },
+      "commonNameAliases": [
+        "Money plant",
+        "Lucky plant",
+        "Jade tree"
+      ]
     }
   },
   {

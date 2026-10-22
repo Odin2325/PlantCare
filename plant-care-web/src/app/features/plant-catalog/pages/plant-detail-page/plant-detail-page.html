@@ -38,6 +38,11 @@
     }
   </section>
 
+  @if (plant.catalogProfile?.commonNameAliases?.length) {
+    <p class="common-name-aliases">Also known as: {{ plant.catalogProfile!.commonNameAliases!.join(', ') }}.</p>
+    <p>Common names can refer to different plants. Check the scientific name and photo when choosing a species.</p>
+  }
+
   <p class="description">
     {{ plant.description }}
   </p>

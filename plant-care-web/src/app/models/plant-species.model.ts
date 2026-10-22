@@ -26,6 +26,7 @@ export interface PlantSpecies {
 }
 
 export interface PlantCatalogProfile {
+  commonNameAliases?: string[] | null;
   growthReferences?: PlantGrowthReference[] | null;
   careSourceUrl: string;
   reviewedOn: string;

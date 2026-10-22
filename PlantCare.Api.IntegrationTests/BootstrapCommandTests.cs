@@ -160,6 +160,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             Assert.Equal(20,species.Count);
             Assert.Equal(2, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(4, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
+            Assert.Equal(8, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(16, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
             foreach(var plant in species)
             {
                 var profile=Assert.IsType<PlantCatalogProfile>(plant.CatalogProfile);
@@ -181,6 +183,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         var monstera = Assert.Single(catalog!, p => p.ScientificName == "Monstera deliciosa");
         Assert.Equal(2, monstera.CatalogProfile!.GrowthReferences!.Count);
         Assert.Contains("young", monstera.CatalogProfile.GrowthReferences[0].Photo.Path);
+        var pothos = Assert.Single(catalog!, p => p.ScientificName == "Epipremnum aureum");
+        Assert.Equal(["Devil's ivy", "Pothos"], pothos.CatalogProfile!.CommonNameAliases);
     }
 
     private const string Catalog = """

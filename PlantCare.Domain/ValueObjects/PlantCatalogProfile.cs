@@ -8,12 +8,21 @@ public sealed record PlantCatalogPhoto(
 
 public sealed record PlantCatalogProfile(
     string CareSourceUrl, DateOnly ReviewedOn, PlantCatalogPhoto? Photo,
-    IReadOnlyList<PlantGrowthReference>? GrowthReferences = null)
+    IReadOnlyList<PlantGrowthReference>? GrowthReferences = null,
+    IReadOnlyList<string>? CommonNameAliases = null)
 {
     public void Validate()
     {
         Https(CareSourceUrl);
         if (ReviewedOn == default) throw new ArgumentException("A care review date is required.");
+        if (CommonNameAliases is { } aliases)
+        {
+            if (aliases.Count > 8) throw new ArgumentException("At most eight common-name aliases are supported.");
+            var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var alias in aliases)
+                if (string.IsNullOrWhiteSpace(alias) || alias.Length > 80 || alias != alias.Trim() || !names.Add(alias))
+                    throw new ArgumentException("Common-name aliases must be distinct, trimmed names of at most 80 characters.");
+        }
         if (Photo is { } photo) ValidatePhoto(photo);
         if (GrowthReferences is null) return;
         if (GrowthReferences.Count > 6) throw new ArgumentException("At most six growth references are supported.");

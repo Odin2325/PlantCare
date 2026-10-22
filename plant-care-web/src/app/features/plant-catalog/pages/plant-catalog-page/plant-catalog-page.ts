@@ -9,6 +9,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
+import { normalizePlantSearch } from '../../../../shared/plant-search';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PlantSpecies, SunlightRequirement } from '../../../../models/plant-species.model';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
@@ -50,10 +51,11 @@ export class PlantCatalogPage {
   }));
   readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
-    const query = this.query().trim().toLowerCase();
+    const query = normalizePlantSearch(this.query());
     return this.plantSpecies().filter(plant =>
       (!this.light() || plant.sunlightRequirement === this.light()) &&
-      (!query || [plant.commonName, plant.scientificName, plant.description].join(' ').toLowerCase().includes(query)))
+      (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
+        ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en', { sensitivity: 'base' }) *
         (this.sort() === 'name-desc' ? -1 : 1));
   });

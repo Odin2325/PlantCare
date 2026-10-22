@@ -16,6 +16,21 @@ public sealed class PlantCatalogProfileTests
             """)!;
         profile.Validate();
         Assert.Null(profile.GrowthReferences);
+        Assert.Null(profile.CommonNameAliases);
+    }
+
+    [Fact]
+    public void AliasesAreOptionalButMustBeBoundedDistinctNames()
+    {
+        var profile = new PlantCatalogProfile("https://example.org/care", new(2026, 10, 22), null,
+            CommonNameAliases: ["Devil's ivy", "Pothos"]);
+        profile.Validate();
+        foreach (var invalid in new IReadOnlyList<string>[] {
+            [""], [" name"], ["Name "], [null!], [new string('a', 81)], ["Pothos", "pothos"],
+            Enumerable.Range(0, 9).Select(i => "Name " + i).ToArray() })
+            Assert.Throws<ArgumentException>(() => (profile with { CommonNameAliases = invalid }).Validate());
+        var roundTrip = JsonSerializer.Deserialize<PlantCatalogProfile>(JsonSerializer.Serialize(profile))!;
+        Assert.Equal(profile.CommonNameAliases, roundTrip.CommonNameAliases);
     }
 
     [Fact]

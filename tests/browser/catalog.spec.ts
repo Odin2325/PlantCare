@@ -134,3 +134,32 @@ test('growth references show selected species features with working photos, sour
   await expect(page.getByRole('heading', { level: 1, name: 'Aloe vera', exact: true })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toHaveCount(0);
 });
+
+test('familiar aliases tolerate punctuation, preserve navigation and keep ambiguous species separate', async ({ page }) => {
+  for (const [query, common] of [
+    ['Devils ivy', 'Golden pothos'], ['DEVIL’S IVY', 'Golden pothos'],
+    ['mother in laws tongue', 'Snake plant'], ['Zanzibar gem', 'ZZ plant'],
+    ['Indian rubber plant', 'Rubber plant'], ['Medicinal aloe', 'Aloe vera'],
+  ]) {
+    await page.goto('/plants?q=' + encodeURIComponent(query));
+    await expect(page.locator('.plant-card h2')).toHaveText([common]);
+  }
+  await page.goto('/plants?q=Devils%20ivy&light=BrightIndirectLight');
+  await page.locator('.plant-card').getByRole('link', { name: 'View details' }).click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Golden pothos', exact: true })).toBeVisible();
+  await expect(page.locator('.common-name-aliases')).toHaveText("Also known as: Devil's ivy, Pothos.");
+  await expect(page.getByText('Common names can refer to different plants.', { exact: false })).toBeVisible();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await expect(page.getByRole('searchbox', { name: 'Find a plant' })).toHaveValue('Devils ivy');
+  await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('BrightIndirectLight');
+  await page.reload();
+  await expect(page.locator('.plant-card h2')).toHaveText(['Golden pothos']);
+  await page.goto('/plants?q=Ribbon%20plant');
+  await expect(page.locator('.plant-card h2')).toHaveText(['Corn plant', 'Spider plant']);
+  await expect(page.locator('.plant-card .scientific-name')).toHaveText(['Dracaena fragrans', 'Chlorophytum comosum']);
+  await page.goto('/plants?q=Money%20plant');
+  await expect(page.locator('.plant-card h2')).toHaveText(['Chinese money plant', 'Jade plant']);
+  await page.setViewportSize({ width: 320, height: 800 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Alternative-name search results');
+});
