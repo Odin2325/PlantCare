@@ -51,10 +51,50 @@ rejecting catalog writes. A local headless Chromium probe could not establish
 notification display permission for the worker; it is not counted as a pass or
 as physical-device acceptance.
 
-Final CI, deployment and backup results will be recorded after verification.
+Final CI and deployment verification is recorded below. Physical Android photo
+appearance remains pending owner confirmation.
 
 Local verification passed: production API/worker builds, all 42 selected real SQL
 Server push/account-data/erasure checks, and the restricted worker permission
 check (including denied catalog writes). The initial full backend run passed
 147 tests; the subsequently added common-name fallback also passed on real SQL.
 All 22 unchanged catalog image files still match their attribution manifest.
+
+## Staging acceptance
+
+Candidate `22539196d11db01e5769f36db292e59e11f94813` is live on staging, following
+`c23787c071074105a637e5f20dee06a0ea6f4cf9`.
+[Full CI](https://github.com/Odin2325/PlantCare/actions/runs/39779446480) passed
+for this exact commit, including backend/frontend, real SQL Server isolation,
+password-reset/session security, encrypted push retry/failure checks, browser
+journeys, accessibility and PWA behavior. The deployment bundle hashes, actual
+API/worker image IDs, worker SELECT/catalog-write-denial checks, readiness and
+operations health passed during activation.
+
+All 12 catalog browser checks passed against public trusted HTTPS in desktop
+Chromium, mobile Chromium and Firefox. All 21 shared catalog IDs/names, 20 reviewed
+profiles and 22 served image hashes are unchanged. The fallback app PNG is also
+available over trusted HTTPS. A conservative payload check of all 20 real photos,
+using an intentionally long non-ASCII plant name, remained below 2,500 bytes per
+message (largest 1,775); this is a check of the current dataset, not a guarantee
+for arbitrary future metadata.
+
+This server/worker release keeps `main-AQVOAFGY.js` unchanged. A session controlled
+by the previous frontend's service worker stayed authenticated across activation,
+retained its approved test account's plant IDs and completed calendar IDs, loaded
+the catalog/photos and logged out successfully. No frontend update prompt,
+reinstallation or renewed push permission is required for this payload change.
+No extra phone pushes or emails were sent for acceptance; existing normal
+reminders will use the new payload when next delivered. Previously delivered
+notifications retain their original appearance.
+
+The owner was asked to check a newly received real-catalog reminder in the
+installed Android app for the correct plant picture and Dashboard tap behavior.
+This manual result is still pending; automated payload/transport results are not
+claimed as proof of physical photo rendering.
+
+Fresh encrypted off-server VPS backups passed before and after activation. The
+post-deployment capture ran after live browser/session checks completed. Local
+and VPS backup health both reported healthy with no problems, and final public
+readiness and operations checks passed. The private backup candidate pointer now
+identifies this deployed release.

@@ -30,6 +30,11 @@ Your search and filters remain when you return from details or reload. Clear
 filters restores the full catalog in A–Z order. Suggested watering intervals are
 prompts to check moisture, not instructions to water an already wet pot.
 
+English common names lead the species listings; scientific names are secondary
+and remain searchable. Your own plants use the nickname you saved. Monstera and
+spider plant details also include Growth references with credited example photos.
+These show different specimens, not a fixed growth timeline or a health diagnosis.
+
 ## Daily care and calendar
 
 Open Dashboard to review due care and record an action when performed. Verify
@@ -60,6 +65,12 @@ A newly received care push opens Dashboard. Browser permissions, device battery
 settings, network access and the push provider can delay or prevent delivery.
 Review Dashboard even if no push arrives. Disable on this device removes that
 device's subscription; browser/site settings also control notification permission.
+
+New care reminders use the relevant species photo where the device supports it,
+with photographer/license credit in the text. Plants without suitable photo
+metadata use the PlantCare icon. A phone may keep its separate app/status-bar
+symbol, and a picture can be omitted if it cannot load. The reminder still opens
+Dashboard. Already delivered notifications keep their original appearance.
 
 ## Install on Android and update
 
