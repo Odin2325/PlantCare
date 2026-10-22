@@ -25,6 +25,15 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Future naming and notification requests (2026-10-22)
+
+- Recorded English common names as the primary species label, keeping personal
+  nicknames first and scientific names secondary/searchable. Catalog cards already
+  lead with common names; review the remaining surfaces for consistency.
+- Recorded plant-specific care notification pictures, with app-icon fallback and
+  real Android rendering/tap acceptance required. Neither item is implemented by
+  this documentation change. See [catalog-roadmap.md](catalog-roadmap.md).
+
 ### English houseplant catalog and browsing (2026-10-21)
 
 - Deployed 15 reviewed real houseplants with English care guidance, source links

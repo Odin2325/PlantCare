@@ -45,3 +45,38 @@ features on species and personal plant detail pages. See
 verification. These show different specimens, without fixed timelines or diagnosis.
 Expand curated references gradually; a personal photo journal remains a separate
 future feature requiring its own storage, privacy and deletion design.
+
+## Planned: familiar names first
+
+Owner request 2026-10-22: users should identify plants quickly through English
+common names, with scientific names secondary. The catalog already leads with
+`commonName`; audit remaining plant headings, selectors, search results, care
+events and notifications for consistency. For an owner's plant, retain the
+nickname when present, then fall back to the English common name. Keep scientific
+names as secondary identification and searchable text, preserving scientific-name
+catalog import matching and stable species IDs. Review familiar English aliases
+where a single common name is ambiguous or less recognizable. Do not introduce
+German display names or replace personal nicknames.
+
+Acceptance: catalog cards/details and plant selectors lead with a common name;
+personal care views and reminder text lead with nickname or common name;
+scientific names remain available without dominating the label. Search continues
+to find both common and scientific names. Existing links, IDs and history remain.
+
+## Planned: plant pictures in care notifications
+
+Owner request 2026-10-22: show the plant needing care as the notification icon
+where supported. Use the corresponding reviewed species photo initially, with
+the PlantCare app icon as fallback for missing images, failed image loads or
+platform limitations. This does not require a personal photo-upload feature.
+Preserve photo rights/attribution and use only existing local public image assets;
+do not put private data or credentials in image URLs. Retain recognizable reminder
+text and the accepted Dashboard destination when a reminder is tapped.
+
+Investigate browser/OS rendering before implementation: a supplied photo might
+appear in a notification's main content while the OS retains a separate app icon
+or monochrome status-bar badge. Do not promise replacement of every system icon.
+Define the chosen image treatment with real installed Android/Chrome testing,
+including multiple plants, absent/broken photos, the app closed and tapping the
+notification. Browser-only tests cannot establish the physical notification layout.
+This is planned work, not implemented or deployed by this roadmap update.
