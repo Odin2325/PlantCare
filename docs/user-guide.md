@@ -23,7 +23,7 @@ legacy demo entry is synthetic and is not botanical guidance.
 
 ## Browse the catalog
 
-Use Find a plant to search common/scientific names or descriptions. Combine it
+Use Find a plant to search common/scientific names, reviewed alternative names or descriptions. Combine it
 with Light requirement and Name A–Z / Name Z–A sorting. These are the listed care
 requirements; open View details for placement advice and full care instructions.
 Your search and filters remain when you return from details or reload. Clear
@@ -34,6 +34,13 @@ English common names lead the species listings; scientific names are secondary
 and remain searchable. Your own plants use the nickname you saved. Monstera and
 spider plant details also include Growth references with credited example photos.
 These show different specimens, not a fixed growth timeline or a health diagnosis.
+
+Alternative names are currently reviewed for eight species. Try Devils ivy or
+mother in laws tongue; matching ignores apostrophe and hyphen variations. Species
+details list Also known as. A shared name such as Ribbon plant can return several
+different species, so compare the photos and scientific names before choosing.
+My plants search also recognizes these alternative names while keeping the
+nickname you saved and the selected location/tag filters.
 
 ## Daily care and calendar
 

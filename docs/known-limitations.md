@@ -4,7 +4,7 @@ Reviewed 2026-10-22. These describe the staging beta, not a released v1.
 
 | Area | Current status |
 | --- | --- |
-| Catalog | 20 reviewed English houseplant entries with linked care references; a starter selection, not a complete botanical database. The legacy demo entry remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
+| Catalog | 20 reviewed English houseplant entries with linked care references; a starter selection, not a complete botanical database. Eight species have reviewed alternative common names for search; these names are not unique species identifiers. The legacy demo entry remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
 | Images | All 20 reviewed entries have local licensed reference photos with visible credits. Monstera and spider plant have curated growth-feature examples of different specimens, without timelines or diagnosis. Personal photo journals are not implemented. |
 | Privacy/account tools | Account supports password-verified export/deletion. The follow-up adds guarded 30-day expiry and current-authority reconciliation; see release/retention-and-erasure-recovery.md for enabling status. Offline storage can delay cleanup; missing current authority blocks managed app recovery. The full privacy notice remains a draft. |
 | Offline use | Offline explanation and reconnect supported; no offline care writes or full offline collection. |
