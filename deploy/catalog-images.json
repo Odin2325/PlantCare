@@ -278,5 +278,33 @@
     "bytes": 185866,
     "sourceFileName": "cyclamen_persicum-wh_nggzAxMbob09.jpe",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Monstera deliciosa (Split-leaf philodendron) houseplant view",
+    "caption": "Monstera deliciosa (Split-leaf philodendron) houseplant view of a young plant",
+    "credit": "Cindy Christian",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "monstera-deliciosa-young",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+    "path": "/images/plants/monstera-deliciosa-young.jpg",
+    "sha256": "f75dfa2d9a188a7b78f930ee5277675e38259142675635a68ea4935a467188f5",
+    "bytes": 489979,
+    "sourceFileName": "20250801_132326_DHyeCR82NXNt.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Upside down plantlet with root beginnings",
+    "caption": "Roots forming on plantlet",
+    "credit": "Hope Duckworth",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "chlorophytum-comosum-plantlet-roots",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+    "path": "/images/plants/chlorophytum-comosum-plantlet-roots.jpg",
+    "sha256": "791a450dd1c9c78830102b81db785214ff6d64359d3cc45deab0604882d02edd",
+    "bytes": 488064,
+    "sourceFileName": "Chlorophytum_comosum_YUzswpgdjCwH.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]

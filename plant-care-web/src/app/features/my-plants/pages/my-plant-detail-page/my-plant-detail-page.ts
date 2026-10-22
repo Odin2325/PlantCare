@@ -5,11 +5,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { MyPlantsApiService } from '../../data-access/my-plants-api.service';
 import { UserPlant } from '../../models/user-plant.model';
+import { PlantGrowthReferences } from '../../../../shared/plant-growth-references/plant-growth-references';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 
 @Component({
   selector: 'app-my-plant-detail-page', standalone: true,
-  imports: [DatePipe, RouterLink, PlantPhoto],
+  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences],
   templateUrl: './my-plant-detail-page.html', styleUrl: './my-plant-detail-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

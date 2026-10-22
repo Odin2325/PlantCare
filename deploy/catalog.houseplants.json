@@ -16,7 +16,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/monstera-deliciosa.jpg",
         "altText": "Swiss cheese plant reference photo",
@@ -25,7 +25,35 @@
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
         "title": "Potted form"
-      }
+      },
+      "growthReferences": [
+        {
+          "title": "Young plant with whole leaves",
+          "description": "The young plant shown has heart-shaped leaves without the deep splits visible in the other example. Do not expect every new leaf to develop holes on a fixed schedule.",
+          "photo": {
+            "path": "/images/plants/monstera-deliciosa-young.jpg",
+            "altText": "Young potted Monstera with mostly whole, heart-shaped leaves",
+            "credit": "Cindy Christian",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Monstera deliciosa (Split-leaf philodendron) houseplant view of a young plant"
+          }
+        },
+        {
+          "title": "Split and perforated leaves",
+          "description": "This separate specimen shows the deep leaf splits and internal holes characteristic of Monstera deliciosa. A sturdy support helps this climbing plant as it grows.",
+          "photo": {
+            "path": "/images/plants/monstera-deliciosa.jpg",
+            "altText": "Potted Monstera with deeply split and perforated leaves",
+            "credit": "Maja Dumat",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+            "licenseName": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+            "title": "Potted form"
+          }
+        }
+      ]
     }
   },
   {
@@ -132,7 +160,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-22",
       "photo": {
         "path": "/images/plants/chlorophytum-comosum.jpg",
         "altText": "Spider plant reference photo",
@@ -141,7 +169,35 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Chlorophytum comosum, Spider Plant, houseplant view"
-      }
+      },
+      "growthReferences": [
+        {
+          "title": "Plant with hanging plantlets",
+          "description": "Small leafy plantlets grow along long stems extending from the parent plant. Plantlet production depends on conditions, including light; their absence alone does not indicate poor health.",
+          "photo": {
+            "path": "/images/plants/chlorophytum-comosum.jpg",
+            "altText": "Spider plant with striped leaves and hanging plantlets",
+            "credit": "Joanne Kollar (Pitt County)",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Chlorophytum comosum, Spider Plant, houseplant view"
+          }
+        },
+        {
+          "title": "Roots forming on a plantlet",
+          "description": "This close-up shows root beginnings on a plantlet. Spider plants can be propagated from plantlets; this example illustrates a feature to recognize, not a required age or size.",
+          "photo": {
+            "path": "/images/plants/chlorophytum-comosum-plantlet-roots.jpg",
+            "altText": "Spider plant plantlet held upside down to show emerging roots",
+            "credit": "Hope Duckworth",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Roots forming on plantlet"
+          }
+        }
+      ]
     }
   },
   {

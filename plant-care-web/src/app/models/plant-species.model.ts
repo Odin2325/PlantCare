@@ -26,9 +26,16 @@ export interface PlantSpecies {
 }
 
 export interface PlantCatalogProfile {
+  growthReferences?: PlantGrowthReference[] | null;
   careSourceUrl: string;
   reviewedOn: string;
   photo: PlantCatalogPhoto | null;
+}
+
+export interface PlantGrowthReference {
+  title: string;
+  description: string;
+  photo: PlantCatalogPhoto;
 }
 
 export interface PlantCatalogPhoto {

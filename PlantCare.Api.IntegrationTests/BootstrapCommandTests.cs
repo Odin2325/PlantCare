@@ -158,6 +158,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         {
             var species=await database.PlantSpecies.ToListAsync();
             Assert.Equal(20,species.Count);
+            Assert.Equal(2, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
+            Assert.Equal(4, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
             foreach(var plant in species)
             {
                 var profile=Assert.IsType<PlantCatalogProfile>(plant.CatalogProfile);
@@ -165,8 +167,20 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
                 Assert.NotNull(profile.Photo);
                 var image=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../../../../plant-care-web/public",profile.Photo.Path.TrimStart('/')));
                 Assert.True(File.Exists(image));
+                foreach (var reference in profile.GrowthReferences ?? [])
+                {
+                    Assert.True(File.Exists(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
+                        "../../../../plant-care-web/public", reference.Photo.Path.TrimStart('/')))));
+                }
             }
         });
+        using var client = factory.CreateClient();
+        var catalog = await client.GetFromJsonAsync<PlantSpeciesDto[]>("/api/plant-species",
+            new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)
+            { Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() } });
+        var monstera = Assert.Single(catalog!, p => p.ScientificName == "Monstera deliciosa");
+        Assert.Equal(2, monstera.CatalogProfile!.GrowthReferences!.Count);
+        Assert.Contains("young", monstera.CatalogProfile.GrowthReferences[0].Photo.Path);
     }
 
     private const string Catalog = """

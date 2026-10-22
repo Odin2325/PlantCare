@@ -102,3 +102,35 @@ test('flowering additions have identifiable photos, attributed care and seasonal
   }
   await auditAccessibility(page, 'Flowering plant care detail');
 });
+
+test('growth references show selected species features with working photos, sources and mobile reflow', async ({ page, request }) => {
+  const species = await (await request.get('/api/plant-species')).json();
+  for (const name of ['Swiss cheese plant', 'Spider plant']) {
+    const plant = species.find((item: { commonName: string }) => item.commonName === name);
+    expect(plant.catalogProfile.growthReferences).toHaveLength(2);
+    await page.goto('/plants/' + plant.id);
+    const section = page.getByRole('region', { name: 'Growth references', exact: true });
+    await section.scrollIntoViewIfNeeded();
+    await expect(section).toBeVisible();
+    await expect(section.getByText('These photos show different specimens', { exact: false })).toBeVisible();
+    for (const reference of plant.catalogProfile.growthReferences) {
+      await expect(section.getByRole('heading', { name: reference.title, exact: true })).toBeVisible();
+      const photo = section.getByRole('img', { name: reference.photo.altText, exact: true });
+      await photo.scrollIntoViewIfNeeded();
+      await expect.poll(() => photo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      const article = photo.locator('xpath=ancestor::article');
+      await expect(article.getByRole('link', { name: reference.photo.credit, exact: true })).toHaveAttribute('href', reference.photo.sourceUrl);
+      await expect(article.getByRole('link', { name: reference.photo.licenseName, exact: true })).toHaveAttribute('href', reference.photo.licenseUrl);
+    }
+    const source = section.getByRole('link', { name: 'Growth reference source', exact: true });
+    await expect(source).toHaveAttribute('href', plant.catalogProfile.careSourceUrl);
+    await source.focus(); await expect(source).toBeFocused();
+    await page.setViewportSize({ width: 320, height: 800 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await auditAccessibility(page, 'Growth references at narrow width');
+  }
+  const aloe = species.find((item: { commonName: string }) => item.commonName === 'Aloe vera');
+  await page.goto('/plants/' + aloe.id);
+  await expect(page.getByRole('heading', { level: 1, name: 'Aloe vera', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toHaveCount(0);
+});

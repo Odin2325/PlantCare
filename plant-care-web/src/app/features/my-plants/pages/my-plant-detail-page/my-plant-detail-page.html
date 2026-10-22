@@ -21,6 +21,8 @@
         </article>
       } @empty { <p>No care schedules.</p> }
     </section>
+  <app-plant-growth-references [profile]="item.speciesCatalogProfile" />
+
     <div class="actions"><a routerLink="/dashboard">Complete care on Dashboard</a><a [routerLink]="['/my-plants', item.id, 'care-history']">View care history</a><a [routerLink]="['/plants', item.plantSpeciesId]">Species information</a></div>
   } @else {
     @if (loading()) { <p role="status">Loading plant details…</p> }

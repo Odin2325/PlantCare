@@ -37,10 +37,11 @@ image delivery within the owner's hosting budget.
 Compact cards, light filtering, name sorting and preserved navigation state are
 tracked in [catalog-browsing.md](catalog-browsing.md). All copy remains English.
 
-## Later exploration: healthy growth progression
+## Implemented: curated growth references
 
-Explore curated growth-stage examples after thumbnails. Growth varies with age,
-season and conditions, so examples must not imply a universal timeline or serve
-as a diagnosis. Decide whether these are reference photos or an owner's personal
-photo journal; those are different scopes. Any generated illustration must be
-labelled and must not be treated as botanical evidence.
+Monstera and spider plant now have attributed examples of recognizable growth
+features on species and personal plant detail pages. See
+[growth-references.md](growth-references.md) for source review, limitations and
+verification. These show different specimens, without fixed timelines or diagnosis.
+Expand curated references gradually; a personal photo journal remains a separate
+future feature requiring its own storage, privacy and deletion design.

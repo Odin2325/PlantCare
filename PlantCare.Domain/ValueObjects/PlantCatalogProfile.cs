@@ -7,13 +7,27 @@ public sealed record PlantCatalogPhoto(
     string LicenseName, string LicenseUrl, string? Title = null);
 
 public sealed record PlantCatalogProfile(
-    string CareSourceUrl, DateOnly ReviewedOn, PlantCatalogPhoto? Photo)
+    string CareSourceUrl, DateOnly ReviewedOn, PlantCatalogPhoto? Photo,
+    IReadOnlyList<PlantGrowthReference>? GrowthReferences = null)
 {
     public void Validate()
     {
         Https(CareSourceUrl);
         if (ReviewedOn == default) throw new ArgumentException("A care review date is required.");
-        if (Photo is not { } photo) return;
+        if (Photo is { } photo) ValidatePhoto(photo);
+        if (GrowthReferences is null) return;
+        if (GrowthReferences.Count > 6) throw new ArgumentException("At most six growth references are supported.");
+        foreach (var reference in GrowthReferences)
+        {
+            if (reference is null || reference.Photo is null)
+                throw new ArgumentException("A growth reference and photo are required.");
+            Required(reference.Title, 100); Required(reference.Description, 600);
+            ValidatePhoto(reference.Photo);
+        }
+    }
+
+    private static void ValidatePhoto(PlantCatalogPhoto photo)
+    {
         if (photo.Path is null || !Regex.IsMatch(photo.Path, @"\A/images/plants/[a-z0-9-]+\.(jpg|jpeg|png|webp)\z"))
             throw new ArgumentException("Use a local plant image path.");
         Required(photo.AltText, 300); Required(photo.Credit, 200);
@@ -45,3 +59,5 @@ public sealed record PlantCatalogProfile(
             throw new ArgumentException("Catalog sources must use an absolute HTTPS URL without credentials.");
     }
 }
+
+public sealed record PlantGrowthReference(string Title, string Description, PlantCatalogPhoto Photo);

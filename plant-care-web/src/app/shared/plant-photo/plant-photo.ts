@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { PlantCatalogProfile } from '../../models/plant-species.model';
+import { PlantCatalogPhoto, PlantCatalogProfile } from '../../models/plant-species.model';
 
 @Component({
   selector: 'app-plant-photo', standalone: true,
   template: `
     <figure [class.detail]="detail()">
-      @if (photo(); as p) {
+      @if (selectedPhoto(); as p) {
         @if (failedPath() !== p.path) {
           <img [src]="p.path" [alt]="p.altText" width="600" height="400"
                loading="lazy" decoding="async" (error)="failedPath.set(p.path)">
@@ -24,7 +24,8 @@ import { PlantCatalogProfile } from '../../models/plant-species.model';
 })
 export class PlantPhoto {
   readonly profile = input<PlantCatalogProfile | null | undefined>(null);
+  readonly photo = input<PlantCatalogPhoto | null | undefined>(null);
   readonly detail = input(false);
-  readonly photo = computed(() => this.profile()?.photo ?? null);
+  readonly selectedPhoto = computed(() => this.photo() ?? this.profile()?.photo ?? null);
   readonly failedPath = signal<string | null>(null);
 }
