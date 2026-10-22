@@ -105,7 +105,7 @@ test('flowering additions have identifiable photos, attributed care and seasonal
 
 test('growth references show selected species features with working photos, sources and mobile reflow', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
-  for (const name of ['Swiss cheese plant', 'Spider plant']) {
+  for (const name of ['Swiss cheese plant', 'Spider plant', 'Golden pothos', 'Aloe vera']) {
     const plant = species.find((item: { commonName: string }) => item.commonName === name);
     expect(plant.catalogProfile.growthReferences).toHaveLength(2);
     await page.goto('/plants/' + plant.id);
@@ -129,9 +129,9 @@ test('growth references show selected species features with working photos, sour
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await auditAccessibility(page, 'Growth references at narrow width');
   }
-  const aloe = species.find((item: { commonName: string }) => item.commonName === 'Aloe vera');
-  await page.goto('/plants/' + aloe.id);
-  await expect(page.getByRole('heading', { level: 1, name: 'Aloe vera', exact: true })).toBeVisible();
+  const zz = species.find((item: { commonName: string }) => item.commonName === 'ZZ plant');
+  await page.goto('/plants/' + zz.id);
+  await expect(page.getByRole('heading', { level: 1, name: 'ZZ plant', exact: true })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toHaveCount(0);
 });
 

@@ -306,5 +306,33 @@
     "bytes": 488064,
     "sourceFileName": "Chlorophytum_comosum_YUzswpgdjCwH.jpeg",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "glossy, variegated leaves with cascading stems",
+    "caption": "Epipremnum aureum (Pothos) houseplant view",
+    "credit": "Matt Stevens (Pitt County)",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "epipremnum-aureum-compact",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "path": "/images/plants/epipremnum-aureum-compact.jpg",
+    "sha256": "c55379e16cdb1ac442ba427911e3703d2ad5fbde25e9a8ad4208bc9fc569cbc3",
+    "bytes": 609592,
+    "sourceFileName": "20250522_140400_Epip_QULzb9gfugsU.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Fom in a pot with gray-green thick succulent leaves",
+    "caption": "Form in a pot",
+    "credit": "Tim Kortekamp",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "aloe-vera-rosette",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+    "path": "/images/plants/aloe-vera-rosette.jpg",
+    "sha256": "dfa4aa8c7ad7cd263837802d77b5434a502dd5c7a9637345279570146170aa2f",
+    "bytes": 410842,
+    "sourceFileName": "Aloe_vera_Form_in_a__7JIpdVIH2OAj.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]

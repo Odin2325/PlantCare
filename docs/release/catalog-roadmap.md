@@ -39,7 +39,7 @@ tracked in [catalog-browsing.md](catalog-browsing.md). All copy remains English.
 
 ## Implemented: curated growth references
 
-Monstera and spider plant now have attributed examples of recognizable growth
+Monstera, spider plant, golden pothos and aloe vera now have attributed examples of recognizable growth
 features on species and personal plant detail pages. See
 [growth-references.md](growth-references.md) for source review, limitations and
 verification. These show different specimens, without fixed timelines or diagnosis.

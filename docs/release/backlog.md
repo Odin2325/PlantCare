@@ -25,6 +25,13 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Growth-reference expansion (2026-10-22)
+
+- Added compact/trailing golden pothos and aloe rosette/flower-stalk examples.
+  Four species now have eight attributed references; original image files remain
+  below 1 MiB each. Care fields, cover photos and aliases are preserved. See
+  [growth-references.md](growth-references.md) for sources and verification.
+
 ### Familiar-name search (2026-10-22)
 
 - Added 16 reviewed English common-name aliases for eight existing species, with

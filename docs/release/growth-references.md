@@ -1,5 +1,32 @@
 # Curated growth references
 
+## Expansion: golden pothos and aloe vera
+
+Prepared 2026-10-22: four additional examples bring coverage to four species and
+eight references. [NC State Extension's pothos profile](https://plants.ces.ncsu.edu/plants/epipremnum-aureum/)
+supports the trailing/climbing habit and retained juvenile leaf shape in containers.
+The compact potted example and trailing specimen illustrate different habits,
+not a chronological before/after pair; variegation is not an age indicator.
+[The aloe profile](https://plants.ces.ncsu.edu/plants/aloe-vera/)
+supports the leaf rosette and mature plant's flowering stalk. The examples do not
+promise flowering at a particular age or classify non-flowering plants as unhealthy.
+
+Two covers are reused; new originals are pothos by Matt Stevens (Pitt County),
+CC BY 4.0, and aloe by Tim Kortekamp, CC BY-SA 4.0. All four selected photographs
+were visually reviewed. The 24 unique catalog images remain unmodified, each below
+1 MiB, with original titles, attribution, licenses and hashes in the manifest.
+All care fields, aliases, primary photographs and existing growth references are
+preserved. This is catalog data in the existing JSON column, without a migration.
+Deployment acceptance for the expansion will be recorded after verification.
+
+Local checks passed: 149 backend tests, all 15 catalog browser checks across
+desktop/mobile Chromium and Firefox, and the 24-image attribution/hash check.
+Desktop and phone layouts were visually reviewed; galleries also pass 320px
+reflow and sampled accessibility checks. Existing dataset fields were compared
+with the previous commit, allowing only these four references and review dates.
+
+## Initial implementation
+
 Implemented 2026-10-22, initially for Monstera deliciosa and Chlorophytum comosum.
 The English-only gallery appears on species details and personal plant details,
 after care information. Catalog cards retain their compact single photograph.

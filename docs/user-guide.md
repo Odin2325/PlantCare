@@ -31,8 +31,9 @@ filters restores the full catalog in A–Z order. Suggested watering intervals a
 prompts to check moisture, not instructions to water an already wet pot.
 
 English common names lead the species listings; scientific names are secondary
-and remain searchable. Your own plants use the nickname you saved. Monstera and
-spider plant details also include Growth references with credited example photos.
+and remain searchable. Your own plants use the nickname you saved. Monstera,
+spider plant, golden pothos and aloe vera details also include Growth references
+with credited example photos.
 These show different specimens, not a fixed growth timeline or a health diagnosis.
 
 Alternative names are currently reviewed for eight species. Try Devils ivy or

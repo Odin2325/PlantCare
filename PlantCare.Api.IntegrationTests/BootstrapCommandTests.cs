@@ -158,8 +158,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         {
             var species=await database.PlantSpecies.ToListAsync();
             Assert.Equal(20,species.Count);
-            Assert.Equal(2, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
-            Assert.Equal(4, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
+            Assert.Equal(4, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
+            Assert.Equal(8, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
             Assert.Equal(8, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
             Assert.Equal(16, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
             foreach(var plant in species)

@@ -86,6 +86,34 @@
       "commonNameAliases": [
         "Devil's ivy",
         "Pothos"
+      ],
+      "growthReferences": [
+        {
+          "title": "Compact potted foliage",
+          "description": "This specimen has short visible stems and heart-shaped, variegated leaves. Pothos grown in containers commonly retains this juvenile leaf shape; leaf colour patterns alone do not indicate age.",
+          "photo": {
+            "path": "/images/plants/epipremnum-aureum-compact.jpg",
+            "altText": "Golden pothos with heart-shaped leaves clustered above a small pot",
+            "credit": "Matt Stevens (Pitt County)",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Epipremnum aureum (Pothos) houseplant view"
+          }
+        },
+        {
+          "title": "Trailing stems",
+          "description": "This separate specimen shows long stems hanging below its pot. Pothos can trail or climb with aerial roots. Stem length and leaf size depend on support, light and growing conditions, rather than a fixed timetable.",
+          "photo": {
+            "path": "/images/plants/epipremnum-aureum.jpg",
+            "altText": "Houseplant view",
+            "credit": "Dell Enecks (Pitt County)",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Epipremnum aureum (Pothos) houseplant view"
+          }
+        }
       ]
     }
   },
@@ -398,6 +426,34 @@
       "commonNameAliases": [
         "Barbados aloe",
         "Medicinal aloe"
+      ],
+      "growthReferences": [
+        {
+          "title": "Leaf rosette",
+          "description": "The thick, pointed leaves grow outward from the centre in a rosette. This specimen illustrates that leaf arrangement; its size does not establish an age or diagnose plant health.",
+          "photo": {
+            "path": "/images/plants/aloe-vera-rosette.jpg",
+            "altText": "Aloe vera with thick pointed leaves spreading outward in a rosette",
+            "credit": "Tim Kortekamp",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+            "licenseName": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "Form in a pot"
+          }
+        },
+        {
+          "title": "Developing flower stalk",
+          "description": "A tall stalk with unopened flower buds rises above the rosette on this separate specimen. Mature aloe can produce tubular flowers. This is an example of flowering growth, not a deadline or a requirement for a healthy indoor plant.",
+          "photo": {
+            "path": "/images/plants/aloe-vera.jpg",
+            "altText": "Aloe vera with an upright flower stalk and unopened buds above the leaves",
+            "credit": "K. Andre",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/aloe-vera/",
+            "licenseName": "CC BY-SA 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+            "title": "Form in a pot"
+          }
+        }
       ]
     }
   },
