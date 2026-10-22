@@ -17,13 +17,36 @@ were visually reviewed. The 24 unique catalog images remain unmodified, each bel
 1 MiB, with original titles, attribution, licenses and hashes in the manifest.
 All care fields, aliases, primary photographs and existing growth references are
 preserved. This is catalog data in the existing JSON column, without a migration.
-Deployment acceptance for the expansion will be recorded after verification.
+Candidate `dd3bc5e5432c8a397a9fdd39cdc597c198926dd2` is deployed on staging,
+following `2ac81f1479a2c0219961a16d35f561ea1df5fef4`.
+[Full exact-commit CI](https://github.com/Odin2325/PlantCare/actions/runs/39793037120)
+passed, including real SQL Server isolation/session security, push failures and
+retries, browser journeys, accessibility and PWA updates. Bundle hashes, pinned
+image identities, restricted runtime access, readiness and operations health
+passed during activation.
 
 Local checks passed: 149 backend tests, all 15 catalog browser checks across
 desktop/mobile Chromium and Firefox, and the 24-image attribution/hash check.
 Desktop and phone layouts were visually reviewed; galleries also pass 320px
 reflow and sampled accessibility checks. Existing dataset fields were compared
 with the previous commit, allowing only these four references and review dates.
+
+Public metadata verification preserved all 21 shared catalog IDs/names and care
+fields, including the legacy demo. All 24 served image hashes and complete growth
+reference metadata match the source dataset; aliases and primary photos remain.
+A service-worker-controlled session held across activation retained its login,
+personal plant IDs and completed calendar history, browsed the catalog and logged
+out successfully. The frontend remains `main-3OR3FFE7.js`; reopening online fetches
+the updated catalog without an app reinstall. This is automated browser evidence,
+not a new physical Android check.
+
+All 15 catalog browser checks passed again against public trusted HTTPS across
+desktop/mobile Chromium and Firefox, including all four galleries, source/license
+links, sampled accessibility and 320px reflow. Fresh encrypted off-server VPS
+backups passed before and after activation; the latter ran after browser checks
+finished. Both local and VPS backup health checks were healthy at 18:57 UTC on
+2026-10-22, with no problem codes. Final public readiness and operations checks
+passed. The backup candidate pointer identifies this deployed release.
 
 ## Initial implementation
 
