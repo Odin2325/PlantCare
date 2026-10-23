@@ -66,6 +66,7 @@ test('calendar sharing sends mail and opens only the invited account calendar', 
     await page.getByLabel('Recipient email', { exact: true }).fill(recipient);
     await page.getByRole('button', { name: 'Share calendar', exact: true }).click();
     await expect(page.getByText('Invitation emailed.', { exact: false })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Sharing controls fit the viewport').toBe(true);
     const link = await emailLink(recipient, 'A PlantCare calendar was shared with you');
     expect(link.pathname).toBe('/calendar'); expect(link.searchParams.has('invitation')).toBe(true);
     await invited.goto(link.href);
@@ -76,6 +77,7 @@ test('calendar sharing sends mail and opens only the invited account calendar', 
     await invited.getByLabel('Password', { exact: true }).fill(password);
     await auth(invited, 'Log in', 'login');
     await expect(invited.getByText('You are viewing a read-only shared calendar.')).toBeVisible();
+    expect(await invited.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Read-only calendar fits the viewport').toBe(true);
     await auditAccessibility(invited, 'Invited read-only calendar');
     await expect.poll(() => new URL(invited.url()).searchParams.has('share')).toBe(true);
     await page.reload();

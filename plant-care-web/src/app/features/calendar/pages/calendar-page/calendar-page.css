@@ -26,6 +26,11 @@
 @media (max-width: 44rem) { .calendar-header { align-items: flex-start; flex-direction: column; }.legend { width: 100%; margin-left: 0; }.calendar { overflow-x: auto; grid-template-columns: repeat(7, minmax(7rem, 1fr)); }.weekday, .day { min-width: 7rem; }.agenda-day { grid-template-columns: 1fr; }.view-switch { width: 100%; }.view-switch button { flex: 1; } }
 @media (max-width: 32rem) { .week-calendar { grid-template-columns: 1fr; }.week-day:last-child { grid-column: auto; } }
 /* Keep nickname and action readable, and separate navigation from care controls. */
+.share-form, .sharing li, .shared-banner { flex-wrap: wrap; }
+.share-form label { min-width: 0; flex: 1 1 14rem; }
+.share-form input { min-width: 0; width: 100%; }
+.sharing li > span { min-width: 0; flex: 1 1 14rem; overflow-wrap: anywhere; }
+.sharing li small { display: block; margin-top: .25rem; color: #596b60; }
 
 
 .event-link { display: block; width: 100%; padding: .3rem .1rem; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; text-decoration: none; overflow-wrap: anywhere; cursor: pointer; }
