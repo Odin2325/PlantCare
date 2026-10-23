@@ -1,5 +1,5 @@
 import { randomBytes, randomUUID } from 'node:crypto';
-import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
+import { expect, test, type APIRequestContext, type Page, type Download } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
 const origin = 'https://localhost:8443';
@@ -64,6 +64,7 @@ async function login(page: Page, email: string, password: string, expected = 200
 }
 
 test('register, confirm, care for a plant, recover password and log out', async ({ page, request, browser }) => {
+  test.setTimeout(300_000);
   const email = `browser-${randomUUID()}@example.test`;
   const password = `Pc9!${randomBytes(20).toString('hex')}`;
   const newPassword = `Pc9!${randomBytes(20).toString('hex')}`;
@@ -288,9 +289,29 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await page.getByLabel('Current password', { exact: true }).fill(newPassword);
     await page.getByLabel('Type DELETE to confirm', { exact: true }).fill('delete');
     await expect(remove).toBeDisabled();
-    const downloadReady = page.waitForEvent('download');
-    await page.getByRole('button', { name: 'Download my data', exact: true }).click();
-    const download = await downloadReady;
+    const downloads: Download[] = [];
+    const captureDownload = (download: Download) => { downloads.push(download); };
+    page.on('download', captureDownload);
+    try {
+      let exported = false;
+      for (let attempt = 0; attempt < 4; attempt++) {
+        // Export clears the password even on a rejected request. Retry the real
+        // form after throttling, rather than bypassing the shared auth policy.
+        await page.getByLabel('Current password', { exact: true }).fill(newPassword);
+        const responseReady = page.waitForResponse(r => new URL(r.url()).pathname === '/api/account/export' && r.request().method() === 'POST');
+        await page.getByRole('button', { name: 'Download my data', exact: true }).click();
+        const response = await responseReady;
+        if (response.status() === 429) {
+          console.info('Browser step: account export waiting for the authentication rate window');
+          await page.waitForTimeout(20_000); continue;
+        }
+        expect(response.status(), 'Account export response').toBe(200); exported = true; break;
+      }
+      expect(exported, 'Export completed within production rate limits').toBe(true);
+      await expect.poll(() => downloads.length).toBe(1);
+    } finally { page.off('download', captureDownload); }
+    const download = downloads[0];
+    if (!download) throw new Error('Account export download missing.');
     expect(download.suggestedFilename()).toBe('plantcare-account.json');
     const stream = await download.createReadStream();
     if (!stream) throw new Error('Account export stream missing.');
