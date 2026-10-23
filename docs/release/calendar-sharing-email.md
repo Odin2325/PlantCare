@@ -52,4 +52,29 @@ The migration matches the EF model and adds only the invitation table/indexes.
 All 53 selected real SQL Server push/account/erasure/sharing checks passed,
 including applying the new migration, invitation expiry/replay, wrong/unconfirmed
 recipients, failed-email resends, stale-link revocation and erased invitation data.
-Staging acceptance will be recorded after completion.
+Staging acceptance completed on 2026-10-24 (Europe/Berlin) for commit
+`6d6d4d52fa6231d335b9b22705f4984ca14c5c76`. All three jobs in
+[CI run 40032318279](https://github.com/Odin2325/PlantCare/actions/runs/40032318279)
+passed before activating the pinned staging bundle. The additive migration and
+restricted API/worker permissions were checked during activation.
+
+A browser holding the previous frontend used the actual Update now flow and
+loaded the new frontend with its signed-in session, personal plant IDs and completed
+care history intact. All five care icons were available offline. Public checks
+preserved all 21 catalog identities (20 reviewed plants plus the legacy demo),
+24 photo hashes, eight growth references, aliases and care fields. Readiness and
+operations checks passed over trusted HTTPS.
+
+One real sharing email to an approved dedicated Gmail test account was accepted
+by the application's SMTP sender and independently confirmed in Gmail's inbox,
+with DKIM passing. The authenticated recipient opened the read-only calendar;
+the temporary test share was revoked, and the link then became unavailable.
+The new-recipient signup/confirmation/acceptance path was exercised through real
+SQL Server and isolated Mailpit SMTP in all three browser journeys; the live SMTP
+test used an already registered test account. No new physical Android test is claimed.
+
+Fresh encrypted VPS backups completed before and after activation. The local
+backup was refreshed and its actual scheduled task retried successfully. Both
+local and VPS backup health checks finished healthy, with no schedule or threshold
+changes. Existing invitations must be submitted again if the previous application
+rejected an unregistered recipient: that version did not queue an invitation email.
