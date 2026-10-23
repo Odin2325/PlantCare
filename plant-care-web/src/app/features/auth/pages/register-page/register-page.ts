@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {
+  ActivatedRoute,
   Router,
   RouterLink,
 } from '@angular/router';
@@ -36,6 +37,8 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 export class RegisterPage {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  readonly returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
 
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
@@ -105,6 +108,7 @@ export class RegisterPage {
             {
               queryParams: {
                 registered: true,
+                returnUrl: this.route.snapshot.queryParamMap.get('returnUrl'),
               },
             },
           );

@@ -94,7 +94,7 @@
 
     <p class="auth-alternative">
       New to PlantCare?
-      <a routerLink="/register">
+      <a routerLink="/register" [queryParams]="{ returnUrl: returnUrl }">
         Create an account
       </a>
     </p>

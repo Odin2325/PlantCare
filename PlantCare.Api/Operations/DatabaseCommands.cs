@@ -11,7 +11,7 @@ public static class DatabaseCommands
 {
     private static readonly string[] ApiWrites = ["AspNetUsers", "AspNetUserClaims", "AspNetUserLogins", "AspNetUserTokens",
         "PlantSpecies", "UserPlants", "UserPlantTags", "CareSchedules", "CareEvents", "NotificationPreferences",
-        "CalendarSubscriptions", "CalendarShares", "PushSubscriptions", "ExternalCalendarConnections", "ExternalCalendarEvents"];
+        "CalendarSubscriptions", "CalendarShares", "CalendarInvitations", "PushSubscriptions", "ExternalCalendarConnections", "ExternalCalendarEvents"];
     private static readonly string[] ApiReads = ["AspNetRoles", "AspNetRoleClaims", "AspNetUserRoles", "PushDeliveries", "__EFMigrationsHistory"];
     private static readonly string[] WorkerReads = ["UserPlants", "CareSchedules", "NotificationPreferences", "AccountErasures", "PlantSpecies"];
     private static readonly string[] WorkerWrites = ["ExternalCalendarEvents"];

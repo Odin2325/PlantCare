@@ -28,4 +28,11 @@ internal sealed class CalendarShareRepository(PlantCareDbContext dbContext) : IC
                select new CalendarShareRecord(share, owner.Email!, recipient.Email!)).ToListAsync(cancellationToken);
 
     public void Add(CalendarShare share) => dbContext.CalendarShares.Add(share);
+    public async Task RevokeRelatedInvitationsAsync(CalendarShare share, DateTimeOffset now, CancellationToken cancellationToken = default)
+    {
+        var email = await dbContext.Users.Where(u => u.Id == share.RecipientUserId).Select(u => u.NormalizedEmail).SingleAsync(cancellationToken);
+        var invitations = await dbContext.CalendarInvitations.Where(i => i.OwnerUserId == share.OwnerUserId && i.RevokedAtUtc == null &&
+            (i.AcceptedShareId == share.Id || i.NormalizedRecipientEmail == email)).ToListAsync(cancellationToken);
+        foreach (var invitation in invitations) invitation.Revoke(now);
+    }
 }

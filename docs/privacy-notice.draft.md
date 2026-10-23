@@ -24,7 +24,7 @@ application. This draft does not describe or authorize advertising processing.
 | Email address, account identifier, password hash and account security state | Create and protect your account, confirm your email and recover access. |
 | Plants, nicknames, user-entered locations, notes, tags, schedules, time zones and care history | Display your collection, plan care and record completed actions. A location label is information you type; the application does not request device geolocation. |
 | Reminder preferences, notifications, delivery records and optional device push subscription details | Show reminders and deliver browser push when enabled. Push services receive delivery information; reminder content can appear on your lock screen. |
-| Private calendar subscription and sharing records | Supply optional read-only feeds and calendars you share with another account. Recipients see calendar entries; sharing also displays account email addresses to the participants. Anyone holding a private feed URL can use it until it is revoked. |
+| Private calendar subscription, sharing and invitation records | Supply optional read-only feeds and calendars you share. Invitations use recipient email addresses and expiring token hashes; new recipients confirm the invited address before accepting access. Recipients see calendar entries; sharing also displays account email addresses to the participants. Anyone holding a private feed URL can use it until it is revoked. |
 | Essential cookies and browser storage | Keep you signed in, protect requests, remember calendar view/device settings and support installation, updates and the offline application shell. |
 | Technical errors and service-operation records | Diagnose faults, protect availability and operate recovery. Network services also process connection information such as IP addresses. |
 | Private support correspondence | Answer questions and handle account and privacy requests. |
@@ -64,7 +64,7 @@ disabled in the current staging setup.
 ## Services and recipients
 
 The current application/database host is **OVHcloud in the UK**. **Brevo** sends
-confirmation and password-reset emails and processes recipient addresses, message
+confirmation, password-reset and calendar-sharing/invitation emails and processes recipient addresses, message
 content and delivery events. Optional web push uses your browser's push service.
 External calendar services receive data when you subscribe or share. **Google
 Gmail** receives private requests sent to the published address; **GitHub** hosts

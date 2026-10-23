@@ -35,6 +35,7 @@ export class LoginPage {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  readonly returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
 
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal<string | null>(null);

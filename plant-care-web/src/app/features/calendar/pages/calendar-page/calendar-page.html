@@ -18,7 +18,7 @@
   @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
   @if (isLoading()) { <p role="status">Loading calendar…</p> }
   @if (calendarView() === 'Month') {
-    <section class="calendar month-calendar" aria-label="Monthly plant care calendar">
+    <section class="calendar month-calendar" aria-label="Monthly plant care calendar" tabindex="0">
       @for (weekday of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track weekday) { <strong class="weekday">{{ weekday }}</strong> }
       @for (day of monthDays(); track day.date.toISOString()) {
         <article class="day" [class.outside]="!day.isCurrentMonth">
@@ -149,9 +149,9 @@
     @if (microsoftMessage()) { <p role="status">{{ microsoftMessage() }}</p> }
   </section>
   <section class="sharing">
-    <div><p class="eyebrow">PlantCare sharing</p><h2>Share with another account</h2><p>Recipients receive read-only access to your current calendar. You can revoke it at any time.</p></div>
+    <div><p class="eyebrow">PlantCare sharing</p><h2>Share your calendar</h2><p>Enter an email address, including Gmail. Existing PlantCare accounts receive read-only access and an email link. New recipients receive a 7-day invitation: they create an account, confirm that email and accept. This does not add events to Google Calendar. You can revoke access or invitations at any time.</p></div>
     <div class="share-form"><label>Recipient email<input type="email" [ngModel]="recipientEmail()" (ngModelChange)="recipientEmail.set($event)" placeholder="gardener@example.com"></label><button type="button" [disabled]="sharingBusy() || !recipientEmail().trim()" (click)="createShare()">Share calendar</button></div>
-    @if (outgoingShares().length) { <h3>Shared by me</h3><ul>@for (share of outgoingShares(); track share.id) { <li><span>{{ share.recipientEmail }}</span><button type="button" class="danger" [disabled]="sharingBusy()" (click)="revokeShare(share)">Revoke</button></li> }</ul> }
+    @if (outgoingShares().length) { <h3>Shared by me</h3><ul>@for (share of outgoingShares(); track share.id) { <li><span>{{ share.recipientEmail }} @if (share.isPendingInvitation) { <small>Invitation pending — expires {{ share.expiresAtUtc | date }}</small> }</span><button type="button" [disabled]="sharingBusy()" (click)="sendShareEmail(share)" [attr.aria-label]="'Send sharing email to ' + share.recipientEmail">Send email</button><button type="button" class="danger" [disabled]="sharingBusy()" (click)="revokeShare(share)">Revoke</button></li> }</ul> }
     @if (incomingShares().length) { <h3>Shared with me</h3><ul>@for (share of incomingShares(); track share.id) { <li><span>{{ share.ownerEmail }}</span><button type="button" (click)="viewSharedCalendar(share)">View calendar</button></li> }</ul> }
     @if (sharingMessage()) { <p role="status">{{ sharingMessage() }}</p> }
   </section>

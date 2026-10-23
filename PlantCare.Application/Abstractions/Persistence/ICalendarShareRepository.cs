@@ -12,4 +12,5 @@ public interface ICalendarShareRepository
     Task<CalendarShare?> GetReceivedAsync(Guid shareId, Guid recipientUserId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<CalendarShareRecord>> GetForUserAsync(Guid userId, CancellationToken cancellationToken = default);
     void Add(CalendarShare share);
+    Task RevokeRelatedInvitationsAsync(CalendarShare share, DateTimeOffset now, CancellationToken cancellationToken = default);
 }

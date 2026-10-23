@@ -19,6 +19,7 @@ public sealed class PlantCareDbContext(DbContextOptions<PlantCareDbContext> opti
     public DbSet<NotificationPreference> NotificationPreferences => Set<NotificationPreference>();
     public DbSet<CalendarSubscription> CalendarSubscriptions => Set<CalendarSubscription>();
     public DbSet<CalendarShare> CalendarShares => Set<CalendarShare>();
+    public DbSet<CalendarInvitation> CalendarInvitations => Set<CalendarInvitation>();
     public DbSet<PushSubscription> PushSubscriptions => Set<PushSubscription>();
     public DbSet<PushDelivery> PushDeliveries => Set<PushDelivery>();
     public DbSet<ExternalCalendarConnection> ExternalCalendarConnections => Set<ExternalCalendarConnection>();
@@ -32,6 +33,7 @@ public sealed class PlantCareDbContext(DbContextOptions<PlantCareDbContext> opti
         // Defense in depth while reconciling a restored database: tombstoned
         // identities and their private/feed/integration records stay invisible.
         modelBuilder.Entity<ApplicationUser>().HasQueryFilter(u => !AccountErasures.Any(e => e.UserId == u.Id));
+        modelBuilder.Entity<CalendarInvitation>().HasQueryFilter(i => !AccountErasures.Any(e => e.UserId == i.OwnerUserId));
         modelBuilder.Entity<UserPlant>().HasQueryFilter(p => !AccountErasures.Any(e => e.UserId == p.UserId));
         modelBuilder.Entity<CareSchedule>().HasQueryFilter(s => !AccountErasures.Any(e => e.UserId == s.UserPlant.UserId));
         modelBuilder.Entity<CareEvent>().HasQueryFilter(c => !AccountErasures.Any(e => e.UserId == c.CareSchedule.UserPlant.UserId));

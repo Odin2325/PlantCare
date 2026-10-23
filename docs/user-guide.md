@@ -106,8 +106,14 @@ PlantCare cannot show the original URL again. Regenerate or revoke it if exposed
 An external calendar may retain previously downloaded entries after revocation.
 External calendar clients refresh on their own schedule.
 
-You can also share your calendar with another registered PlantCare account and
-revoke that access later. Check the intended recipient before sharing. Real
+You can also share your calendar by email and revoke that access later. Gmail
+addresses work too. Existing accounts receive an email link to read-only access.
+New recipients get a seven-day invitation: create an account with the invited
+address, confirm it, then open the invitation link to accept. Use Send email on
+an existing share or pending invitation to resend a missed message; resending a
+pending invitation replaces its earlier link. Delivery failures are shown; check
+spam as well. You can revoke pending invitations before they are accepted. Check the
+intended recipient before sharing. This does not add events to Google Calendar. Real
 calendar-client import/revocation acceptance remains a release check.
 Google and Microsoft account synchronization are disabled in this staging setup
 and are not part of the current launch commitment.

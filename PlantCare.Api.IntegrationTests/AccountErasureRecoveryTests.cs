@@ -77,6 +77,10 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         {
             await db.AccountErasures.ExecuteDeleteAsync();
             db.Users.Add(a); db.UserPlants.Add(plant); db.CareEvents.Add(history);
+            db.CalendarInvitations.AddRange(
+                CalendarInvitation.Create(a.Id, "pending@gmail.com", new string('a',64), DateTimeOffset.UtcNow),
+                CalendarInvitation.Create(b.Id, a.Email!, new string('b',64), DateTimeOffset.UtcNow),
+                CalendarInvitation.Create(b.Id, "other@gmail.com", new string('c',64), DateTimeOffset.UtcNow));
             db.Entry(species).State = EntityState.Unchanged;
         });
         await Apply(file); await Apply(file); // Idempotent reconciliation.
@@ -87,6 +91,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
             Assert.False(await db.UserPlants.IgnoreQueryFilters().AnyAsync(p => p.UserId == a.Id));
             Assert.True(await db.Users.AnyAsync(u => u.Id == b.Id));
             Assert.Single(await db.AccountErasures.ToListAsync());
+            Assert.Equal("other@gmail.com", (await db.CalendarInvitations.SingleAsync()).RecipientEmail);
         }
         using var restoredLogin = Client(); await Login(restoredLogin, a, HttpStatusCode.Unauthorized);
         using var other = Client(); await Login(other, b);
@@ -143,6 +148,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
             db.Notifications.Add(Notification.Create(a.Id, schedule.Id, DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow));
             db.CalendarSubscriptions.Add(CalendarSubscription.Create(a.Id, new string('f',64), DateTimeOffset.UtcNow));
             db.CalendarShares.Add(CalendarShare.Create(a.Id, b.Id, DateTimeOffset.UtcNow));
+            db.CalendarInvitations.Add(CalendarInvitation.Create(a.Id, "pending@gmail.com", new string('e',64), DateTimeOffset.UtcNow));
             db.ExternalCalendarConnections.Add(ExternalCalendarConnection.CreateGoogle(a.Id,a.Email!,"synthetic-access","synthetic-refresh",DateTimeOffset.UtcNow.AddHours(1),DateTimeOffset.UtcNow));
             db.AccountErasures.Add(AccountErasure.Create(a.Id, DateTimeOffset.UtcNow)); return Task.CompletedTask;
         });
@@ -154,6 +160,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         Assert.Empty(await db.UserPlants.ToListAsync()); Assert.Single(await db.UserPlants.IgnoreQueryFilters().ToListAsync());
         Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.Notifications.ToListAsync());
         Assert.Empty(await db.CalendarSubscriptions.ToListAsync()); Assert.Empty(await db.CalendarShares.ToListAsync());
+        Assert.Empty(await db.CalendarInvitations.ToListAsync());
         Assert.Empty(await db.ExternalCalendarConnections.ToListAsync());
     }
 }

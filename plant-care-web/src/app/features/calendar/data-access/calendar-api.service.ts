@@ -29,6 +29,8 @@ export class CalendarApiService {
   getShares(): Observable<CalendarShare[]> { return this.http.get<CalendarShare[]>('/api/calendar/shares'); }
   createShare(recipientEmail: string): Observable<CalendarShare> { return this.http.post<CalendarShare>('/api/calendar/shares', { recipientEmail }); }
   revokeShare(id: string): Observable<void> { return this.http.delete<void>(`/api/calendar/shares/${id}`); }
+  sendShareEmail(id: string): Observable<void> { return this.http.post<void>(`/api/calendar/shares/${id}/email`, {}); }
+  acceptInvitation(token: string): Observable<CalendarShare> { return this.http.post<CalendarShare>('/api/calendar/shares/accept-invitation', { token }); }
   getSharedEntries(id: string, from: Date, to: Date): Observable<CalendarEntry[]> {
     return this.http.get<CalendarEntry[]>(`/api/calendar/shares/${id}/entries`, { params: { fromUtc: from.toISOString(), toUtc: to.toISOString() } });
   }

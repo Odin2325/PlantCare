@@ -1,6 +1,6 @@
 # Current limitations
 
-Reviewed 2026-10-22. These describe the staging beta, not a released v1.
+Reviewed 2026-10-23. These describe the staging beta, not a released v1.
 
 | Area | Current status |
 | --- | --- |
@@ -9,7 +9,7 @@ Reviewed 2026-10-22. These describe the staging beta, not a released v1.
 | Privacy/account tools | Account supports password-verified export/deletion. The follow-up adds guarded 30-day expiry and current-authority reconciliation; see release/retention-and-erasure-recovery.md for enabling status. Offline storage can delay cleanup; missing current authority blocks managed app recovery. The full privacy notice remains a draft. |
 | Offline use | Offline explanation and reconnect supported; no offline care writes or full offline collection. |
 | Devices | Owner reported successful Android 17 / Chrome 155 installation, reminder handling, offline/reconnect, frontend upgrade and multiple care cycles. Other physical devices and assistive technologies have not received equivalent acceptance. Desktop/mobile-sized browser automation is separate evidence. |
-| Calendar | Private feed URLs are bearer secrets. Real calendar-client import/revocation still needs acceptance. Google/Microsoft synchronization remains disabled. |
+| Calendar | Email sharing supports registered users and seven-day signup invitations, accepted only by the matching confirmed account. SMTP acceptance does not guarantee inbox placement; owners can resend. Invitations do not add events to Google Calendar. Private feed URLs are bearer secrets. Real calendar-client import/revocation still needs acceptance. Google/Microsoft synchronization remains disabled. |
 | Push | Permission/provider/network dependent; timely delivery is not guaranteed. New reminders use static cartoon care-action icons; unknown actions use the app icon. Physical-device acceptance of the new drawings is pending. The OS controls its separate status-bar badge. Dashboard remains the tap destination and the place to check due care. |
 | Operations | Backups depend on the owner's PC, external drive and, for VPS capture, SSH/network access. The chosen weekly backup alert check is not continuous or independent monitoring. |
 | Recovery/capacity | Isolated restore and same-schema rollback are tested. Replacement-host recovery, migration downgrade and sustained authenticated/high-fanout capacity are not established. |

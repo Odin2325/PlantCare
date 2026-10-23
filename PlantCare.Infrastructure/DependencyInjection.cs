@@ -75,6 +75,8 @@ public static class DependencyInjection
         services.AddScoped<ICalendarRepository, CalendarRepository>();
         services.AddScoped<ICalendarSubscriptionRepository, CalendarSubscriptionRepository>();
         services.AddScoped<ICalendarShareRepository, CalendarShareRepository>();
+        services.AddScoped<ICalendarShareEmailSender, SmtpCalendarShareEmailSender>();
+        services.AddScoped<ICalendarInvitationService, CalendarInvitationService>();
         services.AddScoped<IExternalCalendarConnectionRepository, ExternalCalendarConnectionRepository>();
         services.AddHttpClient<IExternalCalendarService, GoogleCalendarService>();
         services.AddOptions<GoogleCalendarOptions>()

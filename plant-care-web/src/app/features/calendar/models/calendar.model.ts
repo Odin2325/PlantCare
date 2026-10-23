@@ -20,6 +20,9 @@ export interface CalendarSubscriptionCreated {
 }
 
 export interface CalendarShare {
+  emailNotificationSent?: boolean | null;
+  isPendingInvitation?: boolean;
+  expiresAtUtc?: string | null;
   id: string;
   ownerEmail: string;
   recipientEmail: string;

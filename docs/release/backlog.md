@@ -25,6 +25,13 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Calendar sharing email delivery (2026-10-23)
+
+- Fixed missing calendar-sharing emails and added signup invitations for new
+  recipients, with SMTP acceptance feedback, owner resending, seven-day single-use
+  links, confirmed-email matching and read-only access. Gmail uses the same
+  provider-independent flow. See [calendar-sharing-email.md](calendar-sharing-email.md).
+
 ### Care action notification icons (2026-10-22)
 
 - Owner revised the notification design to original cartoon care-action icons,

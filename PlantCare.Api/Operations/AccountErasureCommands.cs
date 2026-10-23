@@ -82,6 +82,8 @@ public static class AccountErasureCommands
             foreach (var batch in ids.Chunk(500))
             {
                 await db.CalendarShares.IgnoreQueryFilters().Where(s => batch.Contains(s.OwnerUserId) || batch.Contains(s.RecipientUserId)).ExecuteDeleteAsync();
+                var emails = await db.Users.IgnoreQueryFilters().Where(u => batch.Contains(u.Id)).Select(u => u.NormalizedEmail).ToArrayAsync();
+                await db.CalendarInvitations.IgnoreQueryFilters().Where(i => batch.Contains(i.OwnerUserId) || emails.Contains(i.NormalizedRecipientEmail)).ExecuteDeleteAsync();
                 await db.Users.IgnoreQueryFilters().Where(u => batch.Contains(u.Id)).ExecuteDeleteAsync();
             }
             if (await db.Users.IgnoreQueryFilters().AnyAsync(u => db.AccountErasures.Any(e => e.UserId == u.Id)))

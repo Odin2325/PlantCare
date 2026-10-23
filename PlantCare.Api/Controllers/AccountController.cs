@@ -64,6 +64,8 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
             pushDeliveryHistory = await db.PushDeliveries.AsNoTracking().Where(d => notifications.Select(n => n.Id).Contains(d.NotificationId)).Select(d => new { d.NotificationId, d.SubscriptionId, d.Status, d.AttemptCount, d.LastStatusCode, d.NextAttemptAtUtc, d.FinishedAtUtc }).ToListAsync(ct),
             calendarSubscriptions = await db.CalendarSubscriptions.AsNoTracking().Where(s => s.UserId == id).Select(s => new { s.Id, s.CreatedAtUtc, s.RevokedAtUtc }).ToListAsync(ct),
             calendarShares = await db.CalendarShares.AsNoTracking().Where(s => s.OwnerUserId == id || s.RecipientUserId == id).Select(s => new { s.Id, direction = s.OwnerUserId == id ? "outgoing" : "incoming", s.CreatedAtUtc, s.RevokedAtUtc }).ToListAsync(ct),
+            calendarInvitations = await db.CalendarInvitations.AsNoTracking().Where(i => i.OwnerUserId == id || i.NormalizedRecipientEmail == user.NormalizedEmail)
+                .Select(i => new { i.Id, i.RecipientEmail, i.CreatedAtUtc, i.ExpiresAtUtc, i.AcceptedAtUtc, i.RevokedAtUtc }).ToListAsync(ct),
             externalCalendars = await connections.Select(c => new { c.Id, c.Provider, c.AccountEmail, c.CreatedAtUtc, c.LastSyncedAtUtc }).ToListAsync(ct),
             externalEvents = await db.ExternalCalendarEvents.AsNoTracking().Where(e => connections.Select(c => c.Id).Contains(e.ConnectionId)).Select(e => new { e.Id, e.ConnectionId, e.PlantCareEntryId, e.ExternalEventId, e.CreatedAtUtc }).ToListAsync(ct),
             roles = await userManager.GetRolesAsync(user),
@@ -95,6 +97,7 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
                 await db.SaveChangesAsync(ct);
             }
             await db.CalendarShares.IgnoreQueryFilters().Where(s => s.OwnerUserId == user.Id || s.RecipientUserId == user.Id).ExecuteDeleteAsync(ct);
+            await db.CalendarInvitations.IgnoreQueryFilters().Where(i => i.OwnerUserId == user.Id || i.NormalizedRecipientEmail == user.NormalizedEmail).ExecuteDeleteAsync(ct);
             // Existing foreign keys cascade plants/history, notification deliveries,
             // preferences, devices, subscriptions and Identity children atomically.
             await db.Users.IgnoreQueryFilters().Where(u => u.Id == user.Id).ExecuteDeleteAsync(ct);

@@ -7,7 +7,7 @@ import { CalendarApiService } from '../../data-access/calendar-api.service';
 import { CalendarEntry, CalendarShare } from '../../models/calendar.model';
 import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api.service';
 import { CareActionType } from '../../../my-plants/models/user-plant.model';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ExternalCalendarStatus } from '../../models/calendar.model';
 
 interface CalendarDay { date: Date; isCurrentMonth: boolean; entries: CalendarEntry[]; }
@@ -23,6 +23,8 @@ export class CalendarPage {
   private readonly myPlantsApi = inject(MyPlantsApiService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private pendingSharedLink = this.route.snapshot.queryParamMap.get('share');
   readonly visibleDate = signal(new Date());
   readonly calendarView = signal<CalendarView>(this.loadSavedView());
   readonly entries = signal<CalendarEntry[]>([]);
@@ -101,9 +103,25 @@ export class CalendarPage {
   });
 
   constructor() {
-    this.load();
+    const invitation = this.route.snapshot.queryParamMap.get('invitation');
+    if (invitation) {
+      this.api.acceptInvitation(invitation).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+        next: share => {
+          this.pendingSharedLink = share.id;
+          void this.router.navigate([], { relativeTo: this.route, queryParams: { share: share.id }, replaceUrl: true });
+          this.sharingMessage.set('Invitation accepted. You have read-only access.');
+          this.loadShares();
+        },
+        error: () => {
+          this.sharingMessage.set('Invitation unavailable. Use the confirmed account for the invited email. The link may have expired, been used or revoked.');
+          this.load(); this.loadShares();
+        },
+      });
+    } else {
+      if (!this.pendingSharedLink) this.load();
+      this.loadShares();
+    }
     this.loadSubscriptionStatus();
-    this.loadShares();
     this.loadGoogleStatus();
     this.loadMicrosoftStatus();
 
@@ -190,8 +208,30 @@ export class CalendarPage {
     const email = this.recipientEmail().trim(); if (!email || this.sharingBusy()) return;
     this.sharingBusy.set(true); this.sharingMessage.set(null);
     this.api.createShare(email).pipe(finalize(() => this.sharingBusy.set(false)), takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => { this.recipientEmail.set(''); this.sharingMessage.set('Calendar shared.'); this.loadShares(); },
-      error: () => this.sharingMessage.set('The calendar could not be shared. Check that the account exists and does not already have access.'),
+      next: share => {
+        this.recipientEmail.set('');
+        this.sharingMessage.set(share.isPendingInvitation
+          ? (share.emailNotificationSent ? 'Invitation emailed. Access starts only after the recipient signs up, confirms their email and accepts.'
+            : 'Invitation saved, but the email could not be sent. Use Send email to try again.')
+          : share.emailNotificationSent
+          ? 'Calendar shared. The invitation email was sent. The recipient can also check spam.'
+          : 'Calendar access was shared, but the email could not be sent. Use Send email to try again.');
+        this.loadShares();
+      },
+      error: () => this.sharingMessage.set('The calendar could not be shared. Check the email and whether access or an invitation already exists. Wait before trying again.'),
+    });
+  }
+
+  sendShareEmail(share: CalendarShare): void {
+    if (this.sharingBusy()) return;
+    this.sharingBusy.set(true); this.sharingMessage.set(null);
+    this.api.sendShareEmail(share.id).pipe(finalize(() => this.sharingBusy.set(false)), takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => {
+        this.sharingMessage.set(share.isPendingInvitation ? 'A new invitation email was sent. Earlier invitation links are replaced. The recipient can also check spam.'
+          : 'The invitation email was sent. The recipient can also check spam.');
+        this.loadShares();
+      },
+      error: () => this.sharingMessage.set('The email could not be sent. Access is unchanged; wait before trying again.'),
     });
   }
 
@@ -317,7 +357,19 @@ export class CalendarPage {
 
   private loadShares(): void {
     this.api.getShares().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: shares => this.shares.set(shares),
+      next: shares => {
+        this.shares.set(shares);
+        const requested = this.pendingSharedLink;
+        this.pendingSharedLink = null;
+        if (requested) {
+          const incoming = shares.find(share => share.id === requested && !share.isOwnedByCurrentUser);
+          if (incoming) this.viewSharedCalendar(incoming);
+          else {
+            this.sharingMessage.set('This shared calendar is unavailable. Sign in with the invited account; access may have been revoked.');
+            this.load();
+          }
+        }
+      },
       error: () => this.sharingMessage.set('Shared calendars could not be loaded.'),
     });
   }

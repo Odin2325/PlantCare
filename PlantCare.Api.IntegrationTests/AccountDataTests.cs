@@ -63,6 +63,7 @@ public sealed class AccountDataTests : IAsyncLifetime
             db.NotificationPreferences.Add(NotificationPreference.CreateDefault(a.Id));
             db.CalendarSubscriptions.Add(CalendarSubscription.Create(a.Id, new string('a', 64), now));
             db.CalendarShares.AddRange(CalendarShare.Create(a.Id, b.Id, now), CalendarShare.Create(b.Id, a.Id, now));
+            db.CalendarInvitations.AddRange(CalendarInvitation.Create(a.Id, "pending@gmail.com", new string('b',64), now), CalendarInvitation.Create(b.Id, a.Email!, new string('c',64), now));
             return Task.CompletedTask;
         });
     }
@@ -133,6 +134,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.CareEvents.ToListAsync());
         Assert.Empty(await db.Notifications.ToListAsync()); Assert.Empty(await db.PushDeliveries.ToListAsync());
         Assert.Empty(await db.CalendarShares.ToListAsync()); Assert.Empty(await db.CalendarSubscriptions.ToListAsync());
+        Assert.Empty(await db.CalendarInvitations.ToListAsync());
         Assert.Empty(await db.PushSubscriptions.ToListAsync()); Assert.Empty(await db.NotificationPreferences.ToListAsync());
         Assert.Single(await db.AccountErasures.Where(e => e.UserId == a.Id).ToListAsync());
     }

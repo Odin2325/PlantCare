@@ -92,7 +92,7 @@
 
     <p class="auth-alternative">
       Already registered?
-      <a routerLink="/login">
+      <a routerLink="/login" [queryParams]="{ returnUrl: returnUrl }">
         Log in
       </a>
     </p>
