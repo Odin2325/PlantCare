@@ -2,6 +2,11 @@
 
 Baseline: `969d8c074b8a399d05a32cffc33c2cb1d3eeff52`, assessed 2026-10-11.
 
+Current reconciliation: [milestone plan, 2026-10-24](current-milestones.md).
+It identifies completed staging work, exact-candidate evidence and the remaining
+work order. Historical unchecked compound gates below remain open when only part
+has been accepted; they do not mean every supporting check must be repeated.
+
 Owner direction on 2026-10-21: continue English catalog content, photos and
 feature work while deferring the public contact-address decision. This overrides
 the original feature-freeze planning below; it does not close unchecked public
@@ -13,16 +18,12 @@ interval/weekday care schedules, care history, dashboard, calendar views,
 in-app reminders, browser push, calendar subscriptions and sharing, and PWA
 installation/updates. Google and Microsoft synchronization are optional launch
 features: keep them disabled until their provider-specific checks pass.
-Defer new features until these gates pass.
+The owner's later direction permits feature work while publication decisions are
+deferred; the unchecked gates still govern a public v1 launch.
 
-Feature planning can continue during stabilization. Resume implementation after
-the release candidate passes public staging, recovery/operations, supported-device
-and PWA checks, and a beta completes two normal care cycles with no open release
-blockers. Keep v1 scope stable through its tag; use beta feedback to choose one
-small v1.1 feature at a time, retaining the automated release checks. Current
-next priorities are reminder/push failure handling, public staging/operations,
-then beta acceptance and release packaging. A required v1 defect fix is still
-appropriate before that point.
+Continue small owner-directed features while retaining the automated release
+checks. Current priorities and their evidence are maintained in the milestone
+plan above. A required v1 defect fix remains appropriate throughout this work.
 
 Unchecked means not yet accepted, even when supporting code or unit tests exist.
 The [public browser acceptance record](public-browser-acceptance.md) contains
@@ -133,6 +134,7 @@ for offline delays, independent-authority gaps and exact verification scope.
 
 | Check | Candidate SHA | Environment/date | Tester | Result | Evidence/defect |
 | --- | --- | --- | --- | --- | --- |
+| Calendar email sharing and signup invitations | 6d6d4d52fa6231d335b9b22705f4984ca14c5c76 | Public staging / SQL Server / Brevo / Gmail, 2026-10-24 Berlin | Codex | PASS for recorded scope | calendar-sharing-email.md: exact-candidate CI, actual frontend update with data preserved, one Gmail inbox message with DKIM passing, authenticated read-only access and immediate test-share revocation. New-recipient signup/confirmation/acceptance verified with isolated SMTP in three browser projects. Both backup health checks healthy afterward; real calendar-client feed acceptance remains separate. |
 | Full staging acceptance | pending | Public OVHcloud HTTPS app and SMTP working, 2026-10-14 | pending | PARTIAL | public-staging.md; public auth/core/worker/restart checks pass, but full browser isolation/device/operations/recovery/beta gates remain open |
 | Worker progress/disk operations health and bounded read capacity | d3d81f30cc2a6bbd06d92cb2781d7b5e40a3924d | OVHcloud 4 GB / UptimeRobot / Gmail, 2026-10-14 | Codex and owner monitor setup | PASS for recorded checks | worker-capacity.md: 125 backend tests, patched Pkcs audit, exact CI/isolated compatibility/activation; stale running-worker operations 503 with API readiness 200, recovery and real Down/Up inbox delivery. 200 reads at concurrency five, zero errors, P95 49.9 ms; no OOM/restarts. Fresh encrypted snapshot SQL/key/config restore passed. Sustained/authenticated/fanout/backup-time capacity NOT established. |
 | Encrypted VPS snapshot full isolated app recovery and failed-activation rollback | 0acdb2db70a343d1aae977bf4bb19150deaaaf7a runtime; recovery tools added afterward | Fresh local internal Docker project / captured SMTP, 2026-10-14 | Codex | PASS for listed checks | vps-application-recovery.md: hashes/CHECKDB/table comparison, keys/login remapping, copied-account password recovery/login/reset reuse rejection, care/history, worker restart deduplication, exit-42 activation rejection and pinned-runtime rollback preserving cookie/history/keys, logout. Old password/live cookie, real integrations, replacement VPS and schema downgrade NOT accepted. |

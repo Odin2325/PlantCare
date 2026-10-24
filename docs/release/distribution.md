@@ -1,8 +1,9 @@
 # v1 distribution preparation
 
-Reviewed 2026-10-22. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `0394b3b123a919870dbea59cdaeaca714cbcd5a9`;
+Reviewed 2026-10-24. No v1 tag, GitHub release or production launch is created by
+this preparation. The staging runtime is `6d6d4d52fa6231d335b9b22705f4984ca14c5c76`;
 subsequent documentation commits are not new application deployments.
+See the [current milestone plan](current-milestones.md) for the remaining work order.
 
 ## Documentation prepared
 
@@ -41,11 +42,16 @@ explanation when disconnected. Account confirmation and password recovery use
 transactional email.
 
 The current beta also includes private calendar feeds and read-only account
-sharing. Their remaining acceptance checks must pass before advertising them as
-accepted launch capabilities. Google/Microsoft synchronization stays disabled.
+sharing. Sharing now sends transactional emails and seven-day signup invitations;
+matching confirmed accounts can accept, and owners can resend or revoke. Real Gmail
+inbox delivery and live read-only access/revocation are verified in
+[calendar-sharing acceptance](calendar-sharing-email.md). Private feeds still need
+real calendar-client acceptance. Google/Microsoft synchronization stays disabled.
 The beta includes 20 reviewed English houseplant entries and licensed local
-reference photos. This is a starter selection; healthy growth-stage imagery is
-still future work. See [the catalog record](houseplant-starter-catalog.md) and the
+reference photos. Four species also have eight curated growth-feature examples
+of different specimens, without timelines or diagnosis; personal photo journals
+remain future work. See [growth references](growth-references.md),
+[the catalog record](houseplant-starter-catalog.md) and the
 known-limitations document. The five [flowering additions](flowering-houseplant-batch.md)
 include seasonal care guidance and individual photo credits.
 Catalog browsing now includes compact photo cards, light filtering, name sorting
@@ -61,8 +67,8 @@ and search state retained through details and reload; see
    still open; missing authority must not be bypassed during recovery.
 2. Retain and review the attributed starter catalog through the controlled
    import/update procedure, expanding it as needed. Keep the preserved synthetic
-   demo distinct from reviewed botanical content. Growth-stage imagery remains
-   later work; the initial real entries and reference photos are implemented.
+   demo distinct from reviewed botanical content. Expand curated growth references
+   through the existing source/license review; the initial examples are implemented.
 3. Reconcile each acceptance gate with its recorded evidence, execute remaining
    required checks (including real calendar client and wider usability scope),
    and decide explicitly whether to disable any unaccepted optional capability.

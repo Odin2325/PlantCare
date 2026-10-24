@@ -16,11 +16,14 @@ retain their respective licenses.
 
 ## Release preparation
 
+The [current milestone plan](docs/release/current-milestones.md) separates completed
+staging work from the remaining release and feature steps.
+
 Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
 then follow the [staging runbook](docs/release/staging.md).
 The [distribution review](docs/release/distribution.md) collects draft release
 notes and the remaining launch decisions. The [privacy review](docs/release/privacy-review.md)
-is a draft with unresolved operator disclosures, backup retention and restore handling;
+is a draft with unresolved publication, provider and retention criteria;
 it is not a finished public privacy notice.
 See [account export/deletion](docs/release/account-data.md) for the new protected
 Account controls, published private contact and retention policy.
