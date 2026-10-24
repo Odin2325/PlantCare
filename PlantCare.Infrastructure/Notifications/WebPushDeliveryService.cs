@@ -21,7 +21,8 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
         var now = timeProvider.GetUtcNow();
         var notifications = await dbContext.Notifications.Include(item => item.CareSchedule).ThenInclude(schedule => schedule.UserPlant)
             .ThenInclude(plant => plant.PlantSpecies)
-            .Where(item => item.PushSentAtUtc == null && (item.PushNextAttemptAtUtc == null || item.PushNextAttemptAtUtc <= now))
+            .Where(item => (item.NotBeforeUtc == null || item.NotBeforeUtc <= now) &&
+                item.PushSentAtUtc == null && (item.PushNextAttemptAtUtc == null || item.PushNextAttemptAtUtc <= now))
             .OrderBy(item => item.PushNextAttemptAtUtc ?? item.CreatedAtUtc).ThenBy(item => item.Id)
             .Take(batchSize).ToListAsync(cancellationToken);
         var processed = 0;
@@ -35,8 +36,8 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
             var preference = await dbContext.NotificationPreferences.AsNoTracking()
                 .SingleOrDefaultAsync(item => item.UserId == notification.UserId, cancellationToken);
             var deliveries = await dbContext.PushDeliveries.Where(item => item.NotificationId == notification.Id).ToListAsync(cancellationToken);
-            if (!schedule.IsEnabled || schedule.IsArchived || !schedule.UserPlant.IsActive ||
-                schedule.NextDueAtUtc != notification.DueAtUtc || notification.CreatedAtUtc.AddDays(1) <= now ||
+            if (notification.SupersededAtUtc != null || !schedule.IsEnabled || schedule.IsArchived || !schedule.UserPlant.IsActive ||
+                schedule.NextDueAtUtc != notification.DueAtUtc || (notification.NotBeforeUtc ?? notification.CreatedAtUtc).AddDays(1) <= now ||
                 (preference is not null && (!preference.PushEnabled || !preference.IsActionEnabled(schedule.ActionType))))
             {
                 foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending)) delivery.Skip(now);
@@ -68,6 +69,8 @@ internal sealed class WebPushDeliveryService(PlantCareDbContext dbContext, IOpti
             var attempts = 0;
             foreach (var delivery in deliveries.Where(item => item.Status == PushDeliveryStatus.Pending))
             {
+                if (await dbContext.Notifications.AsNoTracking().AnyAsync(n => n.Id == notification.Id && n.SupersededAtUtc != null, cancellationToken))
+                { delivery.Skip(timeProvider.GetUtcNow()); await dbContext.SaveChangesAsync(cancellationToken); continue; }
                 if (attempts >= 16 || passTime.Elapsed >= TimeSpan.FromMinutes(1)) break;
                 cancellationToken.ThrowIfCancellationRequested();
                 now = timeProvider.GetUtcNow();

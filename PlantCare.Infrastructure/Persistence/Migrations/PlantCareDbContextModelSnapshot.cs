@@ -441,6 +441,9 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset>("DueAtUtc")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<DateTimeOffset?>("NotBeforeUtc")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<DateTimeOffset?>("PushNextAttemptAtUtc")
                         .HasColumnType("datetimeoffset");
 
@@ -450,17 +453,23 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ReadAtUtc")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int>("ReminderSequence")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("SupersededAtUtc")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CareScheduleId", "DueAtUtc")
-                        .IsUnique();
-
                     b.HasIndex("PushSentAtUtc", "CreatedAtUtc");
 
                     b.HasIndex("PushSentAtUtc", "PushNextAttemptAtUtc");
+
+                    b.HasIndex("CareScheduleId", "DueAtUtc", "ReminderSequence")
+                        .IsUnique();
 
                     b.HasIndex("UserId", "ReadAtUtc", "CreatedAtUtc");
 

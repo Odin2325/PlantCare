@@ -6,6 +6,8 @@ export interface CareNotification {
   dueAtUtc: string;
   createdAtUtc: string;
   readAtUtc: string | null;
+  snoozedUntilUtc?: string | null;
+  canSnooze?: boolean;
 }
 
 export interface NotificationPreference {

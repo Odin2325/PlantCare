@@ -36,8 +36,10 @@ internal sealed class NotificationRepository(PlantCareDbContext dbContext) : INo
     public async Task<IReadOnlyList<Notification>> GetForUserAsync(Guid userId, int take, CancellationToken cancellationToken = default) =>
         await dbContext.Notifications.AsNoTracking()
             .Include(notification => notification.CareSchedule).ThenInclude(schedule => schedule.UserPlant)
-            .Where(notification => notification.UserId == userId)
-            .OrderBy(notification => notification.ReadAtUtc != null)
+            .Where(notification => notification.UserId == userId && notification.SupersededAtUtc == null)
+            .OrderBy(notification => notification.CareSchedule.NextDueAtUtc != notification.DueAtUtc ||
+                !notification.CareSchedule.IsEnabled || notification.CareSchedule.IsArchived || !notification.CareSchedule.UserPlant.IsActive)
+            .ThenBy(notification => notification.ReadAtUtc != null)
             .ThenByDescending(notification => notification.CreatedAtUtc).Take(take).ToListAsync(cancellationToken);
 
     public Task<Notification?> GetTrackedForUserAsync(Guid notificationId, Guid userId, CancellationToken cancellationToken = default) =>

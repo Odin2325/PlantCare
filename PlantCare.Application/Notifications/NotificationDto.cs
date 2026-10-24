@@ -9,4 +9,6 @@ public sealed record NotificationDto(
     CareActionType ActionType,
     DateTimeOffset DueAtUtc,
     DateTimeOffset CreatedAtUtc,
-    DateTimeOffset? ReadAtUtc);
+    DateTimeOffset? ReadAtUtc,
+    DateTimeOffset? SnoozedUntilUtc = null,
+    bool CanSnooze = false);

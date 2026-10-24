@@ -31,7 +31,8 @@ internal sealed class NotificationConfiguration
         builder.HasIndex(notification => new
         {
             notification.CareScheduleId,
-            notification.DueAtUtc
+            notification.DueAtUtc,
+            notification.ReminderSequence
         }).IsUnique();
 
         builder.HasIndex(notification => new

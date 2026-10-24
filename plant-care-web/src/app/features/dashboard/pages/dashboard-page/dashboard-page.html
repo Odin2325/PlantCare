@@ -116,6 +116,10 @@
           </div>
         </div>
 
+        @if (reminderFor(item); as reminder) {
+          <app-reminder-snooze [notification]="reminder" (snoozed)="loadReminders()" />
+        }
+
         <button type="button"
                 class="care-button"
                 [disabled]="
@@ -189,6 +193,10 @@
             </span>
           </div>
         </div>
+
+        @if (reminderFor(item); as reminder) {
+          <app-reminder-snooze [notification]="reminder" (snoozed)="loadReminders()" />
+        }
 
         <button type="button"
                 class="care-button"

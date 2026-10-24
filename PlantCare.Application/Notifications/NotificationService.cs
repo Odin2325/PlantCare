@@ -56,7 +56,7 @@ internal sealed class NotificationService(
         return notifications
             .Where(notification => preference is null ||
                 preference.IsActionEnabled(notification.CareSchedule.ActionType))
-            .Select(MapToDto)
+            .Select(notification => MapToDto(notification, timeProvider.GetUtcNow()))
             .ToList();
     }
 
@@ -122,7 +122,7 @@ internal sealed class NotificationService(
         return MapPreference(preference);
     }
 
-    private static NotificationDto MapToDto(Notification notification) =>
+    private static NotificationDto MapToDto(Notification notification, DateTimeOffset now) =>
         new(
             notification.Id,
             notification.CareSchedule.UserPlantId,
@@ -130,7 +130,13 @@ internal sealed class NotificationService(
             notification.CareSchedule.ActionType,
             notification.DueAtUtc,
             notification.CreatedAtUtc,
-            notification.ReadAtUtc);
+            notification.ReadAtUtc,
+            IsCurrent(notification) && notification.NotBeforeUtc > now ? notification.NotBeforeUtc : null,
+            IsCurrent(notification) && (notification.NotBeforeUtc is null || notification.NotBeforeUtc <= now));
+
+    private static bool IsCurrent(Notification n) => n.SupersededAtUtc is null &&
+        n.CareSchedule.IsEnabled && !n.CareSchedule.IsArchived && n.CareSchedule.UserPlant.IsActive &&
+        n.CareSchedule.NextDueAtUtc == n.DueAtUtc;
 
     private static NotificationPreferenceDto MapPreference(
         NotificationPreference preference) =>

@@ -95,6 +95,7 @@
 
 .care-card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -103,6 +104,8 @@
   border-radius: 1rem;
   background: white;
 }
+
+.care-card app-reminder-snooze { flex: 1 1 18rem; }
 
 .care-card-main {
   display: flex;
@@ -226,6 +229,8 @@
     align-items: flex-start;
     flex-direction: column;
   }
+
+  .care-card app-reminder-snooze { flex: 0 1 auto; width: 100%; }
 
   .care-button {
     width: 100%;

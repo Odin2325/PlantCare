@@ -132,6 +132,25 @@ test('register, confirm, care for a plant, recover password and log out', async 
   });
 
   await step('Overdue dashboard completion, history and calendar', page, async () => {
+    // Exercise real cookie-authenticated snoozing before completing this occurrence.
+    let dueReminder: { id: string; dueAtUtc: string } | undefined;
+    await expect.poll(async () => {
+      const reminders = await (await page.request.get('/api/notifications')).json();
+      dueReminder = reminders.find((n: { plantName: string; canSnooze: boolean }) => n.plantName === nickname && n.canSnooze);
+      return Boolean(dueReminder);
+    }, { timeout: 30_000, message: 'Worker-generated reminder available to snooze' }).toBe(true);
+    await page.goto('/dashboard');
+    const snoozeControls = page.getByRole('group', { name: `Snooze Watering reminder for ${nickname}`, exact: true });
+    await expect(snoozeControls).toBeVisible();
+    const snoozeResponse = page.waitForResponse(r => new URL(r.url()).pathname.endsWith('/snooze') && r.request().method() === 'POST');
+    await snoozeControls.getByRole('button', { name: '1 hour', exact: true }).click();
+    const saved = await snoozeResponse;
+    expect(saved.status()).toBe(200);
+    expect((await saved.json()).dueAtUtc).toBe(dueReminder!.dueAtUtc);
+    await expect(page.getByText('Care is still due.', { exact: false })).toBeVisible();
+    await page.reload();
+    await expect(page.getByText('Reminder snoozed until', { exact: false })).toBeVisible();
+    await auditAccessibility(page, 'Snoozed dashboard with unchanged due care');
     const nav = page.getByRole('navigation', { name: 'Main navigation' });
     await nav.getByRole('link', { name: 'Notifications', exact: true }).click();
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeVisible();

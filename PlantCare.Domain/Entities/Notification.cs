@@ -14,6 +14,9 @@ public sealed class Notification
     public DateTimeOffset? ReadAtUtc { get; private set; }
     public DateTimeOffset? PushSentAtUtc { get; private set; }
     public DateTimeOffset? PushNextAttemptAtUtc { get; private set; }
+    public int ReminderSequence { get; private set; }
+    public DateTimeOffset? NotBeforeUtc { get; private set; }
+    public DateTimeOffset? SupersededAtUtc { get; private set; }
     public CareSchedule CareSchedule { get; private set; } = null!;
 
     public static Notification Create(
@@ -40,6 +43,16 @@ public sealed class Notification
     public void MarkRead(DateTimeOffset readAtUtc)
     {
         ReadAtUtc ??= readAtUtc;
+    }
+
+    public static Notification CreateFollowUp(Notification previous, DateTimeOffset now, int hours)
+    {
+        ArgumentNullException.ThrowIfNull(previous);
+        if (hours is not (1 or 24 or 72)) throw new ArgumentOutOfRangeException(nameof(hours));
+        var next = Create(previous.UserId, previous.CareScheduleId, previous.DueAtUtc, now);
+        next.ReminderSequence = checked(previous.ReminderSequence + 1);
+        next.NotBeforeUtc = now.AddHours(hours);
+        return next;
     }
 
     public void MarkPushSent(DateTimeOffset sentAtUtc)

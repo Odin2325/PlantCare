@@ -28,6 +28,7 @@ public static class DependencyInjection
         {
             options.UseSqlServer(connectionString);
         });
+        services.AddScoped<IReminderSnoozeService, ReminderSnoozeService>();
 
         var requireConfirmedEmail = configuration.GetValue<bool>(
             "Authentication:RequireConfirmedEmail");

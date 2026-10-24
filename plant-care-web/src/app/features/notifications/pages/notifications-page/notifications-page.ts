@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { finalize, take } from 'rxjs';
+import { finalize, take, fromEvent, merge, timer } from 'rxjs';
 import { NotificationsApiService } from '../../data-access/notifications-api.service';
 import { CareNotification, NotificationPreference } from '../../models/notification.model';
 import { SwPush } from '@angular/service-worker';
 import { firstValueFrom } from 'rxjs';
+import { ReminderSnooze } from '../../../../shared/reminder-snooze/reminder-snooze';
 
 @Component({
   selector: 'app-notifications-page',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, ReminderSnooze],
   templateUrl: './notifications-page.html',
   styleUrl: './notifications-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +32,13 @@ export class NotificationsPage {
   readonly preferencesMessage = signal<string | null>(null);
   private pushPublicKey = '';
 
-  constructor() { this.load(); this.loadPushStatus(); this.loadPreferences(); }
+  constructor() {
+    this.load(); this.loadPushStatus(); this.loadPreferences();
+    merge(fromEvent(window, 'focus'), fromEvent(window, 'online'), timer(60_000, 60_000))
+      .pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        if (document.visibilityState === 'visible') this.load();
+      });
+  }
 
   setPreference(
     key: Exclude<keyof NotificationPreference, 'reminderLeadTimeHours'>,
@@ -96,7 +103,7 @@ export class NotificationsPage {
     finally { this.pushBusy.set(false); }
   }
 
-  private load(): void {
+  load(): void {
     this.api.getNotifications().pipe(
       finalize(() => this.isLoading.set(false)),
       takeUntilDestroyed(this.destroyRef),

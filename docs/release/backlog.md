@@ -25,6 +25,15 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Reminder snoozing and larger catalog (2026-10-24)
+
+- Added durable follow-up reminders for 1 hour, 24 hours or 3 days, with unchanged
+  care due dates/history, worker cancellation checks and restricted API writes.
+  See [reminder-snoozing.md](reminder-snoozing.md) for migration, recovery compatibility
+  and validation/deployment status.
+- Prepared [twenty additional houseplants](houseplant-expansion.md), with licensed
+  original photos and English care/aliases. Existing catalog data remains.
+
 ### Pet-aware catalog expansion (2026-10-24)
 
 - Added parlor palm, cast iron plant and baby rubber plant with English care,

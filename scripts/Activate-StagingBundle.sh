@@ -16,10 +16,11 @@ sha256sum -c SHA256SUMS >/dev/null
 # Keep the separate staging .env and all other private configuration untouched.
 chmod 0755 deploy
 chmod 0644 deploy/Caddyfile deploy/catalog.example.json deploy/catalog.houseplants.json deploy/catalog-images.json
-python3 - "$next" <<'PY'
+python3 - "$next" "$base/releases/$previous/manifest.json" <<'PY'
 import json,sys
 manifest=json.load(open('manifest.json'))
 assert manifest['candidate']==sys.argv[1] and manifest.get('accountErasureProtocol')==1
+assert manifest.get('reminderSnoozeProtocol',0)>=json.load(open(sys.argv[2])).get('reminderSnoozeProtocol',0)
 PY
 docker load --input images.tar >/dev/null
 python3 - <<'PY'
@@ -35,13 +36,15 @@ rollback() {
     code=$?
     trap - EXIT
     if test "$code" != 0; then
-        if ! python3 - "$base/releases/$previous/manifest.json" <<'PY'
+        if ! python3 - "$base/releases/$previous/manifest.json" "$base/releases/$next/manifest.json" <<'PY'
 import json,sys
-assert json.load(open(sys.argv[1])).get('accountErasureProtocol')==1
+previous=json.load(open(sys.argv[1])); current=json.load(open(sys.argv[2]))
+assert previous.get('accountErasureProtocol')==1
+assert previous.get('reminderSnoozeProtocol',0)>=current.get('reminderSnoozeProtocol',0)
 PY
         then
             dc stop api worker >/dev/null 2>&1 || true
-            printf 'Activation failed; application stopped. Erasure-aware forward recovery is required.\n' >&2
+            printf 'Activation failed; application stopped. A compatible erasure/snooze-aware forward recovery is required.\n' >&2
             exit 1
         fi
         cd "$base/releases/$previous"

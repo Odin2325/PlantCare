@@ -57,7 +57,8 @@ def inspect(*args):
 images={name:inspect('inspect','--format','{{.Image}}','plantcare-staging-'+name+'-1') for name in ('api','worker','database','proxy')}
 images['databaseReference']=inspect('image','inspect','--format','{{index .RepoDigests 0}}',images['database'])
 files=[{'name':p.relative_to(root).as_posix(),'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()} for p in sorted(root.rglob('*')) if p.is_file()]
-(root/'manifest.json').write_text(json.dumps({'createdAtUtc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'candidate':sys.argv[2],'images':images,'files':files},indent=2))
+protocol=json.load(open('manifest.json')).get('reminderSnoozeProtocol',0)
+(root/'manifest.json').write_text(json.dumps({'createdAtUtc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'candidate':sys.argv[2],'reminderSnoozeProtocol':protocol,'images':images,'files':files},indent=2))
 PY
 chown -R ubuntu:ubuntu "$scratch"
 find "$scratch" -type f -exec chmod 600 {} +

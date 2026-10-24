@@ -69,7 +69,16 @@ try {
     Set-Content -LiteralPath (Join-Path $payload 'images.env') -Encoding utf8NoBOM -Value @(
         "PLANTCARE_API_IMAGE=$api", "PLANTCARE_WORKER_IMAGE=$worker"
     )
-    @{candidate=$sha;platform='linux/amd64';accountErasureProtocol=1;catalogDataset='houseplants-en-v1';createdAtUtc=[DateTimeOffset]::UtcNow.ToString('O');images=$images} |
+    # Capabilities belong to the exported commit, not this script's checkout.
+    # Exporting an older commit must not label its worker as snooze-aware.
+    $snoozeProtocol = 0
+    $protocolFile = Join-Path $source 'deploy/runtime-protocols.json'
+    if(Test-Path -LiteralPath $protocolFile){
+        $protocols=Get-Content -LiteralPath $protocolFile -Raw|ConvertFrom-Json
+        if($protocols.reminderSnoozeProtocol -ne 1){throw 'Unknown reminder protocol; review the exporter.'}
+        $snoozeProtocol=1
+    }
+    @{candidate=$sha;platform='linux/amd64';accountErasureProtocol=1;reminderSnoozeProtocol=$snoozeProtocol;catalogDataset='houseplants-en-v1';createdAtUtc=[DateTimeOffset]::UtcNow.ToString('O');images=$images} |
         ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $payload 'manifest.json') -Encoding utf8NoBOM
     $checksums = foreach ($file in @('images.tar', 'compose.yaml', 'environment.example', 'images.env', 'manifest.json', 'deploy/Caddyfile', 'deploy/catalog.example.json', 'deploy/catalog.houseplants.json', 'deploy/catalog-images.json')) {
         (Get-FileHash -LiteralPath (Join-Path $payload $file) -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + $file

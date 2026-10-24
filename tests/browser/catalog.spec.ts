@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed.length).toBeGreaterThanOrEqual(23);
+  expect(reviewed.length).toBeGreaterThanOrEqual(43);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
@@ -77,7 +77,7 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   const species = await (await request.get('/api/plant-species')).json();
   const expected = species.filter((p: any) => !p.isToxicToPets && p.catalogProfile?.nonToxicToCatsAndDogsSourceUrl)
     .map((p: any) => p.commonName).sort((a: string, b: string) => a.localeCompare(b, 'en'));
-  expect(expected).toEqual(['African violet', 'Baby rubber plant', 'Cast iron plant', 'Parlor palm', 'Spider plant']);
+  expect(expected).toEqual(['African violet', 'Baby rubber plant', 'Boston fern', 'Cast iron plant', 'Parlor palm', 'Ponytail palm', 'Rattlesnake plant', 'Spider plant', 'Wax plant']);
   await page.goto('/plants?pets=non-toxic');
   const cards = page.locator('.plant-card');
   const names = cards.getByRole('heading', { level: 2 });
@@ -125,6 +125,30 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
       await expect(page.getByText('different from the much larger rubber plant', { exact: false })).toBeVisible();
   }
   await auditAccessibility(page, 'New houseplant detail with sourced classification');
+});
+
+test('large houseplant batch has distinct common-name pages, source credits and working reference photos', async ({ page, request }) => {
+  const all = await (await request.get('/api/plant-species')).json();
+  for (const name of ['Fiddle-leaf fig', 'Chinese banyan', 'Madagascar dragon tree', 'Dwarf umbrella tree',
+    'Money tree', 'Spineless yucca', 'Boston fern', "Bird's nest fern", 'Prayer plant', 'Round-leaf calathea',
+    'Rattlesnake plant', 'Dieffenbachia', 'Chinese evergreen', 'Arrowhead plant', 'Inch plant', 'Wax plant',
+    'String of hearts', 'Ponytail palm', 'Nerve plant', 'Heartleaf philodendron']) {
+    const plant = all.find((p: { commonName: string }) => p.commonName === name);
+    expect(plant, `New catalog plant: ${name}`).toBeTruthy();
+    await page.goto('/plants/' + plant.id);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(name);
+    await expect(page.getByRole('link', { name: 'Care reference', exact: true })).toHaveAttribute('href', plant.catalogProfile.careSourceUrl);
+    const photo = page.locator('app-plant-photo').first().getByRole('img');
+    await photo.scrollIntoViewIfNeeded();
+    await expect.poll(() => photo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    await expect(page.locator('.care-grid')).toContainText(plant.wateringInstructions);
+    await expect(page.locator('app-plant-photo').first().getByRole('link', { name: plant.catalogProfile.photo.licenseName, exact: true })).toHaveAttribute('href', plant.catalogProfile.photo.licenseUrl);
+    if (plant.catalogProfile.nonToxicToCatsAndDogsSourceUrl)
+      await expect(page.getByRole('link', { name: 'Pet toxicity reference', exact: true })).toHaveAttribute('href', plant.catalogProfile.nonToxicToCatsAndDogsSourceUrl);
+  }
+  await page.setViewportSize({ width: 320, height: 800 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Expanded houseplant catalog detail');
 });
 
 test('flowering additions have identifiable photos, attributed care and seasonal guidance', async ({ page }) => {
@@ -212,7 +236,7 @@ test('familiar aliases tolerate punctuation, preserve navigation and keep ambigu
   await expect(page.locator('.plant-card h2')).toHaveText(['Corn plant', 'Spider plant']);
   await expect(page.locator('.plant-card .scientific-name')).toHaveText(['Dracaena fragrans', 'Chlorophytum comosum']);
   await page.goto('/plants?q=Money%20plant');
-  await expect(page.locator('.plant-card h2')).toHaveText(['Chinese money plant', 'Jade plant']);
+  await expect(page.locator('.plant-card h2')).toHaveText(['Chinese money plant', 'Jade plant', 'Money tree']);
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Alternative-name search results');

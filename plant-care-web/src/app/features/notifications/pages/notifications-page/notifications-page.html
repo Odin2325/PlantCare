@@ -63,7 +63,14 @@
     <ul>
       @for (notification of notifications(); track notification.id) {
         <li [class.unread]="!notification.readAtUtc">
-          <div><strong>{{ notification.plantName }}</strong><p>{{ notification.actionType }} is due {{ notification.dueAtUtc | date:'medium' }}.</p></div>
+          <div><strong>{{ notification.plantName }}</strong>
+            @if (notification.canSnooze === false && !notification.snoozedUntilUtc) {
+              <p>Past {{ notification.actionType }} reminder · originally due {{ notification.dueAtUtc | date:'medium' }}.</p>
+            } @else {
+              <p>{{ notification.actionType }} is due {{ notification.dueAtUtc | date:'medium' }}.</p>
+            }
+            <app-reminder-snooze [notification]="notification" (snoozed)="load()" />
+          </div>
           @if (!notification.readAtUtc) { <button type="button" (click)="markRead(notification)">Mark as read</button> }
         </li>
       }

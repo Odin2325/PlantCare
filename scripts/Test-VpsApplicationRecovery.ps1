@@ -76,6 +76,7 @@ try {
         $bundleRoot=Join-Path $BackupState "deployment-bundles/$RuntimeCandidate"
         $bundle=Get-Content (Join-Path $bundleRoot 'manifest.json') -Raw|ConvertFrom-Json
         if($bundle.candidate -ne $RuntimeCandidate -or $bundle.accountErasureProtocol -ne 1){throw 'Recovery requires a matching erasure-aware runtime bundle.'}
+        if([int]$bundle.reminderSnoozeProtocol -lt [int]$manifest.reminderSnoozeProtocol){throw 'The selected runtime cannot safely process snoozed reminders from this snapshot.'}
         foreach($line in Get-Content (Join-Path $bundleRoot 'SHA256SUMS')){
             if($line -notmatch '^([a-f0-9]{64})  (images.tar|compose.yaml|environment.example|images.env|manifest.json|deploy/Caddyfile|deploy/catalog.example.json|deploy/catalog.houseplants.json|deploy/catalog-images.json)$'){throw 'Unexpected prebuilt checksum entry.'}
             if((Get-FileHash (Join-Path $bundleRoot $Matches[2]) -Algorithm SHA256).Hash -ne $Matches[1]){throw 'Prebuilt payload hash mismatch.'}

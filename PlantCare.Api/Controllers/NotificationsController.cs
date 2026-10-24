@@ -2,14 +2,31 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlantCare.Application.Notifications;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace PlantCare.Api.Controllers;
 
 [ApiController]
 [Authorize]
 [Route("api/notifications")]
-public sealed class NotificationsController(INotificationService notificationService) : ControllerBase
+public sealed class NotificationsController(INotificationService notificationService, IReminderSnoozeService snoozeService) : ControllerBase
 {
+    public sealed record SnoozeRequest(int Hours);
+
+    [HttpPost("{notificationId:guid}/snooze")]
+    [EnableRateLimiting("reminder-snooze")]
+    public async Task<IActionResult> Snooze(Guid notificationId, SnoozeRequest request, CancellationToken ct)
+    {
+        if (!TryGetCurrentUserId(out var userId)) return Unauthorized();
+        if (request.Hours is not (1 or 24 or 72)) return BadRequest(new ProblemDetails { Title = "Choose 1 hour, 24 hours or 3 days." });
+        var result = await snoozeService.SnoozeAsync(userId, notificationId, request.Hours, ct);
+        return result.Status switch
+        {
+            SnoozeStatus.Success => Ok(result.Notification),
+            SnoozeStatus.NotFound => NotFound(),
+            _ => Conflict(new ProblemDetails { Title = "This reminder is no longer available to snooze. Reload to see current care." })
+        };
+    }
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<NotificationDto>>> Get([FromQuery] int take = 50, CancellationToken cancellationToken = default)
     {

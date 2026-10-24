@@ -8,7 +8,11 @@ export class NotificationsApiService {
   private readonly http = inject(HttpClient);
 
   getNotifications(): Observable<CareNotification[]> {
-    return this.http.get<CareNotification[]>('/api/notifications');
+    return this.http.get<CareNotification[]>('/api/notifications?take=100');
+  }
+
+  snooze(id: string, hours: number): Observable<CareNotification> {
+    return this.http.post<CareNotification>(`/api/notifications/${id}/snooze`, { hours });
   }
 
   markRead(id: string): Observable<void> {

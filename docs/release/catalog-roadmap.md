@@ -1,5 +1,9 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-24: [twenty further houseplants](houseplant-expansion.md) expand
+the reviewed dataset to 43 entries with 47 photo files. The existing 23 records
+are unchanged; see that record for exact validation/deployment status.
+
 Follow-up 2026-10-24: [pet-aware expansion](pet-aware-catalog.md) prepares three
 additional indoor plants, five sourced cat-and-dog classifications and a combined
 pet filter. See that record for exact verification/deployment status. Reminder

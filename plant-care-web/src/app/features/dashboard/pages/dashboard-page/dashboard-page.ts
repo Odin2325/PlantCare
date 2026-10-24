@@ -13,6 +13,7 @@ import {
 
 import {
   finalize,
+  fromEvent, merge, timer,
 } from 'rxjs';
 
 import {
@@ -22,6 +23,9 @@ import {
 import {
   CareDue,
 } from '../../models/dashboard.model';
+import { ReminderSnooze } from '../../../../shared/reminder-snooze/reminder-snooze';
+import { NotificationsApiService } from '../../../notifications/data-access/notifications-api.service';
+import { CareNotification } from '../../../notifications/models/notification.model';
 
 import {
   MyPlantsApiService,
@@ -30,13 +34,27 @@ import {
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [],
+  imports: [ReminderSnooze],
   templateUrl: './dashboard-page.html',
   styleUrl: './dashboard-page.css',
   changeDetection:
     ChangeDetectionStrategy.OnPush,
 })
 export class DashboardPage {
+  private readonly notificationsApi = inject(NotificationsApiService);
+  readonly reminders = signal<CareNotification[]>([]);
+
+  loadReminders(): void {
+    this.notificationsApi.getNotifications().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: reminders => this.reminders.set(reminders),
+      error: () => this.reminders.set([]),
+    });
+  }
+
+  reminderFor(item: CareDue): CareNotification | undefined {
+    return this.reminders().find(n => n.userPlantId === item.userPlantId && n.actionType === item.actionType &&
+      n.dueAtUtc === item.dueAtUtc && (n.canSnooze || n.snoozedUntilUtc));
+  }
   private readonly dashboardApi =
     inject(DashboardApiService);
 
@@ -60,6 +78,10 @@ export class DashboardPage {
 
   constructor() {
     this.loadDashboard();
+    merge(fromEvent(window, 'focus'), fromEvent(window, 'online'), timer(60_000, 60_000))
+      .pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        if (document.visibilityState === 'visible') this.loadReminders();
+      });
   }
 
   readonly overdue =
@@ -87,6 +109,7 @@ export class DashboardPage {
     );
 
   loadDashboard(): void {
+    this.loadReminders();
     this.isLoading.set(true);
     this.errorMessage.set(null);
 

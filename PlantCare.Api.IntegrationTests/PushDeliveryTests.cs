@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http.Json;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -353,6 +354,136 @@ public sealed class PushDeliveryTests : IAsyncLifetime
     {
         await using var scope = factory.Services.CreateAsyncScope();
         return await scope.ServiceProvider.GetRequiredService<IPushDeliveryService>().DeliverPendingAsync(batch, cancellationToken);
+    }
+
+    private async Task<SnoozeReminderResult> SnoozeAsync(Guid notificationId, int hours)
+    {
+        await using var scope = factory.Services.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+        var user = await db.Notifications.Where(n => n.Id == notificationId).Select(n => n.UserId).SingleAsync();
+        return await scope.ServiceProvider.GetRequiredService<IReminderSnoozeService>().SnoozeAsync(user, notificationId, hours);
+    }
+
+    [Fact]
+    public async Task SnoozeEndpointEnforcesOwnershipDurationsAndStaleRequestConflicts()
+    {
+        var id = await SeedAsync();
+        Guid owner = Guid.Empty;
+        await InspectAsync(async db => owner = (await db.Notifications.SingleAsync()).UserId);
+        using var client = factory.CreateClient(new Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryClientOptions
+            { BaseAddress = new Uri("https://localhost") });
+        Assert.Equal(HttpStatusCode.Unauthorized, (await client.PostAsJsonAsync($"/api/notifications/{id}/snooze", new { hours = 1 })).StatusCode);
+        client.DefaultRequestHeaders.Add(TestAuthenticationHandler.UserIdHeader, Guid.NewGuid().ToString());
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.NotFound, (await client.PostAsJsonAsync($"/api/notifications/{id}/snooze", new { hours = 1 })).StatusCode);
+        client.DefaultRequestHeaders.Remove(TestAuthenticationHandler.UserIdHeader);
+        client.DefaultRequestHeaders.Add(TestAuthenticationHandler.UserIdHeader, owner.ToString());
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsJsonAsync($"/api/notifications/{id}/snooze", new { hours = 2 })).StatusCode);
+        var response = await client.PostAsJsonAsync($"/api/notifications/{id}/snooze", new { hours = 24 });
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(HttpStatusCode.Conflict, (await client.PostAsJsonAsync($"/api/notifications/{id}/snooze", new { hours = 24 })).StatusCode);
+        using var json = JsonDocument.Parse(await (await client.GetAsync("/api/notifications")).Content.ReadAsStringAsync());
+        var current = Assert.Single(json.RootElement.EnumerateArray());
+        Assert.False(current.GetProperty("canSnooze").GetBoolean());
+        Assert.Equal(clock.Now.AddHours(24), current.GetProperty("snoozedUntilUtc").GetDateTimeOffset());
+        clock.Now = clock.Now.AddHours(24);
+        using var awake = JsonDocument.Parse(await (await client.GetAsync("/api/notifications")).Content.ReadAsStringAsync());
+        Assert.True(Assert.Single(awake.RootElement.EnumerateArray()).GetProperty("canSnooze").GetBoolean());
+    }
+
+    [Fact]
+    public async Task SnoozedReminderWaitsThreeDaysAndPreservesAcceptedDeviceHistoryAndCareDate()
+    {
+        var id = await SeedAsync("snooze-device");
+        await DeliverAsync();
+        var now = clock.Now;
+        var result = await SnoozeAsync(id, 72);
+        Assert.Equal(SnoozeStatus.Success, result.Status);
+        Assert.Equal(now.AddHours(72), result.Notification!.SnoozedUntilUtc);
+        Assert.Equal(SnoozeStatus.NotCurrent, (await SnoozeAsync(id, 1)).Status);
+        Assert.Equal(SnoozeStatus.NotCurrent, (await SnoozeAsync(result.Notification.Id, 1)).Status);
+        Assert.Equal(0, await DeliverAsync());
+        clock.Now = now.AddHours(72).AddSeconds(-1);
+        Assert.Equal(0, await DeliverAsync());
+        clock.Now = now.AddHours(72);
+        Assert.Equal(1, await DeliverAsync());
+        Assert.Equal(2, provider.Count("snooze-device"));
+        await InspectAsync(async db =>
+        {
+            var schedule = await db.CareSchedules.SingleAsync();
+            var old = await db.Notifications.SingleAsync(n => n.Id == id);
+            var next = await db.Notifications.SingleAsync(n => n.Id == result.Notification.Id);
+            Assert.Equal(schedule.NextDueAtUtc, next.DueAtUtc);
+            Assert.Equal(old.DueAtUtc, next.DueAtUtc);
+            Assert.Null(schedule.LastCompletedAtUtc);
+            Assert.Empty(await db.CareEvents.ToListAsync());
+            Assert.Equal(1, next.ReminderSequence);
+            Assert.Equal(2, await db.PushDeliveries.CountAsync(d => d.Status == PushDeliveryStatus.Accepted));
+        });
+    }
+
+    [Theory]
+    [InlineData("completed")]
+    [InlineData("disabled")]
+    [InlineData("archived")]
+    [InlineData("preference")]
+    public async Task CareAndPreferenceChangesCancelDelayedPush(string change)
+    {
+        var id = await SeedAsync("cancel-snooze");
+        var result = await SnoozeAsync(id, 24);
+        Assert.Equal(1, await DeliverAsync()); // Close the superseded, unsent occurrence.
+        await InspectAsync(async db =>
+        {
+            var schedule = await db.CareSchedules.Include(s => s.UserPlant).SingleAsync();
+            switch (change)
+            {
+                case "completed": schedule.MarkCompleted(clock.Now); break;
+                case "disabled": schedule.Disable(); break;
+                case "archived": schedule.UserPlant.Archive(); break;
+                case "preference":
+                    var pref = NotificationPreference.CreateDefault(schedule.UserPlant.UserId);
+                    pref.Update(true, false, true, true, true, true, true, 0);
+                    db.NotificationPreferences.Add(pref); break;
+            }
+            await db.SaveChangesAsync();
+        });
+        clock.Now = clock.Now.AddDays(1);
+        Assert.Equal(1, await DeliverAsync());
+        Assert.Equal(0, provider.Count("cancel-snooze"));
+        Assert.Equal(change == "preference" ? SnoozeStatus.Success : SnoozeStatus.NotCurrent,
+            (await SnoozeAsync(result.Notification!.Id, 1)).Status);
+    }
+
+    [Fact]
+    public async Task SnoozingSkipsOnlyPendingDeviceAttemptsAndKeepsOtherAccountsOut()
+    {
+        var id = await SeedAsync("accepted-snooze", "retry-snooze");
+        provider.Respond = device => new(device == "retry-snooze" ? HttpStatusCode.ServiceUnavailable : HttpStatusCode.Created);
+        await DeliverAsync();
+        var result = await SnoozeAsync(id, 1);
+        Assert.Equal(1, await DeliverAsync()); // Worker skips pending attempts on the superseded occurrence.
+        await InspectAsync(async db =>
+        {
+            Assert.Equal(1, await db.PushDeliveries.CountAsync(d => d.Status == PushDeliveryStatus.Accepted));
+            Assert.Equal(1, await db.PushDeliveries.CountAsync(d => d.Status == PushDeliveryStatus.Skipped));
+        });
+        await using var scope = factory.Services.CreateAsyncScope();
+        Assert.Equal(SnoozeStatus.NotFound, (await scope.ServiceProvider.GetRequiredService<IReminderSnoozeService>()
+            .SnoozeAsync(Guid.NewGuid(), result.Notification!.Id, 1)).Status);
+        Assert.Equal(0, await DeliverAsync());
+        Assert.Equal(1, provider.Count("retry-snooze"));
+    }
+
+    [Fact]
+    public async Task ConcurrentSqlSnoozesClaimOneFollowUp()
+    {
+        if (Environment.GetEnvironmentVariable("PLANTCARE_PUSH_TEST_SQL_PASSWORD") is null) return;
+        var id = await SeedAsync("concurrent-snooze");
+        var results = await Task.WhenAll(SnoozeAsync(id, 1), SnoozeAsync(id, 24));
+        Assert.Single(results, r => r.Status == SnoozeStatus.Success);
+        Assert.Single(results, r => r.Status == SnoozeStatus.NotCurrent);
+        await InspectAsync(async db => Assert.Equal(2, await db.Notifications.CountAsync()));
     }
 
     private async Task InspectAsync(Func<PlantCareDbContext, Task> inspect)

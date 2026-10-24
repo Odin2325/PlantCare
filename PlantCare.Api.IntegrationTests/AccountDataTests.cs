@@ -58,7 +58,7 @@ public sealed class AccountDataTests : IAsyncLifetime
             db.PlantSpecies.Add(species); db.UserPlants.Add(plant);
             db.UserPlants.Add(UserPlant.Create(b.Id, species.Id, "Private B plant", null, null, "Private B notes", now));
             db.CareEvents.Add(CareEvent.Create(schedule.Id, now, now));
-            db.Notifications.Add(notification); db.PushSubscriptions.Add(device);
+            db.Notifications.AddRange(notification, Notification.CreateFollowUp(notification, now, 24)); db.PushSubscriptions.Add(device);
             db.PushDeliveries.Add(PushDelivery.Create(notification.Id, device.Id, now));
             db.NotificationPreferences.Add(NotificationPreference.CreateDefault(a.Id));
             db.CalendarSubscriptions.Add(CalendarSubscription.Create(a.Id, new string('a', 64), now));
@@ -78,6 +78,21 @@ public sealed class AccountDataTests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task CookieSnoozeRequiresAntiforgeryAndRejectsArchivedCare()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        Guid notification;
+        await using (var scope = factory.Services.CreateAsyncScope())
+            notification = await scope.ServiceProvider.GetRequiredService<PlantCareDbContext>().Notifications
+                .Where(n => n.UserId == a.Id && n.ReminderSequence == 0).Select(n => n.Id).SingleAsync();
+        using var client = Client(); await Login(client, a);
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsJsonAsync($"/api/notifications/{notification}/snooze", new { hours = 1 })).StatusCode);
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.Conflict, (await client.PostAsJsonAsync($"/api/notifications/{notification}/snooze", new { hours = 1 })).StatusCode);
+    }
+
+    [Fact]
     public async Task ExportIsPrivatePasswordProtectedAndExcludesCredentials()
     {
         var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
@@ -94,6 +109,8 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.Equal(a.Email, json.RootElement.GetProperty("account").GetProperty("email").GetString());
         Assert.Single(json.RootElement.GetProperty("plants").EnumerateArray());
         Assert.Single(json.RootElement.GetProperty("history").EnumerateArray());
+        Assert.Equal(2, json.RootElement.GetProperty("notifications").GetArrayLength());
+        Assert.Contains(json.RootElement.GetProperty("notifications").EnumerateArray(), n => n.GetProperty("reminderSequence").GetInt32() == 1 && n.GetProperty("notBeforeUtc").ValueKind == JsonValueKind.String);
         Assert.Single(json.RootElement.GetProperty("tags").EnumerateArray());
         Assert.False(json.RootElement.GetProperty("plants")[0].GetProperty("isActive").GetBoolean());
         Assert.Contains("Private A notes", text);
@@ -156,7 +173,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         await using var checkScope = factory.Services.CreateAsyncScope();
         var check = checkScope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
         Assert.Equal(2, await check.Users.CountAsync()); Assert.Equal(2, await check.CalendarShares.CountAsync());
-        Assert.Single(await check.Notifications.ToListAsync()); Assert.Single(await check.PushDeliveries.ToListAsync());
+        Assert.Equal(2, await check.Notifications.CountAsync()); Assert.Single(await check.PushDeliveries.ToListAsync());
         Assert.Single(await check.CareEvents.ToListAsync()); Assert.Equal(2, await check.UserPlants.CountAsync());
         Assert.Empty(await check.AccountErasures.ToListAsync());
     }

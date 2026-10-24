@@ -6,7 +6,8 @@ by this plan. The public contact-address decision remains deferred by the owner.
 
 Owner direction on 2026-10-24 prioritizes catalog expansion and the recommended
 features. [Pet-aware catalog browsing](pet-aware-catalog.md) is deployed;
-[reminder snoozing](reminder-snoozing.md) is the next feature increment. Release
+[reminder snoozing](reminder-snoozing.md) and the
+[20-plant expansion](houseplant-expansion.md) are in validation. Release
 work below remains tracked alongside it.
 
 ## Completed staging milestones

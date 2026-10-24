@@ -3,7 +3,7 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The catalog includes 23 real
+data while the launch requirements remain open. The reviewed catalog dataset includes 43 real
 houseplants with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
@@ -69,6 +69,15 @@ Archiving a plant hides it from the active collection and stops new care
 reminders. Use Show archived to find it and restore it. Archiving is not erasure.
 
 ## Reminders
+
+On a current generated reminder in Dashboard or Notifications, choose 1 hour,
+24 hours or 3 days under Remind me in. Wait for the saved snoozed-until time.
+Snoozing does not record care or change its due date, so Dashboard/calendar may
+still show the action as overdue. Complete care only when you have performed it.
+Completing, disabling or archiving that care prevents the delayed reminder.
+Opening or marking a reminder read is separate from snoozing. Previously delivered
+phone notifications cannot reliably be recalled. Check the release record for
+[snoozing deployment status](release/reminder-snoozing.md).
 
 In Notifications, choose in-app and push delivery, care actions, and reminder
 lead time, then choose Save preferences. To receive push on a particular device,

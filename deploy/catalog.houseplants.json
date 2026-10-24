@@ -826,5 +826,669 @@
         "title": "Form"
       }
     }
+  },
+  {
+    "commonName": "Fiddle-leaf fig",
+    "scientificName": "Ficus lyrata",
+    "description": "A tree-like houseplant with large, violin-shaped leaves. Its milky sap can irritate skin; indoor plants rarely flower or fruit.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight; shelter from harsh afternoon sun and temperature swings.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the upper layer of mix dry before watering thoroughly and draining. Avoid saturated roots.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Rich, airy potting mix with drainage.",
+    "humidityInstructions": "Prefers moderate humidity and steady warmth, away from heating vents.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-lyrata/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Banjo fig",
+        "Fiddle leaf fig"
+      ],
+      "photo": {
+        "path": "/images/plants/ficus-lyrata.jpg",
+        "altText": "Ficus lyrata in pots",
+        "credit": "NC Cooperative Extension",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-lyrata/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Ficus lyrata in pots"
+      }
+    }
+  },
+  {
+    "commonName": "Chinese banyan",
+    "scientificName": "Ficus microcarpa",
+    "description": "A small-leaved fig often trained as indoor bonsai. The species becomes a large tree outdoors; the reference photo shows a bonsai specimen.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright filtered daylight in a warm indoor position.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check the mix regularly and water as its surface dries. Drain freely; overwatering can rot roots.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "A well-drained bonsai or houseplant mix appropriate to the container.",
+    "humidityInstructions": "Needs a warm room and humid air; protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Indian laurel fig",
+        "Laurel fig"
+      ],
+      "photo": {
+        "path": "/images/plants/ficus-microcarpa.jpg",
+        "altText": "A shallow ceramic tray with a multiple-trunked bonsai",
+        "credit": "Joey McCoy",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-microcarpa/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Ficus microcarpa as a bonsai"
+      }
+    }
+  },
+  {
+    "commonName": "Madagascar dragon tree",
+    "scientificName": "Dracaena reflexa var. angustifolia",
+    "description": "A slender cane plant with narrow, arching leaves, often labelled Dracaena marginata. Leaf edging varies between cultivars.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight supports compact growth; avoid hot direct sun.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Allow the mix to dry between waterings without leaving it severely dry. Drain after watering.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a freely draining houseplant mix.",
+    "humidityInstructions": "Ordinary room humidity is suitable. Consider low-fluoride water if leaf tips brown.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-reflexa-var-angustifolia/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Dragon tree",
+        "Red-edged dracaena"
+      ],
+      "photo": {
+        "path": "/images/plants/dracaena-marginata.jpg",
+        "altText": "slender trunk, long, narrow, lanceolate leaves with pointed tips",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-reflexa-var-angustifolia/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Dracaena reflexa var. angustifolia, houseplant and form view"
+      }
+    }
+  },
+  {
+    "commonName": "Dwarf umbrella tree",
+    "scientificName": "Heptapleurum arboricola",
+    "description": "Glossy leaflets spread like small umbrellas. Often sold as Schefflera arboricola; variegated and bonsai forms are available.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight; strong direct indoor sun can scorch leaves.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the surface of the mix to dry, then water thoroughly and drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Rich, well-drained potting mix with drainage holes.",
+    "humidityInstructions": "Prefers humid air and warmth. Both very wet and very dry roots can cause leaf drop.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/heptapleurum-arboricola/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Umbrella plant",
+        "Dwarf schefflera"
+      ],
+      "photo": {
+        "path": "/images/plants/heptapleurum-arboricola.jpg",
+        "altText": "Heptapleurum arboricola",
+        "credit": "Dinesh Valke",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/heptapleurum-arboricola/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": null
+      }
+    }
+  },
+  {
+    "commonName": "Money tree",
+    "scientificName": "Pachira aquatica",
+    "description": "An indoor tree with hand-shaped leaves, often sold with braided trunks. Flowering is unusual indoors; it is different from Chinese money plant and jade plant.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight; protect leaves from strong direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix lightly moist as it begins to dry, draining excess water. Never leave the pot in standing water.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a moisture-retentive but well-drained houseplant mix.",
+    "humidityInstructions": "Prefers warmth and humid air; avoid prolonged drought and cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/pachira-aquatica/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Guiana chestnut",
+        "Money plant"
+      ],
+      "photo": {
+        "path": "/images/plants/pachira-aquatica.jpg",
+        "altText": "potted plant with palmately compound leaves & woody stem.",
+        "credit": "mcgarrett88",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pachira-aquatica/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Pachira aquatica. Houseplant."
+      }
+    }
+  },
+  {
+    "commonName": "Spineless yucca",
+    "scientificName": "Yucca gigantea",
+    "description": "A sturdy cane plant with rosettes of firm leaves, formerly called Yucca elephantipes. Indoor specimens stay smaller than outdoor trees.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give a sunny window, introducing stronger sun gradually.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Let the mix dry between thorough waterings. Check less often in winter and drain fully.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a very freely draining mix with mineral grit or perlite.",
+    "humidityInstructions": "Typical room humidity is suitable. Keep frost-free and away from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/yucca-gigantea/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Giant yucca",
+        "Soft-tip yucca"
+      ],
+      "photo": {
+        "path": "/images/plants/yucca-gigantea.jpg",
+        "altText": "Woody-trunked yucca with tuft of lanceolate leaves",
+        "credit": "someone10x",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/yucca-gigantea/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Yucca gigantea. Habit."
+      }
+    }
+  },
+  {
+    "commonName": "Boston fern",
+    "scientificName": "Nephrolepis exaltata",
+    "description": "A fern with arching divided fronds, including the familiar Bostoniensis form. Patterned brown spore clusters beneath fronds are normal.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright indirect light with protection from hot direct sun.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the mix consistently moist but not waterlogged. Do not let the root ball dry completely; reduce water when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "A rich, porous fern potting mix that holds moisture but drains.",
+    "humidityInstructions": "Needs humid air and moderate warmth; avoid dry radiator air.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Boston sword fern",
+        "Bostonfern"
+      ],
+      "photo": {
+        "path": "/images/plants/nephrolepis-exaltata.jpg",
+        "altText": "Nephrolepis exaltata",
+        "credit": "David Eickhoff",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form"
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/boston-fern"
+    }
+  },
+  {
+    "commonName": "Bird's nest fern",
+    "scientificName": "Asplenium nidus",
+    "description": "Broad, undivided green fronds form a central rosette. Cultivars differ in leaf shape and texture.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Filtered daylight or light shade; strong sun can yellow the fronds.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Maintain moist, well-drained mix without letting the root ball dry out. Water the mix rather than collecting water in the rosette.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a rich, porous fern mix.",
+    "humidityInstructions": "Provide humid air and protect the delicate fronds from dry heat and drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/asplenium-nidus/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Nest fern",
+        "Birds nest fern"
+      ],
+      "photo": {
+        "path": "/images/plants/asplenium-nidus.jpg",
+        "altText": "Potted plant with rosette of undivided fronds.",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/asplenium-nidus/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Potted plant."
+      }
+    }
+  },
+  {
+    "commonName": "Prayer plant",
+    "scientificName": "Maranta leuconeura",
+    "description": "A spreading plant with patterned leaves that lift at night. Leaf colour and vein patterns vary between cultivars.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect light; strong sun fades or scorches the patterned leaves.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the mix evenly moist during growth without soaking it. Reduce watering when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "A loose, moisture-retentive mix with good drainage.",
+    "humidityInstructions": "Needs humid air and warmth. Protect from cold drafts; avoid overfeeding.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/maranta-leuconeura/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Herringbone plant",
+        "Rabbit tracks"
+      ],
+      "photo": {
+        "path": "/images/plants/maranta-leuconeura.jpg",
+        "altText": "Maranta leuconeura",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/maranta-leuconeura/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Whole plant"
+      }
+    }
+  },
+  {
+    "commonName": "Round-leaf calathea",
+    "scientificName": "Goeppertia orbifolia",
+    "description": "Large rounded leaves have broad silver-green bands. Often labelled Calathea orbifolia; this is a foliage plant rather than a reliable indoor bloomer.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect light or light shade, without strong direct sun.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the mix consistently moist but not soggy. Low-fluoride water can help limit brown leaf tips.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a slightly acidic, moisture-retentive mix with good drainage.",
+    "humidityInstructions": "Needs high humidity and stable warmth. Keep away from cold drafts and abrupt temperature changes.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-orbifolia/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Orbifolia prayer plant",
+        "Round leaf calathea"
+      ],
+      "photo": {
+        "path": "/images/plants/goeppertia-orbifolia.jpg",
+        "altText": "Plant growing in a pot",
+        "credit": "Fregisseur",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-orbifolia/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Goeppertia orbifolia- form in a pot"
+      }
+    }
+  },
+  {
+    "commonName": "Rattlesnake plant",
+    "scientificName": "Goeppertia insignis",
+    "description": "Long, wavy leaves have dark oval markings and purple undersides. Often sold as Calathea lancifolia or Calathea insignis.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Filtered daylight or bright shade; avoid hot direct sun.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the mix evenly moist during growth and allow excess water to drain. Reduce checks as winter growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use an airy, moisture-retentive potting mix.",
+    "humidityInstructions": "Provide high humidity and a warm room, sheltered from drafts and sudden temperature changes.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-insignis/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Rattlesnake calathea",
+        "Prayer plant"
+      ],
+      "photo": {
+        "path": "/images/plants/goeppertia-insignis.jpg",
+        "altText": "rounded, clumping habit, long, slender leaves with wavy margins,",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-insignis/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Goeppertia insignis or rattlesnake plant, houseplant and form view"
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/prayer-plant"
+    }
+  },
+  {
+    "commonName": "Dieffenbachia",
+    "scientificName": "Dieffenbachia seguine",
+    "description": "An upright foliage plant with large patterned leaves. Colour varies by cultivar; its irritating sap requires careful handling.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Indirect daylight with protection from direct sun and cold drafts.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the top layer of mix dry before watering and draining thoroughly.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "A loose, fertile houseplant mix with good drainage.",
+    "humidityInstructions": "Prefers moderate warmth and humid air.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dieffenbachia-seguine/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Spotted dumb cane",
+        "Dumb cane"
+      ],
+      "photo": {
+        "path": "/images/plants/dieffenbachia-seguine.jpg",
+        "altText": "leaves",
+        "credit": "David J. Stang",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/dieffenbachia-seguine/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "leaves"
+      }
+    }
+  },
+  {
+    "commonName": "Chinese evergreen",
+    "scientificName": "Aglaonema (houseplant species and hybrids)",
+    "description": "A group of compact foliage houseplants with green, silver, pink or red patterns. The photograph shows Aglaonema modestum; cultivars have different light needs.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Use diffuse indirect light. Green forms tolerate lower light; brighter variegated forms need more filtered daylight.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the surface to begin drying between waterings, then drain. Reduce watering when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a moisture-retentive but well-drained potting mix.",
+    "humidityInstructions": "Keep warm and away from cold drafts; tolerates ordinary indoor humidity.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/aglaonema/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Philippine evergreen",
+        "Golden evergreen"
+      ],
+      "photo": {
+        "path": "/images/plants/aglaonema.jpg",
+        "altText": "Potted specimen of a plant with variegated foliage.",
+        "credit": "Marissa Anderson",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/aglaonema/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Aglaonema modestum as a potted plant."
+      }
+    }
+  },
+  {
+    "commonName": "Arrowhead plant",
+    "scientificName": "Syngonium podophyllum",
+    "description": "A climbing or trailing plant with arrow-shaped juvenile leaves. Older climbing plants develop differently shaped leaves; cultivars vary in colour.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight; direct sun can scorch or bleach foliage.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix lightly moist as the surface begins drying, then drain excess water.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a rich, freely draining houseplant mix.",
+    "humidityInstructions": "Prefers a warm room and humid air. A support accommodates its climbing habit.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Arrowhead vine",
+        "American evergreen"
+      ],
+      "photo": {
+        "path": "/images/plants/syngonium-podophyllum.jpg",
+        "altText": "Houseplant view",
+        "credit": "Dell Enecks (Pitt County)",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Syngonium podophyllum (Arrowhead Vine) houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Inch plant",
+    "scientificName": "Tradescantia zebrina",
+    "description": "A trailing plant with striped leaves and purple undersides. Pinching back leggy stems encourages a fuller plant; sap can irritate skin.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight gives good colour. Introduce any gentle sun gradually and avoid harsh summer sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Water when the surface of the mix dries, then drain. Reduce watering during slower winter growth.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "A standard, well-drained houseplant mix.",
+    "humidityInstructions": "Ordinary room humidity is suitable; keep warm and protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/tradescantia-zebrina/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Silver inch plant",
+        "Zebra plant"
+      ],
+      "photo": {
+        "path": "/images/plants/tradescantia-zebrina.jpg",
+        "altText": "Potted plant showing silver-striped leaves with purple underside",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/tradescantia-zebrina/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Tradescantia zebrina"
+      }
+    }
+  },
+  {
+    "commonName": "Wax plant",
+    "scientificName": "Hoya carnosa",
+    "description": "A climbing or trailing plant with thick leaves and waxy flowers. The photo shows a variegated form; retain old flower spurs because they can bloom again.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight throughout the year.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Allow the mix to dry between waterings, then drain. Avoid persistent wetness or prolonged drought.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a loose, fast-draining mix suitable for an epiphytic plant.",
+    "humidityInstructions": "Prefers humid air and warmth. Repot only when needed, avoiding flowering periods.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/hoya-carnosa/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Porcelain flower",
+        "Honey plant"
+      ],
+      "photo": {
+        "path": "/images/plants/hoya-carnosa.jpg",
+        "altText": "thick, waxy, variegated leaves of green and creamy white",
+        "credit": "Matt Stevens (Pitt County)",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/hoya-carnosa/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Hoya carnosa, houseplant view"
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/honey-plant"
+    }
+  },
+  {
+    "commonName": "String of hearts",
+    "scientificName": "Ceropegia woodii",
+    "description": "Fine trailing stems carry small heart-shaped leaves and bead-like aerial tubers. Suitable for a hanging pot or small trellis.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect daylight.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Let the mix dry completely between waterings. Water even less during winter rest.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a sandy, freely draining succulent mix and a pot with drainage.",
+    "humidityInstructions": "Normal indoor humidity is suitable. Avoid cold wet conditions and unnecessary repotting.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ceropegia-woodii/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Chain of hearts",
+        "Rosary vine"
+      ],
+      "photo": {
+        "path": "/images/plants/ceropegia-woodii.jpg",
+        "altText": "Potted vining plant trained on a heart-shaped trellis.",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ceropegia-woodii/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Potted plant."
+      }
+    }
+  },
+  {
+    "commonName": "Ponytail palm",
+    "scientificName": "Beaucarnea recurvata",
+    "description": "A slow-growing plant with a swollen water-storing base and long curling leaves. Despite its common name, it is not a true palm.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny window and acclimatize gradually to stronger light.",
+    "defaultWateringIntervalDays": 21,
+    "wateringInstructions": "Let the mix dry between thorough waterings. Reduce water substantially during winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "A fast-draining cactus or succulent mix.",
+    "humidityInstructions": "Tolerates ordinary dry indoor air. Keep warm and prevent water collecting around the base.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/beaucarnea-recurvata/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Elephant-foot tree",
+        "Bottle palm"
+      ],
+      "photo": {
+        "path": "/images/plants/beaucarnea-recurvata.jpg",
+        "altText": "Beaucarnea recurvata",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beaucarnea-recurvata/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": null
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/pony-tail"
+    }
+  },
+  {
+    "commonName": "Nerve plant",
+    "scientificName": "Fittonia albivenis",
+    "description": "A small, spreading foliage plant with contrasting white, pink or red leaf veins. Compact forms suit terrariums with appropriate ventilation.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Medium to bright indirect daylight; avoid direct sun.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check frequently and keep the mix evenly moist, draining any excess. Avoid both complete drying and waterlogged roots.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use a freely draining, moisture-retentive potting mix in a shallow container.",
+    "humidityInstructions": "Protect from dry air and drafts. Moderate humidity and gentle airflow help prevent leaf problems.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/fittonia-albivenis/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Mosaic plant",
+        "Silver nerve plant"
+      ],
+      "photo": {
+        "path": "/images/plants/fittonia-albivenis.jpg",
+        "altText": "Fittonia albivenis",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fittonia-albivenis/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form (Cabarrus County,NC)"
+      }
+    }
+  },
+  {
+    "commonName": "Heartleaf philodendron",
+    "scientificName": "Philodendron hederaceum",
+    "description": "A trailing or climbing vine with heart-shaped leaves. The reference photo shows the variegated Brasil cultivar; it is different from golden pothos.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Medium indirect daylight; tolerates a dimmer position but grows better with filtered light.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix slightly moist as its surface begins to dry. Reduce watering when winter growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable houseplant fertilizer label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use an airy houseplant mix with reliable drainage.",
+    "humidityInstructions": "Tolerates normal indoor air, preferring moderate humidity and steady warmth.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Sweetheart plant",
+        "Parlor ivy"
+      ],
+      "photo": {
+        "path": "/images/plants/philodendron-hederaceum.jpg",
+        "altText": "Vining houseplant with heart-shaped leaves bearing a stripe.",
+        "credit": "Kathleen Moore",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "P. hederaceum 'Brasil'"
+      }
+    }
   }
 ]
