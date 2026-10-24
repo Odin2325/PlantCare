@@ -146,7 +146,12 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await snoozeControls.getByRole('button', { name: '1 hour', exact: true }).click();
     const saved = await snoozeResponse;
     expect(saved.status()).toBe(200);
-    expect((await saved.json()).dueAtUtc).toBe(dueReminder!.dueAtUtc);
+    // Read persisted state through the cookie-authenticated API. Chromium can
+    // discard a worker-handled response body before DevTools retrieves it.
+    const reminders = await (await page.request.get('/api/notifications')).json();
+    const delayed = reminders.find((n: { plantName: string }) => n.plantName === nickname);
+    expect(delayed.dueAtUtc).toBe(dueReminder!.dueAtUtc);
+    expect(delayed.snoozedUntilUtc).toBeTruthy();
     await expect(page.getByText('Care is still due.', { exact: false })).toBeVisible();
     await page.reload();
     await expect(page.getByText('Reminder snoozed until', { exact: false })).toBeVisible();
