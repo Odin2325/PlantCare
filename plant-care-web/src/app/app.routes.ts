@@ -18,6 +18,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'plants/compare',
+    loadComponent: () => import('./features/plant-catalog/pages/plant-comparison-page/plant-comparison-page')
+      .then(component => component.PlantComparisonPage),
+  },
+  {
     path: 'plants/:id',
     loadComponent: () =>
       import(

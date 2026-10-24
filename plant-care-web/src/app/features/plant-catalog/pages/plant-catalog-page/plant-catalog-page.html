@@ -31,6 +31,18 @@
     No plant species have been added yet.
   </p>
   } @else {
+  <section class="comparison-tools" aria-label="Plant comparison selection">
+    <h2>Find your next plant</h2>
+    <p id="comparison-help">Select two or three plants to compare their care. Your selection stays when you search or change filters.</p>
+    <p role="status">{{ comparisonPlants().length }} of 3 plants selected for comparison</p>
+    @if (comparisonPlants().length > 0) {
+      <ul>@for (plant of comparisonPlants(); track plant.id) {
+        <li>{{ plant.commonName }} <button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'" (click)="toggleComparison(plant)">Remove</button></li>
+      }</ul>
+      @if (comparisonPlants().length >= 2) { <a class="compare-link" routerLink="/plants/compare" [queryParams]="filterQueryParams()">Compare selected plants</a> }
+      <button type="button" (click)="clearComparison()">Clear comparison</button>
+    }
+  </section>
   <section class="catalog-tools" aria-label="Catalog filters">
     <div class="catalog-field catalog-search">
       <label for="plant-search">Find a plant</label>
@@ -69,6 +81,10 @@
   <div class="plant-grid">
     @for (plant of visibleSpecies(); track plant.id) {
     <article class="plant-card">
+      <label class="comparison-choice"><input type="checkbox" [checked]="comparisonIds().includes(plant.id)"
+        [disabled]="comparisonPlants().length >= 3 && !comparisonIds().includes(plant.id)"
+        [attr.aria-label]="'Compare ' + plant.commonName" aria-describedby="comparison-help"
+        (change)="toggleComparison(plant)">Compare</label>
       <app-plant-photo [profile]="plant.catalogProfile" />
       <div class="plant-card__heading">
         <div>

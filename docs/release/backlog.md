@@ -25,6 +25,15 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Plant comparison and 15 more houseplants (2026-10-24)
+
+- Prepared comparison of up to three public species, retaining selection through
+  filters/details/reload and distinguishing unknown pet assessment from sourced
+  classification. See [plant-comparison.md](plant-comparison.md) for scope/status.
+- Added fifteen source-reviewed English profiles with licensed original photos;
+  the earlier 43 records remain unchanged. The batch has 58 plants, 92 aliases,
+  twelve sourced cat-and-dog classifications and 62 photo files.
+
 ### Reminder snoozing and larger catalog (2026-10-24)
 
 - Added durable follow-up reminders for 1 hour, 24 hours or 3 days, with unchanged

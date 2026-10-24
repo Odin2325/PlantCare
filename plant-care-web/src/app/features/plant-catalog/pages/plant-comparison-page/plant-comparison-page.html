@@ -1,0 +1,39 @@
+<main id="main-content" tabindex="-1" class="comparison-page">
+  <a routerLink="/plants" queryParamsHandling="preserve">← Back to plant catalog</a>
+  <h1>Compare plants</h1>
+  <p>Compare up to three plants before choosing one for your home. Common names can refer to different plants; check the scientific name too.</p>
+  <p>Suggested intervals are reminders to check the potting mix, not instructions to water automatically. Light, season and your room change actual needs.</p>
+  @if (loading()) {
+    <p role="status">Loading plant comparison…</p>
+  } @else if (error()) {
+    <div role="alert"><p>The plant comparison could not be loaded. Check your connection and try again.</p><button type="button" (click)="reload()">Try again</button></div>
+  } @else {
+    @if (unavailable()) { <p role="status">Some selected plants are no longer available. Choose replacements in the catalog.</p> }
+    @if (plants().length < 2) { <p role="status">Choose at least two plants in the catalog to compare their care.</p> }
+    <div class="comparison-grid">
+      @for (plant of plants(); track plant.id) {
+        <article class="comparison-card" [attr.aria-label]="plant.commonName + ' comparison'">
+          <h2>{{ plant.commonName }}</h2>
+          @if (plant.scientificName) { <p class="scientific-name">{{ plant.scientificName }}</p> }
+          <app-plant-photo [profile]="plant.catalogProfile" />
+          <dl>
+            <div><dt>Light</dt><dd><strong>{{ lightLabel(plant.sunlightRequirement) }}</strong><p>{{ plant.sunlightInstructions || 'Not specified.' }}</p></dd></div>
+            <div><dt>Watering</dt><dd><strong>Suggested check: every {{ plant.defaultWateringIntervalDays }} days</strong><p>{{ plant.wateringInstructions || 'Not specified.' }}</p></dd></div>
+            <div><dt>Soil and drainage</dt><dd>{{ plant.soilInstructions || 'Not specified.' }}</dd></div>
+            <div><dt>Humidity and room conditions</dt><dd>{{ plant.humidityInstructions || 'Not specified.' }}</dd></div>
+            <div><dt>Fertilizer</dt><dd>{{ plant.fertilizingInstructions || 'Not specified.' }}</dd></div>
+            <div><dt>Cats and dogs</dt><dd>
+              @if (plant.isToxicToPets) { <strong class="warning">Toxicity warning</strong><p>Keep out of reach of pets.</p> }
+              @else if (plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl; as source) {
+                <strong>Reviewed as non-toxic to cats and dogs</strong><p><a [href]="source" target="_blank" rel="noopener noreferrer">Cat-and-dog reference</a></p>
+              } @else { <strong>Not assessed for this comparison</strong><p>No linked cat-and-dog safety reference. An absent warning does not mean safe.</p> }
+            </dd></div>
+          </dl>
+          @if (plant.catalogProfile; as profile) { <p class="source"><a [href]="profile.careSourceUrl" target="_blank" rel="noopener noreferrer">Care reference</a> · Reviewed {{ profile.reviewedOn }}</p> }
+          <div class="card-actions"><a [routerLink]="['/plants', plant.id]" queryParamsHandling="preserve">View details</a><button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'" (click)="remove(plant.id)">Remove</button></div>
+        </article>
+      }
+    </div>
+    <p>Non-toxic plants can still cause stomach upset if eaten. These classifications cover cats and dogs; other animals are outside this comparison.</p>
+  }
+</main>

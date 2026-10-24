@@ -3,7 +3,7 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 43 real
+data while the launch requirements remain open. The reviewed catalog dataset includes 58 real
 houseplants with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
@@ -35,6 +35,13 @@ requirements; open View details for placement advice and full care instructions.
 Your search and filters remain when you return from details or reload. Clear
 filters restores the full catalog in A–Z order. Suggested watering intervals are
 prompts to check moisture, not instructions to water an already wet pot.
+
+Select Compare on two or three catalog cards, then choose Compare selected plants.
+The comparison shows their care guidance and sources together. Search and filters
+keep your selection; Clear filters keeps it too. Use Remove or Clear comparison
+to change it. The comparison URL contains public species choices and can be
+bookmarked. An exact scientific-name search identifies that species; common names
+can still match more than one plant.
 
 English common names lead the species listings; scientific names are secondary
 and remain searchable. Your own plants use the nickname you saved. Monstera,

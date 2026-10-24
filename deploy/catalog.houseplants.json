@@ -1490,5 +1490,503 @@
         "title": "P. hederaceum 'Brasil'"
       }
     }
+  },
+  {
+    "commonName": "Swiss cheese vine",
+    "scientificName": "Monstera adansonii",
+    "description": "A climbing or trailing aroid with perforated leaves. It is a different species from the larger Swiss cheese plant, Monstera deliciosa.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give bright filtered daylight and protect the leaves from strong direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the root zone lightly moist, allowing the surface to start drying before watering. Drain excess water.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An airy, organically rich potting mix with good drainage.",
+    "humidityInstructions": "Warm, humid rooms suit it. Provide a support for climbing and keep away from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-adansonii/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Five holes plant",
+        "Adanson monstera"
+      ],
+      "photo": {
+        "path": "/images/plants/monstera-adansonii.jpg",
+        "altText": "Swiss cheese vine reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-adansonii/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Monstera adansonii (Swiss Cheese Plant) houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Satin pothos",
+    "scientificName": "Scindapsus pictus",
+    "description": "A trailing or climbing vine with silver-patterned leaves. Despite its common name, it is distinct from golden pothos in the genus Epipremnum.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Use bright indirect light, sheltered from harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix lightly moist, letting the surface dry slightly between thorough waterings. Never leave the roots standing in water.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A loose, well-drained houseplant mix.",
+    "humidityInstructions": "Keep in a warm room away from drafts. A stake supports climbing; hanging pots let stems trail.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/scindapsus-pictus/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Silk pothos",
+        "Silver pothos"
+      ],
+      "photo": {
+        "path": "/images/plants/scindapsus-pictus.jpg",
+        "altText": "Satin pothos reference photograph",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/scindapsus-pictus/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Mature plant form grown as trailing houseplant"
+      }
+    }
+  },
+  {
+    "commonName": "Mini monstera",
+    "scientificName": "Rhaphidophora tetrasperma",
+    "description": "A climbing vine with deeply divided leaves. It resembles a small Monstera but belongs to a different genus, and is not a philodendron.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight is best; protect from intense sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water when roughly the top inch of mix has dried, then let the pot drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An airy, freely draining houseplant mix.",
+    "humidityInstructions": "Likes warmth and humid air. Give aerial roots a support and keep out of cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/rhaphidophora-tetrasperma/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Philodendron Ginny",
+        "Monstera minima"
+      ],
+      "photo": {
+        "path": "/images/plants/rhaphidophora-tetrasperma.jpg",
+        "altText": "Mini monstera reference photograph",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rhaphidophora-tetrasperma/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Rhaphidophora tetrasperma. Potted specimen."
+      }
+    }
+  },
+  {
+    "commonName": "African mask plant",
+    "scientificName": "Alocasia × mortfontanensis",
+    "description": "A cultivated hybrid with arrow-shaped leaves and striking pale veins, formerly called Alocasia x amazonica. The reference photo shows the compact cultivar Polly.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect daylight; direct sun can scorch the foliage.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist but well drained during growth. Reduce watering when growth slows rather than leaving the roots wet.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A fertile, airy mix with reliable drainage.",
+    "humidityInstructions": "Needs warmth and humid air. Protect from cold windows and abrupt temperature changes.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/alocasia-x-mortfontanensis/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Amazonica alocasia",
+        "Amazon elephant ear"
+      ],
+      "photo": {
+        "path": "/images/plants/alocasia-x-mortfontanensis.jpg",
+        "altText": "African mask plant reference photograph",
+        "credit": "Tim Kortekamp",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/alocasia-x-mortfontanensis/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "'Polly' growing in a pot"
+      }
+    }
+  },
+  {
+    "commonName": "Rex begonia",
+    "scientificName": "Begonia rex (species and hybrids)",
+    "description": "A foliage group including Begonia rex and its many hybrids. Leaf patterns and colours vary widely between cultivars; the photo is one example.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright filtered light, avoiding harsh direct sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix lightly moist with good drainage. Avoid soggy roots and splashing or misting the leaves.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An organically rich, airy potting mix with drainage.",
+    "humidityInstructions": "Prefers humid air with good circulation. Remove dead foliage and keep the crown from staying wet.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/begonia-rex-types/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Painted leaf begonia",
+        "Fancy-leaf begonia"
+      ],
+      "photo": {
+        "path": "/images/plants/begonia-rex-types.jpg",
+        "altText": "Rex begonia reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/begonia-rex-types/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Begonia--Rex Types (Painted Leaf Begonia) houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Asparagus fern",
+    "scientificName": "Asparagus setaceus",
+    "description": "A feathery ornamental related to asparagus, rather than a true fern. Older scrambling stems can have sharp spines; berries and sap need care around pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight; strong direct sun can damage the foliage.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist during active growth without waterlogging it. Reduce watering in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A moisture-retentive but well-drained, organically rich potting mix.",
+    "humidityInstructions": "Prefers humid air. Watch for dry rooms and allow space for arching or climbing stems.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/asparagus-setaceus/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Lace fern",
+        "Plumosa fern"
+      ],
+      "photo": {
+        "path": "/images/plants/asparagus-setaceus.jpg",
+        "altText": "Asparagus fern reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/asparagus-setaceus/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Asparagus setaceus houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Kentia palm",
+    "scientificName": "Howea forsteriana",
+    "description": "A single-stemmed palm with arching feather-like fronds. Pots may contain several seedlings, but each plant retains its own trunk.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Medium indirect daylight works well; avoid strong direct sunlight.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix from drying completely while allowing excess water to drain. Check conditions before adding more.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A humus-rich potting mix with good drainage.",
+    "humidityInstructions": "Normal comfortable room conditions suit it. Protect from extremes and inspect fronds for mites or scale.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/howea-forsteriana/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Forster sentry palm",
+        "Thatch palm"
+      ],
+      "photo": {
+        "path": "/images/plants/howea-forsteriana.jpg",
+        "altText": "Kentia palm reference photograph",
+        "credit": "East West Trees",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/howea-forsteriana/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Howea forsteriana. Nursery stock."
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/kentia-palm"
+    }
+  },
+  {
+    "commonName": "Lady palm",
+    "scientificName": "Rhapis excelsa",
+    "description": "A clustering palm with fan-shaped leaves and slender fibre-covered canes. The reference photo shows its mature form.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Indirect light is suitable. It tolerates shade, but avoid a dark corner with no useful daylight.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water regularly with good drainage, reducing frequency during winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A well-drained indoor potting mix.",
+    "humidityInstructions": "Ordinary room humidity is usually adequate. Leave space for the clump to spread and check for common houseplant pests.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Broadleaf lady palm",
+        "Bamboo palm"
+      ],
+      "photo": {
+        "path": "/images/plants/rhapis-excelsa.jpg",
+        "altText": "Lady palm reference photograph",
+        "credit": "Eric in SF",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "Coffee plant",
+    "scientificName": "Coffea arabica",
+    "description": "A glossy-leaved tropical shrub grown indoors for foliage. Flowers and coffee cherries are not guaranteed indoors. Keep the plant and its caffeine-containing seeds away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give bright filtered light, with shelter from strong midday sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix consistently moist but not soggy during growth. Reduce watering when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A rich, freely draining potting mix with organic matter.",
+    "humidityInstructions": "Likes warm conditions and humid air. Protect from cold drafts and avoid drying out the roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/coffea-arabica/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Arabian coffee",
+        "Arabica coffee"
+      ],
+      "photo": {
+        "path": "/images/plants/coffea-arabica.jpg",
+        "altText": "Coffee plant reference photograph",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/coffea-arabica/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Coffea arabica"
+      }
+    }
+  },
+  {
+    "commonName": "Clivia",
+    "scientificName": "Clivia miniata",
+    "description": "A clumping plant with strap-like leaves and clusters of orange flowers. It often flowers best once established; a cool rest can help, but bloom timing varies.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Filtered light or gentle morning sun suits indoor plants. Avoid harsh midday sun.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Let the surface start to dry between waterings. Reduce water during the cool resting period and keep water out of the crown.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A well-drained potting mix; avoid unnecessary repotting of an established plant.",
+    "humidityInstructions": "Give good air circulation. Keep the resting plant cool and sheltered from frost; do not force a fixed flowering timetable.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/clivia-miniata/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Natal lily",
+        "Bush lily"
+      ],
+      "photo": {
+        "path": "/images/plants/clivia-miniata.jpg",
+        "altText": "Clivia reference photograph",
+        "credit": "Leo Michels",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/clivia-miniata/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "String of pearls",
+    "scientificName": "Curio rowleyanus",
+    "description": "A trailing succulent with rounded bead-like leaves, formerly called Senecio rowleyanus. It suits a hanging pot with drainage.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect light indoors; protect from scorching direct sun.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Allow the upper mix to dry before watering carefully. Avoid both a permanently wet pot and prolonged complete dehydration.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A freely draining cactus mix, with an open pot and drainage holes.",
+    "humidityInstructions": "Ordinary indoor air is suitable. Give a brighter position rather than compensating for low light with extra water.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/curio-rowleyanus/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "String of beads",
+        "Rosary plant"
+      ],
+      "photo": {
+        "path": "/images/plants/curio-rowleyanus.jpg",
+        "altText": "String of pearls reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/curio-rowleyanus/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Curio rowleyanus, string of pearls, houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Mexican snowball",
+    "scientificName": "Echeveria elegans",
+    "description": "A compact succulent forming pale blue-green rosettes and small offsets. Leaf colour and flowering vary with growing conditions.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a very bright window with some direct sun, acclimatizing gradually.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Let the mix dry between thorough waterings. Keep water out of the rosette and reduce watering in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A gritty, fast-draining succulent mix in a shallow pot with drainage.",
+    "humidityInstructions": "Avoid humid, stagnant conditions and cold wet roots. Handle leaves gently to preserve their surface coating.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/echeveria-elegans/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "White Mexican rose",
+        "Mexican gem"
+      ],
+      "photo": {
+        "path": "/images/plants/echeveria-elegans.jpg",
+        "altText": "Mexican snowball reference photograph",
+        "credit": "Dick Culbert",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/echeveria-elegans/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "Zebra haworthia",
+    "scientificName": "Haworthiopsis attenuata",
+    "description": "A small succulent with white raised bands on pointed leaves. It is often confused with Haworthiopsis fasciata; this species also has bumps on the inner leaf surface.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight suits it; protect from scorching direct sun.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Allow the potting mix to dry between waterings, and drain thoroughly.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A freely draining cactus or succulent mix.",
+    "humidityInstructions": "Tolerates typical indoor humidity. Avoid cold drafts and water sitting between the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/haworthiopsis-attenuata/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Zebra plant",
+        "Haworthia attenuata"
+      ],
+      "photo": {
+        "path": "/images/plants/haworthiopsis-attenuata.jpg",
+        "altText": "Zebra haworthia reference photograph",
+        "credit": "Claire H.",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/haworthiopsis-attenuata/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Form"
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://plants.ces.ncsu.edu/plants/haworthiopsis-attenuata/"
+    }
+  },
+  {
+    "commonName": "Watermelon peperomia",
+    "scientificName": "Peperomia argyraea",
+    "description": "A compact plant with rounded, striped leaves and reddish stalks, formerly called Peperomia argyreia. It is a peperomia rather than a begonia.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect daylight without harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water when the top of the mix feels dry. Avoid both waterlogged roots and letting the whole pot remain very dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A loose, well-drained houseplant mix in a pot with drainage.",
+    "humidityInstructions": "Keep warm and away from cold drafts. It can remain in the same pot until roots genuinely need more space.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-argyraea/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Watermelon begonia",
+        "Watermelon plant"
+      ],
+      "photo": {
+        "path": "/images/plants/peperomia-argyraea.jpg",
+        "altText": "Watermelon peperomia reference photograph",
+        "credit": "Krzysztof Ziarnek, Kenraiz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-argyraea/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/watermelon-peperomia"
+    }
+  },
+  {
+    "commonName": "Panda plant",
+    "scientificName": "Kalanchoe tomentosa",
+    "description": "A slow-growing succulent with fuzzy pale leaves and brown markings along their edges. Different cultivars vary in colour and shape.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give strong indirect daylight, protecting it from very hot direct sun.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Allow the mix to dry between waterings. Water less during slow winter growth.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A well-drained cactus or succulent mix.",
+    "humidityInstructions": "Prefers drier air and a warm position. Avoid cold wet roots and keep water off the fuzzy leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/kalanchoe-tomentosa/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Chocolate soldier",
+        "Pussy ears"
+      ],
+      "photo": {
+        "path": "/images/plants/kalanchoe-tomentosa.jpg",
+        "altText": "Panda plant reference photograph",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/kalanchoe-tomentosa/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Kalanchoe tomentosa. Habit."
+      }
+    }
   }
 ]

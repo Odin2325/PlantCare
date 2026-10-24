@@ -157,12 +157,12 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(43,species.Count);
+            Assert.Equal(58,species.Count);
             Assert.Equal(4, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(8, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
-            Assert.Equal(31, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
-            Assert.Equal(62, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
-            Assert.Equal(9, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
+            Assert.Equal(46, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(92, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(12, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
             Assert.DoesNotContain(species, p => p.IsToxicToPets && p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null);
             foreach(var plant in species)
             {

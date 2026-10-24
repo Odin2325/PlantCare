@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { normalizePlantSearch } from '../../../../shared/plant-search';
+import { parseComparisonIds } from '../../../../shared/plant-comparison';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PlantSpecies, SunlightRequirement } from '../../../../models/plant-species.model';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
@@ -37,6 +38,9 @@ export class PlantCatalogPage {
   readonly light = signal<SunlightRequirement | ''>('');
   readonly pets = signal<'non-toxic' | 'warning' | ''>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
+  readonly comparisonIds = signal<string[]>([]);
+  readonly comparisonPlants = computed(() => this.comparisonIds().map(id => this.plantSpecies().find(p => p.id === id))
+    .filter((p): p is PlantSpecies => Boolean(p)));
   readonly lightOptions: { value: SunlightRequirement; label: string }[] = [
     { value: 'LowLight', label: 'Low light' },
     { value: 'MediumIndirectLight', label: 'Medium indirect light' },
@@ -50,11 +54,15 @@ export class PlantCatalogPage {
     light: this.light() || null,
     pets: this.pets() || null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
+    compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
   readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.pets() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
-    return this.plantSpecies().filter(plant =>
+    // An exact scientific name identifies a species, rather than other plants
+    // whose descriptions mention it. Common-name searches retain ambiguity.
+    const exactScientific = query ? this.plantSpecies().filter(plant => normalizePlantSearch(plant.scientificName ?? '') === query) : [];
+    return (exactScientific.length ? exactScientific : this.plantSpecies()).filter(plant =>
       (!this.light() || plant.sunlightRequirement === this.light()) &&
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
         !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
@@ -74,6 +82,7 @@ export class PlantCatalogPage {
       const pets = params.get('pets');
       this.pets.set(pets === 'non-toxic' || pets === 'warning' ? pets : '');
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
+      this.comparisonIds.set(parseComparisonIds(params.get('compare')));
     });
     this.loadPlantSpecies();
   }
@@ -82,6 +91,15 @@ export class PlantCatalogPage {
     this.query.set(value.slice(0, 100));
     this.saveFilters();
   }
+
+  toggleComparison(plant: PlantSpecies): void {
+    const ids = this.comparisonPlants().map(p => p.id);
+    if (ids.includes(plant.id)) this.comparisonIds.set(ids.filter(id => id !== plant.id));
+    else if (ids.length < 3) this.comparisonIds.set([...ids, plant.id]);
+    this.saveFilters();
+  }
+
+  clearComparison(): void { this.comparisonIds.set([]); this.saveFilters(); }
 
   setLight(value: string): void {
     this.light.set(this.lightOptions.find(option => option.value === value)?.value ?? '');

@@ -10,6 +10,9 @@ features. [Pet-aware catalog browsing](pet-aware-catalog.md),
 [20-plant expansion](houseplant-expansion.md) are deployed to staging. Release
 work below remains tracked alongside it.
 
+The next [plant comparison and 15-plant batch](plant-comparison.md) is in
+validation, preparing 58 reviewed entries while retaining all existing records.
+
 ## Completed staging milestones
 
 | Milestone | Accepted evidence | Limits |
