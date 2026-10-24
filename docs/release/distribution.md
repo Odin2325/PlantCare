@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
 Reviewed 2026-10-24. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `6d6d4d52fa6231d335b9b22705f4984ca14c5c76`;
+this preparation. The staging runtime is `b33c68d1eaf5e600a7cde158a333153bd501c128`;
 subsequent documentation commits are not new application deployments.
 See the [current milestone plan](current-milestones.md) for the remaining work order.
 
@@ -47,7 +47,7 @@ matching confirmed accounts can accept, and owners can resend or revoke. Real Gm
 inbox delivery and live read-only access/revocation are verified in
 [calendar-sharing acceptance](calendar-sharing-email.md). Private feeds still need
 real calendar-client acceptance. Google/Microsoft synchronization stays disabled.
-The beta includes 20 reviewed English houseplant entries and licensed local
+The beta includes 23 reviewed English houseplant entries and licensed local
 reference photos. Four species also have eight curated growth-feature examples
 of different specimens, without timelines or diagnosis; personal photo journals
 remain future work. See [growth references](growth-references.md),
@@ -57,6 +57,9 @@ include seasonal care guidance and individual photo credits.
 Catalog browsing now includes compact photo cards, light filtering, name sorting
 and search state retained through details and reload; see
 [catalog browsing acceptance](catalog-browsing.md).
+The [pet-aware batch](pet-aware-catalog.md) adds parlor palm, cast iron plant and
+baby rubber plant, with a sourced non-toxic cat-and-dog filter covering five
+reviewed species. Missing warnings alone do not qualify a plant for that filter.
 
 ## Before a release tag
 

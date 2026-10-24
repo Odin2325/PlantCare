@@ -57,7 +57,48 @@ including repeat imports, source validation, API metadata and existing care data
 All 32 frontend tests and the production image build passed. EF reports no pending
 model changes. Desktop/mobile layouts were visually reviewed after image decoding;
 the new filter journey passed in desktop/mobile Chromium and Firefox. Final full
-catalog-suite and staging acceptance will be recorded after completion.
+catalog-suite and staging acceptance are recorded below.
+
+## Staging acceptance
+
+Candidate `b33c68d1eaf5e600a7cde158a333153bd501c128` is deployed on staging,
+following `6d6d4d52fa6231d335b9b22705f4984ca14c5c76`.
+[Exact-candidate CI 40092880770](https://github.com/Odin2325/PlantCare/actions/runs/40092880770)
+completed successfully, including all three jobs and the real SQL security/push,
+browser, sharing and PWA checks. Bundle hashes, actual API/worker image identities,
+restricted runtime access, readiness and operations passed during activation.
+
+All 18 catalog browser checks passed against public trusted HTTPS in desktop
+Chromium, mobile-sized Chromium and Firefox. They cover the new filter, combined
+controls, retained navigation/reload state, unknown-value fallback, working new
+photos and source links, sampled accessibility and 320px reflow. Locally, 17 checks
+passed on the first run; one existing Firefox growth-gallery accessibility scan
+timed out and then passed in isolation. Full CI and all public checks passed without
+weakening that scan. This is browser evidence, not new physical Android acceptance.
+
+The public comparison preserved all 21 previous species IDs and care records,
+including the legacy demo. All 23 reviewed profiles match the committed dataset;
+all 27 served photo hashes and five care-action icon hashes match. Existing growth
+references and original aliases remain, with six additional aliases in this batch.
+The only previous profile changes are the two documented classification sources
+and review dates.
+
+A service-worker-controlled approved test account held the previous frontend
+across activation, accepted the actual Update now offer and loaded the new frontend.
+Its login, personal plant IDs and completed calendar history were preserved; the
+new filter returned the five reviewed plants. All five care icons loaded offline,
+and logout passed. Users should open the installed app online and choose Update
+now when offered; reinstalling is unnecessary. No additional test emails or phone
+pushes were sent for this feature.
+
+Pre-deployment checks found the Windows SSH agent stopped and the latest scheduled
+VPS backup failed. Starting the existing agent restored its stored identity and
+trusted connection. The actual existing VPS backup task was retried successfully
+(result 0), producing the fresh encrypted pre-deployment backup. A second encrypted
+VPS backup passed after all live browser checks finished. Local and VPS health
+checks both reported healthy with no problems at 12:33 UTC on 2026-10-24; final
+public readiness/operations passed. No schedules, thresholds or agent startup mode
+were changed. The normal dependency on a running/unlocked agent remains.
 
 Reminder snoozing is the next separate feature increment. It must distinguish
 delaying a reminder from recording completed care and handle already delivered

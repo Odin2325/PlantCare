@@ -5,21 +5,22 @@ their original candidate and scope. No v1 release or production cutover is creat
 by this plan. The public contact-address decision remains deferred by the owner.
 
 Owner direction on 2026-10-24 prioritizes catalog expansion and the recommended
-features. The active increment is [pet-aware catalog browsing](pet-aware-catalog.md),
-followed by reminder snoozing; release work below remains tracked alongside it.
+features. [Pet-aware catalog browsing](pet-aware-catalog.md) is deployed;
+[reminder snoozing](reminder-snoozing.md) is the next feature increment. Release
+work below remains tracked alongside it.
 
 ## Completed staging milestones
 
 | Milestone | Accepted evidence | Limits |
 | --- | --- | --- |
 | Core care and Android beta | [Public browser journey](public-browser-acceptance.md), [Android beta](android-beta.md), owner-confirmed reminders, multiple care cycles, Dashboard taps, installation, offline/reconnect and update with data intact | Other physical devices and assistive technologies need their own acceptance. |
-| English catalog and images | [20 reviewed houseplants](flowering-houseplant-batch.md), licensed cover photos, [catalog browsing](catalog-browsing.md), [16 familiar-name aliases](common-name-aliases.md), [eight growth references for four species](growth-references.md) | A starter catalog; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
+| English catalog and images | [23 reviewed houseplants and sourced pet filters](pet-aware-catalog.md), licensed cover photos, 22 aliases across 11 species, [catalog browsing](catalog-browsing.md), [eight growth references for four species](growth-references.md) | A starter catalog; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
 | Care-action reminder pictures | [Five cartoon-style action icons](care-notification-icons.md), public image hashes and offline coverage | Installed Android rendering of these new drawings is still owner-unconfirmed; older plant-photo confirmation does not cover them. |
 | Sharing emails and signup invitations | [Calendar-sharing acceptance](calendar-sharing-email.md): real Gmail inbox delivery, read-only access/revocation, isolated new-account signup and confirmation tests | Seven-day invitations; SMTP acceptance is not an inbox guarantee. No Google Calendar synchronization is enabled. |
 | Account controls and operations | [Account export/deletion](account-data.md), [retention and erasure-safe restore](retention-and-erasure-recovery.md), [VPS recovery](vps-application-recovery.md), [monitoring](worker-capacity.md) | Backups require the owner's PC/drive/access. Weekly email checks are not independent continuous monitoring. Replacement-host recovery remains open. |
 
-Latest deployed application: `6d6d4d52fa6231d335b9b22705f4984ca14c5c76`, with
-[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40032318279).
+Latest deployed application: `b33c68d1eaf5e600a7cde158a333153bd501c128`, with
+[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40092880770).
 Its staging checks preserved personal data and catalog images, exercised the real
 frontend update, and finished with healthy local/VPS backup checks. Documentation
 commits after that SHA do not imply another deployment or new health check.
