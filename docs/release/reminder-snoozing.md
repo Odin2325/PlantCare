@@ -1,8 +1,8 @@
 # Reminder snoozing: next feature increment
 
-Implemented for validation on 2026-10-24 following the owner's request to expand
-the catalog and build the recommended features. Staging deployment/acceptance is
-recorded below once complete; the earlier pet-aware catalog release did not include it.
+Deployed to staging on 2026-10-24 following the owner's request to expand the
+catalog and build the recommended features. The earlier pet-aware catalog
+release did not include snoozing. Physical-device follow-up acceptance remains open.
 
 ## User behavior
 
@@ -92,3 +92,42 @@ cancellation, preserved accepted deliveries and account export/deletion of follo
 All 35 frontend tests passed, including pending/error and duplicate-submit behavior.
 The real browser care journey now snoozes first, verifies the saved delay after
 reload and completes care with its original due time/history preserved.
+
+## Staging acceptance (2026-10-24, Berlin)
+
+Candidate `5e6225a7946b131c7216a4deb5edf37f89b05345` passed
+[exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40098922124):
+backend, frontend and production-container jobs, including all 39 browser checks.
+The Chrome journey verifies persisted state through a fresh authenticated API
+read, avoiding unreliable retrieval of worker-handled response bodies in DevTools.
+
+A fresh encrypted VPS backup was restored into an isolated local application with
+this pinned runtime before activation. Database/key/config restoration, login
+remapping, sign-in, worker restart/deduplication, care history and failed-activation
+recovery passed. The actual activation guards separately allowed a compatible
+upgrade/recovery and rejected snooze downgrades or erasure-incompatible recovery.
+
+Staging applied `20261024124440_AddReminderSnoozing`, provisioned the controlled
+runtime grants and imported the 43-entry dataset. Pinned API/worker images,
+restricted access, HTTPS readiness and operations passed. A browser holding the
+previous frontend used Update now; its session, personal IDs and completed history
+remained intact. The five care icons were available offline after the update.
+
+The approved synthetic account had no push devices before the live probe; push
+was disabled during it. The real plant form generated a watering reminder, and
+Dashboard saved a 24-hour snooze. Reload preserved the saved time, the plant's
+due state and history stayed identical, and a repeat original-ID request returned
+409. Sampled axe checks, desktop/mobile screenshots and narrow-layout checks passed.
+The probe was archived before restoring the account's original preferences, then
+the session logged out. No external mail or push was sent by this probe.
+
+The full public catalog checks passed in desktop Chrome, mobile Chrome and Firefox
+(21/21); see [the content acceptance](houseplant-expansion.md). This evidence does
+not claim a delayed reminder was delivered on an installed physical phone. Confirm
+that separately on the owner's next natural reminder, retaining the existing care
+icons and Dashboard tap destination.
+
+After all live checks completed, a fresh encrypted backup of the deployed candidate
+passed. Local and VPS backup health both reported healthy with no problem codes;
+final public readiness and operations returned success. Backup schedules, thresholds
+and the owner's chosen weekly alert schedule were unchanged.

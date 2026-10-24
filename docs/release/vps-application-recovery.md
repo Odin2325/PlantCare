@@ -76,6 +76,14 @@ review and was not executed. The internal client removed that requirement.
 
 ## Acceptance limits
 
+Follow-up 2026-10-24: [reminder snoozing](reminder-snoozing.md) adds a runtime
+compatibility protocol. Snapshot manifests record its required version; managed
+app recovery rejects a bundle below that version. Activation blocks downgrades,
+and a failed first upgrade from a snooze-unaware worker stops writers instead of
+reapplying that old runtime. Use compatible forward recovery. The snooze-aware
+candidate's isolated restore and failed-activation recovery passed before staging
+activation; this does not establish migration downgrade or replacement-host recovery.
+
 This is recovery from the real encrypted VPS snapshot onto a separate local
 Docker instance. It is not a complete replacement-VPS exercise or proof that
 credentials can be recovered after losing this PC/DPAPI profile. Keep the

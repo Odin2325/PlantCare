@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
 Reviewed 2026-10-24. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `b33c68d1eaf5e600a7cde158a333153bd501c128`;
+this preparation. The staging runtime is `5e6225a7946b131c7216a4deb5edf37f89b05345`;
 subsequent documentation commits are not new application deployments.
 See the [current milestone plan](current-milestones.md) for the remaining work order.
 
@@ -47,7 +47,7 @@ matching confirmed accounts can accept, and owners can resend or revoke. Real Gm
 inbox delivery and live read-only access/revocation are verified in
 [calendar-sharing acceptance](calendar-sharing-email.md). Private feeds still need
 real calendar-client acceptance. Google/Microsoft synchronization stays disabled.
-The beta includes 23 reviewed English houseplant entries and licensed local
+The beta includes 43 reviewed English houseplant entries and licensed local
 reference photos. Four species also have eight curated growth-feature examples
 of different specimens, without timelines or diagnosis; personal photo journals
 remain future work. See [growth references](growth-references.md),
@@ -59,7 +59,16 @@ and search state retained through details and reload; see
 [catalog browsing acceptance](catalog-browsing.md).
 The [pet-aware batch](pet-aware-catalog.md) adds parlor palm, cast iron plant and
 baby rubber plant, with a sourced non-toxic cat-and-dog filter covering five
-reviewed species. Missing warnings alone do not qualify a plant for that filter.
+reviewed species in that earlier batch. The [larger expansion](houseplant-expansion.md)
+adds 20 further plants, bringing search to 62 aliases across 31 entries and the
+sourced cat-and-dog filter to nine entries. Missing warnings alone do not qualify
+a plant for that filter.
+
+[Reminder snoozing](reminder-snoozing.md) now saves 1-hour, 24-hour or 3-day delays
+on current Dashboard/Notifications reminders without changing care due times or
+history. The additive migration and reminder-protocol guard require compatible
+forward recovery; do not downgrade to the older worker. Installed-phone delivery
+of a delayed follow-up remains a separate acceptance check.
 
 ## Before a release tag
 

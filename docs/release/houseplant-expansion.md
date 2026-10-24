@@ -1,6 +1,6 @@
 # Larger English houseplant catalog
 
-Prepared 2026-10-24. Twenty additions increase the reviewed dataset from 23 to 43
+Deployed to staging 2026-10-24. Twenty additions increase the reviewed dataset from 23 to 43
 entries, with 47 original photo files including the existing growth references.
 This is a curated indoor selection, not a measured popularity ranking for Germany.
 The previous 23 dataset records and photo files are unchanged. The legacy demo is
@@ -69,5 +69,20 @@ classifications and preserved personal care data. Existing growth references rem
 eight across four species. The import format stays `houseplants-en-v1`; exact
 content is identified by the committed candidate and bundle hashes.
 
-Staging acceptance will be recorded after the snoozing and catalog candidate passes
-all release gates. No public-launch or additional physical-device acceptance is implied.
+## Staging acceptance
+
+Candidate `5e6225a7946b131c7216a4deb5edf37f89b05345` passed
+[exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40098922124),
+including all 39 browser cases and the SQL Server security/reminder checks.
+The atomic staging import preserved all 24 previous API catalog records, including
+IDs, care metadata and the legacy demo, while adding the 20 reviewed entries.
+All 43 deployed profiles matched the committed dataset and all 47 public photo
+files matched their committed hashes over trusted HTTPS.
+
+All 21 public catalog cases passed across desktop Chrome, mobile Chrome and
+Firefox: common-name and alias search, combined light/pet filters, detail navigation,
+each new detail page/photo/credit, existing flowering/growth references, reflow and
+sampled accessibility. The real frontend update preserved the synthetic account's
+session, personal IDs and completed history. See [reminder snoozing](reminder-snoozing.md)
+for the accompanying migration, recovery and live reminder checks. No public-launch
+or additional physical-device acceptance is implied.

@@ -31,8 +31,12 @@ release unless the related optional feature is disabled.
   care due dates/history, worker cancellation checks and restricted API writes.
   See [reminder-snoozing.md](reminder-snoozing.md) for migration, recovery compatibility
   and validation/deployment status.
-- Prepared [twenty additional houseplants](houseplant-expansion.md), with licensed
+- Deployed [twenty additional houseplants](houseplant-expansion.md), with licensed
   original photos and English care/aliases. Existing catalog data remains.
+- Candidate `5e6225a7946b131c7216a4deb5edf37f89b05345` passed exact CI (39 browser
+  cases), all 21 public catalog checks, a real frontend update preserving data,
+  isolated application recovery and the live snooze form/reload check. Physical
+  delayed-push acceptance remains separate.
 
 ### Pet-aware catalog expansion (2026-10-24)
 

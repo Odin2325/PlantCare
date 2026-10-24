@@ -2,12 +2,13 @@
 
 Follow-up 2026-10-24: [twenty further houseplants](houseplant-expansion.md) expand
 the reviewed dataset to 43 entries with 47 photo files. The existing 23 records
-are unchanged; see that record for exact validation/deployment status.
+are unchanged; see that record for staging acceptance. Search now has 62 English
+aliases across 31 entries, and the sourced non-toxic cat-and-dog filter covers nine.
 
 Follow-up 2026-10-24: [pet-aware expansion](pet-aware-catalog.md) prepares three
 additional indoor plants, five sourced cat-and-dog classifications and a combined
 pet filter. See that record for exact verification/deployment status. Reminder
-snoozing follows as a separate feature increment.
+snoozing is deployed as a [separate feature increment](reminder-snoozing.md).
 
 Owner request recorded 2026-10-14. Follow-up 2026-10-21: an English-only starter
 catalog of 15 common houseplants and licensed photographs is implemented; see
@@ -35,7 +36,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-The first 15 entries have local licensed photos on catalog and personal plant
+All 43 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep
@@ -63,9 +64,10 @@ common names, with scientific names secondary. The catalog already leads with
 nickname-first personal care views and secondary scientific names. Push reminders
 now also fall back to the common name for legacy blank nicknames. Scientific-name
 catalog import matching, searchable names and stable species IDs are preserved.
-Sixteen reviewed English alternative names for eight species are now implemented
-in catalog and collection search; see [common-name-aliases.md](common-name-aliases.md)
-for sources, punctuation matching, ambiguity and deployment verification.
+The original 16 reviewed English alternative names for eight species established
+catalog and collection search; see [common-name-aliases.md](common-name-aliases.md)
+for punctuation matching and ambiguity. The latest [expansion](houseplant-expansion.md)
+brings that total to 62 aliases across 31 entries.
 
 Acceptance: catalog cards/details and plant selectors lead with a common name;
 personal care views and reminder text lead with nickname or common name;
