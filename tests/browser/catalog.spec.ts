@@ -187,6 +187,11 @@ test('comparison selection survives filters, details and reload, limits three pl
   await expect(page.getByRole('link', { name: 'Compare selected plants', exact: true })).toHaveCount(0);
 });
 
+test.describe('comparison network failure isolation', () => {
+// Exercise an injected network failure directly. A controlling service worker
+// can bypass page.route (particularly in Firefox); real-worker behavior has its
+// own PWA suite and remains enabled in all other catalog/comparison checks.
+test.use({ serviceWorkers: 'block' });
 test('comparison handles malformed or missing choices, unknown assessment and retryable API failure', async ({ page, request }) => {
   const species=await (await request.get('/api/plant-species')).json();
   const unknown=species.find((p: {commonName:string})=>p.commonName==='Lady palm');
@@ -203,6 +208,7 @@ test('comparison handles malformed or missing choices, unknown assessment and re
   await page.getByRole('button',{name:'Try again',exact:true}).click();
   await expect(page.locator('.comparison-card')).toHaveCount(1);
   await expect(page.getByRole('heading',{level:1})).toHaveText('Compare plants');
+});
 });
 
 test('flowering additions have identifiable photos, attributed care and seasonal guidance', async ({ page }) => {
