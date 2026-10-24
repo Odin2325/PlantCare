@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
 Reviewed 2026-10-24. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `5e6225a7946b131c7216a4deb5edf37f89b05345`;
+this preparation. The staging runtime is `ff61f3003bcc2e83af5a2336a577ffdebb2b72fb`;
 subsequent documentation commits are not new application deployments.
 See the [current milestone plan](current-milestones.md) for the remaining work order.
 
@@ -47,7 +47,7 @@ matching confirmed accounts can accept, and owners can resend or revoke. Real Gm
 inbox delivery and live read-only access/revocation are verified in
 [calendar-sharing acceptance](calendar-sharing-email.md). Private feeds still need
 real calendar-client acceptance. Google/Microsoft synchronization stays disabled.
-The beta includes 43 reviewed English houseplant entries and licensed local
+The beta includes 58 reviewed English houseplant entries and licensed local
 reference photos. Four species also have eight curated growth-feature examples
 of different specimens, without timelines or diagnosis; personal photo journals
 remain future work. See [growth references](growth-references.md),
@@ -63,6 +63,13 @@ reviewed species in that earlier batch. The [larger expansion](houseplant-expans
 adds 20 further plants, bringing search to 62 aliases across 31 entries and the
 sourced cat-and-dog filter to nine entries. Missing warnings alone do not qualify
 a plant for that filter.
+
+The next [15-plant batch and comparison feature](plant-comparison.md) brings the
+dataset to 58 entries, 92 aliases across 46 entries and twelve sourced cat-and-dog
+classifications. Users can compare up to three species with their care guidance,
+credited photos, warnings and sources. Selection remains through filters, details
+and reload; comparison URLs contain public species choices. Existing catalog IDs,
+personal care data and reference photos remain intact.
 
 [Reminder snoozing](reminder-snoozing.md) now saves 1-hour, 24-hour or 3-day delays
 on current Dashboard/Notifications reminders without changing care due times or

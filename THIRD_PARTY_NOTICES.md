@@ -19,14 +19,17 @@ notices may change when dependencies change.
 
 ## Plant reference photos
 
-The starter catalog includes individually licensed CC BY / CC BY-SA photographs.
+The reviewed catalog includes CC BY / CC BY-SA photographs and a CC0 photograph.
 See [photo credits](plant-care-web/public/images/plants/README.md) and
 [the exact image manifest](deploy/catalog-images.json). Each photo retains its
-own license; the original application's rights-reserved notice does not cover it.
+listed license or public-domain dedication; the original application's
+rights-reserved notice does not cover it.
 The UI displays the supplied title, author, source and license. Original image
 bytes are preserved and are scaled for display. See
 [catalog review](docs/release/houseplant-starter-catalog.md) and
-[flowering batch](docs/release/flowering-houseplant-batch.md) for the care sources.
+[flowering batch](docs/release/flowering-houseplant-batch.md),
+[larger expansion](docs/release/houseplant-expansion.md) and
+[comparison batch](docs/release/plant-comparison.md) for the care sources.
 
 ## Backend and container software
 

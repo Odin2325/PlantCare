@@ -1,7 +1,7 @@
 # Plant comparison and another 15 houseplants
 
-Implemented for validation on 2026-10-24 following the owner's request for more
-plants and the next feature. Staging acceptance is recorded after the release gates.
+Deployed to staging on 2026-10-24 following the owner's request for more plants
+and the next feature. This is a staging increment, without a v1 release or apex cutover.
 
 ## Behavior
 
@@ -81,8 +81,47 @@ Coffee's warning is a precaution based on its coffee seeds and
 
 ## Validation
 
-The repeated-import regression covers 58 profiles, 92 aliases, twelve sourced pet
+The backend suite passed 55 domain, one application and 115 API tests. The
+repeated-import regression covers 58 profiles, 92 aliases, twelve sourced pet
 classifications, eight growth references and preserved personal data. Asset
-integrity passed for all 62 originals. Local/staging browser and update evidence
-will be recorded once completed. No public-launch or new physical-phone delivery
-acceptance is implied by this increment.
+integrity passed for all 62 originals. All 38 frontend tests and the production
+build passed. The catalog/comparison checks include malformed/duplicate/missing
+choices, the three-plant limit, filters/details/reload, removal, unknown pet
+assessment, linked sources, retry, keyboard/reflow and sampled axe checks.
+
+## Staging acceptance (2026-10-24, Berlin)
+
+Candidate `ff61f3003bcc2e83af5a2336a577ffdebb2b72fb` passed
+[exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40119110012):
+backend, frontend and production-container jobs, including all 45 browser cases
+and the real SQL Server isolation/session/reminder checks. The one injected-503
+comparison case blocks service workers so page-level fault injection reaches
+Firefox consistently. Other catalog/comparison checks retain normal worker
+settings; the separate PWA suite and live update use the real worker.
+
+A fresh encrypted VPS backup was restored into an isolated application using this
+pinned runtime before activation. Database/key/config restoration, login remapping,
+sign-in, worker restart/deduplication, care history and failed-activation recovery
+passed. The existing reminder/erasure compatibility guards remain in force.
+No new database migration or runtime grant is required by this increment.
+
+The staging import added 15 entries while preserving every field and ID of all
+44 previous API catalog records, including the legacy demo. All 58 reviewed
+profiles match the committed dataset and all 62 public photo files match their
+committed hashes over trusted HTTPS. The five public care-icon files are unchanged.
+
+All 27 public catalog/comparison cases passed in desktop Chrome, mobile Chrome
+and Firefox. Desktop/mobile comparison screenshots were visually reviewed with
+all photos loaded. A held synthetic-account session used Update now from the
+previous frontend: sign-in, personal IDs and completed history stayed intact,
+the new comparison route loaded, twelve sourced pet classifications appeared,
+and the five care icons remained available offline. Logout passed. The live
+checks sent no external email or push and made no personal care-data changes.
+
+No public-launch or new physical-phone delivery acceptance is implied by this
+increment. The earlier snoozed-push and action-icon physical checks remain separate.
+
+After live browser acceptance finished, a fresh encrypted VPS backup of the
+deployed candidate passed. Local and VPS backup health reported healthy with no
+problem codes; final public readiness and operations passed. Existing backup
+schedules, thresholds and the owner's chosen weekly alert schedule were unchanged.

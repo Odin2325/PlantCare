@@ -10,22 +10,23 @@ features. [Pet-aware catalog browsing](pet-aware-catalog.md),
 [20-plant expansion](houseplant-expansion.md) are deployed to staging. Release
 work below remains tracked alongside it.
 
-The next [plant comparison and 15-plant batch](plant-comparison.md) is in
-validation, preparing 58 reviewed entries while retaining all existing records.
+[Plant comparison and the 15-plant batch](plant-comparison.md) are also deployed,
+bringing the reviewed catalog to 58 entries while retaining all existing records.
 
 ## Completed staging milestones
 
 | Milestone | Accepted evidence | Limits |
 | --- | --- | --- |
 | Core care and Android beta | [Public browser journey](public-browser-acceptance.md), [Android beta](android-beta.md), owner-confirmed reminders, multiple care cycles, Dashboard taps, installation, offline/reconnect and update with data intact | Other physical devices and assistive technologies need their own acceptance. |
-| English catalog and images | [43 reviewed houseplants](houseplant-expansion.md), licensed cover photos, 62 aliases across 31 entries, nine sourced cat-and-dog classifications, [catalog browsing](catalog-browsing.md), [eight growth references for four species](growth-references.md) | A curated selection; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
+| English catalog and images | [58 reviewed houseplants](plant-comparison.md), licensed cover photos, 92 aliases across 46 entries, twelve sourced cat-and-dog classifications, [catalog browsing](catalog-browsing.md), [eight growth references for four species](growth-references.md) | A curated selection; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
+| Plant comparison | [Compare up to three catalog plants](plant-comparison.md), preserved URL selection/filters, credited photos/care sources and explicit unknown pet assessment; 27 public catalog/comparison checks | Public species comparison, without suitability scores or personal-plant data sharing. Room conditions and actual moisture still need the owner's judgment. |
 | Reminder snoozing | [Server-persisted 1-hour, 24-hour and 3-day follow-ups](reminder-snoozing.md), unchanged care due/history, SQL concurrency/cancellation tests and live 24-hour form/reload checks | Installed-phone delivery of a delayed follow-up remains owner-unconfirmed. Provider-queued messages cannot reliably be recalled. Compatible forward recovery is required after the migration. |
 | Care-action reminder pictures | [Five cartoon-style action icons](care-notification-icons.md), public image hashes and offline coverage | Installed Android rendering of these new drawings is still owner-unconfirmed; older plant-photo confirmation does not cover them. |
 | Sharing emails and signup invitations | [Calendar-sharing acceptance](calendar-sharing-email.md): real Gmail inbox delivery, read-only access/revocation, isolated new-account signup and confirmation tests | Seven-day invitations; SMTP acceptance is not an inbox guarantee. No Google Calendar synchronization is enabled. |
 | Account controls and operations | [Account export/deletion](account-data.md), [retention and erasure-safe restore](retention-and-erasure-recovery.md), [VPS recovery](vps-application-recovery.md), [monitoring](worker-capacity.md) | Backups require the owner's PC/drive/access. Weekly email checks are not independent continuous monitoring. Replacement-host recovery remains open. |
 
-Latest deployed application: `5e6225a7946b131c7216a4deb5edf37f89b05345`, with
-[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40098922124).
+Latest deployed application: `ff61f3003bcc2e83af5a2336a577ffdebb2b72fb`, with
+[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40119110012).
 Its staging checks preserved personal data and catalog images, exercised the real
 frontend update, and finished with healthy local/VPS backup checks. Documentation
 commits after that SHA do not imply another deployment or new health check.

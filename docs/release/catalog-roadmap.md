@@ -1,5 +1,11 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-24: [plant comparison and fifteen additions](plant-comparison.md)
+are deployed to staging: 58 reviewed entries, 92 aliases across 46 entries, twelve
+sourced cat-and-dog classifications and 62 original photo files. Comparison keeps
+up to three public selections through filters/details/reload and shows the
+existing care guidance and references without inventing suitability scores.
+
 Follow-up 2026-10-24: [twenty further houseplants](houseplant-expansion.md) expand
 the reviewed dataset to 43 entries with 47 photo files. The existing 23 records
 are unchanged; see that record for staging acceptance. Search now has 62 English
@@ -36,7 +42,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-All 43 reviewed entries have local licensed photos on catalog and personal plant
+All 58 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep
@@ -67,7 +73,8 @@ catalog import matching, searchable names and stable species IDs are preserved.
 The original 16 reviewed English alternative names for eight species established
 catalog and collection search; see [common-name-aliases.md](common-name-aliases.md)
 for punctuation matching and ambiguity. The latest [expansion](houseplant-expansion.md)
-brings that total to 62 aliases across 31 entries.
+brought that total to 62 aliases across 31 entries. The latest
+[comparison batch](plant-comparison.md) increases it to 92 across 46 entries.
 
 Acceptance: catalog cards/details and plant selectors lead with a common name;
 personal care views and reminder text lead with nickname or common name;

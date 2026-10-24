@@ -27,12 +27,16 @@ release unless the related optional feature is disabled.
 
 ### Plant comparison and 15 more houseplants (2026-10-24)
 
-- Prepared comparison of up to three public species, retaining selection through
+- Deployed comparison of up to three public species, retaining selection through
   filters/details/reload and distinguishing unknown pet assessment from sourced
   classification. See [plant-comparison.md](plant-comparison.md) for scope/status.
 - Added fifteen source-reviewed English profiles with licensed original photos;
   the earlier 43 records remain unchanged. The batch has 58 plants, 92 aliases,
   twelve sourced cat-and-dog classifications and 62 photo files.
+- Candidate `ff61f3003bcc2e83af5a2336a577ffdebb2b72fb` passed exact CI (45 browser
+  cases), all 27 public catalog/comparison checks, real frontend update with
+  session/history preserved and isolated application recovery. All 44 previous
+  public catalog records and all existing photo bytes remain unchanged.
 
 ### Reminder snoozing and larger catalog (2026-10-24)
 
