@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed.length).toBeGreaterThanOrEqual(58);
+  expect(reviewed.length).toBeGreaterThanOrEqual(68);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
@@ -79,7 +79,7 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   const species = await (await request.get('/api/plant-species')).json();
   const expected = species.filter((p: any) => !p.isToxicToPets && p.catalogProfile?.nonToxicToCatsAndDogsSourceUrl)
     .map((p: any) => p.commonName).sort((a: string, b: string) => a.localeCompare(b, 'en'));
-  expect(expected).toEqual(['African violet', 'Baby rubber plant', 'Boston fern', 'Cast iron plant', 'Kentia palm', 'Parlor palm', 'Ponytail palm', 'Rattlesnake plant', 'Spider plant', 'Watermelon peperomia', 'Wax plant', 'Zebra haworthia']);
+  expect(expected).toEqual(['African violet', 'Baby rubber plant', 'Boston fern', 'Cast iron plant', 'Kentia palm', 'Norfolk Island pine', 'Parlor palm', 'Ponytail palm', 'Rattlesnake plant', 'Spider plant', 'Watermelon peperomia', 'Wax plant', 'Zebra haworthia']);
   await page.goto('/plants?pets=non-toxic');
   const cards = page.locator('.plant-card');
   const names = cards.getByRole('heading', { level: 2 });
@@ -137,7 +137,9 @@ test('large houseplant batch has distinct common-name pages, source credits and 
     'String of hearts', 'Ponytail palm', 'Nerve plant', 'Heartleaf philodendron',
     'Swiss cheese vine', 'Satin pothos', 'Mini monstera', 'African mask plant', 'Rex begonia',
     'Asparagus fern', 'Kentia palm', 'Lady palm', 'Coffee plant', 'Clivia', 'String of pearls',
-    'Mexican snowball', 'Zebra haworthia', 'Watermelon peperomia', 'Panda plant']) {
+    'Mexican snowball', 'Zebra haworthia', 'Watermelon peperomia', 'Panda plant',
+    'Polka dot plant', 'Purple passion plant', 'Scarlet star', 'Japanese aralia',
+    'Norfolk Island pine', 'Croton', 'English ivy', 'Umbrella sedge', 'Lipstick plant', 'Goldfish plant']) {
     const plant = all.find((p: { commonName: string }) => p.commonName === name);
     expect(plant, `New catalog plant: ${name}`).toBeTruthy();
     await page.goto('/plants/' + plant.id);
@@ -243,7 +245,8 @@ test('flowering additions have identifiable photos, attributed care and seasonal
 
 test('growth references show selected species features with working photos, sources and mobile reflow', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
-  for (const name of ['Swiss cheese plant', 'Spider plant', 'Golden pothos', 'Aloe vera']) {
+  for (const name of ['Swiss cheese plant', 'Spider plant', 'Golden pothos', 'Aloe vera',
+    'Jade plant', 'Moth orchid', 'Peace lily', 'Wax plant']) {
     const plant = species.find((item: { commonName: string }) => item.commonName === name);
     expect(plant.catalogProfile.growthReferences).toHaveLength(2);
     await page.goto('/plants/' + plant.id);

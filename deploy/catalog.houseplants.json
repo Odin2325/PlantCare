@@ -356,7 +356,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/spathiphyllum/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-24",
       "photo": {
         "path": "/images/plants/spathiphyllum.jpg",
         "altText": "Peace lily reference photo",
@@ -365,7 +365,35 @@
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
         "title": "Potted specimen."
-      }
+      },
+      "growthReferences": [
+        {
+          "title": "Clumping leafy form",
+          "description": "Peace lilies grow as clumps of leaves emerging from the base. This potted example shows one form; dwarf and larger cultivars can look quite different.",
+          "photo": {
+            "path": "/images/plants/spathiphyllum.jpg",
+            "altText": "Potted peace lily with glossy leaves",
+            "credit": "Sherri Barras",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/spathiphyllum/",
+            "licenseName": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+            "title": "Potted specimen."
+          }
+        },
+        {
+          "title": "Spathe around the flower spike",
+          "description": "The pale, sail-like structure is a spathe, a modified leaf around a central flower spike. Spathes can become green as they age; this photo alone cannot diagnose plant health.",
+          "photo": {
+            "path": "/images/plants/spathiphyllum-flower.jpg",
+            "altText": "Peace lily with a pale spathe surrounding the central flower spike",
+            "credit": "Franz Xaver",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/spathiphyllum/",
+            "licenseName": "CC BY-SA 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+            "title": "Flower"
+          }
+        }
+      ]
     }
   },
   {
@@ -385,7 +413,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/phalaenopsis/",
-      "reviewedOn": "2026-10-21",
+      "reviewedOn": "2026-10-24",
       "photo": {
         "path": "/images/plants/phalaenopsis.jpg",
         "altText": "Moth orchid reference photo",
@@ -394,7 +422,35 @@
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
         "title": "Form"
-      }
+      },
+      "growthReferences": [
+        {
+          "title": "Leaves and a flower stem",
+          "description": "This orchid has strap-shaped leaves and an upright flower stem. Moth orchids are a varied hybrid group, so stem length and plant size can differ substantially.",
+          "photo": {
+            "path": "/images/plants/phalaenopsis-stem.jpg",
+            "altText": "Potted moth orchid with green leaves and an upright flower stem",
+            "credit": "Hope Duckworth",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/phalaenopsis/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Flower Stem - Carrabus Co., NC"
+          }
+        },
+        {
+          "title": "Flowers on an arching spray",
+          "description": "The flowering example illustrates the moth-like flowers that give this group its common name. Flower colour and bloom timing vary; a resting plant without flowers is not automatically unhealthy.",
+          "photo": {
+            "path": "/images/plants/phalaenopsis.jpg",
+            "altText": "Flowering moth orchid reference specimen",
+            "credit": "sunoochi",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/phalaenopsis/",
+            "licenseName": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+            "title": "Form"
+          }
+        }
+      ]
     }
   },
   {
@@ -475,7 +531,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
-      "reviewedOn": "2026-10-22",
+      "reviewedOn": "2026-10-24",
       "photo": {
         "path": "/images/plants/crassula-ovata.jpg",
         "altText": "Jade plant reference photo",
@@ -489,6 +545,34 @@
         "Money plant",
         "Lucky plant",
         "Jade tree"
+      ],
+      "growthReferences": [
+        {
+          "title": "Branching succulent form",
+          "description": "This specimen shows the branching form and fleshy leaves of a jade plant. Shape depends on conditions and pruning, so the photograph is not a target size for a particular age.",
+          "photo": {
+            "path": "/images/plants/crassula-ovata.jpg",
+            "altText": "Branching jade plant with fleshy leaves",
+            "credit": "Orange Harvey",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
+            "licenseName": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "Form of a 40 year old plant"
+          }
+        },
+        {
+          "title": "Thickened woody stem",
+          "description": "The separate close-up shows a thick, woody-looking trunk with branching stems. The age in the original photo title describes that specimen only; it is not a timetable for your plant.",
+          "photo": {
+            "path": "/images/plants/crassula-ovata-trunk.jpg",
+            "altText": "Close-up of a jade plant trunk and branching stems",
+            "credit": "David Davies",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
+            "licenseName": "CC BY-SA 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+            "title": "Trunk of a 10 year old plant"
+          }
+        }
       ]
     }
   },
@@ -1355,7 +1439,35 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Hoya carnosa, houseplant view"
       },
-      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/honey-plant"
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/honey-plant",
+      "growthReferences": [
+        {
+          "title": "Cluster of unopened buds",
+          "description": "This wax plant carries a cluster of closed flower buds. Bud production depends on the plant and conditions; their absence does not establish that care is wrong.",
+          "photo": {
+            "path": "/images/plants/hoya-carnosa-buds.jpg",
+            "altText": "Wax plant with a hanging cluster of unopened pink buds",
+            "credit": "Kathleen Moore",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/hoya-carnosa/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Flower buds"
+          }
+        },
+        {
+          "title": "Open star-shaped flowers",
+          "description": "A different specimen shows a rounded cluster of open, star-shaped flowers. These are reference features, not a before-and-after sequence or a promise of a flowering date.",
+          "photo": {
+            "path": "/images/plants/hoya-carnosa-flowers.jpg",
+            "altText": "Wax plant with a rounded cluster of pale star-shaped flowers",
+            "credit": "Kathleen Moore",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/hoya-carnosa/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Umble inflorescence"
+          }
+        }
+      ]
     }
   },
   {
@@ -1592,7 +1704,7 @@
   },
   {
     "commonName": "African mask plant",
-    "scientificName": "Alocasia × mortfontanensis",
+    "scientificName": "Alocasia Ã— mortfontanensis",
     "description": "A cultivated hybrid with arrow-shaped leaves and striking pale veins, formerly called Alocasia x amazonica. The reference photo shows the compact cultivar Polly.",
     "sunlightRequirement": "BrightIndirectLight",
     "sunlightInstructions": "Provide bright indirect daylight; direct sun can scorch the foliage.",
@@ -1986,6 +2098,337 @@
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
         "title": "Kalanchoe tomentosa. Habit."
+      }
+    }
+  },
+  {
+    "commonName": "Polka dot plant",
+    "scientificName": "Hypoestes phyllostachya",
+    "description": "A compact foliage plant with pink, white or red speckles. Different cultivars have different patterns; pinching long stems can encourage a bushier shape.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight supports the leaf colour. Protect from intense direct sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix lightly moist with good drainage. Check the surface before watering and avoid waterlogged roots.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A moist, freely draining houseplant mix.",
+    "humidityInstructions": "A warm indoor position suits it. Watch for powdery mildew and give the foliage space for air circulation.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/hypoestes-phyllostachya/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Freckle face",
+        "Pink splash"
+      ],
+      "photo": {
+        "path": "/images/plants/hypoestes-phyllostachya.jpg",
+        "altText": "Polka dot plant reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/hypoestes-phyllostachya/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Hypoestes phyllostachya, Polka Dot Plant, houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Purple passion plant",
+    "scientificName": "Gynura aurantiaca",
+    "description": "A sprawling plant whose leaves and stems are covered in purple hairs. Pinching stems can keep it bushier; its small orange flowers can have an unpleasant smell.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright indirect daylight, sheltered from hot afternoon sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist while growing, without leaving it soggy. Water less often in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A loose houseplant mix in a pot with drainage holes.",
+    "humidityInstructions": "Keep in comfortable room conditions and inspect for mites or mealybugs. A hanging pot gives the weak stems room to spread.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/gynura-aurantiaca/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Purple velvet plant",
+        "Royal velvet plant"
+      ],
+      "photo": {
+        "path": "/images/plants/gynura-aurantiaca.jpg",
+        "altText": "Purple passion plant reference photograph",
+        "credit": "Lazaregagnidze",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/gynura-aurantiaca/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Gynura aurantiaca- Growing in a pot"
+      }
+    }
+  },
+  {
+    "commonName": "Scarlet star",
+    "scientificName": "Guzmania lingulata",
+    "description": "A bromeliad with a leafy rosette and colourful bracts around small flowers. After flowering the main rosette declines, while offshoots can continue growing. Bract colour varies between cultivars.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Use indirect daylight or suitable artificial lighting. Avoid harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the roots sparingly and keep water in the central leaf cup during warm active growth. Refresh the cup water to avoid stagnation.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An open bromeliad or orchid mix that allows air around the roots.",
+    "humidityInstructions": "Prefers humid air with circulation. Do not keep the root zone waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/guzmania-lingulata/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Guzmania",
+        "Vase plant"
+      ],
+      "photo": {
+        "path": "/images/plants/guzmania-lingulata.jpg",
+        "altText": "Scarlet star reference photograph",
+        "credit": "David J.Stang",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/guzmania-lingulata/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "Japanese aralia",
+    "scientificName": "Fatsia japonica",
+    "description": "A broad-leaved shrub with deeply lobed leaves, grown indoors or in conservatories. The reference photograph shows a large outdoor specimen; indoor size depends on space and care.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Choose indirect light or a shaded position with useful daylight. Strong direct sun can damage leaves.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist with good drainage. Avoid a constantly saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A fertile, humus-rich, freely draining potting mix.",
+    "humidityInstructions": "Allow room for spreading leaves. Check indoor plants for mites, scale and mealybugs; reduce feeding during winter.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Fatsia",
+        "Paper plant"
+      ],
+      "photo": {
+        "path": "/images/plants/fatsia-japonica.jpg",
+        "altText": "Japanese aralia reference photograph",
+        "credit": "Stacy Hodes",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Fatsia japonica (Mecklenburg County, NC)-Fall"
+      }
+    }
+  },
+  {
+    "commonName": "Norfolk Island pine",
+    "scientificName": "Araucaria heterophylla",
+    "description": "An evergreen conifer with regularly tiered branches. It is grown as an indoor tree, but is not a true pine and can eventually outgrow a small room.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give a bright window position, with gentle sun where possible. Protect from intense afternoon sun and avoid a dark corner.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water regularly during growth, letting excess drain. Reduce watering in winter and avoid persistently wet soil.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A fertile, porous, slightly acidic mix with good drainage.",
+    "humidityInstructions": "A bright, cooler room suits it. Allow height for the tree and avoid very dry conditions that can cause lower branches to drop.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/araucaria-heterophylla/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Norfolk pine",
+        "Living Christmas tree"
+      ],
+      "photo": {
+        "path": "/images/plants/araucaria-heterophylla.jpg",
+        "altText": "Norfolk Island pine reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/araucaria-heterophylla/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Araucaria heterophylla, Norfolk Island Pine, houseplant view"
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/australian-pine"
+    }
+  },
+  {
+    "commonName": "Croton",
+    "scientificName": "Codiaeum variegatum",
+    "description": "A woody foliage plant with leathery leaves in many shapes and colours. The photo is one cultivar. Keep away from pets, and avoid contact with the irritating sap.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Needs strong daylight and some direct sun for good colour. Acclimatize to a brighter window gradually.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water generously during growth with free drainage, allowing the mix to start drying. Water more sparingly in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A humus-rich, well-drained potting mix.",
+    "humidityInstructions": "Keep warm and watch for spider mites. Handle damaged stems carefully and wash hands after contact with sap.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/codiaeum-variegatum/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Garden croton",
+        "Joseph's coat"
+      ],
+      "photo": {
+        "path": "/images/plants/codiaeum-variegatum.jpg",
+        "altText": "Croton reference photograph",
+        "credit": "Joanne Kollar (Pitt County)",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/codiaeum-variegatum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Codiaeum variegatum, Croton, houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "English ivy",
+    "scientificName": "Hedera helix",
+    "description": "A trailing or climbing evergreen often grown in indoor pots. The photograph shows the variegated cultivar Gold Child. Leaves and berries are harmful if eaten and sap can irritate skin.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide filtered daylight; variegated forms need enough light to retain their pattern.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist with drainage, checking before watering rather than leaving the pot saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A fertile, well-drained houseplant mix.",
+    "humidityInstructions": "Allow trailing stems space and inspect for mites or scale. Keep contained; it can spread aggressively if planted outdoors.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Common ivy",
+        "Baltic ivy"
+      ],
+      "photo": {
+        "path": "/images/plants/hedera-helix.jpg",
+        "altText": "English ivy reference photograph",
+        "credit": "Cathy Dewitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Leaves 'Gold Child'"
+      }
+    }
+  },
+  {
+    "commonName": "Umbrella sedge",
+    "scientificName": "Cyperus alternifolius",
+    "description": "A grass-like sedge with umbrella-shaped whorls of bracts. Despite one common name it is not a palm. It needs wetter roots than most houseplants.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give bright light with protection from scorching sun.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the roots wet at all times. The container can stand in a tray of water; do not use a dry-out routine.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A fertile, moisture-retentive mix suited to a water-loving plant.",
+    "humidityInstructions": "Protect the bracts from harsh drafts. Brown tips can result when roots dry; tall stems may need support.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/cyperus-alternifolius/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Umbrella grass",
+        "Umbrella palm"
+      ],
+      "photo": {
+        "path": "/images/plants/cyperus-alternifolius.jpg",
+        "altText": "Umbrella sedge reference photograph",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cyperus-alternifolius/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Cyperus alternifolius"
+      }
+    }
+  },
+  {
+    "commonName": "Lipstick plant",
+    "scientificName": "Aeschynanthus radicans",
+    "description": "A trailing tropical plant with glossy leaves and red tubular flowers. A hanging pot shows off its stems; flowering depends on growing conditions.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect light suits it. Avoid full, harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water regularly while growing and drain the pot. Keep a little drier in winter without leaving roots desiccated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An airy, well-drained mix for an epiphytic houseplant.",
+    "humidityInstructions": "Likes warmth and humid air with good circulation. Avoid cold drafts, stagnant damp conditions and wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/aeschynanthus-radicans/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Lipstick vine",
+        "Basket vine"
+      ],
+      "photo": {
+        "path": "/images/plants/aeschynanthus-radicans.jpg",
+        "altText": "Lipstick plant reference photograph",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/aeschynanthus-radicans/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": null
+      }
+    }
+  },
+  {
+    "commonName": "Goldfish plant",
+    "scientificName": "Nematanthus gregarius",
+    "description": "A trailing tropical plant with small fleshy leaves and pouch-shaped orange flowers. It suits a hanging basket; it is distinct from other plants sold under the goldfish name.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright filtered light, avoiding long exposure to full sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist but freely draining, using soft water where available. Check moisture before watering.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A peat-free, freely draining potting compost.",
+    "humidityInstructions": "Keep warm and away from cold windows. Allow room for trailing stems and check for aphids.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/nematanthus-gregarius/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Candycorn plant",
+        "Hypocyrta"
+      ],
+      "photo": {
+        "path": "/images/plants/nematanthus-gregarius.jpg",
+        "altText": "Goldfish plant reference photograph",
+        "credit": "KENPEI",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/nematanthus-gregarius/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Nematanthus gregarius - form"
       }
     }
   }
