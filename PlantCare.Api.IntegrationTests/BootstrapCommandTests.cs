@@ -183,6 +183,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)
             { Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() } });
         var monstera = Assert.Single(catalog!, p => p.ScientificName == "Monstera deliciosa");
+        var africanMask = Assert.Single(catalog!, p => p.CommonName == "African mask plant");
+        Assert.Equal("Alocasia \u00d7 mortfontanensis", africanMask.ScientificName);
         Assert.Equal(2, monstera.CatalogProfile!.GrowthReferences!.Count);
         Assert.Contains("young", monstera.CatalogProfile.GrowthReferences[0].Photo.Path);
         var pothos = Assert.Single(catalog!, p => p.ScientificName == "Epipremnum aureum");

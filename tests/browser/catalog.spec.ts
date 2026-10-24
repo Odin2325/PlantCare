@@ -6,7 +6,9 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed.length).toBeGreaterThanOrEqual(68);
+  expect(reviewed).toHaveLength(68);
+  expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
+    .toHaveLength(1);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
