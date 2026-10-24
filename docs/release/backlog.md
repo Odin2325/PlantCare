@@ -25,6 +25,18 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Expanded growth galleries and ten houseplants (2026-10-24)
+
+- Deployed 68 reviewed English plants, 112 aliases across 56 entries, thirteen
+  sourced cat-and-dog classifications and 77 original licensed photo files.
+- Added eight examples for jade plant, moth orchid, peace lily and wax plant,
+  bringing growth references to sixteen across eight species without timelines.
+- Exact CI, 45 local/CI browser cases, 27 public cases, all public image hashes,
+  existing-worker session/history, isolated recovery and fresh backups passed;
+  see [growth-reference-expansion.md](growth-reference-expansion.md). Earlier
+  physical reminder acceptance and remaining release gates stay separate.
+
+
 ### Plant comparison and 15 more houseplants (2026-10-24)
 
 - Deployed comparison of up to three public species, retaining selection through

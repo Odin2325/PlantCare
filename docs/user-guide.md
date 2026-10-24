@@ -3,7 +3,7 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 58 real
+data while the launch requirements remain open. The reviewed catalog dataset includes 68 real
 houseplants with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
@@ -45,11 +45,11 @@ can still match more than one plant.
 
 English common names lead the species listings; scientific names are secondary
 and remain searchable. Your own plants use the nickname you saved. Monstera,
-spider plant, golden pothos and aloe vera details also include Growth references
-with credited example photos.
+spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily and wax
+plant details also include Growth references with credited example photos.
 These show different specimens, not a fixed growth timeline or a health diagnosis.
 
-Alternative names are currently reviewed for eight species. Try Devils ivy or
+The catalog has 112 alternative names across 56 entries. Try Devils ivy or
 mother in laws tongue; matching ignores apostrophe and hyphen variations. Species
 details list Also known as. A shared name such as Ribbon plant can return several
 different species, so compare the photos and scientific names before choosing.

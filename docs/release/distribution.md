@@ -1,7 +1,7 @@
 # v1 distribution preparation
 
 Reviewed 2026-10-24. No v1 tag, GitHub release or production launch is created by
-this preparation. The staging runtime is `ff61f3003bcc2e83af5a2336a577ffdebb2b72fb`;
+this preparation. The staging runtime is `7ce5a11df523ce38c094fbe48e6395f05fa38f27`;
 subsequent documentation commits are not new application deployments.
 See the [current milestone plan](current-milestones.md) for the remaining work order.
 
@@ -47,8 +47,8 @@ matching confirmed accounts can accept, and owners can resend or revoke. Real Gm
 inbox delivery and live read-only access/revocation are verified in
 [calendar-sharing acceptance](calendar-sharing-email.md). Private feeds still need
 real calendar-client acceptance. Google/Microsoft synchronization stays disabled.
-The beta includes 58 reviewed English houseplant entries and licensed local
-reference photos. Four species also have eight curated growth-feature examples
+The beta includes 68 reviewed English houseplant entries and licensed local
+reference photos. Eight species also have sixteen curated growth-feature examples
 of different specimens, without timelines or diagnosis; personal photo journals
 remain future work. See [growth references](growth-references.md),
 [the catalog record](houseplant-starter-catalog.md) and the
@@ -70,6 +70,11 @@ classifications. Users can compare up to three species with their care guidance,
 credited photos, warnings and sources. Selection remains through filters, details
 and reload; comparison URLs contain public species choices. Existing catalog IDs,
 personal care data and reference photos remain intact.
+
+The [next growth-reference batch](growth-reference-expansion.md) adds ten further
+plants, twenty aliases and one sourced cat-and-dog classification. The current
+totals are 68 plants, 112 aliases, thirteen classifications and 77 original photos,
+with sixteen growth references across eight species.
 
 [Reminder snoozing](reminder-snoozing.md) now saves 1-hour, 24-hour or 3-day delays
 on current Dashboard/Notifications reminders without changing care due times or

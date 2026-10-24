@@ -1,5 +1,10 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-24: [ten plants and expanded growth references](growth-reference-expansion.md)
+are deployed: 68 reviewed entries, 112 aliases across 56 entries, thirteen sourced
+cat-and-dog classifications and 77 original photo files. Sixteen growth references
+now cover eight species; existing care fields and personal references remain.
+
 Follow-up 2026-10-24: [plant comparison and fifteen additions](plant-comparison.md)
 are deployed to staging: 58 reviewed entries, 92 aliases across 46 entries, twelve
 sourced cat-and-dog classifications and 62 original photo files. Comparison keeps
@@ -42,7 +47,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-All 58 reviewed entries have local licensed photos on catalog and personal plant
+All 68 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep
@@ -55,7 +60,7 @@ tracked in [catalog-browsing.md](catalog-browsing.md). All copy remains English.
 
 ## Implemented: curated growth references
 
-Monstera, spider plant, golden pothos and aloe vera now have attributed examples of recognizable growth
+Monstera, spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily and wax plant now have attributed examples of recognizable growth
 features on species and personal plant detail pages. See
 [growth-references.md](growth-references.md) for source review, limitations and
 verification. These show different specimens, without fixed timelines or diagnosis.

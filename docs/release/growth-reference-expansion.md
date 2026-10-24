@@ -2,7 +2,7 @@
 
 Prepared 2026-10-24. This increment expands the English catalog from 58 to 68
 reviewed entries and the growth galleries from eight examples across four species
-to sixteen across eight. Deployment acceptance is recorded after verification.
+to sixteen across eight. The candidate below is deployed on staging.
 
 ## Sources and content
 
@@ -66,3 +66,46 @@ accessibility and 320px reflow. Repeated-import tests pin totals and validate ev
 photo and profile. Public acceptance must additionally check old catalog IDs/care,
 all served hashes, an existing service-worker-controlled session, personal data,
 backup/recovery and trusted HTTPS health before claiming deployment complete.
+
+## Staging acceptance
+
+Candidate `7ce5a11df523ce38c094fbe48e6395f05fa38f27` is deployed after
+[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40125685319),
+including all 45 browser cases and the SQL Server production-container checks.
+A preparation-script Windows encoding error in the first candidate had changed
+the hybrid multiplication sign and created one duplicate African mask plant. The
+new duplicate had zero personal-plant references and was removed transactionally
+with the original record and all personal plants preserved. Explicit UTF-8 source
+reading restored the name; backend and strict browser count/name regressions now
+prevent this recurrence. The first candidate was not accepted as the final release.
+
+Local verification passed the 171-test backend baseline and all seven focused
+catalog import regressions after the correction, 38 frontend tests, the production
+build, all 45 browser cases and the 77-image attribution/integrity check. The
+existing calendar stylesheet budget warning remains; the build passes.
+
+All 27 public catalog/comparison browser cases passed across desktop/mobile
+Chromium and Firefox. All four added galleries were visually reviewed at desktop
+and phone widths; browser checks cover all eight at 320px with keyboard source
+links and sampled accessibility. Public API verification preserved all 59 previous
+catalog IDs and care fields, allowing only the four documented galleries/review
+dates. All 68 reviewed profiles and 77 served image hashes match committed content.
+
+An existing real service-worker-controlled staging session retained its login,
+personal plant IDs and completed calendar history after activation, loaded the
+expanded catalog/galleries and thirteen-entry pet filter, and logged out correctly.
+The main frontend asset remains unchanged; this content update loads online
+without a frontend upgrade or reinstall. Offline action icons remain available.
+This is automated browser evidence, not a new physical Android delivery test.
+
+Fresh encrypted off-server VPS backups passed before and after activation. The
+new runtime passed isolated application recovery from the predeployment snapshot,
+including sign-in, care history, worker restart/deduplication and failed-activation
+recovery. Bundle hashes, pinned image IDs, compatible protocols, restricted runtime
+grants and final trusted HTTPS readiness/operations passed. Both local and VPS
+backup health checks finished healthy with no problem codes. An earlier failed
+local scheduled-task result was cleared by a successful retry of the existing
+task, ending with result 0; schedules and thresholds were unchanged. The
+postdeployment VPS backup identifies this candidate.
+No external mail/push was sent for this increment;
+local/recovery messages were captured internally. No v1 tag or apex cutover is made.

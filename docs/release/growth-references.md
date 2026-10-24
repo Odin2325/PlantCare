@@ -1,5 +1,10 @@
 # Curated growth references
 
+Follow-up 2026-10-24: [expanded galleries and ten houseplants](growth-reference-expansion.md)
+add jade plant, moth orchid, peace lily and wax plant examples. Current coverage
+is sixteen references across eight species, with the acceptance below retained as
+historical evidence for the earlier batches.
+
 ## Expansion: golden pothos and aloe vera
 
 Prepared 2026-10-22: four additional examples bring coverage to four species and
