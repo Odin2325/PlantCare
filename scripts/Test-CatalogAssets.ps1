@@ -4,7 +4,7 @@ $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 $entries=@(Get-Content (Join-Path $root 'deploy/catalog.houseplants.json') -Raw|ConvertFrom-Json)
 $photos=@(Get-Content (Join-Path $root 'deploy/catalog-images.json') -Raw|ConvertFrom-Json)
-if($entries.Count -lt 20){throw 'Reviewed catalog entries are missing.'}
+if($entries.Count -lt 23){throw 'Reviewed catalog entries are missing.'}
 if(@($photos.path|Sort-Object -Unique).Count -ne $photos.Count){throw 'Duplicate catalog image paths.'}
 $referenced=@(foreach($entry in $entries){
     $entry.catalogProfile.photo

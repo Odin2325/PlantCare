@@ -45,6 +45,14 @@
       </select>
     </div>
     <div class="catalog-field">
+      <label for="plant-pets">Cats and dogs</label>
+      <select id="plant-pets" [ngModel]="pets()" (ngModelChange)="setPets($event)" aria-describedby="pet-filter-help">
+        <option value="">All plants</option>
+        <option value="non-toxic">Reviewed as non-toxic</option>
+        <option value="warning">Toxicity warning</option>
+      </select>
+    </div>
+    <div class="catalog-field">
       <label for="plant-sort">Sort by</label>
       <select id="plant-sort" [ngModel]="sort()" (ngModelChange)="setSort($event)">
         <option value="name-asc">Name A–Z</option>
@@ -53,6 +61,7 @@
     </div>
     <button type="button" class="clear-filters" [disabled]="!hasFilters()" (click)="clearFilters()">Clear filters</button>
   </section>
+  <p id="pet-filter-help">The non-toxic filter includes only plants with a linked cat-and-dog toxicity reference. An absent warning is not a safety assessment. Non-toxic plants can still cause stomach upset if eaten.</p>
   <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
   @if (visibleSpecies().length === 0) {
     <p class="status-message">No plants match your search. Try another name or clear the filters.</p>
@@ -76,6 +85,8 @@
         <span class="warning-badge">
           Toxic to pets
         </span>
+        } @else if (plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl) {
+        <span class="pet-badge">Non-toxic to cats and dogs</span>
         }
       </div>
 

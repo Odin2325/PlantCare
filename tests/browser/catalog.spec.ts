@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed.length).toBeGreaterThanOrEqual(20);
+  expect(reviewed.length).toBeGreaterThanOrEqual(23);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
@@ -71,6 +71,60 @@ test('catalog light filters combine with search, survive detail navigation and r
   await page.goto('/plants?light=invalid&sort=invalid');
   await expect(names.first()).toHaveText('African violet');
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('');
+});
+
+test('sourced cat-and-dog filter excludes unknown plants and preserves combined filters through details and reload', async ({ page, request }) => {
+  const species = await (await request.get('/api/plant-species')).json();
+  const expected = species.filter((p: any) => !p.isToxicToPets && p.catalogProfile?.nonToxicToCatsAndDogsSourceUrl)
+    .map((p: any) => p.commonName).sort((a: string, b: string) => a.localeCompare(b, 'en'));
+  expect(expected).toEqual(['African violet', 'Baby rubber plant', 'Cast iron plant', 'Parlor palm', 'Spider plant']);
+  await page.goto('/plants?pets=non-toxic');
+  const cards = page.locator('.plant-card');
+  const names = cards.getByRole('heading', { level: 2 });
+  await expect(names).toHaveText(expected);
+  await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('non-toxic');
+  await expect(page.getByText('An absent warning is not a safety assessment.', { exact: false })).toBeVisible();
+  await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Parlour palm');
+  await page.getByLabel('Light requirement', { exact: true }).selectOption('BrightIndirectLight');
+  await page.getByLabel('Sort by', { exact: true }).selectOption('name-desc');
+  await expect(names).toHaveText(['Parlor palm']);
+  await cards.getByRole('link', { name: 'View details' }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Parlor palm');
+  await expect(page.getByRole('link', { name: 'Pet toxicity reference', exact: true })).toHaveAttribute('href', /aspca.org\/.*bamboo-palm$/);
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.reload();
+  await expect(names).toHaveText(['Parlor palm']);
+  await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('non-toxic');
+  await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('BrightIndirectLight');
+  await expect(page.getByLabel('Sort by', { exact: true })).toHaveValue('name-desc');
+  await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
+  await expect(cards).toHaveCount(0);
+  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await expect(page).toHaveURL(/\/plants$/);
+  await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('');
+  await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
+  await expect(names).toHaveText(species.filter((p: any) => p.isToxicToPets).map((p: any) => p.commonName)
+    .sort((a: string, b: string) => a.localeCompare(b, 'en')));
+  await page.goto('/plants?pets=invalid');
+  await expect(cards).toHaveCount(species.length);
+  await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('');
+  await page.setViewportSize({ width: 320, height: 800 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Cat-and-dog catalog filter at narrow width');
+  for (const common of ['Baby rubber plant', 'Cast iron plant', 'Parlor palm']) {
+    await page.goto('/plants?q=' + encodeURIComponent(common));
+    await expect(cards).toHaveCount(1);
+    const image = cards.getByRole('img');
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    await expect(cards.locator('figcaption a')).toHaveCount(2);
+    await cards.getByRole('link', { name: 'View details' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(common);
+    await expect(page.getByRole('link', { name: 'Pet toxicity reference', exact: true })).toBeVisible();
+    if (common === 'Baby rubber plant')
+      await expect(page.getByText('different from the much larger rubber plant', { exact: false })).toBeVisible();
+  }
+  await auditAccessibility(page, 'New houseplant detail with sourced classification');
 });
 
 test('flowering additions have identifiable photos, attributed care and seasonal guidance', async ({ page }) => {

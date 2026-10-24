@@ -157,11 +157,13 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(20,species.Count);
+            Assert.Equal(23,species.Count);
             Assert.Equal(4, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(8, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
-            Assert.Equal(8, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
-            Assert.Equal(16, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(11, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(22, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(5, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
+            Assert.DoesNotContain(species, p => p.IsToxicToPets && p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null);
             foreach(var plant in species)
             {
                 var profile=Assert.IsType<PlantCatalogProfile>(plant.CatalogProfile);
@@ -185,6 +187,9 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         Assert.Contains("young", monstera.CatalogProfile.GrowthReferences[0].Photo.Path);
         var pothos = Assert.Single(catalog!, p => p.ScientificName == "Epipremnum aureum");
         Assert.Equal(["Devil's ivy", "Pothos"], pothos.CatalogProfile!.CommonNameAliases);
+        var palm = Assert.Single(catalog!, p => p.ScientificName == "Chamaedorea elegans");
+        Assert.Equal("https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/bamboo-palm",
+            palm.CatalogProfile!.NonToxicToCatsAndDogsSourceUrl);
     }
 
     private const string Catalog = """

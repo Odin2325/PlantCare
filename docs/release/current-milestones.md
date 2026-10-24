@@ -4,6 +4,10 @@ Reviewed 2026-10-24. This is the current work order; dated execution records ret
 their original candidate and scope. No v1 release or production cutover is created
 by this plan. The public contact-address decision remains deferred by the owner.
 
+Owner direction on 2026-10-24 prioritizes catalog expansion and the recommended
+features. The active increment is [pet-aware catalog browsing](pet-aware-catalog.md),
+followed by reminder snoozing; release work below remains tracked alongside it.
+
 ## Completed staging milestones
 
 | Milestone | Accepted evidence | Limits |

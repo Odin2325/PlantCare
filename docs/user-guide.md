@@ -3,9 +3,15 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The catalog includes 20 real
+data while the launch requirements remain open. The catalog includes 23 real
 houseplants with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
+
+The catalog combines name search, light requirement and a Cats and dogs filter.
+Reviewed as non-toxic includes only plants with a linked cat-and-dog classification
+reference, rather than every plant without a warning. Open details to see the
+reference. Non-toxic plants can still cause stomach upset if eaten. Clear filters
+restores the full catalog.
 
 ## Your first plant
 

@@ -48,6 +48,13 @@
   </p>
 
   <app-plant-photo [profile]="plant.catalogProfile" [detail]="true" />
+  @if (!plant.isToxicToPets && plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl) {
+    <section aria-label="Cats and dogs">
+      <h2>Non-toxic to cats and dogs</h2>
+      <p>This species is listed as non-toxic to cats and dogs in the linked reference. Eating plant material can still cause stomach upset. This classification does not cover other animals.</p>
+      <a [href]="plant.catalogProfile!.nonToxicToCatsAndDogsSourceUrl" target="_blank" rel="noopener noreferrer">Pet toxicity reference</a>
+    </section>
+  }
   @if (plant.catalogProfile; as profile) {
     <p><a [href]="profile.careSourceUrl" target="_blank" rel="noopener noreferrer">Care reference</a> · Reviewed {{ profile.reviewedOn }}</p>
   }

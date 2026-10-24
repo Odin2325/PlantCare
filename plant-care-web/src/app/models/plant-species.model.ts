@@ -26,6 +26,7 @@ export interface PlantSpecies {
 }
 
 export interface PlantCatalogProfile {
+  nonToxicToCatsAndDogsSourceUrl?: string | null;
   commonNameAliases?: string[] | null;
   growthReferences?: PlantGrowthReference[] | null;
   careSourceUrl: string;

@@ -199,7 +199,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
-      "reviewedOn": "2026-10-22",
+      "reviewedOn": "2026-10-24",
       "photo": {
         "path": "/images/plants/chlorophytum-comosum.jpg",
         "altText": "Spider plant reference photo",
@@ -240,7 +240,8 @@
       "commonNameAliases": [
         "Ribbon plant",
         "Spider ivy"
-      ]
+      ],
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/spider-plant"
     }
   },
   {
@@ -595,7 +596,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-ionanthus/",
-      "reviewedOn": "2026-10-22",
+      "reviewedOn": "2026-10-24",
       "photo": {
         "path": "/images/plants/streptocarpus-ionanthus.jpg",
         "altText": "African violet in flower, reference photo",
@@ -604,7 +605,8 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Streptocarpus ionanthus, Cabarrus County, NC"
-      }
+      },
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/african-violet"
     }
   },
   {
@@ -720,6 +722,108 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Plant in Pot (Cabarrus County,NC)"
+      }
+    }
+  },
+  {
+    "commonName": "Parlor palm",
+    "scientificName": "Chamaedorea elegans",
+    "description": "A small, slow-growing indoor palm with slender stems and feathery fronds. Several individual palms are often planted together in one pot.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect daylight. It tolerates a dimmer position, but keep it away from hot direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the surface of the mix dry slightly before watering, then drain thoroughly. Avoid leaving the roots in standing water.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed lightly during active spring and summer growth according to the product label. Pause feeding in winter.",
+    "soilInstructions": "Use a humus-rich houseplant mix with good drainage. Repot only when necessary.",
+    "humidityInstructions": "Ordinary indoor humidity is usually suitable. Protect from cold drafts and keep the fronds away from radiators.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/chamaedorea-elegans/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Parlour palm",
+        "Neanthe bella palm"
+      ],
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/bamboo-palm",
+      "photo": {
+        "path": "/images/plants/chamaedorea-elegans.jpg",
+        "altText": "Potted parlor palm with green, feathery fronds",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/chamaedorea-elegans/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Chamaedorea elegans houseplant view"
+      }
+    }
+  },
+  {
+    "commonName": "Cast iron plant",
+    "scientificName": "Aspidistra elatior",
+    "description": "An upright foliage plant with broad, leathery leaves. It tolerates shaded indoor positions and occasional missed watering; variegated cultivars have striped leaves.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Choose indirect daylight or a shaded indoor position. Keep leaves out of strong direct sun.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Check the mix and water when the surface has dried, then drain. Water less during slow winter growth; do not leave the pot saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed sparingly during active growth using a suitable houseplant fertilizer at its labelled strength. Reduce or pause in winter.",
+    "soilInstructions": "Use a rich, freely draining potting mix and a pot with drainage holes.",
+    "humidityInstructions": "Typical room humidity is suitable. Keep away from cold drafts and drying heat.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "Bar room plant",
+        "Iron plant"
+      ],
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/cast-iron-plant",
+      "photo": {
+        "path": "/images/plants/aspidistra-elatior.jpg",
+        "altText": "Potted variegated cast iron plant with upright striped leaves beside a window",
+        "credit": "rrei320",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "Baby rubber plant",
+    "scientificName": "Peperomia obtusifolia",
+    "description": "A compact houseplant with thick, glossy, rounded leaves. This Peperomia is different from the much larger rubber plant, Ficus elastica.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Place in bright indirect daylight. Protect from strong direct sun that can scorch the leaves.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Allow the top layer of mix to dry before watering, then let excess water drain. Avoid both persistent wetness and prolonged complete drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a suitable houseplant fertilizer during active growth following the product label. Reduce or pause feeding when growth slows.",
+    "soilInstructions": "Use an airy, freely draining houseplant mix. A pot with drainage holes helps prevent waterlogged roots.",
+    "humidityInstructions": "Average indoor humidity is suitable. Avoid cold drafts and sudden changes in conditions.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-obtusifolia/",
+      "reviewedOn": "2026-10-24",
+      "commonNameAliases": [
+        "American rubber plant",
+        "Pepper face"
+      ],
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/baby-rubber-plant",
+      "photo": {
+        "path": "/images/plants/peperomia-obtusifolia.jpg",
+        "altText": "Baby rubber plant with thick, glossy, rounded green leaves",
+        "credit": "Jerzy Opiola",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-obtusifolia/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
       }
     }
   }

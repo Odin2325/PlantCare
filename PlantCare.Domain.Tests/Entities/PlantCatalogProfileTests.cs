@@ -17,6 +17,30 @@ public sealed class PlantCatalogProfileTests
         profile.Validate();
         Assert.Null(profile.GrowthReferences);
         Assert.Null(profile.CommonNameAliases);
+        Assert.Null(profile.NonToxicToCatsAndDogsSourceUrl);
+    }
+
+    [Fact]
+    public void NonToxicClassificationNeedsAValidSourceAndCannotContradictAToxicPlant()
+    {
+        var profile = new PlantCatalogProfile("https://example.org/care", new(2026, 10, 24), null,
+            NonToxicToCatsAndDogsSourceUrl: "https://example.org/cats-and-dogs");
+        profile.Validate();
+        foreach (var source in new[] { "", "javascript:alert(1)", "http://example.org", "https://user:secret@example.org" })
+            Assert.Throws<ArgumentException>(() => (profile with { NonToxicToCatsAndDogsSourceUrl = source }).Validate());
+
+        var plant = PlantCare.Domain.Entities.PlantSpecies.Create("Example", "Example species", "Example plant",
+            PlantCare.Domain.Enums.SunlightRequirement.BrightIndirectLight, "Indirect light", 7, "Check moisture",
+            null, null, "Draining mix", null, null, null, true);
+        Assert.Throws<ArgumentException>(() => plant.SetCatalogProfile(profile));
+        plant.Update("Example", "Example species", "Example plant",
+            plant.SunlightRequirement, plant.SunlightInstructions, 7, plant.WateringInstructions,
+            null, null, plant.SoilInstructions, null, null, null, false);
+        plant.SetCatalogProfile(profile);
+        plant.Update("Example", "Example species", "Example plant",
+            plant.SunlightRequirement, plant.SunlightInstructions, 7, plant.WateringInstructions,
+            null, null, plant.SoilInstructions, null, null, null, true);
+        Assert.Null(plant.CatalogProfile!.NonToxicToCatsAndDogsSourceUrl);
     }
 
     [Fact]

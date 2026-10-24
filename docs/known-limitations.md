@@ -1,11 +1,12 @@
 # Current limitations
 
-Reviewed 2026-10-23. These describe the staging beta, not a released v1.
+Reviewed 2026-10-24. These describe the staging beta, not a released v1.
 
 | Area | Current status |
 | --- | --- |
-| Catalog | 20 reviewed English houseplant entries with linked care references; a starter selection, not a complete botanical database. Eight species have reviewed alternative common names for search; these names are not unique species identifiers. The legacy demo entry remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
-| Images | All 20 reviewed entries have local licensed reference photos with visible credits. Monstera, spider plant, golden pothos and aloe vera have curated growth-feature examples of different specimens, without timelines or diagnosis. Personal photo journals are not implemented. |
+| Catalog | The next batch expands the reviewed English dataset to 23 entries, with 22 alternative names across 11 species; see release/pet-aware-catalog.md for deployment status. This is a starter selection, not a complete botanical database. Common names are not unique species identifiers. The legacy demo remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
+| Images | All 23 reviewed dataset entries have local licensed photos with visible credits. Monstera, spider plant, golden pothos and aloe vera have curated growth-feature examples of different specimens, without timelines or diagnosis. Personal photo journals are not implemented. |
+| Pet classification | The non-toxic cat-and-dog filter requires an explicit reviewed source and currently covers five species. Missing warnings are not proof of safety. Other animals are outside this classification; plant material can still cause stomach upset if eaten. |
 | Privacy/account tools | Account supports password-verified export/deletion. The follow-up adds guarded 30-day expiry and current-authority reconciliation; see release/retention-and-erasure-recovery.md for enabling status. Offline storage can delay cleanup; missing current authority blocks managed app recovery. The full privacy notice remains a draft. |
 | Offline use | Offline explanation and reconnect supported; no offline care writes or full offline collection. |
 | Devices | Owner reported successful Android 17 / Chrome 155 installation, reminder handling, offline/reconnect, frontend upgrade and multiple care cycles. Other physical devices and assistive technologies have not received equivalent acceptance. Desktop/mobile-sized browser automation is separate evidence. |

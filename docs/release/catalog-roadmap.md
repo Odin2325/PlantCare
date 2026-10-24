@@ -1,5 +1,10 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-24: [pet-aware expansion](pet-aware-catalog.md) prepares three
+additional indoor plants, five sourced cat-and-dog classifications and a combined
+pet filter. See that record for exact verification/deployment status. Reminder
+snoozing follows as a separate feature increment.
+
 Owner request recorded 2026-10-14. Follow-up 2026-10-21: an English-only starter
 catalog of 15 common houseplants and licensed photographs is implemented; see
 [houseplant-starter-catalog.md](houseplant-starter-catalog.md) for verification and

@@ -9,11 +9,13 @@ public sealed record PlantCatalogPhoto(
 public sealed record PlantCatalogProfile(
     string CareSourceUrl, DateOnly ReviewedOn, PlantCatalogPhoto? Photo,
     IReadOnlyList<PlantGrowthReference>? GrowthReferences = null,
-    IReadOnlyList<string>? CommonNameAliases = null)
+    IReadOnlyList<string>? CommonNameAliases = null,
+    string? NonToxicToCatsAndDogsSourceUrl = null)
 {
     public void Validate()
     {
         Https(CareSourceUrl);
+        if (NonToxicToCatsAndDogsSourceUrl is not null) Https(NonToxicToCatsAndDogsSourceUrl);
         if (ReviewedOn == default) throw new ArgumentException("A care review date is required.");
         if (CommonNameAliases is { } aliases)
         {

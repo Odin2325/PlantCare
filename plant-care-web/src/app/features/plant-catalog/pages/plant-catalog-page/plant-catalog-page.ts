@@ -35,6 +35,7 @@ export class PlantCatalogPage {
   readonly plantSpecies = signal<PlantSpecies[]>([]);
   readonly query = signal('');
   readonly light = signal<SunlightRequirement | ''>('');
+  readonly pets = signal<'non-toxic' | 'warning' | ''>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
   readonly lightOptions: { value: SunlightRequirement; label: string }[] = [
     { value: 'LowLight', label: 'Low light' },
@@ -47,13 +48,16 @@ export class PlantCatalogPage {
   readonly filterQueryParams = computed(() => ({
     q: this.query() || null,
     light: this.light() || null,
+    pets: this.pets() || null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
   }));
-  readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.sort() !== 'name-asc'));
+  readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.pets() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
     return this.plantSpecies().filter(plant =>
       (!this.light() || plant.sunlightRequirement === this.light()) &&
+      (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
+        !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
       (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
         ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en', { sensitivity: 'base' }) *
@@ -67,6 +71,8 @@ export class PlantCatalogPage {
       this.query.set((params.get('q') ?? '').slice(0, 100));
       const light = params.get('light');
       this.light.set(this.lightOptions.find(option => option.value === light)?.value ?? '');
+      const pets = params.get('pets');
+      this.pets.set(pets === 'non-toxic' || pets === 'warning' ? pets : '');
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
     });
     this.loadPlantSpecies();
@@ -87,9 +93,15 @@ export class PlantCatalogPage {
     this.saveFilters();
   }
 
+  setPets(value: string): void {
+    this.pets.set(value === 'non-toxic' || value === 'warning' ? value : '');
+    this.saveFilters();
+  }
+
   clearFilters(): void {
     this.query.set('');
     this.light.set('');
+    this.pets.set('');
     this.sort.set('name-asc');
     this.saveFilters();
   }

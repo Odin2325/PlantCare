@@ -334,5 +334,47 @@
     "bytes": 410842,
     "sourceFileName": "Aloe_vera_Form_in_a__7JIpdVIH2OAj.jpeg",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Houseplant view",
+    "caption": "Chamaedorea elegans houseplant view",
+    "credit": "Cindy Christian",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "chamaedorea-elegans",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/chamaedorea-elegans/",
+    "path": "/images/plants/chamaedorea-elegans.jpg",
+    "sha256": "698f2dc346f458273aa02c475be43d5acb4bf1cc36b1edc33637f6cef0df2f3e",
+    "bytes": 591987,
+    "sourceFileName": "20250724_111430_Cham_6ELfDQ4It62b.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Form",
+    "caption": "Form",
+    "credit": "rrei320",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "licenseName": "CC BY 2.0",
+    "slug": "aspidistra-elatior",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+    "path": "/images/plants/aspidistra-elatior.jpg",
+    "sha256": "e7be621f12e05ae6d526c1649853578eaa84d949e246d0b476cb46b4b14e460a",
+    "bytes": 186861,
+    "sourceFileName": "Aspidistra-elatior--rrei320--CC-BY.jpg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Form",
+    "caption": "Form",
+    "credit": "Jerzy Opiola",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "peperomia-obtusifolia",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-obtusifolia/",
+    "path": "/images/plants/peperomia-obtusifolia.jpg",
+    "sha256": "b34a95df13b95a9d6f5a5adc47359e9ab5ba7dae7c9df59e84ef1e0668789a89",
+    "bytes": 800852,
+    "sourceFileName": "Peperomia_obtusifoli_LTVOOl7bxzhD.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]

@@ -25,6 +25,14 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Pet-aware catalog expansion (2026-10-24)
+
+- Added parlor palm, cast iron plant and baby rubber plant with English care,
+  reviewed photographs and aliases. A non-toxic cat-and-dog filter requires an
+  explicit classification source, combines with existing filters and keeps its
+  state through details/reload. See [pet-aware-catalog.md](pet-aware-catalog.md)
+  for local and staging evidence; a missing warning alone does not qualify.
+
 ### Calendar sharing email delivery (2026-10-23)
 
 - Fixed missing calendar-sharing emails and added signup invitations for new

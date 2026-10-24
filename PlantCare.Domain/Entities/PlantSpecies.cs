@@ -53,6 +53,8 @@ public sealed class PlantSpecies
     {
         ArgumentNullException.ThrowIfNull(profile);
         profile.Validate();
+        if (IsToxicToPets && profile.NonToxicToCatsAndDogsSourceUrl is not null)
+            throw new ArgumentException("A toxic plant cannot carry a non-toxic classification.", nameof(profile));
         CatalogProfile = profile;
     }
 
@@ -160,6 +162,8 @@ public sealed class PlantSpecies
         MinimumTemperatureCelsius = minimumTemperatureCelsius;
         MaximumTemperatureCelsius = maximumTemperatureCelsius;
         IsToxicToPets = isToxicToPets;
+        if (isToxicToPets && CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null)
+            CatalogProfile = CatalogProfile with { NonToxicToCatsAndDogsSourceUrl = null };
     }
 
     private static void ValidateAll(SunlightRequirement sunlightRequirement, int defaultWateringIntervalDays, int? defaultFertilizingIntervalDays, decimal? minimumTemperatureCelsius,
