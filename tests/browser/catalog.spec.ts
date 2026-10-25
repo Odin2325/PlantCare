@@ -261,7 +261,7 @@ test('growth photo discovery combines filters and preserves comparison through d
   for (const name of ['Spider plant', 'Wax plant'])
     await page.getByRole('checkbox', { name: 'Compare ' + name, exact: true }).check();
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Spider');
-  await page.getByLabel('Light requirement', { exact: true }).selectOption('BrightIndirectLight');
+  await page.getByLabel('Light requirement', { exact: true }).selectOption('MediumIndirectLight');
   await expect(names).toHaveText(['Spider plant']);
   await page.locator('.plant-card').getByRole('link', { name: 'View details', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toBeVisible();
