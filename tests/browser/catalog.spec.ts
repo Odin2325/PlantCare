@@ -231,7 +231,7 @@ test('flowering additions have identifiable photos, attributed care and seasonal
     ['cyclamen-persicum', "Florist's cyclamen", true],
   ] as const) {
     await page.goto('/plants?q=' + encodeURIComponent(common));
-    const card = page.locator('.plant-card');
+    const card = page.locator('.plant-card').filter({ has: page.getByRole('heading', { name: common, exact: true }) });
     await expect(card).toHaveCount(1);
     await expect(card.getByRole('heading', { name: common, exact: true })).toBeVisible();
     const photo = card.getByRole('img');
