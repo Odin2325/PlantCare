@@ -1,5 +1,10 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-25: [care history discovery and five additions](care-history-discovery.md)
+are deployed: 105 reviewed plants, 179 aliases across 90 entries and 118 licensed
+original photos. Earlier care, galleries, pet assessments and personal data are
+preserved. History discovery filters the latest 100 entries without changing them.
+
 Follow-up 2026-10-25: [collection care filtering and nine additions](collection-care-filter.md)
 are deployed: 100 reviewed plants, 172 aliases across 87 entries and 113 licensed
 original photos. The 24 growth references across twelve species and thirteen
@@ -71,7 +76,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-All 100 reviewed entries have local licensed photos on catalog and personal plant
+All 105 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep
