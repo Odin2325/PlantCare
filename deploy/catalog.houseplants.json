@@ -2431,5 +2431,329 @@
         "title": "Nematanthus gregarius - form"
       }
     }
+  },
+  {
+    "commonName": "Iron cross begonia",
+    "scientificName": "Begonia masoniana",
+    "description": "A rhizomatous foliage begonia with dark cross-shaped markings on textured green leaves. It is grown mainly for foliage rather than its small flowers. Keep out of reach of pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight, protected from strong direct sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep evenly moist during active growth, with good drainage. When growth slows, let the surface nearly dry before watering again.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A moisture-retentive, freely draining houseplant mix.",
+    "humidityInstructions": "Prefers warmth and humid air. Keep foliage dry and provide circulation; avoid overwatering the rhizome.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/begonia-masoniana/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/begonia-masoniana.jpg",
+        "altText": "Iron cross begonia reference photograph",
+        "credit": "Krzysztof Ziarnek, Kenraiz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/begonia-masoniana/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Leaves"
+      }
+    }
+  },
+  {
+    "commonName": "Peacock plant",
+    "scientificName": "Goeppertia makoyana",
+    "description": "A clumping prayer-family plant with feather-like patterns on pale leaves and purple undersides. Leaves can fold in the evening; indoor flowers are uncommon.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight or light shade, away from harsh direct sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist without leaving it soggy. Use rainwater or distilled water where tap-water sensitivity is a problem.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An organically rich mix with perlite or similar material for drainage.",
+    "humidityInstructions": "Needs warm, humid conditions and protection from drafts. Gently wipe dusty leaves rather than keeping them wet.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-makoyana/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/goeppertia-makoyana.jpg",
+        "altText": "Peacock plant reference photograph",
+        "credit": "Maja Dumont",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-makoyana/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "goeppertia makoyana- form"
+      },
+      "commonNameAliases": [
+        "Peacock calathea",
+        "Cathedral windows"
+      ]
+    }
+  },
+  {
+    "commonName": "Rose-painted calathea",
+    "scientificName": "Goeppertia roseopicta",
+    "description": "A compact foliage plant with patterned leaves and reddish-purple undersides. Pink and cream markings vary between cultivars, so the reference photograph is one example.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose bright indirect daylight; strong sun can scorch the leaves.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the root zone moist but freely draining, avoiding both saturation and complete drying. Rainwater or distilled water can help with sensitive leaf tips.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A slightly acidic, organically rich mix with reliable drainage.",
+    "humidityInstructions": "Prefers warm, humid air. Avoid cold drafts and leave space for circulation; keep water off the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-roseopicta/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/goeppertia-roseopicta.jpg",
+        "altText": "Rose-painted calathea reference photograph",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-roseopicta/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Goeppertia roseopicta. Foliage."
+      },
+      "commonNameAliases": [
+        "Jungle rose",
+        "Calathea roseopicta"
+      ]
+    }
+  },
+  {
+    "commonName": "Stromanthe",
+    "scientificName": "Stromanthe thalia",
+    "description": "A clumping tropical foliage plant with burgundy leaf undersides. The photograph shows the variegated cultivar presented as Tricolor; other forms can be largely green.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Indirect daylight or dappled shade suits it. Protect from direct sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist with good drainage. Do not allow the roots to dry out or remain waterlogged.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A moisture-retentive, well-drained houseplant mix.",
+    "humidityInstructions": "Likes warm, humid conditions. Leaves may fold at night; inspect for mites and keep the pot away from drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/stromanthe-thalia/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/stromanthe-thalia.jpg",
+        "altText": "Stromanthe reference photograph",
+        "credit": "Wendy Cutler",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/stromanthe-thalia/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Presented as the cultivar 'Tricolor'"
+      },
+      "commonNameAliases": [
+        "Tricolor stromanthe",
+        "Stromanthe sanguinea"
+      ]
+    }
+  },
+  {
+    "commonName": "Pinstripe plant",
+    "scientificName": "Goeppertia ornata",
+    "description": "A clump-forming foliage plant with fine pale pink or white lines across dark leaves. Leaves can fold at night, and leaf colour changes as foliage matures.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight or light shade, sheltered from strong sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist with drainage, avoiding both complete drying and a permanently wet pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A rich, airy mix suitable for moisture-loving houseplants.",
+    "humidityInstructions": "Prefers warmth and humid air. Wipe dust gently and avoid wet leaves or cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-ornata/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/goeppertia-ornata.jpg",
+        "altText": "Pinstripe plant reference photograph",
+        "credit": "Renan Andrade",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/goeppertia-ornata/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Goeppertia ornata- Growing in a pot"
+      },
+      "commonNameAliases": [
+        "Pinstripe calathea",
+        "Calathea ornata"
+      ]
+    }
+  },
+  {
+    "commonName": "Blushing philodendron",
+    "scientificName": "Philodendron erubescens",
+    "description": "A tropical climbing philodendron with glossy leaves and reddish colouring on stalks or leaf undersides. Appearance varies between forms and cultivars. Keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give indirect daylight and protect from direct sunlight.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist with good drainage. Avoid waterlogging and water at the base rather than over the leaves.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An organically rich, freely draining potting mix.",
+    "humidityInstructions": "Warm, humid conditions suit it. Provide a pole or trellis for climbing and protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/philodendron-erubescens/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/philodendron-erubescens.jpg",
+        "altText": "Blushing philodendron reference photograph",
+        "credit": "Dinesh Valke",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/philodendron-erubescens/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Philodendron erubescens"
+      },
+      "commonNameAliases": [
+        "Red-leaf philodendron"
+      ]
+    }
+  },
+  {
+    "commonName": "Purple shamrock",
+    "scientificName": "Oxalis triangularis",
+    "description": "A rhizomatous plant with triangular leaflets that close at night. Purple and green forms exist. It can enter a dormant period; keep away from pets because of its oxalates.",
+    "sunlightRequirement": "PartialSun",
+    "sunlightInstructions": "A bright window with some gentle sun or partial shade. Protect from excessive heat.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the surface to dry between waterings. Reduce water during dormancy and wait for new growth before increasing it.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A loamy potting mix with good drainage.",
+    "humidityInstructions": "Keep in a comfortable room and check for a resting period when growth stops. Do not keep dormant rhizomes soaked.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/oxalis-triangularis/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/oxalis-triangularis.jpg",
+        "altText": "Purple shamrock reference photograph",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/oxalis-triangularis/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Oxalis triangularis. Potted plant."
+      },
+      "commonNameAliases": [
+        "False shamrock",
+        "Purple wood sorrel"
+      ]
+    }
+  },
+  {
+    "commonName": "Persian violet",
+    "scientificName": "Exacum affine",
+    "description": "A short-lived flowering plant with glossy leaves and purple-blue flowers with yellow centres. It is often kept as a seasonal potted plant and can be difficult to maintain after flowering.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose filtered daylight or light shade. Avoid direct sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix moist but well drained. Check regularly during flowering and avoid leaving water in the outer pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "An organically rich, well-drained potting mix.",
+    "humidityInstructions": "Keep warm and sheltered from cold drafts. Flowering depends on conditions; do not expect the plant to remain in bloom indefinitely.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/exacum-affine/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/exacum-affine.jpg",
+        "altText": "Persian violet reference photograph",
+        "credit": "Jacinta Lluch Valero",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/exacum-affine/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Flower."
+      },
+      "commonNameAliases": [
+        "Arabian gentian",
+        "German violet"
+      ]
+    }
+  },
+  {
+    "commonName": "Creeping fig",
+    "scientificName": "Ficus pumila",
+    "description": "A vigorous vine with small leaves on juvenile climbing stems. It clings to supports and can mark porous surfaces. The photo shows an outdoor specimen; indoor fruiting is uncommon. Keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight or partial shade, protected from afternoon sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Water regularly during growth with free drainage. Reduce watering from autumn into winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A soil-based, organically rich potting mix with drainage.",
+    "humidityInstructions": "Prefers humid air. Prune to contain growth and use a suitable support rather than letting roots attach to delicate surfaces.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/ficus-pumila.jpg",
+        "altText": "Creeping fig reference photograph",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Ficus pumila "
+      },
+      "commonNameAliases": [
+        "Climbing fig"
+      ]
+    }
+  },
+  {
+    "commonName": "Gardenia",
+    "scientificName": "Gardenia jasminoides",
+    "description": "An evergreen shrub also sold as a flowering potted plant. Creamy-white flowers can be single or double depending on the cultivar. Indoor care can be demanding; keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight or partial shade, sheltered from harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist with good drainage, checking before adding water. Avoid a saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed during active growth using a suitable product label. Reduce or pause feeding when growth slows; add a reminder only if needed.",
+    "soilInstructions": "A rich, acidic, freely draining mix; avoid disturbing the shallow roots unnecessarily.",
+    "humidityInstructions": "Protect from cold drafts and abrupt changes. Watch for whiteflies and remove spent flowers; flowering is not guaranteed indoors.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/gardenia-jasminoides/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/gardenia-jasminoides.jpg",
+        "altText": "Gardenia reference photograph",
+        "credit": "Cathy Dewitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/gardenia-jasminoides/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Flower and Leaves (Wake County, NC)-Summer"
+      },
+      "commonNameAliases": [
+        "Cape jasmine",
+        "Cape jessamine"
+      ]
+    }
   }
 ]

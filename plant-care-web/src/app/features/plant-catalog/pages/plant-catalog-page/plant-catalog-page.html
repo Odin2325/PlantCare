@@ -65,6 +65,13 @@
       </select>
     </div>
     <div class="catalog-field">
+      <label for="plant-growth">Growth references</label>
+      <select id="plant-growth" [ngModel]="growth()" (ngModelChange)="setGrowth($event)">
+        <option value="">All plants</option>
+        <option value="available">With growth photos</option>
+      </select>
+    </div>
+    <div class="catalog-field">
       <label for="plant-sort">Sort by</label>
       <select id="plant-sort" [ngModel]="sort()" (ngModelChange)="setSort($event)">
         <option value="name-asc">Name A–Z</option>
@@ -86,6 +93,9 @@
         [attr.aria-label]="'Compare ' + plant.commonName" aria-describedby="comparison-help"
         (change)="toggleComparison(plant)">Compare</label>
       <app-plant-photo [profile]="plant.catalogProfile" />
+      @if (plant.catalogProfile?.growthReferences?.length) {
+        <p class="growth-badge">Growth photos available</p>
+      }
       <div class="plant-card__heading">
         <div>
           <h2>{{ plant.commonName }}</h2>

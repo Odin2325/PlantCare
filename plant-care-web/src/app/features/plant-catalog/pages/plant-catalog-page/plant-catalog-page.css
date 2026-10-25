@@ -120,13 +120,18 @@ h1 {
   font-weight: 700;
 }
 
-.pet-badge {
+.pet-badge, .growth-badge {
   padding: 0.35rem 0.55rem;
   border-radius: 0.6rem;
   background: #e8f4eb;
   color: #255b35;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.growth-badge {
+  align-self: flex-start;
+  margin: 0 0 0.75rem;
 }
 
 .description {

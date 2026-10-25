@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed).toHaveLength(68);
+  expect(reviewed).toHaveLength(78);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {
@@ -42,7 +42,7 @@ test('catalog light filters combine with search, survive detail navigation and r
   await page.goto('/plants?light=PartialSun&sort=name-desc');
   const cards = page.locator('.plant-card');
   const names = cards.getByRole('heading', { level: 2 });
-  await expect(names).toHaveText(['Jade plant', 'Aloe vera']);
+  await expect(names).toHaveText(['Purple shamrock', 'Jade plant', 'Aloe vera']);
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('PartialSun');
   await expect(page.getByLabel('Sort by', { exact: true })).toHaveValue('name-desc');
   const search = page.getByRole('searchbox', { name: 'Find a plant' });
@@ -141,7 +141,9 @@ test('large houseplant batch has distinct common-name pages, source credits and 
     'Asparagus fern', 'Kentia palm', 'Lady palm', 'Coffee plant', 'Clivia', 'String of pearls',
     'Mexican snowball', 'Zebra haworthia', 'Watermelon peperomia', 'Panda plant',
     'Polka dot plant', 'Purple passion plant', 'Scarlet star', 'Japanese aralia',
-    'Norfolk Island pine', 'Croton', 'English ivy', 'Umbrella sedge', 'Lipstick plant', 'Goldfish plant']) {
+    'Norfolk Island pine', 'Croton', 'English ivy', 'Umbrella sedge', 'Lipstick plant', 'Goldfish plant',
+    'Iron cross begonia', 'Peacock plant', 'Rose-painted calathea', 'Stromanthe', 'Pinstripe plant',
+    'Blushing philodendron', 'Purple shamrock', 'Persian violet', 'Creeping fig', 'Gardenia']) {
     const plant = all.find((p: { commonName: string }) => p.commonName === name);
     expect(plant, `New catalog plant: ${name}`).toBeTruthy();
     await page.goto('/plants/' + plant.id);
@@ -243,6 +245,49 @@ test('flowering additions have identifiable photos, attributed care and seasonal
     }
   }
   await auditAccessibility(page, 'Flowering plant care detail');
+});
+
+test('growth photo discovery combines filters and preserves comparison through details and reload', async ({ page, request }) => {
+  const all = await (await request.get('/api/plant-species')).json();
+  await page.goto('/plants?growth=available');
+  const filter = page.getByLabel('Growth references', { exact: true });
+  const names = page.locator('.plant-card h2');
+  await expect(filter).toHaveValue('available');
+  await expect(names).toHaveText(['Aloe vera', 'Golden pothos', 'Jade plant', 'Moth orchid',
+    'Peace lily', 'Spider plant', 'Swiss cheese plant', 'Wax plant']);
+  await expect(page.locator('.growth-badge')).toHaveCount(8);
+  await page.getByLabel('Cats and dogs', { exact: true }).selectOption('non-toxic');
+  await expect(names).toHaveText(['Spider plant', 'Wax plant']);
+  for (const name of ['Spider plant', 'Wax plant'])
+    await page.getByRole('checkbox', { name: 'Compare ' + name, exact: true }).check();
+  await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Spider');
+  await page.getByLabel('Light requirement', { exact: true }).selectOption('BrightIndirectLight');
+  await expect(names).toHaveText(['Spider plant']);
+  await page.locator('.plant-card').getByRole('link', { name: 'View details', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.reload();
+  await expect(filter).toHaveValue('available');
+  await expect(names).toHaveText(['Spider plant']);
+  await page.getByRole('link', { name: 'Compare selected plants', exact: true }).click();
+  await expect(page.locator('.comparison-card h2')).toHaveText(['Spider plant', 'Wax plant']);
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await expect(filter).toHaveValue('available');
+  await expect(names).toHaveText(['Spider plant']);
+  await page.getByRole('searchbox', { name: 'Find a plant' }).fill('ZZ plant');
+  await expect(page.locator('.plant-card')).toHaveCount(0);
+  await expect(page.getByText('No plants match your search. Try another name or clear the filters.')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await expect(filter).toHaveValue('');
+  await expect(page.locator('.plant-card')).toHaveCount(all.length);
+  await expect(page.getByRole('region', { name: 'Plant comparison selection' })).toContainText('2 of 3');
+  await page.setViewportSize({ width: 320, height: 800 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Growth reference discovery at narrow width');
+  await page.goto('/plants?growth=invalid');
+  await expect(filter).toHaveValue('');
+  await expect(page.locator('.plant-card')).toHaveCount(all.length);
+  await expect(page.getByRole('button', { name: 'Clear filters', exact: true })).toBeDisabled();
 });
 
 test('growth references show selected species features with working photos, sources and mobile reflow', async ({ page, request }) => {

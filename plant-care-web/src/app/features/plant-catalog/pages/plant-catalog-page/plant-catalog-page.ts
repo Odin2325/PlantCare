@@ -37,6 +37,7 @@ export class PlantCatalogPage {
   readonly query = signal('');
   readonly light = signal<SunlightRequirement | ''>('');
   readonly pets = signal<'non-toxic' | 'warning' | ''>('');
+  readonly growth = signal<'available' | ''>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
   readonly comparisonIds = signal<string[]>([]);
   readonly comparisonPlants = computed(() => this.comparisonIds().map(id => this.plantSpecies().find(p => p.id === id))
@@ -53,10 +54,11 @@ export class PlantCatalogPage {
     q: this.query() || null,
     light: this.light() || null,
     pets: this.pets() || null,
+    growth: this.growth() || null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
     compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
-  readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.pets() || this.sort() !== 'name-asc'));
+  readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.pets() || this.growth() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
     // An exact scientific name identifies a species, rather than other plants
@@ -64,6 +66,7 @@ export class PlantCatalogPage {
     const exactScientific = query ? this.plantSpecies().filter(plant => normalizePlantSearch(plant.scientificName ?? '') === query) : [];
     return (exactScientific.length ? exactScientific : this.plantSpecies()).filter(plant =>
       (!this.light() || plant.sunlightRequirement === this.light()) &&
+      (!this.growth() || Boolean(plant.catalogProfile?.growthReferences?.length)) &&
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
         !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
       (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
@@ -81,6 +84,7 @@ export class PlantCatalogPage {
       this.light.set(this.lightOptions.find(option => option.value === light)?.value ?? '');
       const pets = params.get('pets');
       this.pets.set(pets === 'non-toxic' || pets === 'warning' ? pets : '');
+      this.growth.set(params.get('growth') === 'available' ? 'available' : '');
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
       this.comparisonIds.set(parseComparisonIds(params.get('compare')));
     });
@@ -120,7 +124,13 @@ export class PlantCatalogPage {
     this.query.set('');
     this.light.set('');
     this.pets.set('');
+    this.growth.set('');
     this.sort.set('name-asc');
+    this.saveFilters();
+  }
+
+  setGrowth(value: string): void {
+    this.growth.set(value === 'available' ? value : '');
     this.saveFilters();
   }
 
