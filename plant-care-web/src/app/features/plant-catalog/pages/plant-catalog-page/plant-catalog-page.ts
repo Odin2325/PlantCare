@@ -36,7 +36,7 @@ export class PlantCatalogPage {
   readonly plantSpecies = signal<PlantSpecies[]>([]);
   readonly query = signal('');
   readonly light = signal<SunlightRequirement | ''>('');
-  readonly pets = signal<'non-toxic' | 'warning' | ''>('');
+  readonly pets = signal<'non-toxic' | 'warning' | 'unknown' | ''>('');
   readonly growth = signal<'available' | ''>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
   readonly comparisonIds = signal<string[]>([]);
@@ -68,6 +68,7 @@ export class PlantCatalogPage {
       (!this.light() || plant.sunlightRequirement === this.light()) &&
       (!this.growth() || Boolean(plant.catalogProfile?.growthReferences?.length)) &&
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
+        this.pets() === 'unknown' ? !plant.isToxicToPets && !plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl :
         !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
       (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
         ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
@@ -83,7 +84,7 @@ export class PlantCatalogPage {
       const light = params.get('light');
       this.light.set(this.lightOptions.find(option => option.value === light)?.value ?? '');
       const pets = params.get('pets');
-      this.pets.set(pets === 'non-toxic' || pets === 'warning' ? pets : '');
+      this.pets.set(pets === 'non-toxic' || pets === 'warning' || pets === 'unknown' ? pets : '');
       this.growth.set(params.get('growth') === 'available' ? 'available' : '');
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
       this.comparisonIds.set(parseComparisonIds(params.get('compare')));
@@ -116,7 +117,7 @@ export class PlantCatalogPage {
   }
 
   setPets(value: string): void {
-    this.pets.set(value === 'non-toxic' || value === 'warning' ? value : '');
+    this.pets.set(value === 'non-toxic' || value === 'warning' || value === 'unknown' ? value : '');
     this.saveFilters();
   }
 

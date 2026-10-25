@@ -261,7 +261,7 @@
     "isToxicToPets": true,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
-      "reviewedOn": "2026-10-22",
+      "reviewedOn": "2026-10-25",
       "photo": {
         "path": "/images/plants/ficus-elastica.jpg",
         "altText": "Rubber plant reference photo",
@@ -273,6 +273,34 @@
       },
       "commonNameAliases": [
         "Indian rubber plant"
+      ],
+      "growthReferences": [
+        {
+          "title": "Young variegated specimen",
+          "description": "This young potted specimen has patterned leaves. Variegation is a cultivar characteristic, not a stage that every rubber plant will develop. Different examples do not establish an age or size target.",
+          "photo": {
+            "path": "/images/plants/ficus-elastica-young.jpg",
+            "altText": "Young potted rubber plant with cream and green variegated leaves",
+            "credit": "Hope Duckworth",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Young Plant (Cabarrus County,NC)"
+          }
+        },
+        {
+          "title": "Upright potted form",
+          "description": "This separate potted specimen shows the upright habit and broad leaves. Pruning and growing conditions affect its shape; indoor plants need not reach the size of outdoor trees.",
+          "photo": {
+            "path": "/images/plants/ficus-elastica.jpg",
+            "altText": "Rubber plant reference photo",
+            "credit": "Margaret Shear",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
+            "licenseName": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "Houseplant"
+          }
+        }
       ]
     }
   },
@@ -1182,7 +1210,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/",
-      "reviewedOn": "2026-10-24",
+      "reviewedOn": "2026-10-25",
       "commonNameAliases": [
         "Boston sword fern",
         "Bostonfern"
@@ -1196,7 +1224,35 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
         "title": "Form"
       },
-      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/boston-fern"
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/boston-fern",
+      "growthReferences": [
+        {
+          "title": "Spore clusters beneath a frond",
+          "description": "The regular brown dots on this frond underside are spore-producing structures. This reference helps recognize fern features; it does not establish that every mark on your own plant has the same cause.",
+          "photo": {
+            "path": "/images/plants/nephrolepis-exaltata-spores.jpg",
+            "altText": "Underside of a Boston fern frond with regular rows of brown spore clusters",
+            "credit": "Forest and Kim Starr",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/",
+            "licenseName": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+            "title": "Spores"
+          }
+        },
+        {
+          "title": "Arching fronds",
+          "description": "This separate specimen shows the leafy fern form. Frond shape varies among cultivars, and the example is not a timetable or a health assessment for your plant.",
+          "photo": {
+            "path": "/images/plants/nephrolepis-exaltata.jpg",
+            "altText": "Nephrolepis exaltata",
+            "credit": "David Eickhoff",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/",
+            "licenseName": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+            "title": "Form"
+          }
+        }
+      ]
     }
   },
   {
@@ -2974,6 +3030,270 @@
       "commonNameAliases": [
         "Purple queen",
         "Purple spiderwort"
+      ]
+    }
+  },
+  {
+    "commonName": "Ripple peperomia",
+    "scientificName": "Peperomia caperata",
+    "description": "A compact foliage plant with deeply ridged, heart-shaped leaves and slender cream flower spikes. Leaf colours vary between cultivars.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Medium filtered daylight suits this plant. Protect from harsh direct sun and cold drafts.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the mix dry between waterings without leaving it severely dry. Water and drain thoroughly; avoid a constantly wet pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a porous, freely draining indoor potting mix and a pot with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is tolerated. Avoid drafty positions and watch for root rot if the mix stays wet.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-caperata/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/peperomia-caperata.jpg",
+        "altText": "Ripple peperomia reference photograph",
+        "credit": "Jerzy Opioła",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/peperomia-caperata/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Leaves"
+      },
+      "commonNameAliases": [
+        "Emerald ripple peperomia",
+        "Ivy-leaf peperomia"
+      ]
+    }
+  },
+  {
+    "commonName": "Friendship plant",
+    "scientificName": "Pilea involucrata",
+    "description": "A compact, trailing pilea with crinkled leaves and bronze-green colouring. The reference photo shows foliage and tiny flowers; indoor flowering is uncommon.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright indirect daylight, sheltered from harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water moderately during growth and drain well. Reduce watering from autumn through late winter; avoid a saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use an organically rich indoor potting mix with good drainage.",
+    "humidityInstructions": "Prefers a warm, humid room. Pinch stem tips to keep a compact form; stem cuttings can produce new plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/pilea-involucrata/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/pilea-involucrata.jpg",
+        "altText": "Friendship plant reference photograph",
+        "credit": "Abdullhaleems",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pilea-involucrata/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Panamiga"
+      ]
+    }
+  },
+  {
+    "commonName": "Baby's tears",
+    "scientificName": "Soleirolia soleirolii",
+    "description": "A creeping plant with tiny rounded leaves that form a soft-looking mat. It is a flowering plant rather than a moss and can crowd other plants in a terrarium.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight. Direct sunlight can scorch its delicate leaves.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the mix moist with free drainage. Check often in a warm room instead of waiting for the pot to become dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use fertile, moisture-retentive, well-drained mix. A wide, shallow pot suits its spreading habit.",
+    "humidityInstructions": "Prefers high humidity and moderate temperatures. Trim spreading stems to keep it within its container.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/soleirolia-soleirolii/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/soleirolia-soleirolii.jpg",
+        "altText": "Baby's tears reference photograph",
+        "credit": "David J. Stang",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/soleirolia-soleirolii/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Hanging basket"
+      },
+      "commonNameAliases": [
+        "Angel's tears",
+        "Mind-your-own-business"
+      ]
+    }
+  },
+  {
+    "commonName": "Maidenhair fern",
+    "scientificName": "Adiantum raddianum",
+    "description": "A delicate fern with small fan-shaped leaflets on dark, wiry stems. The reference shows an outdoor specimen; it can be grown indoors in humid conditions.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Provide filtered light or partial shade. Avoid full sun and very deep shade.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root area consistently moist. Do not allow the roots to dry out; check conditions frequently while retaining drainage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a moisture-retentive indoor potting mix in a pot with drainage.",
+    "humidityInstructions": "Needs humid air; a bright bathroom or suitable terrarium may help. Protect from drying air and hot radiators.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/adiantum-raddianum/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/adiantum-raddianum.jpg",
+        "altText": "Maidenhair fern reference photograph",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/adiantum-raddianum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Delta maidenhair",
+        "Pacific maidenhair"
+      ]
+    }
+  },
+  {
+    "commonName": "African milk tree",
+    "scientificName": "Euphorbia trigona",
+    "description": "An upright, branching succulent with three-sided stems and sharp spines. It resembles a cactus but is a euphorbia. Its milky sap is toxic and irritating; keep away from pets and children.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight indoors, avoiding an abrupt move into harsh sun.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Water sparingly after the upper 2 to 5 cm of mix feels dry, then drain completely. Avoid overwatering.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a freely draining cactus or succulent mix in a pot with drainage holes.",
+    "humidityInstructions": "Keep warm with air circulation. Wear gloves when handling and avoid sap contact, particularly with eyes; handle the spines carefully.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/euphorbia-trigona/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/euphorbia-trigona.jpg",
+        "altText": "African milk tree reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/euphorbia-trigona/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Euphorbia trigona or African milk tree, houseplant view"
+      },
+      "commonNameAliases": [
+        "African milk bush",
+        "Abyssinian euphorbia"
+      ]
+    }
+  },
+  {
+    "commonName": "Strawberry begonia",
+    "scientificName": "Saxifraga stolonifera",
+    "description": "A saxifrage with white-veined leaves and thin runners that carry plantlets. It is neither a true begonia nor a strawberry. The reference shows an outdoor flowering specimen.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight indoors, protected from intense direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist while letting excess water drain. Check before adding more water and avoid leaving the pot saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use an organically rich, well-drained potting mix.",
+    "humidityInstructions": "Give spreading runners space in a hanging pot. Plantlets can root in soil; indoor flowering is not guaranteed.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/saxifraga-stolonifera/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/saxifraga-stolonifera.jpg",
+        "altText": "Strawberry begonia reference photograph",
+        "credit": "Cathy DeWitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/saxifraga-stolonifera/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form - May 22 - Warren Co., NC"
+      },
+      "commonNameAliases": [
+        "Strawberry geranium",
+        "Creeping saxifrage"
+      ]
+    }
+  },
+  {
+    "commonName": "Lucky bamboo",
+    "scientificName": "Dracaena sanderiana",
+    "description": "A dracaena commonly sold as shaped green canes. It is not true bamboo. The photo shows canes growing in water; this plant can also grow in potting mix. Keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight indoors, sheltered from scorching sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "In potting mix, keep roots moist while avoiding waterlogging. For water-grown plants, use chlorine-free water and replace it weekly rather than only topping it up.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a moist indoor potting mix, or grow in chlorine-free water with suitable support. The two growing methods need different care.",
+    "humidityInstructions": "Keep warm and watch for stem rot. Dry air can brown leaf tips; shaped stems are trained forms, not a natural growth stage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-sanderiana/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/dracaena-sanderiana.jpg",
+        "altText": "Lucky bamboo reference photograph",
+        "credit": "Bernard Ladenthin",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-sanderiana/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Dracaena sanderiana in water."
+      },
+      "commonNameAliases": [
+        "Water bamboo",
+        "Friendship bamboo",
+        "Ribbon plant"
+      ]
+    }
+  },
+  {
+    "commonName": "Gold dust dracaena",
+    "scientificName": "Dracaena surculosa",
+    "description": "A slow-growing dracaena with cream or yellow spots on dark green leaves. Spotting varies by cultivar and light. Keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight. Excessive sun can damage leaves; very low light can reduce the colouring.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist during active growth, with good drainage. Avoid standing water and a continually saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a well-drained indoor potting mix and avoid an oversized container.",
+    "humidityInstructions": "Prefers humid air and protection from drafts. Bring container plants indoors before nights fall below 10 C.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-surculosa/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/dracaena-surculosa.jpg",
+        "altText": "Gold dust dracaena reference photograph",
+        "credit": "Krzysztof Ziarnek",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/dracaena-surculosa/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Spotted dracaena",
+        "Gold dust"
       ]
     }
   }

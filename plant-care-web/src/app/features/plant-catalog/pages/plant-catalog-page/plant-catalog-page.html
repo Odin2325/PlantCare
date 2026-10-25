@@ -62,6 +62,7 @@
         <option value="">All plants</option>
         <option value="non-toxic">Reviewed as non-toxic</option>
         <option value="warning">Toxicity warning</option>
+        <option value="unknown">Assessment unknown</option>
       </select>
     </div>
     <div class="catalog-field">
@@ -113,6 +114,8 @@
         </span>
         } @else if (plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl) {
         <span class="pet-badge">Non-toxic to cats and dogs</span>
+        } @else {
+        <span class="unknown-badge">Pet assessment unknown</span>
         }
       </div>
 

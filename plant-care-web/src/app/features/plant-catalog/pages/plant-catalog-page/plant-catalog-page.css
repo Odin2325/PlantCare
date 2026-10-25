@@ -120,7 +120,7 @@ h1 {
   font-weight: 700;
 }
 
-.pet-badge, .growth-badge {
+.pet-badge, .growth-badge, .unknown-badge {
   padding: 0.35rem 0.55rem;
   border-radius: 0.6rem;
   background: #e8f4eb;
@@ -190,3 +190,5 @@ h1 {
   .details-link:hover {
     background: #2d663e;
   }
+
+.unknown-badge { background: #eef0f3; color: #384252; }
