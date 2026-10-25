@@ -3593,5 +3593,163 @@
         "King sago palm"
       ]
     }
+  },
+  {
+    "commonName": "Grape ivy",
+    "scientificName": "Cissus alata",
+    "description": "A climbing vine with glossy, three-part leaves and grasping tendrils. Grow it on a support or let stems trail from a hanging pot.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright, indirect daylight. Keep it out of harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the surface mix to dry between waterings, then drain thoroughly. Reduce watering in winter; avoid both prolonged dryness and a saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a well-drained indoor potting mix in a container with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is tolerated. Keep away from heating vents and cold drafts; prune trailing growth to suit the space.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/cissus-alata/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/cissus-alata.jpg",
+        "altText": "Grape ivy reference photograph",
+        "credit": "Halava",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cissus-alata/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Cissus rhombifolia"
+      },
+      "commonNameAliases": [
+        "Grape leaf ivy",
+        "Oak leaf ivy"
+      ]
+    }
+  },
+  {
+    "commonName": "Rabbit's foot fern",
+    "scientificName": "Davallia fejeensis",
+    "description": "A fern with finely divided fronds and fuzzy rhizomes that creep over the pot edge. These exposed rhizomes are a normal growth feature.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give indirect daylight, protected from scorching sun.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Keep the mix lightly moist, allowing the top centimetre to dry before watering again. Drain well rather than leaving the pot in water.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a moisture-retentive, well-drained fern mix. Let the creeping rhizomes rest on the surface rather than burying them.",
+    "humidityInstructions": "Prefers humid air, although it tolerates drier rooms better than some ferns. Keep warm and protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/davallia-fejeensis/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/davallia-fejeensis.jpg",
+        "altText": "Rabbit's foot fern reference photograph",
+        "credit": "David J. Stang",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/davallia-fejeensis/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Fijian hare's foot fern",
+        "Lacy paw"
+      ]
+    }
+  },
+  {
+    "commonName": "Flame violet",
+    "scientificName": "Episcia cupreata",
+    "description": "A creeping houseplant with patterned leaves and small tubular flowers. Leaf colours vary by cultivar; the reference photo shows Silver Sheen.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide plentiful bright, indirect daylight. Direct sun can scorch the leaves.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Water the mix moderately to keep it lightly moist during active growth. Reduce watering in winter and avoid wetting the leaves or leaving roots waterlogged.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a freely draining houseplant mix and a pot with drainage holes.",
+    "humidityInstructions": "Needs humid air with good circulation. A suitable terrarium can help maintain humidity; do not rely on spraying the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/episcia-cupreata/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/episcia-cupreata.jpg",
+        "altText": "Flame violet reference photograph",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/episcia-cupreata/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Episcia cupreata 'Silver Sheen'"
+      }
+    }
+  },
+  {
+    "commonName": "False African violet",
+    "scientificName": "Streptocarpus saxorum",
+    "description": "A small trailing plant with soft leaves and violet trumpet-shaped flowers. It is a different species from the familiar rosette-forming African violet.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Choose a bright, sheltered position with filtered light. Avoid harsh midday sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Let the potting mix dry somewhat between waterings, then drain well. Its shallow roots are vulnerable to excessive watering.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a well-drained, organically rich mix in a pot with drainage holes.",
+    "humidityInstructions": "Keep warm with good air circulation and protection from drying drafts. Remove spent flowers and unhealthy foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-saxorum/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/streptocarpus-saxorum.jpg",
+        "altText": "False African violet reference photograph",
+        "credit": "Tatiana Gerus",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-saxorum/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Streptocarpus saxorum. Foliage and flowers."
+      },
+      "commonNameAliases": [
+        "Cape primrose",
+        "Cape violet",
+        "Nodding violet"
+      ]
+    }
+  },
+  {
+    "commonName": "Kangaroo vine",
+    "scientificName": "Cissus antarctica",
+    "description": "A vigorous climbing vine with toothed green leaves. It can trail from a basket or climb a support; pruning helps keep it within an indoor space.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Filtered daylight or partial shade is suitable. Protect it from harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the mix to dry between waterings, then drain thoroughly. Adjust checks to room conditions; both excess water and prolonged dryness can cause leaf loss.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a freely draining indoor potting mix and a pot with drainage holes.",
+    "humidityInstructions": "Keep away from heating vents and drafts. Avoid repeatedly moving an established plant; a cooler room can suit its winter rest.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/cissus-antarctica/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/cissus-antarctica.jpg",
+        "altText": "Kangaroo vine reference photograph",
+        "credit": "Margaret Donald",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cissus-antarctica/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "leaves and vines"
+      }
+    }
   }
 ]

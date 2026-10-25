@@ -91,6 +91,33 @@
   margin-top: 3rem;
 }
 
+.history-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+  margin: 0 0 0.7rem;
+  padding: 1rem;
+  border: 1px solid #bbc9be;
+  border-radius: 0.75rem;
+  min-width: 0;
+}
+.history-filters legend { font-weight: 650; }
+.history-filters label { display: grid; gap: 0.4rem; min-width: 0; }
+.history-filters input, .history-filters select, .history-filters button {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.65rem;
+  border: 1px solid #bbc9be;
+  border-radius: 0.5rem;
+  background: white;
+  color: #285f3a;
+  font: inherit;
+}
+.history-filters button { align-self: end; cursor: pointer; font-weight: 650; }
+.history-filters :focus-visible { outline: 3px solid #285f3a; outline-offset: 2px; }
+
 .history-entry {
   padding: 1.25rem 0;
   border-bottom: 1px solid #dce5de;

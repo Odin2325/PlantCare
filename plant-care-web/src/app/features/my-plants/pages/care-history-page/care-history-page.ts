@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   inject,
   signal,
@@ -59,6 +60,38 @@ export class CareHistoryPage {
 
   readonly history =
     signal<CareEventHistory[]>([]);
+
+  readonly actionFilter = signal('');
+  readonly notesFilter = signal('');
+  readonly completedFrom = signal('');
+  readonly completedThrough = signal('');
+  readonly historyOrder = signal('newest');
+  readonly hasHistoryFilters = computed(() => !!(this.actionFilter() || this.notesFilter() ||
+    this.completedFrom() || this.completedThrough() || this.historyOrder() !== 'newest'));
+  readonly dateRangeError = computed(() => this.completedFrom() && this.completedThrough() &&
+    this.completedFrom() > this.completedThrough() ? 'Choose an end date on or after the start date.' : null);
+  readonly filteredHistory = computed(() => {
+    if (this.dateRangeError()) return [];
+    const query = this.notesFilter().trim().toLocaleLowerCase('en');
+    return this.history().filter(event => {
+      const date = this.toLocalDateTimeValue(event.completedAtUtc).slice(0, 10);
+      return (!this.actionFilter() || event.actionType === this.actionFilter()) &&
+        (!query || (event.notes ?? '').toLocaleLowerCase('en').includes(query)) &&
+        (!this.completedFrom() || date >= this.completedFrom()) &&
+        (!this.completedThrough() || date <= this.completedThrough());
+    }).sort((left, right) => {
+      const difference = Date.parse(left.completedAtUtc) - Date.parse(right.completedAtUtc);
+      return (this.historyOrder() === 'oldest' ? difference : -difference) || left.id.localeCompare(right.id);
+    });
+  });
+
+  clearHistoryFilters(): void {
+    this.actionFilter.set('');
+    this.notesFilter.set('');
+    this.completedFrom.set('');
+    this.completedThrough.set('');
+    this.historyOrder.set('newest');
+  }
 
   readonly isLoading =
     signal(true);
@@ -375,6 +408,7 @@ export class CareHistoryPage {
       history:
         this.myPlantsApi.getCareHistory(
           plantId,
+          100,
         ),
     })
       .pipe(

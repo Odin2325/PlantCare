@@ -20,7 +20,7 @@
     </p>
 
     <h1>
-      {{ plant.nickname }}
+      {{ plant.nickname || plant.speciesCommonName }}
     </h1>
 
     <p>
@@ -117,9 +117,42 @@
     <h2>
       History
     </h2>
+    <p class="field-hint">Showing up to the 100 most recent care entries. Filters apply to these loaded entries; older records remain saved.</p>
+
+    @if (history().length) {
+    <fieldset class="history-filters" [disabled]="editingEventId() !== null || mutatingEventId() !== null">
+      <legend>Find past care</legend>
+      <label>Care action
+        <select aria-label="Filter by care action" [value]="actionFilter()" (change)="actionFilter.set($any($event.target).value)">
+          <option value="">All care actions</option>
+          <option value="Watering">Watering</option><option value="Fertilizing">Fertilizing</option>
+          <option value="Misting">Misting</option><option value="Pruning">Pruning</option>
+          <option value="Repotting">Repotting</option><option value="Unknown">Unknown</option>
+        </select>
+      </label>
+      <label>Search notes
+        <input type="search" maxlength="1000" [value]="notesFilter()" (input)="notesFilter.set($any($event.target).value)">
+      </label>
+      <label>Completed from
+        <input type="date" [value]="completedFrom()" (input)="completedFrom.set($any($event.target).value)" [attr.aria-invalid]="dateRangeError() ? 'true' : null" aria-describedby="history-date-hint">
+      </label>
+      <label>Completed through
+        <input type="date" [value]="completedThrough()" (input)="completedThrough.set($any($event.target).value)" [attr.aria-invalid]="dateRangeError() ? 'true' : null" aria-describedby="history-date-hint">
+      </label>
+      <label>Order
+        <select aria-label="History order" [value]="historyOrder()" (change)="historyOrder.set($any($event.target).value)">
+          <option value="newest">Newest first</option><option value="oldest">Oldest first</option>
+        </select>
+      </label>
+      @if (hasHistoryFilters()) { <button type="button" (click)="clearHistoryFilters()">Clear history filters</button> }
+    </fieldset>
+    <p id="history-date-hint" class="field-hint">Dates include the whole day in your device's time zone. Filtering does not change care entries or reminders. Finish editing before changing filters.</p>
+    @if (dateRangeError(); as message) { <p role="alert" class="form-error">{{ message }}</p> }
+    <p role="status" aria-live="polite">{{ filteredHistory().length }} of {{ history().length }} care entries</p>
+    }
 
     @for (
-    event of history();
+    event of filteredHistory();
     track event.id
     ) {
     <article class="history-entry">
@@ -206,14 +239,19 @@
     </article>
     } @empty {
     <div class="empty-history">
+      @if (history().length) {
+      <h3>No care entries match these filters</h3>
+      <p>Change or clear the filters to see more of your history.</p>
+      } @else {
       <h3>
         No care recorded yet
       </h3>
 
       <p>
-        Watering and fertilizing actions
+        Completed care actions
         will appear here.
       </p>
+      }
     </div>
     }
   </section>

@@ -193,6 +193,18 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await entry.getByRole('button', { name: 'Save changes', exact: true }).click();
     const edited = page.locator('.history-entry').filter({ hasText: 'Edited in the browser' });
     await expect(edited).toBeVisible();
+    await page.getByLabel('Search notes', { exact: true }).fill('EDITED IN THE BROWSER');
+    await expect(page.locator('.history-entry')).toHaveCount(1);
+    await page.getByLabel('Filter by care action', { exact: true }).selectOption('Repotting');
+    await expect(page.getByRole('heading', { name: 'No care entries match these filters', exact: true })).toBeVisible();
+    await page.getByLabel('Filter by care action', { exact: true }).selectOption('Watering');
+    await expect(edited).toBeVisible();
+    await edited.getByRole('button', { name: 'Edit', exact: true }).click();
+    await expect(page.getByLabel('Search notes', { exact: true })).toBeDisabled();
+    await edited.getByRole('button', { name: 'Cancel', exact: true }).click();
+    await page.getByRole('button', { name: 'Clear history filters', exact: true }).click();
+    await expect(page.locator('.history-entry')).toHaveCount(2);
+    await auditAccessibility(page, 'Care history filters');
     page.once('dialog', dialog => dialog.accept());
     await edited.getByRole('button', { name: 'Delete', exact: true }).click();
     await expect(page.locator('.history-entry')).toHaveCount(1);
