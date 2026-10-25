@@ -8,9 +8,10 @@ import { PlantCategory } from '../../models/plant-species.model';
 import { plantCategoryOptions } from '../../shared/plant-categories';
 import { PlantPhoto } from '../../shared/plant-photo/plant-photo';
 import { normalizePlantSearch } from '../../shared/plant-search';
+import { PlantingCalendar } from './planting-calendar';
 
 @Component({
-  selector: 'app-garden-page', standalone: true, imports: [DatePipe, RouterLink, PlantPhoto],
+  selector: 'app-garden-page', standalone: true, imports: [DatePipe, RouterLink, PlantPhoto, PlantingCalendar],
   templateUrl: './garden-page.html', styleUrl: './garden-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

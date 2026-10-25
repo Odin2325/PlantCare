@@ -2098,5 +2098,33 @@
     "bytes": 603128,
     "sourceFileName": "brassica-oleracea-cc_kNUubMt0Etoi.jpeg",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Anethum graveolens",
+    "caption": "Foliage",
+    "credit": "Magnus Brath",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "licenseName": "CC BY 2.0",
+    "slug": "anethum-graveolens",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
+    "path": "/images/plants/anethum-graveolens.jpg",
+    "sha256": "a98c3a7db88905e1465a8a3da51a18144a4b352e3f4c748710278280cc0ad085",
+    "bytes": 296097,
+    "sourceFileName": "Anethum-graveolens-foliage--Magnus-Brath--CC-BY-2.jpg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Coriandrum sativum ",
+    "caption": "Coriandrum sativum ",
+    "credit": "Forest and Kim Starr",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "licenseName": "CC BY 2.0",
+    "slug": "coriandrum-sativum",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
+    "path": "/images/plants/coriandrum-sativum.jpg",
+    "sha256": "53598a28db546ad1faaa1c055d951cbad57e108359137f0763aff85826616531",
+    "bytes": 252099,
+    "sourceFileName": "Coriandrum_sativum--Forest-and-Kim-Starr--CC-BY.jpg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]

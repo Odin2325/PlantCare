@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
 // Keep this synthetic read-only API fixture separate from the real-worker PWA suite.
-test.use({ serviceWorkers: 'block' });
+test.use({ serviceWorkers: 'block', timezoneId: 'America/Los_Angeles' });
 
 test('garden collection groups owned crops, filters and links without writing care data', async ({ page }) => {
   const profile = (categories: string[]) => ({ categories, reviewedOn: '2026-10-25',
@@ -39,6 +39,16 @@ test('garden collection groups owned crops, filters and links without writing ca
   await expect(page.locator('.garden-card h3')).toHaveText(['My fig']);
   await page.getByRole('searchbox', { name: 'Find a garden plant', exact: true }).fill('not-present');
   await expect(page.getByText('No garden plants match these filters.', { exact: false })).toBeVisible();
+  await page.getByRole('button', { name: 'Clear garden filters', exact: true }).click();
+  const calendar = page.getByRole('region', { name: 'Planting calendar', exact: true });
+  await calendar.getByLabel('Go to month', { exact: true }).fill('2027-03');
+  await expect(calendar.getByRole('link', { name: 'Balcony favourite · Planned sowing' })).toHaveAttribute('href', '/my-plants/tomato');
+  await calendar.getByRole('button', { name: 'Next month', exact: true }).click();
+  await expect(calendar.getByRole('status')).toContainText('No planting dates');
+  await calendar.getByLabel('Go to month', { exact: true }).fill('2027-08');
+  await expect(calendar.getByRole('link', { name: 'Balcony favourite · Expected harvest' })).toBeVisible();
+  await page.getByRole('button', { name: 'Trees', exact: true }).click();
+  await expect(calendar.getByRole('status')).toContainText('No planting dates');
   await page.getByRole('button', { name: 'Clear garden filters', exact: true }).click();
   await page.locator('.garden-card').first().getByText('Harvest guidance', { exact: true }).click();
   await expect(page.locator('.garden-card').first()).toContainText('Pick ripe fruit');

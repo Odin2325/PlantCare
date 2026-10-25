@@ -6282,5 +6282,300 @@
       "cultivarName": "Igloo",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Dill",
+    "scientificName": "Anethum graveolens",
+    "description": "An annual kitchen herb with finely divided leaves and yellow flower clusters. Leaves and mature seeds are used differently in cooking.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun; coriander also tolerates light shade. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide outdoor airflow and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Garden dill"
+      ],
+      "growingNotes": "Sow directly in a sunny, sheltered spot with drained soil. Thin seedlings to the seed-label spacing; support taller stems if necessary.",
+      "harvestInstructions": "Snip a few fresh leafy tips without stripping the plant. For seed, collect ripening heads before the seeds scatter.",
+      "photo": {
+        "path": "/images/plants/anethum-graveolens.jpg",
+        "altText": "Dill reference photo",
+        "credit": "Magnus Brath",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Foliage"
+      }
+    }
+  },
+  {
+    "commonName": "Coriander",
+    "scientificName": "Coriandrum sativum",
+    "description": "An annual herb grown for fresh leaves and aromatic seeds. Heat and dry soil can bring flowering forward and shorten the leafy harvest.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun; coriander also tolerates light shade. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide outdoor airflow and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Cilantro",
+        "Chinese parsley"
+      ],
+      "growingNotes": "Use sun or light shade and moist but drained soil. Sow small batches for successive leaf harvests and avoid disturbing young roots.",
+      "harvestInstructions": "Pick small amounts of young leaves regularly. For seed, allow heads to ripen and dry before collecting; do not confuse unidentified wild plants with this crop.",
+      "photo": {
+        "path": "/images/plants/coriandrum-sativum.jpg",
+        "altText": "Coriander reference photo",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Coriandrum sativum "
+      }
+    }
+  },
+  {
+    "commonName": "Dill (Dukat)",
+    "scientificName": "Anethum graveolens 'Dukat'",
+    "description": "A named annual dill cultivar grown for its aromatic foliage and seeds.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun; coriander also tolerates light shade. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide outdoor airflow and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.brookgreen.org/plant-collection/name/anethum-graveolens-dukat",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Use a sunny, sheltered site with drained soil and follow the seed label for spacing. Sow where it will grow to limit root disturbance.",
+      "harvestInstructions": "Snip a few fresh leafy tips without stripping the plant. For seed, collect ripening heads before the seeds scatter.",
+      "photo": {
+        "path": "/images/plants/anethum-graveolens.jpg",
+        "altText": "Dill reference photo; Dukat cultivar not verified",
+        "credit": "Magnus Brath",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Foliage"
+      },
+      "cultivarName": "Dukat",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Coriander (Calypso)",
+    "scientificName": "Coriandrum sativum 'Calypso'",
+    "description": "A coriander cultivar selected for slower bolting and an extended leaf harvest. Heat and drought can still trigger flowering.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun; coriander also tolerates light shade. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide outdoor airflow and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/herbs/coriander/grow-your-own",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Grow in sun or light shade with steady moisture and drainage. Use successive sowings rather than assuming one plant will crop indefinitely.",
+      "harvestInstructions": "Pick small amounts of young leaves regularly. For seed, allow heads to ripen and dry before collecting; do not confuse unidentified wild plants with this crop.",
+      "photo": {
+        "path": "/images/plants/coriandrum-sativum.jpg",
+        "altText": "Coriander reference photo; Calypso cultivar not verified",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Coriandrum sativum "
+      },
+      "cultivarName": "Calypso",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Apple tree (Bramley’s Seedling)",
+    "scientificName": "Malus domestica 'Bramley’s Seedling'",
+    "description": "A vigorous cooking apple cultivar. Tree size depends strongly on the rootstock; it is a triploid and is not a useful pollen donor.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root zone during dry periods while establishing. Check soil and rainfall rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with enough space for the chosen rootstock.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/224215/malus-domestica-bramley/details",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose a rootstock for the space and a sunny, sheltered site. Arrange two compatible flowering apple cultivars for pollination; ask the nursery for a suitable combination.",
+      "harvestInstructions": "Pick mature, sound apples when they detach with a gentle lift. Use as a cooking apple; local weather affects maturity and storage suitability.",
+      "photo": {
+        "path": "/images/plants/malus-domestica.jpg",
+        "altText": "Apple tree reference photo; Bramley’s Seedling cultivar not verified",
+        "credit": "Gzzz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "Bramley’s Seedling",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Pear tree (Concorde)",
+    "scientificName": "Pyrus communis 'Concorde'",
+    "description": "A dessert pear cultivar with relatively compact growth. Final size still depends on rootstock and training.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture and rainfall; water during establishment and prolonged dry periods.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Plant in deep, fertile, well-drained soil with room for the selected tree size.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/pears/grow-your-own",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Provide sun, shelter and drained soil. Choose a suitable rootstock and confirm pollination requirements with the nursery before planting.",
+      "harvestInstructions": "Pick when mature but still firm and finish ripening off the tree, following guidance for the chosen cultivar.",
+      "photo": {
+        "path": "/images/plants/pyrus-communis.jpg",
+        "altText": "Pear tree reference photo; Concorde cultivar not verified",
+        "credit": "Peter O_Connor aka anemoneprojectors",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Fruit"
+      },
+      "cultivarName": "Concorde",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Fig tree (Brunswick)",
+    "scientificName": "Ficus carica 'Brunswick'",
+    "description": "A fig cultivar bearing large green fruit with a purple blush. A warm site helps fruit mature; a second crop is not guaranteed.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check the root zone and water during dry spells, especially while establishing or growing in a pot. Reduce checks during dormancy.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use organically rich, moist but well-drained soil; containers need drainage.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/62891/ficus-carica-brunswick-f/details",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Use a sunny sheltered wall or suitable container and protect against severe local cold. Sap can irritate skin, especially with sunlight; use gloves when pruning.",
+      "harvestInstructions": "Pick soft, ripe fruit. Protect skin from sap and keep foliage away from pets.",
+      "photo": {
+        "path": "/images/plants/ficus-carica.jpg",
+        "altText": "Fig tree reference photo; Brunswick cultivar not verified",
+        "credit": "Juan Emilio Prades Bel",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "cultivarName": "Brunswick",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Plum tree (Opal)",
+    "scientificName": "Prunus domestica 'Opal'",
+    "description": "A self-fertile dessert plum cultivar with reddish-purple skin and yellow flesh. Fruit set can still be affected by blossom frost.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check the root zone and water during establishment or dry spells, avoiding saturated soil.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moist but well-drained soil and space for the mature tree.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/plums/grow-your-own",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose sun, shelter and fertile drained soil. Select a rootstock for available space, thin overloaded branches and prune at the appropriate growing-season stage.",
+      "harvestInstructions": "Pick ripe, sound fruits. Remove stones before eating or processing; do not chew the stones.",
+      "photo": {
+        "path": "/images/plants/prunus-domestica.jpg",
+        "altText": "Plum tree reference photo; Opal cultivar not verified",
+        "credit": "Vladimir",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Unripe fruit and stem"
+      },
+      "cultivarName": "Opal",
+      "photoIsSpeciesReference": true
+    }
   }
 ]

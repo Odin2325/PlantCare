@@ -17,6 +17,7 @@
     <div class="search"><label for="garden-plan-filter">Planting plan</label><select id="garden-plan-filter" [value]="planFilter()" (change)="planFilter.set($any($event.target).value)"><option value="">All garden plants</option><option value="planned">With plan dates</option><option value="unplanned">No plan dates</option></select></div>
     @if (query() || category() || planFilter()) { <button type="button" (click)="clearFilters()">Clear garden filters</button> }
     <p role="status" aria-live="polite">{{ visiblePlants().length }} of {{ gardenPlants().length }} garden plants</p>
+    <app-planting-calendar [plants]="visiblePlants()" />
     @for (location of locations(); track location.name) {
       <section class="location" [attr.aria-label]="location.name"><h2>{{ location.name }}</h2><div class="garden-grid">
         @for (plant of location.plants; track plant.id) {

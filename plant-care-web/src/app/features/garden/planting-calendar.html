@@ -1,0 +1,19 @@
+<section aria-labelledby="planting-calendar-heading" class="planting-calendar">
+  <h2 id="planting-calendar-heading">Planting calendar</h2>
+  <p>Your saved target dates for the garden plants matching the filters above. These are plans, not completed work or care reminders. Open a plant to edit its dates.</p>
+  <div class="month-controls">
+    <button type="button" (click)="moveMonth(-1)" [disabled]="month() === '0001-01'">Previous month</button>
+    <button type="button" (click)="goToCurrentMonth()">This month</button>
+    <button type="button" (click)="moveMonth(1)" [disabled]="month() === '9999-12'">Next month</button>
+    <div><label for="planting-calendar-month">Go to month</label><input id="planting-calendar-month" type="month" min="0001-01" max="9999-12" [value]="month()" (input)="setMonth($any($event.target).value)"></div>
+  </div>
+  <h3 aria-live="polite">{{ monthTitle() }}</h3>
+  @for (day of days(); track day.date) {
+    <section class="plan-day" [attr.aria-label]="day.label">
+      <h4><time [attr.datetime]="day.date">{{ day.label }}</time></h4>
+      <ul>@for (event of day.events; track event.plantId + event.field) {
+        <li><a [routerLink]="['/my-plants', event.plantId]">{{ event.name }} · {{ event.action }}</a></li>
+      }</ul>
+    </section>
+  } @empty { <p role="status">No planting dates in this month for the current filters. Choose another month or add dates on a plant’s detail page.</p> }
+</section>
