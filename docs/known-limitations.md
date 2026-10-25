@@ -1,11 +1,11 @@
 # Current limitations
 
-Reviewed 2026-10-24. These describe the staging beta, not a released v1.
+Reviewed 2026-10-25. These describe the staging beta, not a released v1.
 
 | Area | Current status |
 | --- | --- |
-| Catalog | 68 reviewed English entries are deployed on staging, with 112 alternative names across 56 entries; see release/growth-reference-expansion.md for verification. This is a curated selection, not a complete botanical database. Common names are not unique species identifiers. The legacy demo remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
-| Images | All 68 reviewed dataset entries have local licensed photos with visible credits. Monstera, spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily and wax plant have sixteen curated growth-feature examples of different specimens, without timelines or diagnosis. Personal photo journals are not implemented. |
+| Catalog | 78 reviewed English entries are deployed on staging, with 128 alternative names across 65 entries; see release/growth-photo-discovery.md for verification. This is a curated selection, not a complete botanical database. The Growth references filter finds the eight species with galleries and combines with the other filters. Common names are not unique species identifiers. The legacy demo remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
+| Images | All 78 reviewed dataset entries have local licensed photos with visible credits. Monstera, spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily and wax plant have sixteen curated growth-feature examples of different specimens, without timelines or diagnosis. Personal photo journals are not implemented. |
 | Pet classification | The non-toxic cat-and-dog filter requires an explicit reviewed source and currently covers thirteen entries. Missing warnings are not proof of safety. Other animals are outside this classification; plant material can still cause stomach upset if eaten. |
 | Comparison | Up to three public catalog plants, with selection in the URL. It compares curated guidance without assessing a user's room or diagnosing a plant. It does not share personal collection data or store a server-side wishlist. |
 | Snoozing | Current reminders support elapsed delays of 1 hour, 24 hours or 3 days. Care remains due until completed; snoozing does not write history or reschedule care. Saved state, SQL worker behavior and live forms are verified; delayed follow-up delivery on an installed physical phone remains open. |

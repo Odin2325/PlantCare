@@ -1,5 +1,11 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-25: [growth-photo discovery and ten additions](growth-photo-discovery.md)
+are deployed: 78 reviewed entries, 128 aliases across 65 entries and 87 licensed
+original photos. The new combined gallery filter finds the existing sixteen
+references across eight species. Thirteen sourced cat-and-dog classifications
+remain; no missing warning is treated as proof of safety.
+
 Follow-up 2026-10-24: [ten plants and expanded growth references](growth-reference-expansion.md)
 are deployed: 68 reviewed entries, 112 aliases across 56 entries, thirteen sourced
 cat-and-dog classifications and 77 original photo files. Sixteen growth references
@@ -47,7 +53,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-All 68 reviewed entries have local licensed photos on catalog and personal plant
+All 78 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep

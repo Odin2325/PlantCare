@@ -3,7 +3,7 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 68 real
+data while the launch requirements remain open. The reviewed catalog dataset includes 78 real
 houseplants with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
@@ -12,6 +12,12 @@ Reviewed as non-toxic includes only plants with a linked cat-and-dog classificat
 reference, rather than every plant without a warning. Open details to see the
 reference. Non-toxic plants can still cause stomach upset if eaten. Clear filters
 restores the full catalog.
+
+Choose Growth references → With growth photos to find species with example
+photographs. Their cards show Growth photos available; open View details for the
+gallery and credits. This filter combines with the others and remains through
+comparison, details and reload. Clear filters resets it while keeping comparison
+selections. The photographs are reference examples, without a fixed growth timeline.
 
 ## Your first plant
 
@@ -49,7 +55,7 @@ spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily and 
 plant details also include Growth references with credited example photos.
 These show different specimens, not a fixed growth timeline or a health diagnosis.
 
-The catalog has 112 alternative names across 56 entries. Try Devils ivy or
+The catalog has 128 alternative names across 65 entries. Try Devils ivy or
 mother in laws tongue; matching ignores apostrophe and hyphen variations. Species
 details list Also known as. A shared name such as Ribbon plant can return several
 different species, so compare the photos and scientific names before choosing.

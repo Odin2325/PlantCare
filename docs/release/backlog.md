@@ -25,6 +25,18 @@ release unless the related optional feature is disabled.
 
 ## Local checks performed
 
+### Growth-photo discovery and ten houseplants (2026-10-25)
+
+- Deployed a combined Growth references filter with URL/detail/comparison/reload
+  persistence, clear-filter semantics and card labels for available galleries.
+- Expanded to 78 English plants, 128 aliases across 65 entries and 87 original
+  licensed photos, preserving all previous care/profile fields and the thirteen
+  existing sourced cat-and-dog classifications.
+- Exact CI, 48 local/CI browser cases, 30 live catalog cases, all image hashes,
+  real frontend update with personal data intact, isolated recovery and fresh
+  backups passed; see [growth-photo-discovery.md](growth-photo-discovery.md).
+
+
 ### Expanded growth galleries and ten houseplants (2026-10-24)
 
 - Deployed 68 reviewed English plants, 112 aliases across 56 entries, thirteen

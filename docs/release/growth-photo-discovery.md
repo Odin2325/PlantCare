@@ -57,4 +57,36 @@ malformed URL fallback, comparison preservation, gallery navigation, keyboard
 labels, sampled accessibility and 320px reflow. Public acceptance must verify all
 69 previous API records, all 87 photo hashes, a real frontend update preserving
 the approved synthetic account's plants/history, and backup/recovery/health gates.
-Final candidate and deployment results will be recorded after those checks pass.
+Final deployment acceptance follows below.
+
+
+## Staging acceptance
+
+Candidate `259dddd60c18c2b2a63efc5d3c22a32a6dacf8b6` is deployed after
+[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40185988745).
+All 171 backend tests, 38 frontend tests, production builds and 87-image integrity
+checks passed. All 48 local/CI browser cases passed, including the new combined
+filter/navigation case. An initial browser fixture used bright light for Spider
+plant; it was corrected to the existing reviewed medium-light setting. The plant's
+care guidance was preserved. The calendar stylesheet's existing budget warning
+remains non-blocking.
+
+All 30 public catalog/discovery/comparison cases passed across desktop/mobile
+Chromium and Firefox, including sampled accessibility and 320px reflow. Desktop
+and phone filter layouts were visually reviewed. Every one of the 69 previous
+public catalog records is unchanged, including IDs, care and gallery metadata.
+All 78 reviewed profiles and 87 served photo hashes match committed content.
+
+A real service-worker-controlled staging session held across activation accepted
+Update now, loaded the new frontend and filter, retained login, personal plant IDs
+and completed calendar history, retained offline care-action icons and logged out
+correctly. This is automated browser evidence, without a new physical-phone check.
+Existing delivered reminders are unchanged; no extra external email/push was sent.
+
+Fresh encrypted off-server VPS backups passed before and after activation. The
+candidate passed isolated application recovery, sign-in/history, worker restart
+and deduplication, and failed-activation recovery. Bundle checksums, image pins,
+compatible protocols, restricted runtime grants and trusted HTTPS readiness and
+operations passed. Both backup health checks finished healthy with no problem
+codes; both existing scheduled tasks were enabled with successful results.
+The final VPS snapshot identifies this candidate. No v1 tag or apex cutover is made.
