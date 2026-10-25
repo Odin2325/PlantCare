@@ -1,7 +1,6 @@
 # Personal planting plans and kitchen-garden additions
 
-Prepared 2026-10-25; deployment acceptance pending. The current staging runtime
-is still `6171a92921429f65d759a382806357cce21b2798` with 152 reviewed entries.
+Accepted on staging 2026-10-25 as `e075dae96b06d75911e6b9207612c44e0b34d215`, with [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/40226127753). No production cutover or release tag.
 
 ## Behavior
 
@@ -38,7 +37,7 @@ older historical runtimes skip only that new capability probe.
 
 Twelve additions bring the catalog to **164 entries**, including **28 cultivars**,
 **57 harvest guides**, **250 aliases across 125 entries** and **150 licensed photo
-originals**. All previous 152 catalog records are byte-for-value unchanged.
+originals**. All previous 152 catalog records are unchanged.
 
 New general entries: Parsley, Chives, Rosemary, Thyme, Spearmint, Kohlrabi, Kale
 and Cauliflower. New cultivars: Parsley (Moss Curled), Kohlrabi (Kolibri), Kale
@@ -51,6 +50,7 @@ eight roots/tubers and eight herbs. Existing growth references and sourced
 non-toxic assessments remain unchanged. Absence of a warning remains unknown.
 
 Care and photo references:
+
 - [Parsley](https://plants.ces.ncsu.edu/plants/petroselinum-crispum/),
   [Chives](https://plants.ces.ncsu.edu/plants/allium-schoenoprasum/),
   [Rosemary](https://plants.ces.ncsu.edu/plants/salvia-rosmarinus/),
@@ -70,21 +70,38 @@ and recorded with original titles, credits, permanent source URLs, licenses and
 SHA-256 hashes. Growing guidance uses local conditions and seed/nursery labels,
 not fixed German planting months or guaranteed maturity dates.
 
-## Verification so far
+## Deployment acceptance
 
-31 focused backend tests passed: plant domain rules, owner/antiforgery boundaries,
-private exports and catalog imports. Ten affected frontend tests passed. The 12
-catalog browser cases passed; the three affected Garden cases passed on rerun
-after fixing an explicit filter label. One real desktop Chromium journey passed
-including plan persistence, clearing, unchanged care, export and deletion. Layout
-previews passed at desktop and phone sizes, including date-only values in another
-time zone. Photo integrity checks passed for all 150 originals; five CI-selection
-tests passed.
+- Full exact-candidate CI selected `full`: 182 backend tests, 58 frontend tests,
+  retention safety, SQL runtime grants, real-cookie account isolation, password
+  resets/session security, push failures/retries and all 60 browser/PWA cases passed.
+  The existing browser journey now includes planting-plan save/reload/clear and
+  unchanged care. No local full-suite rerun was added.
+- Focused local validation: 31 backend and ten frontend tests, catalog imports,
+  five CI-policy checks, all 150 photo hashes, 12 catalog cases, three Garden cases
+  after fixing the filter label, and one real authenticated desktop journey.
+  Desktop/phone previews and a second-time-zone date-only check passed.
+- Pre-deployment encrypted VPS backup and isolated recovery passed. The new
+  migration was applied to the restored copy; plan dates survived save/reload and
+  rejected API activation recovery, with care history, session and keys intact.
+  Source data was not modified by that drill. Replacement-host recovery is still
+  outside this acceptance.
+- Guarded activation checked bundle/image pins, compatible erasure/snooze
+  protocols, restricted runtime access, migration and trusted HTTPS health.
+- Public focused browser checks: 15 passed across desktop/mobile Chromium and
+  Firefox. All 153 previous public records were exactly preserved, all 164 expected
+  profiles matched, and all 150 photo hashes passed.
+- A held existing-worker session accepted Update now and preserved sign-in, active
+  plant IDs and completed history. Logout passed.
+- The approved test account added one future-only care fixture. Live date saving,
+  reload, clearing, Garden planned/unplanned filtering and private password-protected
+  export passed; acquisition and care stayed unchanged. Only that fixture was
+  archived, retaining its plan under the normal policy. Original collection/history
+  remained intact. No external test mail or push was sent.
+- Post-deployment encrypted backup, default local/VPS backup checks and both
+  scheduled task states were healthy. No schedules or thresholds were changed.
 
-This increment requires full exact-candidate CI because it adds a migration and a
-private write endpoint. Before deployment: export a pinned bundle, take an
-encrypted pre-backup, run isolated recovery against that bundle, hold a real PWA
-session, then activate with runtime/grant/protocol/health guards. Afterwards verify
-public catalog/profile/photo preservation, the held update, a future-only planting
-fixture in the approved test account, a post-backup and default backup/task health.
-No production cutover, release tag, paid service or extra notification is included.
+Routine catalog-only work keeps the faster path already accepted in the Garden
+increment. This migration/private-write feature correctly required full validation.
+A next increment can display saved target dates in a planning calendar or add
+explicit harvest records; neither behavior is implied by these date fields.

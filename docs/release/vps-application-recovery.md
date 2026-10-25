@@ -102,3 +102,12 @@ The final drill resets only the snapshot's copied account and validates its new
 cookie across API replacement. The original saved password file and live account
 are preserved. Real OAuth/provider recovery and email/push delivery remain untested
 from restored configuration. This drill also does not establish VPS capacity.
+
+## Planting-plan migration follow-up
+
+The [planting-plan candidate](planting-plan.md) passed an additional isolated
+restore on 2026-10-25. Its nullable date columns were migrated into the restored
+copy; authenticated save/reload and preservation after rejected API activation
+passed without changing care history. The capability probe remains optional for
+older runtimes. Live source data was unchanged; replacement-host and independent
+erasure-authority limits above remain open.
