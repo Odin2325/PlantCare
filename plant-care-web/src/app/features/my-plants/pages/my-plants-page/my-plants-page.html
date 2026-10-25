@@ -78,6 +78,15 @@
       </select>
     </label>
     <label>
+      Care status
+      <select [value]="careStatusFilter()" (change)="setCareStatusFilter($any($event.target).value)" aria-describedby="collection-care-help">
+        <option value="">All care statuses</option>
+        <option value="needs-care">Needs care</option>
+        <option value="upcoming">Upcoming care only</option>
+        <option value="undated">No active due dates</option>
+      </select>
+    </label>
+    <label>
       Sort
       <select [value]="sortBy()" (change)="setSortBy($any($event.target).value)">
         <option value="nickname">Name A–Z</option>
@@ -86,7 +95,10 @@
         <option value="acquired">Recently acquired</option>
       </select>
     </label>
+    <button type="button" [disabled]="!hasFilters()" (click)="clearFilters()">Clear collection filters</button>
   </section>
+  <p id="collection-care-help">Needs care includes overdue or due-today schedules, based on the dates shown on this device. Paused schedules do not count.</p>
+  <p role="status">{{ filteredPlants().length }} of {{ userPlants().length }} active plants</p>
   }
 
   @if (userPlants().length === 0) {

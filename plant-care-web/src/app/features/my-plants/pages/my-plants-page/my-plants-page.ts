@@ -16,7 +16,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { normalizePlantSearch } from '../../../../shared/plant-search';
-import { finalize } from 'rxjs';
+import { finalize, interval } from 'rxjs';
 
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { MyPlantsApiService } from '../../data-access/my-plants-api.service';
@@ -31,6 +31,8 @@ type CareScheduleStatus =
   | 'upcoming'
   | 'due-today'
   | 'overdue';
+
+type CollectionCareStatus = 'needs-care' | 'upcoming' | 'undated';
 
 type CollectionSort = 'nickname' | 'newest' | 'acquired' | 'next-care';
 
@@ -70,6 +72,10 @@ export class MyPlantsPage {
   readonly locationFilter = signal('');
   readonly tagFilter = signal('');
   readonly sortBy = signal<CollectionSort>('nickname');
+  readonly careStatusFilter = signal<CollectionCareStatus | ''>('');
+  private readonly currentTime = signal(new Date());
+  readonly hasFilters = computed(() => Boolean(this.searchTerm() || this.locationFilter() ||
+    this.tagFilter() || this.careStatusFilter() || this.sortBy() !== 'nickname'));
 
   readonly locations = computed(() =>
     [...new Set(this.userPlants()
@@ -100,7 +106,8 @@ export class MyPlantsPage {
 
       return (!query || normalizePlantSearch(searchable).includes(query)) &&
         (!location || plant.location === location) &&
-        (!tag || plant.tags.includes(tag));
+        (!tag || plant.tags.includes(tag)) &&
+        (!this.careStatusFilter() || this.getPlantCareStatus(plant) === this.careStatusFilter());
     });
 
     return [...plants].sort((left, right) => {
@@ -170,6 +177,8 @@ export class MyPlantsPage {
     signal<string | null>(null);
 
   constructor() {
+    interval(60_000).pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.currentTime.set(new Date()));
     this.loadPlants();
   }
 
@@ -177,6 +186,21 @@ export class MyPlantsPage {
   setLocationFilter(value: string): void { this.locationFilter.set(value); }
   setTagFilter(value: string): void { this.tagFilter.set(value); }
   setSortBy(value: string): void { this.sortBy.set(value as CollectionSort); }
+
+  setCareStatusFilter(value: string): void {
+    this.careStatusFilter.set(value === 'needs-care' || value === 'upcoming' || value === 'undated' ? value : '');
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set(''); this.locationFilter.set(''); this.tagFilter.set('');
+    this.careStatusFilter.set(''); this.sortBy.set('nickname');
+  }
+
+  getPlantCareStatus(plant: UserPlant): CollectionCareStatus {
+    const statuses = plant.careSchedules.map(schedule => this.getCareStatus(schedule));
+    if (statuses.some(status => status === 'overdue' || status === 'due-today')) return 'needs-care';
+    return statuses.includes('upcoming') ? 'upcoming' : 'undated';
+  }
 
   getTagDraft(plant: UserPlant): string {
     return this.tagDrafts()[plant.id] ?? plant.tags.join(', ');
@@ -620,7 +644,7 @@ export class MyPlantsPage {
 
     const today =
       this.getLocalCalendarDayNumber(
-        new Date(),
+        this.currentTime(),
       );
 
     const dueDay =
@@ -659,7 +683,7 @@ export class MyPlantsPage {
 
     const today =
       this.getLocalCalendarDayNumber(
-        new Date(),
+        this.currentTime(),
       );
 
     const dueDay =

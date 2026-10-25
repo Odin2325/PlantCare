@@ -3296,5 +3296,302 @@
         "Gold dust"
       ]
     }
+  },
+  {
+    "commonName": "Crown of thorns",
+    "scientificName": "Euphorbia milii",
+    "description": "A prickly succulent shrub with small flowers surrounded by colourful bracts. Its sap is irritating and its spines are sharp; keep away from pets and children.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "A sunny indoor position suits this plant. Introduce stronger light gradually.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Let the mix dry between waterings and drain thoroughly. Avoid cold, wet soil, especially when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a freely draining soil-based mix in a pot with drainage holes.",
+    "humidityInstructions": "Keep warm and handle carefully with gloves to avoid the spines and sap. Protect eyes and skin from sap contact.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/euphorbia-milii/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/euphorbia-milii.jpg",
+        "altText": "Crown of thorns reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/euphorbia-milii/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Euphorbia milii, Crown-of-thorns, houseplant view"
+      },
+      "commonNameAliases": [
+        "Christ plant",
+        "Christ thorn"
+      ]
+    }
+  },
+  {
+    "commonName": "Desert rose",
+    "scientificName": "Adenium obesum",
+    "description": "A succulent shrub with a swollen stem base and showy flowers. The reference shows a large potted specimen; indoor size and flowering vary. Its milky sap is poisonous; keep away from pets.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give a sunny position, introducing strong light gradually.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Let the mix dry between waterings. Water during active growth and reduce watering during dormancy; never leave the pot saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a cactus or succulent mix in a pot with several drainage holes.",
+    "humidityInstructions": "Keep warm and protect from cold. Handle the plant carefully and avoid contact with its milky sap.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/adenium-obesum/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/adenium-obesum.jpg",
+        "altText": "Desert rose reference photograph",
+        "credit": "Daderot",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/adenium-obesum/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Form in a pot"
+      },
+      "commonNameAliases": [
+        "Desert azalea",
+        "Impala lily"
+      ]
+    }
+  },
+  {
+    "commonName": "Silver jade",
+    "scientificName": "Crassula arborescens",
+    "description": "A shrubby succulent with rounded blue-grey leaves and reddish edges. It is distinct from the green-leaved jade plant, Crassula ovata. The reference is a leaf detail. Keep away from pets.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Full sun to light shade; introduce stronger indoor sun gradually.",
+    "defaultWateringIntervalDays": 14,
+    "wateringInstructions": "Allow the mix to dry between waterings and drain well. Avoid overwatering and reduce watering when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a freely draining cactus or succulent mix and a pot with drainage holes.",
+    "humidityInstructions": "Avoid a constantly damp pot. Watch for mealybugs; flowering is uncommon indoors.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-arborescens/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/crassula-arborescens.jpg",
+        "altText": "Silver jade reference photograph",
+        "credit": "Asan'ny tena",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/crassula-arborescens/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Leaves"
+      },
+      "commonNameAliases": [
+        "Silver dollar jade",
+        "Chinese jade"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweetheart hoya",
+    "scientificName": "Hoya kerrii",
+    "description": "A climbing hoya with thick heart-shaped leaves. A single rooted leaf may not develop into a vine unless the cutting includes suitable stem tissue. The photo shows a vining specimen.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give filtered daylight, sheltered from harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Use room-temperature water, allowing the mix to dry somewhat between thorough waterings. Drain well and avoid a persistently wet pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use an airy, freely draining mix in a container with drainage holes.",
+    "humidityInstructions": "Prefers warm, humid conditions. Provide a support or hanging pot; bare twining stems can later carry leaves and flowers.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/hoya-kerrii/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/hoya-kerrii.jpg",
+        "altText": "Sweetheart hoya reference photograph",
+        "credit": "Kate Ter Haar",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/hoya-kerrii/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Potted plant."
+      },
+      "commonNameAliases": [
+        "Lucky heart plant",
+        "Valentine hoya"
+      ]
+    }
+  },
+  {
+    "commonName": "Jewel orchid",
+    "scientificName": "Ludisia discolor",
+    "description": "A terrestrial orchid grown for its patterned leaves as well as small white flowers. It grows along creeping stems rather than attaching itself to a tree like many other orchids.",
+    "sunlightRequirement": "MediumIndirectLight",
+    "sunlightInstructions": "Moderate filtered daylight or shade, avoiding harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist with good drainage. Water consistently with tepid water, without leaving roots or stems in wet soil.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a moisture-retentive, well-drained mix suitable for terrestrial orchids in a wide, shallow pot.",
+    "humidityInstructions": "Prefers warm, humid air with good circulation. Avoid waterlogged mix, which can rot roots and stems.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/ludisia-discolor/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/ludisia-discolor.jpg",
+        "altText": "Jewel orchid reference photograph",
+        "credit": "Maja Dumat",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ludisia-discolor/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Habit."
+      },
+      "commonNameAliases": [
+        "Golden lace orchid",
+        "Tiger orchid"
+      ]
+    }
+  },
+  {
+    "commonName": "Dragon-tail plant",
+    "scientificName": "Epipremnum pinnatum",
+    "description": "A climbing aroid whose leaves can become deeply divided as it develops. The photo shows the Albo form; Cebu Blue is another cultivar. Leaf colour and splitting vary. Keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight in a warm position, protected from cold drafts.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist while allowing excess water to drain. Check before watering again and avoid a saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use an organically rich, well-drained indoor mix with drainage holes.",
+    "humidityInstructions": "Prefers moderate humidity. Give climbing stems a suitable support and prune to keep the plant within its space.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-pinnatum/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/epipremnum-pinnatum.jpg",
+        "altText": "Dragon-tail plant reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-pinnatum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Epipremnum pinnatum 'Albo' houseplant view with young leaves"
+      },
+      "commonNameAliases": [
+        "Centipede tongavine",
+        "Taro vine"
+      ]
+    }
+  },
+  {
+    "commonName": "Tree philodendron",
+    "scientificName": "Philodendron bipinnatifidum",
+    "description": "A large foliage plant with deeply lobed leaves, also known as Thaumatophyllum bipinnatifidum. The reference shows Selloum. Allow room for spreading leaves; keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight; protect from scorching full sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Keep the mix moist with good drainage. Avoid both prolonged drought and a constantly saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use an organically rich, well-drained indoor mix and a stable pot with drainage.",
+    "humidityInstructions": "Prefers moderate humidity and warmth. It can outgrow small rooms; foliage shape varies with growing conditions.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/philodendron-bipinnatifidum/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/philodendron-bipinnatifidum.jpg",
+        "altText": "Tree philodendron reference photograph",
+        "credit": "Cindy Christian",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/philodendron-bipinnatifidum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Philodendron bipinnatifidum 'Selloum' houseplant view"
+      },
+      "commonNameAliases": [
+        "Lacy tree philodendron",
+        "Horsehead philodendron"
+      ]
+    }
+  },
+  {
+    "commonName": "Ti plant",
+    "scientificName": "Cordyline fruticosa",
+    "description": "A tropical foliage shrub with leaves that may be green, pink, purple or red depending on the cultivar. The reference shows patterned foliage. Keep away from pets.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight helps maintain the leaf colours.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water regularly, allowing the mix to dry slightly between waterings. Reduce watering from late autumn through winter and avoid a soggy pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained indoor potting mix.",
+    "humidityInstructions": "Prefers warm, humid air and protection from drafts. Avoid cold conditions and wear gloves if handling sap.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/cordyline-fruticosa/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/cordyline-fruticosa.jpg",
+        "altText": "Ti plant reference photograph",
+        "credit": "Megan Hansen",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cordyline-fruticosa/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "leaves"
+      },
+      "commonNameAliases": [
+        "Hawaiian ti plant",
+        "Hawaiian good luck plant"
+      ]
+    }
+  },
+  {
+    "commonName": "Sago palm",
+    "scientificName": "Cycas revoluta",
+    "description": "A slow-growing cycad with stiff, palm-like fronds, rather than a true palm. The reference shows spiny lower leaflets. All parts are highly poisonous, especially seeds; keep away from pets and children.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright filtered daylight indoors, protected from harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Maintain moisture with excellent drainage, checking before watering. Avoid overwatering and do not leave the roots in a saturated pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a well-drained, sandy or loamy mix in a pot with drainage holes.",
+    "humidityInstructions": "Protect from frost and handle the spiny foliage carefully. Indoor plants rarely produce cones, and the photo is not a mature-size or growth-timeline target.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/cycas-revoluta/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/cycas-revoluta.jpg",
+        "altText": "Sago palm reference photograph",
+        "credit": "Tom Glasgow",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cycas-revoluta/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Lower leaflets are often spine like in the Cycadaceae family."
+      },
+      "commonNameAliases": [
+        "Japanese sago palm",
+        "King sago palm"
+      ]
+    }
   }
 ]

@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed).toHaveLength(91);
+  expect(reviewed).toHaveLength(100);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {
@@ -146,7 +146,9 @@ test('large houseplant batch has distinct common-name pages, source credits and 
     'Blushing philodendron', 'Purple shamrock', 'Persian violet', 'Creeping fig', 'Gardenia',
     'Air plant', 'Staghorn fern', 'Mistletoe cactus', 'Aluminum plant', 'Purple heart',
     'Ripple peperomia', 'Friendship plant', "Baby's tears", 'Maidenhair fern', 'African milk tree',
-    'Strawberry begonia', 'Lucky bamboo', 'Gold dust dracaena']) {
+    'Strawberry begonia', 'Lucky bamboo', 'Gold dust dracaena',
+    'Crown of thorns', 'Desert rose', 'Silver jade', 'Sweetheart hoya', 'Jewel orchid',
+    'Dragon-tail plant', 'Tree philodendron', 'Ti plant', 'Sago palm']) {
     const plant = all.find((p: { commonName: string }) => p.commonName === name);
     expect(plant, `New catalog plant: ${name}`).toBeTruthy();
     await page.goto('/plants/' + plant.id);

@@ -132,6 +132,14 @@ test('register, confirm, care for a plant, recover password and log out', async 
   });
 
   await step('Overdue dashboard completion, history and calendar', page, async () => {
+    await page.getByLabel('Care status', { exact: true }).selectOption('needs-care');
+    await expect(page.locator('.plant-grid > .plant-card h2')).toHaveText([nickname]);
+    await page.getByRole('searchbox', { name: 'Search', exact: true }).fill(nickname);
+    await page.getByLabel('Location', { exact: true }).selectOption('Browser test room');
+    await page.getByLabel('Tag', { exact: true }).selectOption('updated');
+    await expect(page.locator('.plant-grid > .plant-card')).toHaveCount(1);
+    await page.getByRole('button', { name: 'Clear collection filters', exact: true }).click();
+    await expect(page.getByLabel('Care status', { exact: true })).toHaveValue('');
     // Exercise real cookie-authenticated snoozing before completing this occurrence.
     let dueReminder: { id: string; dueAtUtc: string } | undefined;
     await expect.poll(async () => {
@@ -167,6 +175,11 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await overdue.getByRole('button', { name: 'Water', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Everything is taken care of!' })).toBeVisible();
     await nav.getByRole('link', { name: 'My plants', exact: true }).click();
+    await page.getByLabel('Care status', { exact: true }).selectOption('needs-care');
+    await expect(page.getByText('No plants match these filters.', { exact: true })).toBeVisible();
+    await page.getByLabel('Care status', { exact: true }).selectOption('upcoming');
+    await expect(page.locator('.plant-grid > .plant-card h2')).toHaveText([nickname]);
+    await page.getByRole('button', { name: 'Clear collection filters', exact: true }).click();
     await page.getByRole('link', { name: 'View care history', exact: true }).click();
     await expect(page.locator('.history-entry')).toHaveCount(1);
     await expect(page.locator('.history-entry')).toContainText('Watering');

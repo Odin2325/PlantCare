@@ -60,7 +60,7 @@
 
 .collection-tools {
   display: grid;
-  grid-template-columns: 2fr repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
@@ -487,3 +487,6 @@
     width: 100%;
   }
 }
+
+.collection-tools button { min-height: 44px; align-self: end; padding: .65rem; border: 1px solid #9eb0a3; border-radius: .5rem; background: white; color: #285f3a; cursor: pointer; }
+.collection-tools button:disabled { opacity: .6; cursor: default; }
