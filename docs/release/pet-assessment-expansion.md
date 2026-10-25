@@ -67,3 +67,36 @@ neutral labels, all new details/photos, gallery credits, accessibility and 320px
 reflow. Before accepting staging, verify every prior catalog ID/care record,
 all 104 image hashes, a real frontend update preserving the approved synthetic
 account's data, exact-candidate CI and the backup/recovery/health gates.
+
+
+## Staging acceptance
+
+Candidate `361af0b5b3c96f8e033db330c78240846edf8a01` is deployed after
+[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40207608227).
+All 171 backend tests, 38 frontend tests, production builds and 104-photo integrity
+checks passed. All 51 local browser cases passed across desktop/mobile Chromium
+and Firefox, including the combined unknown-assessment case. The initial native
+frontend test command used an unsupported Node version; the available supported
+Node 24.22 runtime passed the unchanged frontend suite. All three exact-candidate
+CI jobs passed, including the SQL Server checks and all 51 browser cases.
+
+All 33 public catalog cases passed across the same three browser configurations,
+including unknown labels, filter navigation, photos/credits, accessibility and
+320px reflow. All 84 prior catalog IDs and care records are retained; only rubber
+plant and Boston fern gained the planned galleries/review dates. All 91 reviewed
+profiles and 104 public image hashes match the committed content. Catalog and
+gallery desktop/phone layouts were visually reviewed.
+
+A real service-worker-controlled staging session accepted Update now, loaded the
+new application script, exercised the unknown filter and expanded gallery discovery,
+retained login, personal plant IDs and completed history, retained offline action
+icons and logged out correctly. This is browser evidence rather than a new
+physical-phone check. No extra external test emails or pushes were sent.
+
+Fresh encrypted off-server VPS backups passed before and after activation.
+Isolated application recovery retained login/history/keys and passed worker
+restart/deduplication and failed-activation recovery. Bundle checksums, image
+pins, compatible protocols, restricted runtime access, trusted HTTPS readiness
+and operations passed. Final local/VPS backup health was clear, both existing
+scheduled tasks reported successful results, and the final snapshot identifies
+this candidate. No public release or production cutover is implied.

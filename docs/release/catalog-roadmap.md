@@ -1,5 +1,11 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-25: [pet-assessment clarity and eight additions](pet-assessment-expansion.md)
+are deployed: 91 reviewed entries, 154 aliases across 78 entries, 104 licensed
+original photos and 24 growth references across twelve species. The combined
+unknown-assessment filter and neutral card labels distinguish missing assessment
+from a warning or a sourced non-toxic classification.
+
 Follow-up 2026-10-25: [flowering references and five houseplants](flowering-reference-expansion.md)
 are deployed: 83 reviewed entries, 138 aliases across 70 entries and 94 original
 licensed photos. African violet and Thanksgiving cactus bring growth galleries
@@ -59,7 +65,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-All 83 reviewed entries have local licensed photos on catalog and personal plant
+All 91 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep
@@ -72,7 +78,7 @@ tracked in [catalog-browsing.md](catalog-browsing.md). All copy remains English.
 
 ## Implemented: curated growth references
 
-Monstera, spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily, wax plant, African violet and Thanksgiving cactus now have attributed examples of recognizable growth
+Monstera, spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily, wax plant, African violet, Thanksgiving cactus, rubber plant and Boston fern now have attributed examples of recognizable growth
 features on species and personal plant detail pages. See
 [growth-references.md](growth-references.md) for source review, limitations and
 verification. These show different specimens, without fixed timelines or diagnosis.
