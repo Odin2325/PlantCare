@@ -6,7 +6,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed).toHaveLength(78);
+  expect(reviewed).toHaveLength(83);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {
@@ -42,7 +42,7 @@ test('catalog light filters combine with search, survive detail navigation and r
   await page.goto('/plants?light=PartialSun&sort=name-desc');
   const cards = page.locator('.plant-card');
   const names = cards.getByRole('heading', { level: 2 });
-  await expect(names).toHaveText(['Purple shamrock', 'Jade plant', 'Aloe vera']);
+  await expect(names).toHaveText(['Purple shamrock', 'Purple heart', 'Jade plant', 'Aloe vera']);
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('PartialSun');
   await expect(page.getByLabel('Sort by', { exact: true })).toHaveValue('name-desc');
   const search = page.getByRole('searchbox', { name: 'Find a plant' });
@@ -143,7 +143,8 @@ test('large houseplant batch has distinct common-name pages, source credits and 
     'Polka dot plant', 'Purple passion plant', 'Scarlet star', 'Japanese aralia',
     'Norfolk Island pine', 'Croton', 'English ivy', 'Umbrella sedge', 'Lipstick plant', 'Goldfish plant',
     'Iron cross begonia', 'Peacock plant', 'Rose-painted calathea', 'Stromanthe', 'Pinstripe plant',
-    'Blushing philodendron', 'Purple shamrock', 'Persian violet', 'Creeping fig', 'Gardenia']) {
+    'Blushing philodendron', 'Purple shamrock', 'Persian violet', 'Creeping fig', 'Gardenia',
+    'Air plant', 'Staghorn fern', 'Mistletoe cactus', 'Aluminum plant', 'Purple heart']) {
     const plant = all.find((p: { commonName: string }) => p.commonName === name);
     expect(plant, `New catalog plant: ${name}`).toBeTruthy();
     await page.goto('/plants/' + plant.id);
@@ -253,11 +254,11 @@ test('growth photo discovery combines filters and preserves comparison through d
   const filter = page.getByLabel('Growth references', { exact: true });
   const names = page.locator('.plant-card h2');
   await expect(filter).toHaveValue('available');
-  await expect(names).toHaveText(['Aloe vera', 'Golden pothos', 'Jade plant', 'Moth orchid',
-    'Peace lily', 'Spider plant', 'Swiss cheese plant', 'Wax plant']);
-  await expect(page.locator('.growth-badge')).toHaveCount(8);
+  await expect(names).toHaveText(['African violet', 'Aloe vera', 'Golden pothos', 'Jade plant', 'Moth orchid',
+    'Peace lily', 'Spider plant', 'Swiss cheese plant', 'Thanksgiving cactus', 'Wax plant']);
+  await expect(page.locator('.growth-badge')).toHaveCount(10);
   await page.getByLabel('Cats and dogs', { exact: true }).selectOption('non-toxic');
-  await expect(names).toHaveText(['Spider plant', 'Wax plant']);
+  await expect(names).toHaveText(['African violet', 'Spider plant', 'Wax plant']);
   for (const name of ['Spider plant', 'Wax plant'])
     await page.getByRole('checkbox', { name: 'Compare ' + name, exact: true }).check();
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Spider');
@@ -293,7 +294,7 @@ test('growth photo discovery combines filters and preserves comparison through d
 test('growth references show selected species features with working photos, sources and mobile reflow', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   for (const name of ['Swiss cheese plant', 'Spider plant', 'Golden pothos', 'Aloe vera',
-    'Jade plant', 'Moth orchid', 'Peace lily', 'Wax plant']) {
+    'Jade plant', 'Moth orchid', 'Peace lily', 'Wax plant', 'African violet', 'Thanksgiving cactus']) {
     const plant = species.find((item: { commonName: string }) => item.commonName === name);
     expect(plant.catalogProfile.growthReferences).toHaveLength(2);
     await page.goto('/plants/' + plant.id);

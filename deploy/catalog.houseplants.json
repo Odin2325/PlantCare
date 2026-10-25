@@ -680,7 +680,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-ionanthus/",
-      "reviewedOn": "2026-10-24",
+      "reviewedOn": "2026-10-25",
       "photo": {
         "path": "/images/plants/streptocarpus-ionanthus.jpg",
         "altText": "African violet in flower, reference photo",
@@ -690,7 +690,35 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Streptocarpus ionanthus, Cabarrus County, NC"
       },
-      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/african-violet"
+      "nonToxicToCatsAndDogsSourceUrl": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/african-violet",
+      "growthReferences": [
+        {
+          "title": "Leaf rosette",
+          "description": "This specimen shows the fuzzy, rounded leaves arranged in a rosette. Cultivars vary in leaf shape and growth habit; these examples do not establish an age or health target.",
+          "photo": {
+            "path": "/images/plants/streptocarpus-ionanthus-foliage.jpg",
+            "altText": "African violet with a rosette of fuzzy green leaves",
+            "credit": "Forest & Kim Starr",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-ionanthus/",
+            "licenseName": "CC BY 3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+            "title": "Streptocarpus ionanthus. foliage."
+          }
+        },
+        {
+          "title": "Flowers above the foliage",
+          "description": "These separate flowering specimens show blooms above the leaves. Flower colour and form depend on the cultivar, and indoor flowering is not guaranteed.",
+          "photo": {
+            "path": "/images/plants/streptocarpus-ionanthus.jpg",
+            "altText": "African violet in flower, reference photo",
+            "credit": "Hope Duckworth",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/streptocarpus-ionanthus/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Streptocarpus ionanthus, Cabarrus County, NC"
+          }
+        }
+      ]
     }
   },
   {
@@ -768,7 +796,7 @@
     "isToxicToPets": false,
     "catalogProfile": {
       "careSourceUrl": "https://plants.ces.ncsu.edu/plants/schlumbergera-truncata/",
-      "reviewedOn": "2026-10-22",
+      "reviewedOn": "2026-10-25",
       "photo": {
         "path": "/images/plants/schlumbergera-truncata.jpg",
         "altText": "Thanksgiving cactus in flower, reference photo",
@@ -777,7 +805,35 @@
         "licenseName": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "title": "Schlumbergera truncata"
-      }
+      },
+      "growthReferences": [
+        {
+          "title": "Buds at the stem tips",
+          "description": "This specimen has pink buds at the ends of its flattened stem segments. Flowering responds to conditions; buds can drop after abrupt changes in light or temperature.",
+          "photo": {
+            "path": "/images/plants/schlumbergera-truncata-buds.jpg",
+            "altText": "Thanksgiving cactus with pink flower buds at the ends of green stem segments",
+            "credit": "Hope Duckworth",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/schlumbergera-truncata/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Schlumbergera truncata. flower buds, Cabarrus County, NC"
+          }
+        },
+        {
+          "title": "Open flowers",
+          "description": "The separate flowering specimen shows open blooms at the stem tips. Colours vary between cultivars; the examples are not a timetable for your own plant.",
+          "photo": {
+            "path": "/images/plants/schlumbergera-truncata.jpg",
+            "altText": "Thanksgiving cactus in flower, reference photo",
+            "credit": "Maja Dumat",
+            "sourceUrl": "https://plants.ces.ncsu.edu/plants/schlumbergera-truncata/",
+            "licenseName": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Schlumbergera truncata"
+          }
+        }
+      ]
     }
   },
   {
@@ -2753,6 +2809,171 @@
       "commonNameAliases": [
         "Cape jasmine",
         "Cape jessamine"
+      ]
+    }
+  },
+  {
+    "commonName": "Air plant",
+    "scientificName": "Tillandsia ionantha",
+    "description": "A small air plant that attaches to a support instead of rooting in soil. The photo shows a mounted clump; leaf colour varies by cultivar and may redden around flowering.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Give bright indirect daylight with protection from harsh sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Wet the leaves thoroughly, then gently shake off trapped water and allow the plant to dry with good air movement. Check regularly; humid air alone does not replace watering.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Do not plant in ordinary potting soil. Use an open mount or holder that lets water drain and air reach the plant.",
+    "humidityInstructions": "Prefers humid air with ventilation. Keep water from remaining trapped in the leaf bases. Offshoots can form clumps over time.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/tillandsia-ionantha/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/tillandsia-ionantha.jpg",
+        "altText": "Air plant reference photograph",
+        "credit": "Cliff",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/tillandsia-ionantha/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Clumps mounted"
+      },
+      "commonNameAliases": [
+        "Sky plant",
+        "Blushing air plant"
+      ]
+    }
+  },
+  {
+    "commonName": "Staghorn fern",
+    "scientificName": "Platycerium bifurcatum",
+    "description": "An epiphytic fern with forked, antler-like fronds and shield fronds covering its roots. The reference shows a tree-mounted specimen; it can also grow indoors on a mount.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide filtered daylight or partial shade, avoiding scorching direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root area regularly. Let it dry slightly between waterings, without letting it become completely dry. Drain thoroughly after watering.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use an airy epiphytic orchid or sphagnum moss mixture, or a suitable wood or bark mount; keep drainage open.",
+    "humidityInstructions": "Prefers humid conditions with air movement. Mature shield fronds naturally turn brown; leave them in place rather than treating this as a diagnosis of damage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/platycerium-bifurcatum/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/platycerium-bifurcatum.jpg",
+        "altText": "Staghorn fern reference photograph",
+        "credit": "Krzysztof Ziarnek, Kenraiz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/platycerium-bifurcatum/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Elkhorn fern",
+        "Common staghorn fern"
+      ]
+    }
+  },
+  {
+    "commonName": "Mistletoe cactus",
+    "scientificName": "Rhipsalis baccifera",
+    "description": "A rainforest cactus with slender trailing stems, suited to a hanging pot. The reference shows stems and pale berries; indoor flowering and fruiting are not guaranteed.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight, sheltered from harsh direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water when the mix feels dry, then drain well. This rainforest cactus needs more consistent moisture than desert cacti; reduce watering in winter and avoid waterlogging.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a slightly acidic, gritty, freely draining cactus mix in a pot with drainage holes.",
+    "humidityInstructions": "Prefers humid air and good circulation. Avoid hot, arid conditions and prolonged drought.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/rhipsalis-baccifera/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/rhipsalis-baccifera.jpg",
+        "altText": "Mistletoe cactus reference photograph",
+        "credit": "Krzysztof Ziarnek, Kenraiz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rhipsalis-baccifera/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Spaghetti cactus",
+        "Mistletoe cacti"
+      ]
+    }
+  },
+  {
+    "commonName": "Aluminum plant",
+    "scientificName": "Pilea cadierei",
+    "description": "A compact foliage plant with raised silver patches on green leaves. It is distinct from watermelon peperomia, despite their similar common names.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight, protected from full sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water moderately while growing, allowing good drainage. Reduce watering from autumn through late winter and avoid leaving the roots saturated.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a moisture-retentive but freely draining indoor potting mix in a pot with drainage holes.",
+    "humidityInstructions": "Prefers a warm, humid room with air circulation. Pinch stem tips for a bushier shape; overwatering and poor drainage can cause root rot.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/pilea-cadierei/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/pilea-cadierei.jpg",
+        "altText": "Aluminum plant reference photograph",
+        "credit": "Daderot",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pilea-cadierei/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Form"
+      },
+      "commonNameAliases": [
+        "Aluminium plant",
+        "Watermelon pilea"
+      ]
+    }
+  },
+  {
+    "commonName": "Purple heart",
+    "scientificName": "Tradescantia pallida",
+    "description": "A trailing houseplant grown for purple stems and narrow purple leaves. The reference shows Purple Heart foliage. Its sap can irritate skin and mouths; keep away from pets.",
+    "sunlightRequirement": "PartialSun",
+    "sunlightInstructions": "Give a bright position with some direct sun, introducing stronger light gradually. Shadier conditions can produce greener foliage.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the mix and let excess drain. Check moisture before watering again; avoid a continually wet pot. Water less when growth slows.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, using a suitable product label. Reduce or pause when growth slows; add a reminder only if needed.",
+    "soilInstructions": "Use a well-drained potting mix with organic matter and a pot with drainage holes.",
+    "humidityInstructions": "Protect from cold; bring container plants indoors before temperatures fall below 10 C. Pinching encourages branching; handle fragile stems carefully and avoid contact with sap.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/tradescantia-pallida/",
+      "reviewedOn": "2026-10-25",
+      "photo": {
+        "path": "/images/plants/tradescantia-pallida.jpg",
+        "altText": "Purple heart reference photograph",
+        "credit": "David J. Stang",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/tradescantia-pallida/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Foliage form"
+      },
+      "commonNameAliases": [
+        "Purple queen",
+        "Purple spiderwort"
       ]
     }
   }
