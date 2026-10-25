@@ -1,5 +1,11 @@
 # Plant catalog and image roadmap
 
+Follow-up 2026-10-25: [collection care filtering and nine additions](collection-care-filter.md)
+are deployed: 100 reviewed plants, 172 aliases across 87 entries and 113 licensed
+original photos. The 24 growth references across twelve species and thirteen
+sourced cat-and-dog classifications are preserved. My plants now combines care
+status with collection search/location/tags, without changing saved schedules.
+
 Follow-up 2026-10-25: [pet-assessment clarity and eight additions](pet-assessment-expansion.md)
 are deployed: 91 reviewed entries, 154 aliases across 78 entries, 104 licensed
 original photos and 24 growth references across twelve species. The combined
@@ -65,7 +71,7 @@ requirement, rather than waiting for the image features.
 
 ## Implemented: species photos
 
-All 91 reviewed entries have local licensed photos on catalog and personal plant
+All 100 reviewed entries have local licensed photos on catalog and personal plant
 pages, English alternative text, visible source/license credits and missing-image
 fallbacks. Original files and attribution are checked together in CI. Add future
 species through the same reviewed dataset and photo-manifest procedure. Keep

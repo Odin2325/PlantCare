@@ -60,3 +60,45 @@ accepting staging, verify prior catalog IDs/care, all 113 served photo hashes,
 exact-candidate CI, a real frontend update with personal data intact, and the
 backup/recovery/health gates. No public launch or physical-phone acceptance is
 implied by browser checks.
+
+
+## Staging acceptance
+
+Candidate `cddefa4b1cddd5e21a47fca3f969dfb68615581c` is deployed after
+[successful exact-candidate CI](https://github.com/Odin2325/PlantCare/actions/runs/40211806128).
+All 171 backend tests, 41 frontend tests, production builds and 113-image checks
+passed. The initial browser journey found that implicit select labels included
+the option text. The corrected candidate gives Location, Tag, Care status and
+Sort explicit accessible names; the failed candidate was never activated.
+All 51 corrected local browser cases passed across desktop/mobile Chromium and
+Firefox, including real filtering before and after care completion. All three
+exact-candidate CI jobs passed, including the SQL Server and 51 browser checks.
+
+All 33 public catalog cases passed across the same three browser configurations.
+All 92 previous public records, including IDs, care and galleries, are exactly
+unchanged. All 100 reviewed profiles and 113 public photo hashes match committed
+content. Desktop and phone collection controls were visually reviewed using
+read-only synthetic preview data; this did not access or export a real account.
+
+The held service-worker-controlled session accepted Update now and preserved
+login, pre-existing personal IDs and completed history; offline action icons and
+the existing catalog filters also passed. Its later collection assertion exposed
+a test-fixture assumption: this approved account had no active plants, so the
+empty state correctly hid collection controls. The failed check and its completed
+update-phase evidence are retained separately rather than labelled a full pass.
+
+A separate live check verified the empty state, created one future-due plant in
+that dedicated test account, exercised all three care filters plus combined
+search/location/tags and clearing, then archived only the temporary fixture.
+The saved fixture record was equal before and after filtering; the original
+active collection and completed history were restored unchanged after cleanup.
+Logout passed. This is browser evidence, without a new physical-phone check or
+extra external test emails/pushes. The future-only fixture created no due care.
+
+Encrypted off-server VPS backups passed before and after activation. The corrected
+candidate passed isolated application recovery with login/history/keys, worker
+restart/deduplication and failed-activation recovery. Bundle hashes, image pins,
+compatible protocols, restricted runtime access and trusted HTTPS readiness and
+operations passed. Final local/VPS backup health was clear, both scheduled tasks
+reported successful results, and the final snapshot identifies this candidate.
+No public launch, production cutover or new infrastructure cost is introduced.
