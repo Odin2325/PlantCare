@@ -15,6 +15,12 @@
 }
 
 .catalog-tools { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
+.category-labels { color: #285f3a; font-size: .875rem; font-weight: 650; }
+.category-labels span + span::before { content: ' · '; }
+.category-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0}
+.category-tabs a{display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box;padding:.65rem 1rem;border:1px solid #83978a;border-radius:.5rem;color:#235b37;text-decoration:none;background:white}
+.category-tabs a[aria-current="page"]{background:#235b37;color:white;border-color:#235b37;font-weight:700}
+.category-tabs a:focus-visible{outline:3px solid #235b37;outline-offset:3px}
 .catalog-field { flex: 1 1 12rem; min-width: 0; }
 .catalog-tools label { display: block; font-weight: 600; }
 .catalog-tools .catalog-search { flex: 2 1 20rem; }

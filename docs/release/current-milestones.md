@@ -75,6 +75,12 @@ deployment or new health check.
 
 ## Feature lane
 
+[Garden crops and universal cultivars](garden-catalog-expansion.md) are prepared
+in the workspace: 152 entries, a Garden tab, category navigation/entry-type filters and growing/harvest
+guides. Focused native checks passed after approval review resumed. Browser checks,
+full exact-candidate CI for the testing policy and deployment are pending. The accepted staging catalog remains at 105; do not treat this preparation
+as a deployed milestone. The same record describes the focused-test path.
+
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
 account isolation and update checks. The next content increment can expand curated

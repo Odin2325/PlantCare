@@ -18,6 +18,42 @@ public sealed class PlantCatalogProfileTests
         Assert.Null(profile.GrowthReferences);
         Assert.Null(profile.CommonNameAliases);
         Assert.Null(profile.NonToxicToCatsAndDogsSourceUrl);
+        Assert.Null(profile.Categories);
+        Assert.Null(profile.GrowingNotes);
+        Assert.Null(profile.HarvestInstructions);
+        Assert.False(profile.PhotoIsSpeciesReference);
+    }
+
+    [Fact]
+    public void GardenCategoriesOverlapButRejectUnknownDuplicateAndEmptyValues()
+    {
+        var profile = new PlantCatalogProfile("https://example.org/care", new(2026, 10, 25), Photo,
+            Categories: ["fruit", "tree"], GrowingNotes: "Choose a suitable rootstock.",
+            HarvestInstructions: "Pick when ripe.");
+        profile.Validate();
+        foreach (var invalid in new IReadOnlyList<string>[] { [], ["fruit", "fruit"], ["Fruit"], [null!], ["edible"], [" tree"] })
+            Assert.Throws<ArgumentException>(() => (profile with { Categories = invalid }).Validate());
+        var result = JsonSerializer.Deserialize<PlantCatalogProfile>(JsonSerializer.Serialize(profile))!;
+        Assert.Equal(profile.Categories, result.Categories);
+        Assert.Equal(profile.HarvestInstructions, result.HarvestInstructions);
+    }
+
+    [Fact]
+    public void CultivarAndGardenGuidanceAreOptionalButBounded()
+    {
+        var profile = new PlantCatalogProfile("https://example.org/care", new(2026, 10, 25), Photo,
+            CultivarName: "Tiny Tim", GrowingNotes: "A dwarf bush tomato.", HarvestInstructions: "Pick ripe fruit.",
+            PhotoIsSpeciesReference: true);
+        profile.Validate();
+        Assert.Throws<ArgumentException>(() => (profile with { Photo = null }).Validate());
+        Assert.Throws<ArgumentException>(() => (profile with { CultivarName = null }).Validate());
+        foreach (var invalid in new[] { "", " ", new string('a', 81) })
+            Assert.Throws<ArgumentException>(() => (profile with { CultivarName = invalid }).Validate());
+        foreach (var invalid in new[] { "", " ", new string('a', 1001) })
+        {
+            Assert.Throws<ArgumentException>(() => (profile with { GrowingNotes = invalid }).Validate());
+            Assert.Throws<ArgumentException>(() => (profile with { HarvestInstructions = invalid }).Validate());
+        }
     }
 
     [Fact]

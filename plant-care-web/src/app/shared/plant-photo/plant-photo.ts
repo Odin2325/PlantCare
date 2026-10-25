@@ -12,6 +12,9 @@ import { PlantCatalogPhoto, PlantCatalogProfile } from '../../models/plant-speci
         } @else { <div class="placeholder" role="img" aria-label="Plant photo unavailable"><span aria-hidden="true">🌿</span>Photo unavailable</div> }
         <figcaption>@if (p.title) { {{ p.title }} · } Photo: <a [href]="p.sourceUrl" target="_blank" rel="noopener noreferrer">{{ p.credit }}</a>
           · <a [href]="p.licenseUrl" target="_blank" rel="noopener noreferrer">{{ p.licenseName }}</a></figcaption>
+        @if (!photo() && profile()?.photoIsSpeciesReference) {
+          <p class="reference-note">Species reference photo; this specimen is not verified as the named cultivar.</p>
+        }
       } @else { <div class="placeholder" role="img" aria-label="No plant photo available"><span aria-hidden="true">🌿</span>No photo yet</div> }
     </figure>
   `,
@@ -19,6 +22,7 @@ import { PlantCatalogPhoto, PlantCatalogProfile } from '../../models/plant-speci
     :host{display:block;min-width:0}figure{margin:0 0 1rem}img,.placeholder{display:block;width:100%;height:180px;border-radius:.65rem;background:#f0f5f0;object-fit:contain}
     .detail img,.detail .placeholder{height:320px}.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#526356}.placeholder span{font-size:2.5rem}
     figcaption{font-size:.75rem;line-height:1.5;color:#46564a;margin-top:.4rem;overflow-wrap:anywhere}a{color:#235b37}a:focus-visible{outline:3px solid #235b37;outline-offset:2px}
+    .reference-note{font-size:.875rem;line-height:1.5;color:#46564a;margin:.4rem 0 0}
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

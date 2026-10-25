@@ -1,12 +1,88 @@
 import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
+test('garden catalog categories combine with search and preserve navigation and comparison', async ({ page }) => {
+  const categoryLabels: Record<string,string> = { '': 'All plants', houseplant: 'Houseplants', fruit: 'Fruit', vegetable: 'Vegetables', 'root-tuber': 'Roots & tubers', herb: 'Herbs', tree: 'Trees' };
+  const categoryLink = (value: string) => page.getByRole('navigation', { name: 'Catalog categories' }).getByRole('link', { name: categoryLabels[value], exact: true });
+  await page.goto('/plants?category=tree&kind=general');
+  await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('.plant-card h2')).toHaveText(['Apple tree', 'Fig tree', 'Pear tree', 'Plum tree']);
+  await page.getByLabel('Compare Apple tree', { exact: true }).check();
+  await page.getByLabel('Compare Fig tree', { exact: true }).check();
+  await page.getByRole('link', { name: 'Compare selected plants', exact: true }).click();
+  await expect(page.locator('.comparison-card h2')).toHaveText(['Apple tree', 'Fig tree']);
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByLabel('Entry type', { exact: true })).toHaveValue('general');
+  await page.getByLabel('Entry type', { exact: true }).selectOption('');
+  for (const [category, count] of [['houseplant', 107], ['fruit', 14], ['vegetable', 29], ['root-tuber', 8], ['herb', 2]] as const) {
+    await categoryLink(category).click();
+    await expect(page.locator('.plant-card')).toHaveCount(count);
+  }
+  await page.getByLabel('Entry type', { exact: true }).selectOption('cultivar');
+  await categoryLink('houseplant').click();
+  await expect(page.locator('.plant-card')).toHaveCount(2);
+  await categoryLink('fruit').click();
+  await expect(page.locator('.plant-card')).toHaveCount(7);
+  await categoryLink('root-tuber').click();
+  await expect(page.locator('.plant-card')).toHaveCount(4);
+  await page.getByLabel('Entry type', { exact: true }).selectOption('general');
+  await categoryLink('fruit').click();
+  await page.getByRole('searchbox', { name: 'Find a plant', exact: true }).fill('Fig tree');
+  await page.getByLabel('Light requirement', { exact: true }).selectOption('FullSun');
+  await page.getByLabel('Cats and dogs', { exact: true }).selectOption('unknown');
+  await expect(page.locator('.plant-card')).toHaveCount(0);
+  await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
+  await page.locator('.plant-card').getByRole('link', { name: 'View details', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Growing and harvest', exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.reload();
+  await expect(categoryLink('fruit')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('.plant-card h2')).toHaveText(['Fig tree']);
+  await page.setViewportSize({ width: 320, height: 900 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Garden category filters');
+  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await expect(categoryLink('')).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('link', { name: 'Compare selected plants', exact: true })).toBeVisible();
+});
+
+test('garden catalog crop profiles distinguish cultivars and show sourced harvest guidance', async ({ page, request }) => {
+  const species = await (await request.get('/api/plant-species')).json();
+  const garden = species.filter((p: any) => p.catalogProfile?.harvestInstructions);
+  expect(garden).toHaveLength(45);
+  expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(3);
+  expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(4);
+  for (const plant of garden) {
+    expect(plant.catalogProfile.categories.length).toBeGreaterThan(0);
+    expect(plant.catalogProfile.harvestInstructions.length).toBeGreaterThan(0);
+    expect(plant.defaultFertilizingIntervalDays).toBeNull();
+  }
+  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(24);
+  for (const name of ['Cherry tomato (Tiny Tim)', 'Sweet pepper', 'Fig tree', 'Iceberg lettuce', 'Potato', 'Carrot', 'Apple tree (Elstar)', 'Potato (Annabelle)', 'Basil (Genovese)', 'Rubber plant (Tineke)']) {
+    const plant = species.find((p: any) => p.commonName === name);
+    expect(plant).toBeTruthy();
+    await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(name);
+    await expect(page.getByRole('heading', { name: plant.catalogProfile.harvestInstructions ? 'Growing and harvest' : 'Growing guide', exact: true })).toBeVisible();
+    if (plant.catalogProfile.harvestInstructions) await expect(page.getByRole('heading', { name: 'Harvest guidance', exact: true })).toBeVisible();
+    if (plant.catalogProfile.photoIsSpeciesReference) await expect(page.getByText('Species reference photo; this specimen is not verified as the named cultivar.', { exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Growing guide source', exact: true })).toHaveAttribute('href', plant.catalogProfile.careSourceUrl);
+    const image = page.locator('app-plant-photo img').first();
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((i: HTMLImageElement) => i.naturalWidth)).toBeGreaterThan(0);
+    if (name.includes('Tiny Tim')) await expect(page.getByText('not a verified Tiny Tim specimen', { exact: false })).toBeVisible();
+    if (name === 'Potato') await expect(page.getByText('never eat the berries or foliage', { exact: false })).toBeVisible();
+  }
+  await auditAccessibility(page, 'Garden growing and harvest guide');
+});
+
 test('English houseplants have working local photos, attribution and searchable care details', async ({ page, request }) => {
   const response = await request.get('/api/plant-species');
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed).toHaveLength(105);
+  expect(reviewed).toHaveLength(152);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {

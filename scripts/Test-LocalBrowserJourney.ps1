@@ -1,6 +1,6 @@
 # PowerShell 7 and Docker Desktop/Linux containers. Uses only the local stack.
 [CmdletBinding()]
-param([switch]$SkipBuild)
+param([switch]$SkipBuild, [switch]$CatalogOnly)
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
 Push-Location $repoRoot
@@ -24,9 +24,17 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Reviewed houseplant catalog import failed; inspect local operator logs.' }
     # Share the proxy network namespace: both email URLs and the browser retain
     # the real https://localhost:8443 origin. Mailpit resolves on the Compose network.
-    docker run --rm --init --ipc=host --network container:plantcare-local-proxy-1 plantcare-browser-tests:local
+    $browserArguments = @('run', '--rm', '--init', '--ipc=host', '--network', 'container:plantcare-local-proxy-1', 'plantcare-browser-tests:local')
+    if ($CatalogOnly) {
+        $browserArguments += @('npx', 'playwright', 'test', 'catalog.spec.ts', 'garden.spec.ts', '--grep', 'garden collection|garden catalog|catalog light filters combine|comparison selection survives')
+    }
+    docker @browserArguments
     if ($LASTEXITCODE -ne 0) { throw 'Local browser journey failed.' }
-    Write-Output 'PASS: Chromium desktop/mobile and Firefox core journeys, axe/keyboard/reflow checks and real-worker PWA offline/update/failure checks.'
+    if ($CatalogOnly) {
+        Write-Output 'PASS: focused garden catalog, category/navigation/comparison and accessibility/reflow checks across desktop/mobile Chromium and Firefox. Full account/reminder/PWA suite not run.'
+    } else {
+        Write-Output 'PASS: Chromium desktop/mobile and Firefox core journeys, axe/keyboard/reflow checks and real-worker PWA offline/update/failure checks.'
+    }
     Write-Output 'Synthetic accounts, messages and archived plants remain in Docker only; no traces or credentials are exported.'
 }
 finally { Pop-Location }

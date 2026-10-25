@@ -7,10 +7,11 @@ import { MyPlantsApiService } from '../../data-access/my-plants-api.service';
 import { UserPlant } from '../../models/user-plant.model';
 import { PlantGrowthReferences } from '../../../../shared/plant-growth-references/plant-growth-references';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
+import { PlantGrowingGuide } from '../../../../shared/plant-growing-guide/plant-growing-guide';
 
 @Component({
   selector: 'app-my-plant-detail-page', standalone: true,
-  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences],
+  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences, PlantGrowingGuide],
   templateUrl: './my-plant-detail-page.html', styleUrl: './my-plant-detail-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

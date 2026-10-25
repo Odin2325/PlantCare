@@ -12,7 +12,8 @@ import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { normalizePlantSearch } from '../../../../shared/plant-search';
 import { parseComparisonIds } from '../../../../shared/plant-comparison';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PlantSpecies, SunlightRequirement } from '../../../../models/plant-species.model';
+import { PlantCategory, PlantSpecies, SunlightRequirement } from '../../../../models/plant-species.model';
+import { parsePlantCategory, plantCategoryLabel, plantCategoryOptions } from '../../../../shared/plant-categories';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
 
 @Component({
@@ -35,6 +36,10 @@ export class PlantCatalogPage {
 
   readonly plantSpecies = signal<PlantSpecies[]>([]);
   readonly query = signal('');
+  readonly category = signal<PlantCategory | ''>('');
+  readonly kind = signal<'cultivar' | 'general' | ''>('');
+  readonly categoryOptions = plantCategoryOptions;
+  readonly categoryLabel = plantCategoryLabel;
   readonly light = signal<SunlightRequirement | ''>('');
   readonly pets = signal<'non-toxic' | 'warning' | 'unknown' | ''>('');
   readonly growth = signal<'available' | ''>('');
@@ -52,25 +57,30 @@ export class PlantCatalogPage {
   ];
   readonly filterQueryParams = computed(() => ({
     q: this.query() || null,
+    category: this.category() || null,
+    kind: this.kind() || null,
     light: this.light() || null,
     pets: this.pets() || null,
     growth: this.growth() || null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
     compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
-  readonly hasFilters = computed(() => Boolean(this.query() || this.light() || this.pets() || this.growth() || this.sort() !== 'name-asc'));
+  readonly hasFilters = computed(() => Boolean(this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
     // An exact scientific name identifies a species, rather than other plants
     // whose descriptions mention it. Common-name searches retain ambiguity.
     const exactScientific = query ? this.plantSpecies().filter(plant => normalizePlantSearch(plant.scientificName ?? '') === query) : [];
     return (exactScientific.length ? exactScientific : this.plantSpecies()).filter(plant =>
+      (!this.category() || Boolean(plant.catalogProfile?.categories?.includes(this.category() as PlantCategory))) &&
+      (!this.kind() || (this.kind() === 'cultivar' ? Boolean(plant.catalogProfile?.cultivarName) : !plant.catalogProfile?.cultivarName)) &&
       (!this.light() || plant.sunlightRequirement === this.light()) &&
       (!this.growth() || Boolean(plant.catalogProfile?.growthReferences?.length)) &&
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
         this.pets() === 'unknown' ? !plant.isToxicToPets && !plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl :
         !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
       (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
+        plant.catalogProfile?.cultivarName,
         ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en', { sensitivity: 'base' }) *
         (this.sort() === 'name-desc' ? -1 : 1));
@@ -81,6 +91,9 @@ export class PlantCatalogPage {
   constructor() {
     this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe(params => {
       this.query.set((params.get('q') ?? '').slice(0, 100));
+      this.category.set(parsePlantCategory(params.get('category')));
+      const kind = params.get('kind');
+      this.kind.set(kind === 'cultivar' || kind === 'general' ? kind : '');
       const light = params.get('light');
       this.light.set(this.lightOptions.find(option => option.value === light)?.value ?? '');
       const pets = params.get('pets');
@@ -94,6 +107,20 @@ export class PlantCatalogPage {
 
   setQuery(value: string): void {
     this.query.set(value.slice(0, 100));
+    this.saveFilters();
+  }
+
+  setCategory(value: string): void {
+    this.category.set(parsePlantCategory(value));
+    this.saveFilters();
+  }
+
+  categoryQueryParams(value: PlantCategory | '') {
+    return { ...this.filterQueryParams(), category: value || null };
+  }
+
+  setKind(value: string): void {
+    this.kind.set(value === 'cultivar' || value === 'general' ? value : '');
     this.saveFilters();
   }
 
@@ -123,6 +150,8 @@ export class PlantCatalogPage {
 
   clearFilters(): void {
     this.query.set('');
+    this.category.set('');
+    this.kind.set('');
     this.light.set('');
     this.pets.set('');
     this.growth.set('');

@@ -157,11 +157,17 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(105,species.Count);
+            Assert.Equal(152,species.Count);
+            Assert.Equal(24, species.Count(p => p.CatalogProfile?.CultivarName is not null));
+            Assert.Equal(23, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
+            Assert.Equal(107, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
+            Assert.Equal(45, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
+            Assert.Equal(8, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
+            Assert.Equal(8, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
             Assert.Equal(12, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(24, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
-            Assert.Equal(90, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
-            Assert.Equal(179, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(117, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(237, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
             Assert.Equal(13, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
             Assert.DoesNotContain(species, p => p.IsToxicToPets && p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null);
             foreach(var plant in species)
@@ -183,6 +189,19 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)
             { Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() } });
         var monstera = Assert.Single(catalog!, p => p.ScientificName == "Monstera deliciosa");
+        var tinyTim = Assert.Single(catalog!, p => p.ScientificName == "Solanum lycopersicum 'Tiny Tim'");
+        Assert.Equal("Tiny Tim", tinyTim.CatalogProfile!.CultivarName);
+        Assert.Equal(["vegetable"], tinyTim.CatalogProfile.Categories);
+        Assert.Contains("not a verified Tiny Tim specimen", tinyTim.CatalogProfile.GrowingNotes!);
+        Assert.NotEmpty(tinyTim.CatalogProfile.HarvestInstructions!);
+        var fig = Assert.Single(catalog!, p => p.ScientificName == "Ficus carica");
+        Assert.Equal(["fruit", "tree"], fig.CatalogProfile!.Categories);
+        foreach (var name in new[] { "Apple tree (Elstar)", "Potato (Annabelle)", "Basil (Genovese)", "Rubber plant (Tineke)" })
+        {
+            var cultivar = Assert.Single(catalog!, p => p.CommonName == name);
+            Assert.NotNull(cultivar.CatalogProfile!.CultivarName);
+            Assert.True(cultivar.CatalogProfile.PhotoIsSpeciesReference);
+        }
         var africanMask = Assert.Single(catalog!, p => p.CommonName == "African mask plant");
         Assert.Equal("Alocasia \u00d7 mortfontanensis", africanMask.ScientificName);
         Assert.Equal(2, monstera.CatalogProfile!.GrowthReferences!.Count);

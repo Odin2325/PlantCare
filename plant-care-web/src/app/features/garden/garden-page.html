@@ -1,0 +1,37 @@
+<main id="main-content" tabindex="-1" class="garden-page">
+  <header><p class="eyebrow">My garden</p><h1>Your crops and trees</h1>
+    <p>See the crops and trees you have added to My plants, grouped by their saved location. Use locations such as a bed, balcony or greenhouse to organize them.</p>
+    <a routerLink="/plants" [queryParams]="{ category: 'vegetable' }">Browse crops to add</a>
+    <a routerLink="/my-plants">Manage plants and locations</a>
+  </header>
+  @if (loading()) { <p role="status">Loading your garden…</p> }
+  @else if (error()) { <div role="alert"><p>Your garden could not be loaded. Please try again.</p><button type="button" (click)="load()">Try again</button></div> }
+  @else if (!gardenPlants().length) {
+    <section><h2>No crops or trees added yet</h2><p>Add a garden crop from the catalog to start this view. Your existing houseplants remain in My plants.</p></section>
+  } @else {
+    <div class="garden-tabs" role="group" aria-label="Garden categories">
+      <button type="button" [attr.aria-pressed]="!category()" (click)="setCategory('')">All garden plants</button>
+      @for (option of categories; track option.value) { <button type="button" [attr.aria-pressed]="category() === option.value" (click)="setCategory(option.value)">{{ option.label }}</button> }
+    </div>
+    <label class="search">Find a garden plant<input type="search" maxlength="100" [value]="query()" (input)="query.set($any($event.target).value)" placeholder="Nickname, plant, location or tag"></label>
+    @if (query() || category()) { <button type="button" (click)="clearFilters()">Clear garden filters</button> }
+    <p role="status" aria-live="polite">{{ visiblePlants().length }} of {{ gardenPlants().length }} garden plants</p>
+    @for (location of locations(); track location.name) {
+      <section class="location" [attr.aria-label]="location.name"><h2>{{ location.name }}</h2><div class="garden-grid">
+        @for (plant of location.plants; track plant.id) {
+          <article class="garden-card">
+            <app-plant-photo [profile]="plant.speciesCatalogProfile" />
+            <h3><a [routerLink]="['/my-plants', plant.id]">{{ plant.nickname || plant.speciesCommonName }}</a></h3>
+            <p>{{ plant.speciesCommonName }}</p>
+            @if (nextCare(plant); as care) { <p>Next scheduled care: {{ care.actionType }} · {{ care.nextDueAtUtc | date:'medium' }}</p> }
+            @else { <p>No active care date.</p> }
+            @if (plant.speciesCatalogProfile?.harvestInstructions; as harvest) { <details><summary>Harvest guidance</summary><p>{{ harvest }}</p><p>Check local growing conditions and the seed or nursery label.</p></details> }
+            <a [routerLink]="['/my-plants', plant.id]">Growing guide and plant details</a>
+            <a [routerLink]="['/my-plants', plant.id, 'care-history']">Care history</a>
+          </article>
+        }
+      </div></section>
+    } @empty { <p>No garden plants match these filters. Change or clear the filters.</p> }
+    <p><a routerLink="/dashboard">Complete care on Dashboard</a> after checking your plant, soil moisture and weather. Harvest guidance does not mark a harvest or care action complete.</p>
+  }
+</main>

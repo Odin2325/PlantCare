@@ -26,6 +26,11 @@ export interface PlantSpecies {
 }
 
 export interface PlantCatalogProfile {
+  categories?: PlantCategory[] | null;
+  cultivarName?: string | null;
+  growingNotes?: string | null;
+  harvestInstructions?: string | null;
+  photoIsSpeciesReference?: boolean;
   nonToxicToCatsAndDogsSourceUrl?: string | null;
   commonNameAliases?: string[] | null;
   growthReferences?: PlantGrowthReference[] | null;
@@ -33,6 +38,8 @@ export interface PlantCatalogProfile {
   reviewedOn: string;
   photo: PlantCatalogPhoto | null;
 }
+
+export type PlantCategory = 'houseplant' | 'fruit' | 'vegetable' | 'root-tuber' | 'herb' | 'tree';
 
 export interface PlantGrowthReference {
   title: string;

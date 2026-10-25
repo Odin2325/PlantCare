@@ -17,7 +17,7 @@
   <section class="plant-heading">
     <div>
       <p class="eyebrow">
-        Plant species
+        Catalog plant
       </p>
 
       <h1>
@@ -58,7 +58,7 @@
   @if (plant.catalogProfile; as profile) {
     <p><a [href]="profile.careSourceUrl" target="_blank" rel="noopener noreferrer">Care reference</a> · Reviewed {{ profile.reviewedOn }}</p>
   }
-  <p>Care needs vary with your room, pot and season. Suggested intervals are reminders to check moisture, not instructions to water a wet pot.</p>
+    <p>Care needs vary with the growing site, soil, container, weather and season. Suggested intervals are reminders to check moisture, not instructions to water wet soil.</p>
 
   <section class="care-grid">
     <article class="care-card">
@@ -159,6 +159,7 @@
   </section>
 
   <app-plant-growth-references [profile]="plant.catalogProfile" />
+  <app-plant-growing-guide [profile]="plant.catalogProfile" />
 
   <section class="add-plant-section">
     <div class="add-plant-intro">

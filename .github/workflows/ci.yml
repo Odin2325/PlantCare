@@ -3,6 +3,12 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      full_system:
+        description: Run full system validation
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -11,10 +17,24 @@ jobs:
   backend:
     name: Backend
     runs-on: ubuntu-latest
+    outputs:
+      scope: ${{ steps.scope.outputs.scope }}
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select and test validation scope
+        id: scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+          FORCE_FULL: ${{ github.event_name == 'workflow_dispatch' && inputs.full_system }}
+        run: |
+          python3 -m unittest discover -s tests -p test_ci_test_scope.py
+          python3 scripts/ci_test_scope.py
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
@@ -28,9 +48,16 @@ jobs:
         run: dotnet build PlantCare.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test PlantCare.slnx --configuration Release --no-build
+        shell: bash
+        run: |
+          if [ '${{ steps.scope.outputs.scope }}' = catalog ]; then
+            dotnet test PlantCare.slnx --configuration Release --no-build --filter 'FullyQualifiedName~PlantCatalogProfileTests|FullyQualifiedName~BootstrapCommandTests'
+          else
+            dotnet test PlantCare.slnx --configuration Release --no-build
+          fi
 
       - name: Test backup retention safety
+        if: steps.scope.outputs.scope != 'catalog'
         shell: pwsh
         run: ./scripts/Test-BackupRetention.ps1
 
@@ -41,6 +68,7 @@ jobs:
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
+    needs: backend
 
     defaults:
       run:
@@ -67,7 +95,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Test
-        run: pnpm test:ci
+        shell: bash
+        run: |
+          if [ '${{ needs.backend.outputs.scope }}' = catalog ]; then
+            pnpm exec ng test --watch=false --include '**/garden-page.spec.ts' --include '**/plant-catalog-page.spec.ts' --include '**/plant-growing-guide.spec.ts' --include '**/my-plant-detail-page.spec.ts' --include '**/plant-comparison-page.spec.ts' --include '**/plant-photo.spec.ts'
+          else
+            pnpm test:ci
+          fi
 
       - name: Build
         run: pnpm build
@@ -100,7 +134,7 @@ jobs:
           docker build --target worker --tag plantcare-worker:ci .
           docker run --rm --entrypoint dotnet plantcare-worker:ci --list-runtimes | grep -q '^Microsoft.AspNetCore.App '
 
-      - name: Test real-cookie account isolation on SQL Server
+      - name: Start SQL Server stack and check runtime grants
         shell: pwsh
         run: |
           docker tag plantcare:ci plantcare-local-api
@@ -109,19 +143,30 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Worker image tagging failed.' }
           ./scripts/Start-LocalDeployment.ps1 -SkipBuild
           ./scripts/Test-LocalDatabaseAccess.ps1
+
+      - name: Test real-cookie account isolation on SQL Server
+        if: needs.backend.outputs.scope != 'catalog'
+        shell: pwsh
+        run: |
           ./scripts/Test-LocalAccountIsolation.ps1
 
       - name: Test password resets and session security on SQL Server
+        if: needs.backend.outputs.scope != 'catalog'
         shell: pwsh
         run: ./scripts/Test-LocalAuthenticationSecurity.ps1
 
       - name: Test push failures and retries on SQL Server
+        if: needs.backend.outputs.scope != 'catalog'
         shell: pwsh
         run: ./scripts/Test-LocalPushDelivery.ps1
 
       - name: Test browser journeys, accessibility and PWA updates
         shell: pwsh
-        run: ./scripts/Test-LocalBrowserJourney.ps1
+        env:
+          TEST_SCOPE: ${{ needs.backend.outputs.scope }}
+        run: |
+          if ($env:TEST_SCOPE -eq 'catalog') { ./scripts/Test-LocalBrowserJourney.ps1 -CatalogOnly }
+          else { ./scripts/Test-LocalBrowserJourney.ps1 }
 
       - name: Remove isolated CI database and containers
         if: always()

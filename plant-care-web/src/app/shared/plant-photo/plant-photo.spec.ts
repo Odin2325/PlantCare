@@ -11,6 +11,14 @@ const profile: PlantCatalogProfile = {
 };
 
 describe('Plant photos and attribution', () => {
+  it('labels a species reference visibly and does not apply that label to an explicit replacement photo', () => {
+    const fixture = TestBed.createComponent(PlantPhoto);
+    fixture.componentRef.setInput('profile', { ...profile, cultivarName: 'Example', photoIsSpeciesReference: true });
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.reference-note').textContent).toContain('not verified as the named cultivar');
+    fixture.componentRef.setInput('photo', profile.photo); fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.reference-note')).toBeNull();
+  });
   it('retains source/license links when an image fails and retries a different image', () => {
     const fixture = TestBed.createComponent(PlantPhoto);
     fixture.componentRef.setInput('profile', profile); fixture.detectChanges();

@@ -43,7 +43,21 @@
       <button type="button" (click)="clearComparison()">Clear comparison</button>
     }
   </section>
+  <nav class="category-tabs" aria-label="Catalog categories">
+    <a routerLink="/plants" [queryParams]="categoryQueryParams('')" [attr.aria-current]="!category() ? 'page' : null">All plants</a>
+    @for (option of categoryOptions; track option.value) {
+      <a routerLink="/plants" [queryParams]="categoryQueryParams(option.value)" [attr.aria-current]="category() === option.value ? 'page' : null">{{ option.label }}</a>
+    }
+  </nav>
   <section class="catalog-tools" aria-label="Catalog filters">
+    <div class="catalog-field">
+      <label for="plant-kind">Entry type</label>
+      <select id="plant-kind" [ngModel]="kind()" (ngModelChange)="setKind($event)">
+        <option value="">All entries</option>
+        <option value="general">General species and groups</option>
+        <option value="cultivar">Named cultivars</option>
+      </select>
+    </div>
     <div class="catalog-field catalog-search">
       <label for="plant-search">Find a plant</label>
       <input #search id="plant-search" type="search" maxlength="100"
@@ -81,6 +95,7 @@
     </div>
     <button type="button" class="clear-filters" [disabled]="!hasFilters()" (click)="clearFilters()">Clear filters</button>
   </section>
+  <p>Categories describe common garden uses and can overlap. They do not mean that every part of a plant is edible. Check the growing and harvest guidance on its detail page.</p>
   <p id="pet-filter-help">The non-toxic filter includes only plants with a linked cat-and-dog toxicity reference. An absent warning is not a safety assessment. Non-toxic plants can still cause stomach upset if eaten.</p>
   <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
   @if (visibleSpecies().length === 0) {
@@ -94,6 +109,12 @@
         [attr.aria-label]="'Compare ' + plant.commonName" aria-describedby="comparison-help"
         (change)="toggleComparison(plant)">Compare</label>
       <app-plant-photo [profile]="plant.catalogProfile" />
+      @if (plant.catalogProfile?.cultivarName; as cultivar) { <p class="category-labels">Cultivar: {{ cultivar }}</p> }
+      @if (plant.catalogProfile?.categories?.length) {
+        <p class="category-labels">@for (category of plant.catalogProfile!.categories; track category) {
+          <span>{{ categoryLabel(category) }} </span>
+        }</p>
+      }
       @if (plant.catalogProfile?.growthReferences?.length) {
         <p class="growth-badge">Growth photos available</p>
       }

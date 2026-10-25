@@ -10,13 +10,30 @@ public sealed record PlantCatalogProfile(
     string CareSourceUrl, DateOnly ReviewedOn, PlantCatalogPhoto? Photo,
     IReadOnlyList<PlantGrowthReference>? GrowthReferences = null,
     IReadOnlyList<string>? CommonNameAliases = null,
-    string? NonToxicToCatsAndDogsSourceUrl = null)
+    string? NonToxicToCatsAndDogsSourceUrl = null,
+    IReadOnlyList<string>? Categories = null,
+    string? CultivarName = null,
+    string? GrowingNotes = null,
+    string? HarvestInstructions = null,
+    bool PhotoIsSpeciesReference = false)
 {
     public void Validate()
     {
         Https(CareSourceUrl);
         if (NonToxicToCatsAndDogsSourceUrl is not null) Https(NonToxicToCatsAndDogsSourceUrl);
         if (ReviewedOn == default) throw new ArgumentException("A care review date is required.");
+        if (Categories is { } categories)
+        {
+            string[] allowed = ["houseplant", "fruit", "vegetable", "root-tuber", "herb", "tree"];
+            if (categories.Count is < 1 or > 6 || categories.Distinct().Count() != categories.Count ||
+                categories.Any(category => !allowed.Contains(category)))
+                throw new ArgumentException("Use distinct supported catalog categories.");
+        }
+        if (CultivarName is not null) Required(CultivarName, 80);
+        if (GrowingNotes is not null) Required(GrowingNotes, 1_000);
+        if (HarvestInstructions is not null) Required(HarvestInstructions, 1_000);
+        if (PhotoIsSpeciesReference && (Photo is null || CultivarName is null))
+            throw new ArgumentException("A cultivar and photo are required for a species-reference photo label.");
         if (CommonNameAliases is { } aliases)
         {
             if (aliases.Count > 8) throw new ArgumentException("At most eight common-name aliases are supported.");

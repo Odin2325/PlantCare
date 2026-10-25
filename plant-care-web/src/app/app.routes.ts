@@ -4,6 +4,8 @@ import { authGuard } from './core/auth/guards/auth.guard';
 import { guestGuard } from './core/auth/guards/guest.guard';
 
 export const routes: Routes = [
+  { path: 'garden', canActivate: [authGuard],
+    loadComponent: () => import('./features/garden/garden-page').then(component => component.GardenPage) },
   {
     path: 'account', canActivate: [authGuard],
     loadComponent: () => import('./features/account/account-page').then(c => c.AccountPage),
