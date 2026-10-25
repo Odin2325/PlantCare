@@ -65,21 +65,21 @@
     </label>
     <label>
       Location
-      <select [value]="locationFilter()" (change)="setLocationFilter($any($event.target).value)">
+      <select aria-label="Location" [value]="locationFilter()" (change)="setLocationFilter($any($event.target).value)">
         <option value="">All locations</option>
         @for (location of locations(); track location) { <option [value]="location">{{ location }}</option> }
       </select>
     </label>
     <label>
       Tag
-      <select [value]="tagFilter()" (change)="setTagFilter($any($event.target).value)">
+      <select aria-label="Tag" [value]="tagFilter()" (change)="setTagFilter($any($event.target).value)">
         <option value="">All tags</option>
         @for (tag of availableTags(); track tag) { <option [value]="tag">{{ tag }}</option> }
       </select>
     </label>
     <label>
       Care status
-      <select [value]="careStatusFilter()" (change)="setCareStatusFilter($any($event.target).value)" aria-describedby="collection-care-help">
+      <select aria-label="Care status" [value]="careStatusFilter()" (change)="setCareStatusFilter($any($event.target).value)" aria-describedby="collection-care-help">
         <option value="">All care statuses</option>
         <option value="needs-care">Needs care</option>
         <option value="upcoming">Upcoming care only</option>
@@ -88,7 +88,7 @@
     </label>
     <label>
       Sort
-      <select [value]="sortBy()" (change)="setSortBy($any($event.target).value)">
+      <select aria-label="Sort" [value]="sortBy()" (change)="setSortBy($any($event.target).value)">
         <option value="nickname">Name A–Z</option>
         <option value="next-care">Next care due</option>
         <option value="newest">Recently added</option>

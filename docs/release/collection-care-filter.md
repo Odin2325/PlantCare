@@ -53,6 +53,7 @@ non-toxic cat-and-dog classifications remain. Missing assessments stay unknown.
 
 Unit checks cover mixed due/future schedules, paused/invalid/undated schedules,
 combined filters, read-only clearing and local-midnight rollover/timer disposal.
+Collection selects have explicit accessible names, independent of option text.
 The real authenticated browser journey exercises care filtering before and after
 completion. Catalog checks include all nine new details/photos/credits. Before
 accepting staging, verify prior catalog IDs/care, all 113 served photo hashes,
