@@ -15,7 +15,7 @@ test('garden catalog categories combine with search and preserve navigation and 
   await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
   await expect(page.getByLabel('Entry type', { exact: true })).toHaveValue('general');
   await page.getByLabel('Entry type', { exact: true }).selectOption('');
-  for (const [category, count] of [['houseplant', 107], ['fruit', 14], ['vegetable', 29], ['root-tuber', 8], ['herb', 2]] as const) {
+  for (const [category, count] of [['houseplant', 107], ['fruit', 14], ['vegetable', 35], ['root-tuber', 8], ['herb', 8]] as const) {
     await categoryLink(category).click();
     await expect(page.locator('.plant-card')).toHaveCount(count);
   }
@@ -50,7 +50,7 @@ test('garden catalog categories combine with search and preserve navigation and 
 test('garden catalog crop profiles distinguish cultivars and show sourced harvest guidance', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   const garden = species.filter((p: any) => p.catalogProfile?.harvestInstructions);
-  expect(garden).toHaveLength(45);
+  expect(garden).toHaveLength(57);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(3);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(4);
   for (const plant of garden) {
@@ -58,8 +58,8 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
     expect(plant.catalogProfile.harvestInstructions.length).toBeGreaterThan(0);
     expect(plant.defaultFertilizingIntervalDays).toBeNull();
   }
-  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(24);
-  for (const name of ['Cherry tomato (Tiny Tim)', 'Sweet pepper', 'Fig tree', 'Iceberg lettuce', 'Potato', 'Carrot', 'Apple tree (Elstar)', 'Potato (Annabelle)', 'Basil (Genovese)', 'Rubber plant (Tineke)']) {
+  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(28);
+  for (const name of ['Cherry tomato (Tiny Tim)', 'Sweet pepper', 'Fig tree', 'Iceberg lettuce', 'Potato', 'Carrot', 'Apple tree (Elstar)', 'Potato (Annabelle)', 'Basil (Genovese)', 'Rubber plant (Tineke)', 'Parsley (Moss Curled)', 'Kohlrabi (Kolibri)', 'Kale (Redbor)', 'Cauliflower (Igloo)']) {
     const plant = species.find((p: any) => p.commonName === name);
     expect(plant).toBeTruthy();
     await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]);
@@ -82,7 +82,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
-  expect(reviewed).toHaveLength(152);
+  expect(reviewed).toHaveLength(164);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {

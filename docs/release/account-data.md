@@ -22,6 +22,8 @@ submitted. Android installation/previous update/care-cycle reports remain tied
 to their earlier scope; the new Account controls have not had a physical phone
 acceptance check. This does not accept a production release or full privacy notice.
 
+The [planting-plan increment](planting-plan.md) also includes the three optional personal plan dates in private account exports. The same plant/account deletion and backup-retention rules apply.
+
 ## User behavior and security
 
 The protected Account page uses POST `/api/account/export` and

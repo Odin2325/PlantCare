@@ -73,6 +73,8 @@ Latest deployed application: `6171a92921429f65d759a382806357cce21b2798`, with [s
 
 [Garden crops and universal cultivars](garden-catalog-expansion.md) are accepted on staging: 152 entries, 24 named cultivars, a Garden tab, category navigation and growing/harvest guides. The CI policy received its required full run; routine catalog-only work selects focused checks.
 
+[Personal planting plans](planting-plan.md) are prepared for validation: three optional saved dates, a Garden plan filter and twelve catalog additions (164 total). The migration/private-write change selects full CI; staging remains on the accepted Garden candidate until deployment acceptance passes.
+
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
 account isolation and update checks. The next feature can add planting dates and a small sowing/harvest planner, with additional crops and sourced growth references through the established attribution process.

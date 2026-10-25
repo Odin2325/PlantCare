@@ -1,0 +1,24 @@
+<section aria-labelledby="planting-plan-heading">
+  <h2 id="planting-plan-heading">Planting plan</h2>
+  <p>Choose your own target dates using the seed or nursery label and local weather. These are planning dates, not a harvest prediction or a record of completed work. They do not change care reminders.</p>
+  @if (plant().isActive) {
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="plan-fields">
+        <label for="plan-sowing">Planned sowing<input id="plan-sowing" type="date" formControlName="sowing" aria-describedby="plan-help"></label>
+        <label for="plan-planting-out">Planned planting out<input id="plan-planting-out" type="date" formControlName="plantingOut" aria-describedby="plan-help"></label>
+        <label for="plan-harvest">Expected harvest<input id="plan-harvest" type="date" formControlName="harvest" aria-describedby="plan-help"></label>
+      </div>
+      <p id="plan-help">All dates are optional. Leave sowing blank for a purchased plant. When provided, dates must follow sowing, planting out and harvest order.</p>
+      @if (form.hasError('dateOrder')) { <p role="alert">Put the dates in sowing, planting out and harvest order.</p> }
+      <div class="plan-actions"><button type="submit" [disabled]="saving() || form.invalid">{{ saving() ? 'Saving…' : 'Save planting plan' }}</button><button type="button" [disabled]="saving()" (click)="clearDates()">Clear dates</button></div>
+      <p>Clearing dates edits this form. Choose Save planting plan to remove the saved dates.</p>
+    </form>
+  } @else {
+    <dl><dt>Planned sowing</dt><dd>{{ plant().plannedSowingOn ? (plant().plannedSowingOn | date:'mediumDate') : 'Not set' }}</dd>
+    <dt>Planned planting out</dt><dd>{{ plant().plannedPlantingOutOn ? (plant().plannedPlantingOutOn | date:'mediumDate') : 'Not set' }}</dd>
+    <dt>Expected harvest</dt><dd>{{ plant().expectedHarvestOn ? (plant().expectedHarvestOn | date:'mediumDate') : 'Not set' }}</dd></dl>
+    <p>Restore this plant to edit its planting plan.</p>
+  }
+  @if (message()) { <p role="status">{{ message() }}</p> }
+  @if (error()) { <p role="alert">{{ error() }}</p> }
+</section>

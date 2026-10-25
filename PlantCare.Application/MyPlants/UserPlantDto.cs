@@ -19,4 +19,7 @@ public sealed record UserPlantDto(
     int DefaultWateringIntervalDays,
     int? DefaultFertilizingIntervalDays,
     IReadOnlyList<CareScheduleDto> CareSchedules,
-    PlantCatalogProfile? SpeciesCatalogProfile = null);
+    PlantCatalogProfile? SpeciesCatalogProfile = null,
+    DateOnly? PlannedSowingOn = null,
+    DateOnly? PlannedPlantingOutOn = null,
+    DateOnly? ExpectedHarvestOn = null);

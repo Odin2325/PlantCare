@@ -22,12 +22,15 @@ export class GardenPage {
   readonly error = signal(false);
   readonly query = signal('');
   readonly category = signal<PlantCategory | ''>('');
+  readonly planFilter = signal<'planned' | 'unplanned' | ''>('');
+  hasPlan(plant: UserPlant): boolean { return Boolean(plant.plannedSowingOn || plant.plannedPlantingOutOn || plant.expectedHarvestOn); }
   readonly categories = plantCategoryOptions.filter(option => option.value !== 'houseplant');
   readonly gardenPlants = computed(() => this.plants().filter(plant => plant.isActive &&
     plant.speciesCatalogProfile?.categories?.some(category => category !== 'houseplant')));
   readonly visiblePlants = computed(() => {
     const query = normalizePlantSearch(this.query());
     return this.gardenPlants().filter(plant =>
+      (!this.planFilter() || (this.planFilter() === 'planned' ? this.hasPlan(plant) : !this.hasPlan(plant))) &&
       (!this.category() || plant.speciesCatalogProfile?.categories?.includes(this.category() as PlantCategory)) &&
       (!query || normalizePlantSearch([plant.nickname, plant.speciesCommonName, plant.speciesScientificName,
         plant.location, ...plant.tags].join(' ')).includes(query)))
@@ -52,7 +55,7 @@ export class GardenPage {
   setCategory(value: PlantCategory | ''): void {
     this.category.set(this.categories.some(option => option.value === value) ? value : '');
   }
-  clearFilters(): void { this.query.set(''); this.category.set(''); }
+  clearFilters(): void { this.query.set(''); this.category.set(''); this.planFilter.set(''); }
   nextCare(plant: UserPlant): CareSchedule | undefined {
     return plant.careSchedules.filter(schedule => schedule.isEnabled && schedule.nextDueAtUtc &&
       Number.isFinite(Date.parse(schedule.nextDueAtUtc)))

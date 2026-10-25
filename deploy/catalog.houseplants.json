@@ -5837,5 +5837,450 @@
       "cultivarName": "Boltardy",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Parsley",
+    "scientificName": "Petroselinum crispum",
+    "description": "A biennial kitchen herb usually grown for its first-season leaves. Curly and flat-leaved forms differ in appearance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/petroselinum-crispum/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Curly parsley",
+        "Flat-leaf parsley"
+      ],
+      "growingNotes": "Grow in sun or light shade with fertile, moist but drained soil. Germination can be slow; avoid disturbing the taproot when transplanting.",
+      "harvestInstructions": "Snip a few outer leafy stalks near their base, leaving the growing centre intact. Leaves become coarser as the plant flowers.",
+      "photo": {
+        "path": "/images/plants/petroselinum-crispum.jpg",
+        "altText": "Parsley reference photo",
+        "credit": "Cathy Dewitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/petroselinum-crispum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form (Wilson Botanical Garden,NC)"
+      }
+    }
+  },
+  {
+    "commonName": "Chives",
+    "scientificName": "Allium schoenoprasum",
+    "description": "A clump-forming perennial herb with narrow leaves and purple flowers. Like other alliums, it should be kept away from pets.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/allium-schoenoprasum/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Garden chives"
+      ],
+      "growingNotes": "Provide sun or light shade and drained soil. Divide congested clumps and avoid persistently wet roots.",
+      "harvestInstructions": "Cut healthy leaves near the base when established, allowing the clump to regrow. Keep harvested allium material away from pets.",
+      "photo": {
+        "path": "/images/plants/allium-schoenoprasum.jpg",
+        "altText": "Chives reference photo",
+        "credit": "Pohled 111",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-schoenoprasum/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Full form"
+      }
+    }
+  },
+  {
+    "commonName": "Rosemary",
+    "scientificName": "Salvia rosmarinus",
+    "description": "An aromatic evergreen shrub also known as Rosmarinus officinalis. The reference photo shows a plant pruned into a conical shape.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a freely draining mix; avoid heavy, persistently wet soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/salvia-rosmarinus/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Garden rosemary"
+      ],
+      "growingNotes": "Provide full sun and very good drainage. Check the cultivar and local winter conditions; protect container roots from severe cold and wet.",
+      "harvestInstructions": "Snip small amounts of healthy shoot tips for kitchen use while retaining leafy growth. Avoid stripping the whole plant.",
+      "photo": {
+        "path": "/images/plants/salvia-rosmarinus.jpg",
+        "altText": "Rosemary reference photo",
+        "credit": "Cathy Dewitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/salvia-rosmarinus/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Salvia rosmarinus pruned to conical form (Wake County, NC)"
+      }
+    }
+  },
+  {
+    "commonName": "Thyme",
+    "scientificName": "Thymus vulgaris",
+    "description": "A small woody culinary herb with aromatic leaves, suited to a sunny herb bed or drained container.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a freely draining mix; avoid heavy, persistently wet soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Common thyme",
+        "Garden thyme"
+      ],
+      "growingNotes": "Use full sun and freely draining growing mix. Check soil moisture before watering and avoid winter waterlogging.",
+      "harvestInstructions": "Clip small leafy sprigs, retaining live growth and the woody framework. Harvest before flowering when growing mainly for leaves.",
+      "photo": {
+        "path": "/images/plants/thymus-vulgaris.jpg",
+        "altText": "Thyme reference photo",
+        "credit": "Forest and KimStarr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Leaves"
+      }
+    }
+  },
+  {
+    "commonName": "Spearmint",
+    "scientificName": "Mentha spicata",
+    "description": "A strongly spreading culinary mint with fragrant leaves. Growing it in a container helps limit its spread.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Garden mint",
+        "Mint"
+      ],
+      "growingNotes": "Use moist but drained soil in sun or light shade. Check pots frequently and contain spreading roots. Large ingestions can harm pets.",
+      "harvestInstructions": "Pick healthy leaves and soft tips as needed, leaving enough growth for recovery. Do not treat every mint or ornamental lookalike as this species.",
+      "photo": {
+        "path": "/images/plants/mentha-spicata.jpg",
+        "altText": "Spearmint reference photo",
+        "credit": "Forest-and-Kim-Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Mentha spica"
+      }
+    }
+  },
+  {
+    "commonName": "Kohlrabi",
+    "scientificName": "Brassica oleracea Kohlrabi Group",
+    "description": "A cool-season brassica grown for its swollen stem above the soil. It is not a root or tuber; green and purple forms are available.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kohlrabi-group/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "vegetable"
+      ],
+      "commonNameAliases": [
+        "Kohl rabi",
+        "Turnip cabbage"
+      ],
+      "growingNotes": "Provide sun and fertile, drained soil with consistent moisture. Thin or space young plants according to the variety and check local sowing conditions.",
+      "harvestInstructions": "Harvest the swollen stem while young and tender, before it becomes woody. Follow the seed label for the size expected of the variety.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-kohlrabi-group.jpg",
+        "altText": "Kohlrabi reference photo",
+        "credit": "Anita Martinz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kohlrabi-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Kahlrabi purple bulb"
+      }
+    }
+  },
+  {
+    "commonName": "Kale",
+    "scientificName": "Brassica oleracea Kale Group",
+    "description": "A leafy brassica group with flat, curled, green and purple forms. The reference photo shows red curly kale.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kale-group/",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "vegetable"
+      ],
+      "commonNameAliases": [
+        "Curly kale",
+        "Leaf cabbage"
+      ],
+      "growingNotes": "Use a sunny site with fertile, moisture-retentive but drained soil. Allow space for the variety and check for brassica pests.",
+      "harvestInstructions": "Pick tender lower leaves while retaining the growing centre. Match harvest expectations and winter protection to the variety and local conditions.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-kale-group.jpg",
+        "altText": "Kale reference photo",
+        "credit": "Nick Saltmarsh",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kale-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form of a red curly kale"
+      }
+    }
+  },
+  {
+    "commonName": "Cauliflower",
+    "scientificName": "Brassica oleracea Botrytis Group",
+    "description": "A brassica grown for a compact head, called a curd. Choose a variety whose sowing and cropping season fits your climate.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/cauliflower/grow-your-own",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "vegetable"
+      ],
+      "commonNameAliases": [
+        "White cauliflower"
+      ],
+      "growingNotes": "Use sun and fertile, drained soil with consistent moisture. Avoid growth checks from drought and follow the variety label for spacing and head protection.",
+      "harvestInstructions": "Cut the head while compact and firm, before it opens or discolours. Actual maturity depends on the variety and growing conditions.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-cauliflower-broccoli-group.jpg",
+        "altText": "Cauliflower reference photo",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-cauliflower-broccoli-group/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form in backyard garden"
+      }
+    }
+  },
+  {
+    "commonName": "Parsley (Moss Curled)",
+    "scientificName": "Petroselinum crispum 'Moss Curled'",
+    "description": "A curly-leaved parsley cultivar forming compact rosettes of tightly curled foliage.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/112445/petroselinum-crispum-moss-curled/details",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Grow in fertile, moist but drained soil in sun or light shade. Usually crop for leaves in the first season.",
+      "harvestInstructions": "Pick a few outer leafy stalks at a time, leaving the centre to regrow.",
+      "photo": {
+        "path": "/images/plants/petroselinum-crispum.jpg",
+        "altText": "Parsley reference photo; Moss Curled cultivar not verified",
+        "credit": "Cathy Dewitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/petroselinum-crispum/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form (Wilson Botanical Garden,NC)"
+      },
+      "cultivarName": "Moss Curled",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Kohlrabi (Kolibri)",
+    "scientificName": "Brassica oleracea (Gongylodes Group) 'Kolibri'",
+    "description": "A kohlrabi cultivar with purple skin and pale flesh, grown for its tender swollen stem.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/kohl-rabi/grow-your-own",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow and space according to the seed label, keeping soil moisture even. Local weather affects the time to harvest.",
+      "harvestInstructions": "Gather tender stems at a useful size before they become woody.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-kohlrabi-group.jpg",
+        "altText": "Kohlrabi reference photo; Kolibri cultivar not verified",
+        "credit": "Anita Martinz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kohlrabi-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Kahlrabi purple bulb"
+      },
+      "cultivarName": "Kolibri",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Kale (Redbor)",
+    "scientificName": "Brassica oleracea (Acephala Group) 'Redbor'",
+    "description": "A tall kale cultivar with deeply curled purple leaves, often grown for cool-season cropping.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/135076/brassica-oleracea-acephala-group-redbor/details",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Provide sun, fertile drained soil and space for mature plants. Check local winter conditions rather than assuming a hardiness guarantee.",
+      "harvestInstructions": "Pick young, tender leaves regularly while retaining the growing centre.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-kale-group.jpg",
+        "altText": "Kale reference photo; Redbor cultivar not verified",
+        "credit": "Nick Saltmarsh",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kale-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form of a red curly kale"
+      },
+      "cultivarName": "Redbor",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Cauliflower (Igloo)",
+    "scientificName": "Brassica oleracea (Botrytis Group) 'Igloo'",
+    "description": "A cauliflower cultivar commonly chosen for small heads in limited garden space.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/choosing-mini-vegetables",
+      "reviewedOn": "2026-10-25",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Follow the seed label for sowing and spacing. Maintain steady moisture; close spacing changes the expected head size.",
+      "harvestInstructions": "Cut compact small heads before the curds loosen. No fixed harvest date is guaranteed.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-cauliflower-broccoli-group.jpg",
+        "altText": "Cauliflower reference photo; Igloo cultivar not verified",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-cauliflower-broccoli-group/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form in backyard garden"
+      },
+      "cultivarName": "Igloo",
+      "photoIsSpeciesReference": true
+    }
   }
 ]

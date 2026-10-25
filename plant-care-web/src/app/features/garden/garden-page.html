@@ -14,7 +14,8 @@
       @for (option of categories; track option.value) { <button type="button" [attr.aria-pressed]="category() === option.value" (click)="setCategory(option.value)">{{ option.label }}</button> }
     </div>
     <label class="search">Find a garden plant<input type="search" maxlength="100" [value]="query()" (input)="query.set($any($event.target).value)" placeholder="Nickname, plant, location or tag"></label>
-    @if (query() || category()) { <button type="button" (click)="clearFilters()">Clear garden filters</button> }
+    <div class="search"><label for="garden-plan-filter">Planting plan</label><select id="garden-plan-filter" [value]="planFilter()" (change)="planFilter.set($any($event.target).value)"><option value="">All garden plants</option><option value="planned">With plan dates</option><option value="unplanned">No plan dates</option></select></div>
+    @if (query() || category() || planFilter()) { <button type="button" (click)="clearFilters()">Clear garden filters</button> }
     <p role="status" aria-live="polite">{{ visiblePlants().length }} of {{ gardenPlants().length }} garden plants</p>
     @for (location of locations(); track location.name) {
       <section class="location" [attr.aria-label]="location.name"><h2>{{ location.name }}</h2><div class="garden-grid">
@@ -23,10 +24,15 @@
             <app-plant-photo [profile]="plant.speciesCatalogProfile" />
             <h3><a [routerLink]="['/my-plants', plant.id]">{{ plant.nickname || plant.speciesCommonName }}</a></h3>
             <p>{{ plant.speciesCommonName }}</p>
+            <dl class="plan-dates">
+              <div><dt>Planned sowing</dt><dd>{{ plant.plannedSowingOn ? (plant.plannedSowingOn | date:'mediumDate') : 'Not set' }}</dd></div>
+              <div><dt>Planned planting out</dt><dd>{{ plant.plannedPlantingOutOn ? (plant.plannedPlantingOutOn | date:'mediumDate') : 'Not set' }}</dd></div>
+              <div><dt>Expected harvest</dt><dd>{{ plant.expectedHarvestOn ? (plant.expectedHarvestOn | date:'mediumDate') : 'Not set' }}</dd></div>
+            </dl>
             @if (nextCare(plant); as care) { <p>Next scheduled care: {{ care.actionType }} · {{ care.nextDueAtUtc | date:'medium' }}</p> }
             @else { <p>No active care date.</p> }
             @if (plant.speciesCatalogProfile?.harvestInstructions; as harvest) { <details><summary>Harvest guidance</summary><p>{{ harvest }}</p><p>Check local growing conditions and the seed or nursery label.</p></details> }
-            <a [routerLink]="['/my-plants', plant.id]">Growing guide and plant details</a>
+            <a [routerLink]="['/my-plants', plant.id]">Planting plan and plant details</a>
             <a [routerLink]="['/my-plants', plant.id, 'care-history']">Care history</a>
           </article>
         }

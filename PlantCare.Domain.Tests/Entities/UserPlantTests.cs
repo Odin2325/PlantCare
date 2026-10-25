@@ -209,4 +209,35 @@ public sealed class UserPlantTests
             completedAt.AddDays(45),
             restored.NextDueAtUtc);
     }
+    [Fact]
+    public void GrowingPlanAllowsPartialDatesAndDoesNotChangeAcquiredDateOrCare()
+    {
+        var plant = UserPlant.Create(Guid.NewGuid(), Guid.NewGuid(), "Crop", null, new DateOnly(2026, 1, 1), null, DateTimeOffset.UtcNow);
+        var schedule = plant.AddCareSchedule(CareActionType.Watering, 7, DateTimeOffset.UtcNow);
+        var due = schedule.NextDueAtUtc;
+        plant.UpdateGrowingPlan(null, new DateOnly(2027, 5, 1), new DateOnly(2027, 8, 1));
+        Assert.Null(plant.PlannedSowingOn); Assert.Equal(new DateOnly(2027, 5, 1), plant.PlannedPlantingOutOn);
+        Assert.Equal(new DateOnly(2026, 1, 1), plant.AcquiredOn); Assert.Equal(due, schedule.NextDueAtUtc);
+        plant.UpdateGrowingPlan(null, null, null); Assert.Null(plant.PlannedPlantingOutOn); Assert.Null(plant.ExpectedHarvestOn);
+    }
+    [Theory]
+    [InlineData("2027-05-01", "2027-04-01", null)]
+    [InlineData("2027-05-01", null, "2027-04-01")]
+    [InlineData(null, "2027-05-01", "2027-04-01")]
+    public void GrowingPlanRejectsReversedDatesAtomically(string? sowing, string? planting, string? harvest)
+    {
+        var plant = UserPlant.Create(Guid.NewGuid(), Guid.NewGuid(), "Crop", null, null, null, DateTimeOffset.UtcNow);
+        var saved = new DateOnly(2027, 1, 1); plant.UpdateGrowingPlan(saved, null, null);
+        Assert.Throws<ArgumentException>(() => plant.UpdateGrowingPlan(sowing is null ? null : DateOnly.Parse(sowing), planting is null ? null : DateOnly.Parse(planting), harvest is null ? null : DateOnly.Parse(harvest)));
+        Assert.Equal(saved, plant.PlannedSowingOn); Assert.Null(plant.PlannedPlantingOutOn);
+    }
+    [Fact]
+    public void ArchivedPlanIsPreservedAndCannotBeEditedUntilRestored()
+    {
+        var plant = UserPlant.Create(Guid.NewGuid(), Guid.NewGuid(), "Crop", null, null, null, DateTimeOffset.UtcNow);
+        var harvest = new DateOnly(2027, 8, 1); plant.UpdateGrowingPlan(null, null, harvest); plant.Archive();
+        Assert.Throws<InvalidOperationException>(() => plant.UpdateGrowingPlan(null, null, null));
+        plant.Restore(); Assert.Equal(harvest, plant.ExpectedHarvestOn);
+    }
+
 }

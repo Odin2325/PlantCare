@@ -1,0 +1,11 @@
+:host { display: block; min-width: 0; }
+section { margin: 2rem 0; padding: 1.25rem; border: 1px solid #bbc9be; border-radius: .75rem; background: #f2f7f3; color: #263c2d; }
+h2 { margin-top: 0; } p { line-height: 1.6; }
+.plan-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 1rem; }
+label { display: grid; gap: .4rem; font-weight: 600; min-width: 0; }
+input, button { font: inherit; box-sizing: border-box; min-height: 44px; border: 1px solid #83978a; border-radius: .4rem; padding: .6rem; }
+input { min-width: 0; width: 100%; background: white; color: #263c2d; }
+.plan-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+button { cursor: pointer; background: #235b37; color: white; } button[type=button] { background: white; color: #235b37; }
+button:disabled { cursor: default; opacity: .65; }
+input:focus-visible, button:focus-visible { outline: 3px solid #235b37; outline-offset: 3px; }

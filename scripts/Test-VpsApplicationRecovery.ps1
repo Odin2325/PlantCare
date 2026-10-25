@@ -15,7 +15,7 @@ $passed=$false
 $origin='https://localhost:19443'
 $session=[Microsoft.PowerShell.Commands.WebRequestSession]::new()
 function Request([string]$Path,[string]$Method='GET',[object]$Body,[int]$Expected=200) {
-    if($Path -notmatch '^/[a-zA-Z0-9/?=&-]+$' -or $Method -notin @('GET','POST')){throw 'Unexpected isolated HTTP request.'}
+    if($Path -notmatch '^/[a-zA-Z0-9/?=&-]+$' -or ($Method -notin @('GET','POST') -and -not($Method -eq 'PUT' -and $Path -match '^/api/my-plants/[a-f0-9-]{36}/growing-plan$'))){throw 'Unexpected isolated HTTP request.'}
     # Curl runs inside the internal network. Cookies stay in the disposable
     # client container; private request files stay in restricted scratch.
     $curl=@(('url="'+$origin+$Path+'"'),'insecure','silent','max-time=15',('request="'+$Method+'"'),'cookie="/tmp/cookies"','cookie-jar="/tmp/cookies"','output="/tmp/response"','write-out="%{http_code}"')
@@ -233,6 +233,16 @@ services:
     $complete=Request "/api/my-plants/$($plant.id)/care/Watering/complete" 'POST' @{completedAtUtc=[DateTimeOffset]::UtcNow.AddSeconds(-1).ToString('O');notes='Isolated restored-copy care test'}
     $history=@(Request "/api/my-plants/$($plant.id)/care/history")
     if($history.Count -ne 1 -or $history[0].id -ne $complete.event.id){throw 'Recovered care history mismatch.'}
+    # Newer runtimes expose optional planting dates; older supported bundles do
+    # not. Keep this probe capability-based so historical recovery remains usable.
+    $supportsGrowingPlan = $plant.PSObject.Properties.Name -contains 'plannedSowingOn'
+    if($supportsGrowingPlan){
+        $planned=Request "/api/my-plants/$($plant.id)/growing-plan" 'PUT' @{plannedSowingOn='2027-03-01';plannedPlantingOutOn='2027-05-15';expectedHarvestOn='2027-08-01'}
+        $reloaded=Request "/api/my-plants/$($plant.id)"
+        if($reloaded.plannedSowingOn -ne '2027-03-01' -or $reloaded.expectedHarvestOn -ne '2027-08-01'){throw 'Restored planting plan did not persist.'}
+        if((Request "/api/my-plants/$($plant.id)/care/history").id -ne $complete.event.id){throw 'Planting plan changed care history.'}
+        'PASS: restored runtime saves planting dates without changing care history.'
+    }
     'PASS: fresh sign-in, restored worker/restart deduplication and care history.'
     # Failed activation only: intentionally non-starting API, no migrations/data rewrite.
     $failure=Join-Path $scratch 'compose.failed-activation.yaml'
@@ -250,6 +260,8 @@ services:
     $null=Invoke-BackupDocker ($target+@('up','-d','--no-deps','--force-recreate','--wait','--wait-timeout','120','api'))
     $activeImage=(Invoke-BackupDocker @('inspect',"$project-api-1",'--format','{{.Image}}')).ToString().Trim()
     if($activeImage -ne $manifest.images.api){throw 'Rollback did not restore the pinned application image.'}
+    if($supportsGrowingPlan -and (Request "/api/my-plants/$($plant.id)").expectedHarvestOn -ne '2027-08-01'){throw 'Failed activation lost the planting plan.'}
+
     $null=Request '/health/ready'
     if((Request '/api/account/me').email -ne $account.email){throw 'Session did not survive activation rollback.'}
     $after=@(Request "/api/my-plants/$($plant.id)/care/history")
@@ -259,7 +271,7 @@ services:
     $null=Request '/api/auth/logout' 'POST' -Expected 204
     $null=Request '/api/account/me' -Expected 401
     $passed=$true
-    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
+    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
     'PASS: failed API activation rejected; pinned runtime restored with session/history/keys intact; logout enforced.'
 } finally {
     try {

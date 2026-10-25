@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import {
   AddUserPlantRequest,
+  GrowingPlanRequest,
   CareActionType,
   CareSchedule,
   CareEventHistory,
@@ -99,6 +100,10 @@ export class MyPlantsApiService {
     return this.httpClient.delete<void>(
       `${this.endpoint}/${userPlantId}/care/${actionType}/schedule`,
     );
+  }
+
+  updateGrowingPlan(id: string, plan: GrowingPlanRequest): Observable<UserPlant> {
+    return this.httpClient.put<UserPlant>(`${this.endpoint}/${id}/growing-plan`, plan);
   }
 
   getAll(): Observable<UserPlant[]> {

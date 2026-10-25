@@ -25,6 +25,10 @@ public sealed class UserPlant
 
     public DateOnly? AcquiredOn { get; private set; }
 
+    public DateOnly? PlannedSowingOn { get; private set; }
+    public DateOnly? PlannedPlantingOutOn { get; private set; }
+    public DateOnly? ExpectedHarvestOn { get; private set; }
+
     public string? Notes { get; private set; }
 
     public bool IsActive { get; private set; }
@@ -177,6 +181,19 @@ public sealed class UserPlant
         _tags.Clear();
         _tags.AddRange(normalizedTags.Select(tag =>
             UserPlantTag.Create(Id, tag)));
+    }
+
+    public void UpdateGrowingPlan(DateOnly? sowing, DateOnly? plantingOut, DateOnly? harvest)
+    {
+        if (!IsActive) throw new InvalidOperationException("Restore this plant before editing its planting plan.");
+        if ((sowing.HasValue && plantingOut < sowing) ||
+            (sowing.HasValue && harvest < sowing) ||
+            (plantingOut.HasValue && harvest < plantingOut))
+            throw new ArgumentException("Plan dates must follow sowing, planting out and harvest order when provided.");
+
+        PlannedSowingOn = sowing;
+        PlannedPlantingOutOn = plantingOut;
+        ExpectedHarvestOn = harvest;
     }
 
     public void Archive()

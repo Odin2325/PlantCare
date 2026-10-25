@@ -50,6 +50,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         var plant = UserPlant.Create(a.Id, species.Id, "Private A plant", "Test room", null, "Private A notes", now);
         var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, now);
         plant.ReplaceTags(["Synthetic tag"]);
+        plant.UpdateGrowingPlan(new DateOnly(2027, 3, 1), new DateOnly(2027, 5, 15), new DateOnly(2027, 8, 1));
         plant.Archive();
         var notification = Notification.Create(a.Id, schedule.Id, now, now);
         var device = PushSubscription.Create(a.Id, "https://push.example.test/private-endpoint", "private-key", "private-auth", now);
@@ -93,6 +94,29 @@ public sealed class AccountDataTests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task GrowingPlanUsesRealCookieAntiforgeryAndOwnerBoundary()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        Guid id;
+        await using (var scope = factory.Services.CreateAsyncScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+            var plant = await db.UserPlants.SingleAsync(p => p.UserId == a.Id); plant.Restore(); id = plant.Id;
+            await db.SaveChangesAsync();
+        }
+        using var client = Client(); await Login(client, a);
+        var plan = new { plannedSowingOn = "2027-03-01", plannedPlantingOutOn = "2027-05-15", expectedHarvestOn = "2027-08-02" };
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PutAsJsonAsync($"/api/my-plants/{id}/growing-plan", plan)).StatusCode);
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.OK, (await client.PutAsJsonAsync($"/api/my-plants/{id}/growing-plan", plan)).StatusCode);
+        using var outsider = Client(); await Login(outsider, b);
+        Assert.Equal(HttpStatusCode.NotFound, (await outsider.PutAsJsonAsync($"/api/my-plants/{id}/growing-plan", plan)).StatusCode);
+        using var anonymous = Client(); await anonymous.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.PutAsJsonAsync($"/api/my-plants/{id}/growing-plan", plan)).StatusCode);
+    }
+
+    [Fact]
     public async Task ExportIsPrivatePasswordProtectedAndExcludesCredentials()
     {
         var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
@@ -113,6 +137,8 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.Contains(json.RootElement.GetProperty("notifications").EnumerateArray(), n => n.GetProperty("reminderSequence").GetInt32() == 1 && n.GetProperty("notBeforeUtc").ValueKind == JsonValueKind.String);
         Assert.Single(json.RootElement.GetProperty("tags").EnumerateArray());
         Assert.False(json.RootElement.GetProperty("plants")[0].GetProperty("isActive").GetBoolean());
+        Assert.Equal("2027-03-01", json.RootElement.GetProperty("plants")[0].GetProperty("plannedSowingOn").GetString());
+        Assert.Equal("2027-08-01", json.RootElement.GetProperty("plants")[0].GetProperty("expectedHarvestOn").GetString());
         Assert.Contains("Private A notes", text);
         foreach (var secret in new[] { "Private B notes", "Private B plant", "private-endpoint", "private-key", "private-auth", new string('a',64), "passwordHash", "securityStamp", Password })
             Assert.DoesNotContain(secret, text);

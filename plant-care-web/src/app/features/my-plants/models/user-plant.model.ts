@@ -56,6 +56,9 @@ export interface CareEventHistory {
 }
 
 export interface UserPlant {
+  plannedSowingOn?: string | null;
+  plannedPlantingOutOn?: string | null;
+  expectedHarvestOn?: string | null;
   speciesCatalogProfile?: import('../../../models/plant-species.model').PlantCatalogProfile | null;
   id: string;
   plantSpeciesId: string;
@@ -93,4 +96,10 @@ export interface UpdateUserPlantRequest {
   acquiredOn: string | null;
   notes: string | null;
   tags: string[];
+}
+
+export interface GrowingPlanRequest {
+  plannedSowingOn: string | null;
+  plannedPlantingOutOn: string | null;
+  expectedHarvestOn: string | null;
 }

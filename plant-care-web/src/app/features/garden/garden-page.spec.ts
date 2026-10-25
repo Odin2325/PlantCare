@@ -50,4 +50,13 @@ describe('Garden collection', () => {
     page.load(); expect(page.error()).toBe(false); expect(page.gardenPlants()).toHaveLength(1);
     expect(getAll).toHaveBeenCalledTimes(3);
   });
+  it('combines saved plan dates with category and search filters and clearing', () => {
+    const crop = make('Tomato', ['vegetable']); crop.expectedHarvestOn = '2027-08-01';
+    const { page } = setup([crop, make('Fig', ['tree'])]);
+    page.planFilter.set('planned'); expect(page.visiblePlants()).toEqual([crop]);
+    page.category.set('tree'); expect(page.visiblePlants()).toEqual([]);
+    page.planFilter.set('unplanned'); expect(page.visiblePlants().map(p => p.nickname)).toEqual(['Fig']);
+    page.clearFilters(); expect(page.planFilter()).toBe(''); expect(page.visiblePlants()).toHaveLength(2);
+  });
+
 });

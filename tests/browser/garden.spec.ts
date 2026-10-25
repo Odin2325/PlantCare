@@ -9,6 +9,7 @@ test('garden collection groups owned crops, filters and links without writing ca
     careSourceUrl: 'https://example.org/guide', photo: null, harvestInstructions: 'Pick ripe fruit after checking local conditions.' });
   const make = (id: string, nickname: string, categories: string[], location: string | null) => ({
     id, nickname, speciesCommonName: id === 'fig' ? 'Fig tree' : 'Tomato', speciesScientificName: 'Reference plant',
+    plannedSowingOn: id === 'tomato' ? '2027-03-01' : null, expectedHarvestOn: id === 'tomato' ? '2027-08-01' : null,
     speciesCatalogProfile: profile(categories), location, tags: [], isActive: true, careSchedules: [],
   });
   const plants = [make('tomato', 'Balcony favourite', ['vegetable'], ' Balcony '),
@@ -28,6 +29,12 @@ test('garden collection groups owned crops, filters and links without writing ca
   await expect(page.locator('.garden-card h3')).toHaveText(['Balcony favourite', 'My fig']);
   await expect(page.locator('.location h2')).toHaveText(['Balcony', 'Location not set']);
   await expect(page.getByRole('link', { name: 'Balcony favourite', exact: true })).toHaveAttribute('href', '/my-plants/tomato');
+  await page.getByLabel('Planting plan', { exact: true }).selectOption('planned');
+  await expect(page.locator('.garden-card h3')).toHaveText(['Balcony favourite']);
+  await expect(page.locator('.garden-card .plan-dates')).toContainText('Aug 1, 2027');
+  await page.getByLabel('Planting plan', { exact: true }).selectOption('unplanned');
+  await expect(page.locator('.garden-card h3')).toHaveText(['My fig']);
+  await page.getByLabel('Planting plan', { exact: true }).selectOption('');
   await page.getByRole('button', { name: 'Trees', exact: true }).click();
   await expect(page.locator('.garden-card h3')).toHaveText(['My fig']);
   await page.getByRole('searchbox', { name: 'Find a garden plant', exact: true }).fill('not-present');

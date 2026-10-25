@@ -2,6 +2,7 @@
 
 public interface IUserPlantService
 {
+    Task<UserPlantDto?> UpdateGrowingPlanAsync(Guid id, Guid userId, UpdateGrowingPlanCommand command, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<UserPlantDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<UserPlantDto>> GetArchivedAsync(

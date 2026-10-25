@@ -280,6 +280,33 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
   });
 
+  await step('Planting plan persists, clears and leaves care unchanged', page, async () => {
+    const all = await (await page.request.get('/api/my-plants')).json();
+    const plant = all.find((p: { nickname: string }) => p.nickname === nickname);
+    expect(plant).toBeTruthy();
+    await page.goto('/my-plants/' + plant.id);
+    await page.getByLabel('Planned sowing', { exact: true }).fill('2027-05-01');
+    await page.getByLabel('Expected harvest', { exact: true }).fill('2027-04-01');
+    await expect(page.getByRole('button', { name: 'Save planting plan', exact: true })).toBeDisabled();
+    await page.getByLabel('Planned sowing', { exact: true }).fill('2027-03-01');
+    await page.getByLabel('Planned planting out', { exact: true }).fill('2027-05-15');
+    await page.getByLabel('Expected harvest', { exact: true }).fill('2027-08-01');
+    await page.getByRole('button', { name: 'Save planting plan', exact: true }).click();
+    await expect(page.getByText('Planting plan saved.', { exact: true })).toBeVisible();
+    await page.reload();
+    await expect(page.getByLabel('Planned sowing', { exact: true })).toHaveValue('2027-03-01');
+    await expect(page.getByLabel('Expected harvest', { exact: true })).toHaveValue('2027-08-01');
+    await auditAccessibility(page, 'Saved personal planting plan');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    const saved = await (await page.request.get('/api/my-plants/' + plant.id)).json();
+    expect(saved.careSchedules).toEqual(plant.careSchedules); expect(saved.acquiredOn).toBe(plant.acquiredOn);
+    await page.getByRole('button', { name: 'Clear dates', exact: true }).click();
+    expect((await (await page.request.get('/api/my-plants/' + plant.id)).json()).expectedHarvestOn).toBe('2027-08-01');
+    await page.getByRole('button', { name: 'Save planting plan', exact: true }).click();
+    await expect(page.getByText('Planting plan saved.', { exact: true })).toBeVisible();
+    await page.reload(); await expect(page.getByLabel('Expected harvest', { exact: true })).toHaveValue('');
+  });
+
   await step('Archive and restore survive reload', page, async () => {
     await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'My plants', exact: true }).click();
     await page.getByRole('button', { name: 'Archive plant', exact: true }).click();

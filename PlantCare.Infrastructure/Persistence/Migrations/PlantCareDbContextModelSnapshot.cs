@@ -662,6 +662,9 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset>("CreatedAtUtc")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<DateOnly?>("ExpectedHarvestOn")
+                        .HasColumnType("date");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -677,6 +680,12 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<string>("Notes")
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateOnly?>("PlannedPlantingOutOn")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("PlannedSowingOn")
+                        .HasColumnType("date");
 
                     b.Property<Guid>("PlantSpeciesId")
                         .HasColumnType("uniqueidentifier");

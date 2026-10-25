@@ -157,17 +157,17 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(152,species.Count);
-            Assert.Equal(24, species.Count(p => p.CatalogProfile?.CultivarName is not null));
-            Assert.Equal(23, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
+            Assert.Equal(164,species.Count);
+            Assert.Equal(28, species.Count(p => p.CatalogProfile?.CultivarName is not null));
+            Assert.Equal(27, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
             Assert.Equal(107, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
-            Assert.Equal(45, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
+            Assert.Equal(57, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
             Assert.Equal(8, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
             Assert.Equal(8, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
             Assert.Equal(12, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(24, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
-            Assert.Equal(117, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
-            Assert.Equal(237, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(125, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(250, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
             Assert.Equal(13, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
             Assert.DoesNotContain(species, p => p.IsToxicToPets && p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null);
             foreach(var plant in species)
