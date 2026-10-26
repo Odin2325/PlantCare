@@ -8,10 +8,11 @@ import { PlantCategory } from '../../models/plant-species.model';
 import { plantCategoryOptions } from '../../shared/plant-categories';
 import { PlantPhoto } from '../../shared/plant-photo/plant-photo';
 import { normalizePlantSearch } from '../../shared/plant-search';
+import { HarvestOverview } from './harvest-overview';
 import { PlantingCalendar } from './planting-calendar';
 
 @Component({
-  selector: 'app-garden-page', standalone: true, imports: [DatePipe, RouterLink, PlantPhoto, PlantingCalendar],
+  selector: 'app-garden-page', standalone: true, imports: [DatePipe, RouterLink, PlantPhoto, PlantingCalendar, HarvestOverview],
   templateUrl: './garden-page.html', styleUrl: './garden-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,6 +22,7 @@ export class GardenPage {
   readonly plants = signal<UserPlant[]>([]);
   readonly loading = signal(true);
   readonly error = signal(false);
+  readonly view = signal<'plants' | 'harvests'>('plants');
   readonly query = signal('');
   readonly category = signal<PlantCategory | ''>('');
   readonly planFilter = signal<'planned' | 'unplanned' | ''>('');

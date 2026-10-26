@@ -1,3 +1,4 @@
+import { HarvestOverview } from '../models/harvest-overview.model';
 import { HarvestRecord, RecordHarvest } from '../models/harvest-record.model';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
@@ -153,6 +154,9 @@ export class MyPlantsApiService {
       `${this.endpoint}/${userPlantId}`,
       request,
     );
+  }
+  getHarvestOverview(from: string, to: string): Observable<HarvestOverview> {
+    return this.httpClient.get<HarvestOverview>(`${this.endpoint}/harvest-overview`, { params: { from, to } });
   }
   getHarvests(id:string):Observable<HarvestRecord[]>{return this.httpClient.get<HarvestRecord[]>(`${this.endpoint}/${id}/harvests`);}
   recordHarvest(id:string,record:RecordHarvest):Observable<HarvestRecord>{return this.httpClient.post<HarvestRecord>(`${this.endpoint}/${id}/harvests`,record);}

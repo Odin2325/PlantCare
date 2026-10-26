@@ -17,6 +17,11 @@
     <div class="search"><label for="garden-plan-filter">Planting plan</label><select id="garden-plan-filter" [value]="planFilter()" (change)="planFilter.set($any($event.target).value)"><option value="">All garden plants</option><option value="planned">With plan dates</option><option value="unplanned">No plan dates</option></select></div>
     @if (query() || category() || planFilter()) { <button type="button" (click)="clearFilters()">Clear garden filters</button> }
     <p role="status" aria-live="polite">{{ visiblePlants().length }} of {{ gardenPlants().length }} garden plants</p>
+    <div class="garden-tabs" role="group" aria-label="Garden view">
+      <button type="button" [attr.aria-pressed]="view() === 'plants'" (click)="view.set('plants')">Plants and plans</button>
+      <button type="button" [attr.aria-pressed]="view() === 'harvests'" (click)="view.set('harvests')">Harvest overview</button>
+    </div>
+    @if (view() === 'harvests') { <app-harvest-overview [plants]="visiblePlants()" /> } @else {
     <app-planting-calendar [plants]="visiblePlants()" />
     @for (location of locations(); track location.name) {
       <section class="location" [attr.aria-label]="location.name"><h2>{{ location.name }}</h2><div class="garden-grid">
@@ -40,5 +45,6 @@
       </div></section>
     } @empty { <p>No garden plants match these filters. Change or clear the filters.</p> }
     <p><a routerLink="/dashboard">Complete care on Dashboard</a> after checking your plant, soil moisture and weather. Harvest guidance does not mark a harvest or care action complete.</p>
+    }
   }
 </main>

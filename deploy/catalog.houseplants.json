@@ -6880,5 +6880,445 @@
       "cultivarName": "Pinot Noir",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Sweet cherry tree (Lapins)",
+    "scientificName": "Prunus avium 'Lapins'",
+    "description": "A self-fertile sweet cherry cultivar grown for dark-red fruit. Blossom frost and site conditions can still limit cropping.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/cherries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "A self-fertile sweet cherry cultivar grown for dark-red fruit. Blossom frost and site conditions can still limit cropping. Provide sun, shelter and fertile, moist but drained soil. Choose a rootstock for available space, protect blossom from frost where practical and prune at the appropriate summer stage.",
+      "harvestInstructions": "Pick only fully ripe cherries, handling the stalk gently. Cherries do not continue ripening after picking. Keep stones and wilted leaves away from pets.",
+      "photo": {
+        "path": "/images/plants/prunus-avium.jpg",
+        "altText": "Sweet cherry tree reference photo; Lapins cultivar not verified",
+        "credit": "Derek Ramsey",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "Lapins",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Apple tree (Golden Delicious)",
+    "scientificName": "Malus domestica 'Golden Delicious'",
+    "description": "An eating apple cultivar with yellow fruit when ripe. Choose a suitable rootstock and check local pollination and disease guidance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root zone during dry periods while establishing. Check soil and rainfall rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with enough space for the chosen rootstock.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://extension.missouri.edu/publications/g6022",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "An eating apple cultivar with yellow fruit when ripe. Choose a suitable rootstock and check local pollination and disease guidance. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
+      "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
+      "photo": {
+        "path": "/images/plants/malus-domestica.jpg",
+        "altText": "Apple tree reference photo; Golden Delicious cultivar not verified",
+        "credit": "Gzzz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "Golden Delicious",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Pear tree (Williams’ Bon Chrétien)",
+    "scientificName": "Pyrus communis 'Williams’ Bon Chrétien'",
+    "description": "A dessert pear cultivar with sweet fruit. Although partly self-fertile, a compatible nearby pear can improve cropping; check the nursery pollination label.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture and rainfall; water during establishment and prolonged dry periods.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Plant in deep, fertile, well-drained soil with room for the selected tree size.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhsplants.co.uk/plants/_/pear-williams-bon-chrtien/classid.1938/",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "A dessert pear cultivar with sweet fruit. Although partly self-fertile, a compatible nearby pear can improve cropping; check the nursery pollination label. Choose a sunny site and a cultivar suited to local conditions. Check whether a compatible pollination partner is needed before purchasing.",
+      "harvestInstructions": "Pick when mature but still firm and finish ripening off the tree, following guidance for the chosen cultivar.",
+      "photo": {
+        "path": "/images/plants/pyrus-communis.jpg",
+        "altText": "Pear tree reference photo; Williams’ Bon Chrétien cultivar not verified",
+        "credit": "Peter O_Connor aka anemoneprojectors",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Fruit"
+      },
+      "cultivarName": "Williams’ Bon Chrétien",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Plum tree (Czar)",
+    "scientificName": "Prunus domestica 'Czar'",
+    "description": "A self-fertile cooking plum cultivar with deep purplish-blue fruit. Tree size also depends on rootstock and training.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check the root zone and water during establishment or dry spells, avoiding saturated soil.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moist but well-drained soil and space for the mature tree.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/plums/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "A self-fertile cooking plum cultivar with deep purplish-blue fruit. Tree size also depends on rootstock and training. Grow in a sunny site. Check the cultivar's pollination requirements and local pruning advice; self-fertility varies.",
+      "harvestInstructions": "Pick ripe, sound fruits. Remove stones before eating or processing; do not chew the stones.",
+      "photo": {
+        "path": "/images/plants/prunus-domestica.jpg",
+        "altText": "Plum tree reference photo; Czar cultivar not verified",
+        "credit": "Vladimir",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Unripe fruit and stem"
+      },
+      "cultivarName": "Czar",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Potato (Charlotte)",
+    "scientificName": "Solanum tuberosum 'Charlotte'",
+    "description": "A second-early salad potato cultivar producing yellow tubers. Harvest timing varies with planting date, weather and desired tuber size.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil moisture even during tuber development without saturating the bed or container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, well-drained soil and room for the tubers to develop.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A second-early salad potato cultivar producing yellow tubers. Harvest timing varies with planting date, weather and desired tuber size. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
+      "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
+      "photo": {
+        "path": "/images/plants/solanum-tuberosum.jpg",
+        "altText": "Potato reference photo; Charlotte cultivar not verified",
+        "credit": "Josh Graciano",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "'Bintje' potato plants uprooted for harvesting"
+      },
+      "cultivarName": "Charlotte",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Carrot (Autumn King 2)",
+    "scientificName": "Daucus carota 'Autumn King 2'",
+    "description": "A named maincrop carrot cultivar included in RHS carrot trials. Follow the seed packet for spacing and suitability for local sowing conditions.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed and root zone moist with drainage. Avoid repeated drying during germination.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, stone-free, well-drained soil deep enough for the chosen variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/trials-awards/ongoing-plant-trials/carrot",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A named maincrop carrot cultivar included in RHS carrot trials. Follow the seed packet for spacing and suitability for local sowing conditions. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
+      "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
+      "photo": {
+        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
+        "altText": "Carrot reference photo; Autumn King 2 cultivar not verified",
+        "credit": "Forest & Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "ends of carrots"
+      },
+      "cultivarName": "Autumn King 2",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Beetroot (Detroit 2)",
+    "scientificName": "Beta vulgaris 'Detroit 2'",
+    "description": "A globe-rooted red beetroot cultivar grown for cooking and pickling. Thin seedlings as required and avoid leaving roots to become oversized.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://unwins.co.uk/products/beetroot-detroit-2-30610060",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A globe-rooted red beetroot cultivar grown for cooking and pickling. Thin seedlings as required and avoid leaving roots to become oversized. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
+      "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
+      "photo": {
+        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
+        "altText": "Beetroot reference photo; Detroit 2 cultivar not verified",
+        "credit": "woodleywonderworks",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Harvested beets"
+      },
+      "cultivarName": "Detroit 2",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Radish (Cherry Belle)",
+    "scientificName": "Raphanus sativus 'Cherry Belle'",
+    "description": "A radish cultivar with round red roots and white flesh. Harvest while young and crisp rather than relying on a fixed number of days.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/119402/raphanus-sativus-cherry-belle/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A radish cultivar with round red roots and white flesh. Harvest while young and crisp rather than relying on a fixed number of days. Direct sow in loose, drained soil during a suitable cool period. Thin seedlings and avoid repeated drying of the root zone.",
+      "harvestInstructions": "Pull usable roots while tender. Follow the variety label: small salad radishes and long daikon mature differently.",
+      "photo": {
+        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
+        "altText": "Radish reference photo; Cherry Belle cultivar not verified",
+        "credit": "Franco Folini",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Roots of 'Longipinnatus', aka Daikon"
+      },
+      "cultivarName": "Cherry Belle",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Lettuce (Salad Bowl)",
+    "scientificName": "Lactuca sativa 'Salad Bowl'",
+    "description": "A loose-leaf lettuce cultivar with green, lobed leaves. Pick outer leaves as needed while leaving the growing centre intact.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the shallow root zone consistently moist, without waterlogging. Dry soil and heat encourage bolting.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil or growing mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/309312/lactuca-sativa-salad-bowl/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A loose-leaf lettuce cultivar with green, lobed leaves. Pick outer leaves as needed while leaving the growing centre intact. Choose a variety suited to the season. In hot weather some afternoon shade can help; stagger sowings for successive small harvests.",
+      "harvestInstructions": "Pick outer leaves of suitable loose-leaf forms or cut mature heads. Harvest before flowering reduces leaf quality.",
+      "photo": {
+        "path": "/images/plants/lactuca-sativa.jpg",
+        "altText": "Lettuce reference photo; Salad Bowl cultivar not verified",
+        "credit": "Anna",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lactuca-sativa/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Lactuca sativa var. crispa 'Salad Bowl' form"
+      },
+      "cultivarName": "Salad Bowl",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Garden pea (Hurst Green Shaft)",
+    "scientificName": "Pisum sativum 'Hurst Green Shaft'",
+    "description": "A maincrop shelling pea cultivar with long pods. Provide support and consistent moisture during flowering and pod filling.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhsplants.co.uk/plants/_/pea-hurst-green-shaft/classid.2000014658/",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A maincrop shelling pea cultivar with long pods. Provide support and consistent moisture during flowering and pod filling. Provide climbing support, a sunny site and drained soil. Grow in a cool period and maintain moisture during flowering and pod development.",
+      "harvestInstructions": "For shelling peas, pick filled pods while the peas remain tender. Snow and snap types have different harvest stages; check the seed label.",
+      "photo": {
+        "path": "/images/plants/lathyrus-oleraceus.jpg",
+        "altText": "Garden pea reference photo; Hurst Green Shaft cultivar not verified",
+        "credit": "Serge96 46",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lathyrus-oleraceus/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Peas in a pod"
+      },
+      "cultivarName": "Hurst Green Shaft",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Cucumber (Telegraph Improved)",
+    "scientificName": "Cucumis sativus 'Telegraph Improved'",
+    "description": "A traditional greenhouse cucumber cultivar grown for long, smooth fruits. Use a warm protected growing space and follow the seed supplier’s flower-management guidance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Provide consistent moisture with good drainage, watering the soil and keeping foliage dry where practical.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil or a generous drained container.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://marshallsgarden.com/products/cucumber-seeds-telegraph-improved-10202522",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A traditional greenhouse cucumber cultivar grown for long, smooth fruits. Use a warm protected growing space and follow the seed supplier’s flower-management guidance. Plant out after frost risk when the soil has warmed. Offer support for climbing types and check whether the cultivar needs pollination.",
+      "harvestInstructions": "Cut fruits when young and at the preferred size. Pick frequently before fruits become yellow and overripe.",
+      "photo": {
+        "path": "/images/plants/cucumis-sativus.jpg",
+        "altText": "Cucumber reference photo; Telegraph Improved cultivar not verified",
+        "credit": "cristina.sanvito",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucumis-sativus/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Seedlings"
+      },
+      "cultivarName": "Telegraph Improved",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Coriander (Confetti)",
+    "scientificName": "Coriandrum sativum 'Confetti'",
+    "description": "A coriander cultivar with finely divided, feathery foliage and a mild flavour. Grow for fresh leaves or allow selected plants to produce ripe seed.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun; coriander also tolerates light shade. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide outdoor airflow and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/269782/coriandrum-sativum-confetti/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "A coriander cultivar with finely divided, feathery foliage and a mild flavour. Grow for fresh leaves or allow selected plants to produce ripe seed. Use sun or light shade and moist but drained soil. Sow small batches for successive leaf harvests and avoid disturbing young roots.",
+      "harvestInstructions": "Pick small amounts of young leaves regularly. For seed, allow heads to ripen and dry before collecting; do not confuse unidentified wild plants with this crop.",
+      "photo": {
+        "path": "/images/plants/coriandrum-sativum.jpg",
+        "altText": "Coriander reference photo; Confetti cultivar not verified",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Coriandrum sativum "
+      },
+      "cultivarName": "Confetti",
+      "photoIsSpeciesReference": true
+    }
   }
 ]

@@ -6,12 +6,14 @@ public sealed record RecordHarvestCommand(DateOnly HarvestedOn, decimal? Quantit
 public sealed record HarvestRecordDto(Guid Id, DateOnly HarvestedOn, decimal? Quantity, string? Unit, string? Notes, DateTimeOffset RecordedAtUtc);
 public interface IHarvestService
 {
+    Task<HarvestOverviewDto> GetOverviewAsync(Guid user, DateOnly from, DateOnly to, CancellationToken ct);
     Task<IReadOnlyList<HarvestRecordDto>?> GetAsync(Guid user, Guid plant, CancellationToken ct);
     Task<HarvestRecordDto?> AddAsync(Guid user, Guid plant, RecordHarvestCommand command, CancellationToken ct);
     Task<bool> DeleteAsync(Guid user, Guid plant, Guid record, CancellationToken ct);
 }
 internal sealed class HarvestService(IUserPlantRepository plants, IHarvestRecordRepository records, IUnitOfWork unitOfWork, TimeProvider clock) : IHarvestService
 {
+    public Task<HarvestOverviewDto> GetOverviewAsync(Guid user, DateOnly from, DateOnly to, CancellationToken ct) => records.GetOverviewAsync(user, from, to, ct);
     private static HarvestRecordDto Map(HarvestRecord r) => new(r.Id, r.HarvestedOn, r.Quantity, r.Unit, r.Notes, r.RecordedAtUtc);
     public async Task<IReadOnlyList<HarvestRecordDto>?> GetAsync(Guid user, Guid plant, CancellationToken ct)
     {

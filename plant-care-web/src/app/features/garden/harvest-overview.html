@@ -1,0 +1,26 @@
+<section aria-labelledby="harvest-overview-title">
+  <h2 id="harvest-overview-title">Harvest overview</h2>
+  <p>Recorded harvests from your active garden plants. Garden filters apply here too. Quantities stay separate by unit.</p>
+  <form (submit)="$event.preventDefault(); load()">
+    <div><label for="harvest-from">Harvest from</label><input id="harvest-from" type="date" [value]="from()" (input)="from.set($any($event.target).value)" required></div>
+    <div><label for="harvest-to">Harvest to</label><input id="harvest-to" type="date" [value]="to()" (input)="to.set($any($event.target).value)" required></div>
+    <button type="submit">Apply harvest dates</button><button type="button" (click)="thisYear()">This year</button>
+  </form>
+  @if (loading()) { <p role="status">Loading harvest overview…</p> }
+  @if (error()) { <div role="alert"><p>{{ error() }}</p><button type="button" (click)="load()">Retry harvest overview</button></div> }
+  @if (data(); as overview) {
+    <p>{{ date(overview.from) }} – {{ date(overview.to) }}</p>
+    <p role="status">{{ count() }} harvest records · {{ unquantified() }} without quantity</p>
+    <ul aria-label="Harvest totals">@for (total of quantities(); track total.unit) { <li><strong>{{ total.quantity }} {{ total.unit }}</strong></li> }</ul>
+    @if (!count()) { <p>No harvests match these dates and garden filters. Add a harvest in your plant’s details.</p> }
+    @else {
+      <h3>Recent harvests</h3>
+      <p>Showing {{ rows().length }} of {{ count() }} matching records. This list uses the latest 100 records across your garden for these dates; totals include all matching records. Open a plant for its harvest log.</p>
+      <ul class="records">@for (row of rows(); track row.id) {
+        <li><a [routerLink]="['/my-plants', row.userPlantId]">{{ name(row.userPlantId) }}</a><span>{{ date(row.harvestedOn) }}</span>
+          <span>{{ row.quantity === null ? 'Quantity not recorded' : row.quantity + ' ' + row.unit }}</span>@if (row.notes) { <p>{{ row.notes }}</p> }</li>
+      }</ul>
+      <h3>Plants with harvests</h3><ul>@for (summary of summaries(); track summary.userPlantId) { <li><a [routerLink]="['/my-plants', summary.userPlantId]">{{ name(summary.userPlantId) }}</a> · {{ summary.recordCount }} records</li> }</ul>
+    }
+  }
+</section>

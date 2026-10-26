@@ -95,4 +95,49 @@ public sealed class HarvestTests : IAsyncLifetime
         await factory.SeedAsync(async db => { Assert.Empty(await Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync(db.HarvestRecords)); Assert.Equal(103, await Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync(Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.IgnoreQueryFilters(db.HarvestRecords))); });
     }
 
+    [Fact]
+    public async Task OverviewKeepsExactCompleteTotalsAndScopesDatesOwnerCategoryArchiveAndErasure()
+    {
+        var (owner, id) = await Seed();
+        var day = Harvest().HarvestedOn;
+        await factory.SeedAsync(async db => {
+            var plant = await db.UserPlants.FindAsync(id);
+            var species = await db.PlantSpecies.FindAsync(plant!.PlantSpeciesId);
+            species!.SetCatalogProfile(new PlantCare.Domain.ValueObjects.PlantCatalogProfile("https://example.org/crop", day, null, Categories: ["vegetable"]));
+            for (var n = 0; n < 101; n++) db.HarvestRecords.Add(HarvestRecord.Create(id, day, 1.001m, "kg", null, PlantCareApiFactory.UtcNow));
+            db.HarvestRecords.Add(HarvestRecord.Create(id, day, 3m, "g", null, PlantCareApiFactory.UtcNow));
+            db.HarvestRecords.Add(HarvestRecord.Create(id, day, null, null, null, PlantCareApiFactory.UtcNow));
+            db.HarvestRecords.Add(HarvestRecord.Create(id, day.AddDays(-1), 99m, "items", null, PlantCareApiFactory.UtcNow));
+        });
+        using var client = await Client(owner);
+        var url = $"/api/my-plants/harvest-overview?from={day:yyyy-MM-dd}&to={day:yyyy-MM-dd}";
+        var result = (await client.GetFromJsonAsync<HarvestOverviewDto>(url))!;
+        Assert.Equal(100, result.Rows.Count);
+        var totals = Assert.Single(result.Plants);
+        Assert.Equal(103, totals.RecordCount); Assert.Equal(1, totals.UnquantifiedCount);
+        Assert.Equal("101.101", totals.Quantities["kg"]); Assert.Equal("3.000", totals.Quantities["g"]);
+        Assert.False(totals.Quantities.ContainsKey("items"));
+        using var other = await Client(await factory.CreateUserAsync());
+        Assert.Empty((await other.GetFromJsonAsync<HarvestOverviewDto>(url))!.Plants);
+        using var anon = factory.CreateClient(new WebApplicationFactoryClientOptions { BaseAddress = new Uri("https://localhost") });
+        Assert.Equal(HttpStatusCode.Unauthorized, (await anon.GetAsync(url)).StatusCode);
+        foreach (var query in new[] { "", "?from=2026-02-30&to=2026-03-01", "?from=2026-02-02&to=2026-02-01", "?from=2025-01-01&to=2026-01-02" })
+            Assert.Equal(HttpStatusCode.BadRequest, (await client.GetAsync("/api/my-plants/harvest-overview" + query)).StatusCode);
+        (await client.DeleteAsync($"/api/my-plants/{id}")).EnsureSuccessStatusCode();
+        Assert.Empty((await client.GetFromJsonAsync<HarvestOverviewDto>(url))!.Plants);
+        (await client.PostAsync($"/api/my-plants/{id}/restore", null)).EnsureSuccessStatusCode();
+        await factory.SeedAsync(async db => {
+            var plant = await db.UserPlants.FindAsync(id); var species = await db.PlantSpecies.FindAsync(plant!.PlantSpeciesId);
+            species!.SetCatalogProfile(species.CatalogProfile! with { Categories = ["houseplant"] });
+        });
+        Assert.Empty((await client.GetFromJsonAsync<HarvestOverviewDto>(url))!.Plants);
+        await factory.SeedAsync(async db => {
+            var plant = await db.UserPlants.FindAsync(id); var species = await db.PlantSpecies.FindAsync(plant!.PlantSpeciesId);
+            species!.SetCatalogProfile(species.CatalogProfile! with { Categories = ["vegetable"] });
+            db.AccountErasures.Add(AccountErasure.Create(owner, PlantCareApiFactory.UtcNow));
+        });
+        Assert.Empty((await client.GetFromJsonAsync<HarvestOverviewDto>(url))!.Rows);
+        Assert.Empty((await client.GetFromJsonAsync<HarvestOverviewDto>(url))!.Plants);
+    }
+
 }
