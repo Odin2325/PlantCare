@@ -12,6 +12,20 @@
     <p>{{ date(overview.from) }} – {{ date(overview.to) }}</p>
     <p role="status">{{ count() }} harvest records · {{ unquantified() }} without quantity</p>
     <ul aria-label="Harvest totals">@for (total of quantities(); track total.unit) { <li><strong>{{ total.quantity }} {{ total.unit }}</strong></li> }</ul>
+    <h3>Harvest trends</h3>
+    <p>Compare recorded harvests within the applied dates and garden filters. Partial months include only the selected days. These are records you entered, not yield forecasts.</p>
+    @if (overview.months) {
+      <div class="trend-table"><table><caption>Harvests by month</caption>
+        <thead><tr><th scope="col">Month</th><th scope="col">Records</th><th scope="col">Quantities</th></tr></thead>
+        <tbody>@for (month of months(); track month.month) { <tr><th scope="row">{{ month.title }}</th><td>{{ month.count }}<span>{{ month.unquantified }} without quantity</span></td><td>{{ month.count ? month.quantities : 'No harvests recorded' }}</td></tr> }</tbody>
+      </table></div>
+    } @else { <p>Monthly trends are unavailable for this version. Refresh or update the app and try again.</p> }
+    @if (count()) {
+      <div class="trend-table"><table><caption>Harvests by plant</caption>
+        <thead><tr><th scope="col">Plant</th><th scope="col">Records</th><th scope="col">Quantities</th></tr></thead>
+        <tbody>@for (plant of plantTrends(); track plant.userPlantId) { <tr><th scope="row"><a [routerLink]="['/my-plants', plant.userPlantId]">{{ name(plant.userPlantId) }}</a></th><td>{{ plant.recordCount }}<span>{{ plant.unquantifiedCount }} without quantity</span></td><td>{{ combineQuantities([plant]) }}</td></tr> }</tbody>
+      </table></div>
+    }
     @if (!count()) { <p>No harvests match these dates and garden filters. Add a harvest in your plant’s details.</p> }
     @else {
       <h3>Recent harvests</h3>
@@ -20,7 +34,7 @@
         <li><a [routerLink]="['/my-plants', row.userPlantId]">{{ name(row.userPlantId) }}</a><span>{{ date(row.harvestedOn) }}</span>
           <span>{{ row.quantity === null ? 'Quantity not recorded' : row.quantity + ' ' + row.unit }}</span>@if (row.notes) { <p>{{ row.notes }}</p> }</li>
       }</ul>
-      <h3>Plants with harvests</h3><ul>@for (summary of summaries(); track summary.userPlantId) { <li><a [routerLink]="['/my-plants', summary.userPlantId]">{{ name(summary.userPlantId) }}</a> · {{ summary.recordCount }} records</li> }</ul>
+
     }
   }
 </section>

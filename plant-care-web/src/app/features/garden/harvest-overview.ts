@@ -37,6 +37,26 @@ export class HarvestOverview {
     const values = this.summaries().flatMap(p => p.quantities[unit] ? [p.quantities[unit]] : []);
     return values.length ? [{ unit, quantity: sumHarvestQuantities(values) }] : [];
   }));
+  readonly plantTrends = computed(() => [...this.summaries()].sort((a, b) => this.name(a.userPlantId).localeCompare(this.name(b.userPlantId), 'en')));
+  readonly months = computed(() => {
+    const data = this.data(); if (!data?.months) return [];
+    const rows = [];
+    const index = (date: string) => Number(date.slice(0, 4)) * 12 + Number(date.slice(5, 7)) - 1;
+    for (let value = index(data.from); value <= index(data.to); value++) {
+      const month = `${String(Math.floor(value / 12)).padStart(4, '0')}-${String(value % 12 + 1).padStart(2, '0')}`;
+      const summaries = data.months.filter(p => p.month === month && this.ids().has(p.userPlantId));
+      rows.push({ month, title: this.monthTitle(month), count: summaries.reduce((sum, p) => sum + p.recordCount, 0),
+        unquantified: summaries.reduce((sum, p) => sum + p.unquantifiedCount, 0), quantities: this.combineQuantities(summaries) });
+    }
+    return rows;
+  });
+  combineQuantities(summaries: { quantities: Record<string, string> }[]): string {
+    return ['items', 'g', 'kg'].flatMap(unit => {
+      const values = summaries.flatMap(p => p.quantities[unit] ? [p.quantities[unit]] : []);
+      return values.length ? [sumHarvestQuantities(values) + ' ' + unit] : [];
+    }).join(' · ') || 'No quantity recorded';
+  }
+  monthTitle(value: string): string { return new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(value + '-01T00:00:00Z')); }
   readonly rows = computed(() => this.data()?.rows.filter(r => this.ids().has(r.userPlantId)) ?? []);
   constructor() { inject(DestroyRef).onDestroy(() => this.request?.unsubscribe()); this.load(); }
   load(): void {

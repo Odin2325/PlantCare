@@ -75,7 +75,9 @@ test('garden collection harvest overview filters complete per-unit totals and re
       return route.fulfill({ json: { from: url.searchParams.get('from'), to: url.searchParams.get('to'), rows: [
         { id: 'r', userPlantId: 'tomato', harvestedOn: '2026-03-01', quantity: 1.001, unit: 'kg', notes: '<b>Plain notes</b>' }],
         plants: [ { userPlantId: 'tomato', recordCount: 102, unquantifiedCount: 1, quantities: { kg: '1.001', g: '3.000' } },
-          { userPlantId: 'fig', recordCount: 1, unquantifiedCount: 0, quantities: { kg: '2.002' } } ] } });
+          { userPlantId: 'fig', recordCount: 1, unquantifiedCount: 0, quantities: { kg: '2.002' } } ],
+        months: [ { userPlantId: 'tomato', month: '2026-03', recordCount: 102, unquantifiedCount: 1, quantities: { kg: '1.001', g: '3.000' } },
+          { userPlantId: 'fig', month: '2026-03', recordCount: 1, unquantifiedCount: 0, quantities: { kg: '2.002' } } ] } });
     }
     return route.fulfill({ status: 404, json: {} });
   });
@@ -89,11 +91,18 @@ test('garden collection harvest overview filters complete per-unit totals and re
   await expect(overview.locator('.records a')).toHaveAttribute('href', '/my-plants/tomato');
   await expect(overview.locator('.records a')).toHaveText('Balcony favourite');
   await expect(overview.locator('.records')).toContainText('Mar 1, 2026');
+  const monthly = overview.getByRole('table', { name: 'Harvests by month' });
+  await expect(monthly.getByRole('row').filter({ hasText: 'March 2026' })).toContainText('3 g · 3.003 kg');
+  await expect(monthly.getByRole('row').filter({ hasText: 'January 2026' })).toContainText('No harvests recorded');
+  const byPlant = overview.getByRole('table', { name: 'Harvests by plant' });
+  await expect(byPlant.getByRole('row').filter({ hasText: 'Balcony favourite' })).toContainText('1.001 kg');
   await expect(overview.locator('.records b')).toHaveCount(0);
   await expect(overview.locator('.records')).toContainText('<b>Plain notes</b>');
   await page.getByRole('button', { name: 'Trees', exact: true }).click();
   await expect(overview.getByRole('status')).toHaveText('1 harvest records · 0 without quantity');
   await expect(overview.getByLabel('Harvest totals')).toHaveText('2.002 kg');
+  await expect(monthly.getByRole('row').filter({ hasText: 'March 2026' })).toContainText('2.002 kg');
+  await expect(byPlant.getByRole('row')).toHaveCount(2);
   await expect(overview.locator('.records li')).toHaveCount(0);
   await expect(overview.getByRole('link', { name: 'Fig tree' })).toHaveAttribute('href', '/my-plants/fig');
   await page.getByRole('button', { name: 'Clear garden filters' }).click();

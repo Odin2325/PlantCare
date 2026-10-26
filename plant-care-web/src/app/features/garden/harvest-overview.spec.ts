@@ -47,5 +47,23 @@ describe('Garden harvest overview', () => {
     page.load(); expect(page.loading()).toBe(true); page.thisYear();
     pending.next({ ...result, plants: [] }); expect(page.data()).toEqual(result); expect(page.error()).toBe('');
   });
+  it('groups full monthly summaries, includes empty months and applies plant filters without rounding', () => {
+    const { page, fixture } = setup();
+    page.data.set({ ...result, from: '2025-12-31', to: '2026-03-01', months: [
+      { userPlantId: 'a', month: '2025-12', recordCount: 101, unquantifiedCount: 1, quantities: { kg: '1.001' } },
+      { userPlantId: 'b', month: '2025-12', recordCount: 1, unquantifiedCount: 0, quantities: { kg: '2.002', g: '3.000' } },
+      { userPlantId: 'a', month: '2026-03', recordCount: 1, unquantifiedCount: 0, quantities: { items: '2.000' } },
+    ] });
+    expect(page.months().map(m => [m.month, m.count])).toEqual([['2025-12', 102], ['2026-01', 0], ['2026-02', 0], ['2026-03', 1]]);
+    expect(page.months()[0].quantities).toBe('3 g · 3.003 kg');
+    expect(page.months()[0].title).toBe('December 2025');
+    expect(page.plantTrends().map(p => page.name(p.userPlantId))).toEqual(['Fig', 'My crop']);
+    fixture.componentRef.setInput('plants', [{ id: 'a', nickname: 'My crop' }] as unknown as UserPlant[]);
+    expect(page.months()[0].count).toBe(101); expect(page.months()[0].quantities).toBe('1.001 kg');
+    page.data.set({ ...result, from: '9999-12-01', to: '9999-12-31', months: [] });
+    expect(page.months()).toHaveLength(1); expect(page.months()[0].month).toBe('9999-12');
+    page.data.set(result); expect(page.months()).toEqual([]);
+  });
+
 });
 

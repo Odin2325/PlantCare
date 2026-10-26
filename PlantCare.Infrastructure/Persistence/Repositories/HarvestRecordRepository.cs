@@ -16,6 +16,7 @@ internal sealed class HarvestRecordRepository(PlantCareDbContext db) : IHarvestR
         var gardenIds = plants.Where(p => p.CatalogProfile?.Categories?.Any(c => c != "houseplant") == true).Select(p => p.Id).ToArray();
         var rows = new List<HarvestOverviewRow>();
         var totals = new Dictionary<Guid, (int Count, int Unquantified, Dictionary<string, decimal> Quantities)>();
+        var monthly = new Dictionary<(Guid Plant, string Month), (int Count, int Unquantified, Dictionary<string, decimal> Quantities)>();
         if (gardenIds.Length > 0)
         {
             var query = db.HarvestRecords.AsNoTracking().Where(h => h.UserPlant.UserId == user && h.UserPlant.IsActive &&
@@ -29,13 +30,22 @@ internal sealed class HarvestRecordRepository(PlantCareDbContext db) : IHarvestR
                 if (h.Quantity is { } quantity && h.Unit is { } unit) sum.Quantities[unit] = sum.Quantities.GetValueOrDefault(unit) + quantity;
                 else sum.Unquantified++;
                 totals[h.UserPlantId] = sum;
+                var key = (h.UserPlantId, h.HarvestedOn.ToString("yyyy-MM", System.Globalization.CultureInfo.InvariantCulture));
+                var month = monthly.GetValueOrDefault(key, (Count: 0, Unquantified: 0, Quantities: new Dictionary<string, decimal>()));
+                month.Count++;
+                if (h.Quantity is { } amount && h.Unit is { } monthUnit) month.Quantities[monthUnit] = month.Quantities.GetValueOrDefault(monthUnit) + amount;
+                else month.Unquantified++;
+                monthly[key] = month;
                 if (rows.Count < 100) rows.Add(new(h.Id, h.UserPlantId, h.HarvestedOn, h.Quantity, h.Unit, h.Notes));
             }
         }
         var summaries = totals.OrderBy(p => p.Key).Select(p => new PlantHarvestSummary(
             p.Key, p.Value.Count, p.Value.Unquantified, p.Value.Quantities.ToDictionary(q => q.Key,
                 q => q.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture)))).ToList();
-        return new(from, to, rows, summaries);
+        var months = monthly.OrderBy(p => p.Key.Month).ThenBy(p => p.Key.Plant).Select(p => new MonthlyPlantHarvestSummary(
+            p.Key.Plant, p.Key.Month, p.Value.Count, p.Value.Unquantified, p.Value.Quantities.ToDictionary(q => q.Key,
+                q => q.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture)))).ToList();
+        return new(from, to, rows, summaries, months);
     }
     public void Add(HarvestRecord record) => db.HarvestRecords.Add(record);
     public void Remove(HarvestRecord record) => db.HarvestRecords.Remove(record);

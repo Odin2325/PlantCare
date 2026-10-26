@@ -7320,5 +7320,656 @@
       "cultivarName": "Confetti",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Raspberry (Polka)",
+    "scientificName": "Rubus idaeus 'Polka'",
+    "description": "An autumn-fruiting raspberry cultivar with firm, upright canes. Follow autumn-fruiting pruning guidance; cropping dates depend on local conditions.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone moist with good drainage; check more frequently during fruit development and dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil, with mulch kept away from the cane bases.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/raspberries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "An autumn-fruiting raspberry cultivar with firm, upright canes. Follow autumn-fruiting pruning guidance; cropping dates depend on local conditions. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
+      "harvestInstructions": "Pick berries when fully coloured and they release easily from the core. Harvest regularly while fruit is ripe.",
+      "photo": {
+        "path": "/images/plants/rubus-idaeus.jpg",
+        "altText": "Raspberry reference photo; Polka cultivar not verified",
+        "credit": "Bernard Dupont",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Ripe and unripe raspberry fruits"
+      },
+      "cultivarName": "Polka",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Raspberry (Glen Ample)",
+    "scientificName": "Rubus idaeus 'Glen Ample'",
+    "description": "A summer-fruiting raspberry cultivar producing large berries. Keep the new canes that will fruit next season when removing spent fruiting canes.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone moist with good drainage; check more frequently during fruit development and dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil, with mulch kept away from the cane bases.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/raspberries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A summer-fruiting raspberry cultivar producing large berries. Keep the new canes that will fruit next season when removing spent fruiting canes. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
+      "harvestInstructions": "Pick berries when fully coloured and they release easily from the core. Harvest regularly while fruit is ripe.",
+      "photo": {
+        "path": "/images/plants/rubus-idaeus.jpg",
+        "altText": "Raspberry reference photo; Glen Ample cultivar not verified",
+        "credit": "Bernard Dupont",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Ripe and unripe raspberry fruits"
+      },
+      "cultivarName": "Glen Ample",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Strawberry (Cambridge Favourite)",
+    "scientificName": "Fragaria × ananassa 'Cambridge Favourite'",
+    "description": "A mid-season summer-fruiting strawberry cultivar. Use healthy planting stock and pick fruit when fully coloured; local weather affects the cropping window.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the soil consistently moist with drainage, watering the soil rather than soaking ripening fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil. Plant with the crown at the soil surface rather than burying it.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/strawberries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A mid-season summer-fruiting strawberry cultivar. Use healthy planting stock and pick fruit when fully coloured; local weather affects the cropping window. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
+      "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
+      "photo": {
+        "path": "/images/plants/fragaria-x-ananassa.jpg",
+        "altText": "Strawberry reference photo; Cambridge Favourite cultivar not verified",
+        "credit": "Fomulaax",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Plant with Fruit"
+      },
+      "cultivarName": "Cambridge Favourite",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Strawberry (Honeoye)",
+    "scientificName": "Fragaria × ananassa 'Honeoye'",
+    "description": "An early summer-fruiting strawberry cultivar with firm berries. Protect flowers from late frost where practical and keep developing fruit clear of wet soil.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the soil consistently moist with drainage, watering the soil rather than soaking ripening fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil. Plant with the crown at the soil surface rather than burying it.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/strawberries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "An early summer-fruiting strawberry cultivar with firm berries. Protect flowers from late frost where practical and keep developing fruit clear of wet soil. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
+      "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
+      "photo": {
+        "path": "/images/plants/fragaria-x-ananassa.jpg",
+        "altText": "Strawberry reference photo; Honeoye cultivar not verified",
+        "credit": "Fomulaax",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Plant with Fruit"
+      },
+      "cultivarName": "Honeoye",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Blueberry (Duke)",
+    "scientificName": "Vaccinium corymbosum 'Duke'",
+    "description": "A blueberry cultivar that flowers relatively late but ripens early. Acidic growing conditions remain essential; check local frost exposure and nursery guidance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep roots evenly moist with drainage; avoid allowing containers to dry completely.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use acidic, organically rich, well-drained soil or an ericaceous container mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/blueberries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A blueberry cultivar that flowers relatively late but ripens early. Acidic growing conditions remain essential; check local frost exposure and nursery guidance. Choose a sunny to lightly shaded site. Check soil acidity first; a container can suit unsuitable garden soil. A compatible second cultivar can improve cropping.",
+      "harvestInstructions": "Allow berries to become fully blue and ripe before picking; colour change alone may precede full sweetness.",
+      "photo": {
+        "path": "/images/plants/vaccinium-corymbosum.jpg",
+        "altText": "Blueberry reference photo; Duke cultivar not verified",
+        "credit": "Rob Thurman",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Fruits"
+      },
+      "cultivarName": "Duke",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Blueberry (Spartan)",
+    "scientificName": "Vaccinium corymbosum 'Spartan'",
+    "description": "A blueberry cultivar with large berries and an early to mid-season crop. Use acidic soil or ericaceous compost and avoid letting container roots dry out.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep roots evenly moist with drainage; avoid allowing containers to dry completely.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use acidic, organically rich, well-drained soil or an ericaceous container mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/blueberries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A blueberry cultivar with large berries and an early to mid-season crop. Use acidic soil or ericaceous compost and avoid letting container roots dry out. Choose a sunny to lightly shaded site. Check soil acidity first; a container can suit unsuitable garden soil. A compatible second cultivar can improve cropping.",
+      "harvestInstructions": "Allow berries to become fully blue and ripe before picking; colour change alone may precede full sweetness.",
+      "photo": {
+        "path": "/images/plants/vaccinium-corymbosum.jpg",
+        "altText": "Blueberry reference photo; Spartan cultivar not verified",
+        "credit": "Rob Thurman",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Fruits"
+      },
+      "cultivarName": "Spartan",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Apple tree (Discovery)",
+    "scientificName": "Malus domestica 'Discovery'",
+    "description": "An early-season dessert apple cultivar with red-skinned fruit. Choose a rootstock for the available space and check for a compatible pollination partner.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root zone during dry periods while establishing. Check soil and rainfall rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with enough space for the chosen rootstock.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/apples/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "An early-season dessert apple cultivar with red-skinned fruit. Choose a rootstock for the available space and check for a compatible pollination partner. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
+      "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
+      "photo": {
+        "path": "/images/plants/malus-domestica.jpg",
+        "altText": "Apple tree reference photo; Discovery cultivar not verified",
+        "credit": "Gzzz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "Discovery",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Pear tree (Doyenné du Comice)",
+    "scientificName": "Pyrus communis 'Doyenné du Comice'",
+    "description": "A mid-season dessert pear cultivar valued for its flavour and texture. Check pollination compatibility, rootstock and local growing conditions before planting.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture and rainfall; water during establishment and prolonged dry periods.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Plant in deep, fertile, well-drained soil with room for the selected tree size.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/pears/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "A mid-season dessert pear cultivar valued for its flavour and texture. Check pollination compatibility, rootstock and local growing conditions before planting. Choose a sunny site and a cultivar suited to local conditions. Check whether a compatible pollination partner is needed before purchasing.",
+      "harvestInstructions": "Pick when mature but still firm and finish ripening off the tree, following guidance for the chosen cultivar.",
+      "photo": {
+        "path": "/images/plants/pyrus-communis.jpg",
+        "altText": "Pear tree reference photo; Doyenné du Comice cultivar not verified",
+        "credit": "Peter O_Connor aka anemoneprojectors",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Fruit"
+      },
+      "cultivarName": "Doyenné du Comice",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Plum tree (Marjorie’s Seedling)",
+    "scientificName": "Prunus domestica 'Marjorie’s Seedling'",
+    "description": "A self-fertile plum cultivar with large dark fruit suitable for cooking. Allow for rootstock size and protect early blossom from frost where practical.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check the root zone and water during establishment or dry spells, avoiding saturated soil.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moist but well-drained soil and space for the mature tree.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/plums/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "A self-fertile plum cultivar with large dark fruit suitable for cooking. Allow for rootstock size and protect early blossom from frost where practical. Grow in a sunny site. Check the cultivar's pollination requirements and local pruning advice; self-fertility varies.",
+      "harvestInstructions": "Pick ripe, sound fruits. Remove stones before eating or processing; do not chew the stones.",
+      "photo": {
+        "path": "/images/plants/prunus-domestica.jpg",
+        "altText": "Plum tree reference photo; Marjorie’s Seedling cultivar not verified",
+        "credit": "Vladimir",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Unripe fruit and stem"
+      },
+      "cultivarName": "Marjorie’s Seedling",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Spinach (Medania)",
+    "scientificName": "Spinacia oleracea 'Medania'",
+    "description": "A spinach cultivar with deep-green, lightly crinkled leaves. Keep moisture consistent and harvest tender leaves before heat or stress encourages flowering.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/spinach/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A spinach cultivar with deep-green, lightly crinkled leaves. Keep moisture consistent and harvest tender leaves before heat or stress encourages flowering. Choose a cool growing period and a sunny or lightly shaded site with fertile, drained soil. Keep moisture even.",
+      "harvestInstructions": "Pick young outer leaves while leaving the centre growing, or cut a usable whole plant before bolting.",
+      "photo": {
+        "path": "/images/plants/spinacia-oleracea.jpg",
+        "altText": "Spinach reference photo; Medania cultivar not verified",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/spinacia-oleracea/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "leaves and form"
+      },
+      "cultivarName": "Medania",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Common bean (Cobra)",
+    "scientificName": "Phaseolus vulgaris 'Cobra'",
+    "description": "A climbing French bean cultivar grown for stringless green pods. Give it tall, sturdy supports and pick tender pods regularly. Cook beans before eating.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/french-beans/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A climbing French bean cultivar grown for stringless green pods. Give it tall, sturdy supports and pick tender pods regularly. Cook beans before eating. Sow into warmed, drained soil after frost risk. Support climbing forms and maintain steady moisture without waterlogging.",
+      "harvestInstructions": "Pick young pods for snap-bean varieties or let dry-bean varieties mature as directed on the seed label. Cook beans properly; do not eat raw or undercooked beans.",
+      "photo": {
+        "path": "/images/plants/phaseolus-vulgaris.jpg",
+        "altText": "Common bean reference photo; Cobra cultivar not verified",
+        "credit": "DenesFeri",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/phaseolus-vulgaris/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "cultivarName": "Cobra",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Common bean (Purple Teepee)",
+    "scientificName": "Phaseolus vulgaris 'Purple Teepee'",
+    "description": "A dwarf French bean cultivar with purple pods that turn green when cooked. Pick pods while tender; cook beans before eating.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/french-beans/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A dwarf French bean cultivar with purple pods that turn green when cooked. Pick pods while tender; cook beans before eating. Sow into warmed, drained soil after frost risk. Support climbing forms and maintain steady moisture without waterlogging.",
+      "harvestInstructions": "Pick young pods for snap-bean varieties or let dry-bean varieties mature as directed on the seed label. Cook beans properly; do not eat raw or undercooked beans.",
+      "photo": {
+        "path": "/images/plants/phaseolus-vulgaris.jpg",
+        "altText": "Common bean reference photo; Purple Teepee cultivar not verified",
+        "credit": "DenesFeri",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/phaseolus-vulgaris/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "cultivarName": "Purple Teepee",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Squash (Sweet Dumpling)",
+    "scientificName": "Cucurbita pepo 'Sweet Dumpling'",
+    "description": "A winter squash cultivar with small cream-coloured fruit marked with green stripes and orange flesh. Let storage fruits mature; never eat unusually bitter squash.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone evenly moist with drainage; allow for the large leaves and rapidly growing fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with space for the selected bush or trailing variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/267553/sweet-dumpling-agm/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A winter squash cultivar with small cream-coloured fruit marked with green stripes and orange flesh. Let storage fruits mature; never eat unusually bitter squash. Provide full sun and warm conditions after frost risk has passed. This species-level entry covers several forms; follow the variety label for spacing.",
+      "harvestInstructions": "For winter storage, allow fruit to develop a mature rind before gathering with a short stalk attached. Cure and store only sound fruit; never eat unusually bitter squash.",
+      "photo": {
+        "path": "/images/plants/cucurbita-pepo.jpg",
+        "altText": "Squash reference photo; Sweet Dumpling cultivar not verified",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucurbita-pepo/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form and fruit"
+      },
+      "cultivarName": "Sweet Dumpling",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Garlic (Solent Wight)",
+    "scientificName": "Allium sativum 'Solent Wight'",
+    "description": "A softneck garlic cultivar grown for white-skinned bulbs. Use labelled planting cloves, good drainage and a locally suitable planting season. Keep alliums away from pets.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/211281/allium-solent-wight/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A softneck garlic cultivar grown for white-skinned bulbs. Use labelled planting cloves, good drainage and a locally suitable planting season. Keep alliums away from pets. Choose a sunny site with loose, fertile, drained soil. Match planting time to the variety and local weather; reduce watering as bulbs mature.",
+      "harvestInstructions": "Lift mature bulbs carefully, dry them in a ventilated place and store sound bulbs. Keep bulbs and foliage away from pets.",
+      "photo": {
+        "path": "/images/plants/allium-sativum.jpg",
+        "altText": "Garlic reference photo; Solent Wight cultivar not verified",
+        "credit": "Filo geÌ€n'",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-sativum/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "garlic"
+      },
+      "cultivarName": "Solent Wight",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Onion (Red Baron)",
+    "scientificName": "Allium cepa 'Red Baron'",
+    "description": "A red-skinned onion cultivar with a strong flavour. Allow mature bulbs to dry and cure before storage, following local weather and supplier guidance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil moisture even while bulbs grow. Reduce watering as the crop matures, following local conditions.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil without persistent waterlogging.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/onions/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A red-skinned onion cultivar with a strong flavour. Allow mature bulbs to dry and cure before storage, following local weather and supplier guidance. Choose a locally suitable onion variety and plant labelled sets or seedlings. Keep the bed weeded without damaging the shallow roots.",
+      "harvestInstructions": "Lift bulb onions when mature foliage falls and dries. Cure sound bulbs in a dry, ventilated place before storage.",
+      "photo": {
+        "path": "/images/plants/allium-cepa.jpg",
+        "altText": "Onion reference photo; Red Baron cultivar not verified",
+        "credit": "Carl Lewis",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-cepa/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "mass planting"
+      },
+      "cultivarName": "Red Baron",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Dill (Domino)",
+    "scientificName": "Anethum graveolens 'Domino'",
+    "description": "A compact dill cultivar for aromatic leaf harvests. Sow small batches for a succession of fresh leaves and allow selected plants to mature if seed is wanted.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun; coriander also tolerates light shade. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide outdoor airflow and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/herbs/dill/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "A compact dill cultivar for aromatic leaf harvests. Sow small batches for a succession of fresh leaves and allow selected plants to mature if seed is wanted. Sow directly in a sunny, sheltered spot with drained soil. Thin seedlings to the seed-label spacing; support taller stems if necessary.",
+      "harvestInstructions": "Snip a few fresh leafy tips without stripping the plant. For seed, collect ripening heads before the seeds scatter.",
+      "photo": {
+        "path": "/images/plants/anethum-graveolens.jpg",
+        "altText": "Dill reference photo; Domino cultivar not verified",
+        "credit": "Magnus Brath",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Foliage"
+      },
+      "cultivarName": "Domino",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Rosemary (Miss Jessopp’s Upright)",
+    "scientificName": "Salvia rosmarinus 'Miss Jessopp’s Upright'",
+    "description": "An upright rosemary cultivar with light-blue flowers and aromatic leaves. Give it sun and free drainage, and assess winter protection for the local site.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a freely draining mix; avoid heavy, persistently wet soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/herbs/rosemary/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "An upright rosemary cultivar with light-blue flowers and aromatic leaves. Give it sun and free drainage, and assess winter protection for the local site. Provide full sun and very good drainage. Check the cultivar and local winter conditions; protect container roots from severe cold and wet.",
+      "harvestInstructions": "Snip small amounts of healthy shoot tips for kitchen use while retaining leafy growth. Avoid stripping the whole plant.",
+      "photo": {
+        "path": "/images/plants/salvia-rosmarinus.jpg",
+        "altText": "Rosemary reference photo; Miss Jessopp’s Upright cultivar not verified",
+        "credit": "Cathy Dewitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/salvia-rosmarinus/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Salvia rosmarinus pruned to conical form (Wake County, NC)"
+      },
+      "cultivarName": "Miss Jessopp’s Upright",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Thyme (Silver Posie)",
+    "scientificName": "Thymus vulgaris 'Silver Posie'",
+    "description": "A thyme cultivar with pale-edged aromatic leaves. Grow in full sun and well-drained soil; trim lightly to maintain a compact herb plant.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a freely draining mix; avoid heavy, persistently wet soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/74389/thymus-vulgaris-silver-posie/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "A thyme cultivar with pale-edged aromatic leaves. Grow in full sun and well-drained soil; trim lightly to maintain a compact herb plant. Use full sun and freely draining growing mix. Check soil moisture before watering and avoid winter waterlogging.",
+      "harvestInstructions": "Clip small leafy sprigs, retaining live growth and the woody framework. Harvest before flowering when growing mainly for leaves.",
+      "photo": {
+        "path": "/images/plants/thymus-vulgaris.jpg",
+        "altText": "Thyme reference photo; Silver Posie cultivar not verified",
+        "credit": "Forest and KimStarr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Leaves"
+      },
+      "cultivarName": "Silver Posie",
+      "photoIsSpeciesReference": true
+    }
   }
 ]
