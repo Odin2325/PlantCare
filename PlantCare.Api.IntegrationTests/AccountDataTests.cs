@@ -59,6 +59,7 @@ public sealed class AccountDataTests : IAsyncLifetime
             db.PlantSpecies.Add(species); db.UserPlants.Add(plant);
             db.UserPlants.Add(UserPlant.Create(b.Id, species.Id, "Private B plant", null, null, "Private B notes", now));
             db.CareEvents.Add(CareEvent.Create(schedule.Id, now, now));
+            db.HarvestRecords.Add(HarvestRecord.Create(plant.Id,DateOnly.FromDateTime(now.UtcDateTime),2,"items","Private harvest",now));
             db.Notifications.AddRange(notification, Notification.CreateFollowUp(notification, now, 24)); db.PushSubscriptions.Add(device);
             db.PushDeliveries.Add(PushDelivery.Create(notification.Id, device.Id, now));
             db.NotificationPreferences.Add(NotificationPreference.CreateDefault(a.Id));
@@ -67,6 +68,18 @@ public sealed class AccountDataTests : IAsyncLifetime
             db.CalendarInvitations.AddRange(CalendarInvitation.Create(a.Id, "pending@gmail.com", new string('b',64), now), CalendarInvitation.Create(b.Id, a.Email!, new string('c',64), now));
             return Task.CompletedTask;
         });
+    }
+
+    [Fact] public async Task HarvestWritesUseCookieAntiforgery()
+    {
+        var a=await UserAsync();var b=await UserAsync();await Seed(a,b);
+        Guid id;await using(var scope=factory.Services.CreateAsyncScope()){var db=scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();var plant=await db.UserPlants.SingleAsync(p=>p.UserId==a.Id);plant.Restore();id=plant.Id;await db.SaveChangesAsync();}
+        using var client=Client();await Login(client,a);client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        var record=new {harvestedOn=DateOnly.FromDateTime(DateTime.UtcNow).AddDays(-1),quantity=1,unit="items"};
+        Assert.Equal(HttpStatusCode.BadRequest,(await client.PostAsJsonAsync($"/api/my-plants/{id}/harvests",record)).StatusCode);
+        await client.AddAntiforgeryTokenAsync();var added=await client.PostAsJsonAsync($"/api/my-plants/{id}/harvests",record);added.EnsureSuccessStatusCode();
+        using var item=JsonDocument.Parse(await added.Content.ReadAsStringAsync());var harvestId=item.RootElement.GetProperty("id").GetGuid();
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");Assert.Equal(HttpStatusCode.BadRequest,(await client.DeleteAsync($"/api/my-plants/{id}/harvests/{harvestId}")).StatusCode);
     }
 
     [Fact]
@@ -139,6 +152,8 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.False(json.RootElement.GetProperty("plants")[0].GetProperty("isActive").GetBoolean());
         Assert.Equal("2027-03-01", json.RootElement.GetProperty("plants")[0].GetProperty("plannedSowingOn").GetString());
         Assert.Equal("2027-08-01", json.RootElement.GetProperty("plants")[0].GetProperty("expectedHarvestOn").GetString());
+        Assert.Single(json.RootElement.GetProperty("harvests").EnumerateArray());
+        Assert.Contains("Private harvest", text);
         Assert.Contains("Private A notes", text);
         foreach (var secret in new[] { "Private B notes", "Private B plant", "private-endpoint", "private-key", "private-auth", new string('a',64), "passwordHash", "securityStamp", Password })
             Assert.DoesNotContain(secret, text);
@@ -174,7 +189,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
         Assert.False(await db.Users.AnyAsync(u => u.Id == a.Id)); Assert.True(await db.Users.AnyAsync(u => u.Id == b.Id));
         Assert.Single(await db.UserPlants.ToListAsync()); Assert.Single(await db.PlantSpecies.ToListAsync());
-        Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.CareEvents.ToListAsync());
+        Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.CareEvents.ToListAsync()); Assert.Empty(await db.HarvestRecords.IgnoreQueryFilters().ToListAsync());
         Assert.Empty(await db.Notifications.ToListAsync()); Assert.Empty(await db.PushDeliveries.ToListAsync());
         Assert.Empty(await db.CalendarShares.ToListAsync()); Assert.Empty(await db.CalendarSubscriptions.ToListAsync());
         Assert.Empty(await db.CalendarInvitations.ToListAsync());
@@ -200,7 +215,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         var check = checkScope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
         Assert.Equal(2, await check.Users.CountAsync()); Assert.Equal(2, await check.CalendarShares.CountAsync());
         Assert.Equal(2, await check.Notifications.CountAsync()); Assert.Single(await check.PushDeliveries.ToListAsync());
-        Assert.Single(await check.CareEvents.ToListAsync()); Assert.Equal(2, await check.UserPlants.CountAsync());
+        Assert.Single(await check.CareEvents.ToListAsync()); Assert.Single(await check.HarvestRecords.ToListAsync()); Assert.Equal(2, await check.UserPlants.CountAsync());
         Assert.Empty(await check.AccountErasures.ToListAsync());
     }
 

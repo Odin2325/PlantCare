@@ -1,3 +1,4 @@
+import { HarvestRecord, RecordHarvest } from '../models/harvest-record.model';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -153,4 +154,8 @@ export class MyPlantsApiService {
       request,
     );
   }
+  getHarvests(id:string):Observable<HarvestRecord[]>{return this.httpClient.get<HarvestRecord[]>(`${this.endpoint}/${id}/harvests`);}
+  recordHarvest(id:string,record:RecordHarvest):Observable<HarvestRecord>{return this.httpClient.post<HarvestRecord>(`${this.endpoint}/${id}/harvests`,record);}
+  deleteHarvest(id:string,recordId:string):Observable<void>{return this.httpClient.delete<void>(`${this.endpoint}/${id}/harvests/${recordId}`);}
+
 }

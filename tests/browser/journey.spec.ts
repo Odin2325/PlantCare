@@ -307,6 +307,25 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await page.reload(); await expect(page.getByLabel('Expected harvest', { exact: true })).toHaveValue('');
   });
 
+  await step('Harvest logs persist independently and require confirmed removal', page, async () => {
+    const plant=(await(await page.request.get('/api/my-plants')).json()).find((p:{nickname:string})=>p.nickname===nickname);
+    await page.goto('/my-plants/'+plant.id);
+    const log=page.getByRole('region',{name:'Harvest records',exact:true});
+    await log.getByLabel('Quantity (optional)',{exact:true}).fill('1.5');
+    await expect(log.getByRole('button',{name:'Record harvest',exact:true})).toBeDisabled();
+    await log.getByLabel('Harvest unit',{exact:true}).selectOption('kg');
+    await log.getByLabel('Harvest notes (optional)',{exact:true}).fill('Synthetic harvest');
+    await log.getByRole('button',{name:'Record harvest',exact:true}).click();
+    await expect(log.getByText('Harvest recorded.',{exact:true})).toBeVisible();
+    await page.reload();await expect(log.getByText('Synthetic harvest',{exact:true})).toBeVisible();
+    await auditAccessibility(page,'Harvest records');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    expect(await(await page.request.get('/api/my-plants/'+plant.id)).json()).toEqual(plant);
+    await log.getByRole('button',{name:/Remove harvest from/}).click();
+    await log.getByRole('button',{name:'Keep harvest',exact:true}).click();await expect(log.getByText('Synthetic harvest',{exact:true})).toBeVisible();
+    await log.getByRole('button',{name:/Remove harvest from/}).click();await log.getByRole('button',{name:'Confirm removal',exact:true}).click();
+    await expect(log.getByText('No harvests recorded yet.',{exact:true})).toBeVisible();
+  });
+
   await step('Archive and restore survive reload', page, async () => {
     await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'My plants', exact: true }).click();
     await page.getByRole('button', { name: 'Archive plant', exact: true }).click();

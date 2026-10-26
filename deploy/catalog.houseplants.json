@@ -6577,5 +6577,308 @@
       "cultivarName": "Opal",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Sweet cherry tree",
+    "scientificName": "Prunus avium",
+    "description": "A deciduous tree grown for sweet cherries. Mature size depends on rootstock; check whether the chosen cultivar needs a compatible pollinator.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "commonNameAliases": [
+        "Sweet cherry",
+        "Cherry tree"
+      ],
+      "growingNotes": "Provide sun, shelter and fertile, moist but drained soil. Choose a rootstock for available space, protect blossom from frost where practical and prune at the appropriate summer stage.",
+      "harvestInstructions": "Pick only fully ripe cherries, handling the stalk gently. Cherries do not continue ripening after picking. Keep stones and wilted leaves away from pets.",
+      "photo": {
+        "path": "/images/plants/prunus-avium.jpg",
+        "altText": "Sweet cherry tree reference photo",
+        "credit": "Derek Ramsey",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Tree"
+      }
+    }
+  },
+  {
+    "commonName": "Sour cherry tree",
+    "scientificName": "Prunus cerasus",
+    "description": "A fruit tree grown for tart cherries often used in cooking and preserves. Grafted trees vary in size according to their rootstock.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-cerasus/",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "commonNameAliases": [
+        "Sour cherry",
+        "Tart cherry"
+      ],
+      "growingNotes": "Use fertile drained soil in sun or a suitable partly shaded position. Check rootstock, local frost exposure and the cultivar label; prune after fruiting rather than in winter.",
+      "harvestInstructions": "Gather fully ripe fruit carefully in dry weather where possible. Use sound cherries for cooking or preserving; do not consume the stones.",
+      "photo": {
+        "path": "/images/plants/prunus-cerasus.jpg",
+        "altText": "Sour cherry tree reference photo",
+        "credit": "DenesFeri",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-cerasus/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      }
+    }
+  },
+  {
+    "commonName": "Peach tree",
+    "scientificName": "Prunus persica",
+    "description": "A fruit tree grown for summer peaches. The reference photo shows a dwarf 'Bonanza' plant in flower; size and fruit differ among cultivars and rootstocks.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-persica/",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "commonNameAliases": [
+        "Peach",
+        "Common peach"
+      ],
+      "growingNotes": "Choose a warm, sunny and sheltered site with fertile drained soil. Check winter suitability and protect early blossom from frost. Manage peach leaf curl and select a cultivar suited to local conditions.",
+      "harvestInstructions": "Pick when the fruit has developed its expected colour, gives slightly and comes away gently. Handle carefully to avoid bruising. Keep stones and wilted leaves away from pets.",
+      "photo": {
+        "path": "/images/plants/prunus-persica.jpg",
+        "altText": "Peach tree reference photo",
+        "credit": "Cathy DeWitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-persica/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "'Bonanza' dwarf Spring Wake County"
+      }
+    }
+  },
+  {
+    "commonName": "Grape vine",
+    "scientificName": "Vitis vinifera",
+    "description": "A deciduous climbing vine grown for grapes. Cultivars differ in dessert or wine use, ripening needs and disease susceptibility.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "commonNameAliases": [
+        "Grape",
+        "European grape",
+        "Wine grape"
+      ],
+      "growingNotes": "Provide full sun, shelter, drained soil, sturdy support and a suitable training/pruning system. Choose a cultivar that can ripen in the local growing season. Keep grapes and raisins away from dogs.",
+      "harvestInstructions": "Pick complete bunches only when ripe for the intended use; grapes do not sweeten after picking. Local weather and variety affect the harvest date.",
+      "photo": {
+        "path": "/images/plants/vitis-vinifera.jpg",
+        "altText": "Grape vine reference photo",
+        "credit": "Eiku",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Leaves in Pot"
+      }
+    }
+  },
+  {
+    "commonName": "Sweet cherry tree (Stella)",
+    "scientificName": "Prunus avium 'Stella'",
+    "description": "A self-fertile sweet cherry cultivar with dark fruit. Self-fertility does not protect blossom against frost or guarantee fruit set.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/cherries/grow-your-own",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose a sunny, sheltered site and a rootstock suited to the space. Water newly planted or container trees as needed and prune after harvesting.",
+      "harvestInstructions": "Pick only fully ripe cherries, handling the stalk gently. Cherries do not continue ripening after picking. Keep stones and wilted leaves away from pets.",
+      "photo": {
+        "path": "/images/plants/prunus-avium.jpg",
+        "altText": "Sweet cherry tree reference photo; Stella cultivar not verified",
+        "credit": "Derek Ramsey",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "Stella",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Sour cherry tree (Morello)",
+    "scientificName": "Prunus cerasus 'Morello'",
+    "description": "A self-fertile dark-red acid cherry cultivar valued for cooking and preserves. It can crop in a suitably sheltered partly shaded site.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/63690/prunus-cerasus-morello-c/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Use fertile moist but drained soil and a suitable rootstock. Fan training can suit a wall; follow acid-cherry pruning guidance after fruiting.",
+      "harvestInstructions": "Gather fully ripe fruit carefully in dry weather where possible. Use sound cherries for cooking or preserving; do not consume the stones.",
+      "photo": {
+        "path": "/images/plants/prunus-cerasus.jpg",
+        "altText": "Sour cherry tree reference photo; Morello cultivar not verified",
+        "credit": "DenesFeri",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-cerasus/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Form"
+      },
+      "cultivarName": "Morello",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Peach tree (Peregrine)",
+    "scientificName": "Prunus persica 'Peregrine'",
+    "description": "A white-fleshed peach cultivar. Successful cropping depends on warmth, shelter and protection appropriate to the local climate.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/pdfs/agm-lists/agmtreefruits.pdf",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Provide a warm, sunny, sheltered growing site with drainage. Protect early blossom from frost where practical and follow local guidance on leaf curl and pruning.",
+      "harvestInstructions": "Pick when the fruit has developed its expected colour, gives slightly and comes away gently. Handle carefully to avoid bruising. Keep stones and wilted leaves away from pets.",
+      "photo": {
+        "path": "/images/plants/prunus-persica.jpg",
+        "altText": "Peach tree reference photo; Peregrine cultivar not verified",
+        "credit": "Cathy DeWitt",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-persica/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "'Bonanza' dwarf Spring Wake County"
+      },
+      "cultivarName": "Peregrine",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Grape vine (Pinot Noir)",
+    "scientificName": "Vitis vinifera 'Pinot Noir'",
+    "description": "A wine grape cultivar producing compact bunches of small blue-black fruit. Site warmth and local weather affect ripening.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/68269/vitis-vinifera-pinot-noir-o-b/details",
+      "reviewedOn": "2026-10-26",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Train on sturdy support in full sun with shelter and drained soil. Follow the chosen pruning system and monitor disease; do not assume a fixed local harvest month.",
+      "harvestInstructions": "Pick complete bunches only when ripe for the intended use; grapes do not sweeten after picking. Local weather and variety affect the harvest date.",
+      "photo": {
+        "path": "/images/plants/vitis-vinifera.jpg",
+        "altText": "Grape vine reference photo; Pinot Noir cultivar not verified",
+        "credit": "Eiku",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Leaves in Pot"
+      },
+      "cultivarName": "Pinot Noir",
+      "photoIsSpeciesReference": true
+    }
   }
 ]

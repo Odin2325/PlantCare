@@ -56,6 +56,7 @@ public static class DatabaseCommands
     {
         var policy = ApiWrites.ToDictionary(table => table, _ => new[] { "SELECT", "INSERT", "UPDATE", "DELETE" });
         foreach (var table in ApiReads) policy[table] = ["SELECT"];
+        policy["HarvestRecords"] = ["SELECT", "INSERT", "DELETE"];
         policy["AccountErasures"] = ["SELECT", "INSERT"];
         policy["Notifications"] = ["SELECT", "INSERT", "UPDATE"];
         return policy;

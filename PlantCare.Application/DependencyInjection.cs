@@ -15,6 +15,7 @@ public static class DependencyInjection
         services.AddScoped<IPlantSpeciesService, PlantSpeciesService>();
 
         services.AddScoped<IUserPlantService, UserPlantService>();
+        services.AddScoped<IHarvestService, HarvestService>();
 
         services.AddScoped<ICareService, CareService>();
 

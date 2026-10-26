@@ -2126,5 +2126,61 @@
     "bytes": 252099,
     "sourceFileName": "Coriandrum_sativum--Forest-and-Kim-Starr--CC-BY.jpg",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Tree",
+    "caption": "Tree",
+    "credit": "Derek Ramsey",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "licenseName": "CC BY-SA 2.0",
+    "slug": "prunus-avium",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
+    "path": "/images/plants/prunus-avium.jpg",
+    "sha256": "99dafa45021a6b70032db5ffae85916589d193aa7ea28770ad5af20aacb096f0",
+    "bytes": 985315,
+    "sourceFileName": "Prunus_avium-Derek_R_sAsKnbUgpsKI.jpe",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Form",
+    "caption": "Form",
+    "credit": "DenesFeri",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "prunus-cerasus",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-cerasus/",
+    "path": "/images/plants/prunus-cerasus.jpg",
+    "sha256": "34776e0bd663894991e6490dc32af7c19ef8ec438920f33a075cca1722459b0c",
+    "bytes": 1007848,
+    "sourceFileName": "Prunus_cerasus_form__RfM4fTIVCROE.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "'Bonanza' dwarf Spring Wake County",
+    "caption": "'Bonanza' dwarf Spring Wake County",
+    "credit": "Cathy DeWitt",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "prunus-persica",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-persica/",
+    "path": "/images/plants/prunus-persica.jpg",
+    "sha256": "438843c45a7271fa4b3fc693b6d5c83b14738fe40bc7bf43aa3e0b89d5053427",
+    "bytes": 908247,
+    "sourceFileName": "Prunus-persica-dwarf_F5yuyXKEDgK0.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Vitis vinifera",
+    "caption": "Leaves in Pot",
+    "credit": "Eiku",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "vitis-vinifera",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
+    "path": "/images/plants/vitis-vinifera.jpg",
+    "sha256": "4c7af15d8bba8084304549a84c1e5aa851e7f5b3bd975485a0530fd739ceaef0",
+    "bytes": 604111,
+    "sourceFileName": "Vitis_vinifera_Eiku__XyNO2rEtmrWM.jpe",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]

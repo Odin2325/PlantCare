@@ -21,6 +21,7 @@ describe('MyPlantDetailPage', () => {
       http.expectOne(`/api/my-plants/${id}`).flush({ id, nickname, speciesCommonName: 'Boston fern',
         plantSpeciesId: 'b1111111-1111-4111-8111-111111111111', tags: [], careSchedules: [], isActive: true });
       fixture.detectChanges();
+      http.expectOne(`/api/my-plants/${id}/harvests`).flush([]);
       expect(fixture.nativeElement.querySelector('h1').textContent).toBe(nickname || 'Boston fern');
       expect(fixture.nativeElement.querySelector(`a[href="/my-plants/${id}/care-history"]`)).not.toBeNull();
     });

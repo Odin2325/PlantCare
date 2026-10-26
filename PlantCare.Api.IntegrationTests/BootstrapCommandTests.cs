@@ -157,17 +157,17 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(172,species.Count);
-            Assert.Equal(34, species.Count(p => p.CatalogProfile?.CultivarName is not null));
-            Assert.Equal(33, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
+            Assert.Equal(180,species.Count);
+            Assert.Equal(38, species.Count(p => p.CatalogProfile?.CultivarName is not null));
+            Assert.Equal(37, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
             Assert.Equal(107, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
-            Assert.Equal(65, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
-            Assert.Equal(12, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
+            Assert.Equal(73, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
+            Assert.Equal(18, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
             Assert.Equal(8, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
             Assert.Equal(12, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(24, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
-            Assert.Equal(127, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
-            Assert.Equal(253, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(131, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(262, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
             Assert.Equal(13, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
             Assert.DoesNotContain(species, p => p.IsToxicToPets && p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null);
             foreach(var plant in species)

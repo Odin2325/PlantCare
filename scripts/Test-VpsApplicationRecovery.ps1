@@ -243,6 +243,17 @@ services:
         if((Request "/api/my-plants/$($plant.id)/care/history").id -ne $complete.event.id){throw 'Planting plan changed care history.'}
         'PASS: restored runtime saves planting dates without changing care history.'
     }
+    $supportsHarvests = @(& git -C $BackupRoot ls-tree --name-only $RuntimeCandidate 'PlantCare.Domain/Entities/HarvestRecord.cs') -contains 'PlantCare.Domain/Entities/HarvestRecord.cs'
+    if($LASTEXITCODE -ne 0){throw 'Recovery candidate capability lookup failed.'}
+    if($supportsHarvests){
+        $harvest=Request "/api/my-plants/$($plant.id)/harvests" 'POST' @{harvestedOn=[DateOnly]::FromDateTime([DateTime]::UtcNow.AddDays(-1)).ToString('yyyy-MM-dd');quantity=2;unit='items';notes='Isolated restored-copy harvest'}
+        $harvests=@(Request "/api/my-plants/$($plant.id)/harvests")
+        if($harvests.Count -ne 1 -or $harvests[0].id -ne $harvest.id -or $harvests[0].quantity -ne 2){throw 'Restored harvest record did not persist.'}
+        $export=Request '/api/account/export' 'POST' @{password=$newPassword}
+        if(-not(@($export.harvests)|Where-Object id -eq $harvest.id)){throw 'Restored harvest missing from private export.'}
+        if((Request "/api/my-plants/$($plant.id)/care/history").id -ne $complete.event.id){throw 'Harvest changed care history.'}
+        'PASS: restored runtime saves harvest records and exports them without changing care.'
+    }
     'PASS: fresh sign-in, restored worker/restart deduplication and care history.'
     # Failed activation only: intentionally non-starting API, no migrations/data rewrite.
     $failure=Join-Path $scratch 'compose.failed-activation.yaml'
@@ -262,6 +273,10 @@ services:
     if($activeImage -ne $manifest.images.api){throw 'Rollback did not restore the pinned application image.'}
     if($supportsGrowingPlan -and (Request "/api/my-plants/$($plant.id)").expectedHarvestOn -ne '2027-08-01'){throw 'Failed activation lost the planting plan.'}
 
+    if($supportsHarvests){
+        $harvestAfter=@(Request "/api/my-plants/$($plant.id)/harvests")
+        if($harvestAfter.Count -ne 1 -or $harvestAfter[0].id -ne $harvest.id -or $harvestAfter[0].quantity -ne 2){throw 'Failed activation lost the harvest record.'}
+    }
     $null=Request '/health/ready'
     if((Request '/api/account/me').email -ne $account.email){throw 'Session did not survive activation rollback.'}
     $after=@(Request "/api/my-plants/$($plant.id)/care/history")
@@ -271,7 +286,7 @@ services:
     $null=Request '/api/auth/logout' 'POST' -Expected 204
     $null=Request '/api/account/me' -Expected 401
     $passed=$true
-    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
+    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;harvestRecordsVerified=$supportsHarvests;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
     'PASS: failed API activation rejected; pinned runtime restored with session/history/keys intact; logout enforced.'
 } finally {
     try {

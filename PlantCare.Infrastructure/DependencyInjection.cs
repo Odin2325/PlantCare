@@ -63,6 +63,7 @@ public static class DependencyInjection
         services.AddScoped<IPlantSpeciesRepository, PlantSpeciesRepository>();
 
         services.AddScoped<IUserPlantRepository, UserPlantRepository>();
+        services.AddScoped<IHarvestRecordRepository, HarvestRecordRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

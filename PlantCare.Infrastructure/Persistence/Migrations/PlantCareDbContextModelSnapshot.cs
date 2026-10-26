@@ -427,6 +427,39 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("ExternalCalendarEvents");
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.HarvestRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("HarvestedOn")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<decimal?>("Quantity")
+                        .HasPrecision(10, 3)
+                        .HasColumnType("decimal(10,3)");
+
+                    b.Property<DateTimeOffset>("RecordedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Unit")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<Guid>("UserPlantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserPlantId", "HarvestedOn");
+
+                    b.ToTable("HarvestRecords", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.Notification", b =>
                 {
                     b.Property<Guid>("Id")
@@ -916,6 +949,17 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .HasForeignKey("ConnectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.HarvestRecord", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.UserPlant", "UserPlant")
+                        .WithMany()
+                        .HasForeignKey("UserPlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserPlant");
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.Notification", b =>
