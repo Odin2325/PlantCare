@@ -3,8 +3,8 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 180 houseplant, crop and tree entries,
-including 38 named cultivars, with linked care references and licensed photos. Its preserved
+data while the launch requirements remain open. The reviewed catalog dataset includes 192 houseplant, crop and tree entries,
+including 50 named cultivars, with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
 The catalog combines name search, light requirement and a Cats and dogs filter.
@@ -86,6 +86,16 @@ date first; older records remain saved and are included in Download my data.
 Different units are not summed. Harvests do not change target dates, care history,
 schedules or shared-calendar events. Archived plants keep readable harvests;
 restore the plant before adding or removing records.
+
+In Garden, choose Harvest overview to see recorded harvests from active garden
+plants. It starts with this year through today. Set Harvest from and Harvest to,
+then Apply harvest dates; a range can span up to 366 days. This year resets it.
+The Garden category, search and planting-plan filters also apply to these totals.
+Items, grams and kilograms remain separate; records without quantities are counted.
+Totals include every matching record, while Recent harvests shows only matching
+rows from the latest 100 across the garden for those dates. Open a plant link
+(nickname first) to inspect its harvest log. Archived plants are excluded here;
+their individual records remain available on archived plant details.
 
 ## Daily care and calendar
 
