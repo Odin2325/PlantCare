@@ -3,8 +3,8 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 78 real
-houseplants with linked care references and licensed photos. Its preserved
+data while the launch requirements remain open. The reviewed catalog dataset includes 180 houseplant, crop and tree entries,
+including 38 named cultivars, with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
 The catalog combines name search, light requirement and a Cats and dogs filter.
@@ -55,12 +55,37 @@ spider plant, golden pothos, aloe vera, jade plant, moth orchid, peace lily and 
 plant details also include Growth references with credited example photos.
 These show different specimens, not a fixed growth timeline or a health diagnosis.
 
-The catalog has 128 alternative names across 65 entries. Try Devils ivy or
+The catalog has 262 alternative names across 131 entries. Try Devils ivy or
 mother in laws tongue; matching ignores apostrophe and hyphen variations. Species
 details list Also known as. A shared name such as Ribbon plant can return several
 different species, so compare the photos and scientific names before choosing.
 My plants search also recognizes these alternative names while keeping the
 nickname you saved and the selected location/tag filters.
+
+## Garden plans and harvest records
+
+Use the catalog category tabs to browse fruit, vegetables, roots/tubers, herbs and
+trees. Entry type distinguishes general plants from named cultivars. A labelled
+species reference photo does not verify the appearance of the named cultivar.
+
+Garden shows your active crops and trees grouped by the locations saved in My
+plants. Search, category and planting-plan filters apply to both the cards and
+the Planting calendar. On an individual plant's detail page, save optional target
+dates for sowing, planting out and expected harvest. Browse these in Garden by
+month; each nickname/action event opens its own plant. Targets do not send new
+reminders or mark any work complete.
+
+On a plant's detail page, use Harvest records to record what you actually picked:
+choose the date, optionally enter a quantity and unit, and add notes if useful.
+Items must be whole numbers; grams/kilograms allow up to three decimal places.
+Choose Record harvest to save. A failed save retains the draft for retry.
+
+Use Remove harvest, then Confirm removal, to correct a mistake by deleting the
+record; Keep harvest cancels. The latest 100 records are displayed, newest harvest
+date first; older records remain saved and are included in Download my data.
+Different units are not summed. Harvests do not change target dates, care history,
+schedules or shared-calendar events. Archived plants keep readable harvests;
+restore the plant before adding or removing records.
 
 ## Daily care and calendar
 

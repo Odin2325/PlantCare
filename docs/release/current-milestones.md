@@ -23,16 +23,17 @@ filter, eight species and two galleries, bringing that total to 91. The next
 [collection-care increment](collection-care-filter.md) adds active collection care
 filters and nine species, bringing that reviewed total to 100. The following
 [care-history increment](care-history-discovery.md) adds history discovery and five
-plants, bringing that reviewed total to 105. The [Garden and cultivar increment](garden-catalog-expansion.md) adds 47 entries, bringing that total to 152. The [planting-plan increment](planting-plan.md) adds twelve entries, bringing that total to 164. The [planting-calendar increment](planting-calendar.md) adds eight entries, bringing the current total to 172.
+plants, bringing that reviewed total to 105. The [Garden and cultivar increment](garden-catalog-expansion.md) adds 47 entries, bringing that total to 152. The [planting-plan increment](planting-plan.md) adds twelve entries, bringing that total to 164. The [planting-calendar increment](planting-calendar.md) adds eight entries, bringing that total to 172. The [harvest-record increment](harvest-records.md) adds eight entries, bringing the current total to 180.
 
 ## Completed staging milestones
 
 | Milestone | Accepted evidence | Limits |
 | --- | --- | --- |
 | Core care and Android beta | [Public browser journey](public-browser-acceptance.md), [Android beta](android-beta.md), owner-confirmed reminders, multiple care cycles, Dashboard taps, installation, offline/reconnect and update with data intact | Other physical devices and assistive technologies need their own acceptance. |
-| English catalog and images | [172 reviewed entries](planting-calendar.md), houseplants/crops/trees and 34 named cultivars, category tabs, 152 licensed originals, 253 aliases across 127 entries, thirteen sourced cat-and-dog classifications, [catalog browsing](catalog-browsing.md), [24 growth references for twelve species](pet-assessment-expansion.md) | A curated selection; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
-| Garden and cultivar browsing | [Garden tab and category navigation](garden-catalog-expansion.md), saved-location groups, nickname-first cards, next care, harvest guidance and personal growing-guide links; live future-only fixture and data preservation | Read-only garden overview; bed planning and actual harvest records are later features. Generic cultivar photos are explicitly labelled. |
+| English catalog and images | [180 reviewed entries](harvest-records.md), houseplants/crops/trees and 38 named cultivars, category tabs, 156 licensed originals, 262 aliases across 131 entries, thirteen sourced cat-and-dog classifications, [catalog browsing](catalog-browsing.md), [24 growth references for twelve species](pet-assessment-expansion.md) | A curated selection; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
+| Garden and cultivar browsing | [Garden tab and category navigation](garden-catalog-expansion.md), saved-location groups, nickname-first cards, next care, harvest guidance and personal growing-guide links; live future-only fixture and data preservation | Read-only garden overview; bed planning and harvest summaries remain later features. Generic cultivar photos are explicitly labelled. |
 | Planting calendar | [Monthly target-date agenda](planting-calendar.md), date-only month/year navigation, nickname/action links, shared Garden filters and phone reflow | Saved targets only; viewing the calendar does not complete care, record a harvest or send reminders. |
+| Actual harvest records | [Private date/quantity/notes log](harvest-records.md), create/read/confirmed removal, archived retention, export/erasure and migrated recovery | Latest 100 displayed; older records remain in export. Units are not summed and harvesting does not complete care or change target dates. |
 | Personal planting plans | [Optional sowing, planting-out and expected-harvest dates](planting-plan.md), owner/antiforgery protection, private export, Garden filters and migrated recovery | User-entered targets; no automatic maturity forecast, shared-calendar event, reminder or completed harvest is created. |
 | Collection care filtering | [Needs care, Upcoming and No active due dates](collection-care-filter.md), combined search/location/tag filters, result count, clearing, minute clock and rollover/disposal tests; real care-completion and existing-session update checks | Uses the device calendar day, matching collection badges. Filters are local view controls and do not change reminders or saved care. |
 | Care history discovery | [Action, completion-day and notes filters](care-history-discovery.md), newest/oldest order, clearing and edit-draft controls; read-only live acceptance and preserved history | Filters apply to the latest 100 loaded entries, with an explicit limit. Older records remain saved. Dates use the device time zone. |
@@ -42,7 +43,7 @@ plants, bringing that reviewed total to 105. The [Garden and cultivar increment]
 | Sharing emails and signup invitations | [Calendar-sharing acceptance](calendar-sharing-email.md): real Gmail inbox delivery, read-only access/revocation, isolated new-account signup and confirmation tests | Seven-day invitations; SMTP acceptance is not an inbox guarantee. No Google Calendar synchronization is enabled. |
 | Account controls and operations | [Account export/deletion](account-data.md), [retention and erasure-safe restore](retention-and-erasure-recovery.md), [VPS recovery](vps-application-recovery.md), [monitoring](worker-capacity.md) | Backups require the owner's PC/drive/access. Weekly email checks are not independent continuous monitoring. Replacement-host recovery remains open. |
 
-Latest deployed application: `dc25f44eadd8f8e45a7eeb0b9a210234dd8fc740`, with [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/40229274697). [Planting-calendar acceptance](planting-calendar.md) covers month navigation, nickname/action links, filtered target dates, catalog preservation, PWA update and backups. Documentation commits after that SHA do not imply a new runtime deployment.
+Latest deployed application: `2a50bb1f1eba52e6d7f2db0a2acf28d01ac2b9ed`, with [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/40392322159). [Harvest-record acceptance](harvest-records.md) covers ownership, exports/erasure, additive migration and isolated recovery, live date/quantity records, catalog preservation, PWA update and backups. Documentation commits after that SHA do not imply a new runtime deployment.
 
 ## Remaining work, in order
 
@@ -73,11 +74,11 @@ Latest deployed application: `dc25f44eadd8f8e45a7eeb0b9a210234dd8fc740`, with [s
 
 ## Feature lane
 
-[Garden and cultivar browsing](garden-catalog-expansion.md), [personal planting plans](planting-plan.md) and the [monthly planting calendar](planting-calendar.md) are accepted on staging. The catalog now has 172 entries and 34 cultivars. Plan dates are editable on personal details and visible/filterable in Garden and its calendar. The migration/private write received full CI; catalog-only changes retain focused validation.
+[Garden and cultivar browsing](garden-catalog-expansion.md), [personal planting plans](planting-plan.md) and the [monthly planting calendar](planting-calendar.md) are accepted on staging. The catalog now has 180 entries and 38 cultivars. Actual harvest records are also accepted on personal plant details, separately from target dates and care. Plan dates are editable on personal details and visible/filterable in Garden and its calendar. The migration/private write received full CI; catalog-only changes retain focused validation.
 
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
-account isolation and update checks. The next feature can add actual harvest records separate from plans and care completion, alongside more crops and sourced growth references.
+account isolation and update checks. The next feature can add a Garden harvest overview with date filters and per-unit quantities, alongside more crops and sourced growth references.
 Additional species follow the same reviewed import path. A personal photo journal
 requires a separate upload/storage/privacy/deletion design before implementation.
 Common-name-first labels and action-icon reminders are already implemented; do not

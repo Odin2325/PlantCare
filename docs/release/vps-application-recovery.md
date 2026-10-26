@@ -111,3 +111,7 @@ copy; authenticated save/reload and preservation after rejected API activation
 passed without changing care history. The capability probe remains optional for
 older runtimes. Live source data was unchanged; replacement-host and independent
 erasure-authority limits above remain open.
+
+## Harvest-record capability acceptance (2026-10-26)
+
+The isolated drill for `2a50bb1f1eba52e6d7f2db0a2acf28d01ac2b9ed` passed forward migration to the new harvest table, create/read and private export under the restricted runtime, unchanged care, and harvest/planting-plan preservation after a rejected API activation. The candidate is matched through committed source capability inspection. This does not accept replacement-host recovery or old-runtime export of newer harvest data.

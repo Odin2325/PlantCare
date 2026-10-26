@@ -1,6 +1,6 @@
 # Personal harvest records and fruit catalog expansion
 
-Prepared 2026-10-26; staging activation and exact-candidate acceptance are pending.
+Accepted on staging 2026-10-26 as `2a50bb1f1eba52e6d7f2db0a2acf28d01ac2b9ed`, with [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/40392322159). No production cutover or release tag.
 
 ## Behavior and limits
 
@@ -67,10 +67,40 @@ Sources:
   [Pinot Noir](https://www.rhs.org.uk/plants/68269/vitis-vinifera-pinot-noir-o-b/details),
   [grape dog warning](https://www.rhsplants.co.uk/plants/_/grape-pinot-noir/classid.2000047520/).
 
-## Verification
+## Accepted verification
 
-Focused backend and frontend checks, local SQL/browser acceptance, exact-candidate
-full CI and pre-deployment isolated migration/recovery are required. This increment
-changes a private write, erasure/export coverage and database grants; it therefore
-uses full CI under the existing policy. Routine catalog-only changes retain their
-focused path. No production cutover, release tag, new email or push test is implied.
+- Focused local backend coverage: nine domain tests, twelve harvest/account
+  integration tests and seven catalog-import tests passed. Seven relevant frontend
+  tests passed. All 156 photo files passed credits/license/title/hash validation.
+- One real authenticated desktop journey passed after correcting the unit select's
+  explicit label. It covers create/reload, unchanged plans/care, cancelling removal,
+  confirmed removal, archive/restore, accessibility and reflow. Six affected catalog
+  cases passed across desktop/mobile Chromium and Firefox. Desktop and phone form
+  previews passed with a three-decimal weight and no horizontal overflow.
+- Exact-candidate full CI: 196 backend tests, 64 frontend tests, retention safety,
+  restricted SQL access, cookie/ownership/session/push checks and all 60 browser/PWA
+  cases passed. No full local suite was repeated.
+- A verified encrypted pre-deployment snapshot was restored only to an isolated
+  local project. Forward migration, fresh erasure reconciliation and runtime grants
+  passed. Harvest create/read/private export and unchanged care were verified;
+  planting dates and harvest records survived a rejected API activation, with
+  session, history and keys intact. Source records were not modified by the drill.
+- Guarded VPS activation verified bundle checksums, image pins, compatible erasure
+  and snooze protocols, restricted runtime access and trusted HTTPS health.
+- Public acceptance: six focused browser cases, all 180 expected profiles and all
+  156 photo hashes passed. All 173 prior public records were exactly preserved.
+- A held existing-worker session accepted Update now, retained sign-in, active
+  plants and completed history, and logged out successfully.
+- The approved test account used one future-only care fixture. Live harvest
+  create/reload/export, keep/remove confirmation, date/quantity persistence and
+  archived read-only retention passed. Existing plans/care and original plants/
+  history stayed unchanged. Only the newly created fixture was archived, retaining
+  its final synthetic harvest. No external test email or push was sent.
+- Post-deployment encrypted backup and default local/VPS backup health passed;
+  scheduled tasks remained healthy. No schedules or thresholds changed.
+
+## Next feature
+
+Add a Garden harvest overview with date filters and quantities kept separate by
+unit, alongside more common crops. Shared calendars, reminder behavior and the
+remaining public-launch gates stay separate from this feature lane.
