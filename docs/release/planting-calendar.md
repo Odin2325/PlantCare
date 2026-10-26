@@ -1,5 +1,7 @@
 # Garden planting calendar and herb/fruit additions
 
+Accepted on staging 2026-10-26 as `dc25f44eadd8f8e45a7eeb0b9a210234dd8fc740`, with [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/40229274697). No production cutover or release tag.
+
 ## Behavior
 
 Garden now includes a monthly agenda of the saved target dates on active crops
@@ -48,9 +50,36 @@ Sources:
 
 ## Validation and deployment
 
-Pending exact-candidate browser and staging acceptance. Focused local tests cover
-calendar date validation/navigation, grouped event links, filter updates,
-read-only behavior and catalog imports/assets. The existing CI policy selects
-full validation for Garden source paths; this increment does not change that
-policy. The accepted prior planting-plan recovery drill remains applicable to
-unchanged persistence; do not claim a new replacement-host recovery drill.
+- Focused local checks: seven catalog-import and ten frontend tests passed,
+  with the two calendar tests rerun after the final input adjustment. All 152
+  photo files passed attribution/license/hash checks. Desktop and phone layouts,
+  date-only display in another time zone and 15 distinct affected browser cases
+  passed after correcting the fruit count and refreshing the final local image.
+- Exact-candidate full CI: 182 backend tests, 60 frontend tests, backup safety,
+  SQL access/account isolation/session security/push checks and all 60 browser/PWA
+  cases passed. The current policy selects full for Garden source; no full local
+  suite or redundant restore drill was added.
+- A fresh encrypted pre-deployment VPS backup was verified. The accepted prior
+  planting-plan recovery drill covers the unchanged persistence and protocols.
+  Guarded activation verified pinned images, compatible protocols, restricted
+  database access and both public health endpoints.
+- Public staging acceptance: six focused cases passed across desktop/mobile
+  Chromium and Firefox; all 165 prior public records were exactly unchanged,
+  all 172 reviewed profiles matched and all 152 image hashes passed.
+- A held existing-worker session accepted Update now, preserved sign-in, active
+  plant IDs and completed history, and logged out successfully.
+- The approved synthetic account verified all three target-date links, nickname
+  display and month filtering against a newly created future-only fixture.
+  Plan values, care schedules and original plants/history were preserved; only
+  the uniquely identified test fixture was archived. No test email or push sent.
+- On resuming after the usage pause, stale/failed scheduled backups had made
+  the existing retention guard defer cleanup. Rerunning the existing local and
+  VPS tasks restored fresh verified backups and healthy retention status.
+- Post-deployment encrypted backup and default local/VPS health checks passed;
+  both scheduled tasks were healthy. No schedules or thresholds changed.
+
+## Next feature
+
+Record an actual harvest separately from target dates and care completion,
+alongside more reviewed everyday crops. Publication decisions and the remaining
+release gates stay in the milestone plan.
