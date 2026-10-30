@@ -1,6 +1,7 @@
 # Care schedule preview
 
-Prepared 2026-10-30. Staging acceptance pending.
+Deployed and accepted on staging 2026-10-30 at `07848557db0ac3cc43f3d0c839a2af64de690138`.
+[Full CI](https://github.com/Odin2325/PlantCare/actions/runs/41040578725) passed.
 
 My plants now previews interval, weekday and pause/resume changes before an
 explicit Apply schedule changes action. The preview shows the current and proposed
@@ -43,3 +44,41 @@ profiles; API assertions still cover every catalog profile. Scheduling changes
 select full CI once, including SQL security and browser/PWA checks. Activation
 requires successful candidate CI, affected browser acceptance, a current backup,
 existing-worker update checks and a synthetic future-care fixture on staging.
+
+## Completed acceptance
+
+Focused checks passed: eleven API/import tests, six collection-page tests and one
+DST equivalence test. Fifteen catalog/Garden browser cases passed initially;
+three category cases found a stale fruit-cultivar count and passed after its
+correction. The affected desktop core journey passed with interval/weekday
+preview/application, pause/resume, a travelling browser's retained time zone,
+care/history and the existing account controls. The final candidate passed full
+CI, including SQL runtime/security and all browser/PWA checks. Local full suites
+were not repeated.
+
+Public comparison preserved all 223 prior catalog records exactly and verified
+all 230 reviewed profiles and 156 photo hashes over trusted HTTPS. The real
+existing-worker update preserved the approved synthetic account's session,
+collection IDs, completed history and cached care icons.
+
+Only a future-care synthetic fixture was used for live writes. Preview failure,
+retry, cancel, unchanged server data before confirmation, apply failure/retry,
+committed interval and reload passed. Desktop/phone preview layouts were
+inspected without horizontal overflow. The fixture was archived, and all original
+active plants and completed history were unchanged. Failure injection blocked
+service workers for deterministic routing; the real-worker update was verified
+separately. No external test emails or pushes were required.
+
+No database migration or stored format changed. The current schema's successful
+isolated recovery drill remains the 2026-10-30 seasonal-preference baseline; a
+new replacement-host recovery claim is not made. A fresh current-runtime backup
+preceded activation. The final deployed-candidate encrypted backup and integrity
+check passed through the existing scheduled task, and both default backup-health
+checks were healthy afterward.
+
+The post-deployment backup initially stopped before capture because the Windows
+SSH agent service was stopped. Starting the service restored its existing identity
+and server access without credentials being requested. The retry completed and
+both scheduled tasks returned success. No startup policy or schedule changed.
+Acceptance notes are committed locally under the owner's new batched-delivery
+cadence; they do not trigger an additional CI run or deployment.

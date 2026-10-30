@@ -3,8 +3,8 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 222 houseplant, crop and tree entries,
-including 80 named cultivars, with linked care references and licensed photos. Its preserved
+data while the launch requirements remain open. The reviewed catalog dataset includes 230 houseplant, crop and tree entries,
+including 88 named cultivars, with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
 The catalog combines name search, light requirement and a Cats and dogs filter.
@@ -61,6 +61,19 @@ details list Also known as. A shared name such as Ribbon plant can return severa
 different species, so compare the photos and scientific names before choosing.
 My plants search also recognizes these alternative names while keeping the
 nickname you saved and the selected location/tag filters.
+
+## Preview care-schedule changes
+
+In My plants, edit a care interval or weekday/time selection and choose Preview
+schedule. Review Current, Proposed and the estimated next due date. Weekday
+previews also show the reminder time zone; displayed due dates use your device's
+time zone. Apply schedule changes saves the reviewed settings. Cancel preview
+leaves the saved schedule unchanged. Preview pause and Preview resume work the
+same way. Editing a draft requires a fresh preview, and failed saves retain the
+draft for retry. The actual due date is recalculated from the latest history when
+you apply and may already be overdue. Previously queued messages can still arrive.
+This changes a schedule without recording completed care or changing seasonal
+preferences.
 
 ## Seasonal care preferences
 
