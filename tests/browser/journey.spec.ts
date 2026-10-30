@@ -275,14 +275,14 @@ test('register, confirm, care for a plant, recover password and log out', async 
       expect(Boolean(schedule), 'Persisted watering schedule exists').toBe(true);
       expect(schedule.timeZoneId).toBe('Europe/Berlin');
       expect(schedule.isEnabled).toBe(false);
-      await expect(otherWatering.getByRole('button', { name: 'Resume', exact: true })).toBeVisible();
+      await expect(otherWatering.getByRole('button', { name: 'Preview resume', exact: true })).toBeVisible();
       await submitAuth(otherPage, 'Log out', 'logout', 204);
       await expect(otherPage.getByRole('heading', { name: 'Welcome back' })).toBeVisible();
     } finally { await travelling.close(); }
     await page.reload();
     await watering.getByRole('button', { name: 'Preview resume', exact: true }).click();
     await watering.getByRole('button', { name: 'Apply schedule changes', exact: true }).click();
-    await expect(watering.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+    await expect(watering.getByRole('button', { name: 'Preview pause', exact: true })).toBeVisible();
     await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
   });
 

@@ -259,7 +259,7 @@
           @if (schedulePreview(); as preview) {
             @if (preview.plantId === plant.id && preview.before.id === schedule.id) {
               <section class="schedule-preview" aria-label="Care schedule preview" aria-live="polite">
-                <h4>{{ getCareActionName(schedule.actionType) }} schedule preview</h4>
+                <h3>{{ getCareActionName(schedule.actionType) }} schedule preview</h3>
                 <p>Current: {{ getScheduleRecurrenceText(preview.before) }}
                   ({{ preview.before.isEnabled ? 'active' : 'paused' }}).</p>
                 <p>Proposed: {{ getScheduleRecurrenceText(preview.after) }}
