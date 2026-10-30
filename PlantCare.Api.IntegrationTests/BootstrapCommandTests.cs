@@ -157,13 +157,13 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(230,species.Count);
-            Assert.Equal(88, species.Count(p => p.CatalogProfile?.CultivarName is not null));
-            Assert.Equal(87, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
+            Assert.Equal(238,species.Count);
+            Assert.Equal(96, species.Count(p => p.CatalogProfile?.CultivarName is not null));
+            Assert.Equal(95, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
             Assert.Equal(107, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
-            Assert.Equal(123, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
+            Assert.Equal(131, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
             Assert.Equal(27, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
-            Assert.Equal(20, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
+            Assert.Equal(24, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
             Assert.Equal(12, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(24, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
             Assert.Equal(131, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));

@@ -75,6 +75,18 @@ you apply and may already be overdue. Previously queued messages can still arriv
 This changes a schedule without recording completed care or changing seasonal
 preferences.
 
+## Upcoming garden work (next local batch)
+
+This view is prepared locally for the next update batch. In Garden, choose
+Upcoming work to see saved planting targets together with next scheduled care.
+Choose a 7-, 30- or 90-day range, including today. Work type narrows the list to
+care or planting targets; the checkbox includes overdue care and past targets.
+Garden search, category and plan filters apply too. Tap a plant's nickname and
+action to open its details. Care uses this device's dates and times; planting
+targets keep the date you saved. Only the next active care occurrence is shown.
+Viewing the list does not create reminders or record work. Use Dashboard to
+complete care after checking your plant.
+
 ## Seasonal care preferences
 
 Open a personal plant's details to choose Growing environment and Care season,

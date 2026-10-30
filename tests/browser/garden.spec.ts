@@ -4,6 +4,59 @@ import { auditAccessibility } from './accessibility';
 // Keep this synthetic read-only API fixture separate from the real-worker PWA suite.
 test.use({ serviceWorkers: 'block', timezoneId: 'America/Los_Angeles' });
 
+test('garden upcoming work combines local care dates and literal targets with shared filters without writes', async ({ page }) => {
+  await page.clock.setFixedTime(new Date('2026-03-28T12:00:00Z'));
+  const ids: Record<string, string> = { crop: '10000000-0000-4000-8000-000000000001', fig: '10000000-0000-4000-8000-000000000002', indoor: '10000000-0000-4000-8000-000000000003' };
+  const make = (id: string, nickname: string, categories: string[]) => ({ id: ids[id], nickname, plantSpeciesId: '20000000-0000-4000-8000-000000000001', location: null, acquiredOn: null, notes: null, createdAtUtc: '2026-03-01T00:00:00Z',
+    speciesCommonName: id === 'fig' ? 'Fig tree' : 'Tomato', tags: [], isActive: true,
+    speciesCatalogProfile: { categories }, careSchedules: [] as any[],
+    plannedSowingOn: null as string | null, expectedHarvestOn: '2026-04-03' as string | null });
+  const crop = make('crop', 'Balcony favourite', ['vegetable']);
+  crop.plannedSowingOn = '2026-03-27';
+  crop.careSchedules = [
+    { id: 'water', actionType: 'Watering', isEnabled: true, nextDueAtUtc: '2026-03-29T00:30:00Z' },
+    { id: 'prune', actionType: 'Pruning', isEnabled: true, nextDueAtUtc: '2026-03-27T12:00:00Z' },
+    { id: 'paused', actionType: 'Misting', isEnabled: false, nextDueAtUtc: '2026-03-27T12:00:00Z' },
+  ];
+  const plants = [crop, make('fig', '', ['fruit', 'tree']), make('indoor', 'Indoor only', ['houseplant'])];
+  const before = JSON.stringify(plants); const writes: string[] = [];
+  await page.route('**/api/**', async route => {
+    const path = new URL(route.request().url()).pathname;
+    if (route.request().method() !== 'GET') { writes.push(path); return route.fulfill({ status: 405 }); }
+    if (path === '/api/account/me') return route.fulfill({ json: { id: 'fixture', email: 'garden@example.test' } });
+    if (path === '/api/antiforgery/token') return route.fulfill({ json: { requestToken: 'synthetic-token' } });
+    return route.fulfill({ json: path === '/api/my-plants' ? plants : path === '/api/my-plants/' + ids.crop ? crop : [] });
+  });
+  await page.goto('/garden');
+  await page.getByRole('button', { name: 'Upcoming work', exact: true }).click();
+  const work = page.getByRole('region', { name: 'Upcoming garden work', exact: true });
+  await work.getByRole('combobox', { name: 'Work range', exact: true }).selectOption('7');
+  await expect(work.locator('.work-item')).toHaveCount(5);
+  await expect(work).toContainText('Overdue care'); await expect(work).toContainText('Past target');
+  const today = work.getByRole('region', { name: '2026-03-28', exact: true });
+  await expect(today).toContainText('Balcony favourite · Watering');
+  await expect(today).toContainText('Care today');
+  await expect(today.getByRole('heading')).toHaveText('Saturday, March 28, 2026');
+  await expect(work.getByRole('link', { name: 'Fig tree · Expected harvest', exact: true })).toHaveAttribute('href', '/my-plants/' + ids.fig);
+  await work.getByLabel('Include overdue care and past targets', { exact: true }).uncheck();
+  await expect(work.locator('.work-item')).toHaveCount(3);
+  await work.getByRole('combobox', { name: 'Work type', exact: true }).selectOption('target');
+  await expect(work.locator('.work-item')).toHaveCount(2);
+  await page.getByRole('button', { name: 'Trees', exact: true }).click();
+  await expect(work.locator('.work-item')).toHaveCount(1);
+  await page.getByRole('searchbox', { name: 'Find a garden plant', exact: true }).fill('missing');
+  await expect(work).toContainText('No work items match');
+  await page.getByRole('button', { name: 'Clear garden filters', exact: true }).click();
+  await expect(work.locator('.work-item')).toHaveCount(2);
+  await page.setViewportSize({ width: 320, height: 900 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Upcoming garden work');
+  await work.getByRole('link', { name: 'Balcony favourite · Expected harvest', exact: true }).click();
+  await expect(page).toHaveURL(new RegExp('/my-plants/' + ids.crop + '$'));
+  await expect(page.getByRole('heading', { name: 'Balcony favourite', exact: true })).toBeVisible();
+  expect(writes).toEqual([]); expect(JSON.stringify(plants)).toBe(before);
+});
+
 test('garden collection groups owned crops, filters and links without writing care data', async ({ page }) => {
   const profile = (categories: string[]) => ({ categories, reviewedOn: '2026-10-25',
     careSourceUrl: 'https://example.org/guide', photo: null, harvestInstructions: 'Pick ripe fruit after checking local conditions.' });

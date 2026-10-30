@@ -1,0 +1,34 @@
+<section class="upcoming-work" aria-label="Upcoming garden work">
+  <h2>Upcoming garden work</h2>
+  <p>Bring your saved planting targets and next scheduled care together. The garden filters above apply here too.</p>
+  <div class="work-controls">
+    <label>Work range<select [value]="days()" (change)="setDays($any($event.target).value)">
+      <option value="7">Next 7 days</option><option value="30">Next 30 days</option><option value="90">Next 90 days</option>
+    </select></label>
+    <label>Work type<select [value]="kind()" (change)="setKind($any($event.target).value)">
+      <option value="">Care and planting targets</option><option value="care">Scheduled care</option><option value="target">Planting targets</option>
+    </select></label>
+    <label class="past-toggle"><input type="checkbox" [checked]="includePast()" (change)="includePast.set($any($event.target).checked)">Include overdue care and past targets</label>
+  </div>
+  <p>Ranges include today. Care dates and times use this device's time zone; “Care today” includes times later today.
+    Planting targets stay on the date you saved. Only the next due occurrence of each active care schedule is shown.</p>
+  <p role="status" aria-live="polite">{{ entries().length }} work items</p>
+  @for (group of groups(); track group.date) {
+    <section class="work-day" [attr.aria-label]="group.date">
+      <h3>{{ (group.date + 'T00:00:00Z') | date:'fullDate':'UTC' }}</h3>
+      <ul>
+        @for (entry of group.entries; track entry.id) {
+          <li class="work-item">
+            <a [routerLink]="['/my-plants', entry.plantId]">{{ entry.name }} · {{ entry.action }}</a>
+            <span class="work-kind">{{ entry.kind === 'care' ? 'Scheduled care' : 'Planting target' }}</span>
+            <span>{{ entry.status }}@if (entry.instant) { · {{ entry.instant | date:'shortTime' }} }</span>
+          </li>
+        }
+      </ul>
+    </section>
+  } @empty {
+    <p>No work items match this range and these filters. Try a longer range or change the garden filters.</p>
+  }
+  <p>Viewing this list does not complete care, record a harvest or create reminders for planting targets.
+    <a routerLink="/dashboard">Complete care on Dashboard</a> after checking your plant and growing conditions.</p>
+</section>

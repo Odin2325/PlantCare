@@ -80,7 +80,7 @@ Latest deployed application: `07848557db0ac3cc43f3d0c839a2af64de690138`, with [s
 
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
-account isolation and update checks. A next feature can make Garden planning easier with a read-only upcoming-work view combining saved planting targets and due care, alongside more reviewed crops and cultivars. It must distinguish planned targets from actual care and harvest records.
+account isolation and update checks. The [upcoming-work view](garden-upcoming-work.md) and eight more cultivars are implemented locally for the next batch checkpoint. A following increment can improve discovery of related cultivars without changing personal care schedules.
 Additional species follow the same reviewed import path. A personal photo journal
 requires a separate upload/storage/privacy/deletion design before implementation.
 Common-name-first labels and action-icon reminders are already implemented; do not
@@ -95,3 +95,13 @@ checkpoint. Do not push or redeploy merely to publish acceptance notes. Existing
 CI scope rules continue to apply when pipelines run; sensitive changes and release
 checkpoints still receive full validation. Finish post-deployment verification and
 backups for any deployment already in progress before returning to local work.
+
+## Local batch awaiting the next checkpoint
+
+[Garden upcoming work](garden-upcoming-work.md) combines saved planting targets
+and next scheduled care, with date/type/past-item controls, shared Garden filters
+and nickname-first detail links. Eight cultivars bring the local reviewed dataset
+to 238 entries and 96 cultivars. The deployed totals remain 230 and 88 until the
+batch is integrated. Targeted local validation accompanies the local commit;
+full CI, public acceptance, update checks and deployment wait for the larger
+checkpoint. The latest deployed application above remains unchanged.

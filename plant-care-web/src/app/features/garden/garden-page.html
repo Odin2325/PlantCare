@@ -19,9 +19,11 @@
     <p role="status" aria-live="polite">{{ visiblePlants().length }} of {{ gardenPlants().length }} garden plants</p>
     <div class="garden-tabs" role="group" aria-label="Garden view">
       <button type="button" [attr.aria-pressed]="view() === 'plants'" (click)="view.set('plants')">Plants and plans</button>
+      <button type="button" [attr.aria-pressed]="view() === 'upcoming'" (click)="view.set('upcoming')">Upcoming work</button>
       <button type="button" [attr.aria-pressed]="view() === 'harvests'" (click)="view.set('harvests')">Harvest overview</button>
     </div>
-    @if (view() === 'harvests') { <app-harvest-overview [plants]="visiblePlants()" /> } @else {
+    @if (view() === 'harvests') { <app-harvest-overview [plants]="visiblePlants()" /> }
+    @else if (view() === 'upcoming') { <app-upcoming-work [plants]="visiblePlants()" /> } @else {
     <app-planting-calendar [plants]="visiblePlants()" />
     @for (location of locations(); track location.name) {
       <section class="location" [attr.aria-label]="location.name"><h2>{{ location.name }}</h2><div class="garden-grid">

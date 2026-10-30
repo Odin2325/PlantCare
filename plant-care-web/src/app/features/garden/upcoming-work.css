@@ -1,0 +1,13 @@
+:host { display: block; }
+.upcoming-work { margin-block: 1.5rem; }
+.work-controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+.work-controls label { display: flex; flex-direction: column; gap: .4rem; max-width: 100%; }
+select { padding: .6rem; font: inherit; max-width: 100%; border: 1px solid #64766a; border-radius: .4rem; background: white; color: #243b2b; }
+.work-controls .past-toggle { flex-direction: row; align-items: center; padding-block: .6rem; }
+.past-toggle input { width: 1.2rem; height: 1.2rem; flex-shrink: 0; }
+.work-day ul { padding: 0; list-style: none; }
+.work-item { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: baseline; padding: .8rem; margin-block: .5rem; border: 1px solid #c2cec5; border-radius: .5rem; overflow-wrap: anywhere; }
+.work-item a { color: #245c37; font-weight: 600; }
+.work-kind { border: 1px solid #64766a; border-radius: .3rem; padding: .15rem .4rem; }
+a:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #245c37; outline-offset: 3px; }
+@media (max-width: 480px) { .work-controls { flex-direction: column; align-items: stretch; } .work-item { flex-direction: column; align-items: start; } }
