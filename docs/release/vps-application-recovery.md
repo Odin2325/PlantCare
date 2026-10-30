@@ -115,3 +115,15 @@ erasure-authority limits above remain open.
 ## Harvest-record capability acceptance (2026-10-26)
 
 The isolated drill for `2a50bb1f1eba52e6d7f2db0a2acf28d01ac2b9ed` passed forward migration to the new harvest table, create/read and private export under the restricted runtime, unchanged care, and harvest/planting-plan preservation after a rejected API activation. The candidate is matched through committed source capability inspection. This does not accept replacement-host recovery or old-runtime export of newer harvest data.
+
+## 2026-10-30 seasonal preference migration
+
+Exact candidate `3d3237745496b1e85ff20ee3bd2e14d86ca651ca` passed isolated application recovery from a fresh
+encrypted VPS snapshot. Fresh live erasure authority was applied before target
+start; the additive UserPlants migration, runtime login remapping and internal
+mail/password recovery passed. The restored target saved and exported seasonal
+preferences and preserved them through an intentionally rejected API activation
+and reapplication of the pinned runtime. Planting dates, harvests, worker restart
+deduplication, care history, session/key hashes and logout checks also passed.
+Source data was not restored or overwritten. Replacement-VPS and independent
+erasure-authority acceptance remain separate requirements.

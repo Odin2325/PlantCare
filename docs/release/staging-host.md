@@ -91,3 +91,14 @@ The Windows local-backup task does not protect this host. STAGE-01/OPS-01 stay o
 References: [Docker Ubuntu setup](https://docs.docker.com/engine/install/ubuntu/),
 [Brevo free-plan details](https://help.brevo.com/hc/en-us/articles/208589409-About-Brevo-s-pricing-plans),
 [Brevo SMTP setup](https://help.brevo.com/hc/en-us/articles/7924908994450-Send-transactional-emails-using-Brevo-SMTP).
+
+## 2026-10-30 access and backup maintenance
+
+The owner restored SSH access by adding their current trusted public IPv4 to UFW
+through the OVH KVM console. Key-only SSH and existing firewall rules were retained.
+Fresh local and VPS scheduled backup runs then passed, followed by the seasonal
+preference migration/recovery and staging acceptance. An empty scratch directory
+from an interrupted capture was preserved privately to unblock guarded retries.
+The existing VPS scheduled task action now includes `-WindowStyle Hidden`; its
+trigger, principal, retry and retention settings were retained. This is a host
+configuration adjustment, not a change to the registration helper's defaults.

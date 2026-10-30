@@ -3,8 +3,8 @@
 PlantCare helps you keep a personal collection, schedule care and record what
 you have done. The current environment is a staging beta at
 <https://staging.plantacare.org>, not a production release. Use synthetic test
-data while the launch requirements remain open. The reviewed catalog dataset includes 210 houseplant, crop and tree entries,
-including 68 named cultivars, with linked care references and licensed photos. Its preserved
+data while the launch requirements remain open. The reviewed catalog dataset includes 222 houseplant, crop and tree entries,
+including 80 named cultivars, with linked care references and licensed photos. Its preserved
 legacy demo entry is synthetic and is not botanical guidance.
 
 The catalog combines name search, light requirement and a Cats and dogs filter.
@@ -61,6 +61,18 @@ details list Also known as. A shared name such as Ribbon plant can return severa
 different species, so compare the photos and scientific names before choosing.
 My plants search also recognizes these alternative names while keeping the
 nickname you saved and the selected location/tag filters.
+
+## Seasonal care preferences
+
+Open a personal plant's details to choose Growing environment and Care season,
+then Save care preferences. Choose a season for your own growing conditions;
+PlantCare does not infer it from the calendar or hemisphere. General review
+prompts help you inspect the plant and decide whether to adjust its schedule in
+My plants. Saving these preferences keeps current intervals, due dates, reminders
+and care history. Clear preference fields resets the draft; save to clear the
+stored choices. Failed saves retain your choices for retry. Archived plants keep
+readable preferences and must be restored before editing. Both values appear in
+your private account export.
 
 ## Garden plans and harvest records
 
