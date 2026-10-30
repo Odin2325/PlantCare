@@ -8,12 +8,13 @@ import { UserPlant } from '../../models/user-plant.model';
 import { PlantGrowthReferences } from '../../../../shared/plant-growth-references/plant-growth-references';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { HarvestLog } from '../../../../shared/harvest-log/harvest-log';
+import { PlantGrowingContext } from '../../../../shared/plant-growing-context/plant-growing-context';
 import { PlantGrowingPlan } from '../../../../shared/plant-growing-plan/plant-growing-plan';
 import { PlantGrowingGuide } from '../../../../shared/plant-growing-guide/plant-growing-guide';
 
 @Component({
   selector: 'app-my-plant-detail-page', standalone: true,
-  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences, PlantGrowingGuide, PlantGrowingPlan, HarvestLog],
+  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences, PlantGrowingGuide, PlantGrowingPlan, HarvestLog, PlantGrowingContext],
   templateUrl: './my-plant-detail-page.html', styleUrl: './my-plant-detail-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

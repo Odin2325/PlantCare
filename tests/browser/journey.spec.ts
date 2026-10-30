@@ -307,6 +307,25 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await page.reload(); await expect(page.getByLabel('Expected harvest', { exact: true })).toHaveValue('');
   });
 
+  await step('Seasonal preferences persist, clear and preserve care dates', page, async () => {
+    const plant=(await(await page.request.get('/api/my-plants')).json()).find((p:{nickname:string})=>p.nickname===nickname);
+    await page.goto('/my-plants/'+plant.id);
+    const preferences=page.getByRole('region',{name:'Seasonal care preferences',exact:true});
+    await preferences.getByLabel('Growing environment',{exact:true}).selectOption('balcony');
+    await preferences.getByLabel('Care season',{exact:true}).selectOption('winter');
+    await preferences.getByRole('button',{name:'Save care preferences',exact:true}).click();
+    await expect(preferences.getByRole('status')).toHaveText('Seasonal care preferences saved.');
+    await page.reload();await expect(preferences.getByLabel('Growing environment',{exact:true})).toHaveValue('balcony');
+    await expect(preferences.getByLabel('Care season',{exact:true})).toHaveValue('winter');
+    const saved=await(await page.request.get('/api/my-plants/'+plant.id)).json();
+    expect(saved.careSchedules).toEqual(plant.careSchedules);expect(saved.notes).toBe(plant.notes);expect(saved.expectedHarvestOn).toBe(plant.expectedHarvestOn);
+    await auditAccessibility(page,'Saved seasonal preferences');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await preferences.getByRole('button',{name:'Clear preference fields',exact:true}).click();
+    expect((await(await page.request.get('/api/my-plants/'+plant.id)).json()).careSeason).toBe('winter');
+    await preferences.getByRole('button',{name:'Save care preferences',exact:true}).click();await expect(preferences.getByRole('status')).toBeVisible();
+    await page.reload();await expect(preferences.getByLabel('Care season',{exact:true})).toHaveValue('');
+  });
+
   await step('Harvest logs persist independently and require confirmed removal', page, async () => {
     const plant=(await(await page.request.get('/api/my-plants')).json()).find((p:{nickname:string})=>p.nickname===nickname);
     await page.goto('/my-plants/'+plant.id);

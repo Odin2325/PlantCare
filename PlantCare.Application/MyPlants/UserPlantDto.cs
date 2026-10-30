@@ -22,4 +22,6 @@ public sealed record UserPlantDto(
     PlantCatalogProfile? SpeciesCatalogProfile = null,
     DateOnly? PlannedSowingOn = null,
     DateOnly? PlannedPlantingOutOn = null,
-    DateOnly? ExpectedHarvestOn = null);
+    DateOnly? ExpectedHarvestOn = null,
+    string? GrowingEnvironment = null,
+    string? CareSeason = null);

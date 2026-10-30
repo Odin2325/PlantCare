@@ -7971,5 +7971,445 @@
       "cultivarName": "Silver Posie",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Potato (Desiree)",
+    "scientificName": "Solanum tuberosum 'Desiree'",
+    "description": "A maincrop potato cultivar with red-skinned oval tubers and pale-yellow flesh. Use certified planting stock and keep developing tubers covered from light.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil moisture even during tuber development without saturating the bed or container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, well-drained soil and room for the tubers to develop.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A maincrop potato cultivar with red-skinned oval tubers and pale-yellow flesh. Use certified planting stock and keep developing tubers covered from light. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
+      "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
+      "photo": {
+        "path": "/images/plants/solanum-tuberosum.jpg",
+        "altText": "Potato reference photo; Desiree cultivar not verified",
+        "credit": "Josh Graciano",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "'Bintje' potato plants uprooted for harvesting"
+      },
+      "cultivarName": "Desiree",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Potato (Maris Piper)",
+    "scientificName": "Solanum tuberosum 'Maris Piper'",
+    "description": "A maincrop potato cultivar with cream-coloured skin and flesh. Match planting and lifting to local growing conditions and use healthy seed potatoes.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil moisture even during tuber development without saturating the bed or container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, well-drained soil and room for the tubers to develop.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A maincrop potato cultivar with cream-coloured skin and flesh. Match planting and lifting to local growing conditions and use healthy seed potatoes. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
+      "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
+      "photo": {
+        "path": "/images/plants/solanum-tuberosum.jpg",
+        "altText": "Potato reference photo; Maris Piper cultivar not verified",
+        "credit": "Josh Graciano",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "'Bintje' potato plants uprooted for harvesting"
+      },
+      "cultivarName": "Maris Piper",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Carrot (Adelaide)",
+    "scientificName": "Daucus carota subsp. sativus 'Adelaide'",
+    "description": "An early carrot cultivar suited to protected early sowings when local conditions allow. Prepare a fine, stone-free seed bed and follow the packet for spacing.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed and root zone moist with drainage. Avoid repeated drying during germination.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, stone-free, well-drained soil deep enough for the chosen variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/carrots/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "An early carrot cultivar suited to protected early sowings when local conditions allow. Prepare a fine, stone-free seed bed and follow the packet for spacing. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
+      "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
+      "photo": {
+        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
+        "altText": "Carrot reference photo; Adelaide cultivar not verified",
+        "credit": "Forest & Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "ends of carrots"
+      },
+      "cultivarName": "Adelaide",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Carrot (Flyaway)",
+    "scientificName": "Daucus carota subsp. sativus 'Flyaway'",
+    "description": "A main-season carrot cultivar selected for some carrot-fly resistance. Continue to use sensible crop protection; resistance is not immunity.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed and root zone moist with drainage. Avoid repeated drying during germination.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, stone-free, well-drained soil deep enough for the chosen variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/carrots/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A main-season carrot cultivar selected for some carrot-fly resistance. Continue to use sensible crop protection; resistance is not immunity. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
+      "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
+      "photo": {
+        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
+        "altText": "Carrot reference photo; Flyaway cultivar not verified",
+        "credit": "Forest & Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "ends of carrots"
+      },
+      "cultivarName": "Flyaway",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Beetroot (Pablo)",
+    "scientificName": "Beta vulgaris Garden Beet Group 'Pablo'",
+    "description": "A beetroot cultivar with rounded dark-red roots. Sow small batches in suitable conditions and harvest before roots become oversized.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/beetroot/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A beetroot cultivar with rounded dark-red roots. Sow small batches in suitable conditions and harvest before roots become oversized. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
+      "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
+      "photo": {
+        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
+        "altText": "Beetroot reference photo; Pablo cultivar not verified",
+        "credit": "woodleywonderworks",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Harvested beets"
+      },
+      "cultivarName": "Pablo",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Beetroot (Forono)",
+    "scientificName": "Beta vulgaris Garden Beet Group 'Forono'",
+    "description": "A beetroot cultivar with long dark-red roots. Provide enough root depth and keep moisture consistent during establishment.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/beetroot/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A beetroot cultivar with long dark-red roots. Provide enough root depth and keep moisture consistent during establishment. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
+      "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
+      "photo": {
+        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
+        "altText": "Beetroot reference photo; Forono cultivar not verified",
+        "credit": "woodleywonderworks",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Harvested beets"
+      },
+      "cultivarName": "Forono",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Radish (Scarlet Globe)",
+    "scientificName": "Raphanus raphanistrum subsp. sativus 'Scarlet Globe'",
+    "description": "A salad radish cultivar with rounded red roots and white flesh. Pick young and crisp and avoid dry, hot growing conditions.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/radishes/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A salad radish cultivar with rounded red roots and white flesh. Pick young and crisp and avoid dry, hot growing conditions. Direct sow in loose, drained soil during a suitable cool period. Thin seedlings and avoid repeated drying of the root zone.",
+      "harvestInstructions": "Pull usable roots while tender. Follow the variety label: small salad radishes and long daikon mature differently.",
+      "photo": {
+        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
+        "altText": "Radish reference photo; Scarlet Globe cultivar not verified",
+        "credit": "Franco Folini",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Roots of 'Longipinnatus', aka Daikon"
+      },
+      "cultivarName": "Scarlet Globe",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Radish (Amethyst)",
+    "scientificName": "Raphanus raphanistrum subsp. sativus 'Amethyst'",
+    "description": "A salad radish cultivar with purple roots and crisp white flesh. Sow small batches for successive harvests and keep seedlings evenly moist.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/radishes/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "A salad radish cultivar with purple roots and crisp white flesh. Sow small batches for successive harvests and keep seedlings evenly moist. Direct sow in loose, drained soil during a suitable cool period. Thin seedlings and avoid repeated drying of the root zone.",
+      "harvestInstructions": "Pull usable roots while tender. Follow the variety label: small salad radishes and long daikon mature differently.",
+      "photo": {
+        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
+        "altText": "Radish reference photo; Amethyst cultivar not verified",
+        "credit": "Franco Folini",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Roots of 'Longipinnatus', aka Daikon"
+      },
+      "cultivarName": "Amethyst",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Kale (Nero di Toscana)",
+    "scientificName": "Brassica oleracea Kale Group 'Nero di Toscana'",
+    "description": "A Tuscan kale cultivar with narrow, puckered leaves. Pick leaves regularly while retaining the growing centre and check for brassica pests.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/kale/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A Tuscan kale cultivar with narrow, puckered leaves. Pick leaves regularly while retaining the growing centre and check for brassica pests. Use a sunny site with fertile, moisture-retentive but drained soil. Allow space for the variety and check for brassica pests.",
+      "harvestInstructions": "Pick tender lower leaves while retaining the growing centre. Match harvest expectations and winter protection to the variety and local conditions.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-kale-group.jpg",
+        "altText": "Kale reference photo; Nero di Toscana cultivar not verified",
+        "credit": "Nick Saltmarsh",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kale-group/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Form of a red curly kale"
+      },
+      "cultivarName": "Nero di Toscana",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Cauliflower (Clapton)",
+    "scientificName": "Brassica oleracea Botrytis Group 'Clapton'",
+    "description": "A cauliflower cultivar producing large white heads, with clubroot resistance reported by the RHS. Use crop rotation and healthy plants; resistance does not guarantee disease-free growth.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/cauliflower/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A cauliflower cultivar producing large white heads, with clubroot resistance reported by the RHS. Use crop rotation and healthy plants; resistance does not guarantee disease-free growth. Use sun and fertile, drained soil with consistent moisture. Avoid growth checks from drought and follow the variety label for spacing and head protection.",
+      "harvestInstructions": "Cut the head while compact and firm, before it opens or discolours. Actual maturity depends on the variety and growing conditions.",
+      "photo": {
+        "path": "/images/plants/brassica-oleracea-cauliflower-broccoli-group.jpg",
+        "altText": "Cauliflower reference photo; Clapton cultivar not verified",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-cauliflower-broccoli-group/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Form in backyard garden"
+      },
+      "cultivarName": "Clapton",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Spinach (Lazio)",
+    "scientificName": "Spinacia oleracea 'Lazio'",
+    "description": "A spinach cultivar with smooth, rounded leaves. Grow in fertile moisture-retentive soil and avoid heat or drought stress that encourages flowering.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/spinach/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A spinach cultivar with smooth, rounded leaves. Grow in fertile moisture-retentive soil and avoid heat or drought stress that encourages flowering. Choose a cool growing period and a sunny or lightly shaded site with fertile, drained soil. Keep moisture even.",
+      "harvestInstructions": "Pick young outer leaves while leaving the centre growing, or cut a usable whole plant before bolting.",
+      "photo": {
+        "path": "/images/plants/spinacia-oleracea.jpg",
+        "altText": "Spinach reference photo; Lazio cultivar not verified",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/spinacia-oleracea/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "leaves and form"
+      },
+      "cultivarName": "Lazio",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Garden pea (Jaguar)",
+    "scientificName": "Lathyrus oleraceus 'Jaguar'",
+    "description": "A second-early shelling pea cultivar. Provide suitable support and pick well-filled pods while the peas remain tender; check the seed packet for local sowing advice.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/peas/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A second-early shelling pea cultivar. Provide suitable support and pick well-filled pods while the peas remain tender; check the seed packet for local sowing advice. Provide climbing support, a sunny site and drained soil. Grow in a cool period and maintain moisture during flowering and pod development.",
+      "harvestInstructions": "For shelling peas, pick filled pods while the peas remain tender. Snow and snap types have different harvest stages; check the seed label.",
+      "photo": {
+        "path": "/images/plants/lathyrus-oleraceus.jpg",
+        "altText": "Garden pea reference photo; Jaguar cultivar not verified",
+        "credit": "Serge96 46",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lathyrus-oleraceus/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Peas in a pod"
+      },
+      "cultivarName": "Jaguar",
+      "photoIsSpeciesReference": true
+    }
   }
 ]

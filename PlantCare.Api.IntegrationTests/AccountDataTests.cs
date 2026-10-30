@@ -51,6 +51,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, now);
         plant.ReplaceTags(["Synthetic tag"]);
         plant.UpdateGrowingPlan(new DateOnly(2027, 3, 1), new DateOnly(2027, 5, 15), new DateOnly(2027, 8, 1));
+        plant.UpdateGrowingContext("balcony", "winter");
         plant.Archive();
         var notification = Notification.Create(a.Id, schedule.Id, now, now);
         var device = PushSubscription.Create(a.Id, "https://push.example.test/private-endpoint", "private-key", "private-auth", now);
@@ -130,6 +131,29 @@ public sealed class AccountDataTests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task GrowingContextUsesRealCookieAntiforgeryAndOwnerBoundary()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        Guid id;
+        await using (var scope = factory.Services.CreateAsyncScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+            var plant = await db.UserPlants.SingleAsync(p => p.UserId == a.Id); plant.Restore(); id = plant.Id;
+            await db.SaveChangesAsync();
+        }
+        using var client = Client(); await Login(client, a);
+        var plan = new { growingEnvironment = "greenhouse", careSeason = "spring" };
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PutAsJsonAsync($"/api/my-plants/{id}/growing-context", plan)).StatusCode);
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.OK, (await client.PutAsJsonAsync($"/api/my-plants/{id}/growing-context", plan)).StatusCode);
+        using var outsider = Client(); await Login(outsider, b);
+        Assert.Equal(HttpStatusCode.NotFound, (await outsider.PutAsJsonAsync($"/api/my-plants/{id}/growing-context", plan)).StatusCode);
+        using var anonymous = Client(); await anonymous.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.PutAsJsonAsync($"/api/my-plants/{id}/growing-context", plan)).StatusCode);
+    }
+
+    [Fact]
     public async Task ExportIsPrivatePasswordProtectedAndExcludesCredentials()
     {
         var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
@@ -152,6 +176,8 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.False(json.RootElement.GetProperty("plants")[0].GetProperty("isActive").GetBoolean());
         Assert.Equal("2027-03-01", json.RootElement.GetProperty("plants")[0].GetProperty("plannedSowingOn").GetString());
         Assert.Equal("2027-08-01", json.RootElement.GetProperty("plants")[0].GetProperty("expectedHarvestOn").GetString());
+        Assert.Equal("balcony", json.RootElement.GetProperty("plants")[0].GetProperty("growingEnvironment").GetString());
+        Assert.Equal("winter", json.RootElement.GetProperty("plants")[0].GetProperty("careSeason").GetString());
         Assert.Single(json.RootElement.GetProperty("harvests").EnumerateArray());
         Assert.Contains("Private harvest", text);
         Assert.Contains("Private A notes", text);

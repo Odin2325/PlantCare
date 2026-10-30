@@ -183,6 +183,19 @@ public sealed class UserPlant
             UserPlantTag.Create(Id, tag)));
     }
 
+    public string? GrowingEnvironment { get; private set; }
+    public string? CareSeason { get; private set; }
+
+    public void UpdateGrowingContext(string? environment, string? season)
+    {
+        if (environment is not null && environment is not ("indoor" or "balcony" or "greenhouse" or "outdoor"))
+            throw new ArgumentException("Choose a supported growing environment.");
+        if (season is not null && season is not ("spring" or "summer" or "autumn" or "winter"))
+            throw new ArgumentException("Choose a supported care season.");
+        GrowingEnvironment = environment;
+        CareSeason = season;
+    }
+
     public void UpdateGrowingPlan(DateOnly? sowing, DateOnly? plantingOut, DateOnly? harvest)
     {
         if (!IsActive) throw new InvalidOperationException("Restore this plant before editing its planting plan.");

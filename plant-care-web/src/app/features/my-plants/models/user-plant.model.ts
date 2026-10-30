@@ -56,6 +56,8 @@ export interface CareEventHistory {
 }
 
 export interface UserPlant {
+  growingEnvironment?: 'indoor' | 'balcony' | 'greenhouse' | 'outdoor' | null;
+  careSeason?: 'spring' | 'summer' | 'autumn' | 'winter' | null;
   plannedSowingOn?: string | null;
   plannedPlantingOutOn?: string | null;
   expectedHarvestOn?: string | null;

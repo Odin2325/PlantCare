@@ -692,11 +692,19 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.Property<DateOnly?>("AcquiredOn")
                         .HasColumnType("date");
 
+                    b.Property<string>("CareSeason")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<DateTimeOffset>("CreatedAtUtc")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateOnly?>("ExpectedHarvestOn")
                         .HasColumnType("date");
+
+                    b.Property<string>("GrowingEnvironment")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");

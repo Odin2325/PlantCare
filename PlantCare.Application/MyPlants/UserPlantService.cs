@@ -194,7 +194,9 @@ internal sealed class UserPlantService(
             SpeciesCatalogProfile: userPlant.PlantSpecies.CatalogProfile,
             PlannedSowingOn: userPlant.PlannedSowingOn,
             PlannedPlantingOutOn: userPlant.PlannedPlantingOutOn,
-            ExpectedHarvestOn: userPlant.ExpectedHarvestOn);
+            ExpectedHarvestOn: userPlant.ExpectedHarvestOn,
+            GrowingEnvironment: userPlant.GrowingEnvironment,
+            CareSeason: userPlant.CareSeason);
     }
 
     private static void ValidateUserId(Guid userId)
@@ -284,6 +286,16 @@ internal sealed class UserPlantService(
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return MapToDto(userPlant);
+    }
+    public async Task<UserPlantDto?> UpdateGrowingContextAsync(Guid id, Guid userId, UpdateGrowingContextCommand command, CancellationToken cancellationToken = default)
+    {
+        ValidateUserId(userId);
+        ArgumentNullException.ThrowIfNull(command);
+        var plant = await userPlantRepository.GetTrackedByIdForUserAsync(id, userId, cancellationToken);
+        if (plant is null || !plant.IsActive) return null;
+        plant.UpdateGrowingContext(command.GrowingEnvironment, command.CareSeason);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        return MapToDto(plant);
     }
     public async Task<UserPlantDto?> UpdateGrowingPlanAsync(Guid id, Guid userId, UpdateGrowingPlanCommand command, CancellationToken cancellationToken = default)
     {

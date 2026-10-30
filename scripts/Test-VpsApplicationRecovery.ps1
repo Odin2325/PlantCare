@@ -15,7 +15,7 @@ $passed=$false
 $origin='https://localhost:19443'
 $session=[Microsoft.PowerShell.Commands.WebRequestSession]::new()
 function Request([string]$Path,[string]$Method='GET',[object]$Body,[int]$Expected=200) {
-    if($Path -notmatch '^/[a-zA-Z0-9/?=&-]+$' -or ($Method -notin @('GET','POST') -and -not($Method -eq 'PUT' -and $Path -match '^/api/my-plants/[a-f0-9-]{36}/growing-plan$'))){throw 'Unexpected isolated HTTP request.'}
+    if($Path -notmatch '^/[a-zA-Z0-9/?=&-]+$' -or ($Method -notin @('GET','POST') -and -not($Method -eq 'PUT' -and $Path -match '^/api/my-plants/[a-f0-9-]{36}/(growing-plan|growing-context)$'))){throw 'Unexpected isolated HTTP request.'}
     # Curl runs inside the internal network. Cookies stay in the disposable
     # client container; private request files stay in restricted scratch.
     $curl=@(('url="'+$origin+$Path+'"'),'insecure','silent','max-time=15',('request="'+$Method+'"'),'cookie="/tmp/cookies"','cookie-jar="/tmp/cookies"','output="/tmp/response"','write-out="%{http_code}"')
@@ -243,6 +243,17 @@ services:
         if((Request "/api/my-plants/$($plant.id)/care/history").id -ne $complete.event.id){throw 'Planting plan changed care history.'}
         'PASS: restored runtime saves planting dates without changing care history.'
     }
+    $supportsGrowingContext = $plant.PSObject.Properties.Name -contains 'growingEnvironment'
+    if($supportsGrowingContext){
+        $context=Request "/api/my-plants/$($plant.id)/growing-context" 'PUT' @{growingEnvironment='greenhouse';careSeason='winter'}
+        $reloaded=Request "/api/my-plants/$($plant.id)"
+        if($reloaded.growingEnvironment -ne 'greenhouse' -or $reloaded.careSeason -ne 'winter'){throw 'Restored seasonal preferences did not persist.'}
+        $contextExport=Request '/api/account/export' 'POST' @{password=$newPassword}
+        $exportedPlant=@($contextExport.plants)|Where-Object id -eq $plant.id
+        if($exportedPlant.careSeason -ne 'winter'){throw 'Restored preferences missing from export.'}
+        if((Request "/api/my-plants/$($plant.id)/care/history").id -ne $complete.event.id){throw 'Preferences changed care history.'}
+        'PASS: restored runtime saves and exports seasonal preferences without changing care history.'
+    }
     $supportsHarvests = @(& git -C $BackupRoot ls-tree --name-only $RuntimeCandidate 'PlantCare.Domain/Entities/HarvestRecord.cs') -contains 'PlantCare.Domain/Entities/HarvestRecord.cs'
     if($LASTEXITCODE -ne 0){throw 'Recovery candidate capability lookup failed.'}
     if($supportsHarvests){
@@ -273,6 +284,10 @@ services:
     if($activeImage -ne $manifest.images.api){throw 'Rollback did not restore the pinned application image.'}
     if($supportsGrowingPlan -and (Request "/api/my-plants/$($plant.id)").expectedHarvestOn -ne '2027-08-01'){throw 'Failed activation lost the planting plan.'}
 
+    if($supportsGrowingContext){
+        $contextAfter=Request "/api/my-plants/$($plant.id)"
+        if($contextAfter.growingEnvironment -ne 'greenhouse' -or $contextAfter.careSeason -ne 'winter'){throw 'Failed activation lost seasonal preferences.'}
+    }
     if($supportsHarvests){
         $harvestAfter=@(Request "/api/my-plants/$($plant.id)/harvests")
         if($harvestAfter.Count -ne 1 -or $harvestAfter[0].id -ne $harvest.id -or $harvestAfter[0].quantity -ne 2){throw 'Failed activation lost the harvest record.'}
@@ -286,7 +301,7 @@ services:
     $null=Request '/api/auth/logout' 'POST' -Expected 204
     $null=Request '/api/account/me' -Expected 401
     $passed=$true
-    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;harvestRecordsVerified=$supportsHarvests;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
+    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;harvestRecordsVerified=$supportsHarvests;growingContextVerified=$supportsGrowingContext;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
     'PASS: failed API activation rejected; pinned runtime restored with session/history/keys intact; logout enforced.'
 } finally {
     try {

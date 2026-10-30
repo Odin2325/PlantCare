@@ -1,0 +1,19 @@
+<section aria-labelledby="seasonal-care-heading">
+  <h2 id="seasonal-care-heading">Seasonal care preferences</h2>
+  <p>Save the environment and care season you want to review for this plant. Choose the season yourself for your local conditions. Saving these preferences keeps your current care schedule and reminder dates.</p>
+  @if (plant().isActive) {
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div><label for="growing-environment">Growing environment</label><select id="growing-environment" formControlName="environment"><option value="">Not set</option>@for (value of environments; track value) { <option [value]="value">{{ value }}</option> }</select></div>
+      <div><label for="care-season">Care season</label><select id="care-season" formControlName="season"><option value="">Not set</option>@for (value of seasons; track value) { <option [value]="value">{{ value }}</option> }</select></div>
+      <button type="submit" [disabled]="saving()">{{ saving() ? 'Saving…' : 'Save care preferences' }}</button>
+      <button type="button" [disabled]="saving()" (click)="clearPreferences()">Clear preference fields</button>
+      <p>Clearing fields takes effect when you save.</p>
+    </form>
+  } @else { <p>Archived preferences: {{ plant().growingEnvironment || 'Environment not set' }} · {{ plant().careSeason || 'Season not set' }}. Restore the plant in My plants to edit.</p> }
+  @if (message()) { <p role="status">{{ message() }}</p> }
+  @if (error()) { <p role="alert">{{ error() }}</p> }
+  @if (guidance().length) { <h3>Care review</h3><ul>@for (tip of guidance(); track tip) { <li>{{ tip }}</li> }</ul> }
+  <p>These are general review prompts. Follow the plant’s growing guide and observed conditions when adjusting its schedule.</p>
+  <a routerLink="/my-plants">Review schedule settings in My plants</a>
+  <p><a href="https://www.rhs.org.uk/garden-jobs/watering" target="_blank" rel="noopener noreferrer">RHS watering guidance</a></p>
+</section>

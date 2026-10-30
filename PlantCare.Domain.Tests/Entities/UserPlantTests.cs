@@ -240,4 +240,16 @@ public sealed class UserPlantTests
         plant.Restore(); Assert.Equal(harvest, plant.ExpectedHarvestOn);
     }
 
+    [Fact]
+    public void GrowingContextValidatesBothFieldsBeforeChangingState()
+    {
+        var plant=UserPlant.Create(Guid.NewGuid(),Guid.NewGuid(),"Test",null,null,null,DateTimeOffset.UtcNow);
+        foreach(var pair in new[] {("indoor","spring"),("balcony","summer"),("greenhouse","autumn"),("outdoor","winter")}) {
+            plant.UpdateGrowingContext(pair.Item1,pair.Item2);Assert.Equal(pair.Item1,plant.GrowingEnvironment);Assert.Equal(pair.Item2,plant.CareSeason);
+        }
+        Assert.Throws<ArgumentException>(()=>plant.UpdateGrowingContext("indoor","invalid"));Assert.Equal("outdoor",plant.GrowingEnvironment);
+        Assert.Throws<ArgumentException>(()=>plant.UpdateGrowingContext("invalid","spring"));Assert.Equal("winter",plant.CareSeason);
+        plant.UpdateGrowingContext(null,null);Assert.Null(plant.GrowingEnvironment);Assert.Null(plant.CareSeason);
+    }
+
 }

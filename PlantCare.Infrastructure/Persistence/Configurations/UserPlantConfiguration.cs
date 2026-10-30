@@ -32,6 +32,9 @@ internal sealed class UserPlantConfiguration : IEntityTypeConfiguration<UserPlan
         builder.Property(userPlant => userPlant.AcquiredOn)
             .HasColumnType("date");
 
+        builder.Property(plant => plant.GrowingEnvironment).HasMaxLength(20);
+        builder.Property(plant => plant.CareSeason).HasMaxLength(10);
+
         builder.Property(plant => plant.PlannedSowingOn).HasColumnType("date");
         builder.Property(plant => plant.PlannedPlantingOutOn).HasColumnType("date");
         builder.Property(plant => plant.ExpectedHarvestOn).HasColumnType("date");

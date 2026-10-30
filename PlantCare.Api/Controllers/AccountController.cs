@@ -54,7 +54,7 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
         {
             schemaVersion = 1, exportedAtUtc = DateTimeOffset.UtcNow,
             account = new { user.Id, user.Email, user.UserName, user.PhoneNumber, user.EmailConfirmed, user.TwoFactorEnabled, user.CreatedAtUtc },
-            plants = await plants.Select(p => new { p.Id, p.PlantSpeciesId, p.Nickname, p.Location, p.Notes, p.AcquiredOn, p.PlannedSowingOn, p.PlannedPlantingOutOn, p.ExpectedHarvestOn, p.IsActive, p.CreatedAtUtc }).ToListAsync(ct),
+            plants = await plants.Select(p => new { p.Id, p.PlantSpeciesId, p.Nickname, p.Location, p.Notes, p.AcquiredOn, p.PlannedSowingOn, p.PlannedPlantingOutOn, p.ExpectedHarvestOn, p.GrowingEnvironment, p.CareSeason, p.IsActive, p.CreatedAtUtc }).ToListAsync(ct),
             tags = await db.UserPlantTags.AsNoTracking().Where(t => plants.Select(p => p.Id).Contains(t.UserPlantId)).Select(t => new { t.UserPlantId, t.Name }).ToListAsync(ct),
             schedules = await schedules.Select(s => new { s.Id, s.UserPlantId, s.ActionType, s.IntervalDays, s.ScheduleMode, s.WeekDays, s.PreferredTimeLocal, s.TimeZoneId, s.LastCompletedAtUtc, s.NextDueAtUtc, s.IsEnabled, s.IsArchived }).ToListAsync(ct),
             harvests = await db.HarvestRecords.AsNoTracking().Where(h => plants.Select(p => p.Id).Contains(h.UserPlantId)).Select(h => new { h.Id, h.UserPlantId, h.HarvestedOn, h.Quantity, h.Unit, h.Notes, h.RecordedAtUtc }).ToListAsync(ct),

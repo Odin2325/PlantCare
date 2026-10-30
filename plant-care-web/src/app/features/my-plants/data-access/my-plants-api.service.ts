@@ -104,6 +104,9 @@ export class MyPlantsApiService {
     );
   }
 
+  updateGrowingContext(id: string, context: Pick<UserPlant, 'growingEnvironment' | 'careSeason'>): Observable<UserPlant> {
+    return this.httpClient.put<UserPlant>(`${this.endpoint}/${id}/growing-context`, context);
+  }
   updateGrowingPlan(id: string, plan: GrowingPlanRequest): Observable<UserPlant> {
     return this.httpClient.put<UserPlant>(`${this.endpoint}/${id}/growing-plan`, plan);
   }

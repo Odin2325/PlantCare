@@ -11,6 +11,7 @@
       <div><dt>Tags</dt><dd>{{ item.tags.length ? item.tags.join(', ') : 'None' }}</dd></div>
       @if (item.notes) { <div><dt>Notes</dt><dd class="notes">{{ item.notes }}</dd></div> }
     </dl>
+    <app-plant-growing-context [plant]="item" (saved)="plant.set($event)" />
     <section aria-labelledby="care-heading"><h2 id="care-heading">Care plan</h2>
       @for (schedule of item.careSchedules; track schedule.id) {
         <article class="schedule"><h3>{{ schedule.actionType }}</h3>
