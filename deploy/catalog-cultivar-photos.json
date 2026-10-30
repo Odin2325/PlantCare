@@ -1,0 +1,866 @@
+[
+  {
+    "scientificName": "Allium cepa 'Centurion'",
+    "cultivarName": "Centurion",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-onion-centurion.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Allium_cepa_Plantui_Centurion.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Allium cepa Centurion",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Allium cepa 'Red Baron'",
+    "cultivarName": "Red Baron",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-onion-red-baron.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Onion_Red_Baron.JPG",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Red Baron Onion.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Allium cepa (Cepa Group) 'Sturon'",
+    "cultivarName": "Sturon",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Allium sativum 'Solent Wight'",
+    "cultivarName": "Solent Wight",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Anethum graveolens 'Domino'",
+    "cultivarName": "Domino",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Anethum graveolens 'Dukat'",
+    "cultivarName": "Dukat",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Beta vulgaris 'Boltardy'",
+    "cultivarName": "Boltardy",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Beta vulgaris 'Detroit 2'",
+    "cultivarName": "Detroit 2",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Beta vulgaris Garden Beet Group 'Forono'",
+    "cultivarName": "Forono",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Beta vulgaris Garden Beet Group 'Pablo'",
+    "cultivarName": "Pablo",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-beetroot-pablo.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rote_Beete_%27Pablo%27_(35668245913).jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: August 2017\n  Canon EOS 6D\nEF 24-105mm f/4L IS USM\n  Creative Commons Licence BY 2.0\n creativecommons.org/licenses/by/2.0/ \n  Quellenangabe / Credit:\n \nMaja Dumat - Creative Commons Licence BY 2.0",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Beta vulgaris Garden Beet Group 'Wodan'",
+    "cultivarName": "Wodan",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Brassica oleracea (Acephala Group) 'Redbor'",
+    "cultivarName": "Redbor",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Brassica oleracea (Botrytis Group) 'Igloo'",
+    "cultivarName": "Igloo",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Brassica oleracea (Gongylodes Group) 'Kolibri'",
+    "cultivarName": "Kolibri",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Brassica oleracea Botrytis Group 'Clapton'",
+    "cultivarName": "Clapton",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Brassica oleracea Kale Group 'Nero di Toscana'",
+    "cultivarName": "Nero di Toscana",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Capsicum annuum 'California Wonder'",
+    "cultivarName": "California Wonder",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Capsicum annuum 'Early Jalapeno'",
+    "cultivarName": "Early Jalapeno",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Coriandrum sativum 'Calypso'",
+    "cultivarName": "Calypso",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Coriandrum sativum 'Confetti'",
+    "cultivarName": "Confetti",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Cucumis sativus 'Marketmore'",
+    "cultivarName": "Marketmore",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-cucumber-marketmore.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Starr-220604-0503-Cucumis_sativus-Marketmore_flowers_fruit_leaves-Hawea_Pl_Olinda-Maui_(52449241945).jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Cucumis sativus  (Bush cucumber)  \nMarketmore flowers fruit leaves at Hawea Pl Olinda, Maui, Hawaii.\nJune 04, 2022\n \n #220604-0503  -  Image Use Policy",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Cucumis sativus 'Mini Munch'",
+    "cultivarName": "Mini Munch",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Cucumis sativus 'Telegraph Improved'",
+    "cultivarName": "Telegraph Improved",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Cucurbita pepo 'Black Beauty'",
+    "cultivarName": "Black Beauty",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-zucchini-black-beauty.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cucurbita_pepo_zucchini_group_%27Black_Beauty%27.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: \"Black Beauty\" type zucchini, aka courgette ( C. pepo  var.  cylindrica ) from a county fair contest.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Cucurbita pepo 'Sweet Dumpling'",
+    "cultivarName": "Sweet Dumpling",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Daucus carota 'Autumn King 2'",
+    "cultivarName": "Autumn King 2",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Daucus carota 'Early Nantes 2'",
+    "cultivarName": "Early Nantes 2",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Daucus carota subsp. sativus 'Adelaide'",
+    "cultivarName": "Adelaide",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Daucus carota subsp. sativus 'Flyaway'",
+    "cultivarName": "Flyaway",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Daucus carota subsp. sativus 'Maestro'",
+    "cultivarName": "Maestro",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Ficus carica 'Brown Turkey'",
+    "cultivarName": "Brown Turkey",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Ficus carica 'Brunswick'",
+    "cultivarName": "Brunswick",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Ficus elastica 'Tineke'",
+    "cultivarName": "Tineke",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Cambridge Favourite'",
+    "cultivarName": "Cambridge Favourite",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Elsanta'",
+    "cultivarName": "Elsanta",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Florence'",
+    "cultivarName": "Florence",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Honeoye'",
+    "cultivarName": "Honeoye",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-strawberry-honeoye.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fragaria_ananassa_Honeoye_2023-05-27_6283.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Fragaria × ananassa  'Honeoye'. Allotment garden in Szczecin, West Pomeranian Voivodeship, Poland.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Pegasus'",
+    "cultivarName": "Pegasus",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Symphony'",
+    "cultivarName": "Symphony",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lactuca sativa 'All the Year Round'",
+    "cultivarName": "All the Year Round",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Iceberg'",
+    "cultivarName": "Iceberg",
+    "status": "verified",
+    "photoPath": "/images/plants/lactuca-sativa-iceberg.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Iceberg_lettuce_(IJssla_krop).jpg",
+    "identityEvidence": "Existing reviewed cultivar-specific source.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Little Gem'",
+    "cultivarName": "Little Gem",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Salad Bowl'",
+    "cultivarName": "Salad Bowl",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-lettuce-salad-bowl.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lactuca_sativa_var._crispa_Salad_Bowl.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Lactuca sativa  var.  crispa  'Salad Bowl'",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lathyrus oleraceus 'Jaguar'",
+    "cultivarName": "Jaguar",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lathyrus oleraceus 'Vivado'",
+    "cultivarName": "Vivado",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Malus domestica 'Bramley’s Seedling'",
+    "cultivarName": "Bramley’s Seedling",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-apple-tree-bramleys-seedling.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bramleys_Seedling_Apple_cultivars_as_grown_at_Priorwood_Garden_in_2020.jpg",
+    "identityEvidence": "Source title and/or description identify this cultivar; image visually reviewed: Apple cultivars as grown at Priorwood Garden in 2020",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Malus domestica 'Discovery'",
+    "cultivarName": "Discovery",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Malus domestica 'Elstar'",
+    "cultivarName": "Elstar",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-apple-tree-elstar.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Appls_on_an_Elstar_espalier_apple_tree.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Apples on an Elstar espalier apple tree. Photo taken at Kwekerij Houweling (Fruitbomen.net) in Boskoop, The Netherlands",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Malus domestica 'Fiesta'",
+    "cultivarName": "Fiesta",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Malus domestica 'Golden Delicious'",
+    "cultivarName": "Golden Delicious",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-apple-tree-golden-delicious.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Delicious_apples.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: 'Golden Delicious' apples",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Malus domestica 'James Grieve'",
+    "cultivarName": "James Grieve",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Monstera deliciosa 'Thai Constellation'",
+    "cultivarName": "Thai Constellation",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-swiss-cheese-plant-thai-constellation.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:201016_117_San_Diego_Botanic_Garden_-_Dickinson_Family_Conseratory,_Monstera_deliciosa_%27Thai_Constellation%27_Variegated_Mexican_Breadfruit,_Aglaomorpha_coronans_Santa_Rosa_Fern.jpg",
+    "identityEvidence": "Source title and/or description identify this cultivar; image visually reviewed: Photographs taken at the San Diego Botanic Garden, October 9 and 16, 2020",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Ocimum basilicum 'Genovese'",
+    "cultivarName": "Genovese",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-basil-genovese.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:BasilikumGenovesergro%C3%9Fbl%C3%A4ttriger.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Basilikum großblättriger Genoveser",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Petroselinum crispum 'Moss Curled'",
+    "cultivarName": "Moss Curled",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Phaseolus vulgaris 'Cobra'",
+    "cultivarName": "Cobra",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Phaseolus vulgaris 'Purple Teepee'",
+    "cultivarName": "Purple Teepee",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Pisum sativum 'Hurst Green Shaft'",
+    "cultivarName": "Hurst Green Shaft",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Pisum sativum 'Kelvedon Wonder'",
+    "cultivarName": "Kelvedon Wonder",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus avium 'Lapins'",
+    "cultivarName": "Lapins",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-sweet-cherry-tree-lapins.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lapins_cherries_in_bowl.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Lapins cherries in a blue bowl",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus avium 'Stella'",
+    "cultivarName": "Stella",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-sweet-cherry-tree-stella.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: A pair of cherries from the same stalk.  Prunus avium  'Stella'.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus cerasus 'Morello'",
+    "cultivarName": "Morello",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-sour-cherry-tree-morello.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morello_Cherries_-_geograph.org.uk_-_4588668.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Morello Cherries",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus domestica 'Czar'",
+    "cultivarName": "Czar",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "The first licensed candidate shows damaged fruit; seek a clear photograph of a healthy source-identified Czar specimen.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus domestica 'Marjorie’s Seedling'",
+    "cultivarName": "Marjorie’s Seedling",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus domestica 'Opal'",
+    "cultivarName": "Opal",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-plum-tree-opal.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Opal_blommer._Danmark._2025._Foto_Hans_Christian_Hansen.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Opal plums. Denmark. 2025.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus domestica 'Victoria'",
+    "cultivarName": "Victoria",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Prunus persica 'Peregrine'",
+    "cultivarName": "Peregrine",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Pyrus communis 'Concorde'",
+    "cultivarName": "Concorde",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-pear-tree-concorde.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Concorde,_Franc-Picard,_Vron,_Somme,Fr.JPG",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Poires Concorde, vergers du Franc-Picard, Vron, Somme, France.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Pyrus communis 'Conference'",
+    "cultivarName": "Conference",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-pear-tree-conference.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Conference_pear_2017_B1.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Conference pear",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Pyrus communis 'Doyenné du Comice'",
+    "cultivarName": "Doyenné du Comice",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-pear-tree-doyenne-du-comice.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyrus_communis_%27Doyenn%C3%A9_du_Comice%27.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Pyrus communis 'Doyenné du Comice'.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Pyrus communis 'Williams’ Bon Chrétien'",
+    "cultivarName": "Williams’ Bon Chrétien",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Raphanus raphanistrum subsp. sativus 'Amethyst'",
+    "cultivarName": "Amethyst",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Raphanus raphanistrum subsp. sativus 'Black Spanish Round'",
+    "cultivarName": "Black Spanish Round",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Raphanus raphanistrum subsp. sativus 'Scarlet Globe'",
+    "cultivarName": "Scarlet Globe",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Raphanus sativus 'Cherry Belle'",
+    "cultivarName": "Cherry Belle",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Raphanus sativus 'French Breakfast 3'",
+    "cultivarName": "French Breakfast 3",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Rubus idaeus 'All Gold'",
+    "cultivarName": "All Gold",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Rubus idaeus 'Autumn Bliss'",
+    "cultivarName": "Autumn Bliss",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Rubus idaeus 'Glen Ample'",
+    "cultivarName": "Glen Ample",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-raspberry-glen-ample.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glen_Ample_raspberry_canes_-_geograph.org.uk_-_1978810.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Glen Ample raspberry canes",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Rubus idaeus 'Joan J'",
+    "cultivarName": "Joan J",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Rubus idaeus 'Polka'",
+    "cultivarName": "Polka",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Salvia rosmarinus 'Miss Jessopp’s Upright'",
+    "cultivarName": "Miss Jessopp’s Upright",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum lycopersicum 'Roma'",
+    "cultivarName": "Roma",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-plum-tomato-roma.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Roma_tomatoes_(509115549).jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Roma tomatoes",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum lycopersicum 'Tiny Tim'",
+    "cultivarName": "Tiny Tim",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Annabelle'",
+    "cultivarName": "Annabelle",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-annabelle.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lebensmittel-KartoffelsorteAnnabelle1-Asio.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Kartoffeln der Sorte Annabelle.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Charlotte'",
+    "cultivarName": "Charlotte",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-charlotte.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:FranceNormandieSouleuvreEnBocagePommeDeTerreCharlotteFleurs.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Souleuvre en Bocage (Normandie, France). Fleurs de pomme de terre 'Charlotte'.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Desiree'",
+    "cultivarName": "Desiree",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-desiree.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%A9sir%C3%A9e_Potatoes.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Désirée Potatoes from  Waitrose",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'King Edward'",
+    "cultivarName": "King Edward",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-king-edward.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:King_Edward.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: King Edward potato.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Maris Piper'",
+    "cultivarName": "Maris Piper",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-maris-piper.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Four_Maris_Piper_potatoes,_one_halved.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Four Maris Piper potatoes, one of them cut in half. The four potatoes weigh a total of about 750 g. According to the packaging they were grown in Lincolnshire by David Hoyles and sold by Marks & Spencer.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Spinacia oleracea 'Lazio'",
+    "cultivarName": "Lazio",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Spinacia oleracea 'Medania'",
+    "cultivarName": "Medania",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Thymus vulgaris 'Silver Posie'",
+    "cultivarName": "Silver Posie",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Vaccinium corymbosum 'Bluecrop'",
+    "cultivarName": "Bluecrop",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-blueberry-bluecrop.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vaccinium_corymbosum_Bluecrop_0zz.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Location taken: Behnke Nurseries, Potomac MD USA. Names:  Vaccinium corymbosum  'Bluecrop' Linnaeus, Northern Highbush Blueberr Classification: Plantae > Tracheophyta > Spermatopsida > Ericales > Ericaceae > Vaccinieae > Vaccinium >  Vaccinium corymbosum 'Bluecrop' .",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Vaccinium corymbosum 'Chandler'",
+    "cultivarName": "Chandler",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-blueberry-chandler.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blueberry_Chandler.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Blueberry Chandler - fruits ripening",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Vaccinium corymbosum 'Duke'",
+    "cultivarName": "Duke",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-blueberry-duke.jpeg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E5%85%AC%E7%88%B5%E8%97%8D%E8%8E%93_Vaccinium_corymbosum_Duke_-%E8%8D%B7%E8%98%AD%E5%9C%92%E8%97%9D%E5%B1%95_Venlo_Floriade,_Holland-_(9227077537).jpg",
+    "identityEvidence": "Source title and/or description identify this cultivar; image visually reviewed: Highbush blueberry",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Vaccinium corymbosum 'Spartan'",
+    "cultivarName": "Spartan",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Vitis vinifera 'Pinot Noir'",
+    "cultivarName": "Pinot Noir",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-grape-vine-pinot-noir.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_1981_Pinot_Noir_grapes_at_the_Main_Ridge_Estate.jpg",
+    "identityEvidence": "Source file title and/or description identify this named cultivar: Pinot Noir. Main Ridge Estate vineyard, Mornington Peninsula Victoria, Australia.",
+    "reviewedOn": "2026-10-30"
+  }
+]

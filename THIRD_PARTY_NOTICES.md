@@ -24,8 +24,10 @@ See [photo credits](plant-care-web/public/images/plants/README.md) and
 [the exact image manifest](deploy/catalog-images.json). Each photo retains its
 listed license or public-domain dedication; the original application's
 rights-reserved notice does not cover it.
-The UI displays the supplied title, author, source and license. Original image
-bytes are preserved and are scaled for display. See
+The UI displays the supplied title, author, source and license. Original downloads are preserved. Some cultivar photos use Wikimedia-provided
+thumbnails without further edits; the public photo credits and exact manifest
+record those changes and link to the original source. Images are scaled for
+display. See
 [catalog review](docs/release/houseplant-starter-catalog.md) and
 [flowering batch](docs/release/flowering-houseplant-batch.md),
 [larger expansion](docs/release/houseplant-expansion.md) and

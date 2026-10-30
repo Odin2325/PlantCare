@@ -80,7 +80,7 @@ Latest deployed application: `07848557db0ac3cc43f3d0c839a2af64de690138`, with [s
 
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
-account isolation and update checks. The [upcoming-work view](garden-upcoming-work.md) and eight more cultivars are implemented locally for the next batch checkpoint. A following increment can improve discovery of related cultivars without changing personal care schedules.
+account isolation and update checks. The [upcoming-work view](garden-upcoming-work.md) and eight more cultivars are implemented locally for the next batch checkpoint. [Related-cultivar discovery and source-specific photos](related-cultivar-photos.md) are now also implemented locally. Continue the pending photo queue before the next accumulated-batch checkpoint.
 Additional species follow the same reviewed import path. A personal photo journal
 requires a separate upload/storage/privacy/deletion design before implementation.
 Common-name-first labels and action-icon reminders are already implemented; do not
@@ -105,3 +105,11 @@ to 238 entries and 96 cultivars. The deployed totals remain 230 and 88 until the
 batch is integrated. Targeted local validation accompanies the local commit;
 full CI, public acceptance, update checks and deployment wait for the larger
 checkpoint. The latest deployed application above remains unchanged.
+
+The local [related-cultivar/photo increment](related-cultivar-photos.md) adds
+context-preserving profile links and 30 licensed assets, bringing the working
+image manifest to 186 files. Of the 96 cultivars, 31 have distinct source-identified
+photos and 65 use the approved named pending placeholder. Generic images are no
+longer repeated on cultivar entries. This increment and its CI-path updates are
+local-only; the next checkpoint must run full validation for the accumulated
+policy/workflow changes before deployment.

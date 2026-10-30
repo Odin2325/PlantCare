@@ -87,6 +87,17 @@ targets keep the date you saved. Only the next active care occurrence is shown.
 Viewing the list does not create reminders or record work. Use Dashboard to
 complete care after checking your plant.
 
+## Related varieties and cultivar photos (next local batch)
+
+Catalog profiles offer Explore related varieties, with common-name links to the
+other reviewed cultivars and general entry in that catalog group. Following a
+link keeps your catalog filters and comparison selection. Varieties can have
+different habits and care needs. Each approved cultivar photograph identifies the
+named variety at its credited source. Cultivar photo pending means that a suitable
+licensed photograph is still being sourced; a generic species photo is not used
+as its replacement. General entries and growth examples retain their reference
+photos. These changes are prepared locally for the next batched update.
+
 ## Seasonal care preferences
 
 Open a personal plant's details to choose Growing environment and Care season,

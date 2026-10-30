@@ -26,7 +26,7 @@ try {
     # the real https://localhost:8443 origin. Mailpit resolves on the Compose network.
     $browserArguments = @('run', '--rm', '--init', '--ipc=host', '--network', 'container:plantcare-local-proxy-1', 'plantcare-browser-tests:local')
     if ($CatalogOnly) {
-        $browserArguments += @('npx', 'playwright', 'test', 'catalog.spec.ts', 'garden.spec.ts', '--grep', 'garden collection|garden catalog|catalog light filters combine|comparison selection survives')
+        $browserArguments += @('npx', 'playwright', 'test', 'catalog.spec.ts', 'garden.spec.ts', 'cultivars.spec.ts', '--grep', 'garden collection|garden catalog|garden upcoming work|related cultivars|catalog light filters combine|comparison selection survives')
     }
     docker @browserArguments
     if ($LASTEXITCODE -ne 0) { throw 'Local browser journey failed.' }

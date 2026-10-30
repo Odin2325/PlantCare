@@ -98,7 +98,7 @@ jobs:
         shell: bash
         run: |
           if [ '${{ needs.backend.outputs.scope }}' = catalog ]; then
-            pnpm exec ng test --watch=false --include '**/garden-page.spec.ts' --include '**/plant-catalog-page.spec.ts' --include '**/plant-growing-guide.spec.ts' --include '**/my-plant-detail-page.spec.ts' --include '**/plant-comparison-page.spec.ts' --include '**/plant-photo.spec.ts'
+            pnpm exec ng test --watch=false --include '**/garden-page.spec.ts' --include '**/plant-catalog-page.spec.ts' --include '**/plant-growing-guide.spec.ts' --include '**/my-plant-detail-page.spec.ts' --include '**/plant-comparison-page.spec.ts' --include '**/plant-photo.spec.ts' --include '**/plant-relatives.spec.ts'
           else
             pnpm test:ci
           fi

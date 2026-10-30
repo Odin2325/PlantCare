@@ -67,13 +67,16 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(name);
     await expect(page.getByRole('heading', { name: plant.catalogProfile.harvestInstructions ? 'Growing and harvest' : 'Growing guide', exact: true })).toBeVisible();
     if (plant.catalogProfile.harvestInstructions) await expect(page.getByRole('heading', { name: 'Harvest guidance', exact: true })).toBeVisible();
-    if (plant.catalogProfile.photoIsSpeciesReference) await expect(page.getByText('Species reference photo; this specimen is not verified as the named cultivar.', { exact: true })).toBeVisible();
+    expect(plant.catalogProfile.photoIsSpeciesReference ?? false).toBe(false);
     await expect(page.getByRole('link', { name: 'Growing guide source', exact: true })).toHaveAttribute('href', plant.catalogProfile.careSourceUrl);
-    const image = page.locator('app-plant-photo img').first();
-    await image.scrollIntoViewIfNeeded();
-    // Dimensions can become available before the transfer finishes; wait before navigating away.
-    await expect.poll(() => image.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
-    if (name.includes('Tiny Tim')) await expect(page.getByText('not a verified Tiny Tim specimen', { exact: false })).toBeVisible();
+    const primary = page.locator('.plant-detail-page > app-plant-photo');
+    if (plant.catalogProfile.photo) {
+      const image = primary.locator('img'); await image.scrollIntoViewIfNeeded();
+      await expect.poll(() => image.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
+    } else {
+      await expect(primary).toContainText('Cultivar photo pending');
+      await expect(primary.locator('img')).toHaveCount(0);
+    }
     if (name === 'Potato') await expect(page.getByText('never eat the berries or foliage', { exact: false })).toBeVisible();
   }
   await auditAccessibility(page, 'Garden growing and harvest guide');
@@ -83,12 +86,13 @@ test('English houseplants have working local photos, attribution and searchable 
   const response = await request.get('/api/plant-species');
   expect(response.ok()).toBe(true);
   const species = await response.json();
-  const reviewed = species.filter((plant: { catalogProfile?: { photo?: unknown } }) => plant.catalogProfile?.photo);
+  const reviewed = species.filter((plant: { catalogProfile?: unknown }) => plant.catalogProfile);
   expect(reviewed).toHaveLength(238);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
+    if (!photo) { expect(plant.catalogProfile.cultivarName).toBeTruthy(); continue; }
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
     const image = await request.get(photo.path);
     expect(image.ok(), `Image for ${plant.commonName}`).toBe(true);

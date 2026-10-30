@@ -15,6 +15,10 @@ import { PlantCatalogPhoto, PlantCatalogProfile } from '../../models/plant-speci
         @if (!photo() && profile()?.photoIsSpeciesReference) {
           <p class="reference-note">Species reference photo; this specimen is not verified as the named cultivar.</p>
         }
+      } @else if (cultivarPending()) {
+        <div class="placeholder" role="img" [attr.aria-label]="'Cultivar photo pending: ' + profile()!.cultivarName">
+          <span aria-hidden="true">🌿</span>Cultivar photo pending<strong>{{ profile()!.cultivarName }}</strong>
+        </div>
       } @else { <div class="placeholder" role="img" aria-label="No plant photo available"><span aria-hidden="true">🌿</span>No photo yet</div> }
     </figure>
   `,
@@ -30,6 +34,8 @@ export class PlantPhoto {
   readonly profile = input<PlantCatalogProfile | null | undefined>(null);
   readonly photo = input<PlantCatalogPhoto | null | undefined>(null);
   readonly detail = input(false);
-  readonly selectedPhoto = computed(() => this.photo() ?? this.profile()?.photo ?? null);
+  readonly selectedPhoto = computed(() => this.photo() ??
+    (this.profile()?.cultivarName && this.profile()?.photoIsSpeciesReference ? null : this.profile()?.photo ?? null));
+  readonly cultivarPending = computed(() => !this.photo() && !!this.profile()?.cultivarName && !this.selectedPhoto());
   readonly failedPath = signal<string | null>(null);
 }

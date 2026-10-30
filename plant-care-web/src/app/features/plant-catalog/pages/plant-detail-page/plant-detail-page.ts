@@ -29,6 +29,7 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 import { PlantSpecies } from '../../../../models/plant-species.model';
 import { PlantGrowthReferences } from '../../../../shared/plant-growth-references/plant-growth-references';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
+import { PlantRelatives } from '../../../../shared/plant-relatives/plant-relatives';
 import { PlantGrowingGuide } from '../../../../shared/plant-growing-guide/plant-growing-guide';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
 import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api.service';
@@ -42,6 +43,7 @@ import { MyPlantsApiService } from '../../../my-plants/data-access/my-plants-api
     PlantPhoto,
     PlantGrowthReferences,
     PlantGrowingGuide,
+    PlantRelatives,
   ],
   templateUrl: './plant-detail-page.html',
   styleUrl: './plant-detail-page.css',

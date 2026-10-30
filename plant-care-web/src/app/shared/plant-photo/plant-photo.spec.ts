@@ -11,13 +11,19 @@ const profile: PlantCatalogProfile = {
 };
 
 describe('Plant photos and attribution', () => {
-  it('labels a species reference visibly and does not apply that label to an explicit replacement photo', () => {
+  it('shows a named pending placeholder instead of a generic cultivar photo, while preserving explicit reference images', () => {
     const fixture = TestBed.createComponent(PlantPhoto);
     fixture.componentRef.setInput('profile', { ...profile, cultivarName: 'Example', photoIsSpeciesReference: true });
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.reference-note').textContent).toContain('not verified as the named cultivar');
+    expect(fixture.nativeElement.querySelector('img')).toBeNull();
+    expect(fixture.nativeElement.textContent).toContain('Cultivar photo pending');
+    expect(fixture.nativeElement.querySelector('[role="img"]').getAttribute('aria-label')).toBe('Cultivar photo pending: Example');
     fixture.componentRef.setInput('photo', profile.photo); fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.reference-note')).toBeNull();
+    expect(fixture.nativeElement.querySelector('img')).not.toBeNull();
+    fixture.componentRef.setInput('photo', null);
+    fixture.componentRef.setInput('profile', { ...profile, cultivarName: 'Example', photo: null }); fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Cultivar photo pending');
   });
   it('retains source/license links when an image fails and retries a different image', () => {
     const fixture = TestBed.createComponent(PlantPhoto);

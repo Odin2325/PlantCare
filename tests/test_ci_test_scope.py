@@ -11,6 +11,7 @@ class CiScopeTests(unittest.TestCase):
     def test_catalog_content_and_ui_use_focused_checks(self):
         self.assertEqual("catalog", scope.select_scope([
             "deploy/catalog.houseplants.json", "plant-care-web/public/images/plants/fig.jpg",
+            "deploy/catalog-cultivar-photos.json", "tests/browser/cultivars.spec.ts",
             "plant-care-web/src/app/features/plant-catalog/pages/plant-catalog-page/plant-catalog-page.ts",
             "PlantCare.Domain/ValueObjects/PlantCatalogProfile.cs"]))
 

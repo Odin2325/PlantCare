@@ -4125,23 +4125,15 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Protect from frost. This bush cultivar does not require routine side-shoot removal. The photo is a tomato species reference, not a verified Tiny Tim specimen.",
+      "growingNotes": "Protect from frost. This bush cultivar does not require routine side-shoot removal.",
       "harvestInstructions": "Pick ripe red fruit regularly. Leaves and stems are not edible.",
       "commonNameAliases": [
         "Tiny Tim tomato",
         "Dwarf cherry tomato"
       ],
-      "photo": {
-        "path": "/images/plants/solanum-lycopersicum.jpg",
-        "altText": "Cherry tomato (Tiny Tim) reference photo (species reference; cultivar not verified)",
-        "credit": "Sharon_K",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-lycopersicum/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Solanum lycopersicum grown in porous terracotta pots on a porch."
-      },
+      "photo": null,
       "cultivarName": "Tiny Tim",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -4165,23 +4157,23 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Choose a sunny, sheltered place after frost risk has passed. Support fruit-bearing stems as needed. The photo is a tomato species reference, not a verified Roma specimen.",
+      "growingNotes": "Choose a sunny, sheltered place after frost risk has passed. Support fruit-bearing stems as needed.",
       "harvestInstructions": "Pick fully coloured, sound fruits for fresh use or cooking. Do not eat leaves or stems.",
       "commonNameAliases": [
         "Roma tomato",
         "Paste tomato"
       ],
       "photo": {
-        "path": "/images/plants/solanum-lycopersicum.jpg",
-        "altText": "Plum tomato (Roma) reference photo (species reference; cultivar not verified)",
-        "credit": "Sharon_K",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-lycopersicum/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Solanum lycopersicum grown in porous terracotta pots on a porch."
+        "path": "/images/plants/cultivar-plum-tomato-roma.jpg",
+        "altText": "Plum tomato (Roma); source-identified cultivar photograph",
+        "credit": "Simon Law  from Montréal, QC, Canada",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Roma_tomatoes_(509115549).jpg",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Roma tomatoes (509115549)"
       },
       "cultivarName": "Roma",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -4282,23 +4274,15 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Provide full sun and shelter after frost risk has passed. The photo is a hot-pepper group reference, not a verified Early Jalapeno specimen.",
+      "growingNotes": "Provide full sun and shelter after frost risk has passed.",
       "harvestInstructions": "Cut fruits rather than pulling them from branches. Handle hot peppers carefully and avoid touching your eyes.",
       "commonNameAliases": [
         "Jalapeno",
         "Early Jalapeno"
       ],
-      "photo": {
-        "path": "/images/plants/capsicum-annuum-longum-group.jpg",
-        "altText": "Jalapeno pepper (Early Jalapeno) reference photo (species reference; cultivar not verified)",
-        "credit": "Creative Commons Zero",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/capsicum-annuum-longum-group/",
-        "licenseName": "CC0 1.0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "title": "Chili Pepper Plant"
-      },
+      "photo": null,
       "cultivarName": "Early Jalapeno",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -4903,19 +4887,19 @@
         "fruit",
         "tree"
       ],
-      "growingNotes": "Choose a suitable rootstock and a compatible pollination partner. This cultivar belongs to pollination group 3; protect flowers from local spring frost risk. Photo: species reference only; this specimen is not verified as Elstar.",
+      "growingNotes": "Choose a suitable rootstock and a compatible pollination partner. This cultivar belongs to pollination group 3; protect flowers from local spring frost risk.",
       "harvestInstructions": "Follow local ripening signs rather than copying a fixed harvest month from another climate.",
       "photo": {
-        "path": "/images/plants/malus-domestica.jpg",
-        "altText": "Apple tree (Elstar) species reference photo; cultivar not verified",
-        "credit": "Gzzz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "path": "/images/plants/cultivar-apple-tree-elstar.jpg",
+        "altText": "Apple tree (Elstar); source-identified cultivar photograph",
+        "credit": "Frank Houweling (Fruitbomen.net)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Appls_on_an_Elstar_espalier_apple_tree.jpg",
         "licenseName": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Tree"
+        "title": "Appls on an Elstar espalier apple tree"
       },
       "cultivarName": "Elstar",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -4940,19 +4924,19 @@
         "fruit",
         "tree"
       ],
-      "growingNotes": "It can set fruit without cross-pollination, but a suitable pollination partner can improve cropping. Give it a sunny, sheltered site. Photo: species reference only; this specimen is not verified as Conference.",
+      "growingNotes": "It can set fruit without cross-pollination, but a suitable pollination partner can improve cropping. Give it a sunny, sheltered site.",
       "harvestInstructions": "Pick mature, firm fruit and follow local cultivar guidance for finishing ripening and storage.",
       "photo": {
-        "path": "/images/plants/pyrus-communis.jpg",
-        "altText": "Pear tree (Conference) species reference photo; cultivar not verified",
-        "credit": "Peter O_Connor aka anemoneprojectors",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Fruit"
+        "path": "/images/plants/cultivar-pear-tree-conference.jpg",
+        "altText": "Pear tree (Conference); source-identified cultivar photograph",
+        "credit": "Fructibus",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Conference_pear_2017_B1.jpg",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Conference pear 2017 B1"
       },
       "cultivarName": "Conference",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -4977,19 +4961,11 @@
         "fruit",
         "tree"
       ],
-      "growingNotes": "Choose a sunny, sheltered site and a rootstock suited to the available space. Early flowers can be affected by spring frost. Photo: species reference only; this specimen is not verified as Victoria.",
+      "growingNotes": "Choose a sunny, sheltered site and a rootstock suited to the available space. Early flowers can be affected by spring frost.",
       "harvestInstructions": "Pick ripe, sound plums and remove the stones before eating or cooking.",
-      "photo": {
-        "path": "/images/plants/prunus-domestica.jpg",
-        "altText": "Plum tree (Victoria) species reference photo; cultivar not verified",
-        "credit": "Vladimir",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
-        "licenseName": "CC0 1.0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "title": "Unripe fruit and stem"
-      },
+      "photo": null,
       "cultivarName": "Victoria",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5014,19 +4990,11 @@
         "fruit",
         "tree"
       ],
-      "growingNotes": "Choose a warm, sunny, sheltered position or suitable container. Protect container roots in winter and avoid skin contact with sap. Photo: species reference only; this specimen is not verified as Brown Turkey.",
+      "growingNotes": "Choose a warm, sunny, sheltered position or suitable container. Protect container roots in winter and avoid skin contact with sap.",
       "harvestInstructions": "Pick soft, ripe fruits. Do not expect a fixed number of crops in every climate.",
-      "photo": {
-        "path": "/images/plants/ficus-carica.jpg",
-        "altText": "Fig tree (Brown Turkey) species reference photo; cultivar not verified",
-        "credit": "Juan Emilio Prades Bel",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Form"
-      },
+      "photo": null,
       "cultivarName": "Brown Turkey",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5050,19 +5018,11 @@
       "categories": [
         "fruit"
       ],
-      "growingNotes": "Provide sun, shelter and fertile, drained soil. Keep the crown at the surface and give plants room to grow. Photo: species reference only; this specimen is not verified as Elsanta.",
+      "growingNotes": "Provide sun, shelter and fertile, drained soil. Keep the crown at the surface and give plants room to grow.",
       "harvestInstructions": "Pick ripe berries during the summer-fruiting crop. Remove damaged or mouldy fruits.",
-      "photo": {
-        "path": "/images/plants/fragaria-x-ananassa.jpg",
-        "altText": "Strawberry (Elsanta) species reference photo; cultivar not verified",
-        "credit": "Fomulaax",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Plant with Fruit"
-      },
+      "photo": null,
       "cultivarName": "Elsanta",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5086,19 +5046,11 @@
       "categories": [
         "fruit"
       ],
-      "growingNotes": "Provide support if needed. For the usual autumn crop, cut the canes to ground level in late winter; this differs from summer-fruiting raspberry pruning. Photo: species reference only; this specimen is not verified as Autumn Bliss.",
+      "growingNotes": "Provide support if needed. For the usual autumn crop, cut the canes to ground level in late winter; this differs from summer-fruiting raspberry pruning.",
       "harvestInstructions": "Pick fully coloured berries when they release easily. Actual harvest dates depend on local conditions.",
-      "photo": {
-        "path": "/images/plants/rubus-idaeus.jpg",
-        "altText": "Raspberry (Autumn Bliss) species reference photo; cultivar not verified",
-        "credit": "Bernard Dupont",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Ripe and unripe raspberry fruits"
-      },
+      "photo": null,
       "cultivarName": "Autumn Bliss",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5122,19 +5074,19 @@
       "categories": [
         "fruit"
       ],
-      "growingNotes": "Use acidic, moisture-retentive but drained soil or ericaceous container mix. A compatible additional cultivar can help pollination. Photo: species reference only; this specimen is not verified as Bluecrop.",
+      "growingNotes": "Use acidic, moisture-retentive but drained soil or ericaceous container mix. A compatible additional cultivar can help pollination.",
       "harvestInstructions": "Pick fully ripe blue berries. Check ripeness rather than relying only on the first colour change.",
       "photo": {
-        "path": "/images/plants/vaccinium-corymbosum.jpg",
-        "altText": "Blueberry (Bluecrop) species reference photo; cultivar not verified",
-        "credit": "Rob Thurman",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Fruits"
+        "path": "/images/plants/cultivar-blueberry-bluecrop.jpg",
+        "altText": "Blueberry (Bluecrop); source-identified cultivar photograph",
+        "credit": "Photo by David J. Stang",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vaccinium_corymbosum_Bluecrop_0zz.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Vaccinium corymbosum Bluecrop 0zz"
       },
       "cultivarName": "Bluecrop",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5159,19 +5111,19 @@
         "vegetable",
         "root-tuber"
       ],
-      "growingNotes": "Use healthy seed potatoes and protect emerging shoots from frost. Keep developing tubers covered from light. Photo: species reference only; this specimen is not verified as Annabelle.",
+      "growingNotes": "Use healthy seed potatoes and protect emerging shoots from frost. Keep developing tubers covered from light.",
       "harvestInstructions": "Lift at the stage recommended for the seed stock. Discard green or spoiled tubers; never eat foliage or berries.",
       "photo": {
-        "path": "/images/plants/solanum-tuberosum.jpg",
-        "altText": "Potato (Annabelle) species reference photo; cultivar not verified",
-        "credit": "Josh Graciano",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "'Bintje' potato plants uprooted for harvesting"
+        "path": "/images/plants/cultivar-potato-annabelle.jpg",
+        "altText": "Potato (Annabelle); source-identified cultivar photograph",
+        "credit": "Asio otus",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lebensmittel-KartoffelsorteAnnabelle1-Asio.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Lebensmittel-KartoffelsorteAnnabelle1-Asio"
       },
       "cultivarName": "Annabelle",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5196,19 +5148,11 @@
         "vegetable",
         "root-tuber"
       ],
-      "growingNotes": "Choose light, drained soil and direct sow to avoid disturbing the developing taproot. Thin crowded seedlings. Photo: species reference only; this specimen is not verified as Early Nantes 2.",
+      "growingNotes": "Choose light, drained soil and direct sow to avoid disturbing the developing taproot. Thin crowded seedlings.",
       "harvestInstructions": "Lift roots when they reach a suitable size; timing varies with sowing date and weather.",
-      "photo": {
-        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
-        "altText": "Carrot (Early Nantes 2) species reference photo; cultivar not verified",
-        "credit": "Forest & Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
-        "licenseName": "CC BY 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "title": "ends of carrots"
-      },
+      "photo": null,
       "cultivarName": "Early Nantes 2",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5232,19 +5176,19 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Move outside only after frost risk has passed. Provide support and consistent soil moisture without waterlogging. Photo: species reference only; this specimen is not verified as Marketmore.",
+      "growingNotes": "Move outside only after frost risk has passed. Provide support and consistent soil moisture without waterlogging.",
       "harvestInstructions": "Cut usable young fruits regularly. Do not eat unusually bitter fruit or feed it to pets.",
       "photo": {
-        "path": "/images/plants/cucumis-sativus.jpg",
-        "altText": "Cucumber (Marketmore) species reference photo; cultivar not verified",
-        "credit": "cristina.sanvito",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucumis-sativus/",
+        "path": "/images/plants/cultivar-cucumber-marketmore.jpg",
+        "altText": "Cucumber (Marketmore); source-identified cultivar photograph",
+        "credit": "Forest and Kim Starr",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Starr-220604-0503-Cucumis_sativus-Marketmore_flowers_fruit_leaves-Hawea_Pl_Olinda-Maui_(52449241945).jpg",
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Seedlings"
+        "title": "Starr-220604-0503-Cucumis sativus-Marketmore flowers fruit leaves-Hawea Pl Olinda-Maui (52449241945)"
       },
       "cultivarName": "Marketmore",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5268,19 +5212,19 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Give sun and fertile, moisture-retentive but drained soil after frost risk. Picking regularly supports continued cropping. Photo: species reference only; this specimen is not verified as Black Beauty.",
+      "growingNotes": "Give sun and fertile, moisture-retentive but drained soil after frost risk. Picking regularly supports continued cropping.",
       "harvestInstructions": "Pick young, tender fruits. Do not eat unusually bitter squash or feed it to pets.",
       "photo": {
-        "path": "/images/plants/cucurbita-pepo.jpg",
-        "altText": "Zucchini (Black Beauty) species reference photo; cultivar not verified",
-        "credit": "Hope Duckworth",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucurbita-pepo/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "Form and fruit"
+        "path": "/images/plants/cultivar-zucchini-black-beauty.jpg",
+        "altText": "Zucchini (Black Beauty); source-identified cultivar photograph",
+        "credit": "Eric Polk",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cucurbita_pepo_zucchini_group_%27Black_Beauty%27.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Cucurbita pepo zucchini group 'Black Beauty'"
       },
       "cultivarName": "Black Beauty",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5304,19 +5248,11 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Grow labelled sets or seedlings in sunny, fertile, drained soil. Match planting dates to your local conditions. Photo: species reference only; this specimen is not verified as Sturon.",
+      "growingNotes": "Grow labelled sets or seedlings in sunny, fertile, drained soil. Match planting dates to your local conditions.",
       "harvestInstructions": "Lift mature bulbs, dry them thoroughly and store sound bulbs in a ventilated place. Keep onions away from pets.",
-      "photo": {
-        "path": "/images/plants/allium-cepa.jpg",
-        "altText": "Onion (Sturon) species reference photo; cultivar not verified",
-        "credit": "Carl Lewis",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-cepa/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "mass planting"
-      },
+      "photo": null,
       "cultivarName": "Sturon",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5340,19 +5276,19 @@
       "categories": [
         "herb"
       ],
-      "growingNotes": "Provide sun, warmth and well-drained growing mix. Protect the tender plant from cold and pinch tips for branching. Photo: species reference only; this specimen is not verified as Genovese.",
+      "growingNotes": "Provide sun, warmth and well-drained growing mix. Protect the tender plant from cold and pinch tips for branching.",
       "harvestInstructions": "Pick healthy leaves and soft tips as needed while leaving enough foliage for continued growth.",
       "photo": {
-        "path": "/images/plants/ocimum-basilicum.jpg",
-        "altText": "Basil (Genovese) species reference photo; cultivar not verified",
-        "credit": "F. D. Richards",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Ocimum basilicum"
+        "path": "/images/plants/cultivar-basil-genovese.jpg",
+        "altText": "Basil (Genovese); source-identified cultivar photograph",
+        "credit": "Goldlocki",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:BasilikumGenovesergro%C3%9Fbl%C3%A4ttriger.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "BasilikumGenovesergroßblättriger"
       },
       "cultivarName": "Genovese",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5376,19 +5312,11 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Use moisture-retentive soil and small successive sowings. Protect early or late sowings when local weather requires it. Photo: species reference only; this specimen is not verified as Little Gem.",
+      "growingNotes": "Use moisture-retentive soil and small successive sowings. Protect early or late sowings when local weather requires it.",
       "harvestInstructions": "Cut developed heads before flowering reduces quality.",
-      "photo": {
-        "path": "/images/plants/lactuca-sativa.jpg",
-        "altText": "Lettuce (Little Gem) species reference photo; cultivar not verified",
-        "credit": "Anna",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lactuca-sativa/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Lactuca sativa var. crispa 'Salad Bowl' form"
-      },
+      "photo": null,
       "cultivarName": "Little Gem",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5410,20 +5338,20 @@
       "careSourceUrl": "https://www.rhs.org.uk/plants/520520/monstera-deliciosa-thai-constellation-v/details",
       "reviewedOn": "2026-10-25",
       "photo": {
-        "path": "/images/plants/monstera-deliciosa.jpg",
-        "altText": "Swiss cheese plant (Thai Constellation) species reference photo; cultivar not verified",
-        "credit": "Maja Dumat",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+        "path": "/images/plants/cultivar-swiss-cheese-plant-thai-constellation.jpg",
+        "altText": "Swiss cheese plant (Thai Constellation); source-identified cultivar photograph",
+        "credit": "cultivar413",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:201016_117_San_Diego_Botanic_Garden_-_Dickinson_Family_Conseratory,_Monstera_deliciosa_%27Thai_Constellation%27_Variegated_Mexican_Breadfruit,_Aglaomorpha_coronans_Santa_Rosa_Fern.jpg",
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Potted form"
+        "title": "201016 117 San Diego Botanic Garden - Dickinson Family Conseratory, Monstera deliciosa 'Thai Constellation' Variegated Mexican Breadfruit, Aglaomorpha coronans Santa Rosa Fern"
       },
       "categories": [
         "houseplant"
       ],
       "cultivarName": "Thai Constellation",
-      "photoIsSpeciesReference": true,
-      "growingNotes": "Give warm conditions, filtered light and suitable climbing support. Variegated appearance is not a promise about every new leaf. Photo: species reference only; this specimen is not verified as Thai Constellation."
+      "photoIsSpeciesReference": false,
+      "growingNotes": "Give warm conditions, filtered light and suitable climbing support. Variegated appearance is not a promise about every new leaf."
     }
   },
   {
@@ -5444,21 +5372,13 @@
     "catalogProfile": {
       "careSourceUrl": "https://www.rhs.org.uk/plants/304267/ficus-elastica-tineke-v/details",
       "reviewedOn": "2026-10-25",
-      "photo": {
-        "path": "/images/plants/ficus-elastica.jpg",
-        "altText": "Rubber plant (Tineke) species reference photo; cultivar not verified",
-        "credit": "Margaret Shear",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-elastica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Houseplant"
-      },
+      "photo": null,
       "categories": [
         "houseplant"
       ],
       "cultivarName": "Tineke",
-      "photoIsSpeciesReference": true,
-      "growingNotes": "Choose bright, filtered light and a warm position. Water moderately with drainage and reduce watering when growth slows. Photo: species reference only; this specimen is not verified as Tineke."
+      "photoIsSpeciesReference": false,
+      "growingNotes": "Choose bright, filtered light and a warm position. Water moderately with drainage and reduce watering when growth slows."
     }
   },
   {
@@ -5482,19 +5402,11 @@
       "categories": [
         "vegetable"
       ],
-      "growingNotes": "Provide warmth, sun and freely draining soil after frost risk has passed. The reference photo shows a sweet-pepper plant, not a verified California Wonder specimen.",
+      "growingNotes": "Provide warmth, sun and freely draining soil after frost risk has passed.",
       "harvestInstructions": "Cut usable green fruits or allow them to develop their mature red colour. Avoid pulling fruits from the branches.",
-      "photo": {
-        "path": "/images/plants/capsicum-annuum-grossum-group.jpg",
-        "altText": "Sweet pepper species reference; California Wonder cultivar not verified",
-        "credit": "Bukowsky18",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/capsicum-annuum-grossum-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Young plant"
-      },
+      "photo": null,
       "cultivarName": "California Wonder",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5751,17 +5663,9 @@
       ],
       "growingNotes": "An early shelling-pea cultivar. Support stems and check local sowing conditions.",
       "harvestInstructions": "Pick filled pods while the peas are young and tender.",
-      "photo": {
-        "path": "/images/plants/lathyrus-oleraceus.jpg",
-        "altText": "Garden pea species reference; Kelvedon Wonder cultivar not verified",
-        "credit": "Serge96 46",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lathyrus-oleraceus/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Peas in a pod"
-      },
+      "photo": null,
       "cultivarName": "Kelvedon Wonder",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5788,17 +5692,9 @@
       ],
       "growingNotes": "A salad radish with elongated red roots and white tips. Keep the seedbed moist and thin seedlings.",
       "harvestInstructions": "Pull roots young and tender rather than leaving them to become woody.",
-      "photo": {
-        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
-        "altText": "Radish species reference; French Breakfast 3 cultivar not verified",
-        "credit": "Franco Folini",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Roots of 'Longipinnatus', aka Daikon"
-      },
+      "photo": null,
       "cultivarName": "French Breakfast 3",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -5825,17 +5721,9 @@
       ],
       "growingNotes": "A beetroot cultivar selected for resistance to bolting. This does not guarantee it will never bolt; follow local sowing guidance.",
       "harvestInstructions": "Lift tender roots at a useful size. Thin seedlings to leave space for the crop.",
-      "photo": {
-        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
-        "altText": "Beetroot species reference; Boltardy cultivar not verified",
-        "credit": "woodleywonderworks",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Harvested beets"
-      },
+      "photo": null,
       "cultivarName": "Boltardy",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6162,17 +6050,9 @@
       ],
       "growingNotes": "Grow in fertile, moist but drained soil in sun or light shade. Usually crop for leaves in the first season.",
       "harvestInstructions": "Pick a few outer leafy stalks at a time, leaving the centre to regrow.",
-      "photo": {
-        "path": "/images/plants/petroselinum-crispum.jpg",
-        "altText": "Parsley reference photo; Moss Curled cultivar not verified",
-        "credit": "Cathy Dewitt",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/petroselinum-crispum/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "Form (Wilson Botanical Garden,NC)"
-      },
+      "photo": null,
       "cultivarName": "Moss Curled",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6198,17 +6078,9 @@
       ],
       "growingNotes": "Sow and space according to the seed label, keeping soil moisture even. Local weather affects the time to harvest.",
       "harvestInstructions": "Gather tender stems at a useful size before they become woody.",
-      "photo": {
-        "path": "/images/plants/brassica-oleracea-kohlrabi-group.jpg",
-        "altText": "Kohlrabi reference photo; Kolibri cultivar not verified",
-        "credit": "Anita Martinz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kohlrabi-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Kahlrabi purple bulb"
-      },
+      "photo": null,
       "cultivarName": "Kolibri",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6234,17 +6106,9 @@
       ],
       "growingNotes": "Provide sun, fertile drained soil and space for mature plants. Check local winter conditions rather than assuming a hardiness guarantee.",
       "harvestInstructions": "Pick young, tender leaves regularly while retaining the growing centre.",
-      "photo": {
-        "path": "/images/plants/brassica-oleracea-kale-group.jpg",
-        "altText": "Kale reference photo; Redbor cultivar not verified",
-        "credit": "Nick Saltmarsh",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kale-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Form of a red curly kale"
-      },
+      "photo": null,
       "cultivarName": "Redbor",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6270,17 +6134,9 @@
       ],
       "growingNotes": "Follow the seed label for sowing and spacing. Maintain steady moisture; close spacing changes the expected head size.",
       "harvestInstructions": "Cut compact small heads before the curds loosen. No fixed harvest date is guaranteed.",
-      "photo": {
-        "path": "/images/plants/brassica-oleracea-cauliflower-broccoli-group.jpg",
-        "altText": "Cauliflower reference photo; Igloo cultivar not verified",
-        "credit": "Hope Duckworth",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-cauliflower-broccoli-group/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "Form in backyard garden"
-      },
+      "photo": null,
       "cultivarName": "Igloo",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6381,17 +6237,9 @@
       ],
       "growingNotes": "Use a sunny, sheltered site with drained soil and follow the seed label for spacing. Sow where it will grow to limit root disturbance.",
       "harvestInstructions": "Snip a few fresh leafy tips without stripping the plant. For seed, collect ripening heads before the seeds scatter.",
-      "photo": {
-        "path": "/images/plants/anethum-graveolens.jpg",
-        "altText": "Dill reference photo; Dukat cultivar not verified",
-        "credit": "Magnus Brath",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Foliage"
-      },
+      "photo": null,
       "cultivarName": "Dukat",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6417,17 +6265,9 @@
       ],
       "growingNotes": "Grow in sun or light shade with steady moisture and drainage. Use successive sowings rather than assuming one plant will crop indefinitely.",
       "harvestInstructions": "Pick small amounts of young leaves regularly. For seed, allow heads to ripen and dry before collecting; do not confuse unidentified wild plants with this crop.",
-      "photo": {
-        "path": "/images/plants/coriandrum-sativum.jpg",
-        "altText": "Coriander reference photo; Calypso cultivar not verified",
-        "credit": "Forest and Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Coriandrum sativum "
-      },
+      "photo": null,
       "cultivarName": "Calypso",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6455,16 +6295,16 @@
       "growingNotes": "Choose a rootstock for the space and a sunny, sheltered site. Arrange two compatible flowering apple cultivars for pollination; ask the nursery for a suitable combination.",
       "harvestInstructions": "Pick mature, sound apples when they detach with a gentle lift. Use as a cooking apple; local weather affects maturity and storage suitability.",
       "photo": {
-        "path": "/images/plants/malus-domestica.jpg",
-        "altText": "Apple tree reference photo; Bramley’s Seedling cultivar not verified",
-        "credit": "Gzzz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Tree"
+        "path": "/images/plants/cultivar-apple-tree-bramleys-seedling.jpg",
+        "altText": "Apple tree (Bramley’s Seedling); source-identified cultivar photograph",
+        "credit": "Victuallers",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bramleys_Seedling_Apple_cultivars_as_grown_at_Priorwood_Garden_in_2020.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Bramleys Seedling Apple cultivars as grown at Priorwood Garden in 2020"
       },
       "cultivarName": "Bramley’s Seedling",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6492,16 +6332,16 @@
       "growingNotes": "Provide sun, shelter and drained soil. Choose a suitable rootstock and confirm pollination requirements with the nursery before planting.",
       "harvestInstructions": "Pick when mature but still firm and finish ripening off the tree, following guidance for the chosen cultivar.",
       "photo": {
-        "path": "/images/plants/pyrus-communis.jpg",
-        "altText": "Pear tree reference photo; Concorde cultivar not verified",
-        "credit": "Peter O_Connor aka anemoneprojectors",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Fruit"
+        "path": "/images/plants/cultivar-pear-tree-concorde.jpg",
+        "altText": "Pear tree (Concorde); source-identified cultivar photograph",
+        "credit": "APictche",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Concorde,_Franc-Picard,_Vron,_Somme,Fr.JPG",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Concorde, Franc-Picard, Vron, Somme,Fr"
       },
       "cultivarName": "Concorde",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6528,17 +6368,9 @@
       ],
       "growingNotes": "Use a sunny sheltered wall or suitable container and protect against severe local cold. Sap can irritate skin, especially with sunlight; use gloves when pruning.",
       "harvestInstructions": "Pick soft, ripe fruit. Protect skin from sap and keep foliage away from pets.",
-      "photo": {
-        "path": "/images/plants/ficus-carica.jpg",
-        "altText": "Fig tree reference photo; Brunswick cultivar not verified",
-        "credit": "Juan Emilio Prades Bel",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/ficus-carica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Form"
-      },
+      "photo": null,
       "cultivarName": "Brunswick",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6566,16 +6398,16 @@
       "growingNotes": "Choose sun, shelter and fertile drained soil. Select a rootstock for available space, thin overloaded branches and prune at the appropriate growing-season stage.",
       "harvestInstructions": "Pick ripe, sound fruits. Remove stones before eating or processing; do not chew the stones.",
       "photo": {
-        "path": "/images/plants/prunus-domestica.jpg",
-        "altText": "Plum tree reference photo; Opal cultivar not verified",
-        "credit": "Vladimir",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
+        "path": "/images/plants/cultivar-plum-tree-opal.jpg",
+        "altText": "Plum tree (Opal); source-identified cultivar photograph",
+        "credit": "XYZA-2400",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Opal_blommer._Danmark._2025._Foto_Hans_Christian_Hansen.jpg",
         "licenseName": "CC0 1.0",
         "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "title": "Unripe fruit and stem"
+        "title": "Opal blommer. Danmark. 2025. Foto Hans Christian Hansen"
       },
       "cultivarName": "Opal",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6759,16 +6591,16 @@
       "growingNotes": "Choose a sunny, sheltered site and a rootstock suited to the space. Water newly planted or container trees as needed and prune after harvesting.",
       "harvestInstructions": "Pick only fully ripe cherries, handling the stalk gently. Cherries do not continue ripening after picking. Keep stones and wilted leaves away from pets.",
       "photo": {
-        "path": "/images/plants/prunus-avium.jpg",
-        "altText": "Sweet cherry tree reference photo; Stella cultivar not verified",
-        "credit": "Derek Ramsey",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Tree"
+        "path": "/images/plants/cultivar-sweet-cherry-tree-stella.jpg",
+        "altText": "Sweet cherry tree (Stella); source-identified cultivar photograph",
+        "credit": "Benjamint444 , edited by  Fir0002",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cherry_Stella444.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Cherry Stella444"
       },
       "cultivarName": "Stella",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6796,16 +6628,16 @@
       "growingNotes": "Use fertile moist but drained soil and a suitable rootstock. Fan training can suit a wall; follow acid-cherry pruning guidance after fruiting.",
       "harvestInstructions": "Gather fully ripe fruit carefully in dry weather where possible. Use sound cherries for cooking or preserving; do not consume the stones.",
       "photo": {
-        "path": "/images/plants/prunus-cerasus.jpg",
-        "altText": "Sour cherry tree reference photo; Morello cultivar not verified",
-        "credit": "DenesFeri",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-cerasus/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Form"
+        "path": "/images/plants/cultivar-sour-cherry-tree-morello.jpg",
+        "altText": "Sour cherry tree (Morello); source-identified cultivar photograph",
+        "credit": "Oast House Archive",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morello_Cherries_-_geograph.org.uk_-_4588668.jpg",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Morello Cherries - geograph.org.uk - 4588668"
       },
       "cultivarName": "Morello",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6832,17 +6664,9 @@
       ],
       "growingNotes": "Provide a warm, sunny, sheltered growing site with drainage. Protect early blossom from frost where practical and follow local guidance on leaf curl and pruning.",
       "harvestInstructions": "Pick when the fruit has developed its expected colour, gives slightly and comes away gently. Handle carefully to avoid bruising. Keep stones and wilted leaves away from pets.",
-      "photo": {
-        "path": "/images/plants/prunus-persica.jpg",
-        "altText": "Peach tree reference photo; Peregrine cultivar not verified",
-        "credit": "Cathy DeWitt",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-persica/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "'Bonanza' dwarf Spring Wake County"
-      },
+      "photo": null,
       "cultivarName": "Peregrine",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6869,16 +6693,16 @@
       "growingNotes": "Train on sturdy support in full sun with shelter and drained soil. Follow the chosen pruning system and monitor disease; do not assume a fixed local harvest month.",
       "harvestInstructions": "Pick complete bunches only when ripe for the intended use; grapes do not sweeten after picking. Local weather and variety affect the harvest date.",
       "photo": {
-        "path": "/images/plants/vitis-vinifera.jpg",
-        "altText": "Grape vine reference photo; Pinot Noir cultivar not verified",
-        "credit": "Eiku",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vitis-vinifera/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Leaves in Pot"
+        "path": "/images/plants/cultivar-grape-vine-pinot-noir.jpg",
+        "altText": "Grape vine (Pinot Noir); source-identified cultivar photograph",
+        "credit": "CSIRO",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_1981_Pinot_Noir_grapes_at_the_Main_Ridge_Estate.jpg",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "CSIRO ScienceImage 1981 Pinot Noir grapes at the Main Ridge Estate"
       },
       "cultivarName": "Pinot Noir",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6906,16 +6730,16 @@
       "growingNotes": "A self-fertile sweet cherry cultivar grown for dark-red fruit. Blossom frost and site conditions can still limit cropping. Provide sun, shelter and fertile, moist but drained soil. Choose a rootstock for available space, protect blossom from frost where practical and prune at the appropriate summer stage.",
       "harvestInstructions": "Pick only fully ripe cherries, handling the stalk gently. Cherries do not continue ripening after picking. Keep stones and wilted leaves away from pets.",
       "photo": {
-        "path": "/images/plants/prunus-avium.jpg",
-        "altText": "Sweet cherry tree reference photo; Lapins cultivar not verified",
-        "credit": "Derek Ramsey",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-avium/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Tree"
+        "path": "/images/plants/cultivar-sweet-cherry-tree-lapins.jpg",
+        "altText": "Sweet cherry tree (Lapins); source-identified cultivar photograph",
+        "credit": "DrThneed",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lapins_cherries_in_bowl.jpg",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Lapins cherries in bowl"
       },
       "cultivarName": "Lapins",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6943,16 +6767,16 @@
       "growingNotes": "An eating apple cultivar with yellow fruit when ripe. Choose a suitable rootstock and check local pollination and disease guidance. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
       "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
       "photo": {
-        "path": "/images/plants/malus-domestica.jpg",
-        "altText": "Apple tree reference photo; Golden Delicious cultivar not verified",
-        "credit": "Gzzz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "path": "/images/plants/cultivar-apple-tree-golden-delicious.jpg",
+        "altText": "Apple tree (Golden Delicious); source-identified cultivar photograph",
+        "credit": "Ivar Leidus",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Delicious_apples.jpg",
         "licenseName": "CC BY-SA 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Tree"
+        "title": "Golden Delicious apples"
       },
       "cultivarName": "Golden Delicious",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -6979,17 +6803,9 @@
       ],
       "growingNotes": "A dessert pear cultivar with sweet fruit. Although partly self-fertile, a compatible nearby pear can improve cropping; check the nursery pollination label. Choose a sunny site and a cultivar suited to local conditions. Check whether a compatible pollination partner is needed before purchasing.",
       "harvestInstructions": "Pick when mature but still firm and finish ripening off the tree, following guidance for the chosen cultivar.",
-      "photo": {
-        "path": "/images/plants/pyrus-communis.jpg",
-        "altText": "Pear tree reference photo; Williams’ Bon Chrétien cultivar not verified",
-        "credit": "Peter O_Connor aka anemoneprojectors",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Fruit"
-      },
+      "photo": null,
       "cultivarName": "Williams’ Bon Chrétien",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7016,17 +6832,9 @@
       ],
       "growingNotes": "A self-fertile cooking plum cultivar with deep purplish-blue fruit. Tree size also depends on rootstock and training. Grow in a sunny site. Check the cultivar's pollination requirements and local pruning advice; self-fertility varies.",
       "harvestInstructions": "Pick ripe, sound fruits. Remove stones before eating or processing; do not chew the stones.",
-      "photo": {
-        "path": "/images/plants/prunus-domestica.jpg",
-        "altText": "Plum tree reference photo; Czar cultivar not verified",
-        "credit": "Vladimir",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
-        "licenseName": "CC0 1.0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "title": "Unripe fruit and stem"
-      },
+      "photo": null,
       "cultivarName": "Czar",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7054,16 +6862,16 @@
       "growingNotes": "A second-early salad potato cultivar producing yellow tubers. Harvest timing varies with planting date, weather and desired tuber size. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
       "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
       "photo": {
-        "path": "/images/plants/solanum-tuberosum.jpg",
-        "altText": "Potato reference photo; Charlotte cultivar not verified",
-        "credit": "Josh Graciano",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "'Bintje' potato plants uprooted for harvesting"
+        "path": "/images/plants/cultivar-potato-charlotte.jpg",
+        "altText": "Potato (Charlotte); source-identified cultivar photograph",
+        "credit": "Ikmo-ned",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:FranceNormandieSouleuvreEnBocagePommeDeTerreCharlotteFleurs.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "FranceNormandieSouleuvreEnBocagePommeDeTerreCharlotteFleurs"
       },
       "cultivarName": "Charlotte",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7090,17 +6898,9 @@
       ],
       "growingNotes": "A named maincrop carrot cultivar included in RHS carrot trials. Follow the seed packet for spacing and suitability for local sowing conditions. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
       "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
-      "photo": {
-        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
-        "altText": "Carrot reference photo; Autumn King 2 cultivar not verified",
-        "credit": "Forest & Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
-        "licenseName": "CC BY 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "title": "ends of carrots"
-      },
+      "photo": null,
       "cultivarName": "Autumn King 2",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7127,17 +6927,9 @@
       ],
       "growingNotes": "A globe-rooted red beetroot cultivar grown for cooking and pickling. Thin seedlings as required and avoid leaving roots to become oversized. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
       "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
-      "photo": {
-        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
-        "altText": "Beetroot reference photo; Detroit 2 cultivar not verified",
-        "credit": "woodleywonderworks",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Harvested beets"
-      },
+      "photo": null,
       "cultivarName": "Detroit 2",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7164,17 +6956,9 @@
       ],
       "growingNotes": "A radish cultivar with round red roots and white flesh. Harvest while young and crisp rather than relying on a fixed number of days. Direct sow in loose, drained soil during a suitable cool period. Thin seedlings and avoid repeated drying of the root zone.",
       "harvestInstructions": "Pull usable roots while tender. Follow the variety label: small salad radishes and long daikon mature differently.",
-      "photo": {
-        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
-        "altText": "Radish reference photo; Cherry Belle cultivar not verified",
-        "credit": "Franco Folini",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Roots of 'Longipinnatus', aka Daikon"
-      },
+      "photo": null,
       "cultivarName": "Cherry Belle",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7201,16 +6985,16 @@
       "growingNotes": "A loose-leaf lettuce cultivar with green, lobed leaves. Pick outer leaves as needed while leaving the growing centre intact. Choose a variety suited to the season. In hot weather some afternoon shade can help; stagger sowings for successive small harvests.",
       "harvestInstructions": "Pick outer leaves of suitable loose-leaf forms or cut mature heads. Harvest before flowering reduces leaf quality.",
       "photo": {
-        "path": "/images/plants/lactuca-sativa.jpg",
-        "altText": "Lettuce reference photo; Salad Bowl cultivar not verified",
-        "credit": "Anna",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lactuca-sativa/",
+        "path": "/images/plants/cultivar-lettuce-salad-bowl.jpg",
+        "altText": "Lettuce (Salad Bowl); source-identified cultivar photograph",
+        "credit": "Kat  from St Albans, United Kingdom",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lactuca_sativa_var._crispa_Salad_Bowl.jpg",
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Lactuca sativa var. crispa 'Salad Bowl' form"
+        "title": "Lactuca sativa var. crispa Salad Bowl"
       },
       "cultivarName": "Salad Bowl",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7236,17 +7020,9 @@
       ],
       "growingNotes": "A maincrop shelling pea cultivar with long pods. Provide support and consistent moisture during flowering and pod filling. Provide climbing support, a sunny site and drained soil. Grow in a cool period and maintain moisture during flowering and pod development.",
       "harvestInstructions": "For shelling peas, pick filled pods while the peas remain tender. Snow and snap types have different harvest stages; check the seed label.",
-      "photo": {
-        "path": "/images/plants/lathyrus-oleraceus.jpg",
-        "altText": "Garden pea reference photo; Hurst Green Shaft cultivar not verified",
-        "credit": "Serge96 46",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lathyrus-oleraceus/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Peas in a pod"
-      },
+      "photo": null,
       "cultivarName": "Hurst Green Shaft",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7272,17 +7048,9 @@
       ],
       "growingNotes": "A traditional greenhouse cucumber cultivar grown for long, smooth fruits. Use a warm protected growing space and follow the seed supplier’s flower-management guidance. Plant out after frost risk when the soil has warmed. Offer support for climbing types and check whether the cultivar needs pollination.",
       "harvestInstructions": "Cut fruits when young and at the preferred size. Pick frequently before fruits become yellow and overripe.",
-      "photo": {
-        "path": "/images/plants/cucumis-sativus.jpg",
-        "altText": "Cucumber reference photo; Telegraph Improved cultivar not verified",
-        "credit": "cristina.sanvito",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucumis-sativus/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Seedlings"
-      },
+      "photo": null,
       "cultivarName": "Telegraph Improved",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7308,17 +7076,9 @@
       ],
       "growingNotes": "A coriander cultivar with finely divided, feathery foliage and a mild flavour. Grow for fresh leaves or allow selected plants to produce ripe seed. Use sun or light shade and moist but drained soil. Sow small batches for successive leaf harvests and avoid disturbing young roots.",
       "harvestInstructions": "Pick small amounts of young leaves regularly. For seed, allow heads to ripen and dry before collecting; do not confuse unidentified wild plants with this crop.",
-      "photo": {
-        "path": "/images/plants/coriandrum-sativum.jpg",
-        "altText": "Coriander reference photo; Confetti cultivar not verified",
-        "credit": "Forest and Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/coriandrum-sativum/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Coriandrum sativum "
-      },
+      "photo": null,
       "cultivarName": "Confetti",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7344,17 +7104,9 @@
       ],
       "growingNotes": "An autumn-fruiting raspberry cultivar with firm, upright canes. Follow autumn-fruiting pruning guidance; cropping dates depend on local conditions. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
       "harvestInstructions": "Pick berries when fully coloured and they release easily from the core. Harvest regularly while fruit is ripe.",
-      "photo": {
-        "path": "/images/plants/rubus-idaeus.jpg",
-        "altText": "Raspberry reference photo; Polka cultivar not verified",
-        "credit": "Bernard Dupont",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Ripe and unripe raspberry fruits"
-      },
+      "photo": null,
       "cultivarName": "Polka",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7381,16 +7133,16 @@
       "growingNotes": "A summer-fruiting raspberry cultivar producing large berries. Keep the new canes that will fruit next season when removing spent fruiting canes. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
       "harvestInstructions": "Pick berries when fully coloured and they release easily from the core. Harvest regularly while fruit is ripe.",
       "photo": {
-        "path": "/images/plants/rubus-idaeus.jpg",
-        "altText": "Raspberry reference photo; Glen Ample cultivar not verified",
-        "credit": "Bernard Dupont",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
+        "path": "/images/plants/cultivar-raspberry-glen-ample.jpg",
+        "altText": "Raspberry (Glen Ample); source-identified cultivar photograph",
+        "credit": "Sandy B",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glen_Ample_raspberry_canes_-_geograph.org.uk_-_1978810.jpg",
         "licenseName": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Ripe and unripe raspberry fruits"
+        "title": "Glen Ample raspberry canes - geograph.org.uk - 1978810"
       },
       "cultivarName": "Glen Ample",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7416,17 +7168,9 @@
       ],
       "growingNotes": "A mid-season summer-fruiting strawberry cultivar. Use healthy planting stock and pick fruit when fully coloured; local weather affects the cropping window. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
       "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
-      "photo": {
-        "path": "/images/plants/fragaria-x-ananassa.jpg",
-        "altText": "Strawberry reference photo; Cambridge Favourite cultivar not verified",
-        "credit": "Fomulaax",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Plant with Fruit"
-      },
+      "photo": null,
       "cultivarName": "Cambridge Favourite",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7453,16 +7197,16 @@
       "growingNotes": "An early summer-fruiting strawberry cultivar with firm berries. Protect flowers from late frost where practical and keep developing fruit clear of wet soil. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
       "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
       "photo": {
-        "path": "/images/plants/fragaria-x-ananassa.jpg",
-        "altText": "Strawberry reference photo; Honeoye cultivar not verified",
-        "credit": "Fomulaax",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Plant with Fruit"
+        "path": "/images/plants/cultivar-strawberry-honeoye.jpg",
+        "altText": "Strawberry (Honeoye); source-identified cultivar photograph",
+        "credit": "Salicyna",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fragaria_ananassa_Honeoye_2023-05-27_6283.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Fragaria ananassa Honeoye 2023-05-27 6283"
       },
       "cultivarName": "Honeoye",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7489,16 +7233,16 @@
       "growingNotes": "A blueberry cultivar that flowers relatively late but ripens early. Acidic growing conditions remain essential; check local frost exposure and nursery guidance. Choose a sunny to lightly shaded site. Check soil acidity first; a container can suit unsuitable garden soil. A compatible second cultivar can improve cropping.",
       "harvestInstructions": "Allow berries to become fully blue and ripe before picking; colour change alone may precede full sweetness.",
       "photo": {
-        "path": "/images/plants/vaccinium-corymbosum.jpg",
-        "altText": "Blueberry reference photo; Duke cultivar not verified",
-        "credit": "Rob Thurman",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Fruits"
+        "path": "/images/plants/cultivar-blueberry-duke.jpeg",
+        "altText": "Blueberry (Duke); source-identified cultivar photograph",
+        "credit": "阿橋 HQ",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E5%85%AC%E7%88%B5%E8%97%8D%E8%8E%93_Vaccinium_corymbosum_Duke_-%E8%8D%B7%E8%98%AD%E5%9C%92%E8%97%9D%E5%B1%95_Venlo_Floriade,_Holland-_(9227077537).jpg",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "公爵藍莓 Vaccinium corymbosum Duke -荷蘭園藝展 Venlo Floriade, Holland- (9227077537)"
       },
       "cultivarName": "Duke",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7524,17 +7268,9 @@
       ],
       "growingNotes": "A blueberry cultivar with large berries and an early to mid-season crop. Use acidic soil or ericaceous compost and avoid letting container roots dry out. Choose a sunny to lightly shaded site. Check soil acidity first; a container can suit unsuitable garden soil. A compatible second cultivar can improve cropping.",
       "harvestInstructions": "Allow berries to become fully blue and ripe before picking; colour change alone may precede full sweetness.",
-      "photo": {
-        "path": "/images/plants/vaccinium-corymbosum.jpg",
-        "altText": "Blueberry reference photo; Spartan cultivar not verified",
-        "credit": "Rob Thurman",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Fruits"
-      },
+      "photo": null,
       "cultivarName": "Spartan",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7561,17 +7297,9 @@
       ],
       "growingNotes": "An early-season dessert apple cultivar with red-skinned fruit. Choose a rootstock for the available space and check for a compatible pollination partner. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
       "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
-      "photo": {
-        "path": "/images/plants/malus-domestica.jpg",
-        "altText": "Apple tree reference photo; Discovery cultivar not verified",
-        "credit": "Gzzz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Tree"
-      },
+      "photo": null,
       "cultivarName": "Discovery",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7599,16 +7327,16 @@
       "growingNotes": "A mid-season dessert pear cultivar valued for its flavour and texture. Check pollination compatibility, rootstock and local growing conditions before planting. Choose a sunny site and a cultivar suited to local conditions. Check whether a compatible pollination partner is needed before purchasing.",
       "harvestInstructions": "Pick when mature but still firm and finish ripening off the tree, following guidance for the chosen cultivar.",
       "photo": {
-        "path": "/images/plants/pyrus-communis.jpg",
-        "altText": "Pear tree reference photo; Doyenné du Comice cultivar not verified",
-        "credit": "Peter O_Connor aka anemoneprojectors",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/pyrus-communis/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Fruit"
+        "path": "/images/plants/cultivar-pear-tree-doyenne-du-comice.jpg",
+        "altText": "Pear tree (Doyenné du Comice); source-identified cultivar photograph",
+        "credit": "Rasbak",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyrus_communis_%27Doyenn%C3%A9_du_Comice%27.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Pyrus communis 'Doyenné du Comice'"
       },
       "cultivarName": "Doyenné du Comice",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7635,17 +7363,9 @@
       ],
       "growingNotes": "A self-fertile plum cultivar with large dark fruit suitable for cooking. Allow for rootstock size and protect early blossom from frost where practical. Grow in a sunny site. Check the cultivar's pollination requirements and local pruning advice; self-fertility varies.",
       "harvestInstructions": "Pick ripe, sound fruits. Remove stones before eating or processing; do not chew the stones.",
-      "photo": {
-        "path": "/images/plants/prunus-domestica.jpg",
-        "altText": "Plum tree reference photo; Marjorie’s Seedling cultivar not verified",
-        "credit": "Vladimir",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
-        "licenseName": "CC0 1.0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "title": "Unripe fruit and stem"
-      },
+      "photo": null,
       "cultivarName": "Marjorie’s Seedling",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7671,17 +7391,9 @@
       ],
       "growingNotes": "A spinach cultivar with deep-green, lightly crinkled leaves. Keep moisture consistent and harvest tender leaves before heat or stress encourages flowering. Choose a cool growing period and a sunny or lightly shaded site with fertile, drained soil. Keep moisture even.",
       "harvestInstructions": "Pick young outer leaves while leaving the centre growing, or cut a usable whole plant before bolting.",
-      "photo": {
-        "path": "/images/plants/spinacia-oleracea.jpg",
-        "altText": "Spinach reference photo; Medania cultivar not verified",
-        "credit": "Forest and Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/spinacia-oleracea/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "leaves and form"
-      },
+      "photo": null,
       "cultivarName": "Medania",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7707,17 +7419,9 @@
       ],
       "growingNotes": "A climbing French bean cultivar grown for stringless green pods. Give it tall, sturdy supports and pick tender pods regularly. Cook beans before eating. Sow into warmed, drained soil after frost risk. Support climbing forms and maintain steady moisture without waterlogging.",
       "harvestInstructions": "Pick young pods for snap-bean varieties or let dry-bean varieties mature as directed on the seed label. Cook beans properly; do not eat raw or undercooked beans.",
-      "photo": {
-        "path": "/images/plants/phaseolus-vulgaris.jpg",
-        "altText": "Common bean reference photo; Cobra cultivar not verified",
-        "credit": "DenesFeri",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/phaseolus-vulgaris/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Form"
-      },
+      "photo": null,
       "cultivarName": "Cobra",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7743,17 +7447,9 @@
       ],
       "growingNotes": "A dwarf French bean cultivar with purple pods that turn green when cooked. Pick pods while tender; cook beans before eating. Sow into warmed, drained soil after frost risk. Support climbing forms and maintain steady moisture without waterlogging.",
       "harvestInstructions": "Pick young pods for snap-bean varieties or let dry-bean varieties mature as directed on the seed label. Cook beans properly; do not eat raw or undercooked beans.",
-      "photo": {
-        "path": "/images/plants/phaseolus-vulgaris.jpg",
-        "altText": "Common bean reference photo; Purple Teepee cultivar not verified",
-        "credit": "DenesFeri",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/phaseolus-vulgaris/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Form"
-      },
+      "photo": null,
       "cultivarName": "Purple Teepee",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7779,17 +7475,9 @@
       ],
       "growingNotes": "A winter squash cultivar with small cream-coloured fruit marked with green stripes and orange flesh. Let storage fruits mature; never eat unusually bitter squash. Provide full sun and warm conditions after frost risk has passed. This species-level entry covers several forms; follow the variety label for spacing.",
       "harvestInstructions": "For winter storage, allow fruit to develop a mature rind before gathering with a short stalk attached. Cure and store only sound fruit; never eat unusually bitter squash.",
-      "photo": {
-        "path": "/images/plants/cucurbita-pepo.jpg",
-        "altText": "Squash reference photo; Sweet Dumpling cultivar not verified",
-        "credit": "Hope Duckworth",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucurbita-pepo/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "Form and fruit"
-      },
+      "photo": null,
       "cultivarName": "Sweet Dumpling",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7815,17 +7503,9 @@
       ],
       "growingNotes": "A softneck garlic cultivar grown for white-skinned bulbs. Use labelled planting cloves, good drainage and a locally suitable planting season. Keep alliums away from pets. Choose a sunny site with loose, fertile, drained soil. Match planting time to the variety and local weather; reduce watering as bulbs mature.",
       "harvestInstructions": "Lift mature bulbs carefully, dry them in a ventilated place and store sound bulbs. Keep bulbs and foliage away from pets.",
-      "photo": {
-        "path": "/images/plants/allium-sativum.jpg",
-        "altText": "Garlic reference photo; Solent Wight cultivar not verified",
-        "credit": "Filo geÌ€n'",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-sativum/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "garlic"
-      },
+      "photo": null,
       "cultivarName": "Solent Wight",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7852,16 +7532,16 @@
       "growingNotes": "A red-skinned onion cultivar with a strong flavour. Allow mature bulbs to dry and cure before storage, following local weather and supplier guidance. Choose a locally suitable onion variety and plant labelled sets or seedlings. Keep the bed weeded without damaging the shallow roots.",
       "harvestInstructions": "Lift bulb onions when mature foliage falls and dries. Cure sound bulbs in a dry, ventilated place before storage.",
       "photo": {
-        "path": "/images/plants/allium-cepa.jpg",
-        "altText": "Onion reference photo; Red Baron cultivar not verified",
-        "credit": "Carl Lewis",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-cepa/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "mass planting"
+        "path": "/images/plants/cultivar-onion-red-baron.jpg",
+        "altText": "Onion (Red Baron); source-identified cultivar photograph",
+        "credit": "MOs810",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Onion_Red_Baron.JPG",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Onion Red Baron"
       },
       "cultivarName": "Red Baron",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7887,17 +7567,9 @@
       ],
       "growingNotes": "A compact dill cultivar for aromatic leaf harvests. Sow small batches for a succession of fresh leaves and allow selected plants to mature if seed is wanted. Sow directly in a sunny, sheltered spot with drained soil. Thin seedlings to the seed-label spacing; support taller stems if necessary.",
       "harvestInstructions": "Snip a few fresh leafy tips without stripping the plant. For seed, collect ripening heads before the seeds scatter.",
-      "photo": {
-        "path": "/images/plants/anethum-graveolens.jpg",
-        "altText": "Dill reference photo; Domino cultivar not verified",
-        "credit": "Magnus Brath",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/anethum-graveolens/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Foliage"
-      },
+      "photo": null,
       "cultivarName": "Domino",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7923,17 +7595,9 @@
       ],
       "growingNotes": "An upright rosemary cultivar with light-blue flowers and aromatic leaves. Give it sun and free drainage, and assess winter protection for the local site. Provide full sun and very good drainage. Check the cultivar and local winter conditions; protect container roots from severe cold and wet.",
       "harvestInstructions": "Snip small amounts of healthy shoot tips for kitchen use while retaining leafy growth. Avoid stripping the whole plant.",
-      "photo": {
-        "path": "/images/plants/salvia-rosmarinus.jpg",
-        "altText": "Rosemary reference photo; Miss Jessopp’s Upright cultivar not verified",
-        "credit": "Cathy Dewitt",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/salvia-rosmarinus/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "Salvia rosmarinus pruned to conical form (Wake County, NC)"
-      },
+      "photo": null,
       "cultivarName": "Miss Jessopp’s Upright",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7959,17 +7623,9 @@
       ],
       "growingNotes": "A thyme cultivar with pale-edged aromatic leaves. Grow in full sun and well-drained soil; trim lightly to maintain a compact herb plant. Use full sun and freely draining growing mix. Check soil moisture before watering and avoid winter waterlogging.",
       "harvestInstructions": "Clip small leafy sprigs, retaining live growth and the woody framework. Harvest before flowering when growing mainly for leaves.",
-      "photo": {
-        "path": "/images/plants/thymus-vulgaris.jpg",
-        "altText": "Thyme reference photo; Silver Posie cultivar not verified",
-        "credit": "Forest and KimStarr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Leaves"
-      },
+      "photo": null,
       "cultivarName": "Silver Posie",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -7997,16 +7653,16 @@
       "growingNotes": "A maincrop potato cultivar with red-skinned oval tubers and pale-yellow flesh. Use certified planting stock and keep developing tubers covered from light. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
       "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
       "photo": {
-        "path": "/images/plants/solanum-tuberosum.jpg",
-        "altText": "Potato reference photo; Desiree cultivar not verified",
-        "credit": "Josh Graciano",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "'Bintje' potato plants uprooted for harvesting"
+        "path": "/images/plants/cultivar-potato-desiree.jpg",
+        "altText": "Potato (Desiree); source-identified cultivar photograph",
+        "credit": "Nickmurdoch  ( talk )",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%A9sir%C3%A9e_Potatoes.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Désirée Potatoes"
       },
       "cultivarName": "Desiree",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8034,16 +7690,16 @@
       "growingNotes": "A maincrop potato cultivar with cream-coloured skin and flesh. Match planting and lifting to local growing conditions and use healthy seed potatoes. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
       "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
       "photo": {
-        "path": "/images/plants/solanum-tuberosum.jpg",
-        "altText": "Potato reference photo; Maris Piper cultivar not verified",
-        "credit": "Josh Graciano",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "'Bintje' potato plants uprooted for harvesting"
+        "path": "/images/plants/cultivar-potato-maris-piper.jpg",
+        "altText": "Potato (Maris Piper); source-identified cultivar photograph",
+        "credit": "Ben Harris",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Four_Maris_Piper_potatoes,_one_halved.jpg",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Four Maris Piper potatoes, one halved"
       },
       "cultivarName": "Maris Piper",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8070,17 +7726,9 @@
       ],
       "growingNotes": "An early carrot cultivar suited to protected early sowings when local conditions allow. Prepare a fine, stone-free seed bed and follow the packet for spacing. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
       "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
-      "photo": {
-        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
-        "altText": "Carrot reference photo; Adelaide cultivar not verified",
-        "credit": "Forest & Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
-        "licenseName": "CC BY 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "title": "ends of carrots"
-      },
+      "photo": null,
       "cultivarName": "Adelaide",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8107,17 +7755,9 @@
       ],
       "growingNotes": "A main-season carrot cultivar selected for some carrot-fly resistance. Continue to use sensible crop protection; resistance is not immunity. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
       "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
-      "photo": {
-        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
-        "altText": "Carrot reference photo; Flyaway cultivar not verified",
-        "credit": "Forest & Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
-        "licenseName": "CC BY 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "title": "ends of carrots"
-      },
+      "photo": null,
       "cultivarName": "Flyaway",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8145,16 +7785,16 @@
       "growingNotes": "A beetroot cultivar with rounded dark-red roots. Sow small batches in suitable conditions and harvest before roots become oversized. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
       "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
       "photo": {
-        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
-        "altText": "Beetroot reference photo; Pablo cultivar not verified",
-        "credit": "woodleywonderworks",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
+        "path": "/images/plants/cultivar-beetroot-pablo.jpg",
+        "altText": "Beetroot (Pablo); source-identified cultivar photograph",
+        "credit": "Maja Dumat  from Deutschland (Germany)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rote_Beete_%27Pablo%27_(35668245913).jpg",
         "licenseName": "CC BY 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Harvested beets"
+        "title": "Rote Beete 'Pablo' (35668245913)"
       },
       "cultivarName": "Pablo",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8181,17 +7821,9 @@
       ],
       "growingNotes": "A beetroot cultivar with long dark-red roots. Provide enough root depth and keep moisture consistent during establishment. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
       "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
-      "photo": {
-        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
-        "altText": "Beetroot reference photo; Forono cultivar not verified",
-        "credit": "woodleywonderworks",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Harvested beets"
-      },
+      "photo": null,
       "cultivarName": "Forono",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8218,17 +7850,9 @@
       ],
       "growingNotes": "A salad radish cultivar with rounded red roots and white flesh. Pick young and crisp and avoid dry, hot growing conditions. Direct sow in loose, drained soil during a suitable cool period. Thin seedlings and avoid repeated drying of the root zone.",
       "harvestInstructions": "Pull usable roots while tender. Follow the variety label: small salad radishes and long daikon mature differently.",
-      "photo": {
-        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
-        "altText": "Radish reference photo; Scarlet Globe cultivar not verified",
-        "credit": "Franco Folini",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Roots of 'Longipinnatus', aka Daikon"
-      },
+      "photo": null,
       "cultivarName": "Scarlet Globe",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8255,17 +7879,9 @@
       ],
       "growingNotes": "A salad radish cultivar with purple roots and crisp white flesh. Sow small batches for successive harvests and keep seedlings evenly moist. Direct sow in loose, drained soil during a suitable cool period. Thin seedlings and avoid repeated drying of the root zone.",
       "harvestInstructions": "Pull usable roots while tender. Follow the variety label: small salad radishes and long daikon mature differently.",
-      "photo": {
-        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
-        "altText": "Radish reference photo; Amethyst cultivar not verified",
-        "credit": "Franco Folini",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Roots of 'Longipinnatus', aka Daikon"
-      },
+      "photo": null,
       "cultivarName": "Amethyst",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8291,17 +7907,9 @@
       ],
       "growingNotes": "A Tuscan kale cultivar with narrow, puckered leaves. Pick leaves regularly while retaining the growing centre and check for brassica pests. Use a sunny site with fertile, moisture-retentive but drained soil. Allow space for the variety and check for brassica pests.",
       "harvestInstructions": "Pick tender lower leaves while retaining the growing centre. Match harvest expectations and winter protection to the variety and local conditions.",
-      "photo": {
-        "path": "/images/plants/brassica-oleracea-kale-group.jpg",
-        "altText": "Kale reference photo; Nero di Toscana cultivar not verified",
-        "credit": "Nick Saltmarsh",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-kale-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Form of a red curly kale"
-      },
+      "photo": null,
       "cultivarName": "Nero di Toscana",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8327,17 +7935,9 @@
       ],
       "growingNotes": "A cauliflower cultivar producing large white heads, with clubroot resistance reported by the RHS. Use crop rotation and healthy plants; resistance does not guarantee disease-free growth. Use sun and fertile, drained soil with consistent moisture. Avoid growth checks from drought and follow the variety label for spacing and head protection.",
       "harvestInstructions": "Cut the head while compact and firm, before it opens or discolours. Actual maturity depends on the variety and growing conditions.",
-      "photo": {
-        "path": "/images/plants/brassica-oleracea-cauliflower-broccoli-group.jpg",
-        "altText": "Cauliflower reference photo; Clapton cultivar not verified",
-        "credit": "Hope Duckworth",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/brassica-oleracea-cauliflower-broccoli-group/",
-        "licenseName": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "title": "Form in backyard garden"
-      },
+      "photo": null,
       "cultivarName": "Clapton",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8363,17 +7963,9 @@
       ],
       "growingNotes": "A spinach cultivar with smooth, rounded leaves. Grow in fertile moisture-retentive soil and avoid heat or drought stress that encourages flowering. Choose a cool growing period and a sunny or lightly shaded site with fertile, drained soil. Keep moisture even.",
       "harvestInstructions": "Pick young outer leaves while leaving the centre growing, or cut a usable whole plant before bolting.",
-      "photo": {
-        "path": "/images/plants/spinacia-oleracea.jpg",
-        "altText": "Spinach reference photo; Lazio cultivar not verified",
-        "credit": "Forest and Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/spinacia-oleracea/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "leaves and form"
-      },
+      "photo": null,
       "cultivarName": "Lazio",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8399,17 +7991,9 @@
       ],
       "growingNotes": "A second-early shelling pea cultivar. Provide suitable support and pick well-filled pods while the peas remain tender; check the seed packet for local sowing advice. Provide climbing support, a sunny site and drained soil. Grow in a cool period and maintain moisture during flowering and pod development.",
       "harvestInstructions": "For shelling peas, pick filled pods while the peas remain tender. Snow and snap types have different harvest stages; check the seed label.",
-      "photo": {
-        "path": "/images/plants/lathyrus-oleraceus.jpg",
-        "altText": "Garden pea reference photo; Jaguar cultivar not verified",
-        "credit": "Serge96 46",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lathyrus-oleraceus/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Peas in a pod"
-      },
+      "photo": null,
       "cultivarName": "Jaguar",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8435,17 +8019,9 @@
       ],
       "growingNotes": "A late-season summer-fruiting strawberry with large red berries. Pick fully coloured fruit and keep ripening berries clear of wet soil. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
       "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
-      "photo": {
-        "path": "/images/plants/fragaria-x-ananassa.jpg",
-        "altText": "Strawberry species reference photo; Florence cultivar and fruit colour not verified",
-        "credit": "Fomulaax",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Plant with Fruit"
-      },
+      "photo": null,
       "cultivarName": "Florence",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8471,17 +8047,9 @@
       ],
       "growingNotes": "A late-season summer-fruiting strawberry with glossy red fruit. Choose a sunny site and protect ripe berries from birds. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
       "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
-      "photo": {
-        "path": "/images/plants/fragaria-x-ananassa.jpg",
-        "altText": "Strawberry species reference photo; Symphony cultivar and fruit colour not verified",
-        "credit": "Fomulaax",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Plant with Fruit"
-      },
+      "photo": null,
       "cultivarName": "Symphony",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8507,17 +8075,9 @@
       ],
       "growingNotes": "A late-season summer-fruiting strawberry producing large sweet berries. Keep moisture steady as fruit develops and pick ripe berries regularly. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
       "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
-      "photo": {
-        "path": "/images/plants/fragaria-x-ananassa.jpg",
-        "altText": "Strawberry species reference photo; Pegasus cultivar and fruit colour not verified",
-        "credit": "Fomulaax",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Plant with Fruit"
-      },
+      "photo": null,
       "cultivarName": "Pegasus",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8543,17 +8103,9 @@
       ],
       "growingNotes": "An autumn-fruiting raspberry producing large sweet berries. Follow autumn-fruiting pruning guidance and provide support where needed. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
       "harvestInstructions": "Pick berries when fully coloured and they release easily from the core. Harvest regularly while fruit is ripe.",
-      "photo": {
-        "path": "/images/plants/rubus-idaeus.jpg",
-        "altText": "Raspberry species reference photo; Joan J cultivar and fruit colour not verified",
-        "credit": "Bernard Dupont",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Ripe and unripe raspberry fruits"
-      },
+      "photo": null,
       "cultivarName": "Joan J",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8579,17 +8131,9 @@
       ],
       "growingNotes": "An autumn-fruiting raspberry with yellow berries. Judge ripeness by a full golden colour and easy release, rather than looking for red fruit. Follow autumn-fruiting pruning guidance. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
       "harvestInstructions": "Pick when berries are golden, plump and release easily from the plant. Handle gently and eat or chill promptly; exact ripening dates depend on local conditions.",
-      "photo": {
-        "path": "/images/plants/rubus-idaeus.jpg",
-        "altText": "Raspberry species reference photo; All Gold cultivar and fruit colour not verified",
-        "credit": "Bernard Dupont",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Ripe and unripe raspberry fruits"
-      },
+      "photo": null,
       "cultivarName": "All Gold",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8616,16 +8160,16 @@
       "growingNotes": "A blueberry cultivar known for particularly large berries. Use acidic soil or ericaceous compost, keep roots evenly moist and protect the ripening crop from birds. Choose a sunny to lightly shaded site. Check soil acidity first; a container can suit unsuitable garden soil. A compatible second cultivar can improve cropping.",
       "harvestInstructions": "Allow berries to become fully blue and ripe before picking; colour change alone may precede full sweetness.",
       "photo": {
-        "path": "/images/plants/vaccinium-corymbosum.jpg",
-        "altText": "Blueberry species reference photo; Chandler cultivar and fruit colour not verified",
-        "credit": "Rob Thurman",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Fruits"
+        "path": "/images/plants/cultivar-blueberry-chandler.jpg",
+        "altText": "Blueberry (Chandler); source-identified cultivar photograph",
+        "credit": "Blueberry Glade",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blueberry_Chandler.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Blueberry Chandler"
       },
       "cultivarName": "Chandler",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8652,17 +8196,9 @@
       ],
       "growingNotes": "A dessert apple cultivar. Choose a rootstock that suits the available space and check flowering compatibility with a nearby pollination partner. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
       "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
-      "photo": {
-        "path": "/images/plants/malus-domestica.jpg",
-        "altText": "Apple tree species reference photo; Fiesta cultivar and fruit colour not verified",
-        "credit": "Gzzz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Tree"
-      },
+      "photo": null,
       "cultivarName": "Fiesta",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8689,17 +8225,9 @@
       ],
       "growingNotes": "An early-season dessert apple cultivar. Select a suitable rootstock and check local pollination compatibility before planting. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
       "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
-      "photo": {
-        "path": "/images/plants/malus-domestica.jpg",
-        "altText": "Apple tree species reference photo; James Grieve cultivar and fruit colour not verified",
-        "credit": "Gzzz",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Tree"
-      },
+      "photo": null,
       "cultivarName": "James Grieve",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8727,16 +8255,16 @@
       "growingNotes": "A traditional potato cultivar with floury tubers. Use healthy seed potatoes and keep developing tubers covered from light. Plant healthy seed potatoes and keep developing tubers covered from light. Choose an early or maincrop type suited to your space and season.",
       "harvestInstructions": "Lift carefully when ready for the selected type. Discard green, spoiled or heavily sprouted tubers; never eat the berries or foliage.",
       "photo": {
-        "path": "/images/plants/solanum-tuberosum.jpg",
-        "altText": "Potato species reference photo; King Edward cultivar and colour not verified",
-        "credit": "Josh Graciano",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/solanum-tuberosum/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "'Bintje' potato plants uprooted for harvesting"
+        "path": "/images/plants/cultivar-potato-king-edward.jpg",
+        "altText": "Potato (King Edward); source-identified cultivar photograph",
+        "credit": "Hangsna",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:King_Edward.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "King Edward"
       },
       "cultivarName": "King Edward",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8763,17 +8291,9 @@
       ],
       "growingNotes": "A maincrop carrot cultivar included in RHS trials. Sow in a fine, stone-free seed bed and protect seedlings from carrot fly. Direct sow rather than transplanting where possible, then thin seedlings. Dense or stony soil can distort developing roots; avoid excessive nitrogen.",
       "harvestInstructions": "Lift when the roots reach a useful size for the variety. Loosen the soil first to reduce breakage.",
-      "photo": {
-        "path": "/images/plants/daucus-carota-subsp-sativus.jpg",
-        "altText": "Carrot species reference photo; Maestro cultivar and colour not verified",
-        "credit": "Forest & Kim Starr",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/daucus-carota-subsp-sativus/",
-        "licenseName": "CC BY 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "title": "ends of carrots"
-      },
+      "photo": null,
       "cultivarName": "Maestro",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8800,17 +8320,9 @@
       ],
       "growingNotes": "An early-maturing beetroot cultivar with round red roots. Sow in small batches and lift roots before they become coarse. Sow directly in fertile, drained soil and thin crowded seedlings. Maintain consistent moisture and allow room for the roots.",
       "harvestInstructions": "Lift young roots at a useful size before they become coarse. Young sound leaves can also be harvested sparingly.",
-      "photo": {
-        "path": "/images/plants/beta-vulgaris-garden-beet-group.jpg",
-        "altText": "Beetroot species reference photo; Wodan cultivar and colour not verified",
-        "credit": "woodleywonderworks",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/beta-vulgaris-garden-beet-group/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Harvested beets"
-      },
+      "photo": null,
       "cultivarName": "Wodan",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8837,17 +8349,9 @@
       ],
       "growingNotes": "Grow as a winter radish rather than using a quick salad-radish timetable. Follow the seed packet and local conditions for later-season sowing; early sowing can encourage bolting. Provide sufficient root space and steady moisture.",
       "harvestInstructions": "Lift mature, firm winter-radish roots as needed. Use the seed packet and actual root development to judge readiness; these are larger and slower than salad radishes.",
-      "photo": {
-        "path": "/images/plants/raphanus-raphanistrum-subsp-sativus.jpg",
-        "altText": "Radish species reference photo; Black Spanish Round cultivar and colour not verified",
-        "credit": "Franco Folini",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/raphanus-raphanistrum-subsp-sativus/",
-        "licenseName": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-        "title": "Roots of 'Longipinnatus', aka Daikon"
-      },
+      "photo": null,
       "cultivarName": "Black Spanish Round",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8873,17 +8377,9 @@
       ],
       "growingNotes": "A lettuce cultivar forming rounded green heads. Despite its name, choose sowing dates and protection to suit local conditions. Choose a variety suited to the season. In hot weather some afternoon shade can help; stagger sowings for successive small harvests.",
       "harvestInstructions": "Pick outer leaves of suitable loose-leaf forms or cut mature heads. Harvest before flowering reduces leaf quality.",
-      "photo": {
-        "path": "/images/plants/lactuca-sativa.jpg",
-        "altText": "Lettuce species reference photo; All the Year Round cultivar and colour not verified",
-        "credit": "Anna",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lactuca-sativa/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Lactuca sativa var. crispa 'Salad Bowl' form"
-      },
+      "photo": null,
       "cultivarName": "All the Year Round",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8909,17 +8405,9 @@
       ],
       "growingNotes": "Start in warmth and grow in a sheltered sunny position, greenhouse or conservatory. Support climbing stems and keep compost consistently moist without waterlogging. Check the seed label for all-female cucumber growing instructions.",
       "harvestInstructions": "Cut fruits when young and at the preferred size. Pick frequently before fruits become yellow and overripe.",
-      "photo": {
-        "path": "/images/plants/cucumis-sativus.jpg",
-        "altText": "Cucumber species reference photo; Mini Munch cultivar and colour not verified",
-        "credit": "cristina.sanvito",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/cucumis-sativus/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "Seedlings"
-      },
+      "photo": null,
       "cultivarName": "Mini Munch",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8946,16 +8434,16 @@
       "growingNotes": "An early-cropping bulb onion cultivar with brown skin and pale flesh. Cure mature, sound bulbs thoroughly before storage. Choose a locally suitable onion variety and plant labelled sets or seedlings. Keep the bed weeded without damaging the shallow roots.",
       "harvestInstructions": "Lift bulb onions when mature foliage falls and dries. Cure sound bulbs in a dry, ventilated place before storage.",
       "photo": {
-        "path": "/images/plants/allium-cepa.jpg",
-        "altText": "Onion species reference photo; Centurion cultivar and colour not verified",
-        "credit": "Carl Lewis",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/allium-cepa/",
-        "licenseName": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-        "title": "mass planting"
+        "path": "/images/plants/cultivar-onion-centurion.jpg",
+        "altText": "Onion (Centurion); source-identified cultivar photograph",
+        "credit": "Rasbak",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Allium_cepa_Plantui_Centurion.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Allium cepa Plantui Centurion"
       },
       "cultivarName": "Centurion",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   },
   {
@@ -8981,17 +8469,9 @@
       ],
       "growingNotes": "A garden pea cultivar grown for shelling. Support the plants as needed and pick filled pods while the peas remain tender. Provide climbing support, a sunny site and drained soil. Grow in a cool period and maintain moisture during flowering and pod development.",
       "harvestInstructions": "For shelling peas, pick filled pods while the peas remain tender. Snow and snap types have different harvest stages; check the seed label.",
-      "photo": {
-        "path": "/images/plants/lathyrus-oleraceus.jpg",
-        "altText": "Garden pea species reference photo; Vivado cultivar and colour not verified",
-        "credit": "Serge96 46",
-        "sourceUrl": "https://plants.ces.ncsu.edu/plants/lathyrus-oleraceus/",
-        "licenseName": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "title": "Peas in a pod"
-      },
+      "photo": null,
       "cultivarName": "Vivado",
-      "photoIsSpeciesReference": true
+      "photoIsSpeciesReference": false
     }
   }
 ]

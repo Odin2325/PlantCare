@@ -159,7 +159,9 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             var species=await database.PlantSpecies.ToListAsync();
             Assert.Equal(238,species.Count);
             Assert.Equal(96, species.Count(p => p.CatalogProfile?.CultivarName is not null));
-            Assert.Equal(95, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
+            Assert.Equal(0, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
+            Assert.Equal(31, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is not null));
+            Assert.Equal(65, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is null));
             Assert.Equal(107, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
             Assert.Equal(131, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
             Assert.Equal(27, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
@@ -174,9 +176,12 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             {
                 var profile=Assert.IsType<PlantCatalogProfile>(plant.CatalogProfile);
                 profile.Validate();
-                Assert.NotNull(profile.Photo);
-                var image=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../../../../plant-care-web/public",profile.Photo.Path.TrimStart('/')));
-                Assert.True(File.Exists(image));
+                if (profile.Photo is { } photo)
+                {
+                    var image=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../../../../plant-care-web/public",photo.Path.TrimStart('/')));
+                    Assert.True(File.Exists(image));
+                }
+                else Assert.NotNull(profile.CultivarName);
                 foreach (var reference in profile.GrowthReferences ?? [])
                 {
                     Assert.True(File.Exists(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
@@ -192,7 +197,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         var tinyTim = Assert.Single(catalog!, p => p.ScientificName == "Solanum lycopersicum 'Tiny Tim'");
         Assert.Equal("Tiny Tim", tinyTim.CatalogProfile!.CultivarName);
         Assert.Equal(["vegetable"], tinyTim.CatalogProfile.Categories);
-        Assert.Contains("not a verified Tiny Tim specimen", tinyTim.CatalogProfile.GrowingNotes!);
+        Assert.Null(tinyTim.CatalogProfile.Photo);
+        Assert.False(tinyTim.CatalogProfile.PhotoIsSpeciesReference);
         Assert.NotEmpty(tinyTim.CatalogProfile.HarvestInstructions!);
         var fig = Assert.Single(catalog!, p => p.ScientificName == "Ficus carica");
         Assert.Equal(["fruit", "tree"], fig.CatalogProfile!.Categories);
@@ -200,7 +206,9 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         {
             var cultivar = Assert.Single(catalog!, p => p.CommonName == name);
             Assert.NotNull(cultivar.CatalogProfile!.CultivarName);
-            Assert.True(cultivar.CatalogProfile.PhotoIsSpeciesReference);
+            Assert.False(cultivar.CatalogProfile.PhotoIsSpeciesReference);
+            if (cultivar.CatalogProfile.CultivarName == "Tineke") Assert.Null(cultivar.CatalogProfile.Photo);
+            else Assert.NotNull(cultivar.CatalogProfile.Photo);
         }
         var africanMask = Assert.Single(catalog!, p => p.CommonName == "African mask plant");
         Assert.Equal("Alocasia \u00d7 mortfontanensis", africanMask.ScientificName);

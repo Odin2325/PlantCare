@@ -1,5 +1,13 @@
 # Plant catalog and image roadmap
 
+Local follow-up 2026-10-31: [related varieties and distinct cultivar photos](related-cultivar-photos.md)
+prepare context-preserving navigation and replace generic cultivar images with
+source-identified photos or the owner's approved Cultivar photo pending fallback.
+The working catalog has 238 entries and 96 cultivars: 31 have distinct photos and
+65 remain queued for sourcing. The working manifest has 186 credited assets.
+These changes are committed locally for the next batch, without a push or deployment.
+
+
 Follow-up 2026-10-25: [care history discovery and five additions](care-history-discovery.md)
 are deployed: 105 reviewed plants, 179 aliases across 90 entries and 118 licensed
 original photos. Earlier care, galleries, pet assessments and personal data are

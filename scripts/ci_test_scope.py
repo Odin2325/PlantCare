@@ -6,13 +6,14 @@ import subprocess
 
 
 CATALOG_FILES = {
-    "deploy/catalog.houseplants.json", "deploy/catalog-images.json",
+    "deploy/catalog.houseplants.json", "deploy/catalog-images.json", "deploy/catalog-cultivar-photos.json",
     "PlantCare.Domain/ValueObjects/PlantCatalogProfile.cs",
     "PlantCare.Domain.Tests/Entities/PlantCatalogProfileTests.cs",
     "PlantCare.Api.IntegrationTests/BootstrapCommandTests.cs",
     "plant-care-web/src/app/models/plant-species.model.ts",
     "plant-care-web/src/app/shared/plant-categories.ts",
     "tests/browser/catalog.spec.ts",
+    "tests/browser/cultivars.spec.ts",
 }
 CATALOG_PREFIXES = (
     "docs/", "plant-care-web/public/images/plants/",
