@@ -264,6 +264,9 @@
                   ({{ preview.before.isEnabled ? 'active' : 'paused' }}).</p>
                 <p>Proposed: {{ getScheduleRecurrenceText(preview.after) }}
                   ({{ preview.after.isEnabled ? 'active' : 'paused' }}).</p>
+                @if (preview.after.scheduleMode === 'Weekdays') {
+                  <p>Proposed reminder time zone: {{ preview.after.timeZoneId }}.</p>
+                }
                 <p>Current next due: {{ preview.before.nextDueAtUtc ? (preview.before.nextDueAtUtc | date:'medium') : 'Not set' }}.</p>
                 @if (preview.after.isEnabled) {
                   <p>Estimated next due: {{ preview.after.nextDueAtUtc ? (preview.after.nextDueAtUtc | date:'medium') : 'Not set' }}.</p>

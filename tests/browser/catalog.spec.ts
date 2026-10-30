@@ -23,7 +23,7 @@ test('garden catalog categories combine with search and preserve navigation and 
   await categoryLink('houseplant').click();
   await expect(page.locator('.plant-card')).toHaveCount(2);
   await categoryLink('fruit').click();
-  await expect(page.locator('.plant-card')).toHaveCount(28);
+  await expect(page.locator('.plant-card')).toHaveCount(36);
   await categoryLink('root-tuber').click();
   await expect(page.locator('.plant-card')).toHaveCount(16);
   await page.getByLabel('Entry type', { exact: true }).selectOption('general');
