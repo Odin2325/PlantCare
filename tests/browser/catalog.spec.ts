@@ -70,7 +70,8 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
     await expect(page.getByRole('link', { name: 'Growing guide source', exact: true })).toHaveAttribute('href', plant.catalogProfile.careSourceUrl);
     const image = page.locator('app-plant-photo img').first();
     await image.scrollIntoViewIfNeeded();
-    await expect.poll(() => image.evaluate((i: HTMLImageElement) => i.naturalWidth)).toBeGreaterThan(0);
+    // Dimensions can become available before the transfer finishes; wait before navigating away.
+    await expect.poll(() => image.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
     if (name.includes('Tiny Tim')) await expect(page.getByText('not a verified Tiny Tim specimen', { exact: false })).toBeVisible();
     if (name === 'Potato') await expect(page.getByText('never eat the berries or foliage', { exact: false })).toBeVisible();
   }
