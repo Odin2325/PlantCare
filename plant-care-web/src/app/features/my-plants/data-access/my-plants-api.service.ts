@@ -73,6 +73,12 @@ export class MyPlantsApiService {
     );
   }
 
+  previewCareSchedule(userPlantId: string, actionType: CareActionType,
+    request: UpdateCareScheduleRequest): Observable<CareSchedule> {
+    return this.httpClient.post<CareSchedule>(
+      `${this.endpoint}/${userPlantId}/care/${actionType}/schedule/preview`, request);
+  }
+
   updateCareSchedule(
     userPlantId: string,
     actionType: CareActionType,

@@ -124,7 +124,9 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(plant.locator('.tag-list')).toContainText('updated');
     const watering = plant.locator('.care-schedule').filter({ hasText: 'Watering' });
     await watering.getByLabel('Interval', { exact: false }).fill('2');
-    await watering.getByRole('button', { name: 'Save schedule', exact: true }).click();
+    await watering.getByRole('button', { name: 'Preview schedule', exact: true }).click();
+    await expect(watering.getByRole('region', { name: 'Care schedule preview' })).toBeVisible();
+    await watering.getByRole('button', { name: 'Apply schedule changes', exact: true }).click();
     await expect(watering.locator('.interval')).toHaveText('Every 2 days');
     await page.reload();
     await expect(plant.locator('.tag-list')).toContainText('updated');
@@ -241,7 +243,9 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await watering.getByRole('combobox', { name: /Schedule/ }).selectOption('Weekdays');
     await watering.getByRole('checkbox', { name: 'Mon', exact: true }).check();
     await watering.getByLabel('Local reminder time', { exact: true }).fill('09:00');
-    await watering.getByRole('button', { name: 'Save schedule', exact: true }).click();
+    await watering.getByRole('button', { name: 'Preview schedule', exact: true }).click();
+    await expect(watering.getByRole('region', { name: 'Care schedule preview' })).toBeVisible();
+    await watering.getByRole('button', { name: 'Apply schedule changes', exact: true }).click();
     await expect(watering.locator('.interval')).toHaveText('Mon at 09:00');
     await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
     const travelling = await browser.newContext({
@@ -257,7 +261,8 @@ test('register, confirm, care for a plant, recover password and log out', async 
       await expect(otherWatering).toContainText('Reminder time zone: Europe/Berlin');
       const saved = otherPage.waitForResponse(response =>
         response.url().endsWith('/care/Watering/schedule') && response.request().method() === 'PUT');
-      await otherWatering.getByRole('button', { name: 'Pause', exact: true }).click();
+      await otherWatering.getByRole('button', { name: 'Preview pause', exact: true }).click();
+      await otherWatering.getByRole('button', { name: 'Apply schedule changes', exact: true }).click();
       const result = await saved;
       expect(result.status()).toBe(200);
       // A service-worker-owned response body may be unavailable through CDP.
@@ -275,7 +280,8 @@ test('register, confirm, care for a plant, recover password and log out', async 
       await expect(otherPage.getByRole('heading', { name: 'Welcome back' })).toBeVisible();
     } finally { await travelling.close(); }
     await page.reload();
-    await watering.getByRole('button', { name: 'Resume', exact: true }).click();
+    await watering.getByRole('button', { name: 'Preview resume', exact: true }).click();
+    await watering.getByRole('button', { name: 'Apply schedule changes', exact: true }).click();
     await expect(watering.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
     await expect(watering).toContainText('Reminder time zone: Europe/Berlin');
   });

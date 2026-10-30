@@ -71,6 +71,27 @@ public sealed class AccountDataTests : IAsyncLifetime
         });
     }
 
+    [Fact]
+    public async Task SchedulePreviewAndApplyRequireCookieAntiforgery()
+    {
+        var a=await UserAsync(); var b=await UserAsync(); await Seed(a,b);
+        Guid id;
+        await using(var scope=factory.Services.CreateAsyncScope()) {
+            var db=scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
+            var plant=await db.UserPlants.SingleAsync(p=>p.UserId==a.Id);
+            plant.Restore(); id=plant.Id; await db.SaveChangesAsync();
+        }
+        using var client=Client(); await Login(client,a);
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        var url=$"/api/my-plants/{id}/care/Watering/schedule";
+        var request=new {intervalDays=7,isEnabled=true,scheduleMode="Interval",weekDays=0};
+        Assert.Equal(HttpStatusCode.BadRequest,(await client.PostAsJsonAsync(url+"/preview",request)).StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest,(await client.PutAsJsonAsync(url,request)).StatusCode);
+        await client.AddAntiforgeryTokenAsync();
+        (await client.PostAsJsonAsync(url+"/preview",request)).EnsureSuccessStatusCode();
+        (await client.PutAsJsonAsync(url,request)).EnsureSuccessStatusCode();
+    }
+
     [Fact] public async Task HarvestWritesUseCookieAntiforgery()
     {
         var a=await UserAsync();var b=await UserAsync();await Seed(a,b);

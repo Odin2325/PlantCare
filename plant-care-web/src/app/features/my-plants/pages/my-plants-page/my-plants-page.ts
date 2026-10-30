@@ -23,6 +23,7 @@ import { MyPlantsApiService } from '../../data-access/my-plants-api.service';
 import {
   CareActionType,
   CareSchedule,
+  UpdateCareScheduleRequest,
   UserPlant,
 } from '../../models/user-plant.model';
 
@@ -147,6 +148,28 @@ export class MyPlantsPage {
 
   readonly completingCareActionKey =
     signal<string | null>(null);
+
+  readonly schedulePreview = signal<{
+    plantId: string; before: CareSchedule; after: CareSchedule;
+    request: UpdateCareScheduleRequest;
+  } | null>(null);
+
+  cancelSchedulePreview(): void { this.schedulePreview.set(null); }
+
+  applySchedulePreview(): void {
+    const preview = this.schedulePreview();
+    if (!preview || this.updatingScheduleKey()) return;
+    const plant = this.userPlants().find(p => p.id === preview.plantId);
+    const schedule = plant?.careSchedules.find(s => s.id === preview.before.id);
+    if (!plant || !schedule || JSON.stringify(schedule) !== JSON.stringify(preview.before)) {
+      this.cancelSchedulePreview();
+      this.careActionError.set('Care has changed. Preview your schedule again before applying.');
+      return;
+    }
+    const r = preview.request;
+    this.updateSchedule(plant, schedule, r.intervalDays, r.isEnabled, r.scheduleMode,
+      r.weekDays, r.preferredTimeLocal ?? '', true);
+  }
 
   readonly updatingScheduleKey =
     signal<string | null>(null);
@@ -404,6 +427,7 @@ export class MyPlantsPage {
     schedule: CareSchedule,
     event: Event,
   ): void {
+    this.cancelSchedulePreview();
     const intervalDays = Number(
       (event.target as HTMLInputElement).value,
     );
@@ -423,6 +447,7 @@ export class MyPlantsPage {
   }
 
   setScheduleModeDraft(plant: UserPlant, schedule: CareSchedule, value: string): void {
+    this.cancelSchedulePreview();
     const key = this.createCareActionKey(plant.id, schedule.actionType);
     this.scheduleModeDrafts.update(drafts => ({ ...drafts, [key]: value as 'Interval' | 'Weekdays' }));
   }
@@ -432,6 +457,7 @@ export class MyPlantsPage {
   }
 
   toggleWeekDayDraft(plant: UserPlant, schedule: CareSchedule, value: number): void {
+    this.cancelSchedulePreview();
     const key = this.createCareActionKey(plant.id, schedule.actionType);
     const current = this.getWeekDaysDraft(plant, schedule);
     this.weekDaysDrafts.update(drafts => ({ ...drafts, [key]: current ^ value }));
@@ -446,6 +472,7 @@ export class MyPlantsPage {
   }
 
   setPreferredTimeDraft(plant: UserPlant, schedule: CareSchedule, value: string): void {
+    this.cancelSchedulePreview();
     const key = this.createCareActionKey(plant.id, schedule.actionType);
     this.preferredTimeDrafts.update(drafts => ({ ...drafts, [key]: value }));
   }
@@ -836,16 +863,14 @@ export class MyPlantsPage {
     scheduleMode: 'Interval' | 'Weekdays',
     weekDays: number,
     preferredTimeLocal: string,
+    confirmed = false,
   ): void {
     if (
       !Number.isInteger(intervalDays) ||
       intervalDays < 1 ||
       intervalDays > 3650 ||
       (scheduleMode === 'Weekdays' && (weekDays === 0 || !preferredTimeLocal)) ||
-      this.isUpdatingSchedule(
-        plant.id,
-        schedule.actionType,
-      )
+      !!this.updatingScheduleKey()
     ) {
       this.careActionError.set(
         scheduleMode === 'Weekdays'
@@ -862,19 +887,16 @@ export class MyPlantsPage {
     this.updatingScheduleKey.set(key);
     this.careActionError.set(null);
 
-    this.myPlantsApi
-      .updateCareSchedule(
-        plant.id,
-        schedule.actionType,
-        {
-          intervalDays,
-          isEnabled,
-          scheduleMode,
-          weekDays,
-          preferredTimeLocal: scheduleMode === 'Weekdays' ? preferredTimeLocal : null,
-          timeZoneId: scheduleMode === 'Weekdays' ? this.getScheduleTimeZone(schedule) : null,
-        },
-      )
+    const request: UpdateCareScheduleRequest = {
+      intervalDays, isEnabled, scheduleMode, weekDays,
+      preferredTimeLocal: scheduleMode === 'Weekdays' ? preferredTimeLocal : null,
+      timeZoneId: scheduleMode === 'Weekdays' ? this.getScheduleTimeZone(schedule) : null,
+    };
+    this.schedulePreview.set(null);
+    const operation = confirmed
+      ? this.myPlantsApi.updateCareSchedule(plant.id, schedule.actionType, request)
+      : this.myPlantsApi.previewCareSchedule(plant.id, schedule.actionType, request);
+    operation
       .pipe(
         finalize(() => {
           this.updatingScheduleKey.set(null);
@@ -883,6 +905,11 @@ export class MyPlantsPage {
       )
       .subscribe({
         next: (updatedSchedule) => {
+          if (!confirmed) {
+            this.schedulePreview.set({ plantId: plant.id, before: { ...schedule },
+              after: updatedSchedule, request });
+            return;
+          }
           this.userPlants.update((plants) =>
             plants.map((currentPlant) =>
               currentPlant.id === plant.id
@@ -916,7 +943,8 @@ export class MyPlantsPage {
           this.careActionError.set(
             error.status === 404
               ? 'The care schedule could not be found.'
-              : 'The care schedule could not be updated.',
+              : confirmed ? 'The care schedule could not be updated. Preview again to retry.'
+                : 'The schedule preview could not be loaded. Your changes are still available.',
           );
         },
       });

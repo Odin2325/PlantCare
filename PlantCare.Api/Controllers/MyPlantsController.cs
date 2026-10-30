@@ -134,6 +134,27 @@ public sealed class MyPlantsController(IUserPlantService userPlantService, ICare
         return Ok(result);
     }
 
+    [HttpPost("{id:guid}/care/{actionType}/schedule/preview")]
+    public async Task<ActionResult<CareScheduleDto>> PreviewCareSchedule(
+        Guid id, CareActionType actionType, UpdateCareScheduleRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetCurrentUserId(out var userId)) return Unauthorized();
+        try
+        {
+            var result = await careService.UpdateScheduleAsync(userId, id, actionType,
+                request.IntervalDays, request.IsEnabled, request.ScheduleMode,
+                (CareWeekDays)request.WeekDays, request.PreferredTimeLocal, request.TimeZoneId,
+                cancellationToken, previewOnly: true);
+            return result is null ? NotFound() : Ok(result);
+        }
+        catch (Exception exception) when (exception is ArgumentException or
+            TimeZoneNotFoundException or InvalidTimeZoneException)
+        {
+            return BadRequest(new ProblemDetails { Title = "Invalid care schedule." });
+        }
+    }
+
     [HttpPut("{id:guid}/care/{actionType}/schedule")]
     [ProducesResponseType(
         typeof(CareScheduleDto),

@@ -175,7 +175,8 @@ internal sealed class CareService(
         CareWeekDays weekDays,
         TimeOnly? preferredTimeLocal,
         string? timeZoneId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default,
+        bool previewOnly = false)
     {
         ValidateIdentifiers(userId, userPlantId, actionType);
 
@@ -200,33 +201,12 @@ internal sealed class CareService(
             return null;
         }
 
-        if (scheduleMode == CareScheduleMode.Weekdays)
-        {
-            schedule.ConfigureWeekdays(
-                weekDays,
-                preferredTimeLocal!.Value,
-                timeZoneId ?? string.Empty,
-                schedule.LastCompletedAtUtc ?? timeProvider.GetUtcNow());
-        }
-        else if (schedule.ScheduleMode == CareScheduleMode.Weekdays)
-        {
-            schedule.ConfigureInterval(
-                intervalDays,
-                schedule.LastCompletedAtUtc ?? timeProvider.GetUtcNow());
-        }
-        else
-        {
-            schedule.UpdateInterval(intervalDays);
-        }
+        if (previewOnly)
+            return MapSchedule(schedule.PreviewChanges(intervalDays, isEnabled,
+                scheduleMode, weekDays, preferredTimeLocal, timeZoneId, timeProvider.GetUtcNow()));
 
-        if (isEnabled)
-        {
-            schedule.Enable();
-        }
-        else
-        {
-            schedule.Disable();
-        }
+        schedule.ApplyChanges(intervalDays, isEnabled, scheduleMode, weekDays,
+            preferredTimeLocal, timeZoneId, timeProvider.GetUtcNow());
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

@@ -84,3 +84,32 @@ it('refreshes filtered care and badges across a local midnight and tears down it
   expect(page.getCareStatusText(page.userPlants()[0].careSchedules[0])).toBe('Due today');
   http.verify(); fixture.destroy(); expect(vi.getTimerCount()).toBe(0);
 });
+
+it('previews without writing, cancels, invalidates edited drafts and applies only the reviewed request', () => {
+  const { page, http, fixture } = collection([owned('a', [care(new Date('2026-11-07T09:00:00Z'))])]);
+  const plant = page.userPlants()[0], schedule = plant.careSchedules[0];
+  page.saveSchedule(plant, schedule);
+  const preview = http.expectOne('/api/my-plants/a/care/Watering/schedule/preview');
+  expect(preview.request.method).toBe('POST'); preview.flush({ ...schedule, intervalDays: 14 });
+  expect(page.userPlants()[0].careSchedules[0].intervalDays).toBe(7);
+  http.expectNone(r => r.method === 'PUT'); page.cancelSchedulePreview();
+  page.applySchedulePreview(); http.expectNone(r => r.method === 'PUT');
+  page.saveSchedule(plant,schedule); http.expectOne('/api/my-plants/a/care/Watering/schedule/preview').flush(schedule);
+  page.setScheduleModeDraft(plant,schedule,'Weekdays'); expect(page.schedulePreview()).toBeNull();
+  page.setScheduleModeDraft(plant,schedule,'Interval'); page.saveSchedule(plant,schedule);
+  const again=http.expectOne('/api/my-plants/a/care/Watering/schedule/preview');const request=again.request.body;again.flush(schedule);
+  page.applySchedulePreview();const apply=http.expectOne('/api/my-plants/a/care/Watering/schedule');
+  expect(apply.request.method).toBe('PUT');expect(apply.request.body).toEqual(request);apply.flush(schedule);
+  expect(page.schedulePreview()).toBeNull();http.verify();fixture.destroy();
+});
+it('keeps failed drafts and rejects a preview after care changes in the collection', () => {
+  const { page,http,fixture }=collection([owned('a',[care(new Date('2026-11-07T09:00:00Z'))])]);
+  const plant=page.userPlants()[0],schedule=plant.careSchedules[0];
+  page.setIntervalDraft(plant,schedule,{target:{value:'14'}} as unknown as Event);page.saveSchedule(plant,schedule);
+  http.expectOne('/api/my-plants/a/care/Watering/schedule/preview').flush({}, {status:503,statusText:'Unavailable'});
+  expect(page.getIntervalDraft(plant,schedule)).toBe(14);expect(page.schedulePreview()).toBeNull();
+  page.saveSchedule(plant,schedule);http.expectOne('/api/my-plants/a/care/Watering/schedule/preview').flush({...schedule,intervalDays:14});
+  page.userPlants.set([{...plant,careSchedules:[{...schedule,lastCompletedAtUtc:'2026-10-30T09:00:00Z'}]}]);
+  page.applySchedulePreview();http.expectNone(r=>r.method==='PUT');expect(page.careActionError()).toContain('Care has changed');
+  http.verify();fixture.destroy();
+});

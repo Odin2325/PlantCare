@@ -29,7 +29,8 @@ public interface ICareService
         CareWeekDays weekDays,
         TimeOnly? preferredTimeLocal,
         string? timeZoneId,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default,
+        bool previewOnly = false);
 
     Task<CareScheduleDto?> AddScheduleAsync(
         Guid userId,

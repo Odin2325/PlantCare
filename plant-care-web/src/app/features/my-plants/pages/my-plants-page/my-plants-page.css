@@ -490,3 +490,6 @@
 
 .collection-tools button { min-height: 44px; align-self: end; padding: .65rem; border: 1px solid #9eb0a3; border-radius: .5rem; background: white; color: #285f3a; cursor: pointer; }
 .collection-tools button:disabled { opacity: .6; cursor: default; }
+
+.schedule-preview { border: 2px solid #35744a; border-radius: .6rem; padding: 1rem; margin-block: 1rem; overflow-wrap: anywhere; }
+.schedule-preview button { margin: .3rem .5rem .3rem 0; }

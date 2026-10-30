@@ -256,6 +256,31 @@
             }
           </div>
 
+          @if (schedulePreview(); as preview) {
+            @if (preview.plantId === plant.id && preview.before.id === schedule.id) {
+              <section class="schedule-preview" aria-label="Care schedule preview" aria-live="polite">
+                <h4>{{ getCareActionName(schedule.actionType) }} schedule preview</h4>
+                <p>Current: {{ getScheduleRecurrenceText(preview.before) }}
+                  ({{ preview.before.isEnabled ? 'active' : 'paused' }}).</p>
+                <p>Proposed: {{ getScheduleRecurrenceText(preview.after) }}
+                  ({{ preview.after.isEnabled ? 'active' : 'paused' }}).</p>
+                <p>Current next due: {{ preview.before.nextDueAtUtc ? (preview.before.nextDueAtUtc | date:'medium') : 'Not set' }}.</p>
+                @if (preview.after.isEnabled) {
+                  <p>Estimated next due: {{ preview.after.nextDueAtUtc ? (preview.after.nextDueAtUtc | date:'medium') : 'Not set' }}.</p>
+                } @else {
+                  <p>Scheduled reminders will be paused. The saved due date is retained.</p>
+                }
+                <p>Dates are displayed in this device's time zone. The next due date is recalculated when you apply,
+                  using the latest care history. It may already be overdue. Messages already queued may still arrive.
+                  This does not record completed care or change your season preferences.</p>
+                <button type="button" class="schedule-button" [disabled]="!!updatingScheduleKey()"
+                  (click)="applySchedulePreview()">Apply schedule changes</button>
+                <button type="button" class="schedule-button schedule-button--secondary" [disabled]="!!updatingScheduleKey()"
+                  (click)="cancelSchedulePreview()">Cancel preview</button>
+              </section>
+            }
+          }
+
           <div class="schedule-controls">
             <label>
               Schedule
@@ -315,14 +340,14 @@
                       class="schedule-button"
                       [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
                       (click)="saveSchedule(plant, schedule)">
-                Save schedule
+                Preview schedule
               </button>
 
               <button type="button"
                       class="schedule-button schedule-button--secondary"
                       [disabled]="isUpdatingSchedule(plant.id, schedule.actionType)"
                       (click)="toggleSchedule(plant, schedule)">
-                {{ schedule.isEnabled ? 'Pause' : 'Resume' }}
+                {{ schedule.isEnabled ? 'Preview pause' : 'Preview resume' }}
               </button>
 
               @if (schedule.actionType !== 'Watering') {

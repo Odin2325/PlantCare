@@ -283,6 +283,32 @@ public sealed class CareSchedule
             _ => CareWeekDays.None
         };
 
+    // The detached copy uses the same recurrence rules without changing tracked state.
+    public CareSchedule PreviewChanges(int intervalDays, bool isEnabled,
+        CareScheduleMode mode, CareWeekDays days, TimeOnly? time, string? zone,
+        DateTimeOffset now)
+    {
+        var copy = (CareSchedule)MemberwiseClone();
+        copy.ApplyChanges(intervalDays, isEnabled, mode, days, time, zone, now);
+        return copy;
+    }
+
+    public void ApplyChanges(int intervalDays, bool isEnabled,
+        CareScheduleMode mode, CareWeekDays days, TimeOnly? time, string? zone,
+        DateTimeOffset now)
+    {
+        if (mode == CareScheduleMode.Weekdays)
+            ConfigureWeekdays(days, time ?? throw new ArgumentException("A preferred time is required."),
+                zone ?? string.Empty, LastCompletedAtUtc ?? now);
+        else if (mode != CareScheduleMode.Interval)
+            throw new ArgumentOutOfRangeException(nameof(mode));
+        else if (ScheduleMode == CareScheduleMode.Weekdays)
+            ConfigureInterval(intervalDays, LastCompletedAtUtc ?? now);
+        else
+            UpdateInterval(intervalDays);
+        if (isEnabled) Enable(); else Disable();
+    }
+
     public void Enable()
     {
         IsEnabled = true;

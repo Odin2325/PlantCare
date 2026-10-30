@@ -8411,5 +8411,295 @@
       "cultivarName": "Jaguar",
       "photoIsSpeciesReference": true
     }
+  },
+  {
+    "commonName": "Strawberry (Florence)",
+    "scientificName": "Fragaria × ananassa 'Florence'",
+    "description": "A late-season summer-fruiting strawberry with large red berries. Pick fully coloured fruit and keep ripening berries clear of wet soil.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the soil consistently moist with drainage, watering the soil rather than soaking ripening fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil. Plant with the crown at the soil surface rather than burying it.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/strawberries/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A late-season summer-fruiting strawberry with large red berries. Pick fully coloured fruit and keep ripening berries clear of wet soil. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
+      "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
+      "photo": {
+        "path": "/images/plants/fragaria-x-ananassa.jpg",
+        "altText": "Strawberry species reference photo; Florence cultivar and fruit colour not verified",
+        "credit": "Fomulaax",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Plant with Fruit"
+      },
+      "cultivarName": "Florence",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Strawberry (Symphony)",
+    "scientificName": "Fragaria × ananassa 'Symphony'",
+    "description": "A late-season summer-fruiting strawberry with glossy red fruit. Choose a sunny site and protect ripe berries from birds.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the soil consistently moist with drainage, watering the soil rather than soaking ripening fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil. Plant with the crown at the soil surface rather than burying it.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/strawberries/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A late-season summer-fruiting strawberry with glossy red fruit. Choose a sunny site and protect ripe berries from birds. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
+      "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
+      "photo": {
+        "path": "/images/plants/fragaria-x-ananassa.jpg",
+        "altText": "Strawberry species reference photo; Symphony cultivar and fruit colour not verified",
+        "credit": "Fomulaax",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Plant with Fruit"
+      },
+      "cultivarName": "Symphony",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Strawberry (Pegasus)",
+    "scientificName": "Fragaria × ananassa 'Pegasus'",
+    "description": "A late-season summer-fruiting strawberry producing large sweet berries. Keep moisture steady as fruit develops and pick ripe berries regularly.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the soil consistently moist with drainage, watering the soil rather than soaking ripening fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil. Plant with the crown at the soil surface rather than burying it.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/strawberries/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A late-season summer-fruiting strawberry producing large sweet berries. Keep moisture steady as fruit develops and pick ripe berries regularly. Provide sun and choose a cultivar suited to your intended harvest season. Allow room for runners or remove unwanted ones to manage the bed.",
+      "harvestInstructions": "Pick fully coloured ripe berries with a small piece of stalk. Remove damaged or mouldy fruit promptly.",
+      "photo": {
+        "path": "/images/plants/fragaria-x-ananassa.jpg",
+        "altText": "Strawberry species reference photo; Pegasus cultivar and fruit colour not verified",
+        "credit": "Fomulaax",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/fragaria-x-ananassa/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Plant with Fruit"
+      },
+      "cultivarName": "Pegasus",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Raspberry (Joan J)",
+    "scientificName": "Rubus idaeus 'Joan J'",
+    "description": "An autumn-fruiting raspberry producing large sweet berries. Follow autumn-fruiting pruning guidance and provide support where needed.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone moist with good drainage; check more frequently during fruit development and dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil, with mulch kept away from the cane bases.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/raspberries/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "An autumn-fruiting raspberry producing large sweet berries. Follow autumn-fruiting pruning guidance and provide support where needed. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
+      "harvestInstructions": "Pick berries when fully coloured and they release easily from the core. Harvest regularly while fruit is ripe.",
+      "photo": {
+        "path": "/images/plants/rubus-idaeus.jpg",
+        "altText": "Raspberry species reference photo; Joan J cultivar and fruit colour not verified",
+        "credit": "Bernard Dupont",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Ripe and unripe raspberry fruits"
+      },
+      "cultivarName": "Joan J",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Raspberry (All Gold)",
+    "scientificName": "Rubus idaeus 'All Gold'",
+    "description": "An autumn-fruiting raspberry with yellow berries. Judge ripeness by a full golden colour and easy release, rather than looking for red fruit. Follow autumn-fruiting pruning guidance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone moist with good drainage; check more frequently during fruit development and dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil, with mulch kept away from the cane bases.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/raspberries/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "An autumn-fruiting raspberry with yellow berries. Judge ripeness by a full golden colour and easy release, rather than looking for red fruit. Follow autumn-fruiting pruning guidance. Choose a sunny site with support where needed. Confirm the fruiting type before pruning: summer and autumn forms need different treatment.",
+      "harvestInstructions": "Pick when berries are golden, plump and release easily from the plant. Handle gently and eat or chill promptly; exact ripening dates depend on local conditions.",
+      "photo": {
+        "path": "/images/plants/rubus-idaeus.jpg",
+        "altText": "Raspberry species reference photo; All Gold cultivar and fruit colour not verified",
+        "credit": "Bernard Dupont",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/rubus-idaeus/",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Ripe and unripe raspberry fruits"
+      },
+      "cultivarName": "All Gold",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Blueberry (Chandler)",
+    "scientificName": "Vaccinium corymbosum 'Chandler'",
+    "description": "A blueberry cultivar known for particularly large berries. Use acidic soil or ericaceous compost, keep roots evenly moist and protect the ripening crop from birds.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep roots evenly moist with drainage; avoid allowing containers to dry completely.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use acidic, organically rich, well-drained soil or an ericaceous container mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/258502/vaccinium-chandler-f/details",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "A blueberry cultivar known for particularly large berries. Use acidic soil or ericaceous compost, keep roots evenly moist and protect the ripening crop from birds. Choose a sunny to lightly shaded site. Check soil acidity first; a container can suit unsuitable garden soil. A compatible second cultivar can improve cropping.",
+      "harvestInstructions": "Allow berries to become fully blue and ripe before picking; colour change alone may precede full sweetness.",
+      "photo": {
+        "path": "/images/plants/vaccinium-corymbosum.jpg",
+        "altText": "Blueberry species reference photo; Chandler cultivar and fruit colour not verified",
+        "credit": "Rob Thurman",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/vaccinium-corymbosum/",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Fruits"
+      },
+      "cultivarName": "Chandler",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Apple tree (Fiesta)",
+    "scientificName": "Malus domestica 'Fiesta'",
+    "description": "A dessert apple cultivar. Choose a rootstock that suits the available space and check flowering compatibility with a nearby pollination partner.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root zone during dry periods while establishing. Check soil and rainfall rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with enough space for the chosen rootstock.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/apples/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "A dessert apple cultivar. Choose a rootstock that suits the available space and check flowering compatibility with a nearby pollination partner. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
+      "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
+      "photo": {
+        "path": "/images/plants/malus-domestica.jpg",
+        "altText": "Apple tree species reference photo; Fiesta cultivar and fruit colour not verified",
+        "credit": "Gzzz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "Fiesta",
+      "photoIsSpeciesReference": true
+    }
+  },
+  {
+    "commonName": "Apple tree (James Grieve)",
+    "scientificName": "Malus domestica 'James Grieve'",
+    "description": "An early-season dessert apple cultivar. Select a suitable rootstock and check local pollination compatibility before planting.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root zone during dry periods while establishing. Check soil and rainfall rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with enough space for the chosen rootstock.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/apples/grow-your-own",
+      "reviewedOn": "2026-10-30",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "An early-season dessert apple cultivar. Select a suitable rootstock and check local pollination compatibility before planting. Choose a locally suited cultivar and rootstock. Most benefit from a compatible nearby apple flowering at the same time. Keep seeds, stems and leaves away from pets.",
+      "harvestInstructions": "Harvest as the cultivar ripens; apples should separate with a gentle lift and twist. Discard damaged fruit.",
+      "photo": {
+        "path": "/images/plants/malus-domestica.jpg",
+        "altText": "Apple tree species reference photo; James Grieve cultivar and fruit colour not verified",
+        "credit": "Gzzz",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/malus-domestica/",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Tree"
+      },
+      "cultivarName": "James Grieve",
+      "photoIsSpeciesReference": true
+    }
   }
 ]
