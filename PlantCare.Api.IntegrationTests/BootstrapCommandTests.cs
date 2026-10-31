@@ -160,8 +160,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             Assert.Equal(238,species.Count);
             Assert.Equal(96, species.Count(p => p.CatalogProfile?.CultivarName is not null));
             Assert.Equal(0, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
-            Assert.Equal(31, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is not null));
-            Assert.Equal(65, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is null));
+            Assert.Equal(32, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is not null));
+            Assert.Equal(64, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is null));
             Assert.Equal(107, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
             Assert.Equal(131, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
             Assert.Equal(27, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));

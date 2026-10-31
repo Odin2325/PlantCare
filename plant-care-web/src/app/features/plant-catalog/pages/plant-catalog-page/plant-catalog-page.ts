@@ -43,6 +43,7 @@ export class PlantCatalogPage {
   readonly light = signal<SunlightRequirement | ''>('');
   readonly pets = signal<'non-toxic' | 'warning' | 'unknown' | ''>('');
   readonly growth = signal<'available' | ''>('');
+  readonly cultivarPhoto = signal<'available' | 'pending' | ''>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
   readonly comparisonIds = signal<string[]>([]);
   readonly comparisonPlants = computed(() => this.comparisonIds().map(id => this.plantSpecies().find(p => p.id === id))
@@ -62,10 +63,11 @@ export class PlantCatalogPage {
     light: this.light() || null,
     pets: this.pets() || null,
     growth: this.growth() || null,
+    cultivarPhoto: this.cultivarPhoto() || null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
     compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
-  readonly hasFilters = computed(() => Boolean(this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.sort() !== 'name-asc'));
+  readonly hasFilters = computed(() => Boolean(this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
     // An exact scientific name identifies a species, rather than other plants
@@ -76,6 +78,8 @@ export class PlantCatalogPage {
       (!this.kind() || (this.kind() === 'cultivar' ? Boolean(plant.catalogProfile?.cultivarName) : !plant.catalogProfile?.cultivarName)) &&
       (!this.light() || plant.sunlightRequirement === this.light()) &&
       (!this.growth() || Boolean(plant.catalogProfile?.growthReferences?.length)) &&
+      (!this.cultivarPhoto() || Boolean(plant.catalogProfile?.cultivarName) &&
+        ((this.cultivarPhoto() === 'available') === Boolean(plant.catalogProfile?.photo && !plant.catalogProfile?.photoIsSpeciesReference))) &&
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
         this.pets() === 'unknown' ? !plant.isToxicToPets && !plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl :
         !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
@@ -99,6 +103,8 @@ export class PlantCatalogPage {
       const pets = params.get('pets');
       this.pets.set(pets === 'non-toxic' || pets === 'warning' || pets === 'unknown' ? pets : '');
       this.growth.set(params.get('growth') === 'available' ? 'available' : '');
+      const photo = params.get('cultivarPhoto');
+      this.cultivarPhoto.set(photo === 'available' || photo === 'pending' ? photo : '');
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
       this.comparisonIds.set(parseComparisonIds(params.get('compare')));
     });
@@ -155,12 +161,18 @@ export class PlantCatalogPage {
     this.light.set('');
     this.pets.set('');
     this.growth.set('');
+    this.cultivarPhoto.set('');
     this.sort.set('name-asc');
     this.saveFilters();
   }
 
   setGrowth(value: string): void {
     this.growth.set(value === 'available' ? value : '');
+    this.saveFilters();
+  }
+
+  setCultivarPhoto(value: string): void {
+    this.cultivarPhoto.set(value === 'available' || value === 'pending' ? value : '');
     this.saveFilters();
   }
 

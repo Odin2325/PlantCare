@@ -87,6 +87,14 @@
       </select>
     </div>
     <div class="catalog-field">
+      <label for="plant-cultivar-photo">Cultivar photos</label>
+      <select id="plant-cultivar-photo" [ngModel]="cultivarPhoto()" (ngModelChange)="setCultivarPhoto($event)" aria-describedby="cultivar-photo-help">
+        <option value="">All entries</option>
+        <option value="available">With cultivar photo</option>
+        <option value="pending">Photo pending</option>
+      </select>
+    </div>
+    <div class="catalog-field">
       <label for="plant-sort">Sort by</label>
       <select id="plant-sort" [ngModel]="sort()" (ngModelChange)="setSort($event)">
         <option value="name-asc">Name A–Z</option>
@@ -97,6 +105,7 @@
   </section>
   <p>Categories describe common garden uses and can overlap. They do not mean that every part of a plant is edible. Check the growing and harvest guidance on its detail page.</p>
   <p id="pet-filter-help">The non-toxic filter includes only plants with a linked cat-and-dog toxicity reference. An absent warning is not a safety assessment. Non-toxic plants can still cause stomach upset if eaten.</p>
+  <p id="cultivar-photo-help">The cultivar photo choices show named varieties only. Pending means a suitable licensed photo is still being sourced; general species photos do not count as cultivar photos.</p>
   <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
   @if (visibleSpecies().length === 0) {
     <p class="status-message">No plants match your search. Try another name or clear the filters.</p>

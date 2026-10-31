@@ -218,11 +218,11 @@
   {
     "scientificName": "Cucurbita pepo 'Sweet Dumpling'",
     "cultivarName": "Sweet Dumpling",
-    "status": "pending",
-    "photoPath": null,
-    "sourceUrl": null,
-    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
-    "reviewedOn": "2026-10-30"
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-winter-squash-sweet-dumpling.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Courge_patidou_1.jpg",
+    "identityEvidence": "Source description identifies Courge patidou; the source category explicitly identifies Sweet Dumpling (Courge Patidou): https://commons.wikimedia.org/wiki/Category:Cucurbita_pepo_Sweet_Dumpling_(Courge_Patidou). Original photograph visually reviewed; harvested fruit with natural surface marks.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Daucus carota 'Autumn King 2'",

@@ -60,4 +60,41 @@ describe('Catalog categories', () => {
     page.clearFilters(); expect(page.kind()).toBe('');
     params.next(convertToParamMap({ kind: 'unrecognized' })); expect(page.kind()).toBe('');
   });
+  it('distinguishes exact cultivar photos from pending and legacy species-reference photos', () => {
+    const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
+    const photo = { path: '/images/plants/example.jpg', altText: 'Example', title: 'Example',
+      credit: 'Photographer', sourceUrl: 'https://example.org/photo', licenseName: 'CC0 1.0',
+      licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/' };
+    const exact = make('Roma', ['vegetable']);
+    exact.catalogProfile = { ...exact.catalogProfile!, cultivarName: 'Roma', photo };
+    const legacy = make('Legacy cultivar', ['vegetable']);
+    legacy.catalogProfile = { ...legacy.catalogProfile!, cultivarName: 'Legacy', photo, photoIsSpeciesReference: true };
+    const general = make('General with photo', ['vegetable']);
+    general.catalogProfile = { ...general.catalogProfile!, photo };
+    page.plantSpecies.set([...plants, exact, legacy, general]);
+    page.setCultivarPhoto('available');
+    expect(page.visibleSpecies().map(p => p.commonName)).toEqual(['Roma']);
+    page.setCultivarPhoto('pending');
+    expect(page.visibleSpecies().map(p => p.commonName)).toEqual(['Cherry tomato (Tiny Tim)', 'Legacy cultivar']);
+    page.setKind('general'); expect(page.visibleSpecies()).toEqual([]);
+    page.setKind('cultivar'); page.setCategory('fruit'); expect(page.visibleSpecies()).toEqual([]);
+    page.setCategory('vegetable'); page.setQuery('Tiny Tim');
+    expect(page.visibleSpecies().map(p => p.commonName)).toEqual(['Cherry tomato (Tiny Tim)']);
+  });
+  it('restores and saves the cultivar photo filter, ignoring unsupported URL and control values', () => {
+    const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
+    params.next(convertToParamMap({ cultivarPhoto: 'pending', category: 'vegetable', q: 'Tiny Tim' }));
+    expect(page.cultivarPhoto()).toBe('pending'); expect(page.visibleSpecies()).toEqual([plants[3]]);
+    page.setCultivarPhoto('available');
+    expect(TestBed.inject(Router).navigate).toHaveBeenLastCalledWith([], expect.objectContaining({
+      queryParams: expect.objectContaining({ cultivarPhoto: 'available', category: 'vegetable', q: 'Tiny Tim' }),
+    }));
+    params.next(convertToParamMap({ cultivarPhoto: 'unsupported' }));
+    expect(page.cultivarPhoto()).toBe(''); expect(page.hasFilters()).toBe(false);
+    page.setCultivarPhoto('unsupported'); expect(page.cultivarPhoto()).toBe('');
+    page.setCultivarPhoto('pending'); page.toggleComparison(plants[0]); page.clearFilters();
+    expect(page.cultivarPhoto()).toBe(''); expect(page.hasFilters()).toBe(false);
+    expect(page.comparisonIds()).toEqual(['Fig tree']);
+    expect(page.filterQueryParams().cultivarPhoto).toBeNull();
+  });
 });

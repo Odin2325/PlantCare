@@ -113,3 +113,9 @@ photos and 65 use the approved named pending placeholder. Generic images are no
 longer repeated on cultivar entries. This increment and its CI-path updates are
 local-only; the next checkpoint must run full validation for the accumulated
 policy/workflow changes before deployment.
+
+The local [cultivar-photo filter](cultivar-photo-filter.md) adds URL-preserved
+photo/pending browsing with the existing filters and comparison selection. One
+further reviewed Sweet Dumpling photo brings the working totals to 187 assets,
+32 cultivars with distinct photos and 64 pending. Reviewed entry/cultivar totals
+remain 238/96. This increment also awaits the batch checkpoint.

@@ -7475,7 +7475,15 @@
       ],
       "growingNotes": "A winter squash cultivar with small cream-coloured fruit marked with green stripes and orange flesh. Let storage fruits mature; never eat unusually bitter squash. Provide full sun and warm conditions after frost risk has passed. This species-level entry covers several forms; follow the variety label for spacing.",
       "harvestInstructions": "For winter storage, allow fruit to develop a mature rind before gathering with a short stalk attached. Cure and store only sound fruit; never eat unusually bitter squash.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/cultivar-winter-squash-sweet-dumpling.jpg",
+        "altText": "Sweet Dumpling winter squash (Patidou); source-identified harvested fruit",
+        "credit": "DocteurCosmos",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Courge_patidou_1.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Courge patidou 1"
+      },
       "cultivarName": "Sweet Dumpling",
       "photoIsSpeciesReference": false
     }
