@@ -124,3 +124,11 @@ export/deletion and an additive table migration. Focused API, SQL recovery,
 frontend and browser checks passed. This private-data/migration increment selects
 full validation at its next checkpoint and is not pushed or deployed. The current
 staging release and catalog totals above remain unchanged.
+
+The [personal photo-journal design](photo-journal-design.md) is now complete.
+It specifies bounded private SQL image storage, upload/resource limits,
+normalization without source metadata, owner-only access, export/deletion and
+restored-account erasure checks. Uploads remain unimplemented and disabled.
+The next local slice reviews a decoder dependency and implements the isolated
+normalizer before private API or UI work. Capacity and migrated backup/recovery
+acceptance remain checkpoint gates; no new provider or paid service is required.

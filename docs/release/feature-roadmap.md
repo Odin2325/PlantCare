@@ -14,8 +14,9 @@ No schema changed. The preparation outage and interrupted-backup recovery
 follow-up are recorded in that acceptance document.
 
 [Saved shortlists](saved-shortlists.md) are now implemented locally, awaiting their
-full private-data/migration checkpoint. The next feature work is photo-journal
-design. Broader pipelines/deployment wait for the next meaningful combined
+full private-data/migration checkpoint. The [photo-journal design](photo-journal-design.md)
+is complete; the next implementation slice is bounded image normalization and
+dependency review, with uploads disabled. Broader pipelines/deployment wait for the next meaningful combined
 checkpoint; routine increments retain targeted local checks and commits.
 
 ## 1. Saved plant shortlists
@@ -34,6 +35,14 @@ Design storage limits, image validation/resizing, private access, deletion and
 backup behavior before enabling uploads on the small VPS. Strip unnecessary
 photo metadata. Do not expose these photos through public comparison links.
 Make the first version useful without a paid image service.
+
+The [implementation design](photo-journal-design.md) selects bounded private SQL
+image storage for the small beta, so images and metadata share transactional
+deletion and existing database capture. It defines quotas, normalization, private
+routes, account export and recovery gates. No uploads or new dependencies are
+enabled by this design. Start with an isolated normalizer; do not expose upload
+routes until decoding resource bounds, ownership, deletion/export and migrated
+backup/recovery have been verified.
 
 ## 3. Healthy growth-stage reference library
 
