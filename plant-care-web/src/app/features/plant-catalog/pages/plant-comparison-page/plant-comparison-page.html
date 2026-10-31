@@ -28,6 +28,12 @@
                 <strong>Reviewed as non-toxic to cats and dogs</strong><p><a [href]="source" target="_blank" rel="noopener noreferrer">Cat-and-dog reference</a></p>
               } @else { <strong>Not assessed for this comparison</strong><p>No linked cat-and-dog safety reference. An absent warning does not mean safe.</p> }
             </dd></div>
+            @if (plant.catalogProfile?.growingNotes; as notes) {
+              <div><dt>Growing notes</dt><dd>{{ notes }}</dd></div>
+            }
+            @if (plant.catalogProfile?.harvestInstructions; as harvest) {
+              <div><dt>Harvest guidance</dt><dd>{{ harvest }}</dd></div>
+            }
           </dl>
           @if (plant.catalogProfile; as profile) { <p class="source"><a [href]="profile.careSourceUrl" target="_blank" rel="noopener noreferrer">Care reference</a> · Reviewed {{ profile.reviewedOn }}</p> }
           <div class="card-actions"><a [routerLink]="['/plants', plant.id]" queryParamsHandling="preserve">View details</a><button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'" (click)="remove(plant.id)">Remove</button></div>

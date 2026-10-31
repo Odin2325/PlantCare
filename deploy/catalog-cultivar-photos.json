@@ -855,6 +855,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Solanum tuberosum 'Belana'",
+    "cultivarName": "Belana",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-belana.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belana_Kartoffeln.jpeg",
+    "identityEvidence": "Source title and description identify this exact potato cultivar; harvested tuber photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Solanum tuberosum 'Charlotte'",
     "cultivarName": "Charlotte",
     "status": "verified",
@@ -862,6 +871,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:FranceNormandieSouleuvreEnBocagePommeDeTerreCharlotteFleurs.jpg",
     "identityEvidence": "Source file title and/or description identify this named cultivar: Souleuvre en Bocage (Normandie, France). Fleurs de pomme de terre 'Charlotte'.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Cilena'",
+    "cultivarName": "Cilena",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-cilena.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lebensmittel-KartoffelsorteCilena1-Asio.jpg",
+    "identityEvidence": "Source title and description identify this exact potato cultivar; harvested tuber photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Solanum tuberosum 'Desiree'",
@@ -880,6 +898,24 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:King_Edward.jpg",
     "identityEvidence": "Source file title and/or description identify this named cultivar: King Edward potato.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Laura'",
+    "cultivarName": "Laura",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved. The first Laura plant candidate shows growth problems and was not selected.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Marabel'",
+    "cultivarName": "Marabel",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-marabel.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kartoffel_Marabel_04_(fcm).jpg",
+    "identityEvidence": "Source title and description identify this exact potato cultivar; harvested tuber photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Solanum tuberosum 'Maris Piper'",

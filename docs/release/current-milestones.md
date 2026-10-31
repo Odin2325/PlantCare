@@ -130,3 +130,9 @@ two-plant comparison from a profile. Five herb/bean cultivars and one reviewed
 Dark Opal photo bring the current local totals to **249 reviewed entries / 107
 cultivars / 189 assets**, with **34 distinct cultivar photos and 73 pending**.
 This increment remains local pending the accumulated-batch checkpoint.
+
+The local [compared growing guidance and potato batch](compared-growing-guidance.md)
+adds per-plant growing/harvest notes to comparison cards, four table-potato
+cultivars and three distinct photos. Current local totals are **253 reviewed
+entries / 111 cultivars / 192 assets**, with **37 distinct cultivar photos and
+74 pending**. The deployed application remains unchanged.

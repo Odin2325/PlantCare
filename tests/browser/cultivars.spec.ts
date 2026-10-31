@@ -74,6 +74,8 @@ test('related cultivars preserve browsing context and show exact photos or named
     fertilizingInstructions: null, soilInstructions: 'Drained soil', humidityInstructions: null,
     minimumTemperatureCelsius: null, maximumTemperatureCelsius: null, isToxicToPets: false,
     catalogProfile: { cultivarName, photo: path ? photo(path) : null, photoIsSpeciesReference: false,
+      growingNotes: cultivarName ? `Growing notes for ${cultivarName}.` : null,
+      harvestInstructions: cultivarName ? `Harvest guidance for ${cultivarName}.` : null,
       categories: ['vegetable'], careSourceUrl: 'https://www.rhs.org.uk/vegetables/tomatoes/grow-your-own', reviewedOn: '2026-10-30' },
   });
   const catalog = [make(ids.general, 'Tomato', null, '/images/plants/solanum-lycopersicum.jpg'),
@@ -112,10 +114,20 @@ test('related cultivars preserve browsing context and show exact photos or named
   await relatives.getByRole('link', { name: 'Compare Plum tomato (Roma) with Cherry tomato (Tiny Tim)', exact: true }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare plants');
   await expect(page.locator('.comparison-card h2')).toHaveText(['Plum tomato (Roma)', 'Cherry tomato (Tiny Tim)']);
+  const comparisonCards = page.locator('.comparison-card');
+  await expect(comparisonCards.nth(0)).toContainText('Growing notes for Roma.');
+  await expect(comparisonCards.nth(0)).toContainText('Harvest guidance for Roma.');
+  await expect(comparisonCards.nth(0)).not.toContainText('Harvest guidance for Tiny Tim.');
+  await expect(comparisonCards.nth(1)).toContainText('Harvest guidance for Tiny Tim.');
+  await expect(comparisonCards.nth(1).getByRole('link', { name: 'Care reference', exact: true }))
+    .toHaveAttribute('href', 'https://www.rhs.org.uk/vegetables/tomatoes/grow-your-own');
   const comparisonUrl = new URL(page.url());
   expect(comparisonUrl.searchParams.get('compare')).toBe(ids.roma + ',' + ids.tiny);
   expect(comparisonUrl.searchParams.get('category')).toBe('vegetable');
   expect(comparisonUrl.searchParams.get('q')).toBe('tomato');
+  await page.setViewportSize({ width: 320, height: 900 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Compared growing and harvest guidance');
   await page.goBack();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Plum tomato (Roma)');
   expect(new URL(page.url()).searchParams.get('compare')).toBe(ids.general);

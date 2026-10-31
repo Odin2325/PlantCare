@@ -31,3 +31,24 @@ it('shows unavailable selections and a recoverable API failure without silently 
   expect(fixture.nativeElement.textContent).toContain('no longer available');
   expect(fixture.nativeElement.textContent).toContain('Choose at least two plants');http.verify();
 });
+it('keeps each plant growing and harvest guidance with its own source and omits missing guidance', () => {
+  const {fixture,http}=setup(`${a},${b}`);
+  http.expectOne('/api/plant-species').flush([
+    {id:a,commonName:'Climbing bean',sunlightRequirement:'FullSun',isToxicToPets:true,
+      catalogProfile:{careSourceUrl:'https://example.org/bean',reviewedOn:'2026-10-31',photo:null,
+        growingNotes:'Provide a climbing frame.',harvestInstructions:'Pick young pods and cook properly.'}},
+    {id:b,commonName:'Houseplant',sunlightRequirement:'BrightIndirectLight',isToxicToPets:false,
+      catalogProfile:{careSourceUrl:'https://example.org/houseplant',reviewedOn:'2026-10-31',photo:null,
+        growingNotes:'Use a drained indoor pot.'}},
+  ]);
+  fixture.detectChanges();
+  const cards=fixture.nativeElement.querySelectorAll('.comparison-card');
+  expect(cards[0].textContent).toContain('Provide a climbing frame.');
+  expect(cards[0].textContent).toContain('Pick young pods and cook properly.');
+  expect(cards[0].querySelector('.source a').getAttribute('href')).toBe('https://example.org/bean');
+  expect(cards[1].textContent).toContain('Use a drained indoor pot.');
+  expect(cards[1].textContent).not.toContain('Harvest guidance');
+  expect(cards[1].textContent).not.toContain('Pick young pods');
+  expect(cards[1].querySelector('.source a').getAttribute('href')).toBe('https://example.org/houseplant');
+  http.verify();
+});

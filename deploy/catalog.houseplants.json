@@ -8849,5 +8849,161 @@
       "cultivarName": "Borlotto Lingua di Fuoco",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Potato (Belana)",
+    "scientificName": "Solanum tuberosum 'Belana'",
+    "description": "An early to medium-early potato with yellow skin and flesh, grown for firm-cooking salad use.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.europlant.biz/en/list-of-varieties/belana/",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "commonNameAliases": [
+        "Belana potato",
+        "Belana table potato"
+      ],
+      "growingNotes": "Plant healthy seed tubers in a sunny position after considering local frost risk. Earth up to exclude light from developing tubers. Aim for even moisture while tubers develop. The breeder describes good dormancy and storage potential; only store sound, mature tubers.",
+      "harvestInstructions": "Lift a sample to check size and readiness. For storage, allow skins to set and keep sound tubers cool, dark and ventilated. Do not eat green or bitter potatoes, sprouts, berries or foliage.",
+      "photo": {
+        "path": "/images/plants/cultivar-potato-belana.jpg",
+        "altText": "Belana potato tubers; source-identified cultivar photograph",
+        "credit": "Sir James",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belana_Kartoffeln.jpeg",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Belana Kartoffeln"
+      },
+      "cultivarName": "Belana",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Potato (Laura)",
+    "scientificName": "Solanum tuberosum 'Laura'",
+    "description": "A medium-early potato with red skin and deep yellow flesh, usually described as mainly firm cooking.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.europlant.biz/en/list-of-varieties/laura/",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "commonNameAliases": [
+        "Laura potato",
+        "Laura table potato"
+      ],
+      "growingNotes": "Plant healthy seed tubers in a sunny position after considering local frost risk. Earth up to exclude light from developing tubers. Allow tuber skins to set before lifting for storage and handle gently. Check plants for blight symptoms; variety descriptions do not replace local crop-health advice.",
+      "harvestInstructions": "Lift a sample to check size and readiness. For storage, allow skins to set and keep sound tubers cool, dark and ventilated. Do not eat green or bitter potatoes, sprouts, berries or foliage.",
+      "photo": null,
+      "cultivarName": "Laura",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Potato (Marabel)",
+    "scientificName": "Solanum tuberosum 'Marabel'",
+    "description": "An early potato with yellow skin and flesh and a mainly firm-cooking texture.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.europlant.biz/en/list-of-varieties/marabel/",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "commonNameAliases": [
+        "Marabel potato",
+        "Marabel table potato"
+      ],
+      "growingNotes": "Plant healthy seed tubers in a sunny position after considering local frost risk. Earth up to exclude light from developing tubers. Grow in fertile, drained soil and handle tubers carefully when lifting. Relative earliness depends on planting conditions and weather.",
+      "harvestInstructions": "Lift a sample to check size and readiness. For storage, allow skins to set and keep sound tubers cool, dark and ventilated. Do not eat green or bitter potatoes, sprouts, berries or foliage.",
+      "photo": {
+        "path": "/images/plants/cultivar-potato-marabel.jpg",
+        "altText": "Marabel potato tubers; source-identified cultivar photograph",
+        "credit": "Photograph:   Frank C. Müller , Frankfurt am Main",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kartoffel_Marabel_04_(fcm).jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Kartoffel Marabel 04 (fcm)"
+      },
+      "cultivarName": "Marabel",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Potato (Cilena)",
+    "scientificName": "Solanum tuberosum 'Cilena'",
+    "description": "An early, firm-cooking salad potato with yellow flesh and elongated oval tubers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.europlant.biz/en/list-of-varieties/cilena/",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "commonNameAliases": [
+        "Cilena potato",
+        "Cilena table potato"
+      ],
+      "growingNotes": "Plant healthy seed tubers in a sunny position after considering local frost risk. Earth up to exclude light from developing tubers. Keep developing tubers covered and maintain an even supply of moisture without waterlogging. Lift carefully to avoid skin damage.",
+      "harvestInstructions": "Lift a sample to check size and readiness. For storage, allow skins to set and keep sound tubers cool, dark and ventilated. Do not eat green or bitter potatoes, sprouts, berries or foliage.",
+      "photo": {
+        "path": "/images/plants/cultivar-potato-cilena.jpg",
+        "altText": "Cilena potato tubers; source-identified cultivar photograph",
+        "credit": "Asio otus",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lebensmittel-KartoffelsorteCilena1-Asio.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Lebensmittel-KartoffelsorteCilena1-Asio"
+      },
+      "cultivarName": "Cilena",
+      "photoIsSpeciesReference": false
+    }
   }
 ]

@@ -2644,5 +2644,47 @@
     "bytes": 605154,
     "sourceFileName": "Ocimum basilicum 'Dark Opal' kz01.jpg",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Belana potato tubers; source-identified cultivar photograph",
+    "caption": "Belana Kartoffeln",
+    "credit": "Sir James",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "cultivar-potato-belana",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belana_Kartoffeln.jpeg",
+    "path": "/images/plants/cultivar-potato-belana.jpg",
+    "sha256": "fb8eb28e687ecb157c12965cc583ea85e1db7c89bae4a7af28c18deeffa2d7e2",
+    "bytes": 243174,
+    "sourceFileName": "Belana Kartoffeln.jpeg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Marabel potato tubers; source-identified cultivar photograph",
+    "caption": "Kartoffel Marabel 04 (fcm)",
+    "credit": "Photograph:   Frank C. Müller , Frankfurt am Main",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-potato-marabel",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kartoffel_Marabel_04_(fcm).jpg",
+    "path": "/images/plants/cultivar-potato-marabel.jpg",
+    "sha256": "1659ba2e0cd9ff3ab4ce3c00de08d35c5bac8d9cc0653f5ff26ebb8d3065d67e",
+    "bytes": 83622,
+    "sourceFileName": "Kartoffel Marabel 04 (fcm).jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Cilena potato tubers; source-identified cultivar photograph",
+    "caption": "Lebensmittel-KartoffelsorteCilena1-Asio",
+    "credit": "Asio otus",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseName": "CC BY-SA 3.0",
+    "slug": "cultivar-potato-cilena",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lebensmittel-KartoffelsorteCilena1-Asio.jpg",
+    "path": "/images/plants/cultivar-potato-cilena.jpg",
+    "sha256": "2309f2c23c8b34bd2ad39465fa2b742f0afcf0394d0d2468b5e912d649fcda52",
+    "bytes": 178545,
+    "sourceFileName": "Lebensmittel-KartoffelsorteCilena1-Asio.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]
