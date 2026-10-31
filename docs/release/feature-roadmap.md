@@ -4,20 +4,18 @@ Proposed order as of 2026-10-31. These are feature goals, not fixed delivery dat
 Routine increments continue with targeted local checks and commits. Catalog
 expansion and exact-cultivar photography continue alongside the feature work.
 
-## Delivery checkpoint before the next persistent feature
+## Delivery checkpoint completed
 
-The current local batch adds upcoming Garden work, related-variety browsing,
-distinct cultivar photos, photo-status filtering, direct care comparisons,
-growing/harvest comparisons and shareable public comparisons. Current local
-totals are 257 reviewed entries and 115 cultivars; staging remains at the earlier
-accepted release. The 77 unresolved cultivar photos remain visibly pending.
+The [2026-10-31 combined staging checkpoint](catalog-batch-checkpoint.md) passed
+full CI, real public/catalog/image checks, existing-worker update, pinned
+activation and fresh pre/post backups. Current staging totals are 257 reviewed
+entries and 115 cultivars, with 38 distinct cultivar photos and 77 pending.
+No schema changed. The preparation outage and interrupted-backup recovery
+follow-up are recorded in that acceptance document.
 
-At the next accumulated-batch checkpoint, select the committed candidate, run one
-full CI validation for the combined changes (including earlier test-policy edits),
-exercise the real backend/catalog/browser integration, verify existing data and
-service-worker upgrades, and complete the staging deployment/health/backup gates.
-This checkpoint is deferred, not represented as already passed. Do not start
-routine pipelines for each catalog batch.
+Saved shortlists are the next feature. Future increments return to targeted local
+checks and commits; broader pipelines/deployment wait for the next meaningful
+combined checkpoint.
 
 ## 1. Saved plant shortlists
 

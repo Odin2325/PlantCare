@@ -1,6 +1,6 @@
 # Current milestone plan
 
-Reviewed 2026-10-30. This is the current work order; dated execution records retain
+Reviewed 2026-10-31. This is the current work order; dated execution records retain
 their original candidate and scope. No v1 release or production cutover is created
 by this plan. The public contact-address decision remains deferred by the owner.
 
@@ -23,15 +23,15 @@ filter, eight species and two galleries, bringing that total to 91. The next
 [collection-care increment](collection-care-filter.md) adds active collection care
 filters and nine species, bringing that reviewed total to 100. The following
 [care-history increment](care-history-discovery.md) adds history discovery and five
-plants, bringing that reviewed total to 105. The [Garden and cultivar increment](garden-catalog-expansion.md) adds 47 entries, bringing that total to 152. The [planting-plan increment](planting-plan.md) adds twelve entries, bringing that total to 164. The [planting-calendar increment](planting-calendar.md) adds eight entries, bringing that total to 172. The [harvest-record increment](harvest-records.md) adds eight entries, bringing that total to 180. The [harvest-overview increment](harvest-overview.md) adds twelve cultivars, bringing that total to 192. The [harvest-trends increment](harvest-trends.md) adds eighteen cultivars, bringing that total to 210. The [seasonal-care increment](seasonal-care-preferences.md) adds twelve vegetable cultivars, bringing that total to 222. The [care-schedule preview increment](care-schedule-preview.md) adds eight fruit cultivars, bringing the current total to 230.
+plants, bringing that reviewed total to 105. The [Garden and cultivar increment](garden-catalog-expansion.md) adds 47 entries, bringing that total to 152. The [planting-plan increment](planting-plan.md) adds twelve entries, bringing that total to 164. The [planting-calendar increment](planting-calendar.md) adds eight entries, bringing that total to 172. The [harvest-record increment](harvest-records.md) adds eight entries, bringing that total to 180. The [harvest-overview increment](harvest-overview.md) adds twelve cultivars, bringing that total to 192. The [harvest-trends increment](harvest-trends.md) adds eighteen cultivars, bringing that total to 210. The [seasonal-care increment](seasonal-care-preferences.md) adds twelve vegetable cultivars, bringing that total to 222. The [care-schedule preview increment](care-schedule-preview.md) adds eight fruit cultivars, bringing that checkpoint total to 230. The [combined catalog/Garden checkpoint](catalog-batch-checkpoint.md) brings the current total to 257 entries and 115 cultivars.
 
 ## Completed staging milestones
 
 | Milestone | Accepted evidence | Limits |
 | --- | --- | --- |
 | Core care and Android beta | [Public browser journey](public-browser-acceptance.md), [Android beta](android-beta.md), owner-confirmed reminders, multiple care cycles, Dashboard taps, installation, offline/reconnect and update with data intact | Other physical devices and assistive technologies need their own acceptance. |
-| English catalog and images | [230 reviewed entries](care-schedule-preview.md), houseplants/crops/trees and 88 named cultivars, category tabs, 156 licensed originals, 262 aliases across 131 entries, thirteen sourced cat-and-dog classifications, [catalog browsing](catalog-browsing.md), [24 growth references for twelve species](pet-assessment-expansion.md) | A curated selection; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
-| Garden and cultivar browsing | [Garden tab and category navigation](garden-catalog-expansion.md), saved-location groups, nickname-first cards, next care, harvest guidance and personal growing-guide links; live future-only fixture and data preservation | Read-only garden overview; bed planning and harvest summaries remain later features. Generic cultivar photos are explicitly labelled. |
+| English catalog and images | [257 reviewed entries](catalog-batch-checkpoint.md), houseplants/crops/trees and 115 named cultivars, category tabs, 193 licensed assets, 300 aliases across 150 entries, thirteen sourced cat-and-dog classifications, [catalog browsing](catalog-browsing.md), [24 growth references for twelve species](pet-assessment-expansion.md) | A curated selection; examples show different specimens, without a growth timetable or diagnosis. Personal photo uploads are future work. |
+| Garden and cultivar browsing | [Garden tab and category navigation](garden-catalog-expansion.md), saved-location groups, nickname-first cards, next care, harvest guidance and personal growing-guide links; live future-only fixture and data preservation | Read-only garden overview; bed planning and harvest summaries remain later features. Cultivars without an exact reviewed photo show a named pending placeholder. |
 | Planting calendar | [Monthly target-date agenda](planting-calendar.md), date-only month/year navigation, nickname/action links, shared Garden filters and phone reflow | Saved targets only; viewing the calendar does not complete care, record a harvest or send reminders. |
 | Actual harvest records | [Private date/quantity/notes log](harvest-records.md), create/read/confirmed removal, archived retention, export/erasure and migrated recovery | Latest 100 displayed; older records remain in export. Units are not summed and harvesting does not complete care or change target dates. |
 | Care-schedule preview | [Non-persisting server calculation and explicit application](care-schedule-preview.md), interval/weekday/pause controls, DST and travelling-zone checks, cancel/retry and live future-care fixture | Estimated due date recalculates against latest history on apply; provider-queued messages cannot be recalled. |
@@ -45,7 +45,13 @@ plants, bringing that reviewed total to 105. The [Garden and cultivar increment]
 | Sharing emails and signup invitations | [Calendar-sharing acceptance](calendar-sharing-email.md): real Gmail inbox delivery, read-only access/revocation, isolated new-account signup and confirmation tests | Seven-day invitations; SMTP acceptance is not an inbox guarantee. No Google Calendar synchronization is enabled. |
 | Account controls and operations | [Account export/deletion](account-data.md), [retention and erasure-safe restore](retention-and-erasure-recovery.md), [VPS recovery](vps-application-recovery.md), [monitoring](worker-capacity.md) | Backups require the owner's PC/drive/access. Weekly email checks are not independent continuous monitoring. Replacement-host recovery remains open. |
 
-Latest deployed application: `07848557db0ac3cc43f3d0c839a2af64de690138`, with [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/41040578725). [Care-schedule preview acceptance](care-schedule-preview.md) covers non-persisting server previews, explicit interval/weekday/pause confirmation, preserved care/history, the catalog increment, existing-worker update and refreshed backups. Documentation commits after that SHA do not imply another runtime deployment.
+Latest deployed application: `6c84b8e1547e569e189f960af196233508172ee2`, with
+[successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/41198159336).
+[Catalog/Garden checkpoint acceptance](catalog-batch-checkpoint.md) covers the
+257-entry dataset, exact-cultivar images, comparisons/sharing, existing-worker
+update, preserved synthetic session/data, fresh backups and public health.
+No schema changed. Acceptance-note commits after that SHA do not imply a new
+runtime deployment.
 
 ## Remaining work, in order
 
@@ -76,11 +82,11 @@ Latest deployed application: `07848557db0ac3cc43f3d0c839a2af64de690138`, with [s
 
 ## Feature lane
 
-[Garden and cultivar browsing](garden-catalog-expansion.md), [personal planting plans](planting-plan.md) and the [monthly planting calendar](planting-calendar.md) are accepted on staging. The catalog now has 230 entries and 88 cultivars. [Care-schedule previews](care-schedule-preview.md) show recurrence and estimated due-date impact before explicit application. [Seasonal care preferences](seasonal-care-preferences.md) save the owner-selected environment and season with general review prompts, preserving current care schedules. [Harvest trends](harvest-trends.md) compare recorded quantities by month and plant, including empty months and the existing Garden filters. The [Garden harvest overview](harvest-overview.md) adds date and collection filters with exact, separate quantity totals. Actual harvest records are also accepted on personal plant details, separately from target dates and care. Plan dates are editable on personal details and visible/filterable in Garden and its calendar. The migration/private write received full CI; catalog-only changes retain focused validation.
+[Garden and cultivar browsing](garden-catalog-expansion.md), [personal planting plans](planting-plan.md) and the [monthly planting calendar](planting-calendar.md) are accepted on staging. The catalog now has 257 entries and 115 cultivars. [Care-schedule previews](care-schedule-preview.md) show recurrence and estimated due-date impact before explicit application. [Seasonal care preferences](seasonal-care-preferences.md) save the owner-selected environment and season with general review prompts, preserving current care schedules. [Harvest trends](harvest-trends.md) compare recorded quantities by month and plant, including empty months and the existing Garden filters. The [Garden harvest overview](harvest-overview.md) adds date and collection filters with exact, separate quantity totals. Actual harvest records are also accepted on personal plant details, separately from target dates and care. Plan dates are editable on personal details and visible/filterable in Garden and its calendar. The migration/private write received full CI; catalog-only changes retain focused validation.
 
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
-account isolation and update checks. The [upcoming-work view](garden-upcoming-work.md) and eight more cultivars are implemented locally for the next batch checkpoint. [Related-cultivar discovery and source-specific photos](related-cultivar-photos.md) are now also implemented locally. Continue the pending photo queue before the next accumulated-batch checkpoint.
+account isolation and update checks. The [upcoming-work view](garden-upcoming-work.md), [related-cultivar discovery and source-specific photos](related-cultivar-photos.md), photo filtering and compared/sharable care guidance are accepted in the [combined staging checkpoint](catalog-batch-checkpoint.md). Continue the pending photo queue alongside the next feature.
 Additional species follow the same reviewed import path. A personal photo journal
 requires a separate upload/storage/privacy/deletion design before implementation.
 Common-name-first labels and action-icon reminders are already implemented; do not
@@ -96,52 +102,16 @@ CI scope rules continue to apply when pipelines run; sensitive changes and relea
 checkpoints still receive full validation. Finish post-deployment verification and
 backups for any deployment already in progress before returning to local work.
 
-## Local batch awaiting the next checkpoint
+## Latest combined staging checkpoint
 
-[Garden upcoming work](garden-upcoming-work.md) combines saved planting targets
-and next scheduled care, with date/type/past-item controls, shared Garden filters
-and nickname-first detail links. Eight cultivars bring the local reviewed dataset
-to 238 entries and 96 cultivars. The deployed totals remain 230 and 88 until the
-batch is integrated. Targeted local validation accompanies the local commit;
-full CI, public acceptance, update checks and deployment wait for the larger
-checkpoint. The latest deployed application above remains unchanged.
+The [2026-10-31 checkpoint](catalog-batch-checkpoint.md) delivered the eight
+accumulated commits together. Current deployed totals are **257 reviewed entries /
+115 cultivars / 193 assets**, with **38 exact-cultivar photos and 77 pending**.
+Full candidate CI, live catalog/image checks, existing-worker update and fresh
+pre/post backups passed. Both backup-health checks and public readiness/operations
+were healthy at completion. The earlier preparation outage and worker recovery
+are documented; interrupted-backup recovery needs a follow-up.
 
-The local [related-cultivar/photo increment](related-cultivar-photos.md) adds
-context-preserving profile links and 30 licensed assets, bringing the working
-image manifest to 186 files. Of the 96 cultivars, 31 have distinct source-identified
-photos and 65 use the approved named pending placeholder. Generic images are no
-longer repeated on cultivar entries. This increment and its CI-path updates are
-local-only; the next checkpoint must run full validation for the accumulated
-policy/workflow changes before deployment.
-
-The local [cultivar-photo filter](cultivar-photo-filter.md) adds URL-preserved
-photo/pending browsing with the existing filters and comparison selection. One
-further reviewed Sweet Dumpling photo brings the working totals to 187 assets,
-32 cultivars with distinct photos and 64 pending. Reviewed entry/cultivar totals
-remain 238/96. This increment also awaits the batch checkpoint.
-
-The subsequent [lettuce, zucchini and currant batch](lettuce-courgette-currants.md)
-adds six reviewed cultivars and one exact-cultivar seedling photograph. Current
-local totals are **244 reviewed entries / 102 cultivars / 188 assets**, with
-**33 distinct cultivar photos and 69 pending**. Staging remains unchanged.
-
-[Direct related-variety care comparison](related-care-comparison.md) now opens a
-two-plant comparison from a profile. Five herb/bean cultivars and one reviewed
-Dark Opal photo bring the current local totals to **249 reviewed entries / 107
-cultivars / 189 assets**, with **34 distinct cultivar photos and 73 pending**.
-This increment remains local pending the accumulated-batch checkpoint.
-
-The local [compared growing guidance and potato batch](compared-growing-guidance.md)
-adds per-plant growing/harvest notes to comparison cards, four table-potato
-cultivars and three distinct photos. Current local totals are **253 reviewed
-entries / 111 cultivars / 192 assets**, with **37 distinct cultivar photos and
-74 pending**. The deployed application remains unchanged.
-
-[Shareable comparisons](shareable-comparisons.md) now generate public catalog-only
-links and offer clipboard/manual copying. Four salad/root cultivars and one
-reviewed Chioggia photo bring current local totals to **257 reviewed entries / 115
-cultivars / 193 assets**, with **38 distinct cultivar photos and 77 pending**.
-The [next feature milestones](feature-roadmap.md) prioritize an accumulated-batch
-checkpoint, saved shortlists, a personal photo journal, growth-stage references
-and succession planting. No push, pipeline or deployment was performed for this
-increment.
+The [feature roadmap](feature-roadmap.md) now starts with saved plant shortlists,
+followed by a personal photo journal, healthy growth-stage references and
+succession planting. Routine work resumes with local commits and targeted checks.

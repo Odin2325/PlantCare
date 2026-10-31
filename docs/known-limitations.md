@@ -1,11 +1,11 @@
 # Current limitations
 
-Reviewed 2026-10-30. These describe the staging beta, not a released v1.
+Reviewed 2026-10-31. These describe the staging beta, not a released v1.
 
 | Area | Current status |
 | --- | --- |
-| Catalog | 230 reviewed English entries, including 88 cultivars, are deployed on staging, with 262 alternative names across 131 entries; see [care-schedule preview acceptance](release/care-schedule-preview.md). This is a curated selection, not a complete botanical database. The Growth references filter finds the twelve species with galleries and combines with the other filters. Common names are not unique species identifiers. The legacy demo remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
-| Images | All 230 reviewed entries have credited reference photos, drawn from 156 licensed originals. Cultivars using a shared species photo are explicitly marked unverified. Twenty-four curated growth references cover twelve species and show different specimens without timelines or diagnosis. Personal photo journals are not implemented. |
+| Catalog | 257 reviewed English entries, including 115 cultivars, are deployed on staging, with 300 alternative names across 150 entries; see [combined checkpoint acceptance](release/catalog-batch-checkpoint.md). This is a curated selection, not a complete botanical database. The Growth references filter finds the twelve species with galleries and combines with the other filters. Common names are not unique species identifiers. The legacy demo remains to preserve existing plant references. Suggested care intervals need adjustment for the actual plant and conditions. |
+| Images | The catalog retains 193 licensed photo assets. Thirty-eight cultivars have distinct reviewed photographs; 77 show a named Cultivar photo pending placeholder. Generic photos are not labelled as exact cultivars. Twenty-four curated growth references cover twelve species and show different specimens without timelines or diagnosis. Personal photo journals are not implemented. |
 | Garden/harvests | Garden shows saved active crops and target dates, without weather-based forecasts or automatic care completion. Personal harvest logs display the latest 100 records; older records remain in private export. The Garden overview totals all matching records in a range of at most 366 days, while its recent list is capped at 100 across the garden before plant filtering. It excludes archived and houseplant-only entries. Monthly/per-plant trends include all matching records and empty months, with no yield forecasts or comparisons across unlike units. Different quantity units are not summed. Archived plants are read-only until restored. |
 | Pet classification | The non-toxic cat-and-dog filter requires an explicit reviewed source and currently covers thirteen entries. Missing warnings are not proof of safety. Other animals are outside this classification; plant material can still cause stomach upset if eaten. |
 | Comparison | Up to three public catalog plants, with selection in the URL. It compares curated guidance without assessing a user's room or diagnosing a plant. It does not share personal collection data or store a server-side wishlist. |
@@ -26,3 +26,5 @@ gates, and [catalog roadmap](release/catalog-roadmap.md) for the content/image p
 Seasonal care preferences record a manually selected environment and season with general review prompts. They do not infer weather, location or hemisphere, prescribe intervals, or automatically change reminders.
 
 Care-schedule previews show an estimated due date using the server recurrence rules. They do not reserve the occurrence or detect every change made on another device; application recalculates from current history.
+
+The [2026-10-31 checkpoint](release/catalog-batch-checkpoint.md) required manual worker recovery after interrupted staging access and a failed VPS backup attempt. Fresh backups and health later passed; automatic recovery from that failure is not established.
