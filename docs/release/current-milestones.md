@@ -119,3 +119,8 @@ photo/pending browsing with the existing filters and comparison selection. One
 further reviewed Sweet Dumpling photo brings the working totals to 187 assets,
 32 cultivars with distinct photos and 64 pending. Reviewed entry/cultivar totals
 remain 238/96. This increment also awaits the batch checkpoint.
+
+The subsequent [lettuce, zucchini and currant batch](lettuce-courgette-currants.md)
+adds six reviewed cultivars and one exact-cultivar seedling photograph. Current
+local totals are **244 reviewed entries / 102 cultivars / 188 assets**, with
+**33 distinct cultivar photos and 69 pending**. Staging remains unchanged.

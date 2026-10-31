@@ -207,6 +207,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Cucurbita pepo 'Astia'",
+    "cultivarName": "Astia",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Cucurbita pepo 'Black Beauty'",
     "cultivarName": "Black Beauty",
     "status": "verified",
@@ -214,6 +223,24 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cucurbita_pepo_zucchini_group_%27Black_Beauty%27.jpg",
     "identityEvidence": "Source file title and/or description identify this named cultivar: \"Black Beauty\" type zucchini, aka courgette ( C. pepo  var.  cylindrica ) from a county fair contest.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Cucurbita pepo 'Defender'",
+    "cultivarName": "Defender",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "scientificName": "Cucurbita pepo 'Parador'",
+    "cultivarName": "Parador",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Cucurbita pepo 'Sweet Dumpling'",
@@ -376,6 +403,15 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Lollo Rossa'",
+    "cultivarName": "Lollo Rossa",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-lettuce-lollo-rossa.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lollo_rossa_Setzlinge.JPG",
+    "identityEvidence": "Source title and description explicitly identify Lollo Rossa seedlings photographed in Germany; photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Lactuca sativa 'Salad Bowl'",
@@ -673,6 +709,24 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Ribes nigrum 'Ben Sarek'",
+    "cultivarName": "Ben Sarek",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "scientificName": "Ribes rubrum 'Rovada'",
+    "cultivarName": "Rovada",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Rubus idaeus 'All Gold'",

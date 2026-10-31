@@ -8481,5 +8481,205 @@
       "cultivarName": "Vivado",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Lettuce (Lollo Rossa)",
+    "scientificName": "Lactuca sativa 'Lollo Rossa'",
+    "description": "A red loose-leaf lettuce with curled leaves. Harvest individual outer leaves or allow a whole head to develop.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the shallow root zone consistently moist, without waterlogging. Dry soil and heat encourage bolting.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil or growing mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/119367/lactuca-sativa-lollo-rossa/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in sun with fertile soil that retains moisture and drains freely. Protect young plants when frost threatens. Stagger small sowings and watch for slugs. Keep the growing centre intact when picking outer leaves.",
+      "harvestInstructions": "Pick fresh outer leaves as needed or cut a developed head before it flowers.",
+      "commonNameAliases": [
+        "Red loose-leaf lettuce",
+        "Lollo Rossa lettuce"
+      ],
+      "photo": {
+        "path": "/images/plants/cultivar-lettuce-lollo-rossa.jpg",
+        "altText": "Lollo Rossa lettuce seedlings with red curled leaves; source-identified cultivar photograph",
+        "credit": "4028mdk09",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lollo_rossa_Setzlinge.JPG",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Lollo rossa Setzlinge"
+      },
+      "cultivarName": "Lollo Rossa",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Zucchini (Defender)",
+    "scientificName": "Cucurbita pepo 'Defender'",
+    "description": "A green-fruited zucchini cultivar with an open plant habit that makes the crop easier to see.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/112370/cucurbita-pepo-defender/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant out after frost risk in a sunny position with fertile, drained soil. Water the root zone when needed. Allow room around the bush and pick regularly. The cultivar is described as resistant to cucumber mosaic virus, but still inspect plants for pests and disease.",
+      "harvestInstructions": "Cut young, tender fruit regularly. Never eat unusually bitter zucchini or feed it to pets.",
+      "commonNameAliases": [
+        "Courgette Defender",
+        "Defender zucchini"
+      ],
+      "photo": null,
+      "cultivarName": "Defender",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Zucchini (Parador)",
+    "scientificName": "Cucurbita pepo 'Parador'",
+    "description": "A zucchini cultivar producing cylindrical yellow fruits, with relatively early cropping.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/courgettes/grow-your-own",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant out after frost risk in a sunny position with fertile, drained soil. Water the root zone when needed. Pick yellow fruits while young and tender. Colour is a cultivar trait and does not by itself indicate fruit maturity.",
+      "harvestInstructions": "Cut young, tender fruit regularly. Never eat unusually bitter zucchini or feed it to pets.",
+      "commonNameAliases": [
+        "Courgette Parador",
+        "Parador zucchini"
+      ],
+      "photo": null,
+      "cultivarName": "Parador",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Zucchini (Astia)",
+    "scientificName": "Cucurbita pepo 'Astia'",
+    "description": "A compact zucchini cultivar producing slender green fruits. It can be grown in a large container with drainage.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/courgettes/grow-your-own",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant out after frost risk in a sunny position with fertile, drained soil. Water the root zone when needed. A compact habit still needs a generous container, adequate nutrition and regular moisture checks.",
+      "harvestInstructions": "Cut young, tender fruit regularly. Never eat unusually bitter zucchini or feed it to pets.",
+      "commonNameAliases": [
+        "Courgette Astia",
+        "Astia zucchini"
+      ],
+      "photo": null,
+      "cultivarName": "Astia",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Redcurrant (Rovada)",
+    "scientificName": "Ribes rubrum 'Rovada'",
+    "description": "A later-ripening redcurrant with long clusters of red berries. Its woody framework needs different pruning from blackcurrants.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun for good fruiting; redcurrants also tolerate partial shade.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Water young plants and containers when needed, adjusting to rainfall and season.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; keep mulch clear of stem bases.",
+    "humidityInstructions": "Provide air circulation and avoid persistently waterlogged roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/73881/ribes-rubrum-rovada-r/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow in sun or partial shade with fertile, moisture-retentive but drained soil. Mulch without burying the stems. Retain the permanent branch framework; follow redcurrant guidance for winter pruning and shortening summer side shoots. Ripening depends on local conditions.",
+      "harvestInstructions": "Pick fully coloured ripe berries. Taste a small ripe sample to assess readiness; colour and timing vary with the cultivar and weather. Protect ripening clusters from birds if necessary.",
+      "commonNameAliases": [
+        "Rovada redcurrant",
+        "Red currant Rovada"
+      ],
+      "photo": null,
+      "cultivarName": "Rovada",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Blackcurrant (Ben Sarek)",
+    "scientificName": "Ribes nigrum 'Ben Sarek'",
+    "description": "A relatively compact blackcurrant with dark summer berries, grown for fresh use or cooking. It can suit a large container with careful watering.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered position for good fruiting.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Water young plants and containers when needed, adjusting to rainfall and season.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; keep mulch clear of stem bases.",
+    "humidityInstructions": "Provide air circulation and avoid persistently waterlogged roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/85003/ribes-nigrum-ben-sarek-b/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Choose a sunny, sheltered site and fertile soil that retains moisture without waterlogging. Mulch and keep container compost from drying out. Renew older stems during dormant-season pruning to encourage young fruiting wood; use blackcurrant guidance rather than redcurrant framework pruning.",
+      "harvestInstructions": "Pick fully coloured ripe berries. Taste a small ripe sample to assess readiness; colour and timing vary with the cultivar and weather. Protect ripening clusters from birds if necessary.",
+      "commonNameAliases": [
+        "Ben Sarek blackcurrant",
+        "Black currant Ben Sarek"
+      ],
+      "photo": null,
+      "cultivarName": "Ben Sarek",
+      "photoIsSpeciesReference": false
+    }
   }
 ]

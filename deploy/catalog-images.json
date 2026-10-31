@@ -2616,5 +2616,19 @@
     "bytes": 741040,
     "sourceFileName": "Courge patidou 1.jpg",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Lollo Rossa lettuce seedlings with red curled leaves; source-identified cultivar photograph",
+    "caption": "Lollo rossa Setzlinge",
+    "credit": "4028mdk09",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseName": "CC BY-SA 3.0",
+    "slug": "cultivar-lettuce-lollo-rossa",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lollo_rossa_Setzlinge.JPG",
+    "path": "/images/plants/cultivar-lettuce-lollo-rossa.jpg",
+    "sha256": "2ec286130cbf6fc307569d399a3e294f6016292fffb5a2e7cb2abf92071b1740",
+    "bytes": 314493,
+    "sourceFileName": "Lollo rossa Setzlinge.JPG",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]
