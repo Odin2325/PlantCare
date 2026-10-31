@@ -684,6 +684,24 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("PushSubscriptions", (string)null);
                 });
 
+            modelBuilder.Entity("PlantCare.Domain.Entities.ShortlistedPlant", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlantSpeciesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("SavedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("UserId", "PlantSpeciesId");
+
+                    b.HasIndex("PlantSpeciesId");
+
+                    b.ToTable("ShortlistedPlants", (string)null);
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.UserPlant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1007,6 +1025,21 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PlantCare.Domain.Entities.PushSubscription", b =>
                 {
+                    b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.ShortlistedPlant", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.PlantSpecies", null)
+                        .WithMany()
+                        .HasForeignKey("PlantSpeciesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PlantCare.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")

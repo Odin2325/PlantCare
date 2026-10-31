@@ -65,7 +65,12 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         var plant = UserPlant.Create(a.Id, species.Id, "Private erased plant", null, null, "Private erased notes", DateTimeOffset.UtcNow);
         var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, DateTimeOffset.UtcNow.AddDays(-2));
         var history = CareEvent.Create(schedule.Id, DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddDays(-1));
-        await factory.SeedAsync(db => { db.PlantSpecies.Add(species); db.UserPlants.Add(plant); db.CareEvents.Add(history); return Task.CompletedTask; });
+        var shortlist = ShortlistedPlant.Create(a.Id, species.Id, DateTimeOffset.UtcNow);
+        await factory.SeedAsync(db => {
+            db.PlantSpecies.Add(species); db.UserPlants.Add(plant); db.CareEvents.Add(history);
+            db.ShortlistedPlants.AddRange(shortlist, ShortlistedPlant.Create(b.Id, species.Id, DateTimeOffset.UtcNow));
+            return Task.CompletedTask;
+        });
         using var client = Client(); await Login(client, a);
         Assert.Equal(HttpStatusCode.NoContent, (await client.PostAsJsonAsync("/api/account/delete", new { password = Password, confirmation = "DELETE" })).StatusCode);
         var file = Path.Combine(folder, "current.json");
@@ -77,6 +82,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         {
             await db.AccountErasures.ExecuteDeleteAsync();
             db.Users.Add(a); db.UserPlants.Add(plant); db.CareEvents.Add(history);
+            db.ShortlistedPlants.Add(shortlist);
             db.CalendarInvitations.AddRange(
                 CalendarInvitation.Create(a.Id, "pending@gmail.com", new string('a',64), DateTimeOffset.UtcNow),
                 CalendarInvitation.Create(b.Id, a.Email!, new string('b',64), DateTimeOffset.UtcNow),
@@ -90,6 +96,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
             Assert.False(await db.Users.IgnoreQueryFilters().AnyAsync(u => u.Id == a.Id));
             Assert.False(await db.UserPlants.IgnoreQueryFilters().AnyAsync(p => p.UserId == a.Id));
             Assert.True(await db.Users.AnyAsync(u => u.Id == b.Id));
+            Assert.Equal(b.Id, Assert.Single(await db.ShortlistedPlants.IgnoreQueryFilters().ToListAsync()).UserId);
             Assert.Single(await db.AccountErasures.ToListAsync());
             Assert.Equal("other@gmail.com", (await db.CalendarInvitations.SingleAsync()).RecipientEmail);
         }
@@ -145,6 +152,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, DateTimeOffset.UtcNow.AddDays(-2));
         await factory.SeedAsync(db => {
             db.PlantSpecies.Add(species); db.UserPlants.Add(plant);
+            db.ShortlistedPlants.Add(ShortlistedPlant.Create(a.Id, species.Id, DateTimeOffset.UtcNow));
             db.Notifications.Add(Notification.Create(a.Id, schedule.Id, DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow));
             db.CalendarSubscriptions.Add(CalendarSubscription.Create(a.Id, new string('f',64), DateTimeOffset.UtcNow));
             db.CalendarShares.Add(CalendarShare.Create(a.Id, b.Id, DateTimeOffset.UtcNow));
@@ -158,6 +166,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         Assert.False(await db.Users.AnyAsync(u => u.Id == a.Id));
         Assert.True(await db.Users.IgnoreQueryFilters().AnyAsync(u => u.Id == a.Id));
         Assert.Empty(await db.UserPlants.ToListAsync()); Assert.Single(await db.UserPlants.IgnoreQueryFilters().ToListAsync());
+        Assert.Empty(await db.ShortlistedPlants.ToListAsync()); Assert.Single(await db.ShortlistedPlants.IgnoreQueryFilters().ToListAsync());
         Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.Notifications.ToListAsync());
         Assert.Empty(await db.CalendarSubscriptions.ToListAsync()); Assert.Empty(await db.CalendarShares.ToListAsync());
         Assert.Empty(await db.CalendarInvitations.ToListAsync());

@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PlantCategory, PlantSpecies, SunlightRequirement } from '../../../../models/plant-species.model';
 import { parsePlantCategory, plantCategoryLabel, plantCategoryOptions } from '../../../../shared/plant-categories';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
+import { ShortlistService } from '../../../../core/services/shortlist.service';
+import { ShortlistButton, ShortlistNotice } from '../../../../shared/plant-shortlist/plant-shortlist';
 
 @Component({
   selector: 'app-plant-catalog-page',
@@ -23,12 +25,15 @@ import { PlantSpeciesApiService } from '../../../../core/services/plant-species-
     FormsModule,
     RouterLink,
     PlantPhoto,
+    ShortlistButton, ShortlistNotice,
   ],
   templateUrl: './plant-catalog-page.html',
   styleUrl: './plant-catalog-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlantCatalogPage {
+  readonly shortlist = inject(ShortlistService);
+  readonly showShortlist = signal(false);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly plantSpeciesApi =
@@ -64,16 +69,18 @@ export class PlantCatalogPage {
     pets: this.pets() || null,
     growth: this.growth() || null,
     cultivarPhoto: this.cultivarPhoto() || null,
+    shortlisted: this.showShortlist() ? '1' : null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
     compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
-  readonly hasFilters = computed(() => Boolean(this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
+  readonly hasFilters = computed(() => Boolean(this.showShortlist() || this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
     // An exact scientific name identifies a species, rather than other plants
     // whose descriptions mention it. Common-name searches retain ambiguity.
     const exactScientific = query ? this.plantSpecies().filter(plant => normalizePlantSearch(plant.scientificName ?? '') === query) : [];
     return (exactScientific.length ? exactScientific : this.plantSpecies()).filter(plant =>
+      (!this.showShortlist() || this.shortlist.ready() && this.shortlist.has(plant.id)) &&
       (!this.category() || Boolean(plant.catalogProfile?.categories?.includes(this.category() as PlantCategory))) &&
       (!this.kind() || (this.kind() === 'cultivar' ? Boolean(plant.catalogProfile?.cultivarName) : !plant.catalogProfile?.cultivarName)) &&
       (!this.light() || plant.sunlightRequirement === this.light()) &&
@@ -95,6 +102,7 @@ export class PlantCatalogPage {
   constructor() {
     this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe(params => {
       this.query.set((params.get('q') ?? '').slice(0, 100));
+      this.showShortlist.set(params.get('shortlisted') === '1');
       this.category.set(parsePlantCategory(params.get('category')));
       const kind = params.get('kind');
       this.kind.set(kind === 'cultivar' || kind === 'general' ? kind : '');
@@ -155,6 +163,7 @@ export class PlantCatalogPage {
   }
 
   clearFilters(): void {
+    this.showShortlist.set(false);
     this.query.set('');
     this.category.set('');
     this.kind.set('');
@@ -175,6 +184,7 @@ export class PlantCatalogPage {
     this.cultivarPhoto.set(value === 'available' || value === 'pending' ? value : '');
     this.saveFilters();
   }
+  setShowShortlist(value: boolean): void { this.showShortlist.set(value); this.saveFilters(); }
 
   private saveFilters(): void {
     void this.router.navigate([], {

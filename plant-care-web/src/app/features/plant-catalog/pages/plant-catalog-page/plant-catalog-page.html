@@ -12,6 +12,7 @@
       <p class="intro">Suggested intervals are reminders to check your plant. Water only when needed, adjusting for light, potting mix and season.</p>
     </div>
   </header>
+  <app-shortlist-notice />
 
   @if (isLoading()) {
   <p class="status-message">
@@ -50,6 +51,9 @@
     }
   </nav>
   <section class="catalog-tools" aria-label="Catalog filters">
+    <div class="catalog-field">
+      <label class="shortlist-toggle"><input type="checkbox" [ngModel]="showShortlist()" (ngModelChange)="setShowShortlist($event)"> My shortlist only</label>
+    </div>
     <div class="catalog-field">
       <label for="plant-kind">Entry type</label>
       <select id="plant-kind" [ngModel]="kind()" (ngModelChange)="setKind($event)">
@@ -108,11 +112,18 @@
   <p id="cultivar-photo-help">The cultivar photo choices show named varieties only. Pending means a suitable licensed photo is still being sourced; general species photos do not count as cultivar photos.</p>
   <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
   @if (visibleSpecies().length === 0) {
+    @if (showShortlist() && !shortlist.ready()) {
+      <p class="status-message">Sign in or refresh your shortlist to display saved plants.</p>
+    } @else if (showShortlist() && shortlist.ids().length === 0) {
+      <p class="status-message">Your shortlist is empty. Clear filters to browse plants and save some for later.</p>
+    } @else {
     <p class="status-message">No plants match your search. Try another name or clear the filters.</p>
+    }
   }
   <div class="plant-grid">
     @for (plant of visibleSpecies(); track plant.id) {
     <article class="plant-card">
+      <app-shortlist-button [plant]="plant" />
       <label class="comparison-choice"><input type="checkbox" [checked]="comparisonIds().includes(plant.id)"
         [disabled]="comparisonPlants().length >= 3 && !comparisonIds().includes(plant.id)"
         [attr.aria-label]="'Compare ' + plant.commonName" aria-describedby="comparison-help"

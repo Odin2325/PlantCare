@@ -5,6 +5,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { PlantCatalogPage } from './plant-catalog-page';
 import { PlantSpeciesApiService } from '../../../../core/services/plant-species-api.service';
 import { PlantCategory, PlantSpecies } from '../../../../models/plant-species.model';
+import { signal } from '@angular/core';
+import { ShortlistService } from '../../../../core/services/shortlist.service';
 
 describe('Catalog categories', () => {
   const params = new BehaviorSubject(convertToParamMap({}));
@@ -23,7 +25,9 @@ describe('Catalog categories', () => {
     params.next(convertToParamMap({}));
     TestBed.configureTestingModule({ providers: [provideRouter([]),
       { provide: ActivatedRoute, useValue: { queryParamMap: params } },
-      { provide: PlantSpeciesApiService, useValue: { getAll: () => of(plants) } }],
+      { provide: PlantSpeciesApiService, useValue: { getAll: () => of(plants) } },
+      { provide: ShortlistService, useValue: { ids:signal(['Fig tree','Cherry tomato (Tiny Tim)']), ready:signal(true),
+        has: (id:string) => ['Fig tree','Cherry tomato (Tiny Tim)'].includes(id) } }],
     });
     vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
   });
@@ -96,5 +100,15 @@ describe('Catalog categories', () => {
     expect(page.cultivarPhoto()).toBe(''); expect(page.hasFilters()).toBe(false);
     expect(page.comparisonIds()).toEqual(['Fig tree']);
     expect(page.filterQueryParams().cultivarPhoto).toBeNull();
+  });
+  it('combines the saved shortlist with other filters, preserves it in links and clears only the view', () => {
+    const page=TestBed.createComponent(PlantCatalogPage).componentInstance;
+    params.next(convertToParamMap({shortlisted:'1',category:'vegetable'}));
+    expect(page.visibleSpecies()).toEqual([plants[3]]);
+    page.setQuery('no match');expect(page.visibleSpecies()).toEqual([]);
+    page.setQuery('Tiny Tim');expect(page.filterQueryParams().shortlisted).toBe('1');
+    page.clearFilters();expect(page.showShortlist()).toBe(false);expect(page.visibleSpecies()).toHaveLength(5);
+    expect(TestBed.inject(ShortlistService).ids()).toEqual(['Fig tree','Cherry tomato (Tiny Tim)']);
+    params.next(convertToParamMap({shortlisted:'arbitrary'}));expect(page.showShortlist()).toBe(false);
   });
 });

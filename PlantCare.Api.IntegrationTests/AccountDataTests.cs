@@ -58,6 +58,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         await factory.SeedAsync(db =>
         {
             db.PlantSpecies.Add(species); db.UserPlants.Add(plant);
+            db.ShortlistedPlants.AddRange(ShortlistedPlant.Create(a.Id, species.Id, now), ShortlistedPlant.Create(b.Id, species.Id, now));
             db.UserPlants.Add(UserPlant.Create(b.Id, species.Id, "Private B plant", null, null, "Private B notes", now));
             db.CareEvents.Add(CareEvent.Create(schedule.Id, now, now));
             db.HarvestRecords.Add(HarvestRecord.Create(plant.Id,DateOnly.FromDateTime(now.UtcDateTime),2,"items","Private harvest",now));
@@ -194,6 +195,8 @@ public sealed class AccountDataTests : IAsyncLifetime
         Assert.Equal(2, json.RootElement.GetProperty("notifications").GetArrayLength());
         Assert.Contains(json.RootElement.GetProperty("notifications").EnumerateArray(), n => n.GetProperty("reminderSequence").GetInt32() == 1 && n.GetProperty("notBeforeUtc").ValueKind == JsonValueKind.String);
         Assert.Single(json.RootElement.GetProperty("tags").EnumerateArray());
+        Assert.Single(json.RootElement.GetProperty("shortlist").EnumerateArray());
+        Assert.False(json.RootElement.GetProperty("shortlist")[0].TryGetProperty("userId", out _));
         Assert.False(json.RootElement.GetProperty("plants")[0].GetProperty("isActive").GetBoolean());
         Assert.Equal("2027-03-01", json.RootElement.GetProperty("plants")[0].GetProperty("plannedSowingOn").GetString());
         Assert.Equal("2027-08-01", json.RootElement.GetProperty("plants")[0].GetProperty("expectedHarvestOn").GetString());
@@ -236,6 +239,7 @@ public sealed class AccountDataTests : IAsyncLifetime
         var db = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
         Assert.False(await db.Users.AnyAsync(u => u.Id == a.Id)); Assert.True(await db.Users.AnyAsync(u => u.Id == b.Id));
         Assert.Single(await db.UserPlants.ToListAsync()); Assert.Single(await db.PlantSpecies.ToListAsync());
+        Assert.Equal(b.Id, Assert.Single(await db.ShortlistedPlants.IgnoreQueryFilters().ToListAsync()).UserId);
         Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.CareEvents.ToListAsync()); Assert.Empty(await db.HarvestRecords.IgnoreQueryFilters().ToListAsync());
         Assert.Empty(await db.Notifications.ToListAsync()); Assert.Empty(await db.PushDeliveries.ToListAsync());
         Assert.Empty(await db.CalendarShares.ToListAsync()); Assert.Empty(await db.CalendarSubscriptions.ToListAsync());
@@ -281,5 +285,25 @@ public sealed class AccountDataTests : IAsyncLifetime
         using var export = await client.PostAsJsonAsync("/api/account/export", new { password = Password });
         var text = await export.Content.ReadAsStringAsync();
         Assert.Contains("Google", text); Assert.DoesNotContain("secret-access", text); Assert.DoesNotContain("secret-refresh", text);
+    }
+
+    [Fact]
+    public async Task ShortlistUsesRealCookieAntiforgeryAndDoesNotExposeAnotherOwner()
+    {
+        var a = await UserAsync(); var b = await UserAsync(); await Seed(a, b);
+        Guid species;
+        await using (var scope = factory.Services.CreateAsyncScope())
+            species = await scope.ServiceProvider.GetRequiredService<PlantCareDbContext>().PlantSpecies.Select(p => p.Id).SingleAsync();
+        using var client = Client(); await Login(client, a);
+        client.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.PutAsJsonAsync($"/api/shortlist/{species}", new { })).StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, (await client.DeleteAsync($"/api/shortlist/{species}")).StatusCode);
+        await client.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.NoContent, (await client.DeleteAsync($"/api/shortlist/{species}")).StatusCode);
+        Assert.Equal(HttpStatusCode.NoContent, (await client.PutAsJsonAsync($"/api/shortlist/{species}", new { userId = b.Id })).StatusCode);
+        using var response = await client.GetAsync("/api/shortlist");
+        Assert.True(response.Headers.CacheControl?.NoStore);
+        await using var finalScope = factory.Services.CreateAsyncScope();
+        Assert.Equal(2, await finalScope.ServiceProvider.GetRequiredService<PlantCareDbContext>().ShortlistedPlants.CountAsync());
     }
 }

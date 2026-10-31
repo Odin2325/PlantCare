@@ -115,3 +115,12 @@ are documented; interrupted-backup recovery needs a follow-up.
 The [feature roadmap](feature-roadmap.md) now starts with saved plant shortlists,
 followed by a personal photo journal, healthy growth-stage references and
 succession planting. Routine work resumes with local commits and targeted checks.
+
+## New local batch
+
+[Account-synced shortlists](saved-shortlists.md) are implemented locally, with
+catalog/detail save controls, combined filters, comparison reuse, owner isolation,
+export/deletion and an additive table migration. Focused API, SQL recovery,
+frontend and browser checks passed. This private-data/migration increment selects
+full validation at its next checkpoint and is not pushed or deployed. The current
+staging release and catalog totals above remain unchanged.

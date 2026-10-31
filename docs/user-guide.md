@@ -248,6 +248,19 @@ messages and copies held by calendar clients are separate. Backup cleanup target
 A minimal deletion marker is kept to prevent restoration during managed recovery.
 See [deployment/enabling status](release/retention-and-erasure-recovery.md).
 
+## Saved plant shortlist (prepared locally)
+
+This feature awaits the next deployment checkpoint. Once available, sign in and
+use Save to shortlist on a catalog card or plant detail page. My shortlist only
+filters the catalog to your saved entries; search and other filters still apply.
+Clear filters changes the view without deleting your shortlist. Use the existing
+Compare controls to compare saved plants, and View details / Add to My plants
+when you actually acquire one. Saving alone does not start reminders.
+
+The list is private and saved to your account. Refresh shortlist loads changes
+made on another device. If a change cannot be confirmed, refresh before retrying.
+Removing a saved entry does not remove an owned plant or its care history.
+
 ## Getting help
 
 Use [GitHub Issues for general support](../SUPPORT.md). Never post a password,

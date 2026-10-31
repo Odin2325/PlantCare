@@ -13,9 +13,10 @@ entries and 115 cultivars, with 38 distinct cultivar photos and 77 pending.
 No schema changed. The preparation outage and interrupted-backup recovery
 follow-up are recorded in that acceptance document.
 
-Saved shortlists are the next feature. Future increments return to targeted local
-checks and commits; broader pipelines/deployment wait for the next meaningful
-combined checkpoint.
+[Saved shortlists](saved-shortlists.md) are now implemented locally, awaiting their
+full private-data/migration checkpoint. The next feature work is photo-journal
+design. Broader pipelines/deployment wait for the next meaningful combined
+checkpoint; routine increments retain targeted local checks and commits.
 
 ## 1. Saved plant shortlists
 
@@ -23,8 +24,8 @@ Save catalog plants the owner is considering, separately from plants already
 owned. Start in the existing catalog/Garden navigation rather than adding a tab
 for a small list. Support add/remove, reopening a comparison and later choosing
 to add a real plant. Do not create care schedules simply by shortlisting.
-Decide device-local versus account-synced persistence before implementation;
-account storage needs ownership isolation and deletion coverage.
+Account-synced persistence was selected and implemented, with ownership isolation,
+export, deletion and recovery tests. See [local acceptance](saved-shortlists.md).
 
 ## 2. Personal growth photo journal
 

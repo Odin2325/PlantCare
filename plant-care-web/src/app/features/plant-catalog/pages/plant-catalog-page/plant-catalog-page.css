@@ -198,3 +198,5 @@ h1 {
   }
 
 .unknown-badge { background: #eef0f3; color: #384252; }
+:host .catalog-tools .shortlist-toggle{display:flex;align-items:center;gap:.6rem;min-height:44px;cursor:pointer}
+:host .catalog-tools .shortlist-toggle input{display:inline-block;width:20px;height:20px;padding:0;margin:0;accent-color:#235b37}
