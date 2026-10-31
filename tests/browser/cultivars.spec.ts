@@ -63,6 +63,8 @@ test('related cultivars: photo filters combine with search and preserve URL cont
 });
 
 test('related cultivars preserve browsing context and show exact photos or named pending placeholders without writes', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
+    value: { writeText: async (value: string) => { (window as any).__copiedComparison = value; } } }));
   const ids = { general: '30000000-0000-4000-8000-000000000001', tiny: '30000000-0000-4000-8000-000000000002', roma: '30000000-0000-4000-8000-000000000003' };
   const photo = (path: string) => ({ path, altText: 'Source-identified tomato photograph', title: 'Tomato reference',
     credit: 'Source photographer', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Roma_tomatoes_(509115549).jpg',
@@ -125,9 +127,18 @@ test('related cultivars preserve browsing context and show exact photos or named
   expect(comparisonUrl.searchParams.get('compare')).toBe(ids.roma + ',' + ids.tiny);
   expect(comparisonUrl.searchParams.get('category')).toBe('vegetable');
   expect(comparisonUrl.searchParams.get('q')).toBe('tomato');
+  const shareLink = page.getByRole('textbox', { name: 'Comparison link', exact: true });
+  const sharedUrl = await shareLink.inputValue();
+  expect([...new URL(sharedUrl).searchParams.entries()]).toEqual([['compare', ids.roma + ',' + ids.tiny]]);
+  await page.getByRole('button', { name: 'Copy comparison link', exact: true }).click();
+  await expect(page.getByText('Comparison link copied.', { exact: true })).toBeVisible();
+  expect(await page.evaluate(() => (window as any).__copiedComparison)).toBe(sharedUrl);
   await page.setViewportSize({ width: 320, height: 900 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Compared growing and harvest guidance');
+  await page.goto(sharedUrl);
+  await expect(page.locator('.comparison-card h2')).toHaveText(['Plum tomato (Roma)', 'Cherry tomato (Tiny Tim)']);
+  await page.goBack();
   await page.goBack();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Plum tomato (Roma)');
   expect(new URL(page.url()).searchParams.get('compare')).toBe(ids.general);

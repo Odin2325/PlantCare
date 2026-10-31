@@ -2686,5 +2686,19 @@
     "bytes": 178545,
     "sourceFileName": "Lebensmittel-KartoffelsorteCilena1-Asio.jpg",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Chioggia beetroot cut to show red-and-white rings; source-identified cultivar photograph",
+    "caption": "Betterave Rossa di Chioggia Montpellier",
+    "credit": "Michel Chauvet",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseName": "CC BY-SA 3.0",
+    "slug": "cultivar-beetroot-chioggia",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Betterave_Rossa_di_Chioggia_Montpellier.JPG",
+    "path": "/images/plants/cultivar-beetroot-chioggia.jpg",
+    "sha256": "17bb96ddd21033c09cecafcc3a51aa7c284db51b958ccfaa1fdb5e556493c4a5",
+    "bytes": 933038,
+    "sourceFileName": "Betterave Rossa di Chioggia Montpellier.JPG",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]

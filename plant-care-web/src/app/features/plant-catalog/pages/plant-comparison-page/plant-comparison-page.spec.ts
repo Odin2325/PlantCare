@@ -3,9 +3,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { expect, it } from 'vitest';
+import { afterEach, expect, it, vi } from 'vitest';
 import { PlantComparisonPage } from './plant-comparison-page';
 const a='10000000-0000-0000-0000-000000000000',b='20000000-0000-0000-0000-000000000000';
+afterEach(() => vi.unstubAllGlobals());
 function setup(compare: string) {
   const params=new BehaviorSubject(convertToParamMap({compare}));
   TestBed.configureTestingModule({providers:[provideRouter([]),provideHttpClient(),provideHttpClientTesting(),
@@ -51,4 +52,44 @@ it('keeps each plant growing and harvest guidance with its own source and omits 
   expect(cards[1].textContent).not.toContain('Pick young pods');
   expect(cards[1].querySelector('.source a').getAttribute('href')).toBe('https://example.org/houseplant');
   http.verify();
+});
+it('copies only available public catalog identifiers in selection order and clears status when selection changes', async () => {
+  const {fixture,http,params}=setup(`${b},${a}`);
+  params.next(convertToParamMap({compare:`${b},${a}`,q:'private search',category:'fruit',token:'not-for-sharing'}));
+  http.expectOne('/api/plant-species').flush([
+    {id:a,commonName:'A',sunlightRequirement:'Unknown',defaultWateringIntervalDays:7,isToxicToPets:false},
+    {id:b,commonName:'B',sunlightRequirement:'Unknown',defaultWateringIntervalDays:7,isToxicToPets:false},
+  ]);
+  fixture.detectChanges();
+  const link=new URL(fixture.componentInstance.shareUrl());
+  expect(link.pathname).toBe('/plants/compare');
+  expect([...link.searchParams.entries()]).toEqual([['compare',`${b},${a}`]]);
+  const writeText=vi.fn().mockResolvedValue(undefined);vi.stubGlobal('navigator',{clipboard:{writeText}});
+  await fixture.componentInstance.copyComparisonLink();fixture.detectChanges();
+  expect(writeText).toHaveBeenCalledWith(link.href);
+  expect(fixture.nativeElement.textContent).toContain('Comparison link copied.');
+  params.next(convertToParamMap({compare:a}));fixture.detectChanges();
+  expect(fixture.componentInstance.shareUrl()).toBe('');
+  expect(fixture.nativeElement.querySelector('#comparison-share-link')).toBeNull();
+  expect(fixture.componentInstance.copyStatus()).toBe('');http.verify();
+});
+it('offers manual copying when clipboard permission fails and never copies stale unavailable selections', async () => {
+  const missing='30000000-0000-0000-0000-000000000000';
+  const {fixture,http,params}=setup(`${a},${missing},${b}`);
+  http.expectOne('/api/plant-species').flush([
+    {id:a,commonName:'A',sunlightRequirement:'Unknown',defaultWateringIntervalDays:7,isToxicToPets:false},
+    {id:b,commonName:'B',sunlightRequirement:'Unknown',defaultWateringIntervalDays:7,isToxicToPets:false},
+  ]);
+  fixture.detectChanges();
+  expect(new URL(fixture.componentInstance.shareUrl()).searchParams.get('compare')).toBe(`${a},${b}`);
+  let rejectCopy!: (reason: Error) => void;
+  const writeText=vi.fn().mockReturnValue(new Promise<void>((_,reject)=>rejectCopy=reject));
+  vi.stubGlobal('navigator',{clipboard:{writeText}});
+  const pending=fixture.componentInstance.copyComparisonLink();
+  await fixture.componentInstance.copyComparisonLink();expect(writeText).toHaveBeenCalledTimes(1);
+  rejectCopy(new Error('Permission denied'));await pending;fixture.detectChanges();
+  expect(fixture.nativeElement.textContent).toContain('Copy the link from the Comparison link field.');
+  expect(fixture.nativeElement.querySelector('#comparison-share-link').readOnly).toBe(true);
+  params.next(convertToParamMap({compare:a}));
+  await fixture.componentInstance.copyComparisonLink();expect(writeText).toHaveBeenCalledTimes(1);http.verify();
 });

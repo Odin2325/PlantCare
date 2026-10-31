@@ -10,6 +10,17 @@
   } @else {
     @if (unavailable()) { <p role="status">Some selected plants are no longer available. Choose replacements in the catalog.</p> }
     @if (plants().length < 2) { <p role="status">Choose at least two plants in the catalog to compare their care.</p> }
+    @if (shareUrl(); as url) {
+      <section class="comparison-sharing" aria-label="Share this comparison">
+        <h2>Share this comparison</h2>
+        <p id="comparison-share-help">Anyone with this link can view these public catalog entries. Your search text and personal plants are not included.</p>
+        <label for="comparison-share-link">Comparison link</label>
+        <input #shareLink id="comparison-share-link" type="url" readonly [value]="url"
+          aria-describedby="comparison-share-help" (focus)="shareLink.select()">
+        <button type="button" [disabled]="copying()" (click)="copyComparisonLink()">Copy comparison link</button>
+        <p role="status">{{ copyStatus() }}</p>
+      </section>
+    }
     <div class="comparison-grid">
       @for (plant of plants(); track plant.id) {
         <article class="comparison-card" [attr.aria-label]="plant.commonName + ' comparison'">

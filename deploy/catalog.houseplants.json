@@ -9005,5 +9005,144 @@
       "cultivarName": "Cilena",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Beetroot (Chioggia)",
+    "scientificName": "Beta vulgaris 'Chioggia'",
+    "description": "A beetroot with red skin and alternating red-and-white rings visible in a cut root. It adds a different appearance to the root-crop selection.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/246746/beta-vulgaris-chioggia/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly into fertile, drained soil in a sunny position. Thin crowded seedlings so roots can develop. Keep moisture steady without waterlogging and adjust sowing to local conditions.",
+      "harvestInstructions": "Lift tender roots when they reach a useful size. Check a sample rather than relying only on a fixed number of days.",
+      "commonNameAliases": [
+        "Barbietola di Chioggia beetroot",
+        "Candy-striped beetroot Chioggia"
+      ],
+      "photo": {
+        "path": "/images/plants/cultivar-beetroot-chioggia.jpg",
+        "altText": "Chioggia beetroot cut to show red-and-white rings; source-identified cultivar photograph",
+        "credit": "Michel Chauvet",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Betterave_Rossa_di_Chioggia_Montpellier.JPG",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Betterave Rossa di Chioggia Montpellier"
+      },
+      "cultivarName": "Chioggia",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Carrot (Purple Haze)",
+    "scientificName": "Daucus carota 'Purple Haze'",
+    "description": "An F1 carrot with purple skin and an orange core, producing long roots. Choose a deep bed or container for root development.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed and root zone moist with drainage. Avoid repeated drying during germination.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, stone-free, well-drained soil deep enough for the chosen variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/296470/daucus-carota-purple-haze/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly into deep, loose, stone-free soil in sun. Avoid freshly manured beds, thin carefully and maintain moisture while seedlings establish. Protect the crop from carrot fly using suitable local guidance.",
+      "harvestInstructions": "Loosen the soil beside a root and lift carefully when it reaches the preferred size. Use a sample root to judge maturity.",
+      "commonNameAliases": [
+        "Purple Haze F1 carrot",
+        "Purple-skinned carrot Purple Haze"
+      ],
+      "photo": null,
+      "cultivarName": "Purple Haze",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Radish (Rudi)",
+    "scientificName": "Raphanus sativus 'Rudi'",
+    "description": "A summer salad-radish cultivar. It joins the quick-harvest radishes rather than the larger winter-storage types.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://teagasc.ie/crops/horticulture/vegetables/radish---veg-growing-guide/",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Make small successive sowings in suitable cool growing conditions. Thin seedlings and keep the shallow root zone moist with free drainage. Heat, crowding and drying can reduce root quality.",
+      "harvestInstructions": "Check developing roots frequently and pull while small and tender, before they become woody or the plants flower.",
+      "commonNameAliases": [
+        "Rudi summer radish",
+        "Salad radish Rudi"
+      ],
+      "photo": null,
+      "cultivarName": "Rudi",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Lettuce (Red Salad Bowl)",
+    "scientificName": "Lactuca sativa 'Red Salad Bowl'",
+    "description": "A red loose-leaf lettuce with lobed leaves. It offers a red-leaved alternative to the green Salad Bowl cultivar.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the shallow root zone consistently moist, without waterlogging. Dry soil and heat encourage bolting.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil or growing mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/119374/lactuca-sativa-red-salad-bowl/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in fertile, moisture-retentive soil with drainage. Sow small batches for successive harvests and protect young plants as weather requires. Keep the growing centre intact when picking outer leaves.",
+      "harvestInstructions": "Pick tender outer leaves as needed or harvest a developed loose head before flowering.",
+      "commonNameAliases": [
+        "Red Salad Bowl loose-leaf lettuce",
+        "Red oakleaf lettuce Red Salad Bowl"
+      ],
+      "photo": null,
+      "cultivarName": "Red Salad Bowl",
+      "photoIsSpeciesReference": false
+    }
   }
 ]

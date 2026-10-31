@@ -72,6 +72,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Beta vulgaris 'Chioggia'",
+    "cultivarName": "Chioggia",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-beetroot-chioggia.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Betterave_Rossa_di_Chioggia_Montpellier.JPG",
+    "identityEvidence": "Source title and description identify Chioggia beetroot and its cut-root rings; photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Beta vulgaris 'Detroit 2'",
     "cultivarName": "Detroit 2",
     "status": "pending",
@@ -279,6 +288,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Daucus carota 'Purple Haze'",
+    "cultivarName": "Purple Haze",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Daucus carota subsp. sativus 'Adelaide'",
     "cultivarName": "Adelaide",
     "status": "pending",
@@ -420,6 +438,15 @@
     "photoPath": "/images/plants/cultivar-lettuce-lollo-rossa.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lollo_rossa_Setzlinge.JPG",
     "identityEvidence": "Source title and description explicitly identify Lollo Rossa seedlings photographed in Germany; photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Red Salad Bowl'",
+    "cultivarName": "Red Salad Bowl",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-10-31"
   },
   {
@@ -754,6 +781,15 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Raphanus sativus 'Rudi'",
+    "cultivarName": "Rudi",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Ribes nigrum 'Ben Sarek'",

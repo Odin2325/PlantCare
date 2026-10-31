@@ -136,3 +136,12 @@ adds per-plant growing/harvest notes to comparison cards, four table-potato
 cultivars and three distinct photos. Current local totals are **253 reviewed
 entries / 111 cultivars / 192 assets**, with **37 distinct cultivar photos and
 74 pending**. The deployed application remains unchanged.
+
+[Shareable comparisons](shareable-comparisons.md) now generate public catalog-only
+links and offer clipboard/manual copying. Four salad/root cultivars and one
+reviewed Chioggia photo bring current local totals to **257 reviewed entries / 115
+cultivars / 193 assets**, with **38 distinct cultivar photos and 77 pending**.
+The [next feature milestones](feature-roadmap.md) prioritize an accumulated-batch
+checkpoint, saved shortlists, a personal photo journal, growth-stage references
+and succession planting. No push, pipeline or deployment was performed for this
+increment.
