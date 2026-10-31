@@ -2630,5 +2630,19 @@
     "bytes": 314493,
     "sourceFileName": "Lollo rossa Setzlinge.JPG",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Dark Opal basil with purple leaves and flower spikes; source-identified cultivar photograph",
+    "caption": "Ocimum basilicum 'Dark Opal' kz01",
+    "credit": "Krzysztof Ziarnek, Kenraiz",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-basil-dark-opal",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_%27Dark_Opal%27_kz01.jpg",
+    "path": "/images/plants/cultivar-basil-dark-opal.jpg",
+    "sha256": "4c9148c246a065001574fb37d53c61091cf27cceebe98824bd7889059009ddb9",
+    "bytes": 605154,
+    "sourceFileName": "Ocimum basilicum 'Dark Opal' kz01.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]

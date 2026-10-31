@@ -16,6 +16,7 @@ const groupAliases: Record<string, string> = {
   'brassica oleracea acephala group': 'brassica oleracea kale group',
   'capsicum annuum grossum group': 'capsicum annuum',
   'capsicum annuum longum group': 'capsicum annuum',
+  'ocimum basilicum var. purpurascens': 'ocimum basilicum',
 };
 
 export function catalogVarietyGroup(plant: PlantSpecies): string | null {
@@ -38,6 +39,7 @@ export function catalogVarietyGroup(plant: PlantSpecies): string | null {
     <section aria-label="Related varieties">
       <h2>Explore related varieties</h2>
       <p>Browse this catalog's related cultivars and general entry. Growing habits and care can differ between varieties.</p>
+      <p>Compare care starts a comparison of this plant and the related entry you choose.</p>
       @if (loading()) { <p role="status">Loading related varieties…</p> }
       @else if (error()) { <p role="alert">Related varieties could not be loaded.</p><button type="button" (click)="load()">Try related varieties again</button> }
       @else {
@@ -48,6 +50,9 @@ export function catalogVarietyGroup(plant: PlantSpecies): string | null {
               <h3><a [routerLink]="['/plants', relative.id]" queryParamsHandling="preserve">{{ relative.commonName }}</a></h3>
               <p>{{ relative.catalogProfile?.cultivarName ? 'Cultivar: ' + relative.catalogProfile!.cultivarName : 'General entry' }}</p>
               <app-plant-photo [profile]="relative.catalogProfile" />
+              <a routerLink="/plants/compare" queryParamsHandling="merge"
+                [queryParams]="{compare: plant().id + ',' + relative.id}"
+                [attr.aria-label]="'Compare ' + plant().commonName + ' with ' + relative.commonName">Compare care</a>
             </article>
           } @empty { <p>No other reviewed varieties in this catalog group yet.</p> }
         </div>

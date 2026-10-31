@@ -17,6 +17,8 @@ it('reconciles reviewed historical names and apostrophes while keeping crop grou
   expect(catalogVarietyGroup(plant('a', "Brassica oleracea (Acephala Group) 'Redbor'", 'Redbor'))).toBe(catalogVarietyGroup(plant('b', 'Brassica oleracea Kale Group')));
   expect(catalogVarietyGroup(plant('a', 'Brassica oleracea Kale Group'))).not.toBe(catalogVarietyGroup(plant('b', 'Brassica oleracea Botrytis Group')));
   expect(catalogVarietyGroup(plant('a', 'Fragaria × ananassa'))).not.toBe(catalogVarietyGroup(plant('b', 'Fragaria vesca')));
+  expect(catalogVarietyGroup(plant('a', "Ocimum basilicum var. purpurascens 'Dark Opal'", 'Dark Opal')))
+    .toBe(catalogVarietyGroup(plant('b', "Ocimum basilicum 'Genovese'", 'Genovese')));
   expect(catalogVarietyGroup(plant('a', null))).toBeNull();
   expect(catalogVarietyGroup(plant('a', 'Unverified name', 'Claimed cultivar'))).toBeNull();
 });
@@ -32,6 +34,9 @@ it('shows common-name links to other entries, updates on navigation and isolates
   fixture.componentInstance.load(); fixture.detectChanges();
   expect(fixture.componentInstance.relatives().map(p => p.id)).toEqual(['Tiny Tim', 'Tomato']);
   expect(fixture.nativeElement.querySelector('h3 a').getAttribute('href')).toBe('/plants/Tiny%20Tim');
+  const compare = fixture.nativeElement.querySelector('a[aria-label="Compare Roma with Tiny Tim"]');
+  expect(compare.textContent).toBe('Compare care');
+  expect(new URL(compare.getAttribute('href'), 'https://example.org').searchParams.get('compare')).toBe('Roma,Tiny Tim');
   expect(fixture.nativeElement.textContent).toContain('Cultivar photo pending');
   fixture.componentRef.setInput('plant', catalog[3]); fixture.detectChanges();
   expect(fixture.componentInstance.relatives()).toEqual([]);

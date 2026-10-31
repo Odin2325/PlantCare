@@ -109,6 +109,16 @@ test('related cultivars preserve browsing context and show exact photos or named
   await expect(primary.getByRole('link', { name: 'CC BY-SA 2.0', exact: true })).toBeVisible();
   await expect(relatives.locator('h3')).toHaveText(['Cherry tomato (Tiny Tim)', 'Tomato']);
   await expect(relatives).toContainText('Cultivar photo pending');
+  await relatives.getByRole('link', { name: 'Compare Plum tomato (Roma) with Cherry tomato (Tiny Tim)', exact: true }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare plants');
+  await expect(page.locator('.comparison-card h2')).toHaveText(['Plum tomato (Roma)', 'Cherry tomato (Tiny Tim)']);
+  const comparisonUrl = new URL(page.url());
+  expect(comparisonUrl.searchParams.get('compare')).toBe(ids.roma + ',' + ids.tiny);
+  expect(comparisonUrl.searchParams.get('category')).toBe('vegetable');
+  expect(comparisonUrl.searchParams.get('q')).toBe('tomato');
+  await page.goBack();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Plum tomato (Roma)');
+  expect(new URL(page.url()).searchParams.get('compare')).toBe(ids.general);
   await page.setViewportSize({ width: 320, height: 900 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Related cultivar photos and pending placeholders');

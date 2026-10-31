@@ -8681,5 +8681,173 @@
       "cultivarName": "Ben Sarek",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Basil (Dark Opal)",
+    "scientificName": "Ocimum basilicum var. purpurascens 'Dark Opal'",
+    "description": "A purple-leaved basil cultivar with aromatic foliage and an upright, bushy habit. Its leaves bring a different colour to a warm herb-growing space.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/43433/ocimum-basilicum-var-purpurascens-dark-opal/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Provide warmth, sun and a sheltered position with freely draining compost. Grow indoors or under cover when outdoor conditions are cold. Pinch soft tips to encourage branching and check moisture before watering.",
+      "harvestInstructions": "Pick small quantities of healthy leaves and soft tips, leaving enough foliage for continued growth.",
+      "commonNameAliases": [
+        "Purple basil Dark Opal",
+        "Dark Opal sweet basil"
+      ],
+      "photo": {
+        "path": "/images/plants/cultivar-basil-dark-opal.jpg",
+        "altText": "Dark Opal basil with purple leaves and flower spikes; source-identified cultivar photograph",
+        "credit": "Krzysztof Ziarnek, Kenraiz",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_%27Dark_Opal%27_kz01.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Ocimum basilicum 'Dark Opal' kz01"
+      },
+      "cultivarName": "Dark Opal",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Greek basil (Bush)",
+    "scientificName": "Ocimum basilicum 'Bush'",
+    "description": "A compact basil with small aromatic green leaves. It suits a sunny container where it can be sheltered from cold weather.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/283901/ocimum-basilicum-bush/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Grow in a warm, sunny, sheltered position with drained compost. Containers can move outdoors in warm summer weather. Remove developing flower tips if the aim is continued leaf production. This is the source-listed Bush form, also called Greek basil; the name does not identify every basil sold as Greek.",
+      "harvestInstructions": "Pick healthy leaves or soft tips lightly and regularly, allowing the plant to regrow.",
+      "commonNameAliases": [
+        "Bush basil",
+        "Greek bush basil"
+      ],
+      "photo": null,
+      "cultivarName": "Bush",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Chives (Forescate)",
+    "scientificName": "Allium schoenoprasum 'Forescate'",
+    "description": "A larger-growing chive cultivar with tubular leaves and pink flower clusters. Both the leaves and flowers are used in cooking.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/92585/allium-schoenoprasum-forescate/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Grow in sun or light shade with moisture-retentive, well-drained soil or a drained container. Cut back after flowering for fresh leaf growth and divide crowded clumps. Keep allium plants and harvested material away from pets.",
+      "harvestInstructions": "Snip established leaves near the base, allowing regrowth. Gather fresh flowers as needed. Keep harvested allium material away from pets.",
+      "commonNameAliases": [
+        "Forescate garden chives",
+        "Pink-flowered chives Forescate"
+      ],
+      "photo": null,
+      "cultivarName": "Forescate",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "French bean (The Prince)",
+    "scientificName": "Phaseolus vulgaris 'The Prince'",
+    "description": "A dwarf French bean with a bushy habit, grown for green pods. It needs less vertical support than climbing French beans.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/119131/phaseolus-vulgaris-the-prince/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow after frost risk in warm soil. Choose sun and fertile, moisture-retentive soil with drainage. Plant dwarf forms in blocks where suitable so neighbouring plants can help support one another; tall climbing frames are not normally required. Check moisture during flowering and pod growth.",
+      "harvestInstructions": "Pick tender young pods regularly. Cook beans properly before eating; raw pods and seeds can be harmful to people and pets.",
+      "commonNameAliases": [
+        "Dwarf French bean The Prince",
+        "The Prince bush bean"
+      ],
+      "photo": null,
+      "cultivarName": "The Prince",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Borlotti bean (Borlotto Lingua di Fuoco)",
+    "scientificName": "Phaseolus vulgaris 'Borlotto Lingua di Fuoco'",
+    "description": "A climbing borlotti bean with mottled pods and patterned mature seeds. It can be grown for young pods or for mature shelling beans.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/199448/phaseolus-vulgaris-borlotto-lingua-di-fuoco/details",
+      "reviewedOn": "2026-10-31",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give this climbing cultivar a sturdy support in a sunny, sheltered position. Sow after frost risk into fertile, drained soil and maintain even moisture. Choose the harvest stage deliberately: tender whole pods and mature shelling beans need different time on the plant.",
+      "harvestInstructions": "Pick young tender pods or allow the seeds to develop for shelling. Cook harvested beans properly; do not eat raw or undercooked pods or seeds.",
+      "commonNameAliases": [
+        "Firetongue bean",
+        "Borlotto Lingua di Fuoco climbing bean"
+      ],
+      "photo": null,
+      "cultivarName": "Borlotto Lingua di Fuoco",
+      "photoIsSpeciesReference": false
+    }
   }
 ]

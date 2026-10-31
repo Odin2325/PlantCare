@@ -124,3 +124,9 @@ The subsequent [lettuce, zucchini and currant batch](lettuce-courgette-currants.
 adds six reviewed cultivars and one exact-cultivar seedling photograph. Current
 local totals are **244 reviewed entries / 102 cultivars / 188 assets**, with
 **33 distinct cultivar photos and 69 pending**. Staging remains unchanged.
+
+[Direct related-variety care comparison](related-care-comparison.md) now opens a
+two-plant comparison from a profile. Five herb/bean cultivars and one reviewed
+Dark Opal photo bring the current local totals to **249 reviewed entries / 107
+cultivars / 189 assets**, with **34 distinct cultivar photos and 73 pending**.
+This increment remains local pending the accumulated-batch checkpoint.

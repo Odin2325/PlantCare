@@ -36,6 +36,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Allium schoenoprasum 'Forescate'",
+    "cultivarName": "Forescate",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Anethum graveolens 'Domino'",
     "cultivarName": "Domino",
     "status": "pending",
@@ -504,6 +513,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Ocimum basilicum 'Bush'",
+    "cultivarName": "Bush",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Ocimum basilicum 'Genovese'",
     "cultivarName": "Genovese",
     "status": "verified",
@@ -513,6 +531,15 @@
     "reviewedOn": "2026-10-30"
   },
   {
+    "scientificName": "Ocimum basilicum var. purpurascens 'Dark Opal'",
+    "cultivarName": "Dark Opal",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-basil-dark-opal.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_%27Dark_Opal%27_kz01.jpg",
+    "identityEvidence": "Source title and description identify Dark Opal basil in the UMCS Botanical Garden, Lublin; photograph visually reviewed.",
+    "reviewedOn": "2026-10-31"
+  },
+  {
     "scientificName": "Petroselinum crispum 'Moss Curled'",
     "cultivarName": "Moss Curled",
     "status": "pending",
@@ -520,6 +547,15 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Phaseolus vulgaris 'Borlotto Lingua di Fuoco'",
+    "cultivarName": "Borlotto Lingua di Fuoco",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Phaseolus vulgaris 'Cobra'",
@@ -538,6 +574,15 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Phaseolus vulgaris 'The Prince'",
+    "cultivarName": "The Prince",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-10-31"
   },
   {
     "scientificName": "Pisum sativum 'Hurst Green Shaft'",
