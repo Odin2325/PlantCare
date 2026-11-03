@@ -17,8 +17,9 @@ follow-up are recorded in that acceptance document.
 full private-data/migration checkpoint. The [photo-journal design](photo-journal-design.md)
 is complete; the [normalizer prototype](photo-normalization.md) and dependency
 review are implemented locally. The [standalone process boundary](photo-process-isolation.md)
-has passed focused Linux acceptance. Next is a bounded API/worker transport that
-preserves that isolation, with uploads disabled. Broader pipelines/deployment wait for the next meaningful combined
+has passed focused Linux acceptance. The [private transport](photo-worker-connection.md)
+has passed client/gateway and end-to-end acceptance, with uploads disabled. Next
+is private journal storage and lifecycle handling. Broader pipelines/deployment wait for the next meaningful combined
 checkpoint; routine increments retain targeted local checks and commits.
 
 ## 1. Saved plant shortlists

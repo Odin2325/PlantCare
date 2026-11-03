@@ -5,6 +5,9 @@ Implemented locally on 2026-11-03, following the
 new image storage, migrations, deployment or paid service are enabled. The API and
 reminder worker still do not reference the decoder project. No Docker socket or
 Docker privileges are added to either application service.
+The subsequent [private worker connection](photo-worker-connection.md) implements
+and tests the API-side transport and trusted host gateway described as future
+work below. It remains disabled and does not enable uploads.
 
 ## Boundary implemented
 

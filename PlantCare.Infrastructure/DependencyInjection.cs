@@ -10,6 +10,7 @@ using PlantCare.Infrastructure.Persistence.Repositories;
 using PlantCare.Infrastructure.Notifications;
 using PlantCare.Infrastructure.Calendar;
 using PlantCare.Application.Calendar;
+using PlantCare.PhotoTransport;
 
 namespace PlantCare.Infrastructure;
 
@@ -29,6 +30,9 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
         services.AddScoped<IReminderSnoozeService, ReminderSnoozeService>();
+        // Transport only: no upload route or native decoder is enabled here.
+        services.AddSingleton<IPhotoProcessor>(_ => new UnixPhotoProcessor(
+            configuration.GetSection("PhotoProcessing").Get<PhotoProcessorSettings>() ?? new()));
 
         var requireConfirmedEmail = configuration.GetValue<bool>(
             "Authentication:RequireConfirmedEmail");

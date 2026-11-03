@@ -61,6 +61,9 @@ jobs:
         run: |
           docker build -f deploy/Dockerfile.photo-processing --target runtime -t plantcare-photo-processing:ci .
           python3 scripts/Test-PhotoProcessingSandbox.py --image plantcare-photo-processing:ci
+          docker build -f tests/photo-gateway.Dockerfile --target client -t plantcare-photo-client-tests:ci .
+          docker build -f tests/photo-gateway.Dockerfile --target gateway-tests -t plantcare-photo-gateway-tests:ci .
+          python3 scripts/Test-PhotoGateway.py --decoder plantcare-photo-processing:ci --client plantcare-photo-client-tests:ci --gateway plantcare-photo-gateway-tests:ci
 
       - name: Test backup retention safety
         if: steps.scope.outputs.scope != 'catalog'

@@ -30,6 +30,7 @@
     <ItemGroup>
         <ProjectReference Include="..\PlantCare.Application\PlantCare.Application.csproj" />
         <ProjectReference Include="..\PlantCare.Domain\PlantCare.Domain.csproj" />
+        <ProjectReference Include="..\PlantCare.PhotoTransport\PlantCare.PhotoTransport.csproj" />
     </ItemGroup>
 
 </Project>

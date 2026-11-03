@@ -14,6 +14,7 @@ COPY PlantCare.Api/PlantCare.Api.csproj PlantCare.Api/
 COPY PlantCare.Application/PlantCare.Application.csproj PlantCare.Application/
 COPY PlantCare.Domain/PlantCare.Domain.csproj PlantCare.Domain/
 COPY PlantCare.Infrastructure/PlantCare.Infrastructure.csproj PlantCare.Infrastructure/
+COPY PlantCare.PhotoTransport/PlantCare.PhotoTransport.csproj PlantCare.PhotoTransport/
 COPY PlantCare.Worker/PlantCare.Worker.csproj PlantCare.Worker/
 RUN dotnet restore PlantCare.Api/PlantCare.Api.csproj \
     && dotnet restore PlantCare.Worker/PlantCare.Worker.csproj

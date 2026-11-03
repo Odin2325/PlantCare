@@ -133,6 +133,8 @@ The [isolated normalizer prototype](photo-normalization.md) is implemented local
 with pinned dependency/notice review and fifteen focused tests. The following
 slice delivered the [standalone isolated decoder](photo-process-isolation.md),
 with Linux process cleanup, bounded pipes and enforced container controls tested.
-Next is the API-to-isolated-worker transport design/integration before private
-storage and UI work; the API must receive no Docker privileges. Capacity and migrated backup/recovery
+The [private API/worker connection](photo-worker-connection.md) is also implemented
+and tested locally, with transport disabled by default and no API Docker access.
+Next is private journal storage, quotas, ownership and lifecycle handling before
+UI work. Capacity and migrated backup/recovery
 acceptance remain checkpoint gates; no new provider or paid service is required.

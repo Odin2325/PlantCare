@@ -1,0 +1,30 @@
+# Preparation template only. Do not install/enable before the upload checkpoint.
+# The gateway is trusted host code with Docker-daemon privileges. Keep it out of
+# the API container. Replace the image ID only after exact-image acceptance.
+[Unit]
+Description=PlantCare private photo gateway
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=root
+Group=1654
+UMask=0077
+RuntimeDirectory=plantcare-photo
+RuntimeDirectoryMode=0750
+ExecStart=/usr/bin/python3 /opt/plantcare/scripts/photo_gateway.py --image-id sha256:REPLACE_WITH_ACCEPTED_LOCAL_IMAGE_ID --allowed-uid 1654 --socket-gid 1654
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/run/plantcare-photo
+RestrictAddressFamilies=AF_UNIX
+TimeoutStopSec=30
+# Remain stopped on uncertain cleanup; review the generated job before restart.
+Restart=no
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
