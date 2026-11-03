@@ -45,7 +45,6 @@
 .archived-toggle {
   padding: 0.75rem 1rem;
   border: 1px solid var(--color-input-border);
-  border-radius: var(--radius-control);
   background: white;
   color: var(--color-primary);
   font-weight: 700;
@@ -299,7 +298,6 @@
 .schedule-button {
   padding: 0.55rem 0.7rem;
   border: 0;
-  border-radius: var(--radius-control);
   background: var(--color-primary);
   color: white;
   font-weight: 650;
@@ -381,6 +379,8 @@
 
 @media (max-width: 500px) {
   .collection-tools { grid-template-columns: 1fr; }
+  .add-schedule-controls { grid-template-columns: minmax(0, 1fr); }
+  .add-schedule-controls select { flex: 1; }
   .care-schedule__header {
     flex-direction: column;
   }
@@ -473,7 +473,6 @@
     margin-top: 0.5rem;
     padding: 0.6rem 0.85rem;
     border: 0;
-    border-radius: var(--radius-control);
     background: var(--color-primary);
     color: white;
     font-weight: 700;
@@ -488,7 +487,7 @@
   }
 }
 
-.collection-tools button { min-height: 44px; align-self: end; padding: .65rem; border: 1px solid var(--color-input-border); border-radius: var(--radius-control); background: white; color: var(--color-primary); cursor: pointer; }
+.collection-tools button { min-height: 44px; align-self: end; padding: .65rem; border: 1px solid var(--color-input-border); background: white; color: var(--color-primary); cursor: pointer; }
 .collection-tools button:disabled { opacity: .6; cursor: default; }
 
 .schedule-preview { border: 2px solid #35744a; border-radius: var(--radius-control); padding: 1rem; margin-block: 1rem; overflow-wrap: anywhere; }

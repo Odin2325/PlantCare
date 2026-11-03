@@ -30,6 +30,12 @@ with axe, visible field focus, reachable mobile navigation and absence of page
 errors or API writes. The fixture uses no real accounts, messages or private data.
 It is included in the normal browser runner for the next combined pipeline.
 
+The accumulated batch through `d615936571ca434f3888234cf25f022e17283feb` was
+pushed for [one combined CI run](https://github.com/Odin2325/PlantCare/actions/runs/41712620040).
+A subsequent local phone-only refinement stacks the collection's schedule action
+fields instead of squeezing the selected label. Its production build and Chromium
+audit pass; it is retained locally for the next batch, without a second pipeline.
+
 Desktop Chromium, mobile Chromium and Firefox pass. Synthetic desktop/phone
 screenshots were visually inspected for the catalog, calendar, Dashboard and
 Account. The focused shell unit test and existing Chromium shortlist and photo
