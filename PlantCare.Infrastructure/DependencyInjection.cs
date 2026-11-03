@@ -32,6 +32,10 @@ public static class DependencyInjection
         });
         services.AddScoped<IReminderSnoozeService, ReminderSnoozeService>();
         services.AddSingleton(new PhotoJournalLimits());
+        var uploadsEnabled = configuration.GetValue<bool>("PhotoJournal:UploadsEnabled");
+        if (uploadsEnabled && !configuration.GetValue<bool>("PhotoProcessing:Enabled"))
+            throw new InvalidOperationException("Photo uploads require the isolated photo transport.");
+        services.AddSingleton(new PhotoJournalOptions(uploadsEnabled));
         services.AddScoped<PhotoJournalStore>();
         // Transport only: no upload route or native decoder is enabled here.
         services.AddSingleton<IPhotoProcessor>(_ => new UnixPhotoProcessor(

@@ -23,16 +23,19 @@ export class AccountPage {
   readonly message = signal('');
   readonly failed = signal(false);
 
-  exportData(): void {
+  exportData(photos = false): void {
     if (this.busy() || !this.password) return;
+    const owner = this.auth.currentUser()?.id;
+    if (!owner) { this.password = ''; this.error('Sign in again before exporting your data.'); return; }
     const password = this.password;
     this.password = ''; this.begin();
-    this.http.post('/api/account/export', { password }, { responseType: 'blob' })
+    this.http.post(photos ? '/api/account/export/photos' : '/api/account/export', { password }, { responseType: 'blob' })
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.busy.set(false)))
       .subscribe({ next: data => {
+        if (this.auth.currentUser()?.id !== owner) return;
         const url = URL.createObjectURL(data);
         const link = document.createElement('a');
-        link.href = url; link.download = 'plantcare-account.json'; link.click();
+        link.href = url; link.download = photos ? 'plantcare-photos.zip' : 'plantcare-account.json'; link.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
         this.message.set('Export downloaded. Store it privately; it contains your personal plant and account data.');
       }, error: () => this.error('Export failed. Check your current password, or wait and try again. Sign in again if your session expired.') });

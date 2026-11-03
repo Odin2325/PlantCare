@@ -5,6 +5,8 @@ Implemented locally on 2026-11-03 after the
 **No upload route exists and the transport remains disabled.** Only synthetic
 test data was created. No normal application database, real photo, catalog asset,
 backup, schedule or existing runtime login changed.
+The subsequent [gated upload/UI increment](photo-journal-upload-ui.md) adds the
+prepared POST action and journal controls, with uploads still disabled by default.
 
 ## Persistence and transaction boundaries
 

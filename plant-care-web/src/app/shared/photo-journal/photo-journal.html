@@ -1,0 +1,65 @@
+@if(current()){
+<section aria-labelledby="photo-journal-heading">
+  <h2 id="photo-journal-heading">Photo journal</h2>
+  <p>Private photos and notes for this plant. Photos do not complete care or change reminders.</p>
+  @if(!online()){<p role="status">Photo journal needs a connection. Changes are not queued.</p>}
+  @if(loading()){<p role="status">Loading photo journal…</p>}
+  @if(error()){<p role="alert">{{error()}}</p>}
+  <p role="status" aria-live="polite">{{message()}}</p>
+  <div class="controls"><button type="button" (click)="load()" [disabled]="busy()||!online()">Refresh photo journal</button>
+    <label>Photo order<select [value]="oldestFirst()?'oldest':'newest'" (change)="oldestFirst.set($any($event.target).value==='oldest');load()" [disabled]="busy()"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label></div>
+  @if(ready()){
+    @if(!capabilities()?.uploadsEnabled){<p>Photo uploads are not enabled yet.</p>}
+    @else if(!plant().isActive){<p>Restore this archived plant before adding a photo.</p>}
+    @if((canUpload()||hasFile())&&!editing()){
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <h3>Add a growth photo</h3>
+        <p>JPEG, PNG or static WebP, up to 8 MiB. HEIC and animated images are not supported. Originals are resized and source metadata is removed. Avoid faces, addresses or documents visible in the picture.</p>
+        <label>Choose plant photo<input type="file" accept="image/jpeg,image/png,image/webp" (change)="select($event)" [disabled]="busy()||uncertain()||!canUpload()||!online()||needsRefresh()"></label>
+        @if(preview()){<img class="draft-preview" [src]="preview()" alt="Selected photo preview, not yet confirmed saved">}
+        <label>Photo date<input type="date" formControlName="date" [max]="today" required></label>
+        <label>Photo notes (optional)<textarea formControlName="notes" maxlength="500" rows="3"></textarea></label>
+        @if(uncertain()){
+          <p>The draft is locked while its save is uncertain.</p>
+          <button type="button" (click)="reconcile()" [disabled]="busy()||!online()">Check save status</button>
+        }
+        @if(form.invalid&&form.dirty){<p role="alert">Choose a date no later than today and at most 500 characters of notes.</p>}
+        <button type="submit" [disabled]="busy()||!canUpload()||!hasFile()||form.invalid||!online()||needsRefresh()||(uncertain()&&!retryAllowed())">{{busy()?'Working…':uncertain()?'Retry unchanged photo':'Save photo'}}</button>
+        @if(hasDraft()){<button type="button" (click)="discard()" [disabled]="busy()">Discard photo draft</button>}
+      </form>
+    }
+    @if(editing();as item){
+      <form [formGroup]="editForm" (ngSubmit)="saveEdit()">
+        <h3>Edit photo date and notes</h3>
+        <label>Edit photo date<input type="date" formControlName="date" [max]="today" required></label>
+        <label>Edit photo notes<textarea formControlName="notes" maxlength="500" rows="3"></textarea></label>
+        <button type="submit" [disabled]="busy()||editForm.invalid||editConflict()||!online()">Save photo notes</button>
+        <button type="button" (click)="cancelEdit()" [disabled]="busy()">Cancel photo edit</button>
+      </form>
+    }
+    <p>Up to 20 photos per plant and 50 per account, within the storage limit. The journal is included in private account export. Deleted photos can remain in encrypted backups until cleanup; an older recovery can restore individual deleted photos.</p>
+    <ul class="photo-grid">
+    @for(entry of entries();track entry.id){
+      <li><h3>{{entry.photographedOn|date:'mediumDate'}}</h3>
+        @if(thumbnails()[entry.id]){<img [src]="thumbnails()[entry.id]" [alt]="'Growth photo of '+(plant().nickname||plant().speciesCommonName)+' taken '+entry.photographedOn">}
+        @else{<p>Photo preview unavailable.</p>}
+        @if(entry.notes){<p class="notes">{{entry.notes}}</p>}
+        <button type="button" (click)="view(entry)" [disabled]="!online()">View photo from {{entry.photographedOn}}</button>
+        <button type="button" (click)="beginEdit(entry)" [disabled]="busy()||hasDraft()||needsRefresh()||!online()">Edit photo from {{entry.photographedOn}}</button>
+        @if(deleting()===entry.id){
+          <p>Delete this photo and its notes? This cannot be undone in the journal.</p>
+          <button type="button" (click)="remove(entry.id)" [disabled]="busy()||!online()">Confirm photo deletion</button>
+          <button type="button" (click)="deleting.set(null)" [disabled]="busy()">Keep photo</button>
+        }@else{<button type="button" (click)="deleting.set(entry.id)" [disabled]="busy()||hasDraft()||needsRefresh()||!online()">Delete photo from {{entry.photographedOn}}</button>}
+      </li>
+    }@empty{<li>No growth photos saved yet.</li>}
+    </ul>
+    @if(fullImage()){
+      <div #viewer class="viewer" role="region" aria-label="Opened growth photo" tabindex="-1"><h3>Growth photo</h3>
+        <img [src]="fullImage()" [alt]="'Growth photo of '+(plant().nickname||plant().speciesCommonName)">
+        <button type="button" (click)="closeImage(true)">Close growth photo</button>
+      </div>
+    }
+  }
+</section>
+}

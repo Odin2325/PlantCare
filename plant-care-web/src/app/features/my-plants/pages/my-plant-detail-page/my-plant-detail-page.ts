@@ -11,10 +11,11 @@ import { HarvestLog } from '../../../../shared/harvest-log/harvest-log';
 import { PlantGrowingContext } from '../../../../shared/plant-growing-context/plant-growing-context';
 import { PlantGrowingPlan } from '../../../../shared/plant-growing-plan/plant-growing-plan';
 import { PlantGrowingGuide } from '../../../../shared/plant-growing-guide/plant-growing-guide';
+import { PhotoJournal } from '../../../../shared/photo-journal/photo-journal';
 
 @Component({
   selector: 'app-my-plant-detail-page', standalone: true,
-  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences, PlantGrowingGuide, PlantGrowingPlan, HarvestLog, PlantGrowingContext],
+  imports: [DatePipe, RouterLink, PlantPhoto, PlantGrowthReferences, PlantGrowingGuide, PlantGrowingPlan, HarvestLog, PlantGrowingContext, PhotoJournal],
   templateUrl: './my-plant-detail-page.html', styleUrl: './my-plant-detail-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -9,12 +9,24 @@ namespace PlantCare.Infrastructure.Photos;
 
 public sealed record PhotoJournalLimits(int PerPlant = 20, int PerAccount = 50,
     long AccountBytes = 20 * 1024 * 1024, long ServiceBytes = 512 * 1024 * 1024);
+public sealed record PhotoJournalOptions(bool UploadsEnabled = false);
 public sealed record PhotoEntryDto(Guid Id, Guid UserPlantId, DateOnly PhotographedOn, string? Notes,
     DateTimeOffset CreatedAtUtc, Guid Version);
 public sealed record PhotoExportItem(PhotoEntryDto Entry, byte[] Image, string Sha256);
 
 public sealed class PhotoJournalStore(PlantCareDbContext db, TimeProvider clock, PhotoJournalLimits limits)
 {
+    public async Task<bool?> AccessAsync(Guid owner, Guid plantId, CancellationToken ct)
+    {
+        if (!await OwnsAsync(owner, plantId, ct)) return null;
+        return await db.UserPlants.Where(p => p.Id == plantId).Select(p => p.IsActive).SingleAsync(ct);
+    }
+    public async Task<PhotoEntryDto?> FindRequestAsync(Guid owner, Guid plantId, Guid requestId, CancellationToken ct)
+    {
+        if (!await OwnsAsync(owner, plantId, ct)) return null;
+        return await db.PlantPhotoEntries.AsNoTracking().Where(p => p.UserPlantId == plantId && p.UploadRequestId == requestId)
+            .Select(p => new PhotoEntryDto(p.Id, p.UserPlantId, p.PhotographedOn, p.Notes, p.CreatedAtUtc, p.Version)).SingleOrDefaultAsync(ct);
+    }
     public async Task<PhotoEntryDto?> SaveNormalizedAsync(Guid owner, Guid plantId, Guid requestId,
         DateOnly date, string? notes, ProcessedPhoto photo, CancellationToken ct = default)
     {

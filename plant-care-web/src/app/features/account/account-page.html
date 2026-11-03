@@ -12,6 +12,8 @@
       notification preferences and calendar/device metadata. Passwords, tokens and device encryption keys are excluded.
       This is a data copy, not an automatic restore file.</p>
     <button type="button" [disabled]="busy() || !password" (click)="exportData()">Download my data</button>
+    <p>Journal metadata is included in JSON. Download normalized journal images separately as a ZIP with a manifest. Original photo files are not retained.</p>
+    <button type="button" [disabled]="busy() || !password" (click)="exportData(true)">Download my plant photos</button>
   </section>
   <section aria-labelledby="delete-heading">
     <h2 id="delete-heading">Permanently delete your account</h2>

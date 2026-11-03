@@ -137,6 +137,9 @@ The [private API/worker connection](photo-worker-connection.md) is also implemen
 and tested locally, with transport disabled by default and no API Docker access.
 The [journal storage/lifecycle slice](photo-journal-storage.md) is also locally
 implemented: atomic media/metadata, quotas, private read/edit/delete routes,
-password-verified export and erasure-safe handling. Next is bounded upload
-admission, request reconciliation and the owned-plant UI. Capacity and migrated backup/recovery
+password-verified export and erasure-safe handling. The [gated upload and journal
+UI](photo-journal-upload-ui.md) is now also implemented locally, including bounded
+intake, save reconciliation, viewer/edit/delete controls and draft guards. Next
+is a combined candidate/CI/recovery and staging-preparation checkpoint, with both
+photo flags kept off until activation acceptance. Capacity and migrated backup/recovery
 acceptance remain checkpoint gates; no new provider or paid service is required.

@@ -24,6 +24,7 @@
     </section>
   <app-plant-growth-references [profile]="item.speciesCatalogProfile" />
   <app-harvest-log [plant]="item" />
+  <app-photo-journal [plant]="item" />
     <app-plant-growing-plan [plant]="item" (saved)="plant.set($event)" />
   <app-plant-growing-guide [profile]="item.speciesCatalogProfile" />
 

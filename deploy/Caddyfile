@@ -1,4 +1,11 @@
 {$PLANTCARE_DOMAIN} {
     encode zstd gzip
+    @photoUpload {
+        method POST
+        path /api/my-plants/*/photos
+    }
+    request_body @photoUpload {
+        max_size 9437184
+    }
     reverse_proxy api:8080
 }

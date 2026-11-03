@@ -3,6 +3,7 @@ import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { Subject } from 'rxjs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { PwaUpdateService } from './pwa-update.service';
+import { PhotoDraftState } from '../services/photo-draft-state';
 
 describe('PWA update lifecycle', () => {
   let versions: Subject<VersionEvent>;
@@ -15,6 +16,12 @@ describe('PWA update lifecycle', () => {
     TestBed.configureTestingModule({ providers: [{ provide: SwUpdate, useValue: { isEnabled: true, versionUpdates: versions, unrecoverable, checkForUpdate: check } }] });
   });
   afterEach(() => { TestBed.resetTestingModule(); vi.restoreAllMocks(); });
+  it('does not reload an unfinished photo draft when the user cancels',()=>{
+    const drafts=TestBed.inject(PhotoDraftState);drafts.register(()=>true);
+    const confirm=vi.spyOn(window,'confirm').mockReturnValue(false);
+    TestBed.inject(PwaUpdateService).reloadForUpdate();
+    expect(confirm).toHaveBeenCalled();expect(drafts.reloadApproved).toBe(false);
+  });
   it('offers only ready versions and exposes unrecoverable state', () => {
     const service = TestBed.inject(PwaUpdateService);
     versions.next({ type: 'VERSION_DETECTED', version: { hash: 'new' } });

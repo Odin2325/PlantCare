@@ -83,7 +83,7 @@ public sealed class PhotoJournalTests : IAsyncLifetime
         Assert.Equal("nosniff", response.Headers.GetValues("X-Content-Type-Options").Single());
         Assert.Equal(HttpStatusCode.NotFound, (await other.GetAsync($"{url}/{item.Id}/image")).StatusCode);
         Assert.Equal(HttpStatusCode.NotFound, (await owner.GetAsync($"/api/my-plants/{otherPlant.Id}/photos/{item.Id}/thumbnail")).StatusCode);
-        Assert.Equal(HttpStatusCode.NotFound, (await owner.PostAsJsonAsync(url, new { })).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await owner.PostAsync(url, new MultipartFormDataContent())).StatusCode);
         using var anonymous = factory.CreateClient();
         Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.GetAsync(url)).StatusCode);
         await factory.SeedAsync(async db => { Assert.Single(await db.PlantPhotoEntries.ToArrayAsync()); Assert.Single(await db.PlantPhotoMedia.ToArrayAsync());

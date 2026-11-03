@@ -261,6 +261,25 @@ The list is private and saved to your account. Refresh shortlist loads changes
 made on another device. If a change cannot be confirmed, refresh before retrying.
 Removing a saved entry does not remove an owned plant or its care history.
 
+## Photo journal (prepared locally)
+
+This feature is not yet deployed. Once activated, open an owned plant's details
+and use Photo journal to choose a JPEG, PNG or static WebP up to 8 MiB, enter its
+date/notes and save. Previewing does not save it. Photos are private and do not
+complete care or change reminders. View photos in either date order, edit their
+date/notes or confirm deletion. Archived plants retain their journal.
+
+If saving cannot be confirmed, keep the draft unchanged and choose Check save
+status. Follow the result before retrying or discarding. Changes are not queued
+offline. Save before closing the app; in-memory drafts can be lost if the browser
+or phone terminates it. Navigation/update prompts help prevent accidental loss.
+
+Account offers Download my plant photos as a separate password-protected ZIP;
+the JSON download includes journal metadata. Original files/source metadata are
+not retained, but visible faces or addresses in a picture remain visible. Deleted
+photos can remain in encrypted backups until cleanup, and older recovery can
+restore individually deleted photos for an active account.
+
 ## Getting help
 
 Use [GitHub Issues for general support](../SUPPORT.md). Never post a password,

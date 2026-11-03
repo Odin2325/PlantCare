@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { authGuard } from './core/auth/guards/auth.guard';
 import { guestGuard } from './core/auth/guards/guest.guard';
+import { photoDraftGuard } from './core/services/photo-draft-state';
 
 export const routes: Routes = [
   { path: 'garden', canActivate: [authGuard],
@@ -47,6 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'my-plants/:id',
+    canDeactivate: [photoDraftGuard],
     canActivate: [authGuard],
     loadComponent: () => import('./features/my-plants/pages/my-plant-detail-page/my-plant-detail-page')
       .then(component => component.MyPlantDetailPage),

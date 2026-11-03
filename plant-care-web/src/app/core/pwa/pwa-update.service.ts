@@ -1,12 +1,14 @@
 import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SwUpdate } from '@angular/service-worker';
+import { PhotoDraftState } from '../services/photo-draft-state';
 
 @Injectable({ providedIn: 'root' })
 export class PwaUpdateService {
   private readonly updates = inject(SwUpdate);
   private readonly destroyRef = inject(DestroyRef);
   private checking = false;
+  private readonly photoDrafts = inject(PhotoDraftState);
   readonly updateAvailable = signal(false);
   readonly isOnline = signal(navigator.onLine);
   readonly recoveryRequired = signal(false);
@@ -38,6 +40,8 @@ export class PwaUpdateService {
 
   reloadForUpdate(): void {
     if (!this.isOnline()) return;
+    if (!this.photoDrafts.confirmLeave()) return;
+    this.photoDrafts.reloadApproved = true;
     // A full navigation switches versions atomically. Activating before reload
     // can mix the old document with newly versioned lazy chunks.
     document.location.reload();

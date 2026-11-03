@@ -21,6 +21,10 @@ public sealed class ConditionalAntiforgeryFilter(
 
         try
         {
+            // Never extract form tokens before streamed-upload admission.
+            if (context.Filters.OfType<StreamingPhotoUploadAttribute>().Any()
+                && string.IsNullOrWhiteSpace(httpContext.Request.Headers["X-XSRF-TOKEN"]))
+                throw new AntiforgeryValidationException("A header token is required.");
             await antiforgery.ValidateRequestAsync(httpContext);
         }
         catch (AntiforgeryValidationException)
