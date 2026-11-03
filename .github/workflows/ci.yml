@@ -56,6 +56,12 @@ jobs:
             dotnet test PlantCare.slnx --configuration Release --no-build
           fi
 
+      - name: Verify isolated photo processing sandbox
+        if: steps.scope.outputs.scope != 'catalog'
+        run: |
+          docker build -f deploy/Dockerfile.photo-processing --target runtime -t plantcare-photo-processing:ci .
+          python3 scripts/Test-PhotoProcessingSandbox.py --image plantcare-photo-processing:ci
+
       - name: Test backup retention safety
         if: steps.scope.outputs.scope != 'catalog'
         shell: pwsh

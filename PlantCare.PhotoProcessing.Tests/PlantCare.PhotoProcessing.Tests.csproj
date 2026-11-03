@@ -13,6 +13,7 @@
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
     <ProjectReference Include="../PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj" />
+    <ProjectReference Include="../tests/photo-process-fixture/PhotoProcessFixture.csproj" />
     <Using Include="Xunit" />
   </ItemGroup>
 </Project>

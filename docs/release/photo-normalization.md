@@ -4,6 +4,9 @@ Implemented locally on 2026-11-03. This completes the decoder/normalization port
 of the [photo-journal design](photo-journal-design.md), not its process-isolation
 gate. Uploads remain unimplemented. No API/worker reference, DI registration,
 route, migration, image store, frontend change or deployment was added.
+The following [standalone process-isolation increment](photo-process-isolation.md)
+adds the Linux supervisor/container boundary and its focused acceptance. Remaining
+prototype limitations below describe the original increment unless updated there.
 
 ## Dependency decision
 

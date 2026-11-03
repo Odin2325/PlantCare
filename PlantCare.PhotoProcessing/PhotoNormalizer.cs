@@ -61,8 +61,10 @@ public static class PhotoNormalizer
             image.Strip();
             image.Resize(new MagickGeometry(1600, 1600) { Greater = true });
             // Copy pixels onto a fresh image: no source attributes/profiles survive.
-            using var clean = new MagickImage(MagickColors.White, image.Width, image.Height);
-            clean.CopyPixels(image);
+            using var clean = new MagickImage();
+            using (var pixels = image.GetPixels())
+                clean.ReadPixels(pixels.ToByteArray(PixelMapping.RGB)!,
+                    new PixelReadSettings(image.Width, image.Height, StorageType.Char, PixelMapping.RGB));
             clean.ColorSpace = ColorSpace.sRGB;
             clean.Strip();
             var full = Encode(clean, 512 * 1024);

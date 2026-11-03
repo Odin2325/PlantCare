@@ -130,7 +130,9 @@ It specifies bounded private SQL image storage, upload/resource limits,
 normalization without source metadata, owner-only access, export/deletion and
 restored-account erasure checks. Uploads remain unimplemented and disabled.
 The [isolated normalizer prototype](photo-normalization.md) is implemented locally
-with pinned dependency/notice review and fifteen focused tests. The next local
-slice provides a killable decoder process with verified OS resource bounds before
-private API or UI work. Capacity and migrated backup/recovery
+with pinned dependency/notice review and fifteen focused tests. The following
+slice delivered the [standalone isolated decoder](photo-process-isolation.md),
+with Linux process cleanup, bounded pipes and enforced container controls tested.
+Next is the API-to-isolated-worker transport design/integration before private
+storage and UI work; the API must receive no Docker privileges. Capacity and migrated backup/recovery
 acceptance remain checkpoint gates; no new provider or paid service is required.

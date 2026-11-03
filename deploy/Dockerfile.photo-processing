@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj PlantCare.PhotoProcessing/
+RUN dotnet restore PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj
+COPY PlantCare.PhotoProcessing/ PlantCare.PhotoProcessing/
+RUN dotnet publish PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj -c Release --no-restore -o /out
+
+FROM build AS focused-tests
+RUN apt-get update && apt-get install --yes --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+COPY PlantCare.PhotoProcessing.Tests/ PlantCare.PhotoProcessing.Tests/
+COPY tests/photo-process-fixture/ tests/photo-process-fixture/
+RUN dotnet test PlantCare.PhotoProcessing.Tests/PlantCare.PhotoProcessing.Tests.csproj -c Release --verbosity quiet --blame-hang-timeout 45s
+
+FROM mcr.microsoft.com/dotnet/runtime:10.0 AS runtime
+RUN apt-get update && apt-get install --yes --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY --from=build /out/ ./
+ENV DOTNET_EnableDiagnostics=0 DOTNET_gcServer=0 DOTNET_GCHeapHardLimit=4000000 DOTNET_PROCESSOR_COUNT=1
+USER app
+ENTRYPOINT ["dotnet", "PlantCare.PhotoProcessing.dll", "--normalize"]
