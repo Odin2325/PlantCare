@@ -9,6 +9,8 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.RateLimiting;
 using PlantCare.Infrastructure.Persistence;
+using PlantCare.Infrastructure.Photos;
+using System.IO.Compression;
 
 namespace PlantCare.Api.Controllers;
 
@@ -16,8 +18,9 @@ namespace PlantCare.Api.Controllers;
 [Route("api/account")]
 [Authorize]
 public sealed class AccountController(UserManager<ApplicationUser> userManager,
-    SignInManager<ApplicationUser> signInManager, PlantCareDbContext db) : ControllerBase
+    SignInManager<ApplicationUser> signInManager, PlantCareDbContext db, PhotoJournalStore photos) : ControllerBase
 {
+    private static readonly SemaphoreSlim PhotoExports = new(1, 1);
     public sealed record PasswordRequest([Required, StringLength(1024)] string Password);
     public sealed record DeleteRequest([Required, StringLength(1024)] string Password,
         [Required] string Confirmation);
@@ -57,6 +60,9 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
             plants = await plants.Select(p => new { p.Id, p.PlantSpeciesId, p.Nickname, p.Location, p.Notes, p.AcquiredOn, p.PlannedSowingOn, p.PlannedPlantingOutOn, p.ExpectedHarvestOn, p.GrowingEnvironment, p.CareSeason, p.IsActive, p.CreatedAtUtc }).ToListAsync(ct),
             tags = await db.UserPlantTags.AsNoTracking().Where(t => plants.Select(p => p.Id).Contains(t.UserPlantId)).Select(t => new { t.UserPlantId, t.Name }).ToListAsync(ct),
             shortlist = await db.ShortlistedPlants.AsNoTracking().Where(p => p.UserId == id).Select(p => new { p.PlantSpeciesId, p.SavedAtUtc }).ToListAsync(ct),
+            photoJournal = await db.PlantPhotoEntries.AsNoTracking().Where(p => plants.Select(plant => plant.Id).Contains(p.UserPlantId))
+                .OrderBy(p => p.Id).Take(50).Select(p => new { p.Id, p.UserPlantId, p.PhotographedOn, p.Notes, p.CreatedAtUtc }).ToArrayAsync(ct),
+            photoImageDownload = new { endpoint = "/api/account/export/photos", contents = "Normalized JPEG images with a JSON manifest. Originals are not retained." },
             schedules = await schedules.Select(s => new { s.Id, s.UserPlantId, s.ActionType, s.IntervalDays, s.ScheduleMode, s.WeekDays, s.PreferredTimeLocal, s.TimeZoneId, s.LastCompletedAtUtc, s.NextDueAtUtc, s.IsEnabled, s.IsArchived }).ToListAsync(ct),
             harvests = await db.HarvestRecords.AsNoTracking().Where(h => plants.Select(p => p.Id).Contains(h.UserPlantId)).Select(h => new { h.Id, h.UserPlantId, h.HarvestedOn, h.Quantity, h.Unit, h.Notes, h.RecordedAtUtc }).ToListAsync(ct),
             history = await db.CareEvents.AsNoTracking().Where(e => schedules.Select(s => s.Id).Contains(e.CareScheduleId)).Select(e => new { e.Id, e.CareScheduleId, e.CompletedAtUtc, e.RecordedAtUtc, e.Notes }).ToListAsync(ct),
@@ -91,6 +97,7 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
         {
             db.ChangeTracker.Clear();
             await using var transaction = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, ct);
+            await PhotoJournalLock.AcquireAsync(db, ct);
             // Disconnect providers first so their remote cleanup is not silently skipped.
             if (await db.ExternalCalendarConnections.AnyAsync(c => c.UserId == user.Id, ct)) return false;
             if (!await db.AccountErasures.AnyAsync(e => e.UserId == user.Id, ct))
@@ -109,6 +116,49 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
         if (!deleted) return Conflict(new ProblemDetails { Title = "Disconnect external calendars on the Calendar page before deleting your account." });
         await signInManager.SignOutAsync();
         return NoContent();
+    }
+
+    [HttpPost("export/photos")]
+    [PlantCare.Api.Security.PrivatePhotoResponse]
+    [EnableRateLimiting("authentication")]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.Client)]
+    public async Task<IActionResult> ExportPhotos(PasswordRequest request, CancellationToken ct)
+    {
+        var user = await Reauthenticate(request.Password);
+        if (user is null) return BadRequest(new ProblemDetails { Title = "Current password could not be verified. Try again later or reset your password." });
+        if (!await PhotoExports.WaitAsync(0, ct)) return StatusCode(429);
+        var lease = new ExportLease(PhotoExports);
+        Response.RegisterForDispose(lease); // Hold admission through response transfer.
+        try
+        {
+            var items = await photos.ExportAsync(user.Id, ct);
+            if (items is null) return Unauthorized();
+            using var output = new MemoryStream();
+            using (var archive = new ZipArchive(output, ZipArchiveMode.Create, leaveOpen: true))
+            {
+                var manifest = archive.CreateEntry("manifest.json", CompressionLevel.NoCompression);
+                await using (var stream = manifest.Open())
+                    await JsonSerializer.SerializeAsync(stream, new { schemaVersion = 1, exportedAtUtc = DateTimeOffset.UtcNow,
+                        images = items.Select(p => new { p.Entry.Id, p.Entry.UserPlantId, p.Entry.PhotographedOn, p.Entry.Notes,
+                            p.Entry.CreatedAtUtc, file = $"photos/{p.Entry.Id:N}.jpg", sha256 = p.Sha256 }),
+                        limitations = "Normalized images only; source files and their metadata are not retained." },
+                        new JsonSerializerOptions(JsonSerializerDefaults.Web), ct);
+                foreach (var item in items)
+                {
+                    var file = archive.CreateEntry($"photos/{item.Entry.Id:N}.jpg", CompressionLevel.NoCompression);
+                    await using var stream = file.Open(); await stream.WriteAsync(item.Image, ct);
+                }
+            }
+            if (output.Length > 21 * 1024 * 1024) throw new InvalidOperationException("Photo export exceeds its supported size.");
+            return File(output.ToArray(), "application/zip", "plantcare-photos.zip");
+        }
+        catch { lease.Dispose(); throw; }
+    }
+
+    private sealed class ExportLease(SemaphoreSlim gate) : IDisposable
+    {
+        private SemaphoreSlim? held = gate;
+        public void Dispose() => Interlocked.Exchange(ref held, null)?.Release();
     }
 
     private async Task<ApplicationUser?> Reauthenticate(string password)

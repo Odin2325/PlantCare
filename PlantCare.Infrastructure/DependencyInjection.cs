@@ -11,6 +11,7 @@ using PlantCare.Infrastructure.Notifications;
 using PlantCare.Infrastructure.Calendar;
 using PlantCare.Application.Calendar;
 using PlantCare.PhotoTransport;
+using PlantCare.Infrastructure.Photos;
 
 namespace PlantCare.Infrastructure;
 
@@ -30,6 +31,8 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
         services.AddScoped<IReminderSnoozeService, ReminderSnoozeService>();
+        services.AddSingleton(new PhotoJournalLimits());
+        services.AddScoped<PhotoJournalStore>();
         // Transport only: no upload route or native decoder is enabled here.
         services.AddSingleton<IPhotoProcessor>(_ => new UnixPhotoProcessor(
             configuration.GetSection("PhotoProcessing").Get<PhotoProcessorSettings>() ?? new()));

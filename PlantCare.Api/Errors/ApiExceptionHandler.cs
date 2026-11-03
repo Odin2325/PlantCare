@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PlantCare.Infrastructure.Photos;
 
 namespace PlantCare.Api.Errors;
 
@@ -15,6 +16,8 @@ public sealed class ApiExceptionHandler(
     {
         var (statusCode, title, detail) = exception switch
         {
+            PhotoJournalConflictException conflict =>
+                (StatusCodes.Status409Conflict, "Photo journal changed or unavailable.", conflict.Message),
             ArgumentException argumentException =>
                 (
                     StatusCodes.Status400BadRequest,

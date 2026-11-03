@@ -80,4 +80,7 @@ SELECT @sql += N'INSERT #state SELECT N''' + REPLACE(s.name + N'.' + t.name, '''
 FROM sys.tables t JOIN sys.schemas s ON s.schema_id=t.schema_id WHERE t.is_ms_shipped=0;
 EXEC sp_executesql @sql;
 SELECT TableName, [RowCount], COALESCE(RowChecksum,0) FROM #state ORDER BY TableName;
+-- Verify the actual blob bytes separately from SQL's non-cryptographic row checksum.
+IF OBJECT_ID(N'dbo.PlantPhotoMedia', N'U') IS NOT NULL
+    EXEC(N'SELECT CONVERT(varchar(36),Id), CONVERT(varchar(64),HASHBYTES(''SHA2_256'',Image),2), CONVERT(varchar(64),HASHBYTES(''SHA2_256'',Thumbnail),2) FROM dbo.PlantPhotoMedia ORDER BY Id;');
 '@

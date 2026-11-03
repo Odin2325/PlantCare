@@ -4,6 +4,8 @@ Implemented locally on 2026-11-03. This follows the
 [standalone process boundary](photo-process-isolation.md). The connection is
 prepared and tested; **uploads remain disabled**. No public route, storage table,
 migration, personal photo, UI control or VPS deployment was added.
+The following [storage/lifecycle increment](photo-journal-storage.md) adds private
+SQL storage and protected read/edit/delete/export routes. Uploads remain disabled.
 
 ## Connection implemented
 

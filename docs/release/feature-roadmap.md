@@ -19,7 +19,8 @@ is complete; the [normalizer prototype](photo-normalization.md) and dependency
 review are implemented locally. The [standalone process boundary](photo-process-isolation.md)
 has passed focused Linux acceptance. The [private transport](photo-worker-connection.md)
 has passed client/gateway and end-to-end acceptance, with uploads disabled. Next
-is private journal storage and lifecycle handling. Broader pipelines/deployment wait for the next meaningful combined
+is bounded upload admission and the journal UI, following the locally verified
+[storage/lifecycle slice](photo-journal-storage.md). Broader pipelines/deployment wait for the next meaningful combined
 checkpoint; routine increments retain targeted local checks and commits.
 
 ## 1. Saved plant shortlists

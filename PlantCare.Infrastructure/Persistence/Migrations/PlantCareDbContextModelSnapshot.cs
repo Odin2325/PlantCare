@@ -153,6 +153,26 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PhotoJournalQuota", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<long>("Revision")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PhotoJournalQuota", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Revision = 0L
+                        });
+                });
+
             modelBuilder.Entity("PlantCare.Domain.Entities.AccountErasure", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -541,6 +561,85 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("NotificationPreferences", (string)null);
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PlantPhotoEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateOnly>("PhotographedOn")
+                        .HasColumnType("date");
+
+                    b.Property<string>("UploadFingerprint")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<Guid>("UploadRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserPlantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserPlantId", "UploadRequestId")
+                        .IsUnique();
+
+                    b.HasIndex("UserPlantId", "PhotographedOn", "Id");
+
+                    b.ToTable("PlantPhotoEntries", (string)null);
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PlantPhotoMedia", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasMaxLength(524288)
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageSha256")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<byte[]>("Thumbnail")
+                        .IsRequired()
+                        .HasMaxLength(65536)
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ThumbnailSha256")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlantPhotoMedia", (string)null);
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.PlantSpecies", b =>
@@ -1012,6 +1111,28 @@ namespace PlantCare.Infrastructure.Persistence.Migrations
                         .HasForeignKey("PlantCare.Domain.Entities.NotificationPreference", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PlantPhotoEntry", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.UserPlant", "UserPlant")
+                        .WithMany()
+                        .HasForeignKey("UserPlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserPlant");
+                });
+
+            modelBuilder.Entity("PlantCare.Domain.Entities.PlantPhotoMedia", b =>
+                {
+                    b.HasOne("PlantCare.Domain.Entities.PlantPhotoEntry", "Entry")
+                        .WithOne()
+                        .HasForeignKey("PlantCare.Domain.Entities.PlantPhotoMedia", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Entry");
                 });
 
             modelBuilder.Entity("PlantCare.Domain.Entities.PushDelivery", b =>

@@ -1,6 +1,6 @@
 # Current milestone plan
 
-Reviewed 2026-10-31. This is the current work order; dated execution records retain
+Reviewed 2026-11-03. This is the current work order; dated execution records retain
 their original candidate and scope. No v1 release or production cutover is created
 by this plan. The public contact-address decision remains deferred by the owner.
 
@@ -135,6 +135,8 @@ slice delivered the [standalone isolated decoder](photo-process-isolation.md),
 with Linux process cleanup, bounded pipes and enforced container controls tested.
 The [private API/worker connection](photo-worker-connection.md) is also implemented
 and tested locally, with transport disabled by default and no API Docker access.
-Next is private journal storage, quotas, ownership and lifecycle handling before
-UI work. Capacity and migrated backup/recovery
+The [journal storage/lifecycle slice](photo-journal-storage.md) is also locally
+implemented: atomic media/metadata, quotas, private read/edit/delete routes,
+password-verified export and erasure-safe handling. Next is bounded upload
+admission, request reconciliation and the owned-plant UI. Capacity and migrated backup/recovery
 acceptance remain checkpoint gates; no new provider or paid service is required.

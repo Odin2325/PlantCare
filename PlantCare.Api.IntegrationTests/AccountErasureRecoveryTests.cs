@@ -66,8 +66,14 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, DateTimeOffset.UtcNow.AddDays(-2));
         var history = CareEvent.Create(schedule.Id, DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddDays(-1));
         var shortlist = ShortlistedPlant.Create(a.Id, species.Id, DateTimeOffset.UtcNow);
+        var photo = PlantPhotoEntry.Create(plant.Id, Guid.NewGuid(), new string('a',64), DateOnly.FromDateTime(DateTime.UtcNow), "Erased photo", DateTimeOffset.UtcNow);
+        var media = PlantPhotoMedia.Create(photo.Id, [255,216,1,2,255,217], [255,216,1,2,255,217], 8, 4);
+        var otherPlant = UserPlant.Create(b.Id, species.Id, "Preserved photo plant", null, null, null, DateTimeOffset.UtcNow);
+        var otherPhoto = PlantPhotoEntry.Create(otherPlant.Id, Guid.NewGuid(), new string('b',64), DateOnly.FromDateTime(DateTime.UtcNow), "Preserved photo", DateTimeOffset.UtcNow);
+        var otherMedia = PlantPhotoMedia.Create(otherPhoto.Id, [255,216,3,4,255,217], [255,216,3,4,255,217], 8, 4);
         await factory.SeedAsync(db => {
             db.PlantSpecies.Add(species); db.UserPlants.Add(plant); db.CareEvents.Add(history);
+            db.UserPlants.Add(otherPlant); db.PlantPhotoEntries.AddRange(photo, otherPhoto); db.PlantPhotoMedia.AddRange(media, otherMedia);
             db.ShortlistedPlants.AddRange(shortlist, ShortlistedPlant.Create(b.Id, species.Id, DateTimeOffset.UtcNow));
             return Task.CompletedTask;
         });
@@ -82,6 +88,7 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         {
             await db.AccountErasures.ExecuteDeleteAsync();
             db.Users.Add(a); db.UserPlants.Add(plant); db.CareEvents.Add(history);
+            db.PlantPhotoEntries.Add(photo); db.PlantPhotoMedia.Add(media);
             db.ShortlistedPlants.Add(shortlist);
             db.CalendarInvitations.AddRange(
                 CalendarInvitation.Create(a.Id, "pending@gmail.com", new string('a',64), DateTimeOffset.UtcNow),
@@ -98,6 +105,8 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
             Assert.True(await db.Users.AnyAsync(u => u.Id == b.Id));
             Assert.Equal(b.Id, Assert.Single(await db.ShortlistedPlants.IgnoreQueryFilters().ToListAsync()).UserId);
             Assert.Single(await db.AccountErasures.ToListAsync());
+            Assert.Equal(otherPhoto.Id, Assert.Single(await db.PlantPhotoEntries.IgnoreQueryFilters().ToListAsync()).Id);
+            Assert.Equal(otherMedia.Image, Assert.Single(await db.PlantPhotoMedia.IgnoreQueryFilters().ToListAsync()).Image);
             Assert.Equal("other@gmail.com", (await db.CalendarInvitations.SingleAsync()).RecipientEmail);
         }
         using var restoredLogin = Client(); await Login(restoredLogin, a, HttpStatusCode.Unauthorized);
@@ -149,9 +158,12 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         var b = await UserAsync();
         var species = PlantSpecies.Create("Synthetic filtered species", null, "Test", SunlightRequirement.BrightIndirectLight, "Test", 1, "Test", null, null, "Test", null, null, null, false);
         var plant = UserPlant.Create(a.Id, species.Id, "Filtered plant", null, null, null, DateTimeOffset.UtcNow);
+        var filteredPhoto = PlantPhotoEntry.Create(plant.Id, Guid.NewGuid(), new string('c',64), DateOnly.FromDateTime(DateTime.UtcNow), null, DateTimeOffset.UtcNow);
+        var filteredMedia = PlantPhotoMedia.Create(filteredPhoto.Id, [255,216,1,2,255,217], [255,216,1,2,255,217], 8, 4);
         var schedule = plant.AddCareSchedule(CareActionType.Watering, 1, DateTimeOffset.UtcNow.AddDays(-2));
         await factory.SeedAsync(db => {
             db.PlantSpecies.Add(species); db.UserPlants.Add(plant);
+            db.PlantPhotoEntries.Add(filteredPhoto); db.PlantPhotoMedia.Add(filteredMedia);
             db.ShortlistedPlants.Add(ShortlistedPlant.Create(a.Id, species.Id, DateTimeOffset.UtcNow));
             db.Notifications.Add(Notification.Create(a.Id, schedule.Id, DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow));
             db.CalendarSubscriptions.Add(CalendarSubscription.Create(a.Id, new string('f',64), DateTimeOffset.UtcNow));
@@ -167,6 +179,8 @@ public sealed class AccountErasureRecoveryTests : IAsyncLifetime
         Assert.True(await db.Users.IgnoreQueryFilters().AnyAsync(u => u.Id == a.Id));
         Assert.Empty(await db.UserPlants.ToListAsync()); Assert.Single(await db.UserPlants.IgnoreQueryFilters().ToListAsync());
         Assert.Empty(await db.ShortlistedPlants.ToListAsync()); Assert.Single(await db.ShortlistedPlants.IgnoreQueryFilters().ToListAsync());
+        Assert.Empty(await db.PlantPhotoEntries.ToListAsync()); Assert.Single(await db.PlantPhotoEntries.IgnoreQueryFilters().ToListAsync());
+        Assert.Empty(await db.PlantPhotoMedia.ToListAsync()); Assert.Single(await db.PlantPhotoMedia.IgnoreQueryFilters().ToListAsync());
         Assert.Empty(await db.CareSchedules.ToListAsync()); Assert.Empty(await db.Notifications.ToListAsync());
         Assert.Empty(await db.CalendarSubscriptions.ToListAsync()); Assert.Empty(await db.CalendarShares.ToListAsync());
         Assert.Empty(await db.CalendarInvitations.ToListAsync());

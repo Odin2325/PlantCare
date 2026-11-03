@@ -65,6 +65,7 @@ public static class AccountErasureCommands
         {
             db.ChangeTracker.Clear();
             await using var tx = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            await PlantCare.Infrastructure.Photos.PhotoJournalLock.AcquireAsync(db);
             var existing = (await db.AccountErasures.Select(e => e.UserId).ToArrayAsync()).ToHashSet();
             foreach (var marker in ledger.Markers)
                 if (!existing.Contains(marker.UserId))

@@ -58,6 +58,9 @@ public static class DatabaseCommands
         foreach (var table in ApiReads) policy[table] = ["SELECT"];
         policy["HarvestRecords"] = ["SELECT", "INSERT", "DELETE"];
         policy["ShortlistedPlants"] = ["SELECT", "INSERT", "DELETE"];
+        policy["PlantPhotoEntries"] = ["SELECT", "INSERT", "UPDATE", "DELETE"];
+        policy["PlantPhotoMedia"] = ["SELECT", "INSERT", "DELETE"];
+        policy["PhotoJournalQuota"] = ["SELECT", "UPDATE"];
         policy["AccountErasures"] = ["SELECT", "INSERT"];
         policy["Notifications"] = ["SELECT", "INSERT", "UPDATE"];
         return policy;
