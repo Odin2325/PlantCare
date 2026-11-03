@@ -25,7 +25,7 @@ import { PlantSpecies } from '../../models/plant-species.model';
       }
     </section>
   `,
-  styles: `:host{display:block;margin-block:1.5rem;min-width:0}section{padding:1rem;border:1px solid #bbc9be;border-radius:.7rem;background:#f2f7f3;color:#263c2d}h2{margin-top:0;font-size:1.3rem}p{line-height:1.6;overflow-wrap:anywhere}a{color:#235b37}button{font:inherit;padding:.65rem;margin:.5rem;border:1px solid #235b37;border-radius:.4rem;background:white;color:#235b37}a:focus-visible,button:focus-visible{outline:3px solid #235b37;outline-offset:3px}`,
+  styles: `:host{display:block;margin-block:1.5rem;min-width:0}section{padding:1rem;border:1px solid var(--color-input-border);border-radius:.7rem;background:var(--color-tint);color:var(--color-text)}h2{margin-top:0;font-size:1.3rem}p{line-height:1.6;overflow-wrap:anywhere}a{color:var(--color-primary)}button{font:inherit;padding:.65rem;margin:.5rem;border:1px solid var(--color-primary);border-radius:var(--radius-control);background:white;color:var(--color-primary)}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShortlistNotice {
@@ -43,7 +43,7 @@ export class ShortlistNotice {
       {{ shortlist.busy() === plant().id ? 'Saving…' : shortlist.has(plant().id) ? 'Saved to shortlist' : 'Save to shortlist' }}
     </button>
   }`,
-  styles: `:host{display:block;margin-block:.75rem}button{font:inherit;padding:.65rem;border:1px solid #235b37;border-radius:.4rem;background:white;color:#235b37;max-width:100%;overflow-wrap:anywhere}button[aria-pressed=true]{background:#235b37;color:white}button:focus-visible{outline:3px solid #235b37;outline-offset:3px}`,
+  styles: `:host{display:block;margin-block:.75rem}button{font:inherit;padding:.65rem;border:1px solid var(--color-primary);border-radius:var(--radius-control);background:white;color:var(--color-primary);max-width:100%;overflow-wrap:anywhere}button[aria-pressed=true]{background:var(--color-primary);color:white}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShortlistButton {

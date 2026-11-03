@@ -1,10 +1,28 @@
+/* Shared visual tokens: component styles own layout and semantic states. */
+:root {
+  color-scheme: light;
+  --color-primary: #21634b;
+  --color-primary-hover: #164d39;
+  --color-text: #202f29;
+  --color-muted: #56675f;
+  --color-border: #dce5df;
+  --color-input-border: #91a69a;
+  --color-tint: #edf5ef;
+  --color-danger: #a12b36;
+  --color-danger-tint: #fff0f1;
+  --color-surface: #fff;
+  --radius-control: .75rem;
+  --radius-card: 1.25rem;
+  --shadow-card: 0 4px 20px rgb(24 58 41 / 5%);
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  color: #17221a;
-  background: #f7faf7;
+  color: var(--color-text);
+  background: #f6f8f5;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -26,9 +44,9 @@ body {
   z-index: 1000;
   transform: translateY(-200%);
   padding: 0.75rem 1rem;
-  border-radius: 0.4rem;
+  border-radius: var(--radius-control);
   background: #fff;
-  color: #17221a;
+  color: var(--color-text);
   font-weight: 700;
 }
 .skip-link:focus { transform: none; }
@@ -59,10 +77,10 @@ select {
 .auth-card {
   width: min(100%, 440px);
   padding: 2rem;
-  border: 1px solid #dce5de;
+  border: 1px solid var(--color-border);
   border-radius: 1.25rem;
   background: white;
-  box-shadow: 0 16px 40px rgb(20 60 30 / 10%);
+  box-shadow: var(--shadow-card);
 }
 
   .auth-card h1 {
@@ -72,7 +90,7 @@ select {
 
 .auth-intro {
   margin: 0.75rem 0 1.75rem;
-  color: #59655e;
+  color: var(--color-muted);
   line-height: 1.5;
 }
 
@@ -90,13 +108,13 @@ select {
   min-width: 0;
   width: 100%;
   padding: 0.8rem 0.9rem;
-  border: 1px solid #becac1;
-  border-radius: 0.65rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-control);
   outline: none;
 }
 
   .auth-card input:focus {
-    border-color: #377a4b;
+    border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgb(55 122 75 / 14%);
   }
 
@@ -104,15 +122,15 @@ select {
   margin-top: 1rem;
   padding: 0.85rem 1rem;
   border: 0;
-  border-radius: 0.65rem;
-  background: #377a4b;
+  border-radius: var(--radius-control);
+  background: var(--color-primary);
   color: white;
   font-weight: 700;
   cursor: pointer;
 }
 
   .auth-card button:hover:not(:disabled) {
-    background: #2d663e;
+    background: var(--color-primary-hover);
   }
 
   .auth-card button:disabled {
@@ -122,7 +140,7 @@ select {
 
 .field-hint {
   margin: 0;
-  color: #69746d;
+  color: var(--color-muted);
   font-size: 0.82rem;
   line-height: 1.4;
 }
@@ -130,16 +148,16 @@ select {
 .field-error,
 .form-error {
   margin: 0;
-  color: #a12828;
+  color: var(--color-danger);
   font-size: 0.85rem;
 }
 
 .form-success {
   margin: 1rem 0;
   padding: 0.75rem;
-  border-radius: 0.5rem;
-  background: #eaf7ed;
-  color: #245d36;
+  border-radius: var(--radius-control);
+  background: var(--color-tint);
+  color: var(--color-primary);
   line-height: 1.5;
 }
 
@@ -150,24 +168,75 @@ select {
 }
 
   .field-action a {
-    color: #2f7044;
+    color: var(--color-primary);
     font-weight: 650;
   }
 
 .form-error {
   margin-top: 0.5rem;
   padding: 0.75rem;
-  border-radius: 0.5rem;
-  background: #fff0f0;
+  border-radius: var(--radius-control);
+  background: var(--color-danger-tint);
 }
 
 .auth-alternative {
   margin: 1.5rem 0 0;
   text-align: center;
-  color: #59655e;
+  color: var(--color-muted);
 }
 
   .auth-alternative a {
-    color: #2f7044;
+    color: var(--color-primary);
     font-weight: 700;
   }
+
+/* Native controls keep their semantics and platform affordances. */
+:where(button, input, select, textarea) { color: var(--color-text); }
+:where(button) {
+  min-height: 44px;
+  padding: .65rem 1rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: 600;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+:where(button:not(:disabled):hover) { box-shadow: 0 2px 6px rgb(24 58 41 / 12%); }
+:where(button:disabled) { opacity: .55; cursor: default; }
+:where(input:not([type=checkbox], [type=radio]), select, textarea) {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: .7rem .85rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  line-height: 1.45;
+}
+:where(input[type=checkbox], input[type=radio]) { accent-color: var(--color-primary); }
+:where(textarea) { resize: vertical; }
+:where(input::placeholder, textarea::placeholder) { color: var(--color-muted); opacity: 1; }
+:where(input[type=file])::file-selector-button {
+  margin-inline-end: .75rem;
+  padding: .55rem .8rem;
+  border: 0;
+  border-radius: .5rem;
+  background: var(--color-tint);
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+:where(h1, h2, h3) { color: var(--color-text); line-height: 1.2; text-wrap: balance; }
+:where(h1) { font-size: clamp(2rem, 4vw, 3.25rem); letter-spacing: -.035em; }
+:where(h2) { letter-spacing: -.02em; }
+:where(a) { color: var(--color-primary); text-underline-offset: .2em; }
+:where(summary) { border-radius: var(--radius-control); }
+:where(fieldset) { min-inline-size: 0; }
+:where(table) { border-collapse: collapse; }
+:where(th, td) { padding: .8rem; text-align: start; }
+:where(th) { background: var(--color-tint); }
+@media (max-width: 480px) { .auth-card { padding: 1.5rem; } }

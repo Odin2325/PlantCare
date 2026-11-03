@@ -22,7 +22,7 @@ import { NotificationsApiService } from '../../features/notifications/data-acces
     @if (busy()) { <p role="status">Saving reminder…</p> }
     @if (error()) { <p role="alert">{{ error() }}</p> }
   `,
-  styles: `:host{display:block;min-width:0}.snooze-controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}button{font:inherit;padding:.5rem .75rem;border:1px solid #377a4b;border-radius:.5rem;background:white;color:#235b37;cursor:pointer}button:focus-visible{outline:3px solid #235b37;outline-offset:2px}button:disabled{opacity:.6;cursor:wait}p{overflow-wrap:anywhere;line-height:1.5}`,
+  styles: `:host{display:block;min-width:0}.snooze-controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}button{font:inherit;padding:.5rem .75rem;border:1px solid var(--color-primary);border-radius:var(--radius-control);background:white;color:var(--color-primary);cursor:pointer}button:disabled{opacity:.6;cursor:wait}p{overflow-wrap:anywhere;line-height:1.5}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReminderSnooze {

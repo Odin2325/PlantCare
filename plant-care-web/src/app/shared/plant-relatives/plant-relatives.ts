@@ -61,9 +61,8 @@ export function catalogVarietyGroup(plant: PlantSpecies): string | null {
   `,
   styles: `
     :host{display:block;margin-block:2rem;min-width:0}.relatives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
-    article{padding:1rem;border:1px solid #c2cec5;border-radius:.65rem;min-width:0;overflow-wrap:anywhere}h3{margin-top:0}a{color:#245c37}
-    button{font:inherit;padding:.65rem;border:1px solid #245c37;border-radius:.4rem;background:white;color:#245c37}
-    a:focus-visible,button:focus-visible{outline:3px solid #245c37;outline-offset:3px}
+    article{padding:1rem;border:1px solid var(--color-input-border);border-radius:.65rem;min-width:0;overflow-wrap:anywhere}h3{margin-top:0}a{color:var(--color-primary)}
+    button{font:inherit;padding:.65rem;border:1px solid var(--color-primary);border-radius:var(--radius-control);background:white;color:var(--color-primary)}
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

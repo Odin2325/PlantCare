@@ -128,7 +128,8 @@ staging release and catalog totals above remain unchanged.
 The [personal photo-journal design](photo-journal-design.md) is now complete.
 It specifies bounded private SQL image storage, upload/resource limits,
 normalization without source metadata, owner-only access, export/deletion and
-restored-account erasure checks. Uploads remain unimplemented and disabled.
+restored-account erasure checks. Uploads remain disabled; implementation followed
+in the local slices below.
 The [isolated normalizer prototype](photo-normalization.md) is implemented locally
 with pinned dependency/notice review and fifteen focused tests. The following
 slice delivered the [standalone isolated decoder](photo-process-isolation.md),
@@ -143,3 +144,9 @@ intake, save reconciliation, viewer/edit/delete controls and draft guards. Next
 is a combined candidate/CI/recovery and staging-preparation checkpoint, with both
 photo flags kept off until activation acceptance. Capacity and migrated backup/recovery
 acceptance remain checkpoint gates; no new provider or paid service is required.
+
+The [shared visual refresh](visual-refresh.md) now modernizes native controls,
+navigation, account panels, typography and the shared botanical palette across
+the page families. It fixes phone-width add-plant and collection form overflow
+and adds a three-browser synthetic reflow/accessibility audit. This source work
+joins the same pending combined checkpoint; it does not imply a staging update.

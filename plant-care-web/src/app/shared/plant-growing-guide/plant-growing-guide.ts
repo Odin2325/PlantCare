@@ -21,7 +21,7 @@ import { plantCategoryLabel } from '../plant-categories';
       }
     }
   `,
-  styles: `:host{display:block;min-width:0}section{margin:2rem 0;padding:1.25rem;border:1px solid #bbc9be;border-radius:.75rem;background:#f2f7f3;color:#263c2d}p{line-height:1.6;overflow-wrap:anywhere}h2{margin-top:0}h3{font-size:1.1rem}a{color:#235b37}a:focus-visible{outline:3px solid #235b37;outline-offset:3px}`,
+  styles: `:host{display:block;min-width:0}section{margin:2rem 0;padding:1.25rem;border:1px solid var(--color-input-border);border-radius:.75rem;background:var(--color-tint);color:var(--color-text)}p{line-height:1.6;overflow-wrap:anywhere}h2{margin-top:0}h3{font-size:1.1rem}a{color:var(--color-primary)}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlantGrowingGuide {

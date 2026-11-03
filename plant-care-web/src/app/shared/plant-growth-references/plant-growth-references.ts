@@ -27,10 +27,10 @@ import { PlantPhoto } from '../plant-photo/plant-photo';
     }
   `,
   styles: `
-    :host{display:block;min-width:0}section{margin:2rem 0;color:#263c2d}h2{font-size:1.5rem}p{line-height:1.6}
+    :host{display:block;min-width:0}section{margin:2rem 0;color:var(--color-text)}h2{font-size:1.5rem}p{line-height:1.6}
     .references{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1.5rem}
-    article{min-width:0;padding:1rem;border:1px solid #d6e3d7;border-radius:.75rem;background:#f8fbf8}
-    h3{margin-top:0;font-size:1.1rem}.source{font-size:.875rem}a{color:#235b37}a:focus-visible{outline:3px solid #235b37;outline-offset:3px}
+    article{min-width:0;padding:1rem;border:1px solid var(--color-border);border-radius:.75rem;background:var(--color-tint)}
+    h3{margin-top:0;font-size:1.1rem}.source{font-size:.875rem}a{color:var(--color-primary)}
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

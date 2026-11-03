@@ -14,7 +14,7 @@
 
 .eyebrow {
   margin: 0 0 0.4rem;
-  color: #377a4b;
+  color: var(--color-primary);
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -29,7 +29,7 @@
 
 .subtitle {
   margin-top: 0.75rem;
-  color: #68736c;
+  color: var(--color-muted);
   font-size: 1.05rem;
 }
 
@@ -82,7 +82,7 @@
   height: 1.75rem;
   padding: 0 0.45rem;
   place-items: center;
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   background: #edf2ee;
   font-size: 0.8rem;
   font-weight: 700;
@@ -100,8 +100,8 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.2rem;
-  border: 1px solid #dce5de;
-  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
   background: white;
 }
 
@@ -121,7 +121,7 @@
   height: 3rem;
   place-items: center;
   border-radius: 0.8rem;
-  background: #eef5ef;
+  background: var(--color-tint);
   font-size: 1.4rem;
 }
 
@@ -132,12 +132,12 @@
 
 .care-card p {
   margin: 0.2rem 0;
-  color: #68736c;
+  color: var(--color-muted);
   font-size: 0.85rem;
 }
 
 .care-action {
-  color: #377a4b;
+  color: var(--color-primary);
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -146,8 +146,8 @@
   flex-shrink: 0;
   padding: 0.7rem 1.1rem;
   border: 0;
-  border-radius: 0.6rem;
-  background: #377a4b;
+  border-radius: var(--radius-control);
+  background: var(--color-primary);
   color: white;
   font: inherit;
   font-weight: 700;
@@ -168,9 +168,9 @@
   gap: 1rem;
   margin-bottom: 2.5rem;
   padding: 1.5rem;
-  border: 1px solid #dce5de;
-  border-radius: 1rem;
-  background: #f2f7f3;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-tint);
 }
 
 .all-good-icon {
@@ -180,7 +180,7 @@
   height: 3rem;
   place-items: center;
   border-radius: 50%;
-  background: #377a4b;
+  background: var(--color-primary);
   color: white;
   font-size: 1.3rem;
   font-weight: 800;
@@ -193,7 +193,7 @@
 
 .all-good p {
   margin: 0.35rem 0 0;
-  color: #68736c;
+  color: var(--color-muted);
 }
 
 .loading-state,
@@ -204,7 +204,7 @@
 
 .error-state {
   border: 1px solid #f0cccc;
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   background: #fff5f5;
 }
 
@@ -212,8 +212,8 @@
     margin-top: 1rem;
     padding: 0.7rem 1.1rem;
     border: 0;
-    border-radius: 0.6rem;
-    background: #377a4b;
+    border-radius: var(--radius-control);
+    background: var(--color-primary);
     color: white;
     font: inherit;
     font-weight: 700;
