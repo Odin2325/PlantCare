@@ -11,8 +11,8 @@
   --color-danger: #a12b36;
   --color-danger-tint: #fff0f1;
   --color-surface: #fff;
-  --radius-control: .75rem;
-  --radius-card: 1.25rem;
+  --radius-control: 1rem;
+  --radius-card: 1.5rem;
   --shadow-card: 0 4px 20px rgb(24 58 41 / 5%);
 }
 
@@ -195,14 +195,14 @@ select {
 :where(button) {
   min-height: 44px;
   padding: .65rem 1rem;
-  border: 1px solid var(--color-input-border);
+  border: 1px solid transparent;
   border-radius: var(--radius-control);
-  background: var(--color-surface);
+  background: var(--color-tint);
   color: var(--color-primary);
   font-weight: 600;
   line-height: 1.35;
   cursor: pointer;
-  transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 :where(button:not(:disabled):hover) { box-shadow: 0 2px 6px rgb(24 58 41 / 12%); }
 :where(button:disabled) { opacity: .55; cursor: default; }
@@ -230,7 +230,7 @@ select {
   font-weight: 600;
   cursor: pointer;
 }
-:where(h1, h2, h3) { color: var(--color-text); line-height: 1.2; text-wrap: balance; }
+:where(h1, h2, h3) { font-weight: 650; color: var(--color-text); line-height: 1.2; text-wrap: balance; }
 :where(h1) { font-size: clamp(2rem, 4vw, 3.25rem); letter-spacing: -.035em; }
 :where(h2) { letter-spacing: -.02em; }
 :where(a) { color: var(--color-primary); text-underline-offset: .2em; }
@@ -240,3 +240,9 @@ select {
 :where(th, td) { padding: .8rem; text-align: start; }
 :where(th) { background: var(--color-tint); }
 @media (max-width: 480px) { .auth-card { padding: 1.5rem; } }
+
+:where(summary){min-height:48px;cursor:pointer;line-height:1.5}
+:where(p){line-height:1.6}
+:where(button:not(:disabled)):active{transform:translateY(1px)}
+:where(input:not([type=checkbox],[type=radio]),select,textarea):focus{border-color:var(--color-primary)}
+@media(max-width:767px){:where(main){scroll-margin-top:1rem}button,input,select,textarea{scroll-margin-bottom:100px}}

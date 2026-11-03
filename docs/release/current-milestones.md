@@ -150,3 +150,10 @@ navigation, account panels, typography and the shared botanical palette across
 the page families. It fixes phone-width add-plant and collection form overflow
 and adds a three-browser synthetic reflow/accessibility audit. This source work
 joins the same pending combined checkpoint; it does not imply a staging update.
+
+The owner's follow-up makes phone/tablet use the priority. The
+[mobile-first layout](mobile-first-layout.md) adds adaptive bottom/rail navigation,
+collapsible catalog filters and reminder settings, paged reminder history and a
+compact month grid with a selected-day agenda. It also corrects transient calendar
+view-switch contrast found by the first combined CI run. Delivery still requires
+the new exact candidate's CI, recovery and installed-session update acceptance.

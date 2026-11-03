@@ -1,3 +1,4 @@
+import { openCatalogTools } from './ui-controls';
 import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
@@ -31,7 +32,7 @@ test('related cultivars: photo filters combine with search and preserve URL cont
     const plant = catalog.find(p => path === '/api/plant-species/' + p.id);
     return route.fulfill(plant ? { json: plant } : { status: 404, json: {} });
   });
-  await page.goto('/plants?category=vegetable&q=tomato&cultivarPhoto=available&compare=' + catalog[0].id);
+  await page.goto('/plants?category=vegetable&q=tomato&cultivarPhoto=available&compare=' + catalog[0].id); await openCatalogTools(page);
   const cards = page.locator('.plant-card');
   const filter = page.getByRole('combobox', { name: 'Cultivar photos', exact: true });
   await expect(filter).toHaveValue('available');
@@ -46,7 +47,7 @@ test('related cultivars: photo filters combine with search and preserve URL cont
   await filter.selectOption('pending');
   await expect(cards.locator('h2')).toHaveText(['Tomato (Legacy)', 'Tomato (Tiny Tim)']);
   await expect(cards.locator('img')).toHaveCount(0);
-  await page.reload(); await expect(filter).toHaveValue('pending');
+  await page.reload(); await openCatalogTools(page); await expect(filter).toHaveValue('pending');
   await page.getByRole('searchbox', { name: 'Find a plant', exact: true }).fill('Tiny Tim');
   await expect(cards.locator('h2')).toHaveText(['Tomato (Tiny Tim)']);
   expect(new URL(page.url()).searchParams.get('category')).toBe('vegetable');
@@ -93,7 +94,7 @@ test('related cultivars preserve browsing context and show exact photos or named
     const plant = catalog.find(p => path === '/api/plant-species/' + p.id);
     return route.fulfill(plant ? { json: plant } : { status: 404, json: {} });
   });
-  await page.goto('/plants/' + ids.tiny + '?category=vegetable&q=tomato&compare=' + ids.general);
+  await page.goto('/plants/' + ids.tiny + '?category=vegetable&q=tomato&compare=' + ids.general); await openCatalogTools(page);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Cherry tomato (Tiny Tim)');
   const primary = page.locator('.plant-detail-page > app-plant-photo');
   await expect(primary).toContainText('Cultivar photo pending'); await expect(primary).toContainText('Tiny Tim');
@@ -136,7 +137,7 @@ test('related cultivars preserve browsing context and show exact photos or named
   await page.setViewportSize({ width: 320, height: 900 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Compared growing and harvest guidance');
-  await page.goto(sharedUrl);
+  await page.goto(sharedUrl); await openCatalogTools(page);
   await expect(page.locator('.comparison-card h2')).toHaveText(['Plum tomato (Roma)', 'Cherry tomato (Tiny Tim)']);
   await page.goBack();
   await page.goBack();

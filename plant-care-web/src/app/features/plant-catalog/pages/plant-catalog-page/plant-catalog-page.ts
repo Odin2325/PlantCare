@@ -34,6 +34,8 @@ import { ShortlistButton, ShortlistNotice } from '../../../../shared/plant-short
 export class PlantCatalogPage {
   readonly shortlist = inject(ShortlistService);
   readonly showShortlist = signal(false);
+  readonly filtersExpanded = signal(false);
+  readonly advancedFilterCount = computed(() => [this.category(), this.kind(), this.light(), this.pets(), this.growth(), this.cultivarPhoto(), this.showShortlist(), this.sort() !== 'name-asc'].filter(Boolean).length);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly plantSpeciesApi =

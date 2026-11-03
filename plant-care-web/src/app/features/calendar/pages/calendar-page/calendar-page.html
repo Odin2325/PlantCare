@@ -3,6 +3,7 @@
     <div><p class="eyebrow">{{ viewedShare() ? 'Shared calendar · ' + viewedShare()!.ownerEmail : 'Plant care plan' }}</p><h1>{{ periodTitle() }}</h1></div>
     <div class="controls"><button type="button" (click)="changePeriod(-1)" aria-label="Previous period">←</button><button type="button" (click)="goToToday()">Today</button><button type="button" (click)="changePeriod(1)" aria-label="Next period">→</button></div>
   </header>
+  @if (sharingMessage()) { <p role="status">{{ sharingMessage() }}</p> }
   @if (viewedShare()) { <div class="shared-banner"><span>You are viewing a read-only shared calendar.</span><button type="button" (click)="viewOwnCalendar()">Return to my calendar</button></div> }
   <section class="toolbar" aria-label="Calendar filters">
     <div class="view-switch" role="group" aria-label="Calendar view">
@@ -10,9 +11,11 @@
         <button type="button" [class.active]="calendarView() === view" [attr.aria-pressed]="calendarView() === view" (click)="setCalendarView($any(view))">{{ view }}</button>
       }
     </div>
+    <details class="calendar-filter-panel"><summary>Filter events</summary><div class="calendar-filter-fields">
     <label>Plant<select [ngModel]="selectedPlantId()" (ngModelChange)="selectedPlantId.set($event)"><option value="all">All plants</option>@for (plant of plants(); track plant.id) { <option [value]="plant.id">{{ plant.name }}</option> }</select></label>
     <label>Care action<select [ngModel]="selectedAction()" (ngModelChange)="selectedAction.set($event)"><option value="All">All actions</option>@for (action of actions(); track action) { <option [value]="action">{{ action }}</option> }</select></label>
     <label>Status<select [ngModel]="selectedKind()" (ngModelChange)="selectedKind.set($event)"><option value="All">All events</option><option value="Scheduled">Scheduled</option><option value="Completed">Completed</option></select></label>
+    </div></details>
     <div class="legend"><span><i class="scheduled"></i>Scheduled</span><span><i class="completed"></i>Completed</span></div>
   </section>
   @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
@@ -22,6 +25,9 @@
       @for (weekday of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track weekday) { <strong class="weekday">{{ weekday }}</strong> }
       @for (day of monthDays(); track day.date.toISOString()) {
         <article class="day" [class.outside]="!day.isCurrentMonth">
+          <button type="button" class="day-select" [class.selected]="selectedMonthDay()?.date?.toDateString() === day.date.toDateString()" [attr.aria-pressed]="selectedMonthDay()?.date?.toDateString() === day.date.toDateString()" [attr.aria-label]="(day.date | date:'fullDate') + ', ' + day.entries.length + ' care events'" (click)="selectDay(day.date)">
+            <span>{{ day.date.getDate() }}</span><small>{{ day.entries.length ? day.entries.length : ' ' }}</small>
+          </button>
           <time [attr.datetime]="day.date.toISOString()">{{ day.date.getDate() }}</time>
           @for (entry of day.entries; track entry.id) {
             <div class="event" [class.completed]="entry.kind === 'Completed'">
@@ -36,6 +42,20 @@
         </article>
       }
     </section>
+    @if (selectedMonthDay(); as day) {
+      <section class="month-agenda" aria-label="Selected day care" aria-live="polite">
+        <h2>{{ day.date | date:'EEEE, MMMM d' }}</h2>
+        @if (!day.entries.length) { <p class="no-events">No care events on this day.</p> }
+        @for (entry of day.entries; track entry.id) {
+          <div class="event" [class.completed]="entry.kind === 'Completed'">
+            @if (!viewedShare()) {
+              <a class="event-link" [routerLink]="['/my-plants', entry.userPlantId]"><strong>{{ entry.plantName }}</strong><small>{{ entry.startsAtUtc | date:'shortTime' }} · {{ entry.actionType }} · {{ entry.kind }}</small></a>
+            } @else { <strong>{{ entry.plantName }}</strong><p>{{ entry.actionType }} · {{ entry.kind }}</p> }
+            <button type="button" class="event-details" (click)="selectEntry(entry)" [attr.aria-label]="'Care details for ' + entry.plantName + ' · ' + entry.actionType">Care details</button>
+          </div>
+        }
+      </section>
+    }
   } @else if (calendarView() === 'Week') {
     <section class="week-calendar" aria-label="Weekly plant care calendar">
       @for (day of weekDays(); track day.date.toISOString()) {
@@ -90,6 +110,7 @@
       @if (entry.kind === 'Scheduled' && !canComplete(entry)) { <p class="hint">This care action can be completed here once it is due.</p> }
     </aside>
   }
+  <details class="calendar-connections"><summary>Sharing &amp; calendar apps</summary>
   <section class="subscription">
     <div><p class="eyebrow">Calendar subscription</p><h2>Use PlantCare in your calendar app</h2><p>Generate a private read-only link for Apple Calendar, Google Calendar, Outlook, or another app that supports iCalendar subscriptions.</p></div>
     @if (subscriptionActive()) {
@@ -153,6 +174,6 @@
     <div class="share-form"><label>Recipient email<input type="email" [ngModel]="recipientEmail()" (ngModelChange)="recipientEmail.set($event)" placeholder="gardener@example.com"></label><button type="button" [disabled]="sharingBusy() || !recipientEmail().trim()" (click)="createShare()">Share calendar</button></div>
     @if (outgoingShares().length) { <h3>Shared by me</h3><ul>@for (share of outgoingShares(); track share.id) { <li><span>{{ share.recipientEmail }} @if (share.isPendingInvitation) { <small>Invitation pending — expires {{ share.expiresAtUtc | date }}</small> }</span><button type="button" [disabled]="sharingBusy()" (click)="sendShareEmail(share)" [attr.aria-label]="'Send sharing email to ' + share.recipientEmail">Send email</button><button type="button" class="danger" [disabled]="sharingBusy()" (click)="revokeShare(share)">Revoke</button></li> }</ul> }
     @if (incomingShares().length) { <h3>Shared with me</h3><ul>@for (share of incomingShares(); track share.id) { <li><span>{{ share.ownerEmail }}</span><button type="button" (click)="viewSharedCalendar(share)">View calendar</button></li> }</ul> }
-    @if (sharingMessage()) { <p role="status">{{ sharingMessage() }}</p> }
   </section>
+  </details>
 </main>

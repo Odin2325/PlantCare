@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize, take, fromEvent, merge, timer } from 'rxjs';
@@ -11,7 +12,7 @@ import { ReminderSnooze } from '../../../../shared/reminder-snooze/reminder-snoo
 @Component({
   selector: 'app-notifications-page',
   standalone: true,
-  imports: [DatePipe, ReminderSnooze],
+  imports: [DatePipe, ReminderSnooze, RouterLink],
   templateUrl: './notifications-page.html',
   styleUrl: './notifications-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,12 @@ export class NotificationsPage {
   private readonly destroyRef = inject(DestroyRef);
   private readonly swPush = inject(SwPush);
   readonly notifications = signal<CareNotification[]>([]);
+  readonly requestedPage = signal(1);
+  readonly pageCount = computed(() => Math.max(1, Math.ceil(this.notifications().length / 12)));
+  readonly page = computed(() => Math.min(this.requestedPage(), this.pageCount()));
+  readonly pagedNotifications = computed(() => this.notifications().slice((this.page() - 1) * 12, this.page() * 12));
+  changePage(delta: number): void { this.requestedPage.set(Math.max(1, Math.min(this.pageCount(), this.page() + delta))); }
+
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
   readonly pushAvailable = signal(false);

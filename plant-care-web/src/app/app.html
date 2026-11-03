@@ -29,59 +29,27 @@
     PlantCare
   </a>
 
-  <nav aria-label="Main navigation">
-    <a routerLink="/plants"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      Plant catalog
-    </a>
-
+  <nav aria-label="Main navigation" class="primary-navigation">
     @if (authService.isAuthenticated()) {
-    <a routerLink="/my-plants"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      My plants
-    </a>
-
-    <a routerLink="/dashboard"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      Dashboard
-    </a>
-
-    <a routerLink="/garden"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      Garden
-    </a>
-
-    <a routerLink="/notifications"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      Notifications
-    </a>
-
-    <a routerLink="/calendar"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      Calendar
-    </a>
-
-    <span class="account-email">
-      {{ authService.currentUser()?.email }}
-    </span>
-
-    <a routerLink="/account" routerLinkActive="active" ariaCurrentWhenActive="page">Account</a>
-
-    <button type="button"
-            [disabled]="isLoggingOut()"
-            (click)="logout()">
-      Log out
-    </button>
+    <a routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8M5 10v10h5v-6h4v6h5V10" /></svg><span>Dashboard</span></a>
+    <a routerLink="/my-plants" routerLinkActive="active" ariaCurrentWhenActive="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9M12 14C5 14 3 10 3 5c6 0 9 3 9 9Zm0-3c0-5 3-8 9-8 0 5-3 8-9 8Z" /></svg><span>My plants</span></a>
+    <a routerLink="/plants" routerLinkActive="active" ariaCurrentWhenActive="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" /></svg><span>Plant catalog</span></a>
+    <a routerLink="/calendar" routerLinkActive="active" ariaCurrentWhenActive="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1ZM8 3v4M16 3v4M4 10h16M8 14h1M13 14h1M8 17h1" /></svg><span>Calendar</span></a>
+    <details class="app-more" #moreMenu (keydown.escape)="moreMenu.open = false">
+      <summary [class.active]="secondaryRoute()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h14" /></svg><span>More</span></summary>
+      <div class="more-panel">
+        <p class="menu-label">Explore PlantCare</p>
+        <a routerLink="/garden" routerLinkActive="active" ariaCurrentWhenActive="page">Garden</a>
+        <a routerLink="/notifications" routerLinkActive="active" ariaCurrentWhenActive="page">Notifications</a>
+        <a routerLink="/account" routerLinkActive="active" ariaCurrentWhenActive="page">Account</a>
+        <span class="account-email">{{ authService.currentUser()?.email }}</span>
+        <button type="button" [disabled]="isLoggingOut()" (click)="logout()">Log out</button>
+      </div>
+    </details>
     } @else {
-    <a routerLink="/login"
-       routerLinkActive="active" ariaCurrentWhenActive="page">
-      Log in
-    </a>
-
-    <a class="register-link"
-       routerLink="/register">
-      Register
-    </a>
+      <a routerLink="/plants" routerLinkActive="active" ariaCurrentWhenActive="page">Plant catalog</a>
+      <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Log in</a>
+      <a class="register-link" routerLink="/register">Register</a>
     }
   </nav>
 </header>

@@ -1,3 +1,4 @@
+import { openMoreMenu, openCalendarTools } from './ui-controls';
 import { randomUUID, randomBytes } from 'node:crypto';
 import { expect, test, type Page } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
@@ -63,6 +64,7 @@ test('calendar sharing sends mail and opens only the invited account calendar', 
     await page.getByLabel('Password', { exact: true }).fill(password);
     await auth(page, 'Log in', 'login');
     await page.goto(origin + '/calendar');
+    await openCalendarTools(page);
     await page.getByLabel('Recipient email', { exact: true }).fill(recipient);
     await page.getByRole('button', { name: 'Share calendar', exact: true }).click();
     await expect(page.getByText('Invitation emailed.', { exact: false })).toBeVisible();
@@ -81,6 +83,7 @@ test('calendar sharing sends mail and opens only the invited account calendar', 
     await auditAccessibility(invited, 'Invited read-only calendar');
     await expect.poll(() => new URL(invited.url()).searchParams.has('share')).toBe(true);
     await page.reload();
+    await openCalendarTools(page);
     await page.getByRole('button', { name: 'Send sharing email to ' + recipient, exact: true }).click();
     await expect(page.getByText('The invitation email was sent.', { exact: false })).toBeVisible();
     await page.getByRole('button', { name: 'Revoke', exact: true }).click();

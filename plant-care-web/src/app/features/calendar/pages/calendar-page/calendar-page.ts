@@ -28,6 +28,14 @@ export class CalendarPage {
   readonly visibleDate = signal(new Date());
   readonly calendarView = signal<CalendarView>(this.loadSavedView());
   readonly entries = signal<CalendarEntry[]>([]);
+  readonly selectedDay = signal(new Date());
+  readonly selectedMonthDay = computed(() => {
+    const days = this.monthDays().filter(day => day.isCurrentMonth);
+    return days.find(day => day.date.toDateString() === this.selectedDay().toDateString())
+      ?? days.find(day => day.entries.length > 0) ?? days[0];
+  });
+  selectDay(date: Date): void { this.selectedDay.set(date); this.selectedEntry.set(null); }
+
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly selectedPlantId = signal('all');

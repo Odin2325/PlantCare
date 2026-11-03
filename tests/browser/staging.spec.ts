@@ -1,3 +1,4 @@
+import { openMoreMenu, openCalendarTools } from './ui-controls';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { expect, test, type Page } from '@playwright/test';
@@ -121,10 +122,12 @@ test('public staging core journey, sampled accessibility and two-account isolati
       await b.goto(`/my-plants/${plantId}`);
       await expect(b.getByRole('alert')).toHaveText('This plant could not be found.');
       await expect(b.getByRole('heading', { name: nickname, exact: true })).toBeHidden();
+    await openMoreMenu(b);
       await submit(b, 'Log out', 'logout', 204);
     } finally { await other.close(); }
 
     stage('notifications');
+    await openMoreMenu(page);
     await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Notifications', exact: true }).click();
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeVisible();
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeChecked();
@@ -147,10 +150,12 @@ test('public staging core journey, sampled accessibility and two-account isolati
     await auditAccessibility(page, 'Public staging care history');
     stage('calendar');
     await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Calendar', exact: true }).click();
+    await openCalendarTools(page);
     await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
     await page.getByRole('button', { name: 'Agenda', exact: true }).click();
     await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
-    await page.getByLabel(/^Status/).selectOption('Completed');
+    await openCalendarTools(page);
+  await page.getByLabel(/^Status/).selectOption('Completed');
     const event = page.locator('.agenda-event .event-link').filter({ hasText: nickname });
     await expect(event).toHaveCount(1);
     await expect(event).toContainText('Watering');
@@ -168,9 +173,11 @@ test('public staging core journey, sampled accessibility and two-account isolati
     await expect(card).toBeVisible();
     await card.getByRole('button', { name: 'Archive plant', exact: true }).click();
     stage('logout');
+    await openMoreMenu(page);
     await submit(page, 'Log out', 'logout', 204);
     await login(page, data.b); await page.goto('/my-plants');
     await expect(page.getByRole('heading', { name: nickname, exact: true })).toBeHidden();
+    await openMoreMenu(page);
     await submit(page, 'Log out', 'logout', 204);
     await page.goto('/my-plants'); await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
     expect(errors, 'Uncaught public browser errors').toEqual([]);
@@ -205,6 +212,7 @@ test('installed-worker upgrade preserves session and calendar data across real r
   stage('upgrade-previous-launch');
   await login(page, data.a);
   await page.goto('/calendar');
+    await openCalendarTools(page);
   await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller)), { timeout: 60_000 }).toBe(true);
   await page.reload();
@@ -244,6 +252,7 @@ test('installed-worker upgrade preserves session and calendar data across real r
   expect(completedAfter).toEqual(completedBefore);
   await page.getByRole('button', { name: 'Agenda', exact: true }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Loading calendar' })).toBeHidden();
+  await openCalendarTools(page);
   await page.getByLabel(/^Status/).selectOption('Completed');
   const link = page.locator('.agenda-event a.event-link').first();
   await expect(link).toBeVisible();
@@ -251,6 +260,7 @@ test('installed-worker upgrade preserves session and calendar data across real r
   await expect(page).toHaveURL(/\/my-plants\/[a-f0-9-]+$/);
   await expect(page.getByRole('heading', { level: 1 })).not.toHaveText('Plant details');
   await auditAccessibility(page, 'Upgraded personal plant details');
+    await openMoreMenu(page);
   await submit(page, 'Log out', 'logout', 204);
   writeFileSync(`${directory}/passed.json`, JSON.stringify({ passed: true, nextScript: await script() }));
 });
@@ -292,6 +302,7 @@ test('consume real reset link, reject old password, sign in and log out', async 
   await submit(page, 'Log in', 'login', 401);
   stage('reset-new-password');
   await login(page, data.a);
+    await openMoreMenu(page);
   await submit(page, 'Log out', 'logout', 204);
   } finally { await oldContext.close(); }
 });

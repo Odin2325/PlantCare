@@ -5,6 +5,7 @@
     <p>Reminders stay here until you are ready to review them.</p>
   </header>
 
+  <details class="notification-settings"><summary>Reminder settings <span>Delivery, care actions &amp; devices</span></summary>
   @if (preferences(); as settings) {
     <section class="preference-settings">
       <div>
@@ -37,7 +38,7 @@
         </select>
       </label>
 
-      <button type="button" [disabled]="preferencesBusy()" (click)="savePreferences()">{{ preferencesBusy() ? 'Saving…' : 'Save preferences' }}</button>
+      <button class="primary-button" type="button" [disabled]="preferencesBusy()" (click)="savePreferences()">{{ preferencesBusy() ? 'Saving…' : 'Save preferences' }}</button>
       @if (preferencesMessage()) { <p role="status">{{ preferencesMessage() }}</p> }
     </section>
   } @else if (preferencesMessage()) {
@@ -53,6 +54,7 @@
     @if (pushMessage()) { <p role="status">{{ pushMessage() }}</p> }
   </section>
 
+  </details>
   @if (isLoading()) {
     <p role="status">Loading notifications…</p>
   } @else if (errorMessage()) {
@@ -61,8 +63,8 @@
     <section class="empty"><h2>You are all caught up</h2><p>New care reminders will appear here.</p></section>
   } @else {
     <ul>
-      @for (notification of notifications(); track notification.id) {
-        <li [class.unread]="!notification.readAtUtc">
+      @for (notification of pagedNotifications(); track notification.id) {
+        <li class="notification-card" [class.unread]="!notification.readAtUtc">
           <div><strong>{{ notification.plantName }}</strong>
             @if (notification.canSnooze === false && !notification.snoozedUntilUtc) {
               <p>Past {{ notification.actionType }} reminder · originally due {{ notification.dueAtUtc | date:'medium' }}.</p>
@@ -71,9 +73,17 @@
             }
             <app-reminder-snooze [notification]="notification" (snoozed)="load()" />
           </div>
-          @if (!notification.readAtUtc) { <button type="button" (click)="markRead(notification)">Mark as read</button> }
+          <a class="review-care" routerLink="/dashboard">Review care</a>
+          @if (!notification.readAtUtc) { <button class="read-button" type="button" (click)="markRead(notification)">Mark as read</button> }
         </li>
       }
     </ul>
+    @if (pageCount() > 1) {
+      <nav class="notification-pagination" aria-label="Notification pages">
+        <button type="button" [disabled]="page() === 1" (click)="changePage(-1)">Previous</button>
+        <span role="status">Page {{ page() }} of {{ pageCount() }}</span>
+        <button type="button" [disabled]="page() === pageCount()" (click)="changePage(1)">Next</button>
+      </nav>
+    }
   }
 </main>

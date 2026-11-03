@@ -52,8 +52,8 @@ test('page families reflow with visible focus and accessible controls', async ({
     if (path === '/api/dashboard/care') return route.fulfill({ json: [{ userPlantId: plantId,
       plantName: plant.nickname, speciesCommonName: species.commonName, actionType: 'Watering',
       dueAtUtc: '2026-11-03T10:00:00Z', status: 'DueToday' }] });
-    if (path === '/api/calendar') return route.fulfill({ json: [{ id: 'event', userPlantId: plantId,
-      plantName: plant.nickname, actionType: 'Watering', startsAtUtc: '2026-11-03T10:00:00Z', kind: 'Scheduled' }] });
+    if (path === '/api/calendar') return route.fulfill({ json: ['Scheduled', 'Completed'].map((kind, index) => ({ id: 'event-' + index, userPlantId: plantId,
+      plantName: plant.nickname, actionType: index ? 'Fertilizing' : 'Watering', startsAtUtc: '2026-11-03T10:00:00Z', kind })) });
     if (path === '/api/calendar/subscription') return route.fulfill({ json: { isActive: false, createdAtUtc: null } });
     if (path.includes('/integrations/')) return route.fulfill({ json: { isConfigured: false, isConnected: false } });
     if (path.endsWith('/capabilities')) return route.fulfill({ json: { uploadsEnabled: false, canUpload: false, maximumFileBytes: 8388608 } });
@@ -61,9 +61,9 @@ test('page families reflow with visible focus and accessible controls', async ({
     if (path === '/api/notifications/preferences') return route.fulfill({ json: {
       inAppEnabled: true, pushEnabled: false, wateringEnabled: true, fertilizingEnabled: true,
       mistingEnabled: true, pruningEnabled: true, repottingEnabled: true, reminderLeadTimeHours: 0 } });
-    if (path === '/api/notifications') return route.fulfill({ json: [{ id: 'reminder', userPlantId: plantId,
+    if (path === '/api/notifications') return route.fulfill({ json: Array.from({ length: 13 }, (_, index) => ({ id: 'reminder-' + index, userPlantId: plantId,
       plantName: plant.nickname, actionType: 'Watering', dueAtUtc: '2026-11-03T10:00:00Z',
-      createdAtUtc: '2026-11-03T09:00:00Z', readAtUtc: null, canSnooze: true }] });
+      createdAtUtc: '2026-11-03T09:00:00Z', readAtUtc: null, canSnooze: true })) });
     return route.fulfill({ json: [] });
   });
   const pages = ['/plants', '/plants/' + speciesId, '/plants/compare?compare=' + speciesId + ',' + secondSpeciesId,
@@ -87,12 +87,43 @@ test('page families reflow with visible focus and accessible controls', async ({
       }
     }
   }
-  // A scrollable phone navigation must still reveal its last keyboard target.
+  await page.getByRole('navigation', { name: 'Main navigation' }).getByText('More', { exact: true }).click();
   await page.getByRole('button', { name: 'Log out', exact: true }).focus();
   expect(await page.getByRole('button', { name: 'Log out', exact: true }).evaluate(element => {
     const box = element.getBoundingClientRect();
     return box.left >= 0 && box.right <= innerWidth;
   })).toBe(true);
+  await page.goto('/plants');
+  const filters = page.getByRole('button', { name: /^Filters/ });
+  await expect(filters).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByLabel('Entry type', { exact: true })).toBeHidden();
+  await page.getByRole('searchbox', { name: 'Find a plant', exact: true }).fill('Tomato');
+  await expect(page.locator('.plant-card')).toHaveCount(1);
+  await filters.focus(); await page.keyboard.press('Enter');
+  await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
+  await filters.click();
+  await expect(filters).toHaveText(/Filters\s+1/);
+  await expect(page.locator('.plant-card')).toHaveCount(1);
+  await filters.click(); await auditAccessibility(page, 'Expanded catalog filters');
+  await page.goto('/notifications');
+  await expect(page.locator('.notification-card')).toHaveCount(12);
+  await page.getByRole('navigation', { name: 'Notification pages', exact: true }).getByRole('button', { name: 'Next', exact: true }).click();
+  await expect(page.locator('.notification-card')).toHaveCount(1);
+  await page.getByRole('navigation', { name: 'Notification pages', exact: true }).getByRole('button', { name: 'Previous', exact: true }).click();
+  await expect(page.locator('.notification-card')).toHaveCount(12);
+  await page.locator('.notification-settings > summary').click();
+  await auditAccessibility(page, 'Expanded notification preferences');
+  await page.goto('/calendar');
+  await expect(page.getByRole('region', { name: 'Selected day care', exact: true })).toContainText('Sunny balcony tomato');
+  expect(await page.locator('.month-calendar').evaluate(element => element.scrollWidth <= element.clientWidth + 1)).toBe(true);
+  await page.getByRole('button', { name: /Wednesday, November 4, 2026, 0 care events/ }).click();
+  await expect(page.getByRole('region', { name: 'Selected day care', exact: true })).toContainText('No care events');
+  for (const view of ['Week', 'Agenda', 'Month']) {
+    await page.getByRole('group', { name: 'Calendar view', exact: true }).getByRole('button', { name: view, exact: true }).click();
+    await auditAccessibility(page, 'Calendar ' + view);
+  }
+  await page.locator('.calendar-connections > summary').click();
+  await auditAccessibility(page, 'Calendar connections');
   signedIn = false;
   for (const path of ['/login', '/register', '/forgot-password', '/resend-confirmation', '/reset-password']) {
     await page.goto(path);

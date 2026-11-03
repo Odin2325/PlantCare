@@ -1,3 +1,4 @@
+import { openCatalogTools } from './ui-controls';
 import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
@@ -32,14 +33,14 @@ test('private shortlist persists, combines filters, reconciles failed changes an
     const plant=catalog.find(p=>path==='/api/plant-species/'+p.id);
     return route.fulfill(plant?{json:plant}:{status:404,json:{}});
   });
-  await page.goto('/plants');const notice=page.getByRole('region',{name:'Your plant shortlist',exact:true});
+  await page.goto('/plants'); await openCatalogTools(page);const notice=page.getByRole('region',{name:'Your plant shortlist',exact:true});
   await expect(notice.getByRole('alert')).toContainText('could not be loaded');
   const saveRoma=page.getByRole('button',{name:'Save Tomato (Roma) to shortlist',exact:true});
   await expect(saveRoma).toBeDisabled();failLoad=false;await notice.getByRole('button',{name:'Refresh shortlist',exact:true}).click();
   await saveRoma.click();await expect(notice.getByRole('alert')).toContainText('could not be confirmed');expect(saved.size).toBe(0);
   await notice.getByRole('button',{name:'Refresh shortlist',exact:true}).click();await saveRoma.click();
   await expect(page.getByRole('button',{name:'Remove Tomato (Roma) from shortlist',exact:true})).toHaveAttribute('aria-pressed','true');
-  await page.reload();await expect(page.getByRole('button',{name:'Remove Tomato (Roma) from shortlist',exact:true})).toHaveAttribute('aria-pressed','true');
+  await page.reload(); await openCatalogTools(page);await expect(page.getByRole('button',{name:'Remove Tomato (Roma) from shortlist',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.getByRole('checkbox',{name:'My shortlist only',exact:true}).check();await expect(page.locator('.plant-card h2')).toHaveText(['Tomato (Roma)']);
   expect(new URL(page.url()).searchParams.get('shortlisted')).toBe('1');
   await page.getByRole('searchbox',{name:'Find a plant',exact:true}).fill('Tiny Tim');await expect(page.locator('.plant-card')).toHaveCount(0);
@@ -49,16 +50,16 @@ test('private shortlist persists, combines filters, reconciles failed changes an
   await page.getByRole('button',{name:'Remove Tomato (Roma) from shortlist',exact:true}).click();
   await expect(notice.getByRole('alert')).toContainText('could not be confirmed');expect(saved.size).toBe(0);
   await notice.getByRole('button',{name:'Refresh shortlist',exact:true}).click();await expect(saveRoma).toHaveAttribute('aria-pressed','false');
-  await saveRoma.click();await notice.getByRole('link',{name:'View full shortlist',exact:true}).click();
+  await saveRoma.click();await notice.getByRole('link',{name:'View full shortlist',exact:true}).click();await openCatalogTools(page, true);
   await expect(page.locator('.plant-card h2')).toHaveText(['Tomato (Roma)']);
   await page.getByRole('button',{name:'Clear filters',exact:true}).click();
   for(const name of ['Roma','Tiny Tim'])await page.getByRole('checkbox',{name:`Compare Tomato (${name})`,exact:true}).check();
-  await notice.getByRole('link',{name:'View full shortlist',exact:true}).click();
+  await notice.getByRole('link',{name:'View full shortlist',exact:true}).click();await openCatalogTools(page, true);
   await expect(page.locator('.plant-card h2')).toHaveText(['Tomato (Roma)']);
   expect(new URL(page.url()).searchParams.get('compare')).toBe(ids.join(','));
   await page.getByRole('link',{name:'Compare selected plants',exact:true}).click();await expect(page.locator('.comparison-card')).toHaveCount(2);
   expect([...new URL(await page.getByRole('textbox',{name:'Comparison link',exact:true}).inputValue()).searchParams.keys()]).toEqual(['compare']);
-  await page.getByRole('link',{name:'Back to plant catalog',exact:false}).click();await page.getByRole('checkbox',{name:'My shortlist only',exact:true}).check();
+  await page.getByRole('link',{name:'Back to plant catalog',exact:false}).click(); await openCatalogTools(page, true);await page.getByRole('checkbox',{name:'My shortlist only',exact:true}).check();
   await page.setViewportSize({width:320,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await auditAccessibility(page,'Saved plant shortlist');expect(unexpected).toEqual([]);
 });
@@ -72,6 +73,6 @@ test('anonymous catalog browsing never reads or writes a private shortlist',asyn
     if(path==='/api/plant-species')return route.fulfill({json:[]});
     return route.fulfill({status:401,json:{}});
   });
-  await page.goto('/plants?shortlisted=1');await expect(page.getByRole('link',{name:'Log in to save a shortlist',exact:true})).toBeVisible();
+  await page.goto('/plants?shortlisted=1'); await openCatalogTools(page);await expect(page.getByRole('link',{name:'Log in to save a shortlist',exact:true})).toBeVisible();
   await expect(page.getByRole('button',{name:'Save to shortlist',exact:true})).toHaveCount(0);expect(privateRequests).toBe(0);
 });

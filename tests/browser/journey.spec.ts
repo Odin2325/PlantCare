@@ -1,3 +1,4 @@
+import { openMoreMenu, openCalendarTools } from './ui-controls';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { expect, test, type APIRequestContext, type Page, type Download } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
@@ -167,6 +168,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.getByText('Reminder snoozed until', { exact: false })).toBeVisible();
     await auditAccessibility(page, 'Snoozed dashboard with unchanged due care');
     const nav = page.getByRole('navigation', { name: 'Main navigation' });
+    await openMoreMenu(page);
     await nav.getByRole('link', { name: 'Notifications', exact: true }).click();
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeVisible();
     await auditAccessibility(page, 'Notification preferences');
@@ -211,6 +213,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await edited.getByRole('button', { name: 'Delete', exact: true }).click();
     await expect(page.locator('.history-entry')).toHaveCount(1);
     await nav.getByRole('link', { name: 'Calendar', exact: true }).click();
+    await openCalendarTools(page);
     // Wait for each calendar load before changing view/selecting an entry.
     // A pending response clears the selection when it replaces the entries.
     const calendarLoading = page.getByRole('status').filter({ hasText: 'Loading calendar' });
@@ -276,6 +279,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
       expect(schedule.timeZoneId).toBe('Europe/Berlin');
       expect(schedule.isEnabled).toBe(false);
       await expect(otherWatering.getByRole('button', { name: 'Preview resume', exact: true })).toBeVisible();
+    await openMoreMenu(otherPage);
       await submitAuth(otherPage, 'Log out', 'logout', 204);
       await expect(otherPage.getByRole('heading', { name: 'Welcome back' })).toBeVisible();
     } finally { await travelling.close(); }
@@ -361,6 +365,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await expect(page.locator('.plant-card').getByRole('heading', { name: nickname, exact: true })).toBeVisible();
     await page.reload();
     await expect(page.getByRole('heading', { name: nickname, exact: true })).toBeVisible();
+    await openMoreMenu(page);
     await submitAuth(page, 'Log out', 'logout', 204);
     await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
   });
@@ -392,6 +397,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     // Leave successful runs with only an archived synthetic plant.
     await page.getByRole('button', { name: 'Archive plant', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'No plants yet' })).toBeVisible();
+    await openMoreMenu(page);
     await submitAuth(page, 'Log out', 'logout', 204);
     await page.goto('/my-plants');
     await expect(page.getByRole('heading', { name: 'Welcome back', exact: true })).toBeVisible();
@@ -401,6 +407,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
   await step('Private export and explicit account deletion', page, async () => {
     await page.goto('/login');
     await login(page, email, newPassword);
+    await openMoreMenu(page);
     await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Account', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Your account and data', exact: true })).toBeVisible();
     await auditAccessibility(page, 'Account data controls');

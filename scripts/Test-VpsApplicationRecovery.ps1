@@ -15,7 +15,8 @@ $passed=$false
 $origin='https://localhost:19443'
 $session=[Microsoft.PowerShell.Commands.WebRequestSession]::new()
 function Request([string]$Path,[string]$Method='GET',[object]$Body,[int]$Expected=200) {
-    if($Path -notmatch '^/[a-zA-Z0-9/?=&-]+$' -or ($Method -notin @('GET','POST') -and -not($Method -eq 'PUT' -and $Path -match '^/api/my-plants/[a-f0-9-]{36}/(growing-plan|growing-context)$'))){throw 'Unexpected isolated HTTP request.'}
+    $allowedPut = $Method -eq 'PUT' -and ($Path -match '^/api/my-plants/[a-f0-9-]{36}/(growing-plan|growing-context)$' -or $Path -match '^/api/shortlist/[a-f0-9-]{36}$')
+    if($Path -notmatch '^/[a-zA-Z0-9/?=&-]+$' -or ($Method -notin @('GET','POST') -and -not $allowedPut)){throw 'Unexpected isolated HTTP request.'}
     # Curl runs inside the internal network. Cookies stay in the disposable
     # client container; private request files stay in restricted scratch.
     $curl=@(('url="'+$origin+$Path+'"'),'insecure','silent','max-time=15',('request="'+$Method+'"'),'cookie="/tmp/cookies"','cookie-jar="/tmp/cookies"','output="/tmp/response"','write-out="%{http_code}"')
@@ -223,6 +224,25 @@ services:
     $species=@(Request '/api/plant-species')|Where-Object commonName -eq 'Demo houseplant'|Select-Object -First 1
     if(-not $species){throw 'Recovered synthetic catalog unavailable.'}
     $plant=Request '/api/my-plants' 'POST' @{plantSpeciesId=$species.id;nickname='Isolated recovery probe';wateringIntervalDays=7;lastWateredAtUtc=[DateTimeOffset]::UtcNow.AddDays(-8).ToString('O')} -Expected 201
+    $supportsShortlist = @(& git -C $BackupRoot ls-tree --name-only $RuntimeCandidate 'PlantCare.Api/Controllers/ShortlistController.cs') -contains 'PlantCare.Api/Controllers/ShortlistController.cs'
+    if($LASTEXITCODE -ne 0){throw 'Recovery shortlist capability lookup failed.'}
+    if($supportsShortlist){
+        $null=Request "/api/shortlist/$($species.id)" 'PUT' -Expected 204
+        $null=Request "/api/shortlist/$($species.id)" 'PUT' -Expected 204
+        $shortlisted=@(Request '/api/shortlist')|Where-Object plantSpeciesId -eq $species.id
+        if(@($shortlisted).Count -ne 1){throw 'Restored shortlist save was not idempotent.'}
+        $shortlistExport=Request '/api/account/export' 'POST' @{password=$newPassword}
+        if(-not(@($shortlistExport.shortlist)|Where-Object plantSpeciesId -eq $species.id)){throw 'Restored shortlist missing from export.'}
+        'PASS: migrated restricted runtime saves and exports the private shortlist.'
+    }
+    $supportsPhotos = @(& git -C $BackupRoot ls-tree --name-only $RuntimeCandidate 'PlantCare.Api/Controllers/PlantPhotosController.cs') -contains 'PlantCare.Api/Controllers/PlantPhotosController.cs'
+    if($LASTEXITCODE -ne 0){throw 'Recovery journal capability lookup failed.'}
+    if($supportsPhotos){
+        $capabilities=Request "/api/my-plants/$($plant.id)/photos/capabilities"
+        if($capabilities.uploadsEnabled -or $capabilities.canUpload){throw 'Recovery must keep photo uploads disabled.'}
+        if(@(Request "/api/my-plants/$($plant.id)/photos").Count -ne 0){throw 'New restored-copy plant unexpectedly has photos.'}
+        'PASS: migrated private journal reads work with uploads disabled.'
+    }
     $reminder=@(Wait-Reminder $plant.id)
     if($RuntimeCandidate){$null=Request '/health/operations'}
     if($reminder.Count -ne 1){throw 'Recovered worker produced duplicate reminders.'}
@@ -293,6 +313,7 @@ services:
         if($harvestAfter.Count -ne 1 -or $harvestAfter[0].id -ne $harvest.id -or $harvestAfter[0].quantity -ne 2){throw 'Failed activation lost the harvest record.'}
     }
     $null=Request '/health/ready'
+    if($supportsShortlist -and @(@(Request '/api/shortlist')|Where-Object plantSpeciesId -eq $species.id).Count -ne 1){throw 'Failed activation lost the private shortlist.'}
     if((Request '/api/account/me').email -ne $account.email){throw 'Session did not survive activation rollback.'}
     $after=@(Request "/api/my-plants/$($plant.id)/care/history")
     if($after.Count -ne 1 -or $after[0].id -ne $history[0].id){throw 'Rollback lost care history.'}
@@ -301,7 +322,7 @@ services:
     $null=Request '/api/auth/logout' 'POST' -Expected 204
     $null=Request '/api/account/me' -Expected 401
     $passed=$true
-    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;harvestRecordsVerified=$supportsHarvests;growingContextVerified=$supportsGrowingContext;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
+    Write-BackupStatus 'vps-last-app-recovery' @{status='success';atUtc=[DateTimeOffset]::UtcNow.ToString('O');snapshotId=$last.snapshotId;candidate=$testedCandidate;growingPlanVerified=$supportsGrowingPlan;harvestRecordsVerified=$supportsHarvests;growingContextVerified=$supportsGrowingContext;shortlistVerified=$supportsShortlist;gatedJournalVerified=$supportsPhotos;snapshotCandidate=$manifest.candidate;checks=@('sql-checkdb-table-comparison','key-config-hashes','fresh-source-erasure-authority','target-migration-erasure-reconciliation-before-start','runtime-login-remapping','internal-mail-password-recovery','reset-reuse-rejected','fresh-login','worker-restart-deduplication','care-history','failed-activation-rollback','logout');savedPassword='not-accepted';sourceCookie='not-run';externalIntegrations='not-run';replacementVps='not-run'}
     'PASS: failed API activation rejected; pinned runtime restored with session/history/keys intact; logout enforced.'
 } finally {
     try {

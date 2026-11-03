@@ -1,17 +1,18 @@
+import { openCatalogTools } from './ui-controls';
 import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
 test('garden catalog categories combine with search and preserve navigation and comparison', async ({ page }) => {
   const categoryLabels: Record<string,string> = { '': 'All plants', houseplant: 'Houseplants', fruit: 'Fruit', vegetable: 'Vegetables', 'root-tuber': 'Roots & tubers', herb: 'Herbs', tree: 'Trees' };
   const categoryLink = (value: string) => page.getByRole('navigation', { name: 'Catalog categories' }).getByRole('link', { name: categoryLabels[value], exact: true });
-  await page.goto('/plants?category=tree&kind=general');
+  await page.goto('/plants?category=tree&kind=general'); await openCatalogTools(page);
   await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('.plant-card h2')).toHaveText(['Apple tree', 'Fig tree', 'Peach tree', 'Pear tree', 'Plum tree', 'Sour cherry tree', 'Sweet cherry tree']);
   await page.getByLabel('Compare Apple tree', { exact: true }).check();
   await page.getByLabel('Compare Fig tree', { exact: true }).check();
   await page.getByRole('link', { name: 'Compare selected plants', exact: true }).click();
   await expect(page.locator('.comparison-card h2')).toHaveText(['Apple tree', 'Fig tree']);
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
   await expect(page.getByLabel('Entry type', { exact: true })).toHaveValue('general');
   await page.getByLabel('Entry type', { exact: true }).selectOption('');
@@ -35,8 +36,8 @@ test('garden catalog categories combine with search and preserve navigation and 
   await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
   await page.locator('.plant-card').getByRole('link', { name: 'View details', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Growing and harvest', exact: true })).toBeVisible();
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
-  await page.reload();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
+  await page.reload(); await openCatalogTools(page);
   await expect(categoryLink('fruit')).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('.plant-card h2')).toHaveText(['Fig tree']);
   await page.setViewportSize({ width: 320, height: 900 });
@@ -63,7 +64,7 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
   for (const name of ["Cherry tomato (Tiny Tim)", "Potato", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)"]) {
     const plant = species.find((p: any) => p.commonName === name);
     expect(plant).toBeTruthy();
-    await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]);
+    await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]); await openCatalogTools(page);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(name);
     await expect(page.getByRole('heading', { name: plant.catalogProfile.harvestInstructions ? 'Growing and harvest' : 'Growing guide', exact: true })).toBeVisible();
     if (plant.catalogProfile.harvestInstructions) await expect(page.getByRole('heading', { name: 'Harvest guidance', exact: true })).toBeVisible();
@@ -98,7 +99,7 @@ test('English houseplants have working local photos, attribution and searchable 
     expect(image.ok(), `Image for ${plant.commonName}`).toBe(true);
     expect(image.headers()['content-type']).toMatch(/^image\//);
   }
-  await page.goto('/plants');
+  await page.goto('/plants'); await openCatalogTools(page);
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Monstera deliciosa');
   const card = page.locator('.plant-card');
   await expect(card).toHaveCount(1);
@@ -113,7 +114,7 @@ test('English houseplants have working local photos, attribution and searchable 
   await expect(page.getByRole('link', { name: 'Care reference', exact: true })).toHaveAttribute('href', 'https://plants.ces.ncsu.edu/plants/monstera-deliciosa/');
   await expect(page.getByText('Suggested check: every', { exact: false })).toBeVisible();
   await auditAccessibility(page, 'English plant care detail');
-  await page.goto('/plants');
+  await page.goto('/plants'); await openCatalogTools(page);
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('no-such-houseplant-xyz');
   await expect(page.getByText('No plants match your search. Try another name or clear the filters.')).toBeVisible();
 });
@@ -121,7 +122,7 @@ test('English houseplants have working local photos, attribution and searchable 
 test('catalog light filters combine with search, survive detail navigation and reset together', async ({ page, request }) => {
   const firstName = (await (await request.get('/api/plant-species')).json())
     .sort((a: {commonName:string}, b: {commonName:string}) => a.commonName.localeCompare(b.commonName, 'en', {sensitivity:'base'}))[0].commonName;
-  await page.goto('/plants?light=PartialSun&sort=name-desc');
+  await page.goto('/plants?light=PartialSun&sort=name-desc'); await openCatalogTools(page);
   const cards = page.locator('.plant-card');
   const names = cards.getByRole('heading', { level: 2 });
   await expect(names).toHaveText(['Purple shamrock', 'Purple heart', 'Jade plant', 'Aloe vera']);
@@ -135,10 +136,10 @@ test('catalog light filters combine with search, survive detail navigation and r
   await cards.getByRole('link', { name: 'View details' }).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Aloe vera', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Soil', exact: true })).toBeVisible();
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(names).toHaveText(['Aloe vera']);
   await expect(page.getByRole('searchbox', { name: 'Find a plant' })).toHaveValue('Aloe vera');
-  await page.reload();
+  await page.reload(); await openCatalogTools(page);
   await expect(names).toHaveText(['Aloe vera']);
   await page.getByLabel('Light requirement', { exact: true }).selectOption('BrightIndirectLight');
   await expect(cards).toHaveCount(0);
@@ -154,7 +155,7 @@ test('catalog light filters combine with search, survive detail navigation and r
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   // Unsupported URL values fall back to the complete, English A–Z catalog.
-  await page.goto('/plants?light=invalid&sort=invalid');
+  await page.goto('/plants?light=invalid&sort=invalid'); await openCatalogTools(page);
   await expect(names.first()).toHaveText(firstName);
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('');
 });
@@ -164,7 +165,7 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   const expected = species.filter((p: any) => !p.isToxicToPets && p.catalogProfile?.nonToxicToCatsAndDogsSourceUrl)
     .map((p: any) => p.commonName).sort((a: string, b: string) => a.localeCompare(b, 'en'));
   expect(expected).toEqual(['African violet', 'Baby rubber plant', 'Boston fern', 'Cast iron plant', 'Kentia palm', 'Norfolk Island pine', 'Parlor palm', 'Ponytail palm', 'Rattlesnake plant', 'Spider plant', 'Watermelon peperomia', 'Wax plant', 'Zebra haworthia']);
-  await page.goto('/plants?pets=non-toxic');
+  await page.goto('/plants?pets=non-toxic'); await openCatalogTools(page);
   const cards = page.locator('.plant-card');
   const names = cards.getByRole('heading', { level: 2 });
   await expect(names).toHaveText(expected);
@@ -177,8 +178,8 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   await cards.getByRole('link', { name: 'View details' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Parlor palm');
   await expect(page.getByRole('link', { name: 'Pet toxicity reference', exact: true })).toHaveAttribute('href', /aspca.org\/.*bamboo-palm$/);
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
-  await page.reload();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
+  await page.reload(); await openCatalogTools(page);
   await expect(names).toHaveText(['Parlor palm']);
   await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('non-toxic');
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('BrightIndirectLight');
@@ -191,14 +192,14 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
   await expect(names).toHaveText(species.filter((p: any) => p.isToxicToPets).map((p: any) => p.commonName)
     .sort((a: string, b: string) => a.localeCompare(b, 'en')));
-  await page.goto('/plants?pets=invalid');
+  await page.goto('/plants?pets=invalid'); await openCatalogTools(page);
   await expect(cards).toHaveCount(species.length);
   await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('');
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Cat-and-dog catalog filter at narrow width');
   for (const common of ['Baby rubber plant', 'Cast iron plant', 'Parlor palm']) {
-    await page.goto('/plants?q=' + encodeURIComponent(common));
+    await page.goto('/plants?q=' + encodeURIComponent(common)); await openCatalogTools(page);
     await expect(cards).toHaveCount(1);
     const image = cards.getByRole('img');
     await image.scrollIntoViewIfNeeded();
@@ -233,7 +234,7 @@ test('large houseplant batch has distinct common-name pages, source credits and 
     'Dragon-tail plant', 'Tree philodendron', 'Ti plant', 'Sago palm', 'Grape ivy', "Rabbit's foot fern", 'Flame violet', 'False African violet', 'Kangaroo vine']) {
     const plant = all.find((p: { commonName: string }) => p.commonName === name);
     expect(plant, `New catalog plant: ${name}`).toBeTruthy();
-    await page.goto('/plants/' + plant.id);
+    await page.goto('/plants/' + plant.id); await openCatalogTools(page);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(name);
     await expect(page.getByRole('link', { name: 'Care reference', exact: true })).toHaveAttribute('href', plant.catalogProfile.careSourceUrl);
     const photo = page.locator('app-plant-photo').first().getByRole('img');
@@ -250,7 +251,7 @@ test('large houseplant batch has distinct common-name pages, source credits and 
 });
 
 test('comparison selection survives filters, details and reload, limits three plants and shows sourced care', async ({ page }) => {
-  await page.goto('/plants');
+  await page.goto('/plants'); await openCatalogTools(page);
   for (const name of ['Spider plant', 'Snake plant', 'ZZ plant'])
     await page.getByRole('checkbox', { name: 'Compare ' + name, exact: true }).check();
   await expect(page.getByRole('checkbox', { name: 'Compare Golden pothos', exact: true })).toBeDisabled();
@@ -258,7 +259,7 @@ test('comparison selection survives filters, details and reload, limits three pl
   await expect(page.locator('.plant-card')).toHaveCount(1);
   await expect(page.getByRole('region', { name: 'Plant comparison selection' })).toContainText('3 of 3 plants selected');
   await page.locator('.plant-card').getByRole('link', { name: 'View details', exact: true }).click();
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(page.getByRole('searchbox', { name: 'Find a plant' })).toHaveValue('Spider plant');
   await page.getByRole('link', { name: 'Compare selected plants', exact: true }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare plants');
@@ -266,13 +267,13 @@ test('comparison selection survives filters, details and reload, limits three pl
   await expect(page.locator('.comparison-card').first()).toContainText('Reviewed as non-toxic to cats and dogs');
   await expect(page.locator('.comparison-card').nth(1)).toContainText('Toxicity warning');
   await expect(page.locator('.comparison-card').first().getByRole('link', { name: 'Care reference', exact: true })).toHaveAttribute('href', 'https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/');
-  await page.reload();await expect(page.locator('.comparison-card')).toHaveCount(3);
+  await page.reload(); await openCatalogTools(page);await expect(page.locator('.comparison-card')).toHaveCount(3);
   await page.getByRole('button', { name: 'Remove ZZ plant from comparison', exact: true }).click();
   await expect(page.locator('.comparison-card')).toHaveCount(2);
   await page.setViewportSize({width:320,height:800});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await auditAccessibility(page,'Plant comparison at narrow width');
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(page.getByRole('checkbox', { name: 'Compare Spider plant', exact: true })).toBeChecked();
   await expect(page.getByRole('checkbox', { name: 'Compare ZZ plant', exact: true })).not.toBeChecked();
@@ -289,14 +290,14 @@ test('comparison handles malformed or missing choices, unknown assessment and re
   const species=await (await request.get('/api/plant-species')).json();
   const unknown=species.find((p: {commonName:string})=>p.commonName==='Lady palm');
   const fake='00000000-0000-0000-0000-000000000000';
-  await page.goto('/plants/compare?compare='+encodeURIComponent(`bad,${unknown.id},${unknown.id},${fake}`));
+  await page.goto('/plants/compare?compare='+encodeURIComponent(`bad,${unknown.id},${unknown.id},${fake}`)); await openCatalogTools(page);
   await expect(page.locator('.comparison-card')).toHaveCount(1);
   await expect(page.getByText('Some selected plants are no longer available.',{exact:false})).toBeVisible();
   await expect(page.getByText('Not assessed for this comparison',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Remove Lady palm from comparison',exact:true}).click();
   await expect(page.getByText('Choose at least two plants',{exact:false})).toBeVisible();
   await page.route('**/api/plant-species',route=>route.fulfill({status:503,body:'Unavailable'}),{times:1});
-  await page.goto('/plants/compare?compare='+unknown.id);
+  await page.goto('/plants/compare?compare='+unknown.id); await openCatalogTools(page);
   await expect(page.getByRole('alert')).toContainText('could not be loaded');
   await page.getByRole('button',{name:'Try again',exact:true}).click();
   await expect(page.locator('.comparison-card')).toHaveCount(1);
@@ -312,7 +313,7 @@ test('flowering additions have identifiable photos, attributed care and seasonal
     ['schlumbergera-truncata', 'Thanksgiving cactus', false],
     ['cyclamen-persicum', "Florist's cyclamen", true],
   ] as const) {
-    await page.goto('/plants?q=' + encodeURIComponent(common));
+    await page.goto('/plants?q=' + encodeURIComponent(common)); await openCatalogTools(page);
     const card = page.locator('.plant-card').filter({ has: page.getByRole('heading', { name: common, exact: true }) });
     await expect(card).toHaveCount(1);
     await expect(card.getByRole('heading', { name: common, exact: true })).toBeVisible();
@@ -336,7 +337,7 @@ test('flowering additions have identifiable photos, attributed care and seasonal
 
 test('growth photo discovery combines filters and preserves comparison through details and reload', async ({ page, request }) => {
   const all = await (await request.get('/api/plant-species')).json();
-  await page.goto('/plants?growth=available');
+  await page.goto('/plants?growth=available'); await openCatalogTools(page);
   const filter = page.getByLabel('Growth references', { exact: true });
   const names = page.locator('.plant-card h2');
   await expect(filter).toHaveValue('available');
@@ -352,13 +353,13 @@ test('growth photo discovery combines filters and preserves comparison through d
   await expect(names).toHaveText(['Spider plant']);
   await page.locator('.plant-card').getByRole('link', { name: 'View details', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toBeVisible();
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
-  await page.reload();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
+  await page.reload(); await openCatalogTools(page);
   await expect(filter).toHaveValue('available');
   await expect(names).toHaveText(['Spider plant']);
   await page.getByRole('link', { name: 'Compare selected plants', exact: true }).click();
   await expect(page.locator('.comparison-card h2')).toHaveText(['Spider plant', 'Wax plant']);
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(filter).toHaveValue('available');
   await expect(names).toHaveText(['Spider plant']);
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('ZZ plant');
@@ -371,7 +372,7 @@ test('growth photo discovery combines filters and preserves comparison through d
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Growth reference discovery at narrow width');
-  await page.goto('/plants?growth=invalid');
+  await page.goto('/plants?growth=invalid'); await openCatalogTools(page);
   await expect(filter).toHaveValue('');
   await expect(page.locator('.plant-card')).toHaveCount(all.length);
   await expect(page.getByRole('button', { name: 'Clear filters', exact: true })).toBeDisabled();
@@ -383,7 +384,7 @@ test('growth references show selected species features with working photos, sour
     'Jade plant', 'Moth orchid', 'Peace lily', 'Wax plant', 'African violet', 'Thanksgiving cactus', 'Rubber plant', 'Boston fern']) {
     const plant = species.find((item: { commonName: string }) => item.commonName === name);
     expect(plant.catalogProfile.growthReferences).toHaveLength(2);
-    await page.goto('/plants/' + plant.id);
+    await page.goto('/plants/' + plant.id); await openCatalogTools(page);
     const section = page.getByRole('region', { name: 'Growth references', exact: true });
     await section.scrollIntoViewIfNeeded();
     await expect(section).toBeVisible();
@@ -405,7 +406,7 @@ test('growth references show selected species features with working photos, sour
     await auditAccessibility(page, 'Growth references at narrow width');
   }
   const zz = species.find((item: { commonName: string }) => item.commonName === 'ZZ plant');
-  await page.goto('/plants/' + zz.id);
+  await page.goto('/plants/' + zz.id); await openCatalogTools(page);
   await expect(page.getByRole('heading', { level: 1, name: 'ZZ plant', exact: true })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Growth references', exact: true })).toHaveCount(0);
 });
@@ -416,23 +417,23 @@ test('familiar aliases tolerate punctuation, preserve navigation and keep ambigu
     ['mother in laws tongue', 'Snake plant'], ['Zanzibar gem', 'ZZ plant'],
     ['Indian rubber plant', 'Rubber plant'], ['Medicinal aloe', 'Aloe vera'],
   ]) {
-    await page.goto('/plants?q=' + encodeURIComponent(query));
+    await page.goto('/plants?q=' + encodeURIComponent(query)); await openCatalogTools(page);
     await expect(page.locator('.plant-card h2')).toHaveText([common]);
   }
-  await page.goto('/plants?q=Devils%20ivy&light=BrightIndirectLight');
+  await page.goto('/plants?q=Devils%20ivy&light=BrightIndirectLight'); await openCatalogTools(page);
   await page.locator('.plant-card').getByRole('link', { name: 'View details' }).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Golden pothos', exact: true })).toBeVisible();
   await expect(page.locator('.common-name-aliases')).toHaveText("Also known as: Devil's ivy, Pothos.");
   await expect(page.getByText('Common names can refer to different plants.', { exact: false })).toBeVisible();
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(page.getByRole('searchbox', { name: 'Find a plant' })).toHaveValue('Devils ivy');
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('BrightIndirectLight');
-  await page.reload();
+  await page.reload(); await openCatalogTools(page);
   await expect(page.locator('.plant-card h2')).toHaveText(['Golden pothos']);
-  await page.goto('/plants?q=Ribbon%20plant');
+  await page.goto('/plants?q=Ribbon%20plant'); await openCatalogTools(page);
   await expect(page.locator('.plant-card h2')).toHaveText(['Corn plant', 'Lucky bamboo', 'Spider plant']);
   await expect(page.locator('.plant-card .scientific-name')).toHaveText(['Dracaena fragrans', 'Dracaena sanderiana', 'Chlorophytum comosum']);
-  await page.goto('/plants?q=Money%20plant');
+  await page.goto('/plants?q=Money%20plant'); await openCatalogTools(page);
   await expect(page.locator('.plant-card h2')).toHaveText(['Chinese money plant', 'Jade plant', 'Money tree']);
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -446,7 +447,7 @@ test('unknown pet assessment stays distinct and combines with gallery, light and
   expect(expected).toContain('Ripple peperomia');
   expect(expected).not.toContain('African violet');
   expect(expected).not.toContain('African milk tree');
-  await page.goto('/plants?pets=unknown');
+  await page.goto('/plants?pets=unknown'); await openCatalogTools(page);
   const cards = page.locator('.plant-card');
   const filter = page.getByLabel('Cats and dogs', { exact: true });
   await expect(filter).toHaveValue('unknown');
@@ -461,14 +462,14 @@ test('unknown pet assessment stays distinct and combines with gallery, light and
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Phalaenopsis (houseplant hybrids)');
   await expect(cards.locator('h2')).toHaveText(['Moth orchid']);
   await cards.getByRole('link', { name: 'View details', exact: true }).click();
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
-  await page.reload();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
+  await page.reload(); await openCatalogTools(page);
   await expect(filter).toHaveValue('unknown');
   await expect(cards.locator('h2')).toHaveText(['Moth orchid']);
   await page.getByRole('link', { name: 'Compare selected plants', exact: true }).click();
   await expect(page.locator('.comparison-card h2')).toHaveText(['Moth orchid', 'Thanksgiving cactus']);
   await expect(page.locator('.comparison-card').first()).toContainText('Not assessed for this comparison');
-  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click();
+  await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(filter).toHaveValue('unknown');
   await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(filter).toHaveValue('');

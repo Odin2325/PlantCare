@@ -6,13 +6,12 @@
       <h1>Plant catalog</h1>
 
       <p class="intro">
-        Browse plants and learn about their sunlight,
-        watering, soil, and fertilizer requirements.
+        Find your next plant. Explore houseplants, crops and trees.
       </p>
-      <p class="intro">Suggested intervals are reminders to check your plant. Water only when needed, adjusting for light, potting mix and season.</p>
+      <p class="intro">Care intervals are check-in reminders. Water only when the soil needs it.</p>
     </div>
   </header>
-  <app-shortlist-notice />
+
 
   @if (isLoading()) {
   <p class="status-message">
@@ -28,29 +27,30 @@
     </button>
   </div>
   } @else if (plantSpecies().length === 0) {
+  <details class="catalog-extras"><summary>Shortlist &amp; comparison</summary><app-shortlist-notice /></details>
   <p class="status-message">
     No plant species have been added yet.
   </p>
   } @else {
-  <section class="comparison-tools" aria-label="Plant comparison selection">
-    <h2>Find your next plant</h2>
-    <p id="comparison-help">Select two or three plants to compare their care. Your selection stays when you search or change filters.</p>
-    <p role="status">{{ comparisonPlants().length }} of 3 plants selected for comparison</p>
-    @if (comparisonPlants().length > 0) {
-      <ul>@for (plant of comparisonPlants(); track plant.id) {
-        <li>{{ plant.commonName }} <button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'" (click)="toggleComparison(plant)">Remove</button></li>
-      }</ul>
-      @if (comparisonPlants().length >= 2) { <a class="compare-link" routerLink="/plants/compare" [queryParams]="filterQueryParams()">Compare selected plants</a> }
-      <button type="button" (click)="clearComparison()">Clear comparison</button>
-    }
+  <section class="catalog-searchbar" aria-label="Plant search">
+    <div class="catalog-field catalog-search">
+      <label for="plant-search">Find a plant</label>
+      <input #search id="plant-search" type="search" maxlength="100"
+             placeholder="Common, alternative or scientific name" [value]="query()" (input)="setQuery(search.value)">
+    </div>
+    <button class="filter-toggle" type="button" [attr.aria-expanded]="filtersExpanded()" aria-controls="catalog-filters" (click)="filtersExpanded.set(!filtersExpanded())">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" /></svg>
+      Filters @if (advancedFilterCount()) { <span class="filter-count">{{ advancedFilterCount() }}</span> }
+    </button>
   </section>
+  <section id="catalog-filters" [hidden]="!filtersExpanded()" aria-label="Catalog filters">
   <nav class="category-tabs" aria-label="Catalog categories">
     <a routerLink="/plants" [queryParams]="categoryQueryParams('')" [attr.aria-current]="!category() ? 'page' : null">All plants</a>
     @for (option of categoryOptions; track option.value) {
       <a routerLink="/plants" [queryParams]="categoryQueryParams(option.value)" [attr.aria-current]="category() === option.value ? 'page' : null">{{ option.label }}</a>
     }
   </nav>
-  <section class="catalog-tools" aria-label="Catalog filters">
+  <div class="catalog-tools">
     <div class="catalog-field">
       <label class="shortlist-toggle"><input type="checkbox" [ngModel]="showShortlist()" (ngModelChange)="setShowShortlist($event)"> My shortlist only</label>
     </div>
@@ -61,11 +61,6 @@
         <option value="general">General species and groups</option>
         <option value="cultivar">Named cultivars</option>
       </select>
-    </div>
-    <div class="catalog-field catalog-search">
-      <label for="plant-search">Find a plant</label>
-      <input #search id="plant-search" type="search" maxlength="100"
-             placeholder="Common, alternative or scientific name" [value]="query()" (input)="setQuery(search.value)">
     </div>
     <div class="catalog-field">
       <label for="plant-light">Light requirement</label>
@@ -106,10 +101,26 @@
       </select>
     </div>
     <button type="button" class="clear-filters" [disabled]="!hasFilters()" (click)="clearFilters()">Clear filters</button>
-  </section>
+  </div>
   <p>Categories describe common garden uses and can overlap. They do not mean that every part of a plant is edible. Check the growing and harvest guidance on its detail page.</p>
   <p id="pet-filter-help">The non-toxic filter includes only plants with a linked cat-and-dog toxicity reference. An absent warning is not a safety assessment. Non-toxic plants can still cause stomach upset if eaten.</p>
   <p id="cultivar-photo-help">The cultivar photo choices show named varieties only. Pending means a suitable licensed photo is still being sourced; general species photos do not count as cultivar photos.</p>
+  </section>
+  <details class="catalog-extras"><summary>Shortlist &amp; comparison @if (comparisonPlants().length) { <span>{{ comparisonPlants().length }} selected</span> }</summary>
+  <app-shortlist-notice />
+  <section class="comparison-tools" aria-label="Plant comparison selection">
+    <h2>Find your next plant</h2>
+    <p id="comparison-help">Select two or three plants to compare their care. Your selection stays when you search or change filters.</p>
+    <p role="status">{{ comparisonPlants().length }} of 3 plants selected for comparison</p>
+    @if (comparisonPlants().length > 0) {
+      <ul>@for (plant of comparisonPlants(); track plant.id) {
+        <li>{{ plant.commonName }} <button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'" (click)="toggleComparison(plant)">Remove</button></li>
+      }</ul>
+      @if (comparisonPlants().length >= 2) { <a class="compare-link" routerLink="/plants/compare" [queryParams]="filterQueryParams()">Compare selected plants</a> }
+      <button type="button" (click)="clearComparison()">Clear comparison</button>
+    }
+  </section>
+  </details>
   <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
   @if (visibleSpecies().length === 0) {
     @if (showShortlist() && !shortlist.ready()) {
@@ -123,11 +134,6 @@
   <div class="plant-grid">
     @for (plant of visibleSpecies(); track plant.id) {
     <article class="plant-card">
-      <app-shortlist-button [plant]="plant" />
-      <label class="comparison-choice"><input type="checkbox" [checked]="comparisonIds().includes(plant.id)"
-        [disabled]="comparisonPlants().length >= 3 && !comparisonIds().includes(plant.id)"
-        [attr.aria-label]="'Compare ' + plant.commonName" aria-describedby="comparison-help"
-        (change)="toggleComparison(plant)">Compare</label>
       <app-plant-photo [profile]="plant.catalogProfile" />
       @if (plant.catalogProfile?.cultivarName; as cultivar) { <p class="category-labels">Cultivar: {{ cultivar }}</p> }
       @if (plant.catalogProfile?.categories?.length) {
@@ -187,6 +193,13 @@
 
       </dl>
 
+      <div class="card-save-actions">
+      <app-shortlist-button [plant]="plant" />
+      <label class="comparison-choice"><input type="checkbox" [checked]="comparisonIds().includes(plant.id)"
+        [disabled]="comparisonPlants().length >= 3 && !comparisonIds().includes(plant.id)"
+        [attr.aria-label]="'Compare ' + plant.commonName" aria-describedby="comparison-help"
+        (change)="toggleComparison(plant)">Compare</label>
+      </div>
       <a class="details-link"
          [routerLink]="['/plants', plant.id]" [queryParams]="filterQueryParams()">
         View details

@@ -27,6 +27,7 @@ import { PwaUpdateService } from './core/pwa/pwa-update.service';
     RouterLinkActive,
     RouterOutlet,
   ],
+  host: { '[class.signed-in]': 'authService.isAuthenticated()' },
   templateUrl: './app.html',
   styleUrl: './app.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,6 +39,7 @@ export class App {
   private readonly router = inject(Router);
 
   readonly isLoggingOut = signal(false);
+  readonly secondaryRoute = signal(false);
 
   constructor() {
     const injector = inject(Injector);
@@ -46,7 +48,9 @@ export class App {
       filter(event => event instanceof NavigationEnd),
       takeUntilDestroyed(),
     ).subscribe(event => {
+      document.querySelectorAll<HTMLDetailsElement>('.app-more[open]').forEach(menu => menu.open = false);
       const path = event.urlAfterRedirects.split(/[?#]/, 1)[0];
+      this.secondaryRoute.set(['/garden', '/notifications', '/account'].includes(path));
       // Updating a page's filters must retain focus in the active control.
       if (path === previousPath) return;
       previousPath = path;
