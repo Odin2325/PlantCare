@@ -15,8 +15,9 @@ follow-up are recorded in that acceptance document.
 
 [Saved shortlists](saved-shortlists.md) are now implemented locally, awaiting their
 full private-data/migration checkpoint. The [photo-journal design](photo-journal-design.md)
-is complete; the next implementation slice is bounded image normalization and
-dependency review, with uploads disabled. Broader pipelines/deployment wait for the next meaningful combined
+is complete; the [normalizer prototype](photo-normalization.md) and dependency
+review are implemented locally. The next slice is the killable process boundary,
+with uploads disabled. Broader pipelines/deployment wait for the next meaningful combined
 checkpoint; routine increments retain targeted local checks and commits.
 
 ## 1. Saved plant shortlists

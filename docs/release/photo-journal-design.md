@@ -3,6 +3,8 @@
 Decision record, 2026-10-31. Design complete; uploads are **not implemented or
 enabled**. This document defines the first implementation slice and its gates.
 No new provider, paid service, public photo sharing or deployment is introduced.
+The [2026-11-03 normalizer prototype](photo-normalization.md) implements the first
+decoder slice; hard process isolation and all upload-enablement gates remain open.
 
 ## Experience and boundaries
 
