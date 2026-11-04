@@ -75,6 +75,30 @@ write; ordinary API permissions remain more restrictive. This drill grants the
 Docker socket only to its disposable trusted gateway, never the .NET client or
 decoder. It contains generated images and sockets only, no account credentials.
 
+## Local acceptance (2026-11-04)
+
+- Ten bundle-integrity cases passed locally. The existing Linux gateway test
+  target now runs these alongside its nine gateway cases: nineteen passed.
+  This wires the new checks into the existing full runner at the next checkpoint
+  without changing the conservative test selector or starting a CI run.
+- The disabled override merged with base Compose using public example settings;
+  no services were started by that configuration check.
+- Exact committed source `6b725e9db5ed01754179165b277c433389a33590` built and exported
+  successfully. Its separate archive, shipped dependency manifest, notices/policy,
+  pinned service example and disabled override passed independent read-only
+  bundle verification. The bundle stays in ignored local operational storage.
+- The real IPC drill passed against that exported decoder with root:1654 gateway
+  and 1654:1654 client identities, actual 0750/0660 ownership, consecutive jobs,
+  wrong-UID rejection, read-only mount enforcement, invalid input and cancellation
+  cleanup/reuse. The first run exposed a group-0 assumption in the old test
+  launcher; matching the existing systemd Group=1654 fixed it without granting
+  extra capabilities or weakening peer checks. No decoder job remained.
+
+This is packaging and transport evidence. It does not certify a root-owned host
+installation, full HTTP upload/storage flow, VPS capacity or enabled phone uploads.
+No normal local/staging account, database, backup, schedule or feature flag was
+changed. No push, remote CI or deployment was performed.
+
 ## Next checkpoint
 
 Keep uploads disabled. Next is local real-HTTP upload acceptance with the isolated

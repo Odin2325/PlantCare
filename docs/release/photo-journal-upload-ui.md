@@ -1,7 +1,9 @@
 # Gated photo uploads and journal UI
 
 Implemented locally on 2026-11-03 after [journal storage](photo-journal-storage.md).
-Not pushed, deployed or activated. The previous staging runtime remains unchanged.
+The UI/storage later shipped in the [mobile checkpoint](mobile-checkpoint-acceptance.md)
+with uploads disabled. The initial local acceptance below records its original
+scope. Current work prepares the [separate decoder/gateway bundle](photo-processing-bundle.md).
 Both `PhotoJournal:UploadsEnabled` and `PhotoProcessing:Enabled` default to false.
 The application refuses an upload-enabled configuration without the isolated
 transport enabled. Local tests explicitly replace the processor with a synthetic

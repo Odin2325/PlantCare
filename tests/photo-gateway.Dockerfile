@@ -25,5 +25,8 @@ ENTRYPOINT ["python3", "/app/photo_gateway.py"]
 FROM gateway AS gateway-tests
 WORKDIR /src
 COPY scripts/photo_gateway.py scripts/photo_gateway.py
+COPY scripts/photo_bundle.py scripts/photo_bundle.py
 COPY tests/test_photo_gateway.py tests/test_photo_gateway.py
-RUN python3 -m unittest discover -s tests -p test_photo_gateway.py
+COPY tests/test_photo_bundle.py tests/test_photo_bundle.py
+COPY deploy/plantcare-photo-gateway.service.example deploy/compose.photo-processing.yaml.example deploy/
+RUN python3 -m unittest discover -s tests -p 'test_photo_*.py'

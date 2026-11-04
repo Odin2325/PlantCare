@@ -55,6 +55,9 @@ Linux WebKit/device emulation is browser evidence, not certification of actual
 iOS Safari, Home Screen installation, APNs delivery, virtual keyboard, cutouts or
 App Store approval. Physical acceptance remains required after the next batch:
 
+The owner currently has no Apple device available and will report when one is
+available. Continue local development; do not treat emulation as device acceptance.
+
 1. iPhone and iPad Safari: login, forms/keyboard, portrait/landscape, catalog
    filters, selected calendar day, reminders and More menu; zoom and larger text.
 2. Home Screen installation: icon/standalone launch, explicit push opt-in,

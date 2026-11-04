@@ -34,6 +34,7 @@ def main():
         # test launcher, not a configuration to copy into the API service.
         docker("run", "--detach", "--pull", "never", "--name", name,
                "--network", "none", "--read-only", "--log-driver", "none",
+               "--user", "0:1654",
                "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
                "--mount", "type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock",
                "--mount", "type=volume,src=" + volume + ",dst=/run/plantcare-photo",
