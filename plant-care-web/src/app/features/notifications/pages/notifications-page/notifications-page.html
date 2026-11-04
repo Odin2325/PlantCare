@@ -50,8 +50,19 @@
     @if (pushAvailable()) {
       @if (pushEnabled()) { <button type="button" [disabled]="pushBusy()" (click)="disablePush()">Disable on this device</button> }
       @else { <button type="button" [disabled]="pushBusy()" (click)="enablePush()">Enable push reminders</button> }
-    } @else { <p class="muted">Push reminders are unavailable until the installed app and server keys are configured.</p> }
+    } @else { <p class="muted">Push reminders are not available in this browser or are not configured. In-app reminders are still available.</p> }
     @if (pushMessage()) { <p role="status">{{ pushMessage() }}</p> }
+    <details class="apple-install-help">
+      <summary>Install on iPhone or iPad</summary>
+      <p>For push reminders, use the Home Screen app on iOS or iPadOS 16.4 or later.</p>
+      <ol>
+        <li>Open PlantCare in Safari, open the Share menu, then choose Add to Home Screen.</li>
+        <li>If shown, keep Open as Web App enabled, then tap Add.</li>
+        <li>Open PlantCare from its new icon and sign in if needed.</li>
+        <li>Return to Notifications → Reminder settings and tap Enable push reminders. Allow notifications when asked.</li>
+      </ol>
+      <p>Permission is requested only when you tap Enable push reminders. Device notification settings and Focus can affect delivery.</p>
+    </details>
   </section>
 
   </details>

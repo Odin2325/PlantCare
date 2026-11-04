@@ -79,6 +79,13 @@ test('page families reflow with visible focus and accessible controls', async ({
         .filter(element => element.getBoundingClientRect().right > innerWidth + 1)
         .map(element => element.tagName + '.' + element.className));
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), path + ' at ' + width + ': ' + overflow.join(', ')).toBe(true);
+      if (width === 320) {
+        const smallTouchFields = await page.evaluate(() => !matchMedia('(hover: none) and (pointer: coarse)').matches ? [] :
+          [...document.querySelectorAll('input:not([type=checkbox], [type=radio], [type=range], [type=color]), select, textarea')]
+            .filter(e => e.getBoundingClientRect().height > 0 && parseFloat(getComputedStyle(e).fontSize) < 16)
+            .map(e => e.tagName + '.' + e.className));
+        expect(smallTouchFields, path + ': small touch form text').toEqual([]);
+      }
       if (width === 320) await auditAccessibility(page, path);
       if (process.env.STYLE_SCREENSHOTS && testInfo.project.name === 'desktop-chromium' && width !== 768) {
         await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());

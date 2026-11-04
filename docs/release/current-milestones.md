@@ -122,6 +122,12 @@ succession planting. Routine work resumes with local commits and targeted checks
 
 ## New local batch
 
+[Apple compatibility and store readiness](apple-and-store-readiness.md) is the
+next local slice: safe-area/landscape refinements, touch controls, push feature
+detection and installation help, focused WebKit checks, and separate Google Play
+and App Store packaging/beta milestones. These changes wait for the next large
+checkpoint; no new deployment or store upload is part of this slice.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

@@ -78,3 +78,22 @@
 }
 
 @media(max-width:767px){:host:not(.signed-in) .app-header{flex-direction:column;align-items:flex-start;gap:.5rem}:host:not(.signed-in) .primary-navigation{width:100%;flex-wrap:wrap;gap:.2rem}}
+
+/* Home Screen web apps can extend behind the notch and home indicator. */
+.app-header{padding-top:calc(.8rem + env(safe-area-inset-top,0px))}
+.more-panel{max-height:calc(100dvh - 8rem - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:767px){
+ .app-header{padding-top:calc(.75rem + env(safe-area-inset-top,0px))}
+ :host.signed-in .primary-navigation{padding-left:max(.35rem,env(safe-area-inset-left,0px));padding-right:max(.35rem,env(safe-area-inset-right,0px))}
+ .app-more .more-panel{right:calc(1rem + env(safe-area-inset-right,0px))}
+}
+@media(min-width:768px) and (max-width:1199px){
+ :host.signed-in .primary-navigation{left:calc(12px + env(safe-area-inset-left,0px));top:calc(96px + env(safe-area-inset-top,0px))}
+ .app-more .more-panel{position:fixed;left:calc(112px + env(safe-area-inset-left,0px));right:auto;top:calc(96px + env(safe-area-inset-top,0px))}
+}
+@media(min-width:768px) and (max-width:1199px) and (max-height:600px){
+ :host.signed-in .primary-navigation{top:calc(.75rem + env(safe-area-inset-top,0px));gap:.1rem;padding:.35rem}
+ :host.signed-in .primary-navigation>a,.app-more>summary{min-height:56px;gap:.2rem;padding:.3rem .2rem}
+ .more-panel{max-height:calc(100dvh - 3rem - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+ .app-more .more-panel{top:calc(.75rem + env(safe-area-inset-top,0px))}
+}

@@ -1,11 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { SwPush } from '@angular/service-worker';
 import { Observable, Subject, of, throwError } from 'rxjs';
-import { afterEach, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { NotificationsPage } from './notifications-page';
 import { NotificationsApiService } from '../../data-access/notifications-api.service';
 
-afterEach(() => TestBed.resetTestingModule());
+beforeEach(() => {
+  vi.stubGlobal('Notification', { permission: 'default' });
+  vi.stubGlobal('PushManager', class {});
+  vi.stubGlobal('navigator', Object.create(navigator, { serviceWorker: { value: {} } }));
+});
+afterEach(() => { TestBed.resetTestingModule(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 function create(enabled: boolean, subscription: Observable<PushSubscription | null>) {
   TestBed.configureTestingModule({ providers: [
     { provide: NotificationsApiService, useValue: { getNotifications: () => of([]), getPreferences: () => of(null), getPushConfig: () => of({ isEnabled: enabled, publicKey: 'public-fixture-key' }) } },
@@ -32,4 +37,21 @@ it('cancels a pending subscription lookup when the page is destroyed', () => {
   expect(subscription.observed).toBe(true);
   fixture.destroy();
   expect(subscription.observed).toBe(false);
+});
+
+it('keeps in-app reminders available without the browser Notification API', () => {
+  vi.stubGlobal('Notification', undefined);
+  const queried = vi.fn();
+  const fixture = create(true, new Observable(() => { queried(); }));
+  expect(queried).not.toHaveBeenCalled();
+  expect(fixture.componentInstance.pushAvailable()).toBe(false);
+  expect(fixture.componentInstance.errorMessage()).toBeNull();
+});
+
+it('does not offer push when PushManager is missing', () => {
+  vi.stubGlobal('PushManager', undefined);
+  const queried = vi.fn();
+  const fixture = create(true, new Observable(() => { queried(); }));
+  expect(queried).not.toHaveBeenCalled();
+  expect(fixture.componentInstance.pushAvailable()).toBe(false);
 });

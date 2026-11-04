@@ -1,6 +1,6 @@
 # Next feature milestones
 
-Proposed order as of 2026-10-31. These are feature goals, not fixed delivery dates.
+Proposed order as of 2026-11-04. These are feature goals, not fixed delivery dates.
 Routine increments continue with targeted local checks and commits. Catalog
 expansion and exact-cultivar photography continue alongside the feature work.
 
@@ -13,8 +13,9 @@ entries and 115 cultivars, with 38 distinct cultivar photos and 77 pending.
 No schema changed. The preparation outage and interrupted-backup recovery
 follow-up are recorded in that acceptance document.
 
-[Saved shortlists](saved-shortlists.md) are now implemented locally, awaiting their
-full private-data/migration checkpoint. The [photo-journal design](photo-journal-design.md)
+[Saved shortlists](saved-shortlists.md) and the mobile redesign passed the
+[2026-11-04 staging checkpoint](mobile-checkpoint-acceptance.md), including full CI,
+migrated recovery and a preserved existing browser session. The [photo-journal design](photo-journal-design.md)
 is complete; the [normalizer prototype](photo-normalization.md) and dependency
 review are implemented locally. The [standalone process boundary](photo-process-isolation.md)
 has passed focused Linux acceptance. The [private transport](photo-worker-connection.md)
@@ -22,6 +23,12 @@ has passed client/gateway and end-to-end acceptance, with uploads disabled. Next
 is the combined photo-journal checkpoint: [storage/lifecycle](photo-journal-storage.md)
 and [gated uploads/UI](photo-journal-upload-ui.md) are implemented locally. Broader pipelines/deployment wait for the next meaningful combined
 checkpoint; routine increments retain targeted local checks and commits.
+
+The next local batch includes [Apple compatibility and store preparation](apple-and-store-readiness.md):
+safe-area and landscape refinements, reliable unsupported-push guidance, focused
+iPhone/iPad WebKit checks and a separate physical-device acceptance list. Store
+packaging/betas follow as their own milestones; no small-change deployment or
+developer enrollment is bundled into this work.
 
 ## 1. Saved plant shortlists
 

@@ -8,6 +8,7 @@ import { CareNotification, NotificationPreference } from '../../models/notificat
 import { SwPush } from '@angular/service-worker';
 import { firstValueFrom } from 'rxjs';
 import { ReminderSnooze } from '../../../../shared/reminder-snooze/reminder-snooze';
+import { supportsWebPush } from '../../../../core/pwa/web-push-support';
 
 @Component({
   selector: 'app-notifications-page',
@@ -93,7 +94,7 @@ export class NotificationsPage {
       const json = browserSubscription.toJSON();
       const saved = await firstValueFrom(this.api.savePushSubscription({ endpoint: browserSubscription.endpoint, p256dh: json.keys?.['p256dh'] ?? '', auth: json.keys?.['auth'] ?? '' }));
       localStorage.setItem('plantcare.pushSubscriptionId', saved.id); this.pushEnabled.set(true); this.pushMessage.set('Push reminders are enabled on this device.');
-    } catch { this.pushMessage.set(Notification.permission === 'denied' ? 'Notifications are blocked in your browser settings.' : 'Push reminders could not be enabled.'); }
+    } catch { this.pushMessage.set(typeof Notification !== 'undefined' && Notification.permission === 'denied' ? 'Notifications are blocked. Allow PlantCare notifications in your browser or device settings.' : 'Push reminders could not be enabled.'); }
     finally { this.pushBusy.set(false); }
   }
 
@@ -123,7 +124,8 @@ export class NotificationsPage {
   private loadPushStatus(): void {
     this.api.getPushConfig().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: config => {
-        this.pushPublicKey = config.publicKey; this.pushAvailable.set(config.isEnabled && this.swPush.isEnabled);
+        this.pushPublicKey = config.publicKey;
+        this.pushAvailable.set(config.isEnabled && this.swPush.isEnabled && supportsWebPush());
         if (!this.pushAvailable()) { this.pushEnabled.set(false); return; }
         this.swPush.subscription.pipe(take(1), takeUntilDestroyed(this.destroyRef)).subscribe({
           next: subscription => this.pushEnabled.set(subscription !== null),

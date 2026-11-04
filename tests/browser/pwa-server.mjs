@@ -3,9 +3,19 @@
 import https from 'node:https';
 import http from 'node:http';
 import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
+import { resolve, sep } from 'node:path';
 
 function load(path) {
   if (!path.startsWith('/') || path.startsWith('/api/') || path.includes('..')) throw new Error('Invalid fixture asset path');
+  if (process.env.PWA_ASSET_ROOT) {
+    // Optional focused UI checks can use built assets without rebuilding the API.
+    // This fixture is loopback-only and never proxies account/API requests.
+    const root = resolve(process.env.PWA_ASSET_ROOT);
+    const file = resolve(root, '.' + path);
+    if (!file.startsWith(root + sep)) throw new Error('Asset outside fixture root');
+    return readFile(file);
+  }
   return new Promise((resolve, reject) => {
     https.get({ hostname: 'localhost', port: 8443, path, rejectUnauthorized: false }, response => {
       if (response.statusCode !== 200) { response.resume(); reject(new Error('Production asset fetch failed')); return; }
@@ -52,7 +62,9 @@ http.createServer((request, response) => {
     manifest.hashTable['/index.html'] = version === 'broken' ? '0'.repeat(40) : createHash('sha1').update(html).digest('hex');
     response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(manifest)); return;
   }
-  const assetPath = ['/', '/login', '/plants', '/index.html'].includes(path) ? '/index.html' : path;
+  // All extensionless frontend routes share the app shell; API routes above
+  // always retain their explicit uncached response.
+  const assetPath = path === '/' || !path.split('/').at(-1).includes('.') ? '/index.html' : path;
   const bytes = assetPath === '/index.html' ? html : assets.get(assetPath);
   if (!bytes) { response.writeHead(404).end(); return; }
   const extension = assetPath.slice(assetPath.lastIndexOf('.'));
