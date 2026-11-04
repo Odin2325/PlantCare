@@ -1,6 +1,6 @@
 # Current milestone plan
 
-Reviewed 2026-11-03. This is the current work order; dated execution records retain
+Reviewed 2026-11-04. This is the current work order; dated execution records retain
 their original candidate and scope. No v1 release or production cutover is created
 by this plan. The public contact-address decision remains deferred by the owner.
 
@@ -45,13 +45,17 @@ plants, bringing that reviewed total to 105. The [Garden and cultivar increment]
 | Sharing emails and signup invitations | [Calendar-sharing acceptance](calendar-sharing-email.md): real Gmail inbox delivery, read-only access/revocation, isolated new-account signup and confirmation tests | Seven-day invitations; SMTP acceptance is not an inbox guarantee. No Google Calendar synchronization is enabled. |
 | Account controls and operations | [Account export/deletion](account-data.md), [retention and erasure-safe restore](retention-and-erasure-recovery.md), [VPS recovery](vps-application-recovery.md), [monitoring](worker-capacity.md) | Backups require the owner's PC/drive/access. Weekly email checks are not independent continuous monitoring. Replacement-host recovery remains open. |
 
-Latest deployed application: `6c84b8e1547e569e189f960af196233508172ee2`, with
-[successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/41198159336).
+Latest deployed application: `d8ff22b2fc66e4444032796015cd58a1deade5a8`, with
+[successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/41816795736)
+and [mobile checkpoint acceptance](mobile-checkpoint-acceptance.md). This adds
+saved shortlists and the shared phone/tablet redesign. Photo uploads remain off.
+The previous runtime was `6c84b8e1547e569e189f960af196233508172ee2`.
 [Catalog/Garden checkpoint acceptance](catalog-batch-checkpoint.md) covers the
 257-entry dataset, exact-cultivar images, comparisons/sharing, existing-worker
 update, preserved synthetic session/data, fresh backups and public health.
-No schema changed. Acceptance-note commits after that SHA do not imply a new
-runtime deployment.
+The catalog/Garden checkpoint did not change schema; the mobile checkpoint adds
+shortlist/journal migrations. Acceptance-note commits after the latest runtime SHA
+do not imply a new deployment.
 
 ## Remaining work, in order
 
@@ -117,6 +121,11 @@ followed by a personal photo journal, healthy growth-stage references and
 succession planting. Routine work resumes with local commits and targeted checks.
 
 ## New local batch
+
+The historical implementation notes below describe the slices accumulated for
+the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
+recovery and live existing-session update gates passed. Photo processing/uploads
+remain disabled and their activation acceptance is still outstanding.
 
 [Account-synced shortlists](saved-shortlists.md) are implemented locally, with
 catalog/detail save controls, combined filters, comparison reuse, owner isolation,

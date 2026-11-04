@@ -40,6 +40,10 @@ These inform this application's implementation; their framework code is not copi
 
 ## Verification and delivery gates
 
+The combined candidate was deployed on 2026-11-04 after exact-candidate full CI
+and fresh recovery acceptance. See [checkpoint evidence and limits](mobile-checkpoint-acceptance.md)
+for live phone/tablet and existing-session update results. Photo uploads remain off.
+
 The synthetic design audit checks phone (320px), tablet (768px) and desktop
 (1440px) page families, expanded and collapsed filters/settings, keyboard
 navigation, selected-day changes, empty days, and Month/Week/Agenda accessibility.
