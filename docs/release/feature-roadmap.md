@@ -41,6 +41,11 @@ HTTP lifecycle and 20MP decoder sample. Live settings remain unchanged. The next
 activation gate is recovery/log-growth policy plus actual host/mixed-workload
 acceptance; these samples do not enable uploads or trigger a deployment.
 
+The [snapshot-only recovery option](snapshot-recovery-policy.md) now passes its
+local rehearsal, including photo-bearing restore and existing-log-chain refusal.
+The [host preparation sequence](photo-host-preparation.md) is ready for review at
+the combined checkpoint. Live recovery settings and uploads remain unchanged.
+
 ## 1. Saved plant shortlists
 
 Save catalog plants the owner is considering, separately from plants already

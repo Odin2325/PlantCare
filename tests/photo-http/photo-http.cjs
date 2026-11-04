@@ -2,7 +2,7 @@
 const { chromium } = require('/tests/node_modules/playwright');
 const { expect } = require('/tests/node_modules/@playwright/test');
 const assert = require('node:assert/strict');
-const { randomUUID, randomBytes } = require('node:crypto');
+const { randomUUID, randomBytes, createHash } = require('node:crypto');
 const fs = require('node:fs');
 const origin = 'https://plantcare-photo.test:8443';
 const png = process.env.PHOTO_HTTP_PNG ? fs.readFileSync('/fixtures/capacity.png')
@@ -142,6 +142,16 @@ let step = 'launch';
   const thumbnail = await context.request.get(base + '/' + entry.id + '/thumbnail'); assert.equal(thumbnail.status(), 200);
   fs.writeFileSync('/output/photo-sample.json', JSON.stringify({ inputBytes: png.length, sourceWidth: fullWidth, sourceHeight: fullHeight,
     imageBytes: jpeg.length, thumbnailBytes: (await thumbnail.body()).length, zipBytes: exportedBytes.length, uploadMilliseconds }));
+  if (process.env.PHOTO_HTTP_SNAPSHOT === '1') {
+    step = 'await-private-snapshot-check';
+    fs.writeFileSync('/output/snapshot-ready.tmp', JSON.stringify({ photoId: entry.id, imageSha256: createHash('sha256').update(jpeg).digest('hex') }));
+    fs.renameSync('/output/snapshot-ready.tmp', '/output/snapshot-ready.json');
+    const deadline = Date.now() + 180000;
+    while (!fs.existsSync('/output/snapshot-continue.json')) {
+      if (Date.now() > deadline) throw Error();
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+  }
   console.log('PASS: private viewer/focus, notes editing, preserved photo date, reload and password-verified ZIP export.');
 
   step = 'delete-and-account-erasure';

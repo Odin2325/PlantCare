@@ -145,6 +145,12 @@ headroom and media/backup-growth scenarios. Current live cgroups remain unbounde
 the proposed worker/host budget and SQL log-growth/recovery policy still require
 acceptance before photo activation. No runtime setting changed.
 
+The [snapshot-only recovery option](snapshot-recovery-policy.md) is prepared and
+tested only in disposable SQL, including log reuse, photo-bearing restore and
+refusal to retire an existing log chain. It is not a live policy selection.
+[Host preparation](photo-host-preparation.md) now records the ordered artifact,
+ownership/mapping, resource/failure, recovery and device gates for the larger batch.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

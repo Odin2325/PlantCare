@@ -1,0 +1,32 @@
+-- Preparation only. Never run through migrations or application startup.
+-- Choosing SIMPLE retires point-in-time/log-chain recovery. Review the recovery
+-- promise and a fresh verified off-server snapshot before operator approval.
+SET NOCOUNT ON;
+IF DB_NAME() <> N'PlantCare'
+    THROW 51000, 'Snapshot policy requires the PlantCare database context.', 1;
+IF ISNULL(IS_SRVROLEMEMBER(N'sysadmin'), 0) <> 1 OR @@TRANCOUNT <> 0
+    THROW 51000, 'Snapshot policy requires a standalone operator session.', 1;
+IF ISNULL(CONVERT(nvarchar(100), SESSION_CONTEXT(N'PlantCareSnapshotOnlyApproval')), N'')
+        <> N'SNAPSHOT_ONLY_NO_POINT_IN_TIME'
+    THROW 51000, 'Explicit snapshot-only recovery approval is required.', 1;
+IF EXISTS (SELECT 1 FROM sys.databases WHERE database_id = DB_ID()
+    AND (state_desc <> N'ONLINE' OR is_read_only = 1 OR source_database_id IS NOT NULL OR group_database_id IS NOT NULL))
+    THROW 51000, 'Snapshot policy requires an online standalone writable database.', 1;
+IF EXISTS (SELECT 1 FROM sys.database_mirroring WHERE database_id = DB_ID() AND mirroring_guid IS NOT NULL)
+    THROW 51000, 'Mirroring requires a separate recovery-policy review.', 1;
+IF EXISTS (SELECT 1 FROM msdb.dbo.backupset WHERE database_name = DB_NAME() AND type = 'L')
+    THROW 51000, 'Existing log-backup history requires separate review.', 1;
+IF NOT EXISTS (SELECT 1 FROM msdb.dbo.backupset WHERE database_name = DB_NAME()
+    AND type = 'D' AND is_copy_only = 1 AND has_backup_checksums = 1
+    AND is_damaged = 0
+    AND database_guid = (SELECT database_guid FROM sys.database_recovery_status WHERE database_id = DB_ID())
+    AND backup_finish_date >= DATEADD(hour, -2, SYSDATETIME()))
+    THROW 51000, 'A fresh checksum database snapshot is required.', 1;
+-- This SQL history guard cannot prove off-server encryption or successful restore.
+-- The operator must verify those separately before supplying the session approval.
+IF (SELECT recovery_model_desc FROM sys.databases WHERE database_id = DB_ID()) <> N'SIMPLE'
+    ALTER DATABASE [PlantCare] SET RECOVERY SIMPLE WITH NO_WAIT;
+CHECKPOINT;
+IF (SELECT recovery_model_desc FROM sys.databases WHERE database_id = DB_ID()) <> N'SIMPLE'
+    THROW 51000, 'Snapshot recovery model was not applied.', 1;
+PRINT 'PASS: snapshot-only recovery policy applied; no file shrink or size cap changed.';

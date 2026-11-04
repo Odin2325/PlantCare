@@ -8,16 +8,18 @@ import secrets
 import shutil
 import subprocess
 import tempfile
+import time
 import uuid
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from photo_bundle import ROOT, verify
 from photo_capacity import png_fixture
+from photo_snapshot_policy import prepare, checkpoint, reject_log_chain_retirement
 
 
-def docker(*args, check=True, timeout=300):
-    result = subprocess.run(["docker", *args], capture_output=True, timeout=timeout)
+def docker(*args, check=True, timeout=300, data=None):
+    result = subprocess.run(["docker", *args], input=data, capture_output=True, timeout=timeout)
     if check and result.returncode:
         raise RuntimeError("Disposable photo HTTP Docker operation failed; raw output withheld.")
     return result
@@ -38,6 +40,7 @@ def main():
     parser.add_argument("--browser", default="plantcare-browser-tests:local")
     parser.add_argument("--capacity", action="store_true", help="Use a detailed generated sample and record local cgroup accounting")
     parser.add_argument("--budget", action="store_true", help="Test the preparation-only memory budget; requires --capacity")
+    parser.add_argument("--snapshot-policy", action="store_true", help="Rehearse the snapshot-only policy in this disposable SQL server")
     args = parser.parse_args()
     if args.budget and not args.capacity:
         parser.error("--budget requires --capacity")
@@ -57,6 +60,7 @@ def main():
     step, started, passed = "prepare", False, False
     compose = ["compose", "--project-name", project, "--file", str(scratch / "compose.json")]
     resources = None
+    policy_results = None
     try:
         # Generated-only secrets in the private ignored directory, never argv or
         # output. No saved app environment, account, key or backup is read.
@@ -128,6 +132,8 @@ def main():
                 if service == "database":
                     config["services"][service]["environment"].update(budget[service]["environment"])
             config["services"]["gateway"].update(mem_limit="128m", memswap_limit="128m")
+        if args.snapshot_policy:
+            config["services"]["browser"].setdefault("environment", {})["PHOTO_HTTP_SNAPSHOT"] = "1"
         (scratch / "compose.json").write_text(json.dumps(config), encoding="utf-8")
         if os.name != "nt":
             (scratch / "compose.json").chmod(0o600)
@@ -139,6 +145,14 @@ def main():
         step = "migrate-restrict-and-seed"
         for operation in (["--migrate-database"], ["--provision-runtime-users"], ["--import-catalog", "/operator/catalog.example.json"]):
             docker(*compose, "run", "--rm", "--no-deps", "migrate", *operation)
+        def sql(query, check=True):
+            return docker("exec", "-i", project + "-database-1", "sh", "-c",
+                          'SQLCMDPASSWORD="$MSSQL_SA_PASSWORD" /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -C -b -h -1 -W -w 4096 -d PlantCare -i /dev/stdin',
+                          data=("SET NOCOUNT ON;\n" + query).encode(), check=check)
+        if args.snapshot_policy:
+            step = "snapshot-policy-guards"
+            policy = prepare(sql, ROOT)
+            print("PASS: missing approval/baseline refused; acknowledged snapshot-only policy is idempotent in disposable SQL.", flush=True)
         docker(*compose, "up", "-d", "--no-build", "--wait", "--wait-timeout", "180", "api", "proxy")
         api = project + "-api-1"
         mounts = json.loads(docker("inspect", "--format", "{{json .Mounts}}", api).stdout)
@@ -162,7 +176,28 @@ def main():
                                            for service in ("api", "database", "gateway", "proxy")}
         print("PASS: disposable internal HTTPS stack, restricted API and read-only IPC mount.", flush=True)
         step = "real-browser-journal"
-        result = docker(*compose, "run", "--rm", "--no-deps", "browser", check=False)
+        if args.snapshot_policy:
+            process = subprocess.Popen(["docker", *compose, "run", "--rm", "--no-deps", "browser"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                ready_path = scratch / "output/snapshot-ready.json"
+                deadline = time.monotonic() + 180
+                while not ready_path.exists():
+                    if process.poll() is not None or time.monotonic() > deadline:
+                        raise RuntimeError("Browser did not reach the synthetic photo snapshot checkpoint.")
+                    time.sleep(.1)
+                step = "snapshot-photo-restore"
+                try:
+                    policy_results = checkpoint(sql, json.loads(ready_path.read_text(encoding="utf-8")))
+                finally:
+                    (scratch / "output/snapshot-continue.json").write_text('{"continue":true}', encoding="utf-8")
+                out, err = process.communicate(timeout=180)
+                result = subprocess.CompletedProcess(process.args, process.returncode, out, err)
+            finally:
+                if process.poll() is None:
+                    process.kill()
+                    process.communicate(timeout=20)
+        else:
+            result = docker(*compose, "run", "--rm", "--no-deps", "browser", check=False)
         # Print only known success markers. Never forward browser failure details,
         # generated credentials, confirmation links, cookies or request bodies.
         for line in result.stdout.decode(errors="replace").splitlines():
@@ -195,6 +230,10 @@ def main():
         query = "SET NOCOUNT ON; USE PlantCare; IF EXISTS(SELECT 1 FROM PlantPhotoEntries) OR EXISTS(SELECT 1 FROM PlantPhotoMedia) THROW 51000,'Photo rows remain',1;"
         docker("exec", project + "-database-1", "sh", "-c",
                '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -Q "$1"', "sh", query)
+        if args.snapshot_policy:
+            step = "existing-log-chain-refusal"
+            reject_log_chain_retirement(sql, policy)
+            print("PASS: logical log reuse and photo-bearing snapshot restore; existing log-chain retirement refused.", flush=True)
         remaining = docker("ps", "-aq", "--filter", "ancestor=" + manifest["imageId"]).stdout.strip()
         if remaining:
             raise ValueError("A decoder job remains; inspect before further processing.")
@@ -216,6 +255,12 @@ def main():
             "passed": passed and cleanup_ok, "step": step, "cleanup": cleanup_ok,
             "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "images": ids,
             "apiImage": ids["api"], "decoderImage": manifest["imageId"], "bundleCandidate": manifest["candidate"]}), encoding="utf-8")
+        if args.snapshot_policy:
+            (ROOT / ".operations-local/photo-snapshot-policy.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
+                "cleanup": cleanup_ok, "step": step, "results": policy_results,
+                "images": ids, "decoderImage": manifest["imageId"],
+                "limitations": "Disposable local SQL only; policy not selected/applied on normal local/staging databases. SQL media restore only, no restored app start or point-in-time recovery. No encrypted repository capture/restore."}, indent=2) + "\n", encoding="utf-8")
         if cleanup_ok and scratch.resolve().parent == base.resolve() and scratch.name.startswith(project + "-"):
             shutil.rmtree(scratch)
         if not cleanup_ok:
