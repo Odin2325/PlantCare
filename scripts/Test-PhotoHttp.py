@@ -13,6 +13,7 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from photo_bundle import ROOT, verify
+from photo_capacity import png_fixture
 
 
 def docker(*args, check=True, timeout=300):
@@ -35,7 +36,11 @@ def main():
     parser.add_argument("--bundle", required=True, type=Path)
     parser.add_argument("--gateway", default="plantcare-photo-gateway-tests:local")
     parser.add_argument("--browser", default="plantcare-browser-tests:local")
+    parser.add_argument("--capacity", action="store_true", help="Use a detailed generated sample and record local cgroup accounting")
+    parser.add_argument("--budget", action="store_true", help="Test the preparation-only memory budget; requires --capacity")
     args = parser.parse_args()
+    if args.budget and not args.capacity:
+        parser.error("--budget requires --capacity")
     manifest = verify(args.bundle)
     if image(manifest["imageId"]) != manifest["imageId"]:
         raise ValueError("Exact bundle decoder must already be loaded locally.")
@@ -51,6 +56,7 @@ def main():
         scratch.chmod(0o700)
     step, started, passed = "prepare", False, False
     compose = ["compose", "--project-name", project, "--file", str(scratch / "compose.json")]
+    resources = None
     try:
         # Generated-only secrets in the private ignored directory, never argv or
         # output. No saved app environment, account, key or backup is read.
@@ -106,6 +112,22 @@ def main():
                 volumes=[{"type": "bind", "source": str(ROOT / "tests/photo-http"), "target": "/checks", "read_only": True},
                          {"type": "bind", "source": str(scratch / "output"), "target": "/output"}])}}
         (scratch / "output").mkdir()
+        if args.capacity:
+            (scratch / "fixtures").mkdir()
+            (scratch / "fixtures/capacity.png").write_bytes(png_fixture(1024, 768, detailed=True))
+            config["services"]["browser"]["environment"] = {"PHOTO_HTTP_PNG": "/fixtures/capacity.png"}
+            config["services"]["browser"]["volumes"].append({
+                "type": "bind", "source": str(scratch / "fixtures"), "target": "/fixtures", "read_only": True})
+        if args.budget:
+            budget = json.loads((ROOT / "deploy/compose.photo-budget.json.example").read_text(encoding="utf-8"))["services"]
+            # The worker is deliberately absent from this focused journal drill.
+            # Its proposed budget needs reminder-worker acceptance at checkpoint.
+            for service in ("api", "database", "proxy"):
+                for key in ("mem_limit", "memswap_limit"):
+                    config["services"][service][key] = budget[service][key]
+                if service == "database":
+                    config["services"][service]["environment"].update(budget[service]["environment"])
+            config["services"]["gateway"].update(mem_limit="128m", memswap_limit="128m")
         (scratch / "compose.json").write_text(json.dumps(config), encoding="utf-8")
         if os.name != "nt":
             (scratch / "compose.json").chmod(0o600)
@@ -127,6 +149,17 @@ def main():
             if docker("exec", api, "id", flag).stdout.strip() != b"1654":
                 raise ValueError("Unexpected API process identity.")
         docker("exec", api, "dotnet", "PlantCare.Api.dll", "--check-runtime-access", "api")
+        def memory(container, name):
+            value = docker("exec", container, "cat", "/sys/fs/cgroup/memory." + name).stdout.strip()
+            if not re.fullmatch(rb"[1-9][0-9]*", value):
+                raise ValueError("Kernel memory accounting unavailable.")
+            return int(value)
+        if args.capacity:
+            resources = {"beforeBytes": {service: memory(project + "-" + service + "-1", "current")
+                                         for service in ("api", "database", "gateway")}}
+            if args.budget:
+                resources["limitBytes"] = {service: int(docker("exec", project + "-" + service + "-1", "cat", "/sys/fs/cgroup/memory.max").stdout.strip())
+                                           for service in ("api", "database", "gateway", "proxy")}
         print("PASS: disposable internal HTTPS stack, restricted API and read-only IPC mount.", flush=True)
         step = "real-browser-journal"
         result = docker(*compose, "run", "--rm", "--no-deps", "browser", check=False)
@@ -137,6 +170,12 @@ def main():
                 print(line, flush=True)
         if result.returncode:
             raise RuntimeError("Real browser photo journal acceptance failed.")
+        if args.capacity:
+            resources["afterBytes"] = {service: memory(project + "-" + service + "-1", "current")
+                                       for service in ("api", "database", "gateway")}
+            resources["peakBytes"] = {service: memory(project + "-" + service + "-1", "peak")
+                                      for service in ("api", "database", "gateway")}
+            resources["sample"] = json.loads((scratch / "output/photo-sample.json").read_text(encoding="utf-8"))
         step = "verify-normalized-export"
         with zipfile.ZipFile(scratch / "output/photos.zip") as archive:
             export = json.loads(archive.read("manifest.json"))
@@ -160,6 +199,12 @@ def main():
         if remaining:
             raise ValueError("A decoder job remains; inspect before further processing.")
         passed = True
+        if args.capacity:
+            (ROOT / ".operations-local/photo-http-capacity.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "images": ids,
+                "decoderImage": manifest["imageId"], "budgetEnabled": args.budget, "resources": resources,
+                "limitations": "One generated 1024x768 sample in the isolated sequential HTTP lifecycle on local Docker. Peak includes startup and all account/export/erasure work. Not a sustained-load, maximum-body, camera or VPS capacity claim. SQL backup/physical file overhead is not measured."}, indent=2) + "\n", encoding="utf-8")
+            print("PASS: detailed HTTP sample and local API/SQL/gateway kernel memory accounting recorded.", flush=True)
         print("PASS: real SQL photo metadata/media erased; no decoder job remains.", flush=True)
     finally:
         cleanup_ok = True

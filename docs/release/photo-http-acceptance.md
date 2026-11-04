@@ -82,6 +82,10 @@ Use fresh exact-candidate images again at the next combined checkpoint.
 
 ## Remaining activation work
 
+The subsequent [capacity slice](photo-capacity.md) adds a larger generated sample,
+kernel resource accounting and an optional disposable memory-budget rehearsal.
+Its measurements do not change normal app settings or close host activation gates.
+
 Keep normal local/staging uploads disabled. This does not certify the installed
 VPS systemd service, actual user-namespace mappings, sustained load, backup-growth
 capacity, interrupted-backup behavior or a real camera/device. Next: measure

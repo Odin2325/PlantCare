@@ -139,6 +139,12 @@ the isolated decoder and SQL, covering real upload/view/edit/export/delete,
 ownership/CSRF and account media erasure. No normal environment was enabled or
 deployed. Next is capacity/host-install preparation before the larger checkpoint.
 
+[Capacity preparation](photo-capacity.md) now records sequential decoder and
+budgeted HTTP measurements, a preparation-only memory override, read-only VPS
+headroom and media/backup-growth scenarios. Current live cgroups remain unbounded;
+the proposed worker/host budget and SQL log-growth/recovery policy still require
+acceptance before photo activation. No runtime setting changed.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

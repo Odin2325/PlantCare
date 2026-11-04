@@ -5,7 +5,12 @@ const assert = require('node:assert/strict');
 const { randomUUID, randomBytes } = require('node:crypto');
 const fs = require('node:fs');
 const origin = 'https://plantcare-photo.test:8443';
-const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAIAAAA8r+mnAAAAEElEQVR4nGNgaGDAjqgnAQAgkRABZnGeigAAAABJRU5ErkJggg==', 'base64');
+const png = process.env.PHOTO_HTTP_PNG ? fs.readFileSync('/fixtures/capacity.png')
+  : Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAIAAAA8r+mnAAAAEElEQVR4nGNgaGDAjqgnAQAgkRABZnGeigAAAABJRU5ErkJggg==', 'base64');
+const fullWidth = png.readUInt32BE(16), fullHeight = png.readUInt32BE(20);
+assert.ok(fullWidth <= 1600 && fullHeight <= 1600); // This HTTP fixture does not require full-image resizing.
+const thumbScale = Math.min(1, 320 / fullWidth, 320 / fullHeight);
+const thumbSize = [Math.round(fullWidth * thumbScale), Math.round(fullHeight * thumbScale)];
 let step = 'launch';
 
 (async () => {
@@ -75,8 +80,10 @@ let step = 'launch';
   const uploadRequest = page.waitForRequest(r => new URL(r.url()).pathname === base && r.method() === 'POST');
   const uploadResponse = page.waitForResponse(r => new URL(r.url()).pathname === base && r.request().method() === 'POST');
   step = 'browser-upload-response';
+  const uploadStarted = Date.now();
   await journal.getByRole('button', { name: 'Save photo', exact: true }).click();
   assert.equal((await uploadResponse).status(), 200);
+  const uploadMilliseconds = Date.now() - uploadStarted;
   step = 'browser-csrf-contract';
   const request = await uploadRequest;
   const requestHeaders = await request.allHeaders();
@@ -97,7 +104,7 @@ let step = 'launch';
   assert.equal(image.headers()['content-type'], 'image/jpeg');
   const jpeg = await image.body(); assert.ok(jpeg.subarray(0, 2).equals(Buffer.from([255, 216]))); assert.ok(!jpeg.equals(png));
   step = 'browser-decoded-thumbnail';
-  await expect.poll(() => journal.locator('.photo-grid img').evaluate(e => [e.naturalWidth, e.naturalHeight])).toEqual([8, 4]);
+  await expect.poll(() => journal.locator('.photo-grid img').evaluate(e => [e.naturalWidth, e.naturalHeight])).toEqual(thumbSize);
   console.log('PASS: real phone browser upload crosses HTTPS, authenticated API, isolated decoder and private SQL storage.');
 
   step = 'owner-isolation-and-idempotency';
@@ -121,7 +128,7 @@ let step = 'launch';
   await journal.getByRole('button', { name: 'View photo from ' + date, exact: true }).click();
   const viewer = journal.getByRole('region', { name: 'Opened growth photo', exact: true });
   await expect(viewer).toBeVisible(); await expect(viewer).toBeFocused();
-  await expect.poll(() => viewer.locator('img').evaluate(e => e.naturalWidth)).toBe(8);
+  await expect.poll(() => viewer.locator('img').evaluate(e => e.naturalWidth)).toBe(fullWidth);
   await viewer.getByRole('button', { name: 'Close growth photo', exact: true }).click();
   await journal.getByRole('button', { name: 'Edit photo from ' + date, exact: true }).click();
   await journal.getByLabel('Edit photo notes', { exact: true }).fill('Generated second leaf');
@@ -130,7 +137,11 @@ let step = 'launch';
   await page.reload(); await expect(journal.getByText('Generated second leaf', { exact: true })).toBeVisible();
   const exported = await post(context, '/api/account/export/photos', { password: owner.password });
   assert.equal(exported.status(), 200); assert.match(exported.headers()['cache-control'], /no-store/);
-  fs.writeFileSync('/output/photos.zip', await exported.body());
+  const exportedBytes = await exported.body();
+  fs.writeFileSync('/output/photos.zip', exportedBytes);
+  const thumbnail = await context.request.get(base + '/' + entry.id + '/thumbnail'); assert.equal(thumbnail.status(), 200);
+  fs.writeFileSync('/output/photo-sample.json', JSON.stringify({ inputBytes: png.length, sourceWidth: fullWidth, sourceHeight: fullHeight,
+    imageBytes: jpeg.length, thumbnailBytes: (await thumbnail.body()).length, zipBytes: exportedBytes.length, uploadMilliseconds }));
   console.log('PASS: private viewer/focus, notes editing, preserved photo date, reload and password-verified ZIP export.');
 
   step = 'delete-and-account-erasure';

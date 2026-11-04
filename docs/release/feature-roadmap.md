@@ -36,6 +36,11 @@ read-only API mount. [Real HTTP integration](photo-http-acceptance.md) now passe
 locally. Uploads stay off; capacity and host activation acceptance come before the
 next combined deployment.
 
+[Local capacity samples](photo-capacity.md) now pass, including a budgeted real
+HTTP lifecycle and 20MP decoder sample. Live settings remain unchanged. The next
+activation gate is recovery/log-growth policy plus actual host/mixed-workload
+acceptance; these samples do not enable uploads or trigger a deployment.
+
 ## 1. Saved plant shortlists
 
 Save catalog plants the owner is considering, separately from plants already
