@@ -134,6 +134,11 @@ enabling uploads. Its next gate is local real-HTTP integration and measured
 capacity before a combined deployment. The owner has no Apple device available;
 physical Apple checks remain pending while other development continues.
 
+[Real-HTTP journal acceptance](photo-http-acceptance.md) now passes locally through
+the isolated decoder and SQL, covering real upload/view/edit/export/delete,
+ownership/CSRF and account media erasure. No normal environment was enabled or
+deployed. Next is capacity/host-install preparation before the larger checkpoint.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

@@ -101,8 +101,9 @@ changed. No push, remote CI or deployment was performed.
 
 ## Next checkpoint
 
-Keep uploads disabled. Next is local real-HTTP upload acceptance with the isolated
-gateway/decoder, followed by capacity and host-install preparation. Group the
+Keep uploads disabled. [Local real-HTTP upload acceptance](photo-http-acceptance.md)
+now passes with the isolated gateway/decoder. Next is capacity and host-install
+preparation. Group the
 result with Apple refinements and other substantial changes for full candidate
 CI, artifact/license review, fresh recovery and one staging deployment. Physical
 Apple and store beta work remain separate; no device purchase is required now.

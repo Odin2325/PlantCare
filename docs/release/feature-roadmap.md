@@ -32,8 +32,9 @@ developer enrollment is bundled into this work.
 
 The following local slice prepares the [separate photo-processing bundle](photo-processing-bundle.md)
 from committed source and verifies the production-style socket UID/GID and
-read-only API mount. Uploads stay off; real HTTP integration/capacity acceptance
-comes before the next combined deployment.
+read-only API mount. [Real HTTP integration](photo-http-acceptance.md) now passes
+locally. Uploads stay off; capacity and host activation acceptance come before the
+next combined deployment.
 
 ## 1. Saved plant shortlists
 
