@@ -50,6 +50,10 @@ mapping problem.
    cancellation and cleanup before service restart. A killed control-plane process
    must not permit overlapping or forgotten jobs. Confirm no owned decoder remains
    and restored acceptance state is not inferred from a CLI's exit alone.
+   The [local restart drill](photo-gateway-restarts.md) now passes graceful and
+   forced-loss cases. Install protocol-1 gateway state and preserve its runtime
+   directory across service stops; `/run` is still lost on host reboot. Actual
+   systemd/reboot and limit-failure behavior must be checked on the target host.
 6. Review the [snapshot-only option](snapshot-recovery-policy.md) or implement the
    alternative FULL/log-backup policy. Do not silently change recovery models,
    retire an existing chain, alter schedules or shrink files during installation.

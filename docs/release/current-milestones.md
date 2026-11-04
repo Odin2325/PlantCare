@@ -151,6 +151,11 @@ refusal to retire an existing log chain. It is not a live policy selection.
 [Host preparation](photo-host-preparation.md) now records the ordered artifact,
 ownership/mapping, resource/failure, recovery and device gates for the larger batch.
 
+[Gateway restart acceptance](photo-gateway-restarts.md) now passes locally:
+private pending-job state, exclusive startup, graceful cleanup and forced-loss
+restart refusal. Actual host/systemd/reboot and mixed-workload acceptance remain
+pending; uploads are still disabled.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

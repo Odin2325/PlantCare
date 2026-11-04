@@ -101,6 +101,12 @@ changed. No push, remote CI or deployment was performed.
 
 ## Next checkpoint
 
+New bundles include `gatewayStateProtocol: 1` and the preserved-runtime unit
+setting for the [restart barrier](photo-gateway-restarts.md). Legacy bundles
+remain verifiable but do not certify the new gateway behavior. Export the exact
+combined candidate again before host installation; never substitute the delayed
+interruption-test decoder for the production decoder.
+
 Keep uploads disabled. [Local real-HTTP upload acceptance](photo-http-acceptance.md)
 now passes with the isolated gateway/decoder. Next is capacity and host-install
 preparation. Group the

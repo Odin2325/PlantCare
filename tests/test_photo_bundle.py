@@ -22,6 +22,7 @@ class BundleIntegrityTests(unittest.TestCase):
         (self.path / "compose.photo-processing.yaml.example").write_bytes(
             (ROOT / "deploy/compose.photo-processing.yaml.example").read_bytes())
         self.manifest = {"format": 1, "candidate": "b" * 40, "imageId": self.image,
+                         "gatewayStateProtocol": 1,
                          "platform": "linux/amd64", "activation": "disabled", "licenseReview": "incomplete"}
         self.save(rehash=True)
 
@@ -82,6 +83,16 @@ class BundleIntegrityTests(unittest.TestCase):
     def test_malformed_manifest_structure_is_rejected(self):
         (self.path / "manifest.json").write_text("[]", encoding="utf-8")
         with self.assertRaises(ValueError): verify(self.path)
+
+    def test_new_gateway_protocol_requires_preserved_runtime_directory(self):
+        file = self.path / "plantcare-photo-gateway.service.example"
+        file.write_text(file.read_text(encoding="utf-8").replace("RuntimeDirectoryPreserve=yes", "RuntimeDirectoryPreserve=no"), encoding="utf-8")
+        self.save(rehash=True)
+        with self.assertRaises(ValueError): verify(self.path)
+
+    def test_legacy_preparation_bundle_remains_readable_without_state_acceptance(self):
+        del self.manifest["gatewayStateProtocol"]; self.save()
+        self.assertEqual(verify(self.path).get("gatewayStateProtocol", 0), 0)
 
 
 if __name__ == "__main__":

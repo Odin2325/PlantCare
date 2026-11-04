@@ -46,6 +46,11 @@ local rehearsal, including photo-bearing restore and existing-log-chain refusal.
 The [host preparation sequence](photo-host-preparation.md) is ready for review at
 the combined checkpoint. Live recovery settings and uploads remain unchanged.
 
+The [gateway restart slice](photo-gateway-restarts.md) now passes local lock,
+pending-state, graceful-stop, forced-loss and HTTP lifecycle checks. The next
+local slice is combined worker/export/backup resource acceptance; actual host
+installation and systemd/reboot checks remain for the reviewed batch window.
+
 ## 1. Saved plant shortlists
 
 Save catalog plants the owner is considering, separately from plants already

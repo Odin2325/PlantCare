@@ -2,6 +2,7 @@
 import argparse
 import asyncio
 import contextlib
+import json
 import os
 import re
 import signal
@@ -10,6 +11,68 @@ import stat
 import struct
 import sys
 import uuid
+if sys.platform == "linux":
+    import fcntl
+
+
+class RuntimeState:
+    """Private restart barrier. Contains generated job identity, never photo data."""
+    def __init__(self, directory):
+        self.directory = directory
+        self.marker = os.path.join(directory, "job-pending.json")
+        self.active = None
+        self.lock = os.open(os.path.join(directory, "gateway.lock"),
+                            os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW | os.O_CLOEXEC, 0o600)
+        try:
+            self.validate(os.fstat(self.lock))
+            fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            if os.path.lexists(self.marker):
+                raise ValueError("Pending job requires operator review.")
+        except BaseException:
+            os.close(self.lock)
+            raise
+
+    @staticmethod
+    def validate(info):
+        if not stat.S_ISREG(info.st_mode) or info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) != 0o600 or info.st_nlink != 1:
+            raise ValueError("Private gateway state has unsafe ownership or mode.")
+
+    def sync_directory(self):
+        fd = os.open(self.directory, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+
+    def begin(self, name, image):
+        data = json.dumps({"format": 1, "name": name, "imageId": image}, sort_keys=True).encode()
+        fd = os.open(self.marker, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC, 0o600)
+        try:
+            self.validate(os.fstat(fd))
+            with os.fdopen(fd, "wb", closefd=False) as stream:
+                stream.write(data); stream.flush(); os.fsync(fd)
+            info = os.fstat(fd)
+            self.sync_directory()
+            self.active = ((info.st_dev, info.st_ino), data)
+        finally:
+            os.close(fd)
+
+    def clear(self):
+        if self.active is None:
+            raise ValueError("No owned gateway marker to clear.")
+        fd = os.open(self.marker, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        try:
+            info = os.fstat(fd); self.validate(info)
+            if (info.st_dev, info.st_ino) != self.active[0] or os.read(fd, 1025) != self.active[1]:
+                raise ValueError("Gateway marker changed; review before restart.")
+            os.unlink(self.marker)
+            self.sync_directory()
+            self.active = None
+        finally:
+            os.close(fd)
+
+    def close(self):
+        os.close(self.lock)
 
 MAX_INPUT = 8 * 1024 * 1024
 MAX_RESULT = 20 + 512 * 1024 + 64 * 1024
@@ -49,12 +112,22 @@ def validate_result(data):
 
 
 class DockerLauncher:
-    def __init__(self, image_id, binary="/usr/bin/docker"):
+    def __init__(self, image_id, binary="/usr/bin/docker", runtime_state=None):
         if not re.fullmatch(r"sha256:[a-f0-9]{64}", image_id):
             raise ValueError("A pinned local image ID is required.")
         self.image_id = image_id
         self.binary = binary
         self.poisoned = False
+        self.runtime_state = runtime_state
+
+    async def ensure_idle(self):
+        # Include old unlabeled jobs and old image versions, in every state.
+        # Never auto-remove a container whose interruption has not been reviewed.
+        code, output = await self.control("container", "ls", "--all", "--filter",
+                                          "name=^/plantcare-photo-job-", "--format", "{{.Names}}")
+        if code != 0 or output.strip():
+            self.poisoned = True
+            raise Failure("photo-processing-unavailable")
 
     async def spawn(self, *arguments, stdin=None):
         return await asyncio.create_subprocess_exec(
@@ -97,11 +170,19 @@ class DockerLauncher:
         name = "plantcare-photo-job-" + uuid.uuid4().hex
         process = None
         tasks = []
+        marked = False
         try:
+            if self.runtime_state is not None:
+                try:
+                    self.runtime_state.begin(name, self.image_id)
+                    marked = True
+                except BaseException:
+                    self.poisoned = True
+                    raise
             # Finish creation before attachment. A cancellation during creation
             # must settle that bounded control call before checking job absence.
             creation = asyncio.create_task(self.control(
-                "create", "--rm", "--pull", "never", "--name", name, "--log-driver", "none", "-i",
+                "create", "--rm", "--pull", "never", "--name", name, "--label", "plantcare.photo-job=1", "--log-driver", "none", "-i",
                 "--network", "none", "--read-only", "--memory", "384m", "--memory-swap", "384m",
                 "--cpus", "1", "--pids-limit", "64", "--cap-drop", "ALL",
                 "--security-opt", "no-new-privileges", self.image_id, mime))
@@ -160,6 +241,12 @@ class DockerLauncher:
                 raise
             finally:
                 await self.cleanup(name)
+                if marked and not self.poisoned:
+                    try:
+                        self.runtime_state.clear()
+                    except BaseException:
+                        self.poisoned = True
+                        raise
 
 
 class Gateway:
@@ -168,6 +255,7 @@ class Gateway:
         self.allowed_uid = allowed_uid
         self.busy = False
         self.connections = set()
+        self.closing = False
 
     async def handle(self, reader, writer):
         current = asyncio.current_task()
@@ -175,6 +263,8 @@ class Gateway:
         admitted = False
         job = watch = None
         try:
+            if self.closing:
+                raise Failure("photo-processing-unavailable")
             credentials = writer.get_extra_info("socket").getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, 12)
             _, uid, _ = struct.unpack("3i", credentials)
             if uid != self.allowed_uid:
@@ -235,27 +325,51 @@ async def serve(args):
     info = os.stat(directory)
     if info.st_uid != os.geteuid() or info.st_mode & 0o007 or info.st_mode & stat.S_IWGRP:
         raise ValueError("The socket directory must be gateway-owned and private.")
-    # Never unlink an unknown preexisting path; operators resolve stale sockets
-    # after confirming no old gateway remains. systemd removes RuntimeDirectory.
+    runtime = RuntimeState(directory)
+    try:
+        await serve_locked(args, path, runtime)
+    finally:
+        runtime.close()
+
+
+async def serve_locked(args, path, runtime):
+    # Never unlink unknown state. Preserve RuntimeDirectory across service stops
+    # so an interrupted creation cannot evade the restart barrier.
+    launcher = DockerLauncher(args.image_id, runtime_state=runtime)
+    await launcher.ensure_idle()
     if os.path.lexists(path):
         raise ValueError("Socket path already exists.")
-    gateway = Gateway(DockerLauncher(args.image_id), args.allowed_uid)
-    server = await asyncio.start_unix_server(gateway.handle, path=path, backlog=1, limit=8192)
-    os.chown(path, -1, args.socket_gid)
-    os.chmod(path, 0o660)
+    gateway = Gateway(launcher, args.allowed_uid)
+    # Python 3.13 added automatic socket removal. Keep explicit ownership-based
+    # removal after job cleanup, consistently with older supported Python.
+    options = {"cleanup_socket": False} if sys.version_info >= (3, 13) else {}
+    server = await asyncio.start_unix_server(gateway.handle, path=path, backlog=1, limit=8192, **options)
+    socket_identity = os.lstat(path)
     stop = asyncio.Event()
     loop = asyncio.get_running_loop()
     for signum in (signal.SIGTERM, signal.SIGINT):
         loop.add_signal_handler(signum, stop.set)
     try:
+        os.chown(path, -1, args.socket_gid)
+        os.chmod(path, 0o660)
         await stop.wait()
     finally:
+        gateway.closing = True
         server.close()
-        await server.wait_closed()
+        # Modern asyncio waits for active transports too. Cancel/reap handlers
+        # first, otherwise a paused decoder can keep shutdown waiting until the
+        # service manager kills the gateway before it removes its job.
         for task in list(gateway.connections):
             task.cancel()
         await asyncio.gather(*list(gateway.connections), return_exceptions=True)
-        os.unlink(path)
+        await server.wait_closed()
+        if os.path.lexists(path):
+            current = os.lstat(path)
+            if not stat.S_ISSOCK(current.st_mode) or (current.st_dev, current.st_ino) != (socket_identity.st_dev, socket_identity.st_ino):
+                raise Failure("photo-processing-unavailable")
+            os.unlink(path)
+        if launcher.poisoned:
+            raise Failure("photo-processing-unavailable")
 
 
 def main():

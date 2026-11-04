@@ -54,12 +54,17 @@ def verify(path):
     for name, expected in manifest["files"].items():
         if not isinstance(expected, str) or not re.fullmatch(r"[a-f0-9]{64}", expected) or digest(path / name) != expected:
             raise ValueError("Bundle checksum mismatch.")
+    protocol = manifest.get("gatewayStateProtocol", 0)
+    if protocol not in (0, 1):
+        raise ValueError("Unsupported gateway restart-state protocol.")
     # A manifest is not a signature. Compare its digest through a trusted channel
     # at transfer, then verify loaded image ID and host permissions separately.
     unit = (path / "plantcare-photo-gateway.service.example").read_text(encoding="utf-8")
     if ("--image-id " + manifest["imageId"] not in unit or "User=root" not in unit
             or "--allowed-uid 1654 --socket-gid 1654" not in unit):
         raise ValueError("Gateway identity or image binding changed.")
+    if protocol == 1 and "RuntimeDirectoryPreserve=yes" not in unit:
+        raise ValueError("Gateway restart state must survive service stops.")
     compose = (path / "compose.photo-processing.yaml.example").read_text(encoding="utf-8")
     for required in ('PhotoProcessing__Enabled: "false"', 'PhotoJournal__UploadsEnabled: "false"',
                      "read_only: true", "create_host_path: false"):
@@ -127,6 +132,7 @@ def export(candidate):
         print("Exporting separate decoder archive and verified image notices.", flush=True)
         command("docker", "image", "save", "--output", str(payload / "decoder-image.tar"), tag)
         manifest = {"format": 1, "candidate": sha, "imageId": image, "platform": "linux/amd64",
+                    "gatewayStateProtocol": 1,
                     "activation": "disabled", "licenseReview": "incomplete",
                     "files": {name: digest(payload / name) for name in sorted(FILES)}}
         (payload / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")

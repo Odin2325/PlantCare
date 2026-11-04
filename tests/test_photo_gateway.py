@@ -1,12 +1,16 @@
 import asyncio
 import contextlib
+import json
 import os
 import socket
 import struct
 import sys
 import tempfile
 import unittest
-from scripts.photo_gateway import Gateway, DockerLauncher, Failure, bounded
+from unittest.mock import patch
+from types import SimpleNamespace
+import signal
+from scripts.photo_gateway import Gateway, DockerLauncher, Failure, bounded, RuntimeState, serve_locked
 
 
 def photo():
@@ -70,6 +74,13 @@ class GatewayTests(unittest.IsolatedAsyncioTestCase):
             writer.close(); await writer.wait_closed()
         self.assertEqual(2, self.launcher.calls)
 
+    async def test_closing_gateway_rejects_new_job(self):
+        self.gateway.closing = True
+        reader, writer = await self.connect()
+        self.assertEqual((1, b"photo-processing-unavailable"), await self.response(reader))
+        self.assertEqual(0, self.launcher.calls)
+        writer.close(); await writer.wait_closed()
+
     async def test_wrong_peer_identity_never_launches_decoder(self):
         self.gateway.allowed_uid = os.geteuid() + 1
         reader, writer = await asyncio.open_unix_connection(self.path)
@@ -116,6 +127,17 @@ class GatewayTests(unittest.IsolatedAsyncioTestCase):
 
 
 class LimitsTests(unittest.IsolatedAsyncioTestCase):
+    async def test_startup_refuses_old_jobs_and_failed_inspection_without_removing(self):
+        for code, output in ((0, b"plantcare-photo-job-old\n"), (1, b"")):
+            launcher = DockerLauncher("sha256:" + "a" * 64)
+            calls = []
+            async def control(*args):
+                calls.append(args)
+                return code, output
+            launcher.control = control
+            with self.assertRaises(Failure): await launcher.ensure_idle()
+            self.assertTrue(launcher.poisoned)
+            self.assertEqual(1, len(calls)); self.assertEqual("container", calls[0][0])
     async def test_reader_stops_at_one_excess_byte(self):
         reader = asyncio.StreamReader()
         reader.feed_data(b"a" * 100); reader.feed_eof()
@@ -162,6 +184,104 @@ class LimitsTests(unittest.IsolatedAsyncioTestCase):
             await job
         self.assertTrue(removed.is_set())
         self.assertFalse(launcher.poisoned)
+
+
+@unittest.skipUnless(sys.platform == "linux", "Private gateway state requires Linux flock")
+class RuntimeStateTests(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.directory = tempfile.TemporaryDirectory(prefix="pc-photo-state-")
+        self.state = RuntimeState(self.directory.name)
+        self.name = "plantcare-photo-job-" + "a" * 32
+        self.image = "sha256:" + "b" * 64
+
+    def tearDown(self):
+        self.state.close()
+        self.directory.cleanup()
+
+    async def test_second_gateway_cannot_take_lock(self):
+        with self.assertRaises(BlockingIOError): RuntimeState(self.directory.name)
+        self.assertFalse(os.get_inheritable(self.state.lock))
+
+    async def test_pending_identity_is_private_and_survives_process_lifetime(self):
+        self.state.begin(self.name, self.image)
+        with open(self.state.marker) as file: data = json.load(file)
+        self.assertEqual({"format": 1, "name": self.name, "imageId": self.image}, data)
+        self.assertEqual(0o600, os.stat(self.state.marker).st_mode & 0o777)
+        self.state.close()
+        with self.assertRaises(ValueError): RuntimeState(self.directory.name)
+        # Reopen the locked descriptor for the fixture's final close only.
+        self.state.lock = os.open(os.path.join(self.directory.name, "gateway.lock"), os.O_RDWR)
+
+    async def test_confirmed_cleanup_allows_new_lifetime(self):
+        self.state.begin(self.name, self.image); self.state.clear()
+        self.assertFalse(os.path.exists(self.state.marker))
+        self.state.close(); self.state = RuntimeState(self.directory.name)
+
+    async def test_replaced_marker_is_not_deleted(self):
+        self.state.begin(self.name, self.image)
+        os.unlink(self.state.marker)
+        with open(self.state.marker, "w") as file: file.write("unrecognized state")
+        os.chmod(self.state.marker, 0o600)
+        with self.assertRaises(ValueError): self.state.clear()
+        self.assertTrue(os.path.exists(self.state.marker))
+
+    async def test_unsafe_lock_modes_links_and_symlinks_are_refused(self):
+        for kind in ("mode", "hardlink", "symlink"):
+            with tempfile.TemporaryDirectory(prefix="pc-photo-bad-lock-") as directory:
+                path = os.path.join(directory, "gateway.lock")
+                if kind == "symlink":
+                    os.symlink(os.path.join(directory, "target"), path)
+                else:
+                    with open(path, "w"): pass
+                    os.chmod(path, 0o644 if kind == "mode" else 0o600)
+                    if kind == "hardlink": os.link(path, os.path.join(directory, "other"))
+                with self.assertRaises((ValueError, OSError)): RuntimeState(directory)
+
+    async def test_uncertain_creation_retains_marker_even_after_empty_cleanup(self):
+        launcher = DockerLauncher(self.image, runtime_state=self.state)
+        async def control(*args):
+            if args[0] == "create": raise TimeoutError()
+            return 0, b""
+        launcher.control = control
+        with self.assertRaises(Failure): await launcher.normalize(b"synthetic", "image/png")
+        self.assertTrue(launcher.poisoned)
+        self.assertTrue(os.path.exists(self.state.marker))
+
+    async def test_settled_creation_cancellation_clears_marker_after_removal(self):
+        launcher = DockerLauncher(self.image, runtime_state=self.state)
+        started, release = asyncio.Event(), asyncio.Event()
+        async def control(*args):
+            if args[0] == "create": started.set(); await release.wait()
+            return 0, b""
+        launcher.control = control
+        job = asyncio.create_task(launcher.normalize(b"synthetic", "image/png"))
+        await started.wait(); job.cancel(); release.set()
+        with self.assertRaises(asyncio.CancelledError): await job
+        self.assertFalse(launcher.poisoned)
+        self.assertFalse(os.path.exists(self.state.marker))
+
+    async def test_shutdown_cancels_handlers_before_waiting_for_server_connections(self):
+        fake = FakeLauncher(); fake.block = True; fake.poisoned = False
+        async def idle(): pass
+        fake.ensure_idle = idle
+        handlers = {}
+        loop = asyncio.get_running_loop()
+        path = os.path.join(self.directory.name, "gateway.sock")
+        args = SimpleNamespace(image_id=self.image, allowed_uid=os.geteuid(), socket_gid=os.getegid())
+        with patch("scripts.photo_gateway.DockerLauncher", return_value=fake), patch.object(loop, "add_signal_handler", side_effect=lambda signum, callback: handlers.update({signum: callback})):
+            service = asyncio.create_task(serve_locked(args, path, self.state))
+            for _ in range(100):
+                if os.path.exists(path): break
+                await asyncio.sleep(.01)
+            reader, writer = await asyncio.open_unix_connection(path)
+            writer.write(b"PCR1\2" + struct.pack("<I", 3) + b"abc"); await writer.drain()
+            await asyncio.wait_for(fake.started.wait(), 2)
+            handlers[signal.SIGTERM]()
+            await asyncio.wait_for(service, 2)
+            self.assertTrue(fake.cleaned.is_set())
+            self.assertFalse(os.path.exists(path))
+            writer.close()
+            with contextlib.suppress(ConnectionError): await writer.wait_closed()
 
 
 if __name__ == "__main__":
