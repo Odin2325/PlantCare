@@ -43,7 +43,7 @@ test('garden catalog categories combine with search and preserve navigation and 
   await page.setViewportSize({ width: 320, height: 900 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Garden category filters');
-  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(categoryLink('')).toHaveAttribute('aria-current', 'page');
   await expect(page.getByRole('link', { name: 'Compare selected plants', exact: true })).toBeVisible();
 });
@@ -144,7 +144,7 @@ test('catalog light filters combine with search, survive detail navigation and r
   await page.getByLabel('Light requirement', { exact: true }).selectOption('BrightIndirectLight');
   await expect(cards).toHaveCount(0);
   await expect(page.getByText('No plants match your search. Try another name or clear the filters.')).toBeVisible();
-  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(page).toHaveURL(/\/plants$/);
   await expect(page.getByRole('searchbox', { name: 'Find a plant' })).toHaveValue('');
   await expect(page.getByLabel('Light requirement', { exact: true })).toHaveValue('');
@@ -186,7 +186,7 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   await expect(page.getByLabel('Sort by', { exact: true })).toHaveValue('name-desc');
   await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
   await expect(cards).toHaveCount(0);
-  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(page).toHaveURL(/\/plants$/);
   await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('');
   await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
@@ -274,7 +274,7 @@ test('comparison selection survives filters, details and reload, limits three pl
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await auditAccessibility(page,'Plant comparison at narrow width');
   await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
-  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(page.getByRole('checkbox', { name: 'Compare Spider plant', exact: true })).toBeChecked();
   await expect(page.getByRole('checkbox', { name: 'Compare ZZ plant', exact: true })).not.toBeChecked();
   await page.getByRole('button', { name: 'Clear comparison', exact: true }).click();
@@ -365,7 +365,7 @@ test('growth photo discovery combines filters and preserves comparison through d
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('ZZ plant');
   await expect(page.locator('.plant-card')).toHaveCount(0);
   await expect(page.getByText('No plants match your search. Try another name or clear the filters.')).toBeVisible();
-  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(filter).toHaveValue('');
   await expect(page.locator('.plant-card')).toHaveCount(all.length);
   await expect(page.getByRole('region', { name: 'Plant comparison selection' })).toContainText('2 of 3');
@@ -471,7 +471,7 @@ test('unknown pet assessment stays distinct and combines with gallery, light and
   await expect(page.locator('.comparison-card').first()).toContainText('Not assessed for this comparison');
   await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await expect(filter).toHaveValue('unknown');
-  await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(filter).toHaveValue('');
   await expect(cards).toHaveCount(species.length);
   await expect(page.getByRole('region', { name: 'Plant comparison selection' })).toContainText('2 of 3');

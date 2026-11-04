@@ -1,4 +1,4 @@
-import { openMoreMenu, openCalendarTools } from './ui-controls';
+import { openMoreMenu, openCalendarTools, openNotificationSettings } from './ui-controls';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { expect, test, type Page } from '@playwright/test';
@@ -129,6 +129,7 @@ test('public staging core journey, sampled accessibility and two-account isolati
     stage('notifications');
     await openMoreMenu(page);
     await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Notifications', exact: true }).click();
+    await openNotificationSettings(page);
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeVisible();
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeChecked();
     stage('notification-audit');

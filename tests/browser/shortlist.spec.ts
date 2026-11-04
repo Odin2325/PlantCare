@@ -29,7 +29,7 @@ test('private shortlist persists, combines filters, reconciles failed changes an
       return route.fulfill({status:204});
     }
     if(method!=='GET'){unexpected.push(path);return route.fulfill({status:405});}
-    if(path==='/api/plant-species')return route.fulfill({json:catalog});
+    if(path==='/api/plant-species'){await new Promise(resolve=>setTimeout(resolve,150));return route.fulfill({json:catalog});}
     const plant=catalog.find(p=>path==='/api/plant-species/'+p.id);
     return route.fulfill(plant?{json:plant}:{status:404,json:{}});
   });
@@ -44,7 +44,7 @@ test('private shortlist persists, combines filters, reconciles failed changes an
   await page.getByRole('checkbox',{name:'My shortlist only',exact:true}).check();await expect(page.locator('.plant-card h2')).toHaveText(['Tomato (Roma)']);
   expect(new URL(page.url()).searchParams.get('shortlisted')).toBe('1');
   await page.getByRole('searchbox',{name:'Find a plant',exact:true}).fill('Tiny Tim');await expect(page.locator('.plant-card')).toHaveCount(0);
-  await page.getByRole('button',{name:'Clear filters',exact:true}).click();await expect(page.locator('.plant-card')).toHaveCount(2);expect(saved.size).toBe(1);
+  await openCatalogTools(page, true);await page.getByRole('button',{name:'Clear filters',exact:true}).click();await expect(page.locator('.plant-card')).toHaveCount(2);expect(saved.size).toBe(1);
   await page.locator('.plant-card').filter({has:page.getByRole('heading',{name:'Tomato (Roma)',exact:true})}).getByRole('link',{name:'View details',exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toHaveText('Tomato (Roma)');
   await page.getByRole('button',{name:'Remove Tomato (Roma) from shortlist',exact:true}).click();
@@ -52,7 +52,7 @@ test('private shortlist persists, combines filters, reconciles failed changes an
   await notice.getByRole('button',{name:'Refresh shortlist',exact:true}).click();await expect(saveRoma).toHaveAttribute('aria-pressed','false');
   await saveRoma.click();await notice.getByRole('link',{name:'View full shortlist',exact:true}).click();await openCatalogTools(page, true);
   await expect(page.locator('.plant-card h2')).toHaveText(['Tomato (Roma)']);
-  await page.getByRole('button',{name:'Clear filters',exact:true}).click();
+  await openCatalogTools(page, true);await page.getByRole('button',{name:'Clear filters',exact:true}).click();
   for(const name of ['Roma','Tiny Tim'])await page.getByRole('checkbox',{name:`Compare Tomato (${name})`,exact:true}).check();
   await notice.getByRole('link',{name:'View full shortlist',exact:true}).click();await openCatalogTools(page, true);
   await expect(page.locator('.plant-card h2')).toHaveText(['Tomato (Roma)']);

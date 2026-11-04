@@ -1,4 +1,4 @@
-import { openMoreMenu, openCalendarTools } from './ui-controls';
+import { openMoreMenu, openCalendarTools, openNotificationSettings } from './ui-controls';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { expect, test, type APIRequestContext, type Page, type Download } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
@@ -170,6 +170,7 @@ test('register, confirm, care for a plant, recover password and log out', async 
     const nav = page.getByRole('navigation', { name: 'Main navigation' });
     await openMoreMenu(page);
     await nav.getByRole('link', { name: 'Notifications', exact: true }).click();
+    await openNotificationSettings(page);
     await expect(page.getByRole('checkbox', { name: 'Show reminders in PlantCare', exact: true })).toBeVisible();
     await auditAccessibility(page, 'Notification preferences');
     await nav.getByRole('link', { name: 'Dashboard', exact: true }).click();

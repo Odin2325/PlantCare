@@ -55,3 +55,11 @@ runtime checks, migrated recovery and existing-session PWA update acceptance
 before staging activation. Activating photo uploads has its own further gates.
 
 Existing stylesheet-size warnings remain visible; budgets are not relaxed.
+
+The first mobile candidate's combined browser run found incomplete disclosure
+steps in the older journeys and a destination-render timing issue in their
+helper. The helper now waits for the catalog page itself, and journeys explicitly
+open the settings they use. A delayed catalog fixture checks the asynchronous
+case. Real local acceptance also found an expanded calendar filter panel could
+overlap event actions; filters now expand in page flow instead of overlaying them.
+These fixes are checked locally before another combined candidate is pushed.

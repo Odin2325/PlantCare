@@ -42,7 +42,7 @@ test('related cultivars: photo filters combine with search and preserve URL cont
   await cards.getByRole('link', { name: 'View details', exact: true }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tomato (Roma)');
   expect(new URL(page.url()).searchParams.get('cultivarPhoto')).toBe('available');
-  await page.goBack();
+  await page.goBack(); await openCatalogTools(page, true);
   await expect(filter).toHaveValue('available');
   await filter.selectOption('pending');
   await expect(cards.locator('h2')).toHaveText(['Tomato (Legacy)', 'Tomato (Tiny Tim)']);
