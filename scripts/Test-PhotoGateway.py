@@ -37,7 +37,7 @@ def main():
                "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
                "--mount", "type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock",
                "--mount", "type=volume,src=" + volume + ",dst=/run/plantcare-photo",
-               args.gateway, "--image-id", image, "--allowed-uid", "1654", "--socket-gid", "0")
+               args.gateway, "--image-id", image, "--allowed-uid", "1654", "--socket-gid", "1654")
         for _ in range(40):
             ready = docker("exec", name, "python3", "-c", "import os; raise SystemExit(not os.path.exists('/run/plantcare-photo/gateway.sock'))", check=False)
             if ready.returncode == 0:
@@ -46,12 +46,15 @@ def main():
         else:
             raise AssertionError("Private test gateway did not start.")
 
-        def client(data, uid="0", cancel=False):
+        docker("exec", name, "python3", "-c", "import os,stat; p='/run/plantcare-photo'; d=os.stat(p); s=os.stat(p+'/gateway.sock'); assert (d.st_uid,d.st_gid,stat.S_IMODE(d.st_mode))==(0,1654,0o750); assert (s.st_uid,s.st_gid,stat.S_IMODE(s.st_mode))==(0,1654,0o660)")
+        print("PASS: root-owned private directory and socket use API group 1654", flush=True)
+
+        def client(data, uid="0", cancel=False, process_uid="1654"):
             client_name = "plantcare-photo-client-test-" + uuid.uuid4().hex
             try:
                 return docker("run", "--rm", "--pull", "never", "--name", client_name,
                               "--network", "none", "--read-only", "--log-driver", "none",
-                              "--user", "1654:0", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
+                              "--user", process_uid + ":1654", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
                               "--mount", "type=volume,src=" + volume + ",dst=/run/plantcare-photo,readonly",
                               "-i", args.client, "/run/plantcare-photo/gateway.sock", uid, *(["cancel"] if cancel else []), data=data, check=False)
             finally:
@@ -65,7 +68,15 @@ def main():
         assert invalid.returncode != 0 and invalid.stderr.strip() == b"photo-invalid" and not invalid.stdout
         wrong = client(fixture.png(), uid="42")
         assert wrong.returncode != 0 and wrong.stderr.strip() == b"photo-processing-unavailable" and not wrong.stdout
-        print("PASS: invalid photos and wrong gateway identity fail closed", flush=True)
+        wrong_peer = client(fixture.png(), process_uid="1655")
+        assert wrong_peer.returncode != 0 and wrong_peer.stderr.strip() == b"photo-processing-unavailable" and not wrong_peer.stdout
+        read_only = docker("run", "--rm", "--pull", "never", "--network", "none", "--read-only",
+                           "--user", "0:1654", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
+                           "--mount", "type=volume,src=" + volume + ",dst=/run/plantcare-photo,readonly",
+                           "--entrypoint", "python3", args.gateway, "-c",
+                           "import errno,os\ntry: os.open('/run/plantcare-photo/probe', os.O_WRONLY|os.O_CREAT,0o600)\nexcept OSError as e: assert e.errno==errno.EROFS\nelse: raise AssertionError('socket mount is writable')", check=False)
+        assert read_only.returncode == 0, "shared client socket mount must enforce read-only even for its directory owner"
+        print("PASS: invalid photos, wrong peer identities and client-directory writes fail closed", flush=True)
         canceled = client(fixture.png(), cancel=True)
         assert canceled.returncode == 3 and canceled.stderr.strip() == b"photo-test-canceled"
         for _ in range(10):

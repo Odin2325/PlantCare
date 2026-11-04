@@ -128,6 +128,12 @@ detection and installation help, focused WebKit checks, and separate Google Play
 and App Store packaging/beta milestones. These changes wait for the next large
 checkpoint; no new deployment or store upload is part of this slice.
 
+The next [photo-processing preparation slice](photo-processing-bundle.md) exports
+the decoder and pinned gateway templates separately, without installing them or
+enabling uploads. Its next gate is local real-HTTP integration and measured
+capacity before a combined deployment. The owner has no Apple device available;
+physical Apple checks remain pending while other development continues.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

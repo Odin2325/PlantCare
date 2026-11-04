@@ -1,0 +1,84 @@
+# Photo-processing preparation bundle
+
+This local slice packages the isolated decoder separately from the API/worker.
+It does not install a gateway, mount a socket into the app or enable uploads.
+Apple physical-device acceptance remains pending because the owner has no Apple
+device available. Routine work retains focused checks and local commits; a full
+deployment waits for the next substantial batch.
+
+## Committed-source export
+
+With Python 3.12+ and Linux Docker running:
+
+```powershell
+python scripts/photo_bundle.py export --candidate HEAD
+python scripts/photo_bundle.py verify --bundle .operations-local/photo-processing-bundles/<full-sha>
+```
+
+The exporter reads only the selected Git commit, never the current source tree,
+environment files, account data or working-directory photos. Its allowlisted
+source archive contains the decoder project, decoder Dockerfile, gateway script
+and two preparation templates. The decoder is built for Linux amd64 and inspected
+for the expected non-root user and normalization entrypoint. A stopped container
+provides the actual shipped dependency manifest, notices and native policy; its
+notice/policy hashes must match committed source. The container is never started.
+
+The resulting directory contains a separate decoder image archive, pinned
+gateway service example, gateway source, disabled Compose override example,
+actual decoder dependency manifest, policy and two Magick.NET notice files.
+Every payload has a SHA256 in `manifest.json`; the exporter reports the manifest
+hash separately. Final directories are published only after verification and
+existing bundles are never overwritten. Failed scratch is removed without
+deleting unrelated artifacts or images.
+
+Verification rejects changed/missing/unexpected files, links/junctions, unknown
+manifest paths, wrong platform/identity, changed service-image binding, removed
+notices and an upload-enabled override. It reads files only: no Docker load,
+package execution, installation, socket connection or remote action. Hashes do
+not authenticate an attacker-rewritten manifest; compare its digest through the
+trusted deployment channel and verify the loaded image identity at activation.
+
+`licenseReview` remains `incomplete`: these two notice files do not close the
+container/.NET/native nested-license review. Keep vendor notices in the image,
+review the exact dependency manifest and finish attribution before distribution.
+
+## Host/API boundary preparation
+
+`deploy/compose.photo-processing.yaml.example` keeps both feature flags false,
+expects a root gateway and adds only the private socket directory as a read-only
+API bind. It forbids Docker Compose from silently creating a missing host path.
+It does not mount the Docker socket, add privileges or alter the worker. Existing
+base Compose and saved deployment configuration remain unchanged.
+
+The accepted host arrangement must be checked again on the actual VPS:
+
+- Gateway source/unit are root-owned, not writable by the API. The host gateway
+  is trusted Docker control-plane code; only it receives Docker access.
+- Runtime directory is root:1654 mode 0750; socket is root:1654 mode 0660.
+  API process uses UID/GID 1654:1654 and expects gateway UID 0 through SO_PEERCRED.
+- API socket-directory mount is read-only, and no daemon socket is present.
+  User-namespace/rootless mappings need explicit acceptance; do not weaken peer
+  identity checks merely to make a mapping work.
+- Load/inspect the exact accepted decoder image and bind the service to its
+  immutable image ID. Do not enable the example unit or flags as part of export.
+- Measure actual decoder peak memory/time, API/SQL headroom and backup size/time
+  on the 4GB VPS before the later activation checkpoint. Verify the real
+  HTTP → gateway → decoder → private SQL path, migrated restore/erasure handling,
+  rollback/fail-closed behavior, and installed-device upload/view/delete.
+
+The synthetic `Test-PhotoGateway.py` drill now uses the intended UID/GID instead
+of giving its API-side client group 0. It checks real directory/socket ownership,
+two consecutive client/decoder jobs, rejection of a different connecting UID and
+wrong expected gateway UID, invalid images, cancellation/reuse and cleanup.
+A separate directory-owner probe confirms the client mount returns EROFS on a
+write; ordinary API permissions remain more restrictive. This drill grants the
+Docker socket only to its disposable trusted gateway, never the .NET client or
+decoder. It contains generated images and sockets only, no account credentials.
+
+## Next checkpoint
+
+Keep uploads disabled. Next is local real-HTTP upload acceptance with the isolated
+gateway/decoder, followed by capacity and host-install preparation. Group the
+result with Apple refinements and other substantial changes for full candidate
+CI, artifact/license review, fresh recovery and one staging deployment. Physical
+Apple and store beta work remain separate; no device purchase is required now.

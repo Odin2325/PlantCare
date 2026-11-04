@@ -1,0 +1,16 @@
+# Preparation only: verify/install the root-owned gateway before using this
+# override. Keep uploads off until the combined activation/device checkpoint.
+services:
+  api:
+    environment:
+      PhotoProcessing__Enabled: "false"
+      PhotoJournal__UploadsEnabled: "false"
+      PhotoProcessing__SocketPath: /run/plantcare-photo/gateway.sock
+      PhotoProcessing__GatewayUid: "0"
+    volumes:
+      - type: bind
+        source: /run/plantcare-photo
+        target: /run/plantcare-photo
+        read_only: true
+        bind:
+          create_host_path: false

@@ -30,6 +30,11 @@ iPhone/iPad WebKit checks and a separate physical-device acceptance list. Store
 packaging/betas follow as their own milestones; no small-change deployment or
 developer enrollment is bundled into this work.
 
+The following local slice prepares the [separate photo-processing bundle](photo-processing-bundle.md)
+from committed source and verifies the production-style socket UID/GID and
+read-only API mount. Uploads stay off; real HTTP integration/capacity acceptance
+comes before the next combined deployment.
+
 ## 1. Saved plant shortlists
 
 Save catalog plants the owner is considering, separately from plants already

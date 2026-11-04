@@ -19,7 +19,7 @@ FROM docker:cli AS docker-cli
 FROM python:3.13-slim AS gateway
 COPY --from=docker-cli /usr/local/bin/docker /usr/bin/docker
 COPY scripts/photo_gateway.py /app/photo_gateway.py
-RUN mkdir -p /run/plantcare-photo && chmod 750 /run/plantcare-photo
+RUN mkdir -p /run/plantcare-photo && chown 0:1654 /run/plantcare-photo && chmod 750 /run/plantcare-photo
 ENTRYPOINT ["python3", "/app/photo_gateway.py"]
 
 FROM gateway AS gateway-tests
