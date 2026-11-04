@@ -5,11 +5,19 @@ export async function openCatalogTools(page: Page, expectedCatalog = false) {
   if (expectedCatalog) await expect(page).toHaveURL(/\/plants(?:\?|$)/);
   if (new URL(page.url()).pathname !== '/plants') return;
   await expect(page.locator('.catalog-page')).toBeVisible();
-  await expect(page.getByText('Loading plant catalog...', { exact: true })).toBeHidden();
+  // The destination shell can appear before its async @if branch renders. An
+  // absent loading message alone does not prove that the controls exist yet.
+  const toolbar = page.locator('.catalog-searchbar');
+  const terminal = page.locator('.catalog-page > .status-message').filter({ hasNotText: 'Loading plant catalog...' });
+  await expect(toolbar.or(terminal).first()).toBeVisible();
   const filters = page.getByRole('button', { name: /^Filters/ });
-  if (await filters.count() && await filters.getAttribute('aria-expanded') === 'false') await filters.click();
-  if (await filters.count()) await expect(filters).toHaveAttribute('aria-expanded', 'true');
+  if (await toolbar.isVisible()) {
+    await expect(filters).toBeVisible();
+    if (await filters.getAttribute('aria-expanded') === 'false') await filters.click();
+    await expect(filters).toHaveAttribute('aria-expanded', 'true');
+  }
   const extras = page.locator('.catalog-extras');
+  if (await toolbar.isVisible()) await expect(extras).toBeVisible();
   if (await extras.count() && !await extras.evaluate(element => (element as HTMLDetailsElement).open)) await extras.locator(':scope > summary').click();
 }
 
