@@ -43,6 +43,17 @@ class BundleIntegrityTests(unittest.TestCase):
         (self.path / "photo_gateway.py").write_text("changed", encoding="utf-8")
         with self.assertRaises(ValueError): verify(self.path)
 
+    def test_linux_runtime_declaration_requires_matching_dependency_target(self):
+        self.manifest["decoderRuntimeIdentifier"] = "linux-x64"
+        deps = self.path / "decoder.deps.json"
+        deps.write_text(json.dumps({"runtimeTarget": {"name": ".NETCoreApp,Version=v10.0/linux-x64"}}), encoding="utf-8")
+        self.save(rehash=True)
+        self.assertEqual("linux-x64", verify(self.path)["decoderRuntimeIdentifier"])
+        for target in (".NETCoreApp,Version=v10.0", ".NETCoreApp,Version=v10.0/linux-arm64"):
+            deps.write_text(json.dumps({"runtimeTarget": {"name": target}}), encoding="utf-8")
+            self.save(rehash=True)
+            with self.assertRaises(ValueError): verify(self.path)
+
     def test_extra_private_file_is_rejected(self):
         (self.path / ".env").write_text("SYNTHETIC=fixture", encoding="utf-8")
         with self.assertRaises(ValueError): verify(self.path)

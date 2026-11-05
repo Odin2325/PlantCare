@@ -1,5 +1,11 @@
 # Dependency attribution and packaging review
 
+The 2026-10-21 state below is historical. The newer
+[photo host/artifact preflight](photo-candidate-preflight.md) records exact decoder
+package, native, framework and OS evidence; it does not clear the full backend/
+container license gate. Current staging delivery is recorded in the
+[mobile checkpoint](mobile-checkpoint-acceptance.md).
+
 Reviewed 2026-10-21. This work closes a verified frontend packaging gap and starts
 the backend/container distribution review. It does not accept a public release.
 The staging application remains `677b91a`; the correction below is not yet live.

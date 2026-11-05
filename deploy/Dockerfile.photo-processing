@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 COPY PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj PlantCare.PhotoProcessing/
-RUN dotnet restore PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj
+RUN dotnet restore PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj --runtime linux-x64
 COPY PlantCare.PhotoProcessing/ PlantCare.PhotoProcessing/
-RUN dotnet publish PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj -c Release --no-restore -o /out
+RUN dotnet publish PlantCare.PhotoProcessing/PlantCare.PhotoProcessing.csproj -c Release --no-restore --runtime linux-x64 --self-contained false -o /out
 
 FROM build AS focused-tests
 RUN apt-get update && apt-get install --yes --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*

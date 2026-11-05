@@ -107,6 +107,11 @@ remain verifiable but do not certify the new gateway behavior. Export the exact
 combined candidate again before host installation; never substitute the delayed
 interruption-test decoder for the production decoder.
 
+New exports also declare `decoderRuntimeIdentifier: linux-x64` and check that
+the dependency target matches. The [host/artifact preflight](photo-candidate-preflight.md)
+records the portable-image finding, focused publish correction and remaining
+license/host gates. This RID declaration does not mark attribution review complete.
+
 Keep uploads disabled. [Local real-HTTP upload acceptance](photo-http-acceptance.md)
 now passes with the isolated gateway/decoder. Next is capacity and host-install
 preparation. Group the

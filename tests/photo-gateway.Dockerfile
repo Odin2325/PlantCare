@@ -27,8 +27,10 @@ WORKDIR /src
 COPY scripts/photo_gateway.py scripts/photo_gateway.py
 COPY scripts/photo_bundle.py scripts/photo_bundle.py
 COPY scripts/photo_capacity.py scripts/photo_capacity.py
+COPY scripts/photo_image_inventory.py scripts/photo_image_inventory.py
 COPY tests/test_photo_gateway.py tests/test_photo_gateway.py
 COPY tests/test_photo_bundle.py tests/test_photo_bundle.py
 COPY tests/test_photo_capacity.py tests/test_photo_capacity.py
+COPY tests/test_photo_image_inventory.py tests/test_photo_image_inventory.py
 COPY deploy/plantcare-photo-gateway.service.example deploy/compose.photo-processing.yaml.example deploy/
 RUN python3 -m unittest discover -s tests -p 'test_photo_*.py'

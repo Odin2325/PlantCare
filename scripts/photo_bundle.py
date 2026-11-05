@@ -57,6 +57,11 @@ def verify(path):
     protocol = manifest.get("gatewayStateProtocol", 0)
     if protocol not in (0, 1):
         raise ValueError("Unsupported gateway restart-state protocol.")
+    rid = manifest.get("decoderRuntimeIdentifier")
+    if rid is not None:
+        deps = json.loads((path / "decoder.deps.json").read_text(encoding="utf-8"))
+        if rid != "linux-x64" or not deps.get("runtimeTarget", {}).get("name", "").endswith("/linux-x64"):
+            raise ValueError("Decoder runtime manifest does not match the declared Linux x64 target.")
     # A manifest is not a signature. Compare its digest through a trusted channel
     # at transfer, then verify loaded image ID and host permissions separately.
     unit = (path / "plantcare-photo-gateway.service.example").read_text(encoding="utf-8")
@@ -133,6 +138,7 @@ def export(candidate):
         command("docker", "image", "save", "--output", str(payload / "decoder-image.tar"), tag)
         manifest = {"format": 1, "candidate": sha, "imageId": image, "platform": "linux/amd64",
                     "gatewayStateProtocol": 1,
+                    "decoderRuntimeIdentifier": "linux-x64",
                     "activation": "disabled", "licenseReview": "incomplete",
                     "files": {name: digest(payload / name) for name in sorted(FILES)}}
         (payload / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")

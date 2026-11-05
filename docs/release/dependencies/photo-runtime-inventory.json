@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "applicationCandidate": "755c477b4f6bf93d100f3610e430c6ba59a79c7f",
+  "scope": "NuGet packages listed by the supplied shipped application dependency manifests; excludes shared frameworks, base-image OS packages, SQL Server, Caddy and build/test-only tools.",
+  "packageCount": 2,
+  "packages": [
+    {
+      "id": "Magick.NET-Q8-AnyCPU",
+      "version": "15.0.0",
+      "restoreContentHash": "sha512-yECRj8M7/D7dIndVmvEbMsolIBC+lyd+Er3wM/p8MSCaTAqjXjYvqmfETu9u/QuJBKM/ofgZBUtRs4HqRicrow==",
+      "archiveSha512": "C/3HLeMk7iXdTlC6O2XSOMB7wi9lcMZak55gQg/Ne5tlb+qkiueOd+iEHClmvVCajDhqngE06FO6jiTzTQdDig==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "Apache-2.0",
+      "licenseUrl": "https://licenses.nuget.org/Apache-2.0",
+      "projectUrl": "https://github.com/dlemstra/Magick.NET",
+      "authors": "Dirk Lemstra",
+      "copyright": "Copyright 2013-2026 Dirk Lemstra",
+      "packagedNotices": [
+        {
+          "path": "Notice.txt",
+          "characters": 419972,
+          "normalizedTextSha256": "3a480d219337545b0f123820876bc84dba0cf44898592b156bdd3d98f9d83376"
+        }
+      ],
+      "reviewStatus": "packaged-notice-available-review-required"
+    },
+    {
+      "id": "Magick.NET.Core",
+      "version": "15.0.0",
+      "restoreContentHash": "sha512-mP/VovMRuXBX2Rcnn1wWu0Zur6cjsf8IQhmTUCrasEk8cyAtN5sjHE7NxiH88whw8/2mjRvuphKUwj6bAZslpQ==",
+      "archiveSha512": "uBnOFSexMIv+YzqeSr1IuTGeq+apYqf38OcUXGUqOK5bJc1opjuReMP2/YAso7VXOvGZZcG0k1bCSFjMjQE+VA==",
+      "declaredLicenseType": "expression",
+      "declaredLicense": "Apache-2.0",
+      "licenseUrl": "https://licenses.nuget.org/Apache-2.0",
+      "projectUrl": "https://github.com/dlemstra/Magick.NET",
+      "authors": "Dirk Lemstra",
+      "copyright": "Copyright 2013-2026 Dirk Lemstra",
+      "packagedNotices": [],
+      "reviewStatus": "notice-text-review-required"
+    }
+  ]
+}
