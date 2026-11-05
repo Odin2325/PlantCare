@@ -183,6 +183,15 @@ the deleted owner stays absent and the other account remains usable. This shares
 the fixture SQL server/logins, so independent replacement-host acceptance remains
 open. No live data, service, backup or upload flag changed.
 
+The [selected format/count scenarios](photo-formats-counts.md) now also pass:
+real JPEG orientation, PNG/WebP transparency/metadata normalization, unsupported/
+corrupt/animation-header rejection, separate 20-plant/50-account entry limits,
+verified 50-image export, quota reuse and account erasure. The local functional,
+capacity-sample and encrypted/restored-app foundation is ready to consolidate.
+Next are the remaining host/native-license prerequisites and one exact combined
+candidate's CI/recovery/staging gates. Device/diverse-media limits remain explicit;
+physical Apple checks still wait for hardware.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

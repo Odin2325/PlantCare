@@ -20,6 +20,7 @@ from photo_mixed_workload import mixed_checkpoint
 from photo_large_workload import large_checkpoint, padded_png
 from photo_encrypted_recovery import encrypted_recovery
 from photo_restored_app import restored_app
+from photo_formats_counts import count_checkpoint, animation_probes
 
 
 def docker(*args, check=True, timeout=300, data=None):
@@ -49,6 +50,7 @@ def main():
     parser.add_argument("--large-account", action="store_true", help="Test input boundaries and near-quota private export; requires --capacity --budget")
     parser.add_argument("--encrypted-recovery", action="store_true", help="Capture/check/restore only this generated near-quota fixture in a new private restic repository")
     parser.add_argument("--restored-app", action="store_true", help="Verify restored keys, restricted API, private photos and erasure replay; requires --encrypted-recovery")
+    parser.add_argument("--formats-counts", action="store_true", help="Real HTTP image-format and per-plant/account entry limits; requires --capacity --budget")
     args = parser.parse_args()
     if args.budget and not args.capacity:
         parser.error("--budget requires --capacity")
@@ -60,6 +62,8 @@ def main():
         parser.error("--encrypted-recovery requires --large-account")
     if args.restored_app and not args.encrypted_recovery:
         parser.error("--restored-app requires --encrypted-recovery")
+    if args.formats_counts and (not args.budget or args.large_account or args.mixed_worker or args.snapshot_policy):
+        parser.error("--formats-counts requires --capacity --budget and its own isolated run")
     restic = ROOT / ".operations-local/tools/restic.exe"
     if args.encrypted_recovery and (os.name != "nt" or not restic.is_file() or restic.is_symlink()):
         parser.error("Encrypted fixture recovery needs Windows and the existing local restic tool")
@@ -72,6 +76,10 @@ def main():
         "mailpit": "axllent/mailpit:v1.27"}.items()}
     if args.mixed_worker:
         ids["worker"] = image(args.mixed_worker)
+    if args.formats_counts:
+        ids["formatFixtures"] = image("plantcare-photo-format-fixtures:local")
+        if docker("image", "inspect", ids["formatFixtures"], "--format", '{{index .Config.Labels "org.plantcare.test-only"}}').stdout.strip() != b"format-fixtures":
+            raise ValueError("Use the test-only format fixture generator.")
     project = "plantcare-photo-http-" + uuid.uuid4().hex
     base = ROOT / ".operations-local" / "photo-http"
     base.mkdir(parents=True, exist_ok=True)
@@ -84,6 +92,7 @@ def main():
     policy_results = None
     mixed_results = None
     large_results = None
+    format_results = None
     try:
         # Generated-only secrets in the private ignored directory, never argv or
         # output. No saved app environment, account, key or backup is read.
@@ -164,6 +173,17 @@ def main():
                 "over-limit.png": padded_png((scratch / "fixtures/capacity.png").read_bytes(), 8 * 1024 * 1024 + 1),
                 "20mp.png": png_fixture(5000, 4000), "21mp.png": png_fixture(6000, 3500)}.items():
                 (scratch / "fixtures" / name).write_bytes(data)
+        if args.formats_counts:
+            config["services"]["browser"]["environment"]["PHOTO_HTTP_FORMATS_COUNTS"] = "1"
+            generator = project + "-format-fixtures"
+            try:
+                docker("run", "--rm", "--name", generator, "--pull", "never", "--network", "none", "--read-only",
+                       "--user", "0:0", "--memory", "384m", "--memory-swap", "384m", "--cpus", "1",
+                       "--pids-limit", "64", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
+                       "--mount", "type=bind,src=" + str(scratch / "fixtures") + ",dst=/out", ids["formatFixtures"])
+            finally:
+                docker("rm", "--force", generator, check=False)
+            animation_probes(scratch / "fixtures")
         if args.restored_app:
             config["services"]["browser"]["environment"]["PHOTO_HTTP_RESTORED_APP"] = "1"
         if args.budget:
@@ -218,10 +238,15 @@ def main():
                                            for service in ("api", "database", "gateway", "proxy")}
         print("PASS: disposable internal HTTPS stack, restricted API and read-only IPC mount.", flush=True)
         step = "real-browser-journal"
-        if args.snapshot_policy or args.mixed_worker or args.large_account:
+        if args.snapshot_policy or args.mixed_worker or args.large_account or args.formats_counts:
             process = subprocess.Popen(["docker", *compose, "run", "--rm", "--no-deps", "browser"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
-                if args.large_account:
+                if args.formats_counts:
+                    step = "image-formats-and-count-quotas"
+                    format_results = {}
+                    format_results.update(count_checkpoint(sql, project, scratch, process, format_results))
+                    print("PASS: real JPEG/PNG/WebP normalization and 20-per-plant/50-per-account entry limits with quota reuse.", flush=True)
+                elif args.large_account:
                     step = "large-input-account-export"
                     large_results = {}
                     def recovery(sample, progress):
@@ -348,6 +373,12 @@ def main():
                 "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
                 "cleanup": cleanup_ok, "step": step, "results": recovery_result.get("app"), "images": ids,
                 "limitations": "Generated local accounts, same disposable SQL server and existing server logins. Real restored keys/API and erasure replay, not a fresh-master/replacement-host test or external notification delivery."}, indent=2) + "\n", encoding="utf-8")
+        if args.formats_counts:
+            (ROOT / ".operations-local/photo-formats-counts.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
+                "cleanup": cleanup_ok, "step": step, "results": format_results, "images": ids,
+                "decoderImage": manifest["imageId"],
+                "limitations": "Generated native format fixtures and normalized-media copies in disposable SQL. Selected orientation/alpha/metadata and MIME/container probes, not a real-device camera or exhaustive codec corpus. No staging/normal upload flag changed."}, indent=2) + "\n", encoding="utf-8")
         if cleanup_ok and scratch.resolve().parent == base.resolve() and scratch.name.startswith(project + "-"):
             shutil.rmtree(scratch)
         if not cleanup_ok:

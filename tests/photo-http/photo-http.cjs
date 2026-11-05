@@ -143,6 +143,12 @@ let responseStatus;
   const thumbnail = await context.request.get(base + '/' + entry.id + '/thumbnail'); assert.equal(thumbnail.status(), 200);
   fs.writeFileSync('/output/photo-sample.json', JSON.stringify({ inputBytes: png.length, sourceWidth: fullWidth, sourceHeight: fullHeight,
     imageBytes: jpeg.length, thumbnailBytes: (await thumbnail.body()).length, zipBytes: exportedBytes.length, uploadMilliseconds }));
+  if (process.env.PHOTO_HTTP_FORMATS_COUNTS === '1') {
+    step = 'formats-and-counts';
+    await require('./photo-formats-counts.cjs')({ context, page, password: owner.password, base, originalId: entry.id, date });
+    assert.deepEqual(await (await context.request.get('/api/my-plants/' + plant.id)).json(), beforePlant);
+    assert.deepEqual(await (await context.request.get('/api/my-plants/' + plant.id + '/care/history')).json(), beforeHistory);
+  }
   if (process.env.PHOTO_HTTP_LARGE === '1') {
     const signal = (name, value) => {
       fs.writeFileSync('/output/' + name + '.tmp', JSON.stringify(value));

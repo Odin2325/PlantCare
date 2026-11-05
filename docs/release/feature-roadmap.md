@@ -56,10 +56,17 @@ caps. The [large-input/account-export sample](photo-large-account.md) now also
 passes for 8-MiB/20-MP inputs and a 38-photo ZIP at about 99% account byte usage.
 The [encrypted local recovery sample](photo-encrypted-recovery.md) now also passes
 for SQL/key capture, a fresh repository and verified SQL/media restore. Next are
-remaining image/count scenarios, diverse-media sizing and actual host acceptance,
-followed by the combined deployment gates. The [local restored-app check](photo-restored-app.md)
+diverse-media sizing and actual host acceptance, followed by the combined
+deployment gates. The [local restored-app check](photo-restored-app.md)
 now passes key-dependent sessions, private reads/export, account erasure and
 reconciliation of that erasure before an old-snapshot app restart.
+
+The [selected HTTP format/count check](photo-formats-counts.md) now passes JPEG
+orientation, PNG/static-WebP alpha and metadata handling, bounded rejection and
+independent 20/50-entry limits with a verified 50-photo export. Consolidate the
+local photo/Apple work into the combined candidate after host/native-notice
+prerequisites; do not deploy each test increment. Physical Apple checks remain
+separate until a device is available.
 
 ## 1. Saved plant shortlists
 

@@ -56,6 +56,10 @@ mapping problem.
    The [local recovered API/key check](photo-restored-app.md) now passes private
    photo access/export and account-erasure replay before old-snapshot restart.
    It shares the fixture SQL server/logins and does not certify a fresh host.
+   The [selected format/count drill](photo-formats-counts.md) also passes JPEG
+   orientation, PNG/WebP alpha/metadata handling and independent 20/50-entry
+   limits. It complements the byte-quota sample; it is not an exhaustive real
+   camera/codec corpus or diverse-media retention-size forecast.
    The gateway's 128-MiB planning envelope is not automatically enforced by the
    current unit template. Validate any chosen host limit and its failure behavior.
 5. Rehearse graceful termination, forced gateway loss/limit failure, decoder crash,
