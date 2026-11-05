@@ -17,6 +17,7 @@ from photo_bundle import ROOT, verify
 from photo_capacity import png_fixture
 from photo_snapshot_policy import prepare, checkpoint, reject_log_chain_retirement
 from photo_mixed_workload import mixed_checkpoint
+from photo_large_workload import large_checkpoint, padded_png
 
 
 def docker(*args, check=True, timeout=300, data=None):
@@ -43,11 +44,14 @@ def main():
     parser.add_argument("--budget", action="store_true", help="Test the preparation-only memory budget; requires --capacity")
     parser.add_argument("--snapshot-policy", action="store_true", help="Rehearse the snapshot-only policy in this disposable SQL server")
     parser.add_argument("--mixed-worker", help="Existing local worker image for concurrent reminder/photo/SQL-backup acceptance; requires --capacity --budget")
+    parser.add_argument("--large-account", action="store_true", help="Test input boundaries and near-quota private export; requires --capacity --budget")
     args = parser.parse_args()
     if args.budget and not args.capacity:
         parser.error("--budget requires --capacity")
     if args.mixed_worker and (not args.budget or args.snapshot_policy):
         parser.error("--mixed-worker requires --capacity --budget and cannot combine with --snapshot-policy")
+    if args.large_account and (not args.budget or args.snapshot_policy or args.mixed_worker):
+        parser.error("--large-account requires --capacity --budget and its own isolated run")
     manifest = verify(args.bundle)
     if image(manifest["imageId"]) != manifest["imageId"]:
         raise ValueError("Exact bundle decoder must already be loaded locally.")
@@ -68,6 +72,7 @@ def main():
     resources = None
     policy_results = None
     mixed_results = None
+    large_results = None
     try:
         # Generated-only secrets in the private ignored directory, never argv or
         # output. No saved app environment, account, key or backup is read.
@@ -141,6 +146,13 @@ def main():
             config["services"]["browser"].setdefault("environment", {})["PHOTO_HTTP_PNG"] = "/fixtures/capacity.png"
             config["services"]["browser"]["volumes"].append({
                 "type": "bind", "source": str(scratch / "fixtures"), "target": "/fixtures", "read_only": True})
+        if args.large_account:
+            config["services"]["browser"]["environment"]["PHOTO_HTTP_LARGE"] = "1"
+            for name, data in {
+                "limit.png": padded_png((scratch / "fixtures/capacity.png").read_bytes(), 8 * 1024 * 1024),
+                "over-limit.png": padded_png((scratch / "fixtures/capacity.png").read_bytes(), 8 * 1024 * 1024 + 1),
+                "20mp.png": png_fixture(5000, 4000), "21mp.png": png_fixture(6000, 3500)}.items():
+                (scratch / "fixtures" / name).write_bytes(data)
         if args.budget:
             budget = json.loads((ROOT / "deploy/compose.photo-budget.json.example").read_text(encoding="utf-8"))["services"]
             for service in ("api", "database", "proxy") + (("worker",) if args.mixed_worker else ()):
@@ -193,10 +205,15 @@ def main():
                                            for service in ("api", "database", "gateway", "proxy")}
         print("PASS: disposable internal HTTPS stack, restricted API and read-only IPC mount.", flush=True)
         step = "real-browser-journal"
-        if args.snapshot_policy or args.mixed_worker:
+        if args.snapshot_policy or args.mixed_worker or args.large_account:
             process = subprocess.Popen(["docker", *compose, "run", "--rm", "--no-deps", "browser"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
-                if args.mixed_worker:
+                if args.large_account:
+                    step = "large-input-account-export"
+                    large_results = {}
+                    large_results.update(large_checkpoint(sql, docker, project, scratch, process, large_results))
+                    print("PASS: input byte/pixel boundaries, near-quota private export and storage rejection/reuse.", flush=True)
+                elif args.mixed_worker:
                     step = "mixed-worker-photo-backups"
                     mixed_results = {}
                     mixed_results.update(mixed_checkpoint(sql, docker, compose, project, scratch, process, mixed_results))
@@ -291,6 +308,12 @@ def main():
                 "cleanup": cleanup_ok, "step": step, "results": mixed_results, "images": ids,
                 "decoderImage": manifest["imageId"],
                 "limitations": "Generated local Docker sample, 100 reminders, four extra photo uploads/exports and overlapping SQL COPY_ONLY backups. No external push/mail, encrypted repository work, maximum quota export, sustained load, systemd or VPS acceptance."}, indent=2) + "\n", encoding="utf-8")
+        if args.large_account:
+            (ROOT / ".operations-local/photo-large-account.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
+                "cleanup": cleanup_ok, "step": step, "results": large_results, "images": ids,
+                "decoderImage": manifest["imageId"],
+                "limitations": "Generated local fixtures and cloned genuine normalized media in disposable SQL. Near-quota sample, not every image mix, real camera, multi-user/service saturation, encrypted backup or VPS acceptance."}, indent=2) + "\n", encoding="utf-8")
         if cleanup_ok and scratch.resolve().parent == base.resolve() and scratch.name.startswith(project + "-"):
             shutil.rmtree(scratch)
         if not cleanup_ok:

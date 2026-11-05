@@ -47,6 +47,9 @@ mapping problem.
    Use the [mixed-workload check](photo-mixed-workload.md) for the local reminder,
    upload/export and SQL-backup sample. It does not cover encrypted capture or
    the largest permitted exports and does not certify VPS headroom.
+   The separate [large-account sample](photo-large-account.md) exercises input
+   boundaries and a near-byte-quota ZIP. Different image mixes, maximum entry
+   counts and encrypted capture/recovery overhead remain separate checks.
    The gateway's 128-MiB planning envelope is not automatically enforced by the
    current unit template. Validate any chosen host limit and its failure behavior.
 5. Rehearse graceful termination, forced gateway loss/limit failure, decoder crash,

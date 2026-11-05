@@ -52,8 +52,10 @@ installation and systemd/reboot checks remain for the reviewed batch window.
 
 The [mixed local sample](photo-mixed-workload.md) now passes for 100 reminders,
 repeated uploads/exports and overlapping SQL backups under the proposed memory
-caps. Next are maximum-body/account-export preparation and encrypted capture/
-recovery sizing, followed by the actual host and combined deployment gates.
+caps. The [large-input/account-export sample](photo-large-account.md) now also
+passes for 8-MiB/20-MP inputs and a 38-photo ZIP at about 99% account byte usage.
+Next are encrypted capture/recovery sizing and remaining image/count scenarios,
+followed by the actual host and combined deployment gates.
 
 ## 1. Saved plant shortlists
 

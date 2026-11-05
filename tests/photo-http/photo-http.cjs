@@ -143,6 +143,82 @@ let responseStatus;
   const thumbnail = await context.request.get(base + '/' + entry.id + '/thumbnail'); assert.equal(thumbnail.status(), 200);
   fs.writeFileSync('/output/photo-sample.json', JSON.stringify({ inputBytes: png.length, sourceWidth: fullWidth, sourceHeight: fullHeight,
     imageBytes: jpeg.length, thumbnailBytes: (await thumbnail.body()).length, zipBytes: exportedBytes.length, uploadMilliseconds }));
+  if (process.env.PHOTO_HTTP_LARGE === '1') {
+    const signal = (name, value) => {
+      fs.writeFileSync('/output/' + name + '.tmp', JSON.stringify(value));
+      fs.renameSync('/output/' + name + '.tmp', '/output/' + name + '.json');
+    };
+    const wait = async name => {
+      const deadline = Date.now() + 180000;
+      while (!fs.existsSync('/output/' + name + '.json')) {
+        if (Date.now() > deadline) throw Error();
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      return JSON.parse(fs.readFileSync('/output/' + name + '.json', 'utf8'));
+    };
+    const upload = async (buffer, target = base) => {
+      const response = await context.request.post(target, { headers: await headers(context), multipart: {
+        ...multipart, requestId: randomUUID(), file: { name: 'photo', mimeType: 'image/png', buffer } } });
+      responseStatus = response.status();
+      return response;
+    };
+    const timings = {};
+    step = 'large-byte-limit';
+    const limit = fs.readFileSync('/fixtures/limit.png'); assert.equal(limit.length, 8 * 1024 * 1024);
+    let began = Date.now();
+    let response = await upload(limit); assert.equal(response.status(), 200);
+    timings.byteLimitMilliseconds = Date.now() - began;
+    let temporary = await response.json();
+    const normalized = await context.request.get(base + '/' + temporary.id + '/image');
+    assert.equal(normalized.status(), 200);
+    assert.equal(createHash('sha256').update(await normalized.body()).digest('hex'), createHash('sha256').update(jpeg).digest('hex'));
+    assert.equal((await context.request.delete(base + '/' + temporary.id, { headers: await headers(context) })).status(), 204);
+    step = 'large-pixel-limit';
+    began = Date.now(); response = await upload(fs.readFileSync('/fixtures/20mp.png'));
+    assert.equal(response.status(), 200); timings.pixelLimitMilliseconds = Date.now() - began;
+    temporary = await response.json();
+    const resized = await context.request.get(base + '/' + temporary.id + '/image'); assert.equal(resized.status(), 200);
+    const resizedBytes = await resized.body(); assert.ok(resizedBytes.length <= 512 * 1024);
+    assert.deepEqual(await page.evaluate(async bytes => {
+      const bitmap = await createImageBitmap(new Blob([new Uint8Array(bytes)], { type: 'image/jpeg' }));
+      const size = [bitmap.width, bitmap.height]; bitmap.close(); return size;
+    }, Array.from(resizedBytes)), [1600, 1280]);
+    assert.equal((await context.request.delete(base + '/' + temporary.id, { headers: await headers(context) })).status(), 204);
+    step = 'large-rejections';
+    response = await upload(fs.readFileSync('/fixtures/over-limit.png')); assert.equal(response.status(), 413);
+    response = await upload(fs.readFileSync('/fixtures/21mp.png')); assert.equal(response.status(), 422);
+    assert.equal((await response.json()).detail, 'photo-dimensions-exceeded');
+    response = await context.request.post(base, { headers: { ...await headers(context), 'Content-Type': 'multipart/form-data; boundary=generated' },
+      data: Buffer.alloc(9 * 1024 * 1024 + 1, 120) });
+    responseStatus = response.status(); assert.equal(response.status(), 413);
+    assert.equal((await (await context.request.get(base)).json()).length, 1);
+    signal('large-ready', { photoId: entry.id });
+    const seeded = await wait('large-seeded');
+    const secondBase = '/api/my-plants/' + seeded.plantId + '/photos';
+    step = 'large-account-quota';
+    const secondCount = (await (await context.request.get(secondBase)).json()).length;
+    assert.ok(secondCount < 20);
+    response = await upload(png, secondBase); assert.equal(response.status(), 409);
+    assert.equal((await (await context.request.get(secondBase)).json()).length, secondCount);
+    step = 'large-account-export';
+    began = Date.now();
+    response = await post(context, '/api/account/export/photos', { password: owner.password });
+    responseStatus = response.status(); assert.equal(response.status(), 200);
+    assert.match(response.headers()['cache-control'], /no-store/);
+    const archive = await response.body(); assert.ok(archive.length > 18 * 1024 * 1024);
+    timings.exportMilliseconds = Date.now() - began;
+    fs.writeFileSync('/output/large-photos.zip', archive);
+    signal('large-done', { ...timings, acceptedFileBytes: limit.length, acceptedPixels: 20000000,
+      rejectedFileBytes: 8 * 1024 * 1024 + 1, rejectedBodyBytes: 9 * 1024 * 1024 + 1, rejectedPixels: 21000000,
+      accountQuotaRejected: true });
+    await wait('large-continue');
+    step = 'large-quota-reuse';
+    response = await upload(png); assert.equal(response.status(), 200);
+    temporary = await response.json();
+    assert.equal((await context.request.delete(base + '/' + temporary.id, { headers: await headers(context) })).status(), 204);
+    assert.equal((await (await context.request.get(base)).json()).length, 1);
+    console.log('PASS: exact input byte/pixel limits, oversized rejection, near-quota private export and subsequent quota reuse.');
+  }
   if (process.env.PHOTO_HTTP_MIXED === '1') {
     // Registration, confirmation and login for two accounts already consume
     // six shared authentication permits. Keep production limits unchanged and
@@ -223,5 +299,6 @@ let responseStatus;
   console.log('PASS: explicit photo deletion and account erasure through real authenticated endpoints.');
 })().catch(() => {
   if (process.env.PHOTO_HTTP_MIXED === '1') fs.writeFileSync('/output/mixed-failure.json', JSON.stringify({ step, responseStatus }));
+  if (process.env.PHOTO_HTTP_LARGE === '1') fs.writeFileSync('/output/large-failure.json', JSON.stringify({ step, responseStatus }));
   console.log('Photo HTTP browser failure at ' + step + '; sensitive details withheld.'); process.exit(1);
 });

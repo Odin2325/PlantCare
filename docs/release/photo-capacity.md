@@ -121,6 +121,12 @@ the proposed 192-MiB worker cap. That sample does not certify largest exports,
 encrypted repository overhead or actual VPS headroom. Its per-service memory
 measurements and remaining limits are recorded separately.
 
+The opt-in [large-account check](photo-large-account.md) covers HTTP input
+boundaries and a private export close to the account byte quota. It uses genuine
+normalized media copies in disposable SQL, not a relaxed production quota or
+dozens of repeated HTTP decodes. Its safe report records full lifecycle/cleanup
+acceptance independently of the mixed-worker sample.
+
 Keep both photo flags off. Prepare/review the SQL log-growth/recovery policy and
 host gateway installation, then accept mixed workload/resource limits, actual
 image backup/recovery size/time and interrupted-processing cleanup. Include the
