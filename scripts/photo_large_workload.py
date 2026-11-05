@@ -28,7 +28,7 @@ def padded_png(data, target):
     return data[:-12] + chunk + data[-12:]
 
 
-def large_checkpoint(sql, docker, project, scratch, browser, progress):
+def large_checkpoint(sql, docker, project, scratch, browser, progress, recovery=None):
     if not re.fullmatch(r"plantcare-photo-http-[a-f0-9]{32}", project):
         raise ValueError("Large-account check requires its disposable project.")
     output = scratch / "output"
@@ -103,6 +103,10 @@ SELECT @count AS entries,@pair*@count AS storedBytes,@pair AS pairBytes,
                 raise ValueError("Large export normalized image/hash mismatch.")
         if set(archive.namelist()) != names | {"manifest.json"}:
             raise ValueError("Large export includes unexpected files.")
+    if recovery is not None:
+        progress["phase"] = "encrypted-capture-and-restore"
+        progress["recovery"] = {}
+        progress["recovery"].update(recovery(sample, progress["recovery"]))
     resources = {}
     for service in ("api", "database", "gateway", "proxy"):
         container = project + "-" + service + "-1"

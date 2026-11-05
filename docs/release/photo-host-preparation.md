@@ -49,7 +49,10 @@ mapping problem.
    the largest permitted exports and does not certify VPS headroom.
    The separate [large-account sample](photo-large-account.md) exercises input
    boundaries and a near-byte-quota ZIP. Different image mixes, maximum entry
-   counts and encrypted capture/recovery overhead remain separate checks.
+   counts remain separate checks; encrypted recovery has its own sample below.
+   The [encrypted local sample](photo-encrypted-recovery.md) now measures one
+   generated near-quota capture and SQL/key restore. Actual drive/network cost,
+   diverse retained media and full replacement-host app recovery remain pending.
    The gateway's 128-MiB planning envelope is not automatically enforced by the
    current unit template. Validate any chosen host limit and its failure behavior.
 5. Rehearse graceful termination, forced gateway loss/limit failure, decoder crash,

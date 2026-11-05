@@ -18,6 +18,7 @@ from photo_capacity import png_fixture
 from photo_snapshot_policy import prepare, checkpoint, reject_log_chain_retirement
 from photo_mixed_workload import mixed_checkpoint
 from photo_large_workload import large_checkpoint, padded_png
+from photo_encrypted_recovery import encrypted_recovery
 
 
 def docker(*args, check=True, timeout=300, data=None):
@@ -45,6 +46,7 @@ def main():
     parser.add_argument("--snapshot-policy", action="store_true", help="Rehearse the snapshot-only policy in this disposable SQL server")
     parser.add_argument("--mixed-worker", help="Existing local worker image for concurrent reminder/photo/SQL-backup acceptance; requires --capacity --budget")
     parser.add_argument("--large-account", action="store_true", help="Test input boundaries and near-quota private export; requires --capacity --budget")
+    parser.add_argument("--encrypted-recovery", action="store_true", help="Capture/check/restore only this generated near-quota fixture in a new private restic repository")
     args = parser.parse_args()
     if args.budget and not args.capacity:
         parser.error("--budget requires --capacity")
@@ -52,6 +54,11 @@ def main():
         parser.error("--mixed-worker requires --capacity --budget and cannot combine with --snapshot-policy")
     if args.large_account and (not args.budget or args.snapshot_policy or args.mixed_worker):
         parser.error("--large-account requires --capacity --budget and its own isolated run")
+    if args.encrypted_recovery and not args.large_account:
+        parser.error("--encrypted-recovery requires --large-account")
+    restic = ROOT / ".operations-local/tools/restic.exe"
+    if args.encrypted_recovery and (os.name != "nt" or not restic.is_file() or restic.is_symlink()):
+        parser.error("Encrypted fixture recovery needs Windows and the existing local restic tool")
     manifest = verify(args.bundle)
     if image(manifest["imageId"]) != manifest["imageId"]:
         raise ValueError("Exact bundle decoder must already be loaded locally.")
@@ -211,7 +218,10 @@ def main():
                 if args.large_account:
                     step = "large-input-account-export"
                     large_results = {}
-                    large_results.update(large_checkpoint(sql, docker, project, scratch, process, large_results))
+                    def recovery(sample, progress):
+                        return encrypted_recovery(sql, docker, project, scratch, restic, sample, ids, manifest["imageId"], progress)
+                    large_results.update(large_checkpoint(sql, docker, project, scratch, process, large_results,
+                                                         recovery if args.encrypted_recovery else None))
                     print("PASS: input byte/pixel boundaries, near-quota private export and storage rejection/reuse.", flush=True)
                 elif args.mixed_worker:
                     step = "mixed-worker-photo-backups"
@@ -314,6 +324,12 @@ def main():
                 "cleanup": cleanup_ok, "step": step, "results": large_results, "images": ids,
                 "decoderImage": manifest["imageId"],
                 "limitations": "Generated local fixtures and cloned genuine normalized media in disposable SQL. Near-quota sample, not every image mix, real camera, multi-user/service saturation, encrypted backup or VPS acceptance."}, indent=2) + "\n", encoding="utf-8")
+        if args.encrypted_recovery:
+            (ROOT / ".operations-local/photo-encrypted-recovery.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
+                "cleanup": cleanup_ok, "step": step, "results": (large_results or {}).get("recovery"),
+                "images": ids, "decoderImage": manifest["imageId"],
+                "limitations": "New disposable local repository and random test key only; repeated generated media can deduplicate heavily. SQL/key payload restore and CHECKDB, not restored app startup, external-drive/network transfer, independent production recovery or retention sizing."}, indent=2) + "\n", encoding="utf-8")
         if cleanup_ok and scratch.resolve().parent == base.resolve() and scratch.name.startswith(project + "-"):
             shutil.rmtree(scratch)
         if not cleanup_ok:

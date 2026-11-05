@@ -165,8 +165,15 @@ remain ahead of photo activation. No deployment or live limits changed.
 The [large-input and near-quota export sample](photo-large-account.md) also
 passes locally: exact 8-MiB/20-MP input boundaries, oversized rejection and a
 hash-verified 38-image ZIP at about 99% account byte usage, followed by quota reuse
-and account erasure. Different image mixes/maximum entry counts, encrypted
-capture/recovery overhead and actual host/device acceptance remain pending.
+and account erasure. Different image mixes/maximum entry counts and actual
+host/device acceptance remain pending.
+
+The [encrypted capture/SQL recovery sample](photo-encrypted-recovery.md) now
+passes locally: new test-only repository, full data check, wrong-key refusal,
+verified SQL/key payloads, CHECKDB and all 38 image/thumbnail hashes. The generated
+repository and restored database were removed. Diverse-media retention sizing,
+external-drive transfer and full restored-app/replacement-host acceptance remain
+open; normal repositories and schedules are unchanged.
 
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,

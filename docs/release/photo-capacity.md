@@ -127,6 +127,13 @@ normalized media copies in disposable SQL, not a relaxed production quota or
 dozens of repeated HTTP decodes. Its safe report records full lifecycle/cleanup
 acceptance independently of the mixed-worker sample.
 
+The [encrypted recovery sample](photo-encrypted-recovery.md) now also passes
+locally with the 38-photo near-quota fixture: a new private restic repository,
+full data check, decrypted SQL/key hash verification, SQL restore/CHECKDB and all
+photo/thumbnail hashes. It measures local capture/recovery size/time; diverse
+retained versions, external-drive transfer and restored-app acceptance remain
+separate gates. No existing repository was accessed.
+
 Keep both photo flags off. Prepare/review the SQL log-growth/recovery policy and
 host gateway installation, then accept mixed workload/resource limits, actual
 image backup/recovery size/time and interrupted-processing cleanup. Include the
