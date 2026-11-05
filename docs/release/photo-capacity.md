@@ -115,6 +115,12 @@ live recovery model as a capacity shortcut.
 
 ## Next batch gates
 
+The [2026-11-05 mixed-workload sample](photo-mixed-workload.md) now passes with
+100 unique reminders, overlapping photo uploads/exports and SQL backups, including
+the proposed 192-MiB worker cap. That sample does not certify largest exports,
+encrypted repository overhead or actual VPS headroom. Its per-service memory
+measurements and remaining limits are recorded separately.
+
 Keep both photo flags off. Prepare/review the SQL log-growth/recovery policy and
 host gateway installation, then accept mixed workload/resource limits, actual
 image backup/recovery size/time and interrupted-processing cleanup. Include the

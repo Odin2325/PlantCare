@@ -12,6 +12,7 @@ assert.ok(fullWidth <= 1600 && fullHeight <= 1600); // This HTTP fixture does no
 const thumbScale = Math.min(1, 320 / fullWidth, 320 / fullHeight);
 const thumbSize = [Math.round(fullWidth * thumbScale), Math.round(fullHeight * thumbScale)];
 let step = 'launch';
+let responseStatus;
 
 (async () => {
   const browser = await chromium.launch();
@@ -142,6 +143,56 @@ let step = 'launch';
   const thumbnail = await context.request.get(base + '/' + entry.id + '/thumbnail'); assert.equal(thumbnail.status(), 200);
   fs.writeFileSync('/output/photo-sample.json', JSON.stringify({ inputBytes: png.length, sourceWidth: fullWidth, sourceHeight: fullHeight,
     imageBytes: jpeg.length, thumbnailBytes: (await thumbnail.body()).length, zipBytes: exportedBytes.length, uploadMilliseconds }));
+  if (process.env.PHOTO_HTTP_MIXED === '1') {
+    // Registration, confirmation and login for two accounts already consume
+    // six shared authentication permits. Keep production limits unchanged and
+    // let that fixed window expire before repeated password-verified exports.
+    step = 'mixed-rate-window';
+    await new Promise(resolve => setTimeout(resolve, 61000));
+    step = 'mixed-workload';
+    const signal = (name, value) => {
+      fs.writeFileSync('/output/' + name + '.tmp', JSON.stringify(value));
+      fs.renameSync('/output/' + name + '.tmp', '/output/' + name + '.json');
+    };
+    const wait = async name => {
+      const deadline = Date.now() + 180000;
+      while (!fs.existsSync('/output/' + name + '.json')) {
+        if (Date.now() > deadline) throw Error();
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    };
+    signal('mixed-ready', { plantId: plant.id });
+    await wait('mixed-start');
+    const start = Date.now(), operations = [];
+    for (let i = 0; i < 4; i++) {
+      step = 'mixed-upload';
+      let began = Date.now();
+      const upload = await context.request.post(base, { headers: await headers(context), multipart: { ...multipart, requestId: randomUUID() } });
+      responseStatus = upload.status();
+      assert.equal(upload.status(), 200);
+      const temporary = await upload.json();
+      operations.push([began, Date.now()]);
+      step = 'mixed-export';
+      began = Date.now();
+      const zip = await post(context, '/api/account/export/photos', { password: owner.password });
+      responseStatus = zip.status();
+      assert.equal(zip.status(), 200); assert.match(zip.headers()['cache-control'], /no-store/);
+      const bytes = await zip.body(); assert.equal(bytes.readUInt32LE(0), 0x04034b50);
+      operations.push([began, Date.now()]);
+      step = 'mixed-delete';
+      assert.equal((await context.request.delete(base + '/' + temporary.id, { headers: await headers(context) })).status(), 204);
+      await new Promise(resolve => setTimeout(resolve, 5000));
+    }
+    step = 'mixed-notifications';
+    await expect.poll(async () => {
+      const notifications = await context.request.get('/api/notifications?take=100');
+      assert.equal(notifications.status(), 200);
+      return (await notifications.json()).length;
+    }, { timeout: 30000 }).toBe(100);
+    signal('mixed-done', { window: [start, Date.now()], operations });
+    await wait('mixed-continue');
+    console.log('PASS: four additional real uploads and private ZIP exports with 100 in-app reminders visible.');
+  }
   if (process.env.PHOTO_HTTP_SNAPSHOT === '1') {
     step = 'await-private-snapshot-check';
     fs.writeFileSync('/output/snapshot-ready.tmp', JSON.stringify({ photoId: entry.id, imageSha256: createHash('sha256').update(jpeg).digest('hex') }));
@@ -170,4 +221,7 @@ let step = 'launch';
   assert.deepEqual(errors, []);
   await browser.close();
   console.log('PASS: explicit photo deletion and account erasure through real authenticated endpoints.');
-})().catch(() => { console.log('Photo HTTP browser failure at ' + step + '; sensitive details withheld.'); process.exit(1); });
+})().catch(() => {
+  if (process.env.PHOTO_HTTP_MIXED === '1') fs.writeFileSync('/output/mixed-failure.json', JSON.stringify({ step, responseStatus }));
+  console.log('Photo HTTP browser failure at ' + step + '; sensitive details withheld.'); process.exit(1);
+});

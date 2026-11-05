@@ -156,6 +156,12 @@ private pending-job state, exclusive startup, graceful cleanup and forced-loss
 restart refusal. Actual host/systemd/reboot and mixed-workload acceptance remain
 pending; uploads are still disabled.
 
+The [local mixed-workload sample](photo-mixed-workload.md) now passes: 100 unique
+reminders, four extra upload/export cycles and overlapping checksum SQL backups,
+with no service restart or OOM event under the proposed local memory caps. Larger
+bodies/exports, encrypted capture/recovery overhead and actual host acceptance
+remain ahead of photo activation. No deployment or live limits changed.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

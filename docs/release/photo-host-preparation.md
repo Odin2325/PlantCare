@@ -44,6 +44,9 @@ mapping problem.
    [budget example and capacity record](photo-capacity.md) leave limited host
    headroom; live containers currently have no cgroup ceilings. Include worker,
    browser-sized uploads, largest exports, decoder and backup/restore together.
+   Use the [mixed-workload check](photo-mixed-workload.md) for the local reminder,
+   upload/export and SQL-backup sample. It does not cover encrypted capture or
+   the largest permitted exports and does not certify VPS headroom.
    The gateway's 128-MiB planning envelope is not automatically enforced by the
    current unit template. Validate any chosen host limit and its failure behavior.
 5. Rehearse graceful termination, forced gateway loss/limit failure, decoder crash,

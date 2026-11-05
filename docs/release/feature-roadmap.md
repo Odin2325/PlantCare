@@ -47,9 +47,13 @@ The [host preparation sequence](photo-host-preparation.md) is ready for review a
 the combined checkpoint. Live recovery settings and uploads remain unchanged.
 
 The [gateway restart slice](photo-gateway-restarts.md) now passes local lock,
-pending-state, graceful-stop, forced-loss and HTTP lifecycle checks. The next
-local slice is combined worker/export/backup resource acceptance; actual host
+pending-state, graceful-stop, forced-loss and HTTP lifecycle checks. Actual host
 installation and systemd/reboot checks remain for the reviewed batch window.
+
+The [mixed local sample](photo-mixed-workload.md) now passes for 100 reminders,
+repeated uploads/exports and overlapping SQL backups under the proposed memory
+caps. Next are maximum-body/account-export preparation and encrypted capture/
+recovery sizing, followed by the actual host and combined deployment gates.
 
 ## 1. Saved plant shortlists
 

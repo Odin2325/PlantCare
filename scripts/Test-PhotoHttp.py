@@ -16,6 +16,7 @@ from pathlib import Path
 from photo_bundle import ROOT, verify
 from photo_capacity import png_fixture
 from photo_snapshot_policy import prepare, checkpoint, reject_log_chain_retirement
+from photo_mixed_workload import mixed_checkpoint
 
 
 def docker(*args, check=True, timeout=300, data=None):
@@ -41,9 +42,12 @@ def main():
     parser.add_argument("--capacity", action="store_true", help="Use a detailed generated sample and record local cgroup accounting")
     parser.add_argument("--budget", action="store_true", help="Test the preparation-only memory budget; requires --capacity")
     parser.add_argument("--snapshot-policy", action="store_true", help="Rehearse the snapshot-only policy in this disposable SQL server")
+    parser.add_argument("--mixed-worker", help="Existing local worker image for concurrent reminder/photo/SQL-backup acceptance; requires --capacity --budget")
     args = parser.parse_args()
     if args.budget and not args.capacity:
         parser.error("--budget requires --capacity")
+    if args.mixed_worker and (not args.budget or args.snapshot_policy):
+        parser.error("--mixed-worker requires --capacity --budget and cannot combine with --snapshot-policy")
     manifest = verify(args.bundle)
     if image(manifest["imageId"]) != manifest["imageId"]:
         raise ValueError("Exact bundle decoder must already be loaded locally.")
@@ -51,6 +55,8 @@ def main():
         "api": args.api, "gateway": args.gateway, "browser": args.browser,
         "database": "mcr.microsoft.com/mssql/server:2022-latest", "proxy": "caddy:2-alpine",
         "mailpit": "axllent/mailpit:v1.27"}.items()}
+    if args.mixed_worker:
+        ids["worker"] = image(args.mixed_worker)
     project = "plantcare-photo-http-" + uuid.uuid4().hex
     base = ROOT / ".operations-local" / "photo-http"
     base.mkdir(parents=True, exist_ok=True)
@@ -61,6 +67,7 @@ def main():
     compose = ["compose", "--project-name", project, "--file", str(scratch / "compose.json")]
     resources = None
     policy_results = None
+    mixed_results = None
     try:
         # Generated-only secrets in the private ignored directory, never argv or
         # output. No saved app environment, account, key or backup is read.
@@ -116,17 +123,27 @@ def main():
                 volumes=[{"type": "bind", "source": str(ROOT / "tests/photo-http"), "target": "/checks", "read_only": True},
                          {"type": "bind", "source": str(scratch / "output"), "target": "/output"}])}}
         (scratch / "output").mkdir()
+        if args.mixed_worker:
+            config["volumes"]["worker-health"] = {}
+            config["services"]["worker"] = service("worker", environment={
+                "DOTNET_ENVIRONMENT": "Production", "Logging__LogLevel__Default": "Warning",
+                "ConnectionStrings__PlantCareDatabase": connection.format("plantcare_worker", passwords["worker"]),
+                "Notifications__PollIntervalSeconds": "5", "Notifications__BatchSize": "25",
+                "ExternalCalendarSync__Enabled": "false", "GoogleCalendar__Enabled": "false",
+                "MicrosoftCalendar__Enabled": "false", "WebPush__PublicKey": "", "WebPush__PrivateKey": "",
+                "WebPush__Subject": "", "DataProtection__KeysPath": "/var/lib/plantcare/keys",
+                "Operations__HeartbeatPath": "/var/lib/plantcare/worker-health/notifications.json"},
+                volumes=[volume("keys", "/var/lib/plantcare/keys"), volume("worker-health", "/var/lib/plantcare/worker-health")])
+            config["services"]["browser"]["environment"] = {"PHOTO_HTTP_MIXED": "1"}
         if args.capacity:
             (scratch / "fixtures").mkdir()
             (scratch / "fixtures/capacity.png").write_bytes(png_fixture(1024, 768, detailed=True))
-            config["services"]["browser"]["environment"] = {"PHOTO_HTTP_PNG": "/fixtures/capacity.png"}
+            config["services"]["browser"].setdefault("environment", {})["PHOTO_HTTP_PNG"] = "/fixtures/capacity.png"
             config["services"]["browser"]["volumes"].append({
                 "type": "bind", "source": str(scratch / "fixtures"), "target": "/fixtures", "read_only": True})
         if args.budget:
             budget = json.loads((ROOT / "deploy/compose.photo-budget.json.example").read_text(encoding="utf-8"))["services"]
-            # The worker is deliberately absent from this focused journal drill.
-            # Its proposed budget needs reminder-worker acceptance at checkpoint.
-            for service in ("api", "database", "proxy"):
+            for service in ("api", "database", "proxy") + (("worker",) if args.mixed_worker else ()):
                 for key in ("mem_limit", "memswap_limit"):
                     config["services"][service][key] = budget[service][key]
                 if service == "database":
@@ -176,20 +193,27 @@ def main():
                                            for service in ("api", "database", "gateway", "proxy")}
         print("PASS: disposable internal HTTPS stack, restricted API and read-only IPC mount.", flush=True)
         step = "real-browser-journal"
-        if args.snapshot_policy:
+        if args.snapshot_policy or args.mixed_worker:
             process = subprocess.Popen(["docker", *compose, "run", "--rm", "--no-deps", "browser"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
-                ready_path = scratch / "output/snapshot-ready.json"
-                deadline = time.monotonic() + 180
-                while not ready_path.exists():
-                    if process.poll() is not None or time.monotonic() > deadline:
-                        raise RuntimeError("Browser did not reach the synthetic photo snapshot checkpoint.")
-                    time.sleep(.1)
-                step = "snapshot-photo-restore"
-                try:
-                    policy_results = checkpoint(sql, json.loads(ready_path.read_text(encoding="utf-8")))
-                finally:
-                    (scratch / "output/snapshot-continue.json").write_text('{"continue":true}', encoding="utf-8")
+                if args.mixed_worker:
+                    step = "mixed-worker-photo-backups"
+                    mixed_results = {}
+                    mixed_results.update(mixed_checkpoint(sql, docker, compose, project, scratch, process, mixed_results))
+                    print("PASS: concurrent photo operations, restricted reminder worker and checksum SQL backups; no duplicate reminders or OOM events.", flush=True)
+                else:
+                    step = "snapshot-browser-checkpoint"
+                    ready_path = scratch / "output/snapshot-ready.json"
+                    deadline = time.monotonic() + 180
+                    while not ready_path.exists():
+                        if process.poll() is not None or time.monotonic() > deadline:
+                            raise RuntimeError("Browser did not reach the synthetic photo snapshot checkpoint.")
+                        time.sleep(.1)
+                    step = "snapshot-photo-restore"
+                    try:
+                        policy_results = checkpoint(sql, json.loads(ready_path.read_text(encoding="utf-8")))
+                    finally:
+                        (scratch / "output/snapshot-continue.json").write_text('{"continue":true}', encoding="utf-8")
                 out, err = process.communicate(timeout=180)
                 result = subprocess.CompletedProcess(process.args, process.returncode, out, err)
             finally:
@@ -261,6 +285,12 @@ def main():
                 "cleanup": cleanup_ok, "step": step, "results": policy_results,
                 "images": ids, "decoderImage": manifest["imageId"],
                 "limitations": "Disposable local SQL only; policy not selected/applied on normal local/staging databases. SQL media restore only, no restored app start or point-in-time recovery. No encrypted repository capture/restore."}, indent=2) + "\n", encoding="utf-8")
+        if args.mixed_worker:
+            (ROOT / ".operations-local/photo-mixed-workload.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
+                "cleanup": cleanup_ok, "step": step, "results": mixed_results, "images": ids,
+                "decoderImage": manifest["imageId"],
+                "limitations": "Generated local Docker sample, 100 reminders, four extra photo uploads/exports and overlapping SQL COPY_ONLY backups. No external push/mail, encrypted repository work, maximum quota export, sustained load, systemd or VPS acceptance."}, indent=2) + "\n", encoding="utf-8")
         if cleanup_ok and scratch.resolve().parent == base.resolve() and scratch.name.startswith(project + "-"):
             shutil.rmtree(scratch)
         if not cleanup_ok:
