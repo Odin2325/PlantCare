@@ -53,6 +53,9 @@ mapping problem.
    The [encrypted local sample](photo-encrypted-recovery.md) now measures one
    generated near-quota capture and SQL/key restore. Actual drive/network cost,
    diverse retained media and full replacement-host app recovery remain pending.
+   The [local recovered API/key check](photo-restored-app.md) now passes private
+   photo access/export and account-erasure replay before old-snapshot restart.
+   It shares the fixture SQL server/logins and does not certify a fresh host.
    The gateway's 128-MiB planning envelope is not automatically enforced by the
    current unit template. Validate any chosen host limit and its failure behavior.
 5. Rehearse graceful termination, forced gateway loss/limit failure, decoder crash,

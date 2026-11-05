@@ -175,6 +175,14 @@ repository and restored database were removed. Diverse-media retention sizing,
 external-drive transfer and full restored-app/replacement-host acceptance remain
 open; normal repositories and schedules are unchanged.
 
+The [restored-app and erasure replay check](photo-restored-app.md) now passes
+locally: empty/restored key-ring session controls, restricted recovered API,
+private reads/export for all 38 photos, fresh login and account/media deletion.
+A second old-snapshot restore applies the current erasure ledger before restart;
+the deleted owner stays absent and the other account remains usable. This shares
+the fixture SQL server/logins, so independent replacement-host acceptance remains
+open. No live data, service, backup or upload flag changed.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads

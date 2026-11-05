@@ -19,6 +19,7 @@ from photo_snapshot_policy import prepare, checkpoint, reject_log_chain_retireme
 from photo_mixed_workload import mixed_checkpoint
 from photo_large_workload import large_checkpoint, padded_png
 from photo_encrypted_recovery import encrypted_recovery
+from photo_restored_app import restored_app
 
 
 def docker(*args, check=True, timeout=300, data=None):
@@ -47,6 +48,7 @@ def main():
     parser.add_argument("--mixed-worker", help="Existing local worker image for concurrent reminder/photo/SQL-backup acceptance; requires --capacity --budget")
     parser.add_argument("--large-account", action="store_true", help="Test input boundaries and near-quota private export; requires --capacity --budget")
     parser.add_argument("--encrypted-recovery", action="store_true", help="Capture/check/restore only this generated near-quota fixture in a new private restic repository")
+    parser.add_argument("--restored-app", action="store_true", help="Verify restored keys, restricted API, private photos and erasure replay; requires --encrypted-recovery")
     args = parser.parse_args()
     if args.budget and not args.capacity:
         parser.error("--budget requires --capacity")
@@ -56,6 +58,8 @@ def main():
         parser.error("--large-account requires --capacity --budget and its own isolated run")
     if args.encrypted_recovery and not args.large_account:
         parser.error("--encrypted-recovery requires --large-account")
+    if args.restored_app and not args.encrypted_recovery:
+        parser.error("--restored-app requires --encrypted-recovery")
     restic = ROOT / ".operations-local/tools/restic.exe"
     if args.encrypted_recovery and (os.name != "nt" or not restic.is_file() or restic.is_symlink()):
         parser.error("Encrypted fixture recovery needs Windows and the existing local restic tool")
@@ -160,6 +164,8 @@ def main():
                 "over-limit.png": padded_png((scratch / "fixtures/capacity.png").read_bytes(), 8 * 1024 * 1024 + 1),
                 "20mp.png": png_fixture(5000, 4000), "21mp.png": png_fixture(6000, 3500)}.items():
                 (scratch / "fixtures" / name).write_bytes(data)
+        if args.restored_app:
+            config["services"]["browser"]["environment"]["PHOTO_HTTP_RESTORED_APP"] = "1"
         if args.budget:
             budget = json.loads((ROOT / "deploy/compose.photo-budget.json.example").read_text(encoding="utf-8"))["services"]
             for service in ("api", "database", "proxy") + (("worker",) if args.mixed_worker else ()):
@@ -219,7 +225,11 @@ def main():
                     step = "large-input-account-export"
                     large_results = {}
                     def recovery(sample, progress):
-                        return encrypted_recovery(sql, docker, project, scratch, restic, sample, ids, manifest["imageId"], progress)
+                        def recover_app(payload, app_progress):
+                            return restored_app(sql, docker, compose, project, scratch, process, payload, sample,
+                                                config, api_environment, passwords, app_progress)
+                        return encrypted_recovery(sql, docker, project, scratch, restic, sample, ids, manifest["imageId"], progress,
+                                                  recover_app if args.restored_app else None)
                     large_results.update(large_checkpoint(sql, docker, project, scratch, process, large_results,
                                                          recovery if args.encrypted_recovery else None))
                     print("PASS: input byte/pixel boundaries, near-quota private export and storage rejection/reuse.", flush=True)
@@ -329,7 +339,15 @@ def main():
                 "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
                 "cleanup": cleanup_ok, "step": step, "results": (large_results or {}).get("recovery"),
                 "images": ids, "decoderImage": manifest["imageId"],
-                "limitations": "New disposable local repository and random test key only; repeated generated media can deduplicate heavily. SQL/key payload restore and CHECKDB, not restored app startup, external-drive/network transfer, independent production recovery or retention sizing."}, indent=2) + "\n", encoding="utf-8")
+                "limitations": "New disposable local repository and random test key only; repeated generated media can deduplicate heavily. "
+                    + ("Restored API/key/erasure acceptance is recorded separately. " if args.restored_app else "SQL/key payload restore and CHECKDB, without restored app startup. ")
+                    + "No external-drive/network transfer, independent production recovery or retention sizing."}, indent=2) + "\n", encoding="utf-8")
+        if args.restored_app:
+            recovery_result = (large_results or {}).get("recovery", {})
+            (ROOT / ".operations-local/photo-restored-app.json").write_text(json.dumps({
+                "checkedAtUtc": datetime.now(timezone.utc).isoformat(), "passed": passed and cleanup_ok,
+                "cleanup": cleanup_ok, "step": step, "results": recovery_result.get("app"), "images": ids,
+                "limitations": "Generated local accounts, same disposable SQL server and existing server logins. Real restored keys/API and erasure replay, not a fresh-master/replacement-host test or external notification delivery."}, indent=2) + "\n", encoding="utf-8")
         if cleanup_ok and scratch.resolve().parent == base.resolve() and scratch.name.startswith(project + "-"):
             shutil.rmtree(scratch)
         if not cleanup_ok:

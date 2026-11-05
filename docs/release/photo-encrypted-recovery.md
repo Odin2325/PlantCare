@@ -92,8 +92,10 @@ process sets `GOMAXPROCS=2` and a 256-MiB Go runtime memory target; that target 
 not an OS limit and its peak working set is not measured here. Application/SQL
 cgroup peaks are measured by the surrounding large-account check.
 
-External-drive/network transfer, genuinely independent/replacement-host recovery,
-runtime-login remapping, restored-app/key use, restored-account erasure, full
-configuration reprovisioning and actual VPS/systemd/resource-limit acceptance
-remain checkpoint gates. This does not install a gateway, change live recovery
-models or alter the user's external repositories.
+The [restored-app extension](photo-restored-app.md) now also passes local key use,
+private photo access/export, account erasure and old-snapshot erasure replay. It
+uses the same disposable SQL server and existing server logins. External-drive/
+network transfer, fresh-master login remapping, independent replacement-host
+recovery, full configuration reprovisioning and actual VPS/systemd/resource-limit
+acceptance remain checkpoint gates. This does not install a gateway, change live
+recovery models or alter the user's external repositories.

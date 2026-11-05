@@ -8,7 +8,7 @@ import subprocess
 import time
 
 
-def encrypted_recovery(sql, docker, project, scratch, tool, sample, images, decoder, progress):
+def encrypted_recovery(sql, docker, project, scratch, tool, sample, images, decoder, progress, app_recovery=None):
     if not re.fullmatch(r"plantcare-photo-http-[a-f0-9]{32}", project):
         raise ValueError("Encrypted rehearsal requires its disposable project.")
     root = scratch / "encrypted-fixture"
@@ -133,11 +133,19 @@ IF EXISTS(SELECT 1 FROM PlantCareEncryptedPhotoRestore.dbo.PlantPhotoMedia
 IF EXISTS(SELECT 1 FROM PlantCareEncryptedPhotoRestore.dbo.PlantPhotoEntries WHERE Notes<>N'Generated second leaf' OR Notes IS NULL)
  THROW 51000,'Restored photo notes differ',1;
 """)
+        times["sqlCopyRestoreAndCheckdbSeconds"] = round(time.perf_counter() - start, 3)
+        if app_recovery is not None:
+            app_start = time.perf_counter()
+            progress["phase"] = "restored-app-and-erasure"
+            progress["app"] = {}
+            progress["app"].update(app_recovery(payload, progress["app"]))
+            times["restoredAppAndErasureReplaySeconds"] = round(time.perf_counter() - app_start, 3)
     finally:
+        drop_start = time.perf_counter()
         sql("DROP DATABASE [PlantCareEncryptedPhotoRestore];")
-    times["sqlCopyRestoreCheckdbAndDropSeconds"] = round(time.perf_counter() - start, 3)
-    # The original database/account stays alive for the existing real HTTP
-    # quota-release/erasure checks. Do not start an app/worker on the restored DB.
+        times["restoredDatabaseDropSeconds"] = round(time.perf_counter() - drop_start, 3)
+    # The source stays alive for its original quota-release/erasure checks.
+    # An optional app drill stops its restored services before this DB is dropped.
     progress["phase"] = "accepted"
     return {"timings": times, "capturedBytes": captured_bytes,
             "sqlBackupBytes": (capture / "database.bak").stat().st_size, "keyArchiveBytes": len(keys),

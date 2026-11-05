@@ -211,6 +211,13 @@ let responseStatus;
     signal('large-done', { ...timings, acceptedFileBytes: limit.length, acceptedPixels: 20000000,
       rejectedFileBytes: 8 * 1024 * 1024 + 1, rejectedBodyBytes: 9 * 1024 * 1024 + 1, rejectedPixels: 21000000,
       accountQuotaRejected: true });
+    if (process.env.PHOTO_HTTP_RESTORED_APP === '1') {
+      step = 'restored-application';
+      await require('./photo-recovered.cjs')({ browser, context, other, password: owner.password,
+        plantId: plant.id, photoId: entry.id, count: seeded.entries,
+        imageHash: createHash('sha256').update(jpeg).digest('hex'),
+        thumbnailHash: createHash('sha256').update(await thumbnail.body()).digest('hex') });
+    }
     await wait('large-continue');
     step = 'large-quota-reuse';
     response = await upload(png); assert.equal(response.status(), 200);
