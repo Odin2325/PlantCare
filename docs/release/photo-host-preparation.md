@@ -29,6 +29,11 @@ mapping problem.
 
 ## Read-only preflight before activation
 
+The [2026-11-05 host/artifact record](photo-candidate-preflight.md) now includes
+read-only staging identity/version/mount facts and exact Linux-x64 artifact
+evidence. It does not install the still-missing gateway or accept the live budget,
+recovery policy, socket mapping or native license gate.
+
 1. Verify transferred hashes through the trusted manifest digest. Inspect loaded
    API/worker/decoder image IDs, Linux amd64 platform and non-root API user.
    Preserve vendor notices and finish the remaining native/container review.

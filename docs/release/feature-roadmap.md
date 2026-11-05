@@ -68,6 +68,13 @@ local photo/Apple work into the combined candidate after host/native-notice
 prerequisites; do not deploy each test increment. Physical Apple checks remain
 separate until a device is available.
 
+The [host/artifact preflight](photo-candidate-preflight.md) now supplies repeatable
+read-only host facts and exact native/OS/framework notice evidence. Linux-x64
+decoder publishing removes unused platform assets while retaining the identical
+Linux library and notice archive; the disabled bundle and focused HTTP lifecycle
+pass. Finish the remaining native terms/source mapping and reviewed host gates
+before the combined CI/recovery/deployment checkpoint.
+
 ## 1. Saved plant shortlists
 
 Save catalog plants the owner is considering, separately from plants already

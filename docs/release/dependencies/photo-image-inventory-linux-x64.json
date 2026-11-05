@@ -1,0 +1,1138 @@
+{
+  "bundleCandidate": "1cc3e02d0491a9fe24201b4d21300c7170a33ae4",
+  "containerStarted": false,
+  "frameworkVersions": [
+    "10.0.14"
+  ],
+  "imageId": "sha256:28557790c669b3b6d348bf66745eb71d7e4de927faeb7fe4f21a9fd2e879223f",
+  "installedOsPackages": [
+    {
+      "architecture": "amd64",
+      "package": "apt",
+      "version": "2.8.3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "base-files",
+      "version": "13ubuntu10.5"
+    },
+    {
+      "architecture": "amd64",
+      "package": "base-passwd",
+      "version": "3.6.3build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "bash",
+      "version": "5.2.21-2ubuntu4"
+    },
+    {
+      "architecture": "amd64",
+      "package": "bsdutils",
+      "version": "1:2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "all",
+      "package": "ca-certificates",
+      "version": "20260816ubuntu0.24.04.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "coreutils",
+      "version": "9.4-3ubuntu6.3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "dash",
+      "version": "0.5.12-6ubuntu5"
+    },
+    {
+      "architecture": "all",
+      "package": "debconf",
+      "version": "1.5.86ubuntu1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "debianutils",
+      "version": "5.17build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "diffutils",
+      "version": "1:3.10-1ubuntu0.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "dpkg",
+      "version": "1.22.6ubuntu6.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "e2fsprogs",
+      "version": "1.47.0-2.4~exp1ubuntu4.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "findutils",
+      "version": "4.9.0-5build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "gcc-14-base",
+      "version": "14.2.0-4ubuntu2~24.04.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "gpgv",
+      "version": "2.4.4-2ubuntu17.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "grep",
+      "version": "3.11-4build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "gzip",
+      "version": "1.12-1ubuntu3.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "hostname",
+      "version": "3.23+nmu2ubuntu2"
+    },
+    {
+      "architecture": "all",
+      "package": "init-system-helpers",
+      "version": "1.66ubuntu1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libacl1",
+      "version": "2.3.2-1build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libapt-pkg6.0t64",
+      "version": "2.8.3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libassuan0",
+      "version": "2.5.6-1build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libattr1",
+      "version": "1:2.5.2-1ubuntu0.1"
+    },
+    {
+      "architecture": "all",
+      "package": "libaudit-common",
+      "version": "1:3.1.2-2.1ubuntu0.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libaudit1",
+      "version": "1:3.1.2-2.1ubuntu0.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libblkid1",
+      "version": "2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libbz2-1.0",
+      "version": "1.0.8-5.1ubuntu0.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libc-bin",
+      "version": "2.39-0ubuntu8.9"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libc6",
+      "version": "2.39-0ubuntu8.9"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libcap-ng0",
+      "version": "0.8.4-2build2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libcap2",
+      "version": "1:2.66-5ubuntu2.4"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libcom-err2",
+      "version": "1.47.0-2.4~exp1ubuntu4.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libcrypt1",
+      "version": "1:4.4.36-4build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libdb5.3t64",
+      "version": "5.3.28+dfsg2-7"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libdebconfclient0",
+      "version": "0.271ubuntu3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libext2fs2t64",
+      "version": "1.47.0-2.4~exp1ubuntu4.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libffi8",
+      "version": "3.4.6-1build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libgcc-s1",
+      "version": "14.2.0-4ubuntu2~24.04.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libgcrypt20",
+      "version": "1.10.3-2ubuntu0.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libgmp10",
+      "version": "2:6.3.0+dfsg-2ubuntu6.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libgnutls30t64",
+      "version": "3.8.3-1.1ubuntu3.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libgomp1",
+      "version": "14.2.0-4ubuntu2~24.04.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libgpg-error0",
+      "version": "1.47-3build2.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libhogweed6t64",
+      "version": "3.9.1-2.2build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libicu74",
+      "version": "74.2-1ubuntu3.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libidn2-0",
+      "version": "2.3.7-2build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "liblz4-1",
+      "version": "1.9.4-1build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "liblzma5",
+      "version": "5.6.1+really5.4.5-1ubuntu0.4"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libmd0",
+      "version": "1.1.0-2build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libmount1",
+      "version": "2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libncursesw6",
+      "version": "6.4+20240113-1ubuntu2.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libnettle8t64",
+      "version": "3.9.1-2.2build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libnpth0t64",
+      "version": "1.6-3.1build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libp11-kit0",
+      "version": "0.25.3-4ubuntu2.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libpam-modules",
+      "version": "1.5.3-5ubuntu5.7"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libpam-modules-bin",
+      "version": "1.5.3-5ubuntu5.7"
+    },
+    {
+      "architecture": "all",
+      "package": "libpam-runtime",
+      "version": "1.5.3-5ubuntu5.7"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libpam0g",
+      "version": "1.5.3-5ubuntu5.7"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libpcre2-8-0",
+      "version": "10.42-4ubuntu2.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libproc2-0",
+      "version": "2:4.0.4-4ubuntu3.3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libseccomp2",
+      "version": "2.5.5-1ubuntu3.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libselinux1",
+      "version": "3.5-2ubuntu2.1"
+    },
+    {
+      "architecture": "all",
+      "package": "libsemanage-common",
+      "version": "3.5-1build5"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libsemanage2",
+      "version": "3.5-1build5"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libsepol2",
+      "version": "3.5-2build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libsmartcols1",
+      "version": "2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libss2",
+      "version": "1.47.0-2.4~exp1ubuntu4.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libssl3t64",
+      "version": "3.0.13-0ubuntu3.16"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libstdc++6",
+      "version": "14.2.0-4ubuntu2~24.04.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libsystemd0",
+      "version": "255.4-1ubuntu8.18"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libtasn1-6",
+      "version": "4.19.0-3ubuntu0.24.04.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libtinfo6",
+      "version": "6.4+20240113-1ubuntu2.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libudev1",
+      "version": "255.4-1ubuntu8.18"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libunistring5",
+      "version": "1.1-2build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libuuid1",
+      "version": "2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libxxhash0",
+      "version": "0.8.2-2build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "libzstd1",
+      "version": "1.5.5+dfsg2-2build1.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "login",
+      "version": "1:4.13+dfsg1-4ubuntu3.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "logsave",
+      "version": "1.47.0-2.4~exp1ubuntu4.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "mawk",
+      "version": "1.3.4.20240123-1build1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "mount",
+      "version": "2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "all",
+      "package": "ncurses-base",
+      "version": "6.4+20240113-1ubuntu2.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "ncurses-bin",
+      "version": "6.4+20240113-1ubuntu2.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "openssl",
+      "version": "3.0.13-0ubuntu3.16"
+    },
+    {
+      "architecture": "amd64",
+      "package": "passwd",
+      "version": "1:4.13+dfsg1-4ubuntu3.2"
+    },
+    {
+      "architecture": "amd64",
+      "package": "perl-base",
+      "version": "5.38.2-3.2ubuntu0.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "procps",
+      "version": "2:4.0.4-4ubuntu3.3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "sed",
+      "version": "4.9-2ubuntu0.24.04.1"
+    },
+    {
+      "architecture": "all",
+      "package": "sensible-utils",
+      "version": "0.0.22"
+    },
+    {
+      "architecture": "amd64",
+      "package": "sysvinit-utils",
+      "version": "3.08-6ubuntu3"
+    },
+    {
+      "architecture": "amd64",
+      "package": "tar",
+      "version": "1.35+dfsg-3ubuntu0.4"
+    },
+    {
+      "architecture": "all",
+      "package": "tzdata",
+      "version": "2026e-0ubuntu0.24.04.1"
+    },
+    {
+      "architecture": "all",
+      "package": "tzdata-legacy",
+      "version": "2026e-0ubuntu0.24.04.1"
+    },
+    {
+      "architecture": "all",
+      "package": "ubuntu-keyring",
+      "version": "2023.11.28.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "unminimize",
+      "version": "0.2.1"
+    },
+    {
+      "architecture": "amd64",
+      "package": "util-linux",
+      "version": "2.39.3-9ubuntu6.6"
+    },
+    {
+      "architecture": "amd64",
+      "package": "zlib1g",
+      "version": "1:1.3.dfsg-3.1ubuntu2.3"
+    }
+  ],
+  "licenseReview": "incomplete",
+  "nativeNoticeSectionHeadings": [
+    "Magick.NET",
+    "ImageMagick 7.1.2-33 (2026-10-10)",
+    "aom 3.15.1 (2026-09-22)",
+    "brotli 1.2.0 (2025-10-27)",
+    "libbzip2 1.0.8 (2019-07-13)",
+    "cairo 1.18.6 (2026-09-20)",
+    "libcroco 0.6.13 (2019-04-06)",
+    "libde265 1.1.3 (2026-09-14)",
+    "openexr 3.5.2 (2026-10-03)",
+    "libffi 3.8.0 (2026-08-09)",
+    "fontconfig 2.18.3 (2026-08-06)",
+    "freetype 2.14.3 (2026-03-22)",
+    "fribidi 1.0.17 (2026-09-20)",
+    "gdk-pixbuf 2.44.8 (2026-08-12)",
+    "glib 2.64.3 (2020-05-20)",
+    "harfbuzz 14.6.0 (2026-10-05)",
+    "libheif 1.23.6 (2026-10-05)",
+    "libhwy 1.4.0 (2026-04-23)",
+    "imath 3.2.3 (2026-08-20)",
+    "libjpeg-turbo 3.2.0 (2025-06-30)",
+    "libjxl 0.12.0 (2026-07-01)",
+    "lcms 2.19.1 (2026-05-06)",
+    "liblqr 0.4.2 (2012-12-04)",
+    "liblzma 5.8.4 (2026-09-09)",
+    "openh264 2.6.0 (2025-02-12)",
+    "openjpeg 2.5.4 (2025-09-20)",
+    "openjph 0.32.0 (2026-09-17)",
+    "pango 1.45.3 (2020-06-22)",
+    "pixman 0.46.4 (2025-07-20)",
+    "libpng 1.6.59 (2026-09-28)",
+    "libraqm 0.11.0 (2026-07-23)",
+    "libraw 0.22.2 (2026-07-16)",
+    "librsvg 2.40.20 (2017-12-15)",
+    "libtiff 4.7.2 (2026-06-26)",
+    "libwebp 1.6.0 (2025-07-09)",
+    "libxml2 2.15.4 (2026-09-01)",
+    "libzip 1.11.4 (2025-05-23)",
+    "zlib 1.3.2 (2026-02-17)",
+    "zstd 1.5.7 (2025-02-19)"
+  ],
+  "noticeArchiveSha256": "9c4cd5bc0da33afbf26b461bc95cba7c2dafb7994552a6ad4fa3696793720c60",
+  "noticeFiles": [
+    {
+      "bytes": 428101,
+      "path": "app/ThirdPartyNotices/Magick.NET-15.0.0.txt",
+      "sha256": "a08ce0f18e36f83c971ab35a7504523fa25a797e99eec57e67c96ab4648b1409"
+    },
+    {
+      "bytes": 116,
+      "path": "app/ThirdPartyNotices/Magick.NET.Core-15.0.0.txt",
+      "sha256": "0b68e9a3c1456e76d84d57dd42da6fc1c71195a5ad2a466ed480b42e22aaa054"
+    },
+    {
+      "bytes": 11358,
+      "path": "usr/share/common-licenses/Apache-2.0",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "bytes": 6111,
+      "path": "usr/share/common-licenses/Artistic",
+      "sha256": "b7fd9b73ea99602016a326e0b62e6646060d18febdd065ceca8bb482208c3d88"
+    },
+    {
+      "bytes": 1499,
+      "path": "usr/share/common-licenses/BSD",
+      "sha256": "5d588eb3b157d52112afea935c88a7ff9efddc1e2d95a42c25d3b96ad9055008"
+    },
+    {
+      "bytes": 7048,
+      "path": "usr/share/common-licenses/CC0-1.0",
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "bytes": 20432,
+      "path": "usr/share/common-licenses/GFDL-1.2",
+      "sha256": "d8e94ae5fdb5433fcae2961aeb1a8cf17174d6f4a0465d24bf37dd8a038bd439"
+    },
+    {
+      "bytes": 22955,
+      "path": "usr/share/common-licenses/GFDL-1.3",
+      "sha256": "110535522396708cea37c72a802c5e7e81391139f5f7985631c93ef242b206a4"
+    },
+    {
+      "bytes": 12632,
+      "path": "usr/share/common-licenses/GPL-1",
+      "sha256": "d77d235e41d54594865151f4751e835c5a82322b0e87ace266567c3391a4b912"
+    },
+    {
+      "bytes": 18092,
+      "path": "usr/share/common-licenses/GPL-2",
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    {
+      "bytes": 35149,
+      "path": "usr/share/common-licenses/GPL-3",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "bytes": 25381,
+      "path": "usr/share/common-licenses/LGPL-2",
+      "sha256": "681e386e44a19d7d0674b4320272c90e66b6610b741e7e6305f8219c42e85366"
+    },
+    {
+      "bytes": 26530,
+      "path": "usr/share/common-licenses/LGPL-2.1",
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    {
+      "bytes": 7652,
+      "path": "usr/share/common-licenses/LGPL-3",
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+    },
+    {
+      "bytes": 25755,
+      "path": "usr/share/common-licenses/MPL-1.1",
+      "sha256": "f849fc26a7a99981611a3a370e83078deb617d12a45776d6c4cada4d338be469"
+    },
+    {
+      "bytes": 16726,
+      "path": "usr/share/common-licenses/MPL-2.0",
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    },
+    {
+      "bytes": 7668,
+      "path": "usr/share/doc/apt/copyright",
+      "sha256": "b4701305243d8d746f4acaafe15d94f946251b05691bd6917fef41dd15e9ee12"
+    },
+    {
+      "bytes": 1208,
+      "path": "usr/share/doc/base-files/copyright",
+      "sha256": "fd7e4aae7e7b05f217bcf2d02322825c360e66c52c4c2f1b28d784d6297a1c23"
+    },
+    {
+      "bytes": 798,
+      "path": "usr/share/doc/base-passwd/copyright",
+      "sha256": "0f1cde79bd80a75f9029ae9a8c252b642223027ef36f6989c63a8230aae576a7"
+    },
+    {
+      "bytes": 9764,
+      "path": "usr/share/doc/bash/copyright",
+      "sha256": "06319d84c3e5ed096036f6a9310a030c7e84e50dff2b8a6792285c83ec0ada73"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/bsdutils/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 18940,
+      "path": "usr/share/doc/ca-certificates/copyright",
+      "sha256": "e85e1bcad3a915dc7e6f41412bc5bdeba275cadd817896ea0451f2140a93967c"
+    },
+    {
+      "bytes": 164,
+      "path": "usr/share/doc/ca-certificates/examples/ca-certificates-local/debian/copyright",
+      "sha256": "ccfe62f0f73541f1c76a6d33aed26290391685c43f914a5e24c6b1f72cddcdff"
+    },
+    {
+      "bytes": 5551,
+      "path": "usr/share/doc/coreutils/copyright",
+      "sha256": "d23a4fb17c4a2e5bc46dafe9d22192ecf3905473317e17139d210339dcf50fa9"
+    },
+    {
+      "bytes": 3878,
+      "path": "usr/share/doc/dash/copyright",
+      "sha256": "d98c53f281321baad38164aa9ae6e368a9253be6ec51bd26a759b5e72b326f4a"
+    },
+    {
+      "bytes": 2764,
+      "path": "usr/share/doc/debconf/copyright",
+      "sha256": "57163c71bd8a5289660892827dd0dfaa7fef47f89deedc9dc6711ced7d0a28d7"
+    },
+    {
+      "bytes": 9062,
+      "path": "usr/share/doc/debianutils/copyright",
+      "sha256": "aeb68ea374f488431b8963df24f05482692edfa70d7556d7e528dd06d255461c"
+    },
+    {
+      "bytes": 16445,
+      "path": "usr/share/doc/diffutils/copyright",
+      "sha256": "ac6fcf18142bab7569188ae75b204a9e1c73c050c0f9467adaf080759e516123"
+    },
+    {
+      "bytes": 5661,
+      "path": "usr/share/doc/dpkg/copyright",
+      "sha256": "6511e06b27f2297fde6ee8fb2e59807b7712dda61837ca00a0980da1e5df07ac"
+    },
+    {
+      "bytes": 15209,
+      "path": "usr/share/doc/e2fsprogs/copyright",
+      "sha256": "1ca415a294c0e56958c4f795b3f1f69ea3479bca53d7811f5cdd020a258949db"
+    },
+    {
+      "bytes": 24779,
+      "path": "usr/share/doc/findutils/copyright",
+      "sha256": "601cc227b3e22ad219beeed7c86b9e146ddf9c88c25620f78169fd5451d4f966"
+    },
+    {
+      "bytes": 69004,
+      "path": "usr/share/doc/gcc-14-base/copyright",
+      "sha256": "20390f8a6f3b1e4d7cb45dd8652dabb259bbef688cbad839bcdb0b9ba7252f79"
+    },
+    {
+      "bytes": 12624,
+      "path": "usr/share/doc/gpgv/copyright",
+      "sha256": "2be9a9a5d7db2584cf984de83379d395bb4a33478404160d1d77d0060b5a1bd1"
+    },
+    {
+      "bytes": 1807,
+      "path": "usr/share/doc/grep/copyright",
+      "sha256": "42d9b4d610396b1e8d1303dcb9487af3f5a2d2709623cf03a04cf76acdf6c5e3"
+    },
+    {
+      "bytes": 2895,
+      "path": "usr/share/doc/gzip/copyright",
+      "sha256": "1ca5dd5098fe2e1c0f0d05196f5b3da8b414a807702e6ca8b536eb5fd3059130"
+    },
+    {
+      "bytes": 1273,
+      "path": "usr/share/doc/hostname/copyright",
+      "sha256": "94189fc5a9a7b7224d96e1a0cfdfe9be0df2018b04bf21d591627ab96b30cad1"
+    },
+    {
+      "bytes": 3133,
+      "path": "usr/share/doc/init-system-helpers/copyright",
+      "sha256": "7534601cc4fa513804d16490359f5831e7b6a1212da3bbf948bebdd4c8799783"
+    },
+    {
+      "bytes": 2048,
+      "path": "usr/share/doc/libacl1/copyright",
+      "sha256": "9a2dfb4a5abc7e84be2cc41f1089be665519c9409549296f6c19de57ab1d37c2"
+    },
+    {
+      "bytes": 7668,
+      "path": "usr/share/doc/libapt-pkg6.0t64/copyright",
+      "sha256": "b4701305243d8d746f4acaafe15d94f946251b05691bd6917fef41dd15e9ee12"
+    },
+    {
+      "bytes": 3373,
+      "path": "usr/share/doc/libassuan0/copyright",
+      "sha256": "d704d521eb7ba7b9e3d82d85ac6caac4dfb4c784a4762f61a95fbb2733b05ff3"
+    },
+    {
+      "bytes": 1947,
+      "path": "usr/share/doc/libattr1/copyright",
+      "sha256": "0cbec745d85ea775450b2d54fac55277197f429e52d611f72852ed420450620e"
+    },
+    {
+      "bytes": 1596,
+      "path": "usr/share/doc/libaudit-common/copyright",
+      "sha256": "6c7011e93f643b112c4cc3622131e28a30477afad6c4f5efe466b13aa7f603cc"
+    },
+    {
+      "bytes": 1596,
+      "path": "usr/share/doc/libaudit1/copyright",
+      "sha256": "6c7011e93f643b112c4cc3622131e28a30477afad6c4f5efe466b13aa7f603cc"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/libblkid1/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 2228,
+      "path": "usr/share/doc/libbz2-1.0/copyright",
+      "sha256": "832ed535ff3c3d025a8d2348eb1b697b89addcf2eaadbc17650262040b9145e2"
+    },
+    {
+      "bytes": 26462,
+      "path": "usr/share/doc/libc-bin/copyright",
+      "sha256": "d3c95b56fa33e28b57860580f0baf4e4f4de2a268a2b80f1d031a5191bade265"
+    },
+    {
+      "bytes": 26462,
+      "path": "usr/share/doc/libc6/copyright",
+      "sha256": "d3c95b56fa33e28b57860580f0baf4e4f4de2a268a2b80f1d031a5191bade265"
+    },
+    {
+      "bytes": 1621,
+      "path": "usr/share/doc/libcap-ng0/copyright",
+      "sha256": "567997de097e3738564c90e6fe13343b2daae21a7926d6fb161df41322c1840b"
+    },
+    {
+      "bytes": 4631,
+      "path": "usr/share/doc/libcap2/copyright",
+      "sha256": "e60a5642e12e340060e4e519a65b2eb0330be2917854841c644e36268f607d54"
+    },
+    {
+      "bytes": 15209,
+      "path": "usr/share/doc/libcom-err2/copyright",
+      "sha256": "1ca415a294c0e56958c4f795b3f1f69ea3479bca53d7811f5cdd020a258949db"
+    },
+    {
+      "bytes": 6010,
+      "path": "usr/share/doc/libcrypt1/copyright",
+      "sha256": "5a5e7ca0e9f3f9679977e3a3e9ede45ad92885a3297ea78e766979f9866c5a16"
+    },
+    {
+      "bytes": 17177,
+      "path": "usr/share/doc/libdb5.3t64/copyright",
+      "sha256": "8b53da37d73289d9df7317b3a2dbe16491f1fa9fec8b77b86d69704b40ce2c26"
+    },
+    {
+      "bytes": 5856,
+      "path": "usr/share/doc/libdebconfclient0/copyright",
+      "sha256": "cf63099896d1c0f6529c41b8d95738e6fea342ffba609187d339c4f38ce36ecc"
+    },
+    {
+      "bytes": 15209,
+      "path": "usr/share/doc/libext2fs2t64/copyright",
+      "sha256": "1ca415a294c0e56958c4f795b3f1f69ea3479bca53d7811f5cdd020a258949db"
+    },
+    {
+      "bytes": 10165,
+      "path": "usr/share/doc/libffi8/copyright",
+      "sha256": "737ff68f0eb104d3b0d96b291c3a8f40a775a3ec2b53f9b2e4bcfe3188bde118"
+    },
+    {
+      "bytes": 24896,
+      "path": "usr/share/doc/libgcrypt20/copyright",
+      "sha256": "40162167dff80843a4b24aa8d0a4ffc50be5338d004ebe38f86ae3397ba9de3e"
+    },
+    {
+      "bytes": 4153,
+      "path": "usr/share/doc/libgmp10/copyright",
+      "sha256": "7d366aef5ba325150246de1d7820c4c9926cd27ca61a69948492b26cd3b61601"
+    },
+    {
+      "bytes": 54039,
+      "path": "usr/share/doc/libgnutls30t64/copyright",
+      "sha256": "51da5214308b87d6a0a2fbcaea1f7dbd15510be733e5921d9548ff6b88d84dd8"
+    },
+    {
+      "bytes": 4903,
+      "path": "usr/share/doc/libgpg-error0/copyright",
+      "sha256": "0250e9e7cbf6c68c2bd05b6db1ea684988f91cd95da69f2936064cf302729fe5"
+    },
+    {
+      "bytes": 24280,
+      "path": "usr/share/doc/libhogweed6t64/copyright",
+      "sha256": "2cecdc7ac1913beb31299a41a8092fc936d9e6a1d00872fc3bf6e2263aecf842"
+    },
+    {
+      "bytes": 2214,
+      "path": "usr/share/doc/libicu74/copyright",
+      "sha256": "5bbff5f646ce750ac0a347e7f91793279b7422a1119820b5f75d98879c201c68"
+    },
+    {
+      "bytes": 5348,
+      "path": "usr/share/doc/libidn2-0/copyright",
+      "sha256": "41702469f28e8ff406345e3d1dd0c741f11bdfca319264f67036efd6aaa79e4b"
+    },
+    {
+      "bytes": 3275,
+      "path": "usr/share/doc/liblz4-1/copyright",
+      "sha256": "d3be0f43fe14da244f97c451bbae789c0acf868612598a69f5f22a289abeca40"
+    },
+    {
+      "bytes": 15465,
+      "path": "usr/share/doc/liblzma5/copyright",
+      "sha256": "a2dc8fac0f496e1c58aff67018cf0c6b88336316afa5642f9335b71642e28aa8"
+    },
+    {
+      "bytes": 8018,
+      "path": "usr/share/doc/libmd0/copyright",
+      "sha256": "4365ef6255ad553fce69dd4bc0e093472c5d0e41b8ea493a545cc926ce171aa6"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/libmount1/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 24280,
+      "path": "usr/share/doc/libnettle8t64/copyright",
+      "sha256": "2cecdc7ac1913beb31299a41a8092fc936d9e6a1d00872fc3bf6e2263aecf842"
+    },
+    {
+      "bytes": 1164,
+      "path": "usr/share/doc/libnpth0t64/copyright",
+      "sha256": "df6909abb38f4e84d237d8617e948bdbb391b2004ecf573863011d54a88ccf22"
+    },
+    {
+      "bytes": 15380,
+      "path": "usr/share/doc/libp11-kit0/copyright",
+      "sha256": "d33af1e069981d1c1b576cb22e4bc260a134ffa2fce6ddd3cbbbb5b181113f0c"
+    },
+    {
+      "bytes": 9477,
+      "path": "usr/share/doc/libpam-modules-bin/copyright",
+      "sha256": "9596b9028339d66c285422237728d6170e1e29d0b0d9adf0e9f1bda82e2391ce"
+    },
+    {
+      "bytes": 9477,
+      "path": "usr/share/doc/libpam-modules/copyright",
+      "sha256": "9596b9028339d66c285422237728d6170e1e29d0b0d9adf0e9f1bda82e2391ce"
+    },
+    {
+      "bytes": 9477,
+      "path": "usr/share/doc/libpam-runtime/copyright",
+      "sha256": "9596b9028339d66c285422237728d6170e1e29d0b0d9adf0e9f1bda82e2391ce"
+    },
+    {
+      "bytes": 9477,
+      "path": "usr/share/doc/libpam0g/copyright",
+      "sha256": "9596b9028339d66c285422237728d6170e1e29d0b0d9adf0e9f1bda82e2391ce"
+    },
+    {
+      "bytes": 6626,
+      "path": "usr/share/doc/libpcre2-8-0/copyright",
+      "sha256": "030511beb4d9d620ad09914c369c36ec0528dcf301d1923cc643c948ee7c6a38"
+    },
+    {
+      "bytes": 3974,
+      "path": "usr/share/doc/libproc2-0/copyright",
+      "sha256": "90a66617c36d83068b52bbb77cbfef1234f526bfa287156d9d05f7df4d339539"
+    },
+    {
+      "bytes": 1429,
+      "path": "usr/share/doc/libseccomp2/copyright",
+      "sha256": "6da0653a365b80ab31478dbfe9e7c358e80d58b6d2b52b4e16b4dbb42d7d9f5c"
+    },
+    {
+      "bytes": 1957,
+      "path": "usr/share/doc/libselinux1/copyright",
+      "sha256": "864f1bb189f609075d580b8c4aada16d85a44546884f1687989e1cacc8c56751"
+    },
+    {
+      "bytes": 1921,
+      "path": "usr/share/doc/libsemanage-common/copyright",
+      "sha256": "fe5876a94047cafbeb8b164fd98304912d94b6028e19415f08b7a8a2f90645fe"
+    },
+    {
+      "bytes": 1921,
+      "path": "usr/share/doc/libsemanage2/copyright",
+      "sha256": "fe5876a94047cafbeb8b164fd98304912d94b6028e19415f08b7a8a2f90645fe"
+    },
+    {
+      "bytes": 3750,
+      "path": "usr/share/doc/libsepol2/copyright",
+      "sha256": "78d2a34606a0302057ec499a3b3c07bcbc43ca334064ce4c80891a0f69c8f6c6"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/libsmartcols1/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 15209,
+      "path": "usr/share/doc/libss2/copyright",
+      "sha256": "1ca415a294c0e56958c4f795b3f1f69ea3479bca53d7811f5cdd020a258949db"
+    },
+    {
+      "bytes": 2543,
+      "path": "usr/share/doc/libssl3t64/copyright",
+      "sha256": "6a7da622fe0637a334d2a8fc470852d2ffb77d9a2b2f930f854e32a41ad6ef35"
+    },
+    {
+      "bytes": 12776,
+      "path": "usr/share/doc/libsystemd0/copyright",
+      "sha256": "a7d06854714a1ca99f6dbd1a1641dde5bcf28635be149f6554449618f8f427f3"
+    },
+    {
+      "bytes": 3451,
+      "path": "usr/share/doc/libtasn1-6/copyright",
+      "sha256": "572ad60ad184d8f52c6dc66d83a61a68f137db560b3452ce00588c9ecf128a65"
+    },
+    {
+      "bytes": 4670,
+      "path": "usr/share/doc/libtinfo6/copyright",
+      "sha256": "7c9d2c8dbee48b6f4bbbffb1f370cc5858de11cc4f5a70c5c622c274917e1c65"
+    },
+    {
+      "bytes": 12776,
+      "path": "usr/share/doc/libudev1/copyright",
+      "sha256": "a7d06854714a1ca99f6dbd1a1641dde5bcf28635be149f6554449618f8f427f3"
+    },
+    {
+      "bytes": 6564,
+      "path": "usr/share/doc/libunistring5/copyright",
+      "sha256": "dbbfee567c5eb53ad1c75ce666779e596b5f794b52be7f5834685ddd633185ea"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/libuuid1/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 3213,
+      "path": "usr/share/doc/libxxhash0/copyright",
+      "sha256": "53acfd069ef57d3a68fc03d3ecdbcb7939c8083bae3fe52851da69b0383d7ee0"
+    },
+    {
+      "bytes": 5389,
+      "path": "usr/share/doc/libzstd1/copyright",
+      "sha256": "35e85e8e9bbb71492c5f5dddf39ed65b68775a02ad8d710c25d097b497f06c49"
+    },
+    {
+      "bytes": 7044,
+      "path": "usr/share/doc/login/copyright",
+      "sha256": "a4c3e5b19700dd3cc5961663d204bd7150f65f913314682aede5931548c436d5"
+    },
+    {
+      "bytes": 15209,
+      "path": "usr/share/doc/logsave/copyright",
+      "sha256": "1ca415a294c0e56958c4f795b3f1f69ea3479bca53d7811f5cdd020a258949db"
+    },
+    {
+      "bytes": 22806,
+      "path": "usr/share/doc/mawk/copyright",
+      "sha256": "f6b94f461b09398ef192207356d89d7bf59833fe03082a14b910b3c740f2a318"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/mount/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 4670,
+      "path": "usr/share/doc/ncurses-base/copyright",
+      "sha256": "7c9d2c8dbee48b6f4bbbffb1f370cc5858de11cc4f5a70c5c622c274917e1c65"
+    },
+    {
+      "bytes": 4670,
+      "path": "usr/share/doc/ncurses-bin/copyright",
+      "sha256": "7c9d2c8dbee48b6f4bbbffb1f370cc5858de11cc4f5a70c5c622c274917e1c65"
+    },
+    {
+      "bytes": 7044,
+      "path": "usr/share/doc/passwd/copyright",
+      "sha256": "a4c3e5b19700dd3cc5961663d204bd7150f65f913314682aede5931548c436d5"
+    },
+    {
+      "bytes": 108292,
+      "path": "usr/share/doc/perl-base/copyright",
+      "sha256": "657ac19622868be1f2bf8ac3823a952b28c7a2a467f61353743e9c9d89291921"
+    },
+    {
+      "bytes": 3974,
+      "path": "usr/share/doc/procps/copyright",
+      "sha256": "90a66617c36d83068b52bbb77cbfef1234f526bfa287156d9d05f7df4d339539"
+    },
+    {
+      "bytes": 8618,
+      "path": "usr/share/doc/sed/copyright",
+      "sha256": "719320e425e8e6da53a55e0fcfa2f2ed9b1332cea16abd65321bd651b2a88568"
+    },
+    {
+      "bytes": 6752,
+      "path": "usr/share/doc/sensible-utils/copyright",
+      "sha256": "4405a7fb92b693f790887d5f1d6b190e2fd00d824d80ef0b3d10e64cf21275dc"
+    },
+    {
+      "bytes": 5881,
+      "path": "usr/share/doc/sysvinit-utils/copyright",
+      "sha256": "53c7ef3839f64b24cc25a0937d11ce228517a48be0cc794f0d67b7e209b2a9ba"
+    },
+    {
+      "bytes": 6560,
+      "path": "usr/share/doc/tar/copyright",
+      "sha256": "a0a44d41b2a045eb5946a8952487151cfa6ff0cd080bbf4b2eec220751d23024"
+    },
+    {
+      "bytes": 3794,
+      "path": "usr/share/doc/tzdata-legacy/copyright",
+      "sha256": "97fad960bf4aea7cb5faf6dc8a536bf91bf85a69a7869cfa8254a0162134c1d8"
+    },
+    {
+      "bytes": 3794,
+      "path": "usr/share/doc/tzdata/copyright",
+      "sha256": "97fad960bf4aea7cb5faf6dc8a536bf91bf85a69a7869cfa8254a0162134c1d8"
+    },
+    {
+      "bytes": 1242,
+      "path": "usr/share/doc/ubuntu-keyring/copyright",
+      "sha256": "191cdb1291b2fc3b9fdcd8648b16ab7f9e4f15b74dc5b30959a9fdcfb4782b6c"
+    },
+    {
+      "bytes": 948,
+      "path": "usr/share/doc/unminimize/copyright",
+      "sha256": "3d2c2c55ac1cc4a77652fa1d33aa7cb9b3f3cbc92c200c69f52b32825585085f"
+    },
+    {
+      "bytes": 23160,
+      "path": "usr/share/doc/util-linux/copyright",
+      "sha256": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab"
+    },
+    {
+      "bytes": 2927,
+      "path": "usr/share/doc/zlib1g/copyright",
+      "sha256": "9e5b96d63773a5d177ba264254390f792be07e41748ebd94730981c6cac31cc6"
+    },
+    {
+      "bytes": 1116,
+      "path": "usr/share/dotnet/LICENSE.txt",
+      "sha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310"
+    },
+    {
+      "bytes": 77436,
+      "path": "usr/share/dotnet/ThirdPartyNotices.txt",
+      "sha256": "2dc8f8c5a39401e928b5784ab564eb8b3ceb99ead3df8f260e0cab7e0bbecc7a"
+    }
+  ],
+  "noticeLinks": [
+    {
+      "kind": "symlink",
+      "path": "usr/share/common-licenses/GFDL",
+      "target": "GFDL-1.3"
+    },
+    {
+      "kind": "symlink",
+      "path": "usr/share/common-licenses/GPL",
+      "target": "GPL-3"
+    },
+    {
+      "kind": "symlink",
+      "path": "usr/share/common-licenses/LGPL",
+      "target": "LGPL-3"
+    },
+    {
+      "kind": "symlink",
+      "path": "usr/share/doc/openssl/copyright",
+      "target": "../libssl3t64/copyright"
+    }
+  ],
+  "osRelease": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "platform": "linux/amd64",
+  "schemaVersion": 1,
+  "scope": "Exact stopped-container filesystem: native RID assets, OS package records, framework and packaged vendor notice bytes. Headings are not proof of linked components or license obligations. No code executed, package installed, host modified, signature verified or legal clearance granted.",
+  "shippedNativeAssets": [
+    {
+      "bytes": 38511216,
+      "path": "app/Magick.Native-Q8-x64.dll.so",
+      "sha256": "604a949384414fece8ded77d6d9f93aadec0b79cc665d5bb7086dcc6674e59ff"
+    }
+  ]
+}

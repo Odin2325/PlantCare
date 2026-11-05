@@ -70,10 +70,41 @@ preparation bundles remain verifiable.
 
 Focused native decoder/supervisor checks passed (29), as did bundle-integrity
 checks (13) and notice-archive integrity checks (5). Exact committed-source export,
-new-image inventory and focused HTTP acceptance follow before treating the
-publish correction as an accepted artifact. No full suite/remote CI ran here.
+new-image inventory and focused HTTP acceptance subsequently passed as recorded
+below. No full suite/remote CI ran here.
 The five archive cases are also wired into the existing Linux gateway test target;
 all 43 gateway/bundle/capacity/archive cases passed in that focused target.
+
+## Accepted disabled decoder artifact
+
+Committed source `1cc3e02d0491a9fe24201b4d21300c7170a33ae4` now exported and
+verified successfully. Its trusted manifest SHA256 is
+`603ec753651fa97ab76260936a742541d9e3a9a4125d638baee703c2b8b449c6`;
+decoder image ID is
+`sha256:28557790c669b3b6d348bf66745eb71d7e4de927faeb7fe4f21a9fd2e879223f`.
+The bundle remains in ignored local operational storage with activation disabled
+and `licenseReview: incomplete`; it is not a full new API/worker deployment.
+
+[Linux-x64 image inventory](dependencies/photo-image-inventory-linux-x64.json)
+confirms one native asset, `/app/Magick.Native-Q8-x64.dll.so`, instead of the old
+seven. Its SHA256 is unchanged from the portable image's Linux-x64 library:
+`604a949384414fece8ded77d6d9f93aadec0b79cc665d5bb7086dcc6674e59ff`.
+The .NET 10.0.14 framework, 98 OS package records and all 112 retained notice
+files remain. The deterministic notice archive hash is identical. The new
+[package inventory](dependencies/photo-runtime-inventory-linux-x64.json) also
+matches both shipped dependency hashes and cached archive checksums.
+
+The saved decoder archive fell from 177,415,680 to 102,637,568 bytes, a reduction
+of 74,778,112 bytes (about 42.1%). These are the actual local exported archive
+sizes, not an asserted registry download size or host memory saving.
+
+One focused real HTTP format/count lifecycle passed against this exact decoder
+and the existing accepted API image: JPEG orientation, PNG/WebP alpha/metadata,
+bounded rejection, independent 20/50-entry limits, a hash-verified 50-image ZIP,
+quota reuse, account erasure and complete SQL/project cleanup. No decoder job or
+UUID scratch directory remained. Prior larger workload/recovery samples stay
+documented against their own exact image IDs; this does not relabel them as runs
+against a future combined API/worker candidate.
 
 ## Remaining activation gates
 

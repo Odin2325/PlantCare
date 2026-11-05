@@ -192,6 +192,15 @@ Next are the remaining host/native-license prerequisites and one exact combined
 candidate's CI/recovery/staging gates. Device/diverse-media limits remain explicit;
 physical Apple checks still wait for hardware.
 
+[Host/artifact preflight](photo-candidate-preflight.md) now records read-only
+staging versions, UID/GID 1654 and absent Docker/gateway mounts. The gateway is
+not installed. Exact image/managed-package notice inventories are captured and
+the decoder now publishes only Linux x64: one unchanged native library instead
+of seven platform variants, with an approximately 42% smaller saved archive.
+The disabled exact-source decoder bundle and focused HTTP check pass. Native
+linked-component/terms mapping, actual host installation/resource/recovery gates
+and combined exact-candidate CI remain open; no live service or flag changed.
+
 The historical implementation notes below describe the slices accumulated for
 the now-deployed [mobile checkpoint](mobile-checkpoint-acceptance.md). Its full CI,
 recovery and live existing-session update gates passed. Photo processing/uploads
