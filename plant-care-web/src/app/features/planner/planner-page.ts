@@ -118,6 +118,7 @@ export class PlannerPage {
   readonly collectionById = computed(() => new Map(this.collection().map(plant => [plant.id, plant])));
   readonly browseCatalog = signal(false);
   readonly zoneQuery = signal('');
+  readonly hideZoneConflicts = signal(false);
   readonly selectedZone = computed(() => {
     const shape = this.selectedShape();
     return shape?.role === 'light' && shape.light ? { ...shape, light: shape.light } : null;
@@ -137,9 +138,17 @@ export class PlannerPage {
       : collection.map(owned => ({ id: owned.id, name: owned.nickname.trim() || owned.speciesCommonName,
         plant: catalog.get(owned.plantSpeciesId), owned: true }));
     const query = normalizePlantSearch(this.zoneQuery());
+    const existing = this.zoneDestination()?.plants ?? [];
+    const hideConflicts = this.hideZoneConflicts();
     return candidates.filter(({ name, plant }) => plant?.sunlightRequirement === zone.light &&
       (!query || normalizePlantSearch([name, plant.commonName, plant.scientificName,
         ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
+      .map(choice => {
+        const assessment = choice.plant && existing.length
+          ? sharing([...existing, { speciesId: choice.plant.id, moisture: '' }], catalog) : null;
+        return { ...choice, conflict: assessment?.status === 'conflict' ? assessment.detail : null };
+      })
+      .filter(choice => !hideConflicts || !choice.conflict)
       .sort((a, b) => a.name.localeCompare(b.name, 'en'));
   });
   readonly zonePage = linkedSignal({ source: this.zoneChoices, computation: () => 0 });
@@ -317,6 +326,7 @@ export class PlannerPage {
     this.zoneQuery.set('');
     this.browseCatalog.set(false);
     this.zoneDestinationId.set('');
+    this.hideZoneConflicts.set(false);
   }
   selectFromList(id: string): void {
     if (this.plan().shapes.some(shape => shape.id === id)) this.select('shape', id);
@@ -358,13 +368,6 @@ export class PlannerPage {
     const pot: Pot = { ...spot, id: crypto.randomUUID(), name: choice.name.slice(0, 60), plants: [planting] };
     this.update({ pots: [...this.plan().pots, pot] });
     this.select('pot', pot.id);
-  }
-
-  zoneCompanionConflict(speciesId: string): string | null {
-    const plants = this.zoneDestination()?.plants;
-    if (!plants?.length) return null;
-    const assessment = sharing([...plants, { speciesId, moisture: '' }], this.catalog());
-    return assessment?.status === 'conflict' ? assessment.detail : null;
   }
 
   removeItem(): void {

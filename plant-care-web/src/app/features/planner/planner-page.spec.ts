@@ -244,10 +244,16 @@ describe('Space planner', () => {
     select.dispatchEvent(new Event('change'));
     fixture.detectChanges();
     expect(page.canPlanInZone()).toBe(true);
-    const candidate = Array.from(finder.querySelectorAll('.plant-list button') as NodeListOf<HTMLButtonElement>)
+    const candidate = () => Array.from(finder.querySelectorAll('.plant-list button') as NodeListOf<HTMLButtonElement>)
       .find(button => button.textContent?.trim() === 'Plan Cold fixture');
-    expect(candidate?.parentElement?.textContent).toContain('Different needs for temperature.');
-    candidate!.click();
+    expect(candidate()?.parentElement?.textContent).toContain('Different needs for temperature.');
+    const toggle = finder.querySelector('input[type="checkbox"]') as HTMLInputElement;
+    toggle.click();
+    fixture.detectChanges();
+    expect(candidate()).toBeUndefined();
+    toggle.click();
+    fixture.detectChanges();
+    candidate()!.click();
     expect(page.plan().pots).toHaveLength(2);
     expect(page.selectedPot()?.id).toBe(destination.id);
     expect(page.selectedPot()?.plants.map(plant => plant.speciesId)).toEqual(['basil', 'cold']);

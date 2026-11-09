@@ -183,6 +183,13 @@
                 </select>
               </label>
             }
+            @if (zoneDestination()?.plants?.length) {
+              <label class="zone-conflict-toggle">
+                <input type="checkbox" [checked]="hideZoneConflicts()"
+                  (change)="hideZoneConflicts.set($any($event.target).checked)">
+                Hide plants with known care conflicts
+              </label>
+            }
             @if (!zoneDestination()) {
               @if (plan().pots.length >= maxPots) {
                 <p role="status">This layout has reached its pot limit.</p>
@@ -199,8 +206,8 @@
                       (click)="planZonePlant(choice.id)">Plan {{ choice.name }}</button>
                     @if (planned) { <small>Already in this layout</small> }
                     @else if (choice.owned && choice.name !== choice.plant?.commonName) { <small>{{ choice.plant?.commonName }}</small> }
-                    @if (!planned && choice.plant && zoneCompanionConflict(choice.plant.id); as conflict) {
-                      <small>{{ conflict }}</small>
+                    @if (!planned && choice.conflict) {
+                      <small>{{ choice.conflict }}</small>
                     }
                   </li>
                 }
@@ -220,7 +227,7 @@
                 <p>Planning adds a pot to this layout.</p>
               }
             } @else {
-              <p>No {{ browseCatalog() ? 'unowned catalog plants' : 'plants in your collection' }} match this light and search.</p>
+              <p>No plants match these filters.</p>
             }
           }
         </section>
