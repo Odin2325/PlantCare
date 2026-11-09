@@ -9784,5 +9784,205 @@
         "Sárpo Mira"
       ]
     }
+  },
+  {
+    "commonName": "Snow pea (Oregon Sugar Pod)",
+    "scientificName": "Lathyrus oleraceus 'Oregon Sugar Pod'",
+    "description": "An edible-pod snow pea grown for flat pods rather than for shelling.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/112457/pisum-sativum-oregon-sugar-pod/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow in cool weather and give the plants support. Keep the soil evenly moist as flowers and pods develop.",
+      "harvestInstructions": "Pick pods while flat and tender, before the peas inside swell much.",
+      "photo": null,
+      "cultivarName": "Oregon Sugar Pod",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Oregon Sugar Pod snow pea",
+        "Oregon Sugar Pod mangetout"
+      ]
+    }
+  },
+  {
+    "commonName": "Snap pea (Sugar Ann)",
+    "scientificName": "Lathyrus oleraceus 'Sugar Ann'",
+    "description": "An early, compact snap pea with edible green pods.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/163116/pisum-sativum-sugar-ann/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Use a sunny bed or a drained container with room for the roots. Add a low support if the plants lean, and keep the mix from drying during flowering.",
+      "harvestInstructions": "Pick the pods when they are crisp and starting to fill. The whole young pod is edible.",
+      "photo": null,
+      "cultivarName": "Sugar Ann",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Sugar Ann snap pea",
+        "Sugar Ann sugar snap pea"
+      ]
+    }
+  },
+  {
+    "commonName": "Snap pea (Super Sugar Snap)",
+    "scientificName": "Lathyrus oleraceus 'Super Sugar Snap'",
+    "description": "A tall snap pea with plump edible pods and intermediate resistance to powdery mildew.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/vegetables/peas/snap-peas/super-sugar-snap-pea-seed-2855.36.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Set up a trellis when sowing. Grow in a cool part of the season, with steady moisture as pods fill.",
+      "harvestInstructions": "Pick the pods once the peas have begun to fill them while the pod walls are still crisp.",
+      "photo": null,
+      "cultivarName": "Super Sugar Snap",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Super Sugar Snap pea",
+        "Super Sugar Snap edible-pod pea"
+      ]
+    }
+  },
+  {
+    "commonName": "Runner bean (Scarlet Emperor)",
+    "scientificName": "Phaseolus coccineus 'Scarlet Emperor'",
+    "description": "A vigorous runner bean with orange-red flowers followed by long green pods.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/143395/phaseolus-coccineus-scarlet-emperor/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant out after the risk of frost has passed and provide a sturdy trellis or cane frame. Water regularly as flowers and pods develop.",
+      "harvestInstructions": "Pick young pods before the seeds bulge and the pods become tough. Cook thoroughly before eating.",
+      "photo": null,
+      "cultivarName": "Scarlet Emperor",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Scarlet Emperor runner bean",
+        "Scarlet Emperor climbing bean"
+      ]
+    }
+  },
+  {
+    "commonName": "Winter squash (Uchiki Kuri)",
+    "scientificName": "Cucurbita maxima 'Uchiki Kuri'",
+    "description": "A winter squash with orange-red skin and yellow flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone evenly moist with drainage; allow for the large leaves and rapidly growing fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with space for the selected bush or trailing variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.takiiseed.com/variety/uchiki-kuri/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Provide sun and room for the vines to spread. Plant outdoors after frost risk passes and water the root zone while the fruit grows.",
+      "harvestInstructions": "For storage, cut mature fruit with a short piece of stalk and set aside only sound, undamaged squash.",
+      "photo": {
+        "path": "/images/plants/cultivar-squash-uchiki-kuri.jpg",
+        "altText": "Uchiki Kuri squash with orange-red skin",
+        "credit": "Philafrenzy",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Uchiki_Kuri_squash.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Uchiki Kuri squash"
+      },
+      "cultivarName": "Uchiki Kuri",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Uchiki Kuri squash",
+        "Uchiki Kuri red kuri"
+      ]
+    }
+  },
+  {
+    "commonName": "Winter squash (Crown Prince)",
+    "scientificName": "Cucurbita maxima 'Crown Prince'",
+    "description": "A trailing winter squash with large blue-grey fruit and orange flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone evenly moist with drainage; allow for the large leaves and rapidly growing fruits.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with space for the selected bush or trailing variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/237223/cucurbita-maxima-crown-prince/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give the vines a sunny bed with ample room to spread. Keep soil moisture steady while fruit develops.",
+      "harvestInstructions": "Let the rind mature and cut the fruit with a short stalk before frost. Cure sound fruit before storing it.",
+      "photo": null,
+      "cultivarName": "Crown Prince",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Crown Prince squash",
+        "Crown Prince pumpkin"
+      ]
+    }
   }
 ]

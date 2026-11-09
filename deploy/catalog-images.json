@@ -2826,5 +2826,19 @@
     "bytes": 170943,
     "sourceFileName": "Solanum tuberosum Sarpo Mira.jpg",
     "changes": "Wikimedia-provided 500-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Uchiki Kuri squash with orange-red skin",
+    "caption": "Uchiki Kuri squash",
+    "credit": "Philafrenzy",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-squash-uchiki-kuri",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Uchiki_Kuri_squash.jpg",
+    "path": "/images/plants/cultivar-squash-uchiki-kuri.jpg",
+    "sha256": "f9694546f2fc9abd75176609ace28921718590f4401410dbab5b683a73b46422",
+    "bytes": 95027,
+    "sourceFileName": "Uchiki Kuri squash.jpg",
+    "changes": "Wikimedia-provided thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]
