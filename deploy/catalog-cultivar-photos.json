@@ -1186,5 +1186,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Allium cepa (Cepa Group) 'Ailsa Craig'",
+    "cultivarName": "Ailsa Craig",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-onion-ailsa-craig.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cebula_cukrowa_Ailsa_Craig.jpg",
+    "identityEvidence": "The photographer identifies the pictured onion as Ailsa Craig in the source description.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Daucus carota subsp. sativus 'Paris Market'",
+    "cultivarName": "Paris Market",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Daucus carota subsp. sativus 'Red Cored Chantenay'",
+    "cultivarName": "Red Cored Chantenay",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Beta vulgaris Garden Beet Group 'Burpee’s Golden'",
+    "cultivarName": "Burpee’s Golden",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Raphanus sativus 'White Icicle'",
+    "cultivarName": "White Icicle",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]

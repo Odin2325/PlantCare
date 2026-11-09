@@ -9984,5 +9984,177 @@
         "Crown Prince pumpkin"
       ]
     }
+  },
+  {
+    "commonName": "Onion (Ailsa Craig)",
+    "scientificName": "Allium cepa (Cepa Group) 'Ailsa Craig'",
+    "description": "A mild onion grown for large bulbs. Use it relatively soon after harvest.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://fedcoseeds.com/seeds/ailsa-craig-organic-summer-onion-2483",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start seed early enough for the plants to establish before the long days that trigger bulbing. Keep the bed weeded and water evenly as bulbs enlarge.",
+      "harvestInstructions": "Lift when the tops fall and start to dry. Dry the bulbs in a well-ventilated place before trimming the tops.",
+      "photo": {
+        "path": "/images/plants/cultivar-onion-ailsa-craig.jpg",
+        "altText": "Harvested Ailsa Craig onion bulb",
+        "credit": "MOs810",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cebula_cukrowa_Ailsa_Craig.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Cebula cukrowa Ailsa Craig"
+      },
+      "cultivarName": "Ailsa Craig",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Ailsa Craig onion",
+        "Ailsa Craig bulb onion"
+      ]
+    }
+  },
+  {
+    "commonName": "Carrot (Paris Market)",
+    "scientificName": "Daucus carota subsp. sativus 'Paris Market'",
+    "description": "A short, round orange carrot suited to containers and shallow beds.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed and root zone moist with drainage. Avoid repeated drying during germination.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, stone-free, well-drained soil deep enough for the chosen variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://kokopelli-semences.fr/en/p/paris-market-carrot",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Direct-sow into a fine, drained mix and keep the surface moist until seedlings appear. Thin early so the roots have room to round out.",
+      "harvestInstructions": "Lift a sample when the shoulders are rounded. Harvest the rest as they reach the size you want.",
+      "photo": null,
+      "cultivarName": "Paris Market",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Paris Market carrot",
+        "Paris Market round carrot"
+      ]
+    }
+  },
+  {
+    "commonName": "Carrot (Red Cored Chantenay)",
+    "scientificName": "Daucus carota subsp. sativus 'Red Cored Chantenay'",
+    "description": "A broad-shouldered carrot with a short, blunt orange root.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed and root zone moist with drainage. Avoid repeated drying during germination.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, stone-free, well-drained soil deep enough for the chosen variety.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.burpee.com/products/carrot-red-cored-chantenay-prod001114",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly in loosened, stone-free soil. Thin the seedlings and keep the soil evenly moist while the broad roots develop.",
+      "harvestInstructions": "Lift a sample to check root size. Loosen the soil around mature roots before lifting them.",
+      "photo": null,
+      "cultivarName": "Red Cored Chantenay",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Cored Chantenay carrot",
+        "Chantenay Red Cored carrot"
+      ]
+    }
+  },
+  {
+    "commonName": "Beetroot (Burpee’s Golden)",
+    "scientificName": "Beta vulgaris Garden Beet Group 'Burpee’s Golden'",
+    "description": "A beetroot with rounded roots and golden-yellow flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/139288/beta-vulgaris-burpees-golden/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow into a bed or drained container with room for the roots to swell. Thin clusters of seedlings and keep the mix from drying out.",
+      "harvestInstructions": "Start by lifting the largest roots and leave the smaller ones room to grow.",
+      "photo": null,
+      "cultivarName": "Burpee’s Golden",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Burpee's Golden beetroot",
+        "Burpees Golden beet"
+      ]
+    }
+  },
+  {
+    "commonName": "Radish (White Icicle)",
+    "scientificName": "Raphanus sativus 'White Icicle'",
+    "description": "A quick radish with slender, tapered white roots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://yardandgarden.extension.iastate.edu/faq/what-are-some-good-radish-varieties-home-garden",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly in loose soil or a container deep enough for the full root. Thin early and keep moisture steady.",
+      "harvestInstructions": "Pull a sample once the roots look developed. Harvest while they are firm and crisp, before they turn pithy.",
+      "commonNameAliases": [
+        "White Icicle radish",
+        "Icicle radish"
+      ],
+      "photo": null,
+      "cultivarName": "White Icicle",
+      "photoIsSpeciesReference": false
+    }
   }
 ]

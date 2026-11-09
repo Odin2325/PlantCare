@@ -2840,5 +2840,19 @@
     "bytes": 95027,
     "sourceFileName": "Uchiki Kuri squash.jpg",
     "changes": "Wikimedia-provided thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Harvested Ailsa Craig onion bulb",
+    "caption": "Cebula cukrowa Ailsa Craig",
+    "credit": "MOs810",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-onion-ailsa-craig",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cebula_cukrowa_Ailsa_Craig.jpg",
+    "path": "/images/plants/cultivar-onion-ailsa-craig.jpg",
+    "sha256": "674a7f17bd1bf47c3350ad8f914bfa0bd0feafd20852e952efcc733331c67c2a",
+    "bytes": 43874,
+    "sourceFileName": "Cebula cukrowa Ailsa Craig.jpg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]
