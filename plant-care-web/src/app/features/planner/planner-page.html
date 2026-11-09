@@ -1,0 +1,159 @@
+<main id="main-content" tabindex="-1" class="planner">
+  <header class="hero">
+    <a routerLink="/garden">← Garden</a>
+    <p class="eyebrow">Space planner</p>
+    <h1>Plan your plant space</h1>
+    <p>Draw a room, balcony or garden. Mark where the light falls, then try arrangements for your pots.</p>
+  </header>
+
+  <section class="panel layout-settings" aria-label="Layout settings">
+    <label>Layout<select [value]="plan().id" (change)="switchPlan($any($event.target).value)">
+      @for (layout of plans(); track layout.id) { <option [value]="layout.id" [selected]="layout.id === planId()">{{ layout.name }}</option> }
+    </select></label>
+    <label>Layout name<input maxlength="60" [value]="plan().name" (change)="renamePlan($any($event.target).value)"></label>
+    <label>Setting<select [value]="plan().setting" (change)="setSetting($any($event.target).value)">
+      <option value="indoor">Indoor</option><option value="outdoor">Outdoor</option>
+    </select></label>
+    <div class="actions">
+      <button type="button" (click)="addPlan()" [disabled]="plans().length >= maxPlans">New layout</button>
+      <button type="button" (click)="deletePlan()">Delete layout</button>
+    </div>
+    <p class="storage">Layouts are saved in this browser for your account. {{ saveMessage() }}</p>
+  </section>
+
+  <div class="workspace">
+    <section class="panel map-panel" aria-labelledby="map-heading">
+      <h2 id="map-heading">Layout map</h2>
+      <div class="actions tools" role="group" aria-label="Add to the map">
+        <button type="button" (click)="addShape('rectangle')" [disabled]="plan().shapes.length >= maxShapes">Rectangle</button>
+        <button type="button" (click)="addShape('square')" [disabled]="plan().shapes.length >= maxShapes">Square</button>
+        <button type="button" (click)="addShape('circle')" [disabled]="plan().shapes.length >= maxShapes">Circle</button>
+        <button type="button" class="primary" (click)="addPot()" [disabled]="plan().pots.length >= maxPots">Add pot</button>
+      </div>
+      <p class="tip">Use shapes for boundaries, obstacles or light zones. Each grid square is one unit.</p>
+      <div class="map" role="group" aria-label="Map items">
+        @for (shape of plan().shapes; track shape.id) {
+          <button type="button" class="map-item shape" [class.circle]="shape.kind === 'circle'"
+            [class.zone]="shape.role === 'light'" [class.obstacle]="shape.role === 'obstacle'"
+            [attr.data-light]="shape.role === 'light' ? shape.light : null" [style]="box(shape)"
+            [attr.aria-label]="'Select shape ' + shape.name" [attr.aria-pressed]="selectedShape()?.id === shape.id"
+            (click)="select('shape', shape.id)"><span>{{ shape.name }}</span></button>
+        }
+        @for (pot of plan().pots; track pot.id) {
+          <button type="button" class="map-item pot circle" [style]="box(pot)"
+            [attr.aria-label]="'Select pot ' + pot.name" [attr.aria-pressed]="selectedPot()?.id === pot.id"
+            (click)="select('pot', pot.id)"><span>{{ pot.plants.length || '•' }}</span></button>
+        }
+        @if (placing()) {
+          <button #surface type="button" class="place-surface" aria-label="Tap the map to place the selected item. Use coordinate fields for keyboard placement."
+            (click)="place($event, surface)"></button>
+        }
+      </div>
+      @if (placing()) { <p role="status">Tap where the selected item's top-left corner should go.</p> }
+      @if (plan().shapes.length || plan().pots.length) {
+        <label class="item-list">Edit map item<select [value]="selection()?.id ?? ''"
+          (change)="selectFromList($any($event.target).value)">
+          <option value="">Choose an item</option>
+          @for (shape of plan().shapes; track shape.id) { <option [value]="shape.id">Shape · {{ shape.name }}</option> }
+          @for (pot of plan().pots; track pot.id) { <option [value]="pot.id">Pot · {{ pot.name }}</option> }
+        </select></label>
+      }
+      <p class="tip">{{ plan().setting === 'outdoor'
+        ? 'Observe direct sun and shade over the day. Check wind, seasonal temperatures and outdoor suitability before moving plants.'
+        : 'Observe light at plant height over the day. A sunny windowsill and a bright spot out of direct sun can suit different plants.' }}</p>
+    </section>
+
+    <section class="panel inspector" aria-labelledby="edit-heading">
+      <h2 id="edit-heading">Edit and check</h2>
+      @if (item(); as selected) {
+        <label>Item name<input maxlength="60" [value]="selected.name" (change)="renameItem($any($event.target).value)"></label>
+        <div class="fields">
+          <label>Column<input #x type="number" min="0" [max]="columns - selected.width" [value]="selected.x" (change)="changeBounds('x', x)"></label>
+          <label>Row<input #y type="number" min="0" [max]="rows - selected.height" [value]="selected.y" (change)="changeBounds('y', y)"></label>
+          <label>{{ selectedPot() || selectedShape()?.kind === 'circle' ? 'Diameter' : selectedShape()?.kind === 'square' ? 'Side length' : 'Width' }}
+            <input #width type="number" min="1" [max]="selectedShape()?.kind === 'rectangle' ? columns : rows" [value]="selected.width" (change)="changeBounds('width', width)">
+          </label>
+          @if (selectedShape()?.kind === 'rectangle') {
+            <label>Height<input #height type="number" min="1" [max]="rows" [value]="selected.height" (change)="changeBounds('height', height)"></label>
+          }
+        </div>
+        <div class="actions">
+          <button type="button" [attr.aria-pressed]="placing()" (click)="placing.set(!placing())">{{ placing() ? 'Cancel placement' : 'Place on map' }}</button>
+          <button type="button" (click)="removeItem()">Remove item</button>
+        </div>
+      } @else { <p>Add or select a shape or pot to edit it.</p> }
+
+      @if (selectedShape(); as shape) {
+        <label>Use shape as<select [value]="shape.role" (change)="setRole($any($event.target).value)">
+          <option value="outline">Space boundary</option><option value="obstacle">Obstacle or furniture</option><option value="light">Light zone</option>
+        </select></label>
+        @if (shape.role === 'light') {
+          <label>Observed light<select [value]="shape.light ?? ''" (change)="setLight($any($event.target).value)">
+            <option value="">Choose observed light</option>
+            @for (option of lights; track option.value) { <option [value]="option.value">{{ option.label }}</option> }
+          </select></label>
+        }
+      }
+
+      @if (selectedPot(); as pot) {
+        <div class="assessment" aria-live="polite">
+          <h3>Pot placement</h3>
+          <p>{{ potLight() ? lightLabel(potLight()) : 'Place the whole pot in a marked light zone.' }}</p>
+          @if (potBlocked()) { <p>The pot overlaps another item or extends beyond a space boundary.</p> }
+          @if (pot.plants.length && !loading() && !catalogError()) {
+            @if (suggestion(); as candidate) {
+              @if (candidate.x === pot.x && candidate.y === pot.y) { <p>This spot matches the catalog light needs.</p> }
+              @else {
+                <p>Matching spot at column {{ candidate.x }}, row {{ candidate.y }}.</p>
+                <button type="button" class="primary" (click)="applySuggestion()">Move to suggested spot</button>
+              }
+            } @else { <p>No clear match. Check the plants' light needs, light zones and available space.</p> }
+          }
+        </div>
+        <h3>Plants in this pot</h3>
+        @if (loading()) { <p role="status">Loading plants…</p> }
+        @if (catalogError()) { <p role="alert">The catalog could not be loaded.</p><button type="button" (click)="loadCatalog()">Retry catalog</button> }
+        @if (pot.plants.length < maxPlants && !loading() && !catalogError()) {
+          <label>Find a catalog plant<input type="search" maxlength="100" placeholder="Search by name or cultivar"
+            [value]="query()" (input)="query.set($any($event.target).value)"></label>
+          @if (potLight()) {
+            <button type="button" [attr.aria-pressed]="matchLight()" (click)="matchLight.set(!matchLight())">Match this spot’s light</button>
+          }
+          @if (query().trim() || (matchLight() && potLight())) {
+            <ul class="plant-list">
+              @for (plant of choices(); track plant.id) {
+                <li><button type="button" (click)="addPlant(plant.id)">Add {{ plant.commonName }} @if (plant.catalogProfile?.cultivarName; as cultivar) { · {{ cultivar }} }</button>
+                  <small>{{ lightLabel(plant.sunlightRequirement) }}</small></li>
+              } @empty { <li>No matching catalog plants.</li> }
+            </ul>
+          }
+        }
+        @for (plant of pot.plants; track plant.id) {
+          @let species = catalog().get(plant.speciesId);
+          <article class="plant-card">
+            <strong>{{ species?.commonName ?? 'Catalog plant unavailable' }}</strong>
+            @if (species) {
+              <p>{{ lightLabel(species.sunlightRequirement) }}
+                @if (potLight() && species.sunlightRequirement !== 'Unknown') {
+                  · {{ species.sunlightRequirement === potLight() ? 'Matches this spot' : 'Needs different light' }}
+                }
+              </p>
+              <details><summary>Catalog care notes</summary><p>{{ species.sunlightInstructions }}</p><p>{{ species.wateringInstructions }}</p><p>{{ species.soilInstructions }}</p></details>
+            }
+            <label>Soil moisture preference<select [value]="plant.moisture" (change)="setMoisture(plant.id, $any($event.target).value)">
+              <option value="">Unknown</option><option value="dry">Dries out between watering</option>
+              <option value="moderate">Moderate moisture</option><option value="moist">Stays evenly moist</option>
+            </select></label>
+            <button type="button" (click)="removePlant(plant.id)" [attr.aria-label]="'Remove ' + (species?.commonName ?? 'plant')">Remove plant</button>
+          </article>
+        } @empty { <p>Add plants from the catalog to check their light and shared-pot needs.</p> }
+        @if (shared(); as guidance) {
+          <div class="assessment" aria-live="polite">
+            <h3>{{ guidance.label }}</h3><p>{{ guidance.detail }}</p>
+          </div>
+        }
+      }
+    </section>
+  </div>
+  <footer><a href="https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/lighting-for-indoor-plants">Light guidance from University of Minnesota Extension</a></footer>
+</main>

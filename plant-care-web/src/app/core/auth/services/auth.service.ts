@@ -19,6 +19,7 @@ import {
 } from 'rxjs';
 
 import { Credentials, CurrentUser } from '../models/auth.models';
+import { plannerStorageKey } from '../../services/planner-storage-key';
 import { AntiforgeryService } from '../../security/services/antiforgery.service';
 
 @Injectable({
@@ -166,6 +167,8 @@ export class AuthService {
   }
 
   clearDeletedAccount(): void {
+    const owner = this.currentUserState()?.id;
+    if (owner) localStorage.removeItem(plannerStorageKey(owner));
     this.currentUserState.set(null);
     localStorage.removeItem('plantcare.pushSubscriptionId');
     localStorage.removeItem('plantcare.calendarView');

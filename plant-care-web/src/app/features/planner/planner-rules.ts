@@ -1,0 +1,104 @@
+import { PlantSpecies, SunlightRequirement } from '../../models/plant-species.model';
+
+export const columns = 24;
+export const rows = 16;
+export const lightOptions = [
+  { value: 'LowLight', label: 'Low light / shade' },
+  { value: 'MediumIndirectLight', label: 'Medium indirect light' },
+  { value: 'BrightIndirectLight', label: 'Bright indirect light' },
+  { value: 'PartialSun', label: 'Partial direct sun' },
+  { value: 'FullSun', label: 'Full direct sun' },
+] as const;
+
+export type Light = Exclude<SunlightRequirement, 'Unknown'>;
+export type Moisture = '' | 'dry' | 'moderate' | 'moist';
+export interface Bounds { x: number; y: number; width: number; height: number }
+export interface Shape extends Bounds {
+  id: string; name: string; kind: 'rectangle' | 'square' | 'circle';
+  role: 'outline' | 'obstacle' | 'light'; light: Light | null;
+}
+export interface Planting { id: string; speciesId: string; moisture: Moisture }
+export interface Pot extends Bounds { id: string; name: string; plants: Planting[] }
+export interface Plan { id: string; name: string; setting: 'indoor' | 'outdoor'; shapes: Shape[]; pots: Pot[] }
+
+export function lightLabel(value: SunlightRequirement | null): string {
+  return lightOptions.find(option => option.value === value)?.label ?? 'Light unknown';
+}
+
+function circlesOverlap(a: Bounds, b: Bounds): boolean {
+  return Math.hypot(a.x + a.width / 2 - b.x - b.width / 2,
+    a.y + a.height / 2 - b.y - b.height / 2) < (a.width + b.width) / 2;
+}
+
+function shapeOverlapsPot(shape: Shape, pot: Bounds): boolean {
+  if (shape.kind === 'circle') return circlesOverlap(shape, pot);
+  const radius = pot.width / 2;
+  const centerX = pot.x + radius;
+  const centerY = pot.y + radius;
+  const nearestX = Math.max(shape.x, Math.min(centerX, shape.x + shape.width));
+  const nearestY = Math.max(shape.y, Math.min(centerY, shape.y + shape.height));
+  return Math.hypot(centerX - nearestX, centerY - nearestY) < radius;
+}
+
+function contains(zone: Shape, pot: Bounds): boolean {
+  if (zone.kind === 'circle') {
+    const radius = pot.width / 2;
+    const zoneRadius = zone.width / 2;
+    return Math.hypot(pot.x + radius - zone.x - zoneRadius,
+      pot.y + radius - zone.y - zoneRadius) + radius <= zoneRadius;
+  }
+  return pot.x >= zone.x && pot.x + pot.width <= zone.x + zone.width &&
+    pot.y >= zone.y && pot.y + pot.height <= zone.y + zone.height;
+}
+
+export function lightAt(plan: Plan, pot: Bounds): Light | null {
+  const zones = plan.shapes.filter(shape => shape.role === 'light' && shapeOverlapsPot(shape, pot));
+  const zone = zones.find(shape => contains(shape, pot));
+  return zone && zones.every(shape => shape.light === zone.light) ? zone.light : null;
+}
+
+export function blocked(plan: Plan, pot: Pot): boolean {
+  const boundaries = plan.shapes.filter(shape => shape.role === 'outline');
+  return (boundaries.length > 0 && !boundaries.some(shape => contains(shape, pot))) ||
+    plan.shapes.some(shape => shape.role === 'obstacle' && shapeOverlapsPot(shape, pot)) ||
+    plan.pots.some(other => other.id !== pot.id && circlesOverlap(other, pot));
+}
+
+export function placement(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>): Bounds | null {
+  const light = catalog.get(pot.plants[0]?.speciesId)?.sunlightRequirement;
+  if (!light || light === 'Unknown' ||
+      !pot.plants.every(plant => catalog.get(plant.speciesId)?.sunlightRequirement === light)) return null;
+  let best: Bounds | null = null;
+  let distance = Infinity;
+  for (let y = 0; y <= rows - pot.height; y++) {
+    for (let x = 0; x <= columns - pot.width; x++) {
+      const candidate = { ...pot, x, y };
+      const offset = (x - pot.x) ** 2 + (y - pot.y) ** 2;
+      if (offset < distance && !blocked(plan, candidate) && lightAt(plan, candidate) === light) {
+        best = candidate;
+        distance = offset;
+      }
+    }
+  }
+  return best;
+}
+
+export function sharing(pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>): { label: string; detail: string } | null {
+  if (pot.plants.length < 2) return null;
+  const species = pot.plants.map(plant => catalog.get(plant.speciesId));
+  const light = new Set(species.flatMap(plant => plant && plant.sunlightRequirement !== 'Unknown' ? [plant.sunlightRequirement] : []));
+  const moisture = new Set(pot.plants.map(plant => plant.moisture).filter(Boolean));
+  const minimum = Math.max(...species.map(plant => plant?.minimumTemperatureCelsius ?? -Infinity));
+  const maximum = Math.min(...species.map(plant => plant?.maximumTemperatureCelsius ?? Infinity));
+  const differences = [
+    ...(light.size > 1 ? ['light'] : []),
+    ...(moisture.size > 1 ? ['soil moisture'] : []),
+    ...(minimum > maximum ? ['temperature'] : []),
+  ];
+  if (differences.length) return { label: 'Separate pots suggested', detail: 'Different needs for ' + differences.join(', ') + '.' };
+  if (species.some(plant => !plant || plant.sunlightRequirement === 'Unknown') ||
+      pot.plants.some(plant => !plant.moisture)) {
+    return { label: 'More information needed', detail: 'Check catalog light needs and choose a soil moisture preference for each plant.' };
+  }
+  return { label: 'Possible match', detail: 'Light and selected soil moisture agree. Check mature size, root space, potting mix and drainage before planting together.' };
+}

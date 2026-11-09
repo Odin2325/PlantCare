@@ -5,6 +5,8 @@ import { guestGuard } from './core/auth/guards/guest.guard';
 import { photoDraftGuard } from './core/services/photo-draft-state';
 
 export const routes: Routes = [
+  { path: 'garden/planner', canActivate: [authGuard],
+    loadComponent: () => import('./features/planner/planner-page').then(component => component.PlannerPage) },
   { path: 'garden', canActivate: [authGuard],
     loadComponent: () => import('./features/garden/garden-page').then(component => component.GardenPage) },
   {

@@ -3,6 +3,7 @@
     <p>See the crops and trees you have added to My plants, grouped by their saved location. Use locations such as a bed, balcony or greenhouse to organize them.</p>
     <a routerLink="/plants" [queryParams]="{ category: 'vegetable' }">Browse crops to add</a>
     <a routerLink="/my-plants">Manage plants and locations</a>
+    <a routerLink="/garden/planner">Open space planner</a>
   </header>
   @if (loading()) { <p role="status">Loading your garden…</p> }
   @else if (error()) { <div role="alert"><p>Your garden could not be loaded. Please try again.</p><button type="button" (click)="load()">Try again</button></div> }

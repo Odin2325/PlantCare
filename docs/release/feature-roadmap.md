@@ -117,6 +117,19 @@ dates distinct from completed actions and recorded harvests. Show each batch's
 next action in Garden without duplicating existing care reminders. Use the
 owner's growing context and local frost judgement, not universal German dates.
 
+## Indoor and outdoor space planner
+
+Garden includes a first planner for saved indoor and outdoor layouts. Add square,
+rectangular or circular boundaries, obstacles and observed light zones. Place pots
+on the map or enter grid coordinates. The planner can suggest the nearest free spot
+where a pot fits within a marked zone and matches the catalog light for each plant.
+
+Shared-pot checks compare catalog light and temperature ranges alongside the soil
+moisture preferences entered by the user. A possible match still needs a check of
+mature size, potting mix, drainage and root space. The catalog supplies care notes
+and a light filter for choosing candidates. Layouts are saved per account in the
+current browser. The existing photo journal release checks remain a separate track.
+
 ## Later candidates and release boundary
 
 After these milestones, evaluate a structured plant-health observation log and
