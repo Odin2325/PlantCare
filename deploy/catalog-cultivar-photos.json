@@ -1411,5 +1411,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Prunus cerasus 'North Star'",
+    "cultivarName": "North Star",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-sour-cherry-north-star.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prunus_cerasus_%27North_Star%27_JRVdH_01.jpg",
+    "identityEvidence": "The source photograph caption or description identifies this exact cultivar.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Prunus avium 'Kordia'",
+    "cultivarName": "Kordia",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Prunus domestica 'Mirabelle de Nancy'",
+    "cultivarName": "Mirabelle de Nancy",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Ficus carica 'Hardy Chicago'",
+    "cultivarName": "Hardy Chicago",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Ficus carica 'Desert King'",
+    "cultivarName": "Desert King",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]

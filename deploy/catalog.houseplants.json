@@ -10837,5 +10837,178 @@
         "Lunchbox Red Improved snack pepper"
       ]
     }
+  },
+  {
+    "commonName": "Sour cherry tree (North Star)",
+    "scientificName": "Prunus cerasus 'North Star'",
+    "description": "A compact, self-fertile sour cherry that produces dark red fruit for baking and preserves.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://trees.umn.edu/north-star-sour-cherry-prunus-north-star",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose a sunny site with good drainage. Check the rootstock and mature size before deciding how much room to leave.",
+      "harvestInstructions": "Pick when the cherries are fully coloured and taste ripe. Keep stones and wilted foliage away from pets.",
+      "photo": {
+        "path": "/images/plants/cultivar-sour-cherry-north-star.jpg",
+        "altText": "White blossoms on a North Star sour cherry tree",
+        "credit": "Cephas",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prunus_cerasus_%27North_Star%27_JRVdH_01.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Prunus cerasus 'North Star' JRVdH 01"
+      },
+      "cultivarName": "North Star",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "North Star sour cherry",
+        "North Star tart cherry"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet cherry tree (Kordia)",
+    "scientificName": "Prunus avium 'Kordia'",
+    "description": "A late-season sweet cherry with large, dark fruit.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Use a sunny growing site; suitable sour cherries can also tolerate some shade. Follow the growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/204656/prunus-avium-kordia-d/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Give the tree a sunny, sheltered site with good drainage. Check pollination compatibility and choose a nearby cherry that flowers at the same time.",
+      "harvestInstructions": "Taste a sample once the cherries have darkened, then pick carefully to avoid bruising. Keep stones and wilted foliage away from pets.",
+      "photo": null,
+      "cultivarName": "Kordia",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Kordia cherry",
+        "Kordia sweet cherry"
+      ]
+    }
+  },
+  {
+    "commonName": "Mirabelle plum tree (Mirabelle de Nancy)",
+    "scientificName": "Prunus domestica 'Mirabelle de Nancy'",
+    "description": "A mirabelle with small, round golden-yellow plums, sometimes speckled.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/66550/prunus-insititia-mirabelle-de-nancy-c/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose a sunny site protected from strong wind. Check the rootstock for final size and allow room to pick fruit without crowding the branches.",
+      "harvestInstructions": "Pick when the fruit has turned golden and gives slightly. Use ripe plums fresh or for preserves and discard the stones.",
+      "photo": null,
+      "cultivarName": "Mirabelle de Nancy",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Nancy mirabelle",
+        "Mirabelle de Nancy plum"
+      ]
+    }
+  },
+  {
+    "commonName": "Fig tree (Hardy Chicago)",
+    "scientificName": "Ficus carica 'Hardy Chicago'",
+    "description": "A common fig selected for better cold tolerance than many figs when grown in a protected spot.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.chicagobotanic.org/plant-information/plant-finder/ficus-carica-hardy-chicago-hardy-chicago-fig",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Use a warm, sunny location and free-draining soil. Shelter container roots in winter and keep young plants out of exposed, cold wind.",
+      "harvestInstructions": "Pick when the figs soften and droop slightly. Use or chill ripe fruit soon after picking.",
+      "photo": null,
+      "cultivarName": "Hardy Chicago",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Chicago Hardy fig",
+        "Hardy Chicago fig"
+      ]
+    }
+  },
+  {
+    "commonName": "Fig tree (Desert King)",
+    "scientificName": "Ficus carica 'Desert King'",
+    "description": "A fig grown for an early crop on shoots from the previous season.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://extension.oregonstate.edu/catalog/pub/ec-819-growing-tree-fruits-nuts-home",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Use a warm, sunny, sheltered spot. Keep some healthy wood from last season when pruning so the early crop has shoots to develop on.",
+      "harvestInstructions": "Pick ripe figs once they soften and hang down. Handle gently and eat or refrigerate them soon after harvest.",
+      "photo": null,
+      "cultivarName": "Desert King",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Desert King fig",
+        "Desert King fig tree"
+      ]
+    }
   }
 ]
