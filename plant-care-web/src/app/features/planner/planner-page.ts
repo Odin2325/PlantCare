@@ -6,8 +6,8 @@ import { AuthService } from '../../core/auth/services/auth.service';
 import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
-import { Bounds, Light, Moisture, Plan, Pot, Shape, blocked, columns, lightAt, lightLabel,
-  lightOptions, placement, rows, sharing } from './planner-rules';
+import { Bounds, Light, Moisture, Plan, Pot, Shape, columns, lightAt, lightLabel,
+  lightOptions, placement, placementProblem, rows, sharing } from './planner-rules';
 
 const maxPlans = 12;
 const maxShapes = 40;
@@ -117,9 +117,9 @@ export class PlannerPage {
     const source = this.selectedPot();
     return source ? this.plan().pots.filter(pot => pot.id !== source.id && pot.plants.length < maxPlants) : [];
   });
-  readonly potBlocked = computed(() => {
+  readonly potPlacementProblem = computed(() => {
     const pot = this.selectedPot();
-    return !!pot && blocked(this.plan(), pot);
+    return pot ? placementProblem(this.plan(), pot) : null;
   });
   readonly columns = columns;
   readonly rows = rows;

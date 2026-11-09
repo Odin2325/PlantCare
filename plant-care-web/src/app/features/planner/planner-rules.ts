@@ -57,11 +57,15 @@ export function lightAt(plan: Plan, pot: Bounds): Light | null {
   return zone && zones.every(shape => shape.light === zone.light) ? zone.light : null;
 }
 
-export function blocked(plan: Plan, pot: Pot): boolean {
+export function placementProblem(plan: Plan, pot: Pot): string | null {
   const boundaries = plan.shapes.filter(shape => shape.role === 'outline');
-  return (boundaries.length > 0 && !boundaries.some(shape => contains(shape, pot))) ||
-    plan.shapes.some(shape => shape.role === 'obstacle' && shapeOverlapsPot(shape, pot)) ||
-    plan.pots.some(other => other.id !== pot.id && circlesOverlap(other, pot));
+  if (boundaries.length && !boundaries.some(shape => contains(shape, pot))) {
+    return 'Move the whole pot inside a space boundary.';
+  }
+  const obstacle = plan.shapes.find(shape => shape.role === 'obstacle' && shapeOverlapsPot(shape, pot));
+  if (obstacle) return 'This pot overlaps the obstacle “' + obstacle.name + '”.';
+  const overlappingPot = plan.pots.find(other => other.id !== pot.id && circlesOverlap(other, pot));
+  return overlappingPot ? 'This pot overlaps “' + overlappingPot.name + '”.' : null;
 }
 
 export function placement(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>): Bounds | null {
@@ -74,7 +78,7 @@ export function placement(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, Pla
     for (let x = 0; x <= columns - pot.width; x++) {
       const candidate = { ...pot, x, y };
       const offset = (x - pot.x) ** 2 + (y - pot.y) ** 2;
-      if (offset < distance && !blocked(plan, candidate) && lightAt(plan, candidate) === light) {
+      if (offset < distance && !placementProblem(plan, candidate) && lightAt(plan, candidate) === light) {
         best = candidate;
         distance = offset;
       }

@@ -46,6 +46,7 @@ describe('Space planner', () => {
     page.setLight('FullSun');
     page.addShape('square');
     page.setRole('obstacle');
+    page.renameItem('Shelf');
     const width = document.createElement('input');
     width.type = 'number';
     width.value = '2';
@@ -56,14 +57,16 @@ describe('Space planner', () => {
     fixture.detectChanges();
     const move = Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>)
       .find(button => button.textContent?.trim() === 'Move to suggested spot');
+    expect(fixture.nativeElement.querySelector('.assessment').textContent).toContain('This pot overlaps the obstacle “Shelf”.');
     expect(fixture.nativeElement.querySelector('.suggestion-marker')).not.toBeNull();
     expect(move).toBeDefined();
     move!.click();
-    expect(page.potBlocked()).toBe(false);
+    expect(page.potPlacementProblem()).toBeNull();
     expect(page.potLight()).toBe('FullSun');
     expect(page.selectedPot()?.x).toBe(2);
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.suggestion-marker')).toBeNull();
+    expect(fixture.nativeElement.querySelector('.assessment').textContent).not.toContain('Shelf');
   });
 
   it('asks for missing moisture data and flags a mismatch in a shared pot', () => {
