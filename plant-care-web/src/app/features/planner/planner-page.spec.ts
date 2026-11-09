@@ -69,6 +69,18 @@ describe('Space planner', () => {
     expect(fixture.nativeElement.querySelector('.assessment').textContent).not.toContain('Shelf');
   });
 
+  it('explains why it cannot suggest a light zone', () => {
+    const page = setup().componentInstance;
+    page.addPot();
+    page.addPlant('basil');
+    expect(page.placementAdvice()?.problem).toBe('Mark a light zone for full direct sun.');
+
+    page.addPlant('fern');
+    expect(page.placementAdvice()?.problem).toContain('different light');
+    page.addPlant('unknown');
+    expect(page.placementAdvice()?.problem).toContain('missing catalog light requirements');
+  });
+
   it('asks for missing moisture data and flags a mismatch in a shared pot', () => {
     const page = setup().componentInstance;
     page.addPot();

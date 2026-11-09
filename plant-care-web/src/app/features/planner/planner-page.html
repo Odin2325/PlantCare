@@ -113,7 +113,7 @@
                 <p>Matching spot at column {{ candidate.x }}, row {{ candidate.y }}.</p>
                 <button type="button" class="primary" (click)="applySuggestion()">Move to suggested spot</button>
               }
-            } @else { <p>No clear match. Check the plants' light needs, light zones and available space.</p> }
+            } @else if (placementAdvice()?.problem; as problem) { <p>{{ problem }}</p> }
           }
         </div>
         <h3>Plants in this pot</h3>

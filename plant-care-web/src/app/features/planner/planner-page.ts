@@ -7,7 +7,7 @@ import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
 import { Bounds, Light, Moisture, Plan, Pot, Shape, columns, lightAt, lightLabel,
-  lightOptions, placement, placementProblem, rows, sharing } from './planner-rules';
+  lightOptions, placementAdvice, placementProblem, rows, sharing } from './planner-rules';
 
 const maxPlans = 12;
 const maxShapes = 40;
@@ -105,10 +105,11 @@ export class PlannerPage {
     const pot = this.selectedPot();
     return pot ? lightAt(this.plan(), pot) : null;
   });
-  readonly suggestion = computed(() => {
+  readonly placementAdvice = computed(() => {
     const pot = this.selectedPot();
-    return pot ? placement(this.plan(), pot, this.catalog()) : null;
+    return pot?.plants.length ? placementAdvice(this.plan(), pot, this.catalog()) : null;
   });
+  readonly suggestion = computed(() => this.placementAdvice()?.spot);
   readonly shared = computed(() => {
     const pot = this.selectedPot();
     return pot ? sharing(pot.plants, this.catalog()) : null;
