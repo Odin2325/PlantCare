@@ -92,6 +92,31 @@ describe('Space planner', () => {
     expect(button('left').disabled).toBe(true);
   });
 
+  it('restores the last removed pot with its plantings and clears undo when changing layouts', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addPot();
+    page.addPlant('basil');
+    const original = page.selectedPot()!;
+    fixture.detectChanges();
+    const action = (label: string) => Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>)
+      .find(button => button.textContent?.trim() === label);
+    action('Remove item')!.click();
+    fixture.detectChanges();
+    expect(page.plan().pots).toHaveLength(0);
+    expect(fixture.nativeElement.querySelector('[role="status"]').textContent).toContain('Removed Pot 1');
+    action('Undo removal')!.click();
+    fixture.detectChanges();
+    expect(page.selectedPot()).toEqual(original);
+    expect(action('Undo removal')).toBeUndefined();
+
+    action('Remove item')!.click();
+    page.addPlan();
+    fixture.detectChanges();
+    expect(action('Undo removal')).toBeUndefined();
+    expect(page.plan().pots).toHaveLength(0);
+  });
+
   it('explains why it cannot suggest a light zone', () => {
     const page = setup().componentInstance;
     page.addPot();

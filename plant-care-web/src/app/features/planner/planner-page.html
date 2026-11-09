@@ -86,6 +86,15 @@
 
     <section class="panel inspector" aria-labelledby="edit-heading">
       <h2 id="edit-heading">Edit and check</h2>
+      @if (removedItem(); as removed) {
+        <div class="assessment">
+          <p role="status">
+            Removed {{ removed.item.name }}.
+            @if (!canRestoreItem()) { Remove an item of the same type to make room. }
+          </p>
+          <button type="button" [disabled]="!canRestoreItem()" (click)="restoreItem()">Undo removal</button>
+        </div>
+      }
       @if (item(); as selected) {
         <label>Item name<input maxlength="60" [value]="selected.name" (change)="renameItem($any($event.target).value)"></label>
         <div class="fields">

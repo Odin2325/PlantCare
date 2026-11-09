@@ -58,6 +58,12 @@ export class PlannerPage {
   readonly planId = signal(this.plans()[0].id);
   readonly plan = computed(() => this.plans().find(plan => plan.id === this.planId()) ?? this.plans()[0]);
   readonly selection = signal<{ kind: 'shape' | 'pot'; id: string } | null>(null);
+  readonly removedItem = signal<{ item: Shape | Pot; index: number } | null>(null);
+  readonly canRestoreItem = computed(() => {
+    const removed = this.removedItem();
+    if (!removed) return false;
+    return 'kind' in removed.item ? this.plan().shapes.length < maxShapes : this.plan().pots.length < maxPots;
+  });
   readonly selectedShape = computed(() => this.selection()?.kind === 'shape'
     ? this.plan().shapes.find(shape => shape.id === this.selection()?.id) : undefined);
   readonly selectedPot = computed(() => this.selection()?.kind === 'pot'
@@ -181,7 +187,11 @@ export class PlannerPage {
     this.save(this.plans().map(plan => plan.id === id ? { ...plan, ...patch } : plan));
   }
 
-  switchPlan(id: string): void { this.planId.set(id); this.clearSelection(); }
+  switchPlan(id: string): void {
+    if (id !== this.planId()) this.removedItem.set(null);
+    this.planId.set(id);
+    this.clearSelection();
+  }
   addPlan(): void {
     if (this.plans().length >= maxPlans) return;
     const plan = newPlan();
@@ -245,11 +255,36 @@ export class PlannerPage {
     this.select('pot', pot.id);
   }
   removeItem(): void {
-    const item = this.selection();
+    const item = this.item();
     if (!item) return;
-    if (item.kind === 'shape') this.update({ shapes: this.plan().shapes.filter(shape => shape.id !== item.id) });
-    else this.update({ pots: this.plan().pots.filter(pot => pot.id !== item.id) });
+    if ('kind' in item) {
+      const shapes = this.plan().shapes;
+      this.removedItem.set({ item, index: shapes.indexOf(item) });
+      this.update({ shapes: shapes.filter(shape => shape.id !== item.id) });
+    } else {
+      const pots = this.plan().pots;
+      this.removedItem.set({ item, index: pots.indexOf(item) });
+      this.update({ pots: pots.filter(pot => pot.id !== item.id) });
+    }
     this.clearSelection();
+  }
+
+  restoreItem(): void {
+    const removed = this.removedItem();
+    if (!removed || !this.canRestoreItem()) return;
+    const { item, index } = removed;
+    if ('kind' in item) {
+      const shapes = [...this.plan().shapes];
+      shapes.splice(index, 0, item);
+      this.update({ shapes });
+      this.select('shape', item.id);
+    } else {
+      const pots = [...this.plan().pots];
+      pots.splice(index, 0, item);
+      this.update({ pots });
+      this.select('pot', item.id);
+    }
+    this.removedItem.set(null);
   }
   renameItem(name: string): void { this.updateItem({ name: name.trim().slice(0, 60) || 'Unnamed item' }); }
   setRole(role: Shape['role']): void { this.updateShape({ role }); }
