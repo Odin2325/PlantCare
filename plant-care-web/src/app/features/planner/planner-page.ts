@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, linkedSignal, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
@@ -13,6 +13,7 @@ const maxPlans = 12;
 const maxShapes = 40;
 const maxPots = 40;
 const maxPlants = 8;
+const choicePageSize = 12;
 const newPlan = (): Plan => ({ id: crypto.randomUUID(), name: 'My space', setting: 'indoor', shapes: [], pots: [] });
 
 function validBounds(value: Bounds): boolean {
@@ -92,8 +93,13 @@ export class PlannerPage {
           ? 'Same catalog light needs. Check soil moisture and root space.'
           : 'Some catalog light needs are unknown.' };
       })
-      .filter(choice => !companionsOnly || choice.potential)
-      .slice(0, 12);
+      .filter(choice => !companionsOnly || choice.potential);
+  });
+  readonly choicePage = linkedSignal({ source: this.choices, computation: () => 0 });
+  readonly choicePageCount = computed(() => Math.ceil(this.choices().length / choicePageSize));
+  readonly visibleChoices = computed(() => {
+    const start = this.choicePage() * choicePageSize;
+    return this.choices().slice(start, start + choicePageSize);
   });
   readonly potLight = computed(() => {
     const pot = this.selectedPot();

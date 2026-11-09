@@ -22,11 +22,11 @@ const cold: PlantSpecies = { ...basil, id: 'cold', commonName: 'Cold fixture',
   minimumTemperatureCelsius: null, maximumTemperatureCelsius: 8 };
 const unknown: PlantSpecies = { ...basil, id: 'unknown', commonName: 'Unknown fixture', sunlightRequirement: 'Unknown' };
 
-function setup(owner = 'planner-test-owner') {
+function setup(owner = 'planner-test-owner', species = [basil, fern, cold, unknown]) {
   TestBed.configureTestingModule({ providers: [
     provideRouter([]),
     { provide: AuthService, useValue: { currentUser: () => ({ id: owner }) } },
-    { provide: PlantSpeciesApiService, useValue: { getAll: () => of([basil, fern, cold, unknown]) } },
+    { provide: PlantSpeciesApiService, useValue: { getAll: () => of(species) } },
   ] });
   return TestBed.createComponent(PlannerPage);
 }
@@ -95,6 +95,35 @@ describe('Space planner', () => {
     expect(page.choices().map(choice => choice.plant.id)).toEqual(['basil']);
     expect(page.choices()[0].preview).toContain('Check soil moisture');
     expect(page.selectedPot()?.plants).toHaveLength(1);
+  });
+
+  it('shows later plant matches and resets paging when the search changes', () => {
+    const species = Array.from({ length: 13 }, (_, index) => ({
+      ...basil, id: String(index), commonName: 'Basil ' + (index + 1),
+    }));
+    const fixture = setup(undefined, species);
+    const page = fixture.componentInstance;
+    page.addPot();
+    fixture.detectChanges();
+    const search = fixture.nativeElement.querySelector('input[type="search"]') as HTMLInputElement;
+    const buttons = () => Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>);
+    const searchFor = (value: string) => {
+      search.value = value;
+      search.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+    };
+    const resultLabels = () => buttons().map(button => button.textContent?.trim())
+      .filter(label => label?.startsWith('Add Basil'));
+
+    searchFor('Basil');
+    expect(resultLabels()).toHaveLength(12);
+    buttons().find(button => button.textContent?.trim() === 'Next plants')!.click();
+    fixture.detectChanges();
+    expect(resultLabels()).toEqual(['Add Basil 13']);
+
+    searchFor('Basil 3');
+    expect(page.choicePage()).toBe(0);
+    expect(resultLabels()).toEqual(['Add Basil 3']);
   });
 
   it('moves a planting once, keeping its identity and moisture preference', () => {

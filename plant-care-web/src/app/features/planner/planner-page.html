@@ -130,7 +130,7 @@
           }
           @if (query().trim() || (matchLight() && potLight()) || companionsOnly()) {
             <ul class="plant-list">
-              @for (choice of choices(); track choice.plant.id) {
+              @for (choice of visibleChoices(); track choice.plant.id) {
                 @let candidate = choice.plant;
                 <li>
                   <button type="button" (click)="addPlant(candidate.id)">Add {{ candidate.commonName }} @if (candidate.catalogProfile?.cultivarName; as cultivar) { · {{ cultivar }} }</button>
@@ -140,6 +140,15 @@
                 <li>{{ companionsOnly() ? 'No candidates match the known needs and selected filters.' : 'No matching catalog plants.' }}</li>
               }
             </ul>
+            @if (choicePageCount() > 1) {
+              <div class="actions" role="group" aria-label="Plant result pages">
+                <button type="button" [disabled]="choicePage() === 0"
+                  (click)="choicePage.set(choicePage() - 1)">Previous plants</button>
+                <button type="button" [disabled]="choicePage() + 1 === choicePageCount()"
+                  (click)="choicePage.set(choicePage() + 1)">Next plants</button>
+              </div>
+              <small role="status">Page {{ choicePage() + 1 }} of {{ choicePageCount() }} · {{ choices().length }} matching plants</small>
+            }
           }
         }
         @for (plant of pot.plants; track plant.id) {
