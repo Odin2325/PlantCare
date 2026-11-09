@@ -2798,5 +2798,33 @@
     "bytes": 137955,
     "sourceFileName": "Okra -- Abelmoschus esculentus.jpg",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Harvested Topaz apples with red-blushed skin",
+    "caption": "Apfel-Topaz",
+    "credit": "© Superbass / CC-BY-SA-4.0 (via Wikimedia Commons)",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-apple-topaz",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Apfel-Topaz.jpg",
+    "path": "/images/plants/cultivar-apple-topaz.jpg",
+    "sha256": "16a686e2a4d21bced6f426114db72a6881fa4395099f3b7ce5a75d983c195fb7",
+    "bytes": 138188,
+    "sourceFileName": "Apfel-Topaz.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Sarpo Mira potato plant growing in a field",
+    "caption": "Solanum tuberosum Sarpo Mira",
+    "credit": "Ordercrazy (Thomas Springer)",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "licenseName": "CC0 1.0",
+    "slug": "cultivar-potato-sarpo-mira",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solanum_tuberosum_Sarpo_Mira.jpg",
+    "path": "/images/plants/cultivar-potato-sarpo-mira.jpg",
+    "sha256": "1e8e5a258a93fe1e7e55bbc677a777eadc8b26bd8666f5e022db8a3d92ae7f56",
+    "bytes": 170943,
+    "sourceFileName": "Solanum tuberosum Sarpo Mira.jpg",
+    "changes": "Wikimedia-provided 500-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]

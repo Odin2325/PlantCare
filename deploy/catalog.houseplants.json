@@ -9572,5 +9572,217 @@
       "cultivarName": "Clemson Spineless",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Apple tree (Topaz)",
+    "scientificName": "Malus domestica 'Topaz'",
+    "description": "A Czech dessert apple with crisp flesh and an orange-red blush. The breeder selected it for resistance to apple scab.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Water the root zone during dry periods while establishing. Check soil and rainfall rather than watering automatically.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil with enough space for the chosen rootstock.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://applebreeding.ueb.cas.cz/variety-topaz/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose a rootstock sized for your space. Topaz flowers in mid-season, so check that a compatible nearby apple flowers at the same time. Keep seeds, stems and leaves away from pets.",
+      "harvestInstructions": "Pick when the fruit separates with a gentle lift and twist. Check several apples as they ripen and set sound fruit aside for storage.",
+      "photo": {
+        "path": "/images/plants/cultivar-apple-topaz.jpg",
+        "altText": "Harvested Topaz apples with red-blushed skin",
+        "credit": "© Superbass / CC-BY-SA-4.0 (via Wikimedia Commons)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Apfel-Topaz.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Apfel-Topaz"
+      },
+      "cultivarName": "Topaz",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Topaz apple",
+        "Topaz dessert apple"
+      ]
+    }
+  },
+  {
+    "commonName": "Peach tree (Redhaven)",
+    "scientificName": "Prunus persica 'Redhaven'",
+    "description": "A self-fertile peach with yellow flesh that separates readily from the stone when ripe.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide full sun in a warm, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/131862/prunus-persica-redhaven-f/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Give the tree a warm sheltered site in full sun. Protect early blossom from frost and thin crowded young fruit so the remaining peaches have room to develop.",
+      "harvestInstructions": "Check for a ripe background colour and a little give. Lift ripe fruit gently to avoid bruising and keep the stones away from pets.",
+      "photo": null,
+      "cultivarName": "Redhaven",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Redhaven peach",
+        "Red Haven peach"
+      ]
+    }
+  },
+  {
+    "commonName": "Peach tree (Avalon Pride)",
+    "scientificName": "Prunus persica 'Avalon Pride'",
+    "description": "A yellow-fleshed peach with red-blushed fruit and pink spring blossom.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide full sun in a warm, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Adjust to rainfall, season, root establishment and container size; let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; avoid waterlogged roots.",
+    "humidityInstructions": "Allow airflow around the plant and avoid persistently wet foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/269018/prunus-persica-avalon-pride-f/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Use a sunny, sheltered position with free drainage. Protect blossom from frost where practical and water during dry spells while the fruit is developing.",
+      "harvestInstructions": "Pick gently once the peach gives slightly and comes away from the branch. Keep peach stones away from pets.",
+      "photo": null,
+      "cultivarName": "Avalon Pride",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Avalon Pride peach",
+        "Avalon Pride peach tree"
+      ]
+    }
+  },
+  {
+    "commonName": "Blackcurrant (Ben Hope)",
+    "scientificName": "Ribes nigrum 'Ben Hope'",
+    "description": "An upright blackcurrant that ripens later in the season and bears long clusters of medium-sized berries.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered position for good fruiting.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering. Water young plants and containers when needed, adjusting to rainfall and season.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use fertile, moisture-retentive but well-drained soil; keep mulch clear of stem bases.",
+    "humidityInstructions": "Provide air circulation and avoid persistently waterlogged roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/227435/ribes-nigrum-ben-hope/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Allow room for the upright bush and keep the root zone moist while it establishes. Remove some of the oldest stems during dormant pruning to renew fruiting wood.",
+      "harvestInstructions": "Taste a few fully coloured berries to check ripeness before picking whole clusters. Protect the crop from birds as it ripens.",
+      "commonNameAliases": [
+        "Ben Hope blackcurrant",
+        "Black currant Ben Hope"
+      ],
+      "photo": null,
+      "cultivarName": "Ben Hope",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Raspberry (Tulameen)",
+    "scientificName": "Rubus idaeus 'Tulameen'",
+    "description": "A late summer-fruiting raspberry with upright, spine-free canes and a long picking window.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the root zone moist with good drainage; check more frequently during fruit development and dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil, with mulch kept away from the cane bases.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/129074/rubus-idaeus-tulameen-f/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Tie canes to supports where needed. After harvest, remove the canes that fruited and keep this year's new canes for next season.",
+      "harvestInstructions": "Pick fully coloured berries as they release from the core with a light pull. Return every few days during ripening.",
+      "photo": null,
+      "cultivarName": "Tulameen",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Tulameen raspberry",
+        "Tulameen red raspberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Potato (Sarpo Mira)",
+    "scientificName": "Solanum tuberosum 'Sarpo Mira'",
+    "description": "A late maincrop potato with red skin and floury flesh. It has resistance to potato blight and needs a longer growing season than early salad potatoes.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil moisture even during tuber development without saturating the bed or container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use loose, well-drained soil and room for the tubers to develop.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/198017/solanum-tuberosum-sarpo-mira/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Start from certified seed potatoes. Allow room for the vigorous foliage and mound soil around the stems to keep developing tubers covered from light.",
+      "harvestInstructions": "For storage, lift once the foliage has died back and the skins have set. Discard green or spoiled tubers and never eat the foliage or berries.",
+      "photo": {
+        "path": "/images/plants/cultivar-potato-sarpo-mira.jpg",
+        "altText": "Sarpo Mira potato plant growing in a field",
+        "credit": "Ordercrazy (Thomas Springer)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solanum_tuberosum_Sarpo_Mira.jpg",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "Solanum tuberosum Sarpo Mira"
+      },
+      "cultivarName": "Sarpo Mira",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Sarpo Mira potato",
+        "Sárpo Mira"
+      ]
+    }
   }
 ]

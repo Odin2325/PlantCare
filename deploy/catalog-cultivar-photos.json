@@ -1078,5 +1078,59 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Malus domestica 'Topaz'",
+    "cultivarName": "Topaz",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-apple-topaz.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Apfel-Topaz.jpg",
+    "identityEvidence": "The source photograph description identifies Topaz by cultivar name.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Prunus persica 'Redhaven'",
+    "cultivarName": "Redhaven",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Prunus persica 'Avalon Pride'",
+    "cultivarName": "Avalon Pride",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Ribes nigrum 'Ben Hope'",
+    "cultivarName": "Ben Hope",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Rubus idaeus 'Tulameen'",
+    "cultivarName": "Tulameen",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Sarpo Mira'",
+    "cultivarName": "Sarpo Mira",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-sarpo-mira.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solanum_tuberosum_Sarpo_Mira.jpg",
+    "identityEvidence": "The source photograph description identifies Sarpo Mira by cultivar name.",
+    "reviewedOn": "2026-11-09"
   }
 ]
