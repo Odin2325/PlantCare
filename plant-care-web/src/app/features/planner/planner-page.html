@@ -37,7 +37,9 @@
           <button type="button" class="map-item shape" [class.circle]="shape.kind === 'circle'"
             [class.zone]="shape.role === 'light'" [class.obstacle]="shape.role === 'obstacle'"
             [attr.data-light]="shape.role === 'light' ? shape.light : null" [style]="box(shape)"
-            [attr.aria-label]="'Select shape ' + shape.name" [attr.aria-pressed]="selectedShape()?.id === shape.id"
+            [attr.aria-label]="'Select shape ' + shape.name + ' · ' +
+              (shape.role === 'light' ? lightLabel(shape.light) : shape.role === 'obstacle' ? 'Obstacle' : 'Space boundary')"
+            [attr.aria-pressed]="selectedShape()?.id === shape.id"
             (click)="select('shape', shape.id)"><span>{{ shape.name }}</span></button>
         }
         @for (pot of plan().pots; track pot.id) {
@@ -55,6 +57,19 @@
             (click)="place($event, surface)"></button>
         }
       </div>
+      <details class="map-legend">
+        <summary>Map legend</summary>
+        <ul>
+          <li><span class="legend-key" aria-hidden="true"></span>Space boundary</li>
+          <li><span class="legend-key obstacle" aria-hidden="true"></span>Obstacle or furniture</li>
+          <li><span class="legend-key pot circle" aria-hidden="true"></span>Pot</li>
+          <li><span class="legend-key suggested circle" aria-hidden="true"></span>Suggested pot position</li>
+          @for (option of lights; track option.value) {
+            <li><span class="legend-key zone" [attr.data-light]="option.value" aria-hidden="true"></span>{{ option.label }}</li>
+          }
+          <li><span class="legend-key zone" aria-hidden="true"></span>Light level unset</li>
+        </ul>
+      </details>
       @if (placing()) { <p role="status">Tap where the selected item's top-left corner should go.</p> }
       @if (plan().shapes.length || plan().pots.length) {
         <label class="item-list">Edit map item<select [value]="selection()?.id ?? ''"

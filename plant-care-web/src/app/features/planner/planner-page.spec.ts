@@ -57,6 +57,9 @@ describe('Space planner', () => {
     fixture.detectChanges();
     const move = Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>)
       .find(button => button.textContent?.trim() === 'Move to suggested spot');
+    expect(fixture.nativeElement.querySelector('.map-legend').textContent).toContain('Suggested pot position');
+    expect(fixture.nativeElement.querySelector('.map-legend [data-light="FullSun"]').parentElement.textContent).toContain('Full direct sun');
+    expect(fixture.nativeElement.querySelector('.map [data-light="FullSun"]').getAttribute('aria-label')).toContain('Full direct sun');
     expect(fixture.nativeElement.querySelector('.assessment').textContent).toContain('This pot overlaps the obstacle “Shelf”.');
     expect(fixture.nativeElement.querySelector('.suggestion-marker')).not.toBeNull();
     expect(move).toBeDefined();
