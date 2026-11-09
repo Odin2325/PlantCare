@@ -282,14 +282,24 @@ export class PlannerPage {
     this.updateItem(next);
   }
 
+  private moveItem(item: Bounds, x: number, y: number): void {
+    this.updateItem({
+      x: Math.max(0, Math.min(columns - item.width, x)),
+      y: Math.max(0, Math.min(rows - item.height, y)),
+    });
+  }
+
+  nudge(dx: number, dy: number): void {
+    const item = this.item();
+    if (item) this.moveItem(item, item.x + dx, item.y + dy);
+  }
+
   place(event: MouseEvent, surface: HTMLButtonElement): void {
     const item = this.item();
     if (!item || event.detail === 0) return;
     const rect = surface.getBoundingClientRect();
-    this.updateItem({
-      x: Math.max(0, Math.min(columns - item.width, Math.floor((event.clientX - rect.left) / rect.width * columns))),
-      y: Math.max(0, Math.min(rows - item.height, Math.floor((event.clientY - rect.top) / rect.height * rows))),
-    });
+    this.moveItem(item, Math.floor((event.clientX - rect.left) / rect.width * columns),
+      Math.floor((event.clientY - rect.top) / rect.height * rows));
     this.placing.set(false);
   }
   applySuggestion(): void {

@@ -98,6 +98,12 @@
             <label>Height<input #height type="number" min="1" [max]="rows" [value]="selected.height" (change)="changeBounds('height', height)"></label>
           }
         </div>
+        <div class="actions" role="group" aria-label="Move selected item one grid square">
+          <button type="button" aria-label="Move left" [disabled]="selected.x === 0" (click)="nudge(-1, 0)">←</button>
+          <button type="button" aria-label="Move right" [disabled]="selected.x + selected.width === columns" (click)="nudge(1, 0)">→</button>
+          <button type="button" aria-label="Move up" [disabled]="selected.y === 0" (click)="nudge(0, -1)">↑</button>
+          <button type="button" aria-label="Move down" [disabled]="selected.y + selected.height === rows" (click)="nudge(0, 1)">↓</button>
+        </div>
         <div class="actions">
           <button type="button" [attr.aria-pressed]="placing()" (click)="placing.set(!placing())">{{ placing() ? 'Cancel placement' : 'Place on map' }}</button>
           <button type="button" (click)="removeItem()">Remove item</button>

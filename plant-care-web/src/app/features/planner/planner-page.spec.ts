@@ -72,6 +72,26 @@ describe('Space planner', () => {
     expect(fixture.nativeElement.querySelector('.assessment').textContent).not.toContain('Shelf');
   });
 
+  it('moves the selected item one square with the direction buttons', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addPot();
+    fixture.detectChanges();
+    const button = (direction: string): HTMLButtonElement =>
+      fixture.nativeElement.querySelector('button[aria-label="Move ' + direction + '"]');
+
+    expect(button('left').disabled).toBe(true);
+    expect(button('up').disabled).toBe(true);
+    button('right').click();
+    button('down').click();
+    fixture.detectChanges();
+    expect(page.selectedPot()).toMatchObject({ x: 1, y: 1, width: 2, height: 2 });
+    button('left').click();
+    fixture.detectChanges();
+    expect(page.selectedPot()?.x).toBe(0);
+    expect(button('left').disabled).toBe(true);
+  });
+
   it('explains why it cannot suggest a light zone', () => {
     const page = setup().componentInstance;
     page.addPot();
