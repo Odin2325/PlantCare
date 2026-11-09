@@ -17,7 +17,9 @@ retain their respective licenses.
 ## Release preparation
 
 The [current milestone plan](docs/release/current-milestones.md) separates completed
-staging work from the remaining release and feature steps.
+staging work from the remaining release and feature steps. The
+[app audit and improvement plan](docs/release/app-audit-and-improvement-plan.md)
+prioritizes the next staging batch, OVH reliability, store delivery and advertising.
 
 Start with the [v1 acceptance checklist](docs/release/v1-acceptance.md),
 then follow the [staging runbook](docs/release/staging.md).
