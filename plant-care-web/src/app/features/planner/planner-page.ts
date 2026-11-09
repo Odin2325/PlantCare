@@ -110,9 +110,14 @@ export class PlannerPage {
   readonly layoutChecks = computed(() => {
     const plan = this.plan();
     const catalog = this.catalog();
-    return plan.pots.map(pot => ({ pot, ...checkPotPosition(plan, pot, catalog) }));
+    return plan.pots.map(pot => {
+      const position = checkPotPosition(plan, pot, catalog);
+      const companions = sharing(pot.plants, catalog);
+      const companionIssue = companions?.status === 'possible' ? null : companions;
+      return { pot, position, companionIssue, needsReview: position.status === 'review' || !!companionIssue };
+    });
   });
-  readonly layoutReviewCount = computed(() => this.layoutChecks().filter(check => check.status === 'review').length);
+  readonly layoutReviewCount = computed(() => this.layoutChecks().filter(check => check.needsReview).length);
   readonly potLight = computed(() => {
     const pot = this.selectedPot();
     return pot ? lightAt(this.plan(), pot) : null;

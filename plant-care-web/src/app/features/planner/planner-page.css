@@ -38,6 +38,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .map-legend, .layout-check { margin-top: .65rem; font-size: .9rem; }
 .map-legend summary, .layout-check summary { min-height: 2.75rem; align-content: center; cursor: pointer; font-weight: 650; }
 .layout-check button[aria-pressed="true"] { border-color: #22573e; background: #e3f0e7; }
+.layout-companion-issue { display: block; margin-top: .2rem; }
 .map-legend ul { display: flex; flex-wrap: wrap; gap: .45rem .85rem; list-style: none; padding: 0; margin: .25rem 0 .75rem; }
 .map-legend li { display: flex; align-items: center; gap: .35rem; }
 .legend-key.pot { background: #42785a; border: 1px solid #184830; }

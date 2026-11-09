@@ -78,7 +78,12 @@
               <li>
                 <button type="button" [attr.aria-pressed]="selectedPot()?.id === check.pot.id"
                   (click)="select('pot', check.pot.id)">{{ check.pot.name }}</button>
-                <span>{{ check.detail }}</span>
+                <div>
+                  <span>{{ check.position.detail }}</span>
+                  @if (check.companionIssue; as issue) {
+                    <small class="layout-companion-issue">{{ issue.label }}. {{ issue.detail }}</small>
+                  }
+                </div>
               </li>
             }
           </ul>

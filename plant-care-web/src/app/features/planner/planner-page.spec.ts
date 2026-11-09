@@ -138,6 +138,30 @@ describe('Space planner', () => {
     expect(page.selectedPot()?.name).toBe('Pot 1');
   });
 
+  it('counts shared-pot conflicts even when the current light matches', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    page.addPot();
+    page.addPlant('basil');
+    page.addPlant('basil');
+    const [first, second] = page.selectedPot()!.plants;
+    page.setMoisture(first.id, 'moist');
+    page.setMoisture(second.id, 'dry');
+    fixture.detectChanges();
+
+    const checklist = fixture.nativeElement.querySelector('.layout-check');
+    expect(checklist.querySelector('summary').textContent).toContain('1 to review');
+    expect(checklist.textContent).toContain('Matches the catalog light needs.');
+    expect(checklist.textContent).toContain('Different needs for soil moisture.');
+    page.setMoisture(second.id, 'moist');
+    fixture.detectChanges();
+    expect(checklist.querySelector('summary').textContent).toContain('0 to review');
+    expect(checklist.querySelector('.layout-companion-issue')).toBeNull();
+  });
+
   it('explains why it cannot suggest a light zone', () => {
     const page = setup().componentInstance;
     page.addPot();
