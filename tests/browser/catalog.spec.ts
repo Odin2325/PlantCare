@@ -2,7 +2,12 @@ import { openCatalogTools } from './ui-controls';
 import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
-test('garden catalog categories combine with search and preserve navigation and comparison', async ({ page }) => {
+test('garden catalog categories combine with search and preserve navigation and comparison', async ({ page, request }) => {
+  const response = await request.get('/api/plant-species');
+  expect(response.ok()).toBe(true);
+  const species: { catalogProfile?: { categories?: string[]; cultivarName?: string } }[] = await response.json();
+  const categoryCount = (category: string, cultivarsOnly = false) => species.filter(plant =>
+    plant.catalogProfile?.categories?.includes(category) && (!cultivarsOnly || plant.catalogProfile.cultivarName)).length;
   const categoryLabels: Record<string,string> = { '': 'All plants', houseplant: 'Houseplants', fruit: 'Fruit', vegetable: 'Vegetables', 'root-tuber': 'Roots & tubers', herb: 'Herbs', tree: 'Trees' };
   const categoryLink = (value: string) => page.getByRole('navigation', { name: 'Catalog categories' }).getByRole('link', { name: categoryLabels[value], exact: true });
   await page.goto('/plants?category=tree&kind=general'); await openCatalogTools(page);
@@ -16,17 +21,15 @@ test('garden catalog categories combine with search and preserve navigation and 
   await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
   await expect(page.getByLabel('Entry type', { exact: true })).toHaveValue('general');
   await page.getByLabel('Entry type', { exact: true }).selectOption('');
-  for (const [category, count] of [['houseplant', 107], ['fruit', 49], ['vegetable', 82], ['root-tuber', 31], ['herb', 19]] as const) {
+  for (const category of ['houseplant', 'fruit', 'vegetable', 'root-tuber', 'herb']) {
     await categoryLink(category).click();
-    await expect(page.locator('.plant-card')).toHaveCount(count);
+    await expect(page.locator('.plant-card')).toHaveCount(categoryCount(category));
   }
   await page.getByLabel('Entry type', { exact: true }).selectOption('cultivar');
-  await categoryLink('houseplant').click();
-  await expect(page.locator('.plant-card')).toHaveCount(2);
-  await categoryLink('fruit').click();
-  await expect(page.locator('.plant-card')).toHaveCount(38);
-  await categoryLink('root-tuber').click();
-  await expect(page.locator('.plant-card')).toHaveCount(27);
+  for (const category of ['houseplant', 'fruit', 'root-tuber']) {
+    await categoryLink(category).click();
+    await expect(page.locator('.plant-card')).toHaveCount(categoryCount(category, true));
+  }
   await page.getByLabel('Entry type', { exact: true }).selectOption('general');
   await categoryLink('fruit').click();
   await page.getByRole('searchbox', { name: 'Find a plant', exact: true }).fill('Fig tree');
@@ -51,17 +54,17 @@ test('garden catalog categories combine with search and preserve navigation and 
 test('garden catalog crop profiles distinguish cultivars and show sourced harvest guidance', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   const garden = species.filter((p: any) => p.catalogProfile?.harvestInstructions);
-  expect(garden).toHaveLength(189);
-  expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(3);
-  expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(4);
+  expect(garden).toHaveLength(194);
+  expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(6);
+  expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(6);
   for (const plant of garden) {
     expect(plant.catalogProfile.categories.length).toBeGreaterThan(0);
     expect(plant.catalogProfile.harvestInstructions.length).toBeGreaterThan(0);
     expect(plant.defaultFertilizingIntervalDays).toBeNull();
   }
-  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(152);
+  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(157);
   // Exercise this batch and representative regressions; API assertions above cover every profile.
-  for (const name of ["Cherry tomato (Tiny Tim)", "Potato", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Kale (Red Russian)", "Crisphead lettuce (Great Lakes 118)"]) {
+  for (const name of ["Cherry tomato (Tiny Tim)", "Potato", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Plum tomato (San Marzano)", "Sweet pepper (Corno di Toro Rosso)"]) {
     const plant = species.find((p: any) => p.commonName === name);
     expect(plant).toBeTruthy();
     await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]); await openCatalogTools(page);
@@ -88,7 +91,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: unknown }) => plant.catalogProfile);
-  expect(reviewed).toHaveLength(301);
+  expect(reviewed).toHaveLength(306);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {

@@ -10669,5 +10669,173 @@
         "Burgundy rubber tree"
       ]
     }
+  },
+  {
+    "commonName": "Plum tomato (San Marzano)",
+    "scientificName": "Solanum lycopersicum 'San Marzano'",
+    "description": "A plum tomato with elongated fruit suited to cooking and sauces.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix consistently moist while allowing excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, freely draining soil or a generous drained container.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/304425/solanum-lycopersicum-san-marzano-tomato-san-marzano/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start under cover and plant out after frost risk passes. Support the upright stems as they grow and keep moisture steady while fruit develops.",
+      "harvestInstructions": "Pick sound fruit once it turns fully red. Leave leaves and stems out of the harvest.",
+      "commonNameAliases": [
+        "San Marzano tomato",
+        "San Marzano plum tomato"
+      ],
+      "photo": {
+        "path": "/images/plants/cultivar-plum-tomato-san-marzano.jpg",
+        "altText": "Elongated red fruit of the San Marzano tomato cultivar",
+        "credit": "Frank C. Müller",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tomatensorte_San_Marzano_01_(fcm).jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Tomatensorte San Marzano 01 (fcm)"
+      },
+      "cultivarName": "San Marzano",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Tomato (Moneymaker)",
+    "scientificName": "Solanum lycopersicum 'Moneymaker'",
+    "description": "A cordon tomato with round red fruit for slicing and salads.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check soil moisture regularly and keep it even, watering the soil rather than the foliage. Containers can dry quickly in warm weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil or a large pot with drainage.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/327922/solanum-lycopersicum-moneymaker/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Use a sunny, sheltered site and a tall stake or string. Train one main stem by pinching out side shoots, and water evenly as the fruit swells.",
+      "harvestInstructions": "Pick firm, fully red tomatoes. Harvest regularly as the trusses ripen.",
+      "commonNameAliases": [
+        "Moneymaker tomato",
+        "Money Maker tomato"
+      ],
+      "photo": null,
+      "cultivarName": "Moneymaker",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Cherry tomato (Sungold)",
+    "scientificName": "Solanum lycopersicum 'Sungold'",
+    "description": "A vigorous hybrid cherry tomato that ripens to orange.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the root zone evenly moist with free drainage; check containers often in warm weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a drained container filled with fertile growing mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.tozerseeds.com/wp-content/uploads/2021/10/Tomato-Sungold-F1-2021.pdf",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Provide tall support for the climbing stems. Grow in a warm, sunny spot and water consistently, especially in containers.",
+      "harvestInstructions": "Pick individual tomatoes once their colour deepens to orange. Check ripening trusses frequently.",
+      "commonNameAliases": [
+        "Sungold cherry tomato",
+        "Sun Gold tomato"
+      ],
+      "photo": null,
+      "cultivarName": "Sungold",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Sweet pepper (Corno di Toro Rosso)",
+    "scientificName": "Capsicum annuum 'Corno di Toro Rosso'",
+    "description": "A sweet pepper with long, tapered fruit that ripens red.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil evenly moist with good drainage; avoid letting containers dry completely.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil in a warm position or a drained container.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.allianceofnativeseedkeepers.com/products/pepper-seeds-sweet-pepper-corno-di-toro-rosso",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start seed in warmth. Move plants to a sunny, sheltered bed or large pot when nights have warmed, and stake stems if heavy fruit pulls them down.",
+      "harvestInstructions": "Clip fruits from the stem. Let them reach full red colour for a sweeter harvest.",
+      "photo": null,
+      "cultivarName": "Corno di Toro Rosso",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Corno di Toro Rosso pepper",
+        "Red bull’s horn pepper"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet pepper (Lunchbox Red Improved)",
+    "scientificName": "Capsicum annuum 'Lunchbox Red Improved'",
+    "description": "A snack pepper grown for small, sweet fruits that mature red.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep soil evenly moist with good drainage; avoid letting containers dry completely.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, well-drained soil in a warm position or a drained container.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-peppers/lunchbox-red-improved-organic-snack-pepper-seed-5452G.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in a warm, sunny position with steady moisture and free drainage. Support fruiting branches if they begin to bend.",
+      "harvestInstructions": "Cut the small fruits when they are firm and fully red. Leave ripening fruits on the plant until they colour.",
+      "photo": null,
+      "cultivarName": "Lunchbox Red Improved",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Lunchbox Red Improved pepper",
+        "Lunchbox Red Improved snack pepper"
+      ]
+    }
   }
 ]

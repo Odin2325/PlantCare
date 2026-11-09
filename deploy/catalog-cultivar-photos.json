@@ -1366,5 +1366,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Solanum lycopersicum 'San Marzano'",
+    "cultivarName": "San Marzano",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-plum-tomato-san-marzano.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tomatensorte_San_Marzano_01_(fcm).jpg",
+    "identityEvidence": "The source photograph caption or description identifies this exact cultivar.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Solanum lycopersicum 'Moneymaker'",
+    "cultivarName": "Moneymaker",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Solanum lycopersicum 'Sungold'",
+    "cultivarName": "Sungold",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Capsicum annuum 'Corno di Toro Rosso'",
+    "cultivarName": "Corno di Toro Rosso",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Capsicum annuum 'Lunchbox Red Improved'",
+    "cultivarName": "Lunchbox Red Improved",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]
