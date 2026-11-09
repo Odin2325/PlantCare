@@ -29,6 +29,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .obstacle { background: #c4ceca; border-style: solid; }
 .map-item.pot { z-index: 3; border: 1px solid #184830; background: #42785a; color: #fff; font-weight: 750; }
 .map-item.pot[aria-pressed="true"] { z-index: 4; box-shadow: inset 0 0 0 2px white; }
+.suggestion-marker { position: absolute; z-index: 4; pointer-events: none; box-sizing: border-box; border: 2px dashed #095938; background: #ffffff80; }
 .place-surface { position: absolute; inset: 0; z-index: 5; width: 100%; background: #ffffff20; border: 0; cursor: crosshair; }
 .item-list, footer { margin-top: .8rem; }
 .inspector { display: grid; gap: .65rem; }

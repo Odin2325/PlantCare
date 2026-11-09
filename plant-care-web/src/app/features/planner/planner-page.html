@@ -44,6 +44,11 @@
             [attr.aria-label]="'Select pot ' + pot.name" [attr.aria-pressed]="selectedPot()?.id === pot.id"
             (click)="select('pot', pot.id)"><span>{{ pot.plants.length || '•' }}</span></button>
         }
+        @if (suggestion(); as spot) {
+          @if (spot.x !== selectedPot()?.x || spot.y !== selectedPot()?.y) {
+            <div class="suggestion-marker circle" [style]="box(spot)" aria-hidden="true"></div>
+          }
+        }
         @if (placing()) {
           <button #surface type="button" class="place-surface" aria-label="Tap the map to place the selected item. Use coordinate fields for keyboard placement."
             (click)="place($event, surface)"></button>

@@ -56,11 +56,14 @@ describe('Space planner', () => {
     fixture.detectChanges();
     const move = Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>)
       .find(button => button.textContent?.trim() === 'Move to suggested spot');
+    expect(fixture.nativeElement.querySelector('.suggestion-marker')).not.toBeNull();
     expect(move).toBeDefined();
     move!.click();
     expect(page.potBlocked()).toBe(false);
     expect(page.potLight()).toBe('FullSun');
     expect(page.selectedPot()?.x).toBe(2);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.suggestion-marker')).toBeNull();
   });
 
   it('asks for missing moisture data and flags a mismatch in a shared pot', () => {
