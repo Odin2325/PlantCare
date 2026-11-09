@@ -11010,5 +11010,173 @@
         "Desert King fig tree"
       ]
     }
+  },
+  {
+    "commonName": "Strawberry (Senga Sengana)",
+    "scientificName": "Fragaria × ananassa 'Senga Sengana'",
+    "description": "A German-bred strawberry with dark red, aromatic berries.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://sordivaramu.emu.ee/sort/marjakultuurid/maasikas/senga-sengana/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Set the crown at soil level in a sunny, drained bed. Keep the root zone moist as berries develop and lay clean mulch beneath the fruit.",
+      "harvestInstructions": "Pick fully coloured berries with the caps attached. Use the ripe berries fresh or for preserves.",
+      "photo": {
+        "path": "/images/plants/cultivar-strawberry-senga-sengana.jpg",
+        "altText": "Ripe Senga Sengana strawberries in a tray",
+        "credit": "3268zauber",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Erdbeere_Senga_Sengana.JPG",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Erdbeere Senga Sengana"
+      },
+      "cultivarName": "Senga Sengana",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Senga Sengana strawberry",
+        "Senga Sengana garden strawberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Strawberry (Mara des Bois)",
+    "scientificName": "Fragaria × ananassa 'Mara des Bois'",
+    "description": "A repeat-fruiting strawberry grown for small, fragrant berries.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.chicagobotanic.org/plant-information/plant-finder/fragaria-x-ananassa-mara-des-bois-mara-des-bois-strawberry",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Use a sunny bed or a well-drained container. Keep the crown at soil level and check moisture regularly between crops.",
+      "harvestInstructions": "Pick ripe red berries frequently while the plant is fruiting. Handle gently and use soon after picking.",
+      "photo": null,
+      "cultivarName": "Mara des Bois",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Mara des Bois strawberry",
+        "Mara des Bois everbearing strawberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Strawberry (Albion)",
+    "scientificName": "Fragaria × ananassa 'Albion'",
+    "description": "A day-neutral strawberry with firm, elongated berries and a long picking season in suitable weather.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://strawberry.ucdavis.edu/albion",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Choose sun and good drainage, and keep soil evenly moist as flowers and fruit develop. Remove runners if you want the plant to focus on fruit production.",
+      "harvestInstructions": "Pick once the berries are red and ripe, taking the short stem with each berry.",
+      "photo": null,
+      "cultivarName": "Albion",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Albion strawberry",
+        "Albion day-neutral strawberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Blueberry (Pink Lemonade)",
+    "scientificName": "Vaccinium 'Pink Lemonade'",
+    "description": "A blueberry hybrid whose ripe fruit is pink.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use acidic, moisture-retentive, well-drained soil or an ericaceous container mix.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.ars.usda.gov/northeast-area/beltsville-md-barc/beltsville-agricultural-research-center/genetic-improvement-for-fruits-vegetables-laboratory/docs/pink-lemonade-1/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow in acidic, freely draining soil or an ericaceous container mix. Water evenly while berries develop and check local pollinator guidance if fruit set is poor.",
+      "harvestInstructions": "Wait for the fruit to turn pink and come away easily. Taste a sample to judge ripeness.",
+      "photo": null,
+      "cultivarName": "Pink Lemonade",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Pink Lemonade blueberry",
+        "Pink-fruited blueberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Cucumber (Crystal Lemon)",
+    "scientificName": "Cucumis sativus 'Crystal Lemon'",
+    "description": "A climbing cucumber that produces small, round, yellow fruits.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/173947/cucumis-sativus-crystal-lemon/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give the vines support in a warm, sunny spot. Water the root zone regularly as fruits swell, especially in containers.",
+      "harvestInstructions": "Cut the fruit when it is round, yellow and still tender. Pick regularly to keep the plant producing.",
+      "photo": null,
+      "cultivarName": "Crystal Lemon",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Crystal Lemon cucumber",
+        "Crystal Lemon round cucumber"
+      ]
+    }
   }
 ]

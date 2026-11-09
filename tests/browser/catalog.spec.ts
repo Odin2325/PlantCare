@@ -54,7 +54,7 @@ test('garden catalog categories combine with search and preserve navigation and 
 test('garden catalog crop profiles distinguish cultivars and show sourced harvest guidance', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   const garden = species.filter((p: any) => p.catalogProfile?.harvestInstructions);
-  expect(garden).toHaveLength(199);
+  expect(garden).toHaveLength(204);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(6);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(6);
   for (const plant of garden) {
@@ -62,9 +62,9 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
     expect(plant.catalogProfile.harvestInstructions.length).toBeGreaterThan(0);
     expect(plant.defaultFertilizingIntervalDays).toBeNull();
   }
-  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(162);
+  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(167);
   // Exercise this batch and representative regressions; API assertions above cover every profile.
-  for (const name of ["Cherry tomato (Tiny Tim)", "Potato", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Sour cherry tree (North Star)", "Fig tree (Hardy Chicago)"]) {
+  for (const name of ["Cherry tomato (Tiny Tim)", "Potato", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Strawberry (Senga Sengana)", "Cucumber (Crystal Lemon)"]) {
     const plant = species.find((p: any) => p.commonName === name);
     expect(plant).toBeTruthy();
     await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]); await openCatalogTools(page);
@@ -91,7 +91,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: unknown }) => plant.catalogProfile);
-  expect(reviewed).toHaveLength(311);
+  expect(reviewed).toHaveLength(316);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {

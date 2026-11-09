@@ -1456,5 +1456,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Senga Sengana'",
+    "cultivarName": "Senga Sengana",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-strawberry-senga-sengana.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Erdbeere_Senga_Sengana.JPG",
+    "identityEvidence": "The source photograph caption or description identifies this exact cultivar.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Mara des Bois'",
+    "cultivarName": "Mara des Bois",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Fragaria × ananassa 'Albion'",
+    "cultivarName": "Albion",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Vaccinium 'Pink Lemonade'",
+    "cultivarName": "Pink Lemonade",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Cucumis sativus 'Crystal Lemon'",
+    "cultivarName": "Crystal Lemon",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]
