@@ -2854,5 +2854,19 @@
     "bytes": 43874,
     "sourceFileName": "Cebula cukrowa Ailsa Craig.jpg",
     "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Tuscan Blue rosemary plant",
+    "caption": "Rosmarinus officinalis 'Tuscan Blue'1",
+    "credit": "KENPEI",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseName": "CC BY-SA 3.0",
+    "slug": "cultivar-rosemary-tuscan-blue",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_%27Tuscan_Blue%271.jpg",
+    "path": "/images/plants/cultivar-rosemary-tuscan-blue.jpg",
+    "sha256": "775cc586f24f070687b79176e6d8de546d5776b2c10e56b6ab3eae35a5a3ccbf",
+    "bytes": 63817,
+    "sourceFileName": "Rosmarinus officinalis 'Tuscan Blue'1.jpg",
+    "changes": "Wikimedia-provided 500-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]

@@ -1231,5 +1231,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Ocimum basilicum var. purpurascens 'Purple Ruffles'",
+    "cultivarName": "Purple Ruffles",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Ocimum basilicum 'Cinnamon'",
+    "cultivarName": "Cinnamon",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Thymus 'Doone Valley'",
+    "cultivarName": "Doone Valley",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Salvia rosmarinus 'Tuscan Blue'",
+    "cultivarName": "Tuscan Blue",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-rosemary-tuscan-blue.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_%27Tuscan_Blue%271.jpg",
+    "identityEvidence": "The photographer identifies the rosemary as Tuscan Blue in the source description.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Mentha spicata var. crispa 'Moroccan'",
+    "cultivarName": "Moroccan",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]

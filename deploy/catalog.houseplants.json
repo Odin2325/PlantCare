@@ -10156,5 +10156,172 @@
       "cultivarName": "White Icicle",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Basil (Purple Ruffles)",
+    "scientificName": "Ocimum basilicum var. purpurascens 'Purple Ruffles'",
+    "description": "A purple basil with deeply ruffled leaves.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/69873/ocimum-basilicum-var-purpurascens-purple-ruffles/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Plant in warmth and full sun once cold nights have passed. Pinch young shoot tips to encourage branching and keep the mix evenly moist.",
+      "harvestInstructions": "Pick small amounts of healthy leaves and soft tips. Leave enough foliage for the plant to regrow.",
+      "commonNameAliases": [
+        "Purple Ruffles basil",
+        "Purple Ruffles purple basil"
+      ],
+      "photo": null,
+      "cultivarName": "Purple Ruffles",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Basil (Cinnamon)",
+    "scientificName": "Ocimum basilicum 'Cinnamon'",
+    "description": "A basil with green leaves, purple stems and a cinnamon-like scent.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rareseeds.com/products/basil-cinnamon",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Give it a warm, sunny spot and keep the mix moist with good drainage. Pinch growing tips to encourage side shoots.",
+      "harvestInstructions": "Clip leafy tips as needed. If growing mostly for leaves, pinch out flower shoots as they appear.",
+      "photo": null,
+      "cultivarName": "Cinnamon",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Cinnamon basil",
+        "Cinnamon-scented basil"
+      ]
+    }
+  },
+  {
+    "commonName": "Thyme (Doone Valley)",
+    "scientificName": "Thymus 'Doone Valley'",
+    "description": "A low, spreading thyme with small variegated leaves.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a freely draining mix; avoid heavy, persistently wet soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://redbuttegarden.org/plants/species/3131/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Use full sun and free-draining soil. Allow it room to spread and keep the crown clear of wet mulch.",
+      "harvestInstructions": "Snip short leafy sprigs from several places to keep the mat covered. Leave woody stems and some leafy growth intact.",
+      "photo": null,
+      "cultivarName": "Doone Valley",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Doone Valley thyme",
+        "Doone Valley lemon thyme"
+      ]
+    }
+  },
+  {
+    "commonName": "Rosemary (Tuscan Blue)",
+    "scientificName": "Salvia rosmarinus 'Tuscan Blue'",
+    "description": "An upright rosemary with aromatic leaves and blue flowers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a freely draining mix; avoid heavy, persistently wet soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/384285/salvia-rosmarinus-tuscan-blue-ro/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Choose a sunny, sheltered spot and a container or bed with good drainage. Give the upright shoots space and shelter pots from prolonged hard frost.",
+      "harvestInstructions": "Snip small amounts of soft growth. Leave enough leafy shoots for regrowth and avoid cutting back into bare wood.",
+      "photo": {
+        "path": "/images/plants/cultivar-rosemary-tuscan-blue.jpg",
+        "altText": "Tuscan Blue rosemary plant",
+        "credit": "KENPEI",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_%27Tuscan_Blue%271.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Rosmarinus officinalis 'Tuscan Blue'1"
+      },
+      "cultivarName": "Tuscan Blue",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Tuscan Blue rosemary",
+        "Tuscan Blue upright rosemary"
+      ]
+    }
+  },
+  {
+    "commonName": "Spearmint (Moroccan)",
+    "scientificName": "Mentha spicata var. crispa 'Moroccan'",
+    "description": "A spreading spearmint with crinkled leaves and a sweet mint flavour.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/155862/mentha-spicata-var-crispa-moroccan/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "herb"
+      ],
+      "commonNameAliases": [
+        "Moroccan mint",
+        "Moroccan spearmint"
+      ],
+      "growingNotes": "Grow in sun or partial shade with steady moisture. Use a separate pot to contain the spreading stems.",
+      "harvestInstructions": "Pick healthy leaves and soft tips as needed. Leave leafy shoots for continued growth.",
+      "photo": null,
+      "cultivarName": "Moroccan"
+    }
   }
 ]
