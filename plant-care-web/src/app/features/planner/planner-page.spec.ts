@@ -210,6 +210,49 @@ describe('Space planner', () => {
     expect(reopened.plan().pots.map(pot => pot.x)).toEqual([4, 6]);
   });
 
+  it('lets a plant join an existing pot in the selected zone and warns about companion conflicts', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    const width = document.createElement('input');
+    width.type = 'number';
+    width.value = '2';
+    page.changeBounds('width', width);
+    const zoneId = page.selectedZone()!.id;
+    page.addPot();
+    page.addPlant('basil');
+    const destination = page.selectedPot()!;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    page.nudge(4, 0);
+    page.addPot();
+    page.nudge(4, 0);
+
+    page.select('shape', zoneId);
+    page.browseCatalog.set(true);
+    fixture.detectChanges();
+    const finder = fixture.nativeElement.querySelector('.zone-plant-finder');
+    const select = finder.querySelectorAll('select')[1] as HTMLSelectElement;
+    expect(Array.from(select.options).map(option => option.value)).toEqual(['', destination.id]);
+    expect(page.zoneSpot()).toBeNull();
+    expect(page.canPlanInZone()).toBe(false);
+
+    select.value = destination.id;
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(page.canPlanInZone()).toBe(true);
+    const candidate = Array.from(finder.querySelectorAll('.plant-list button') as NodeListOf<HTMLButtonElement>)
+      .find(button => button.textContent?.trim() === 'Plan Cold fixture');
+    expect(candidate?.parentElement?.textContent).toContain('Different needs for temperature.');
+    candidate!.click();
+    expect(page.plan().pots).toHaveLength(2);
+    expect(page.selectedPot()?.id).toBe(destination.id);
+    expect(page.selectedPot()?.plants.map(plant => plant.speciesId)).toEqual(['basil', 'cold']);
+  });
+
   it('keeps the plant ideas visible when the selected zone cannot fit a pot', () => {
     const fixture = setup();
     const page = fixture.componentInstance;

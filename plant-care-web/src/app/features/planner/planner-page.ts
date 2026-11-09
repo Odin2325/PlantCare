@@ -9,7 +9,7 @@ import { PlantSpecies } from '../../models/plant-species.model';
 import { normalizePlantSearch } from '../../shared/plant-search';
 import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
 import { UserPlant } from '../my-plants/models/user-plant.model';
-import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, findPotSpot, lightAt, lightLabel,
+import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, containsPot, findPotSpot, lightAt, lightLabel,
   lightOptions, placementAdvice, placementProblem, rows, sharing } from './planner-rules';
 
 const maxPlans = 12;
@@ -148,6 +148,16 @@ export class PlannerPage {
     const start = this.zonePage() * choicePageSize;
     return this.zoneChoices().slice(start, start + choicePageSize);
   });
+  readonly zoneDestinationId = signal('');
+  readonly zonePots = computed(() => {
+    const zone = this.selectedZone();
+    const plan = this.plan();
+    return zone ? plan.pots.filter(pot => pot.plants.length < maxPlants &&
+      containsPot(zone, pot) && lightAt(plan, pot) === zone.light) : [];
+  });
+  readonly zoneDestination = computed(() => this.zonePots().find(pot => pot.id === this.zoneDestinationId()));
+  readonly canPlanInZone = computed(() => !!this.zoneDestination() ||
+    (this.plan().pots.length < maxPots && !!this.zoneSpot()));
   readonly zoneSpot = computed(() => {
     const zone = this.selectedZone();
     return zone ? findPotSpot(this.plan(), {
@@ -306,6 +316,7 @@ export class PlannerPage {
     this.query.set('');
     this.zoneQuery.set('');
     this.browseCatalog.set(false);
+    this.zoneDestinationId.set('');
   }
   selectFromList(id: string): void {
     if (this.plan().shapes.some(shape => shape.id === id)) this.select('shape', id);
@@ -328,20 +339,32 @@ export class PlannerPage {
     this.select('pot', pot.id);
   }
   planZonePlant(id: string): void {
-    const spot = this.zoneSpot();
     const choice = this.zoneChoices().find(candidate => candidate.id === id);
     if (this.loading() || this.catalogError() || this.collectionLoading() || this.collectionError() ||
-        !spot || !choice?.plant || this.plan().pots.length >= maxPots ||
-        (choice.owned && this.plannedPlantIds().has(id))) return;
-    const pot: Pot = {
-      ...spot,
-      id: crypto.randomUUID(),
-      name: choice.name.slice(0, 60),
-      plants: [{ id: crypto.randomUUID(), speciesId: choice.plant.id, moisture: '',
-        ...(choice.owned ? { userPlantId: id } : {}) }],
+        !choice?.plant || (choice.owned && this.plannedPlantIds().has(id))) return;
+    const planting: Pot['plants'][number] = {
+      id: crypto.randomUUID(), speciesId: choice.plant.id, moisture: '',
+      ...(choice.owned ? { userPlantId: id } : {}),
     };
+    const destination = this.zoneDestination();
+    if (destination) {
+      this.update({ pots: this.plan().pots.map(pot => pot.id === destination.id
+        ? { ...pot, plants: [...pot.plants, planting] } : pot) });
+      this.select('pot', destination.id);
+      return;
+    }
+    const spot = this.zoneSpot();
+    if (!spot || this.plan().pots.length >= maxPots) return;
+    const pot: Pot = { ...spot, id: crypto.randomUUID(), name: choice.name.slice(0, 60), plants: [planting] };
     this.update({ pots: [...this.plan().pots, pot] });
     this.select('pot', pot.id);
+  }
+
+  zoneCompanionConflict(speciesId: string): string | null {
+    const plants = this.zoneDestination()?.plants;
+    if (!plants?.length) return null;
+    const assessment = sharing([...plants, { speciesId, moisture: '' }], this.catalog());
+    return assessment?.status === 'conflict' ? assessment.detail : null;
   }
 
   removeItem(): void {

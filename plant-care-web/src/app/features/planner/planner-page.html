@@ -173,20 +173,35 @@
             <label>Search zone matches
               <input type="search" maxlength="100" [value]="zoneQuery()" (input)="zoneQuery.set($any($event.target).value)">
             </label>
-            @if (plan().pots.length >= maxPots) {
-              <p role="status">This layout has reached its pot limit.</p>
-            } @else if (!zoneSpot()) {
-              <p role="status">There’s no clear space for a two-square pot in this zone.</p>
+            @if (zonePots().length) {
+              <label>Plan in
+                <select [value]="zoneDestination()?.id ?? ''" (change)="zoneDestinationId.set($any($event.target).value)">
+                  <option value="">New pot</option>
+                  @for (pot of zonePots(); track pot.id) {
+                    <option [value]="pot.id">{{ pot.name }} · {{ pot.plants.length }} planted</option>
+                  }
+                </select>
+              </label>
+            }
+            @if (!zoneDestination()) {
+              @if (plan().pots.length >= maxPots) {
+                <p role="status">This layout has reached its pot limit.</p>
+              } @else if (!zoneSpot()) {
+                <p role="status">There’s no clear space for a pot two grid squares across in this zone.</p>
+              }
             }
             @if (zoneChoices().length) {
               <ul class="plant-list">
                 @for (choice of visibleZoneChoices(); track choice.id) {
                   @let planned = choice.owned && plannedPlantIds().has(choice.id);
                   <li>
-                    <button type="button" [disabled]="planned || !zoneSpot() || plan().pots.length >= maxPots"
+                    <button type="button" [disabled]="planned || !canPlanInZone()"
                       (click)="planZonePlant(choice.id)">Plan {{ choice.name }}</button>
                     @if (planned) { <small>Already in this layout</small> }
                     @else if (choice.owned && choice.name !== choice.plant?.commonName) { <small>{{ choice.plant?.commonName }}</small> }
+                    @if (!planned && choice.plant && zoneCompanionConflict(choice.plant.id); as conflict) {
+                      <small>{{ conflict }}</small>
+                    }
                   </li>
                 }
               </ul>
@@ -199,7 +214,11 @@
                 </div>
                 <small role="status">Page {{ zonePage() + 1 }} of {{ zonePageCount() }} · {{ zoneChoices().length }} matching plants</small>
               }
-              <p>Planning adds a pot to this layout.</p>
+              @if (zoneDestination(); as destination) {
+                <p>Planning adds the plant to {{ destination.name }}. Review soil moisture and root space before sharing a pot.</p>
+              } @else {
+                <p>Planning adds a pot to this layout.</p>
+              }
             } @else {
               <p>No {{ browseCatalog() ? 'unowned catalog plants' : 'plants in your collection' }} match this light and search.</p>
             }

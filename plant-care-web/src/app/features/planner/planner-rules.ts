@@ -40,7 +40,7 @@ function shapeOverlapsPot(shape: Shape, pot: Bounds): boolean {
   return Math.hypot(centerX - nearestX, centerY - nearestY) < radius;
 }
 
-function contains(zone: Shape, pot: Bounds): boolean {
+export function containsPot(zone: Shape, pot: Bounds): boolean {
   if (zone.kind === 'circle') {
     const radius = pot.width / 2;
     const zoneRadius = zone.width / 2;
@@ -53,13 +53,13 @@ function contains(zone: Shape, pot: Bounds): boolean {
 
 export function lightAt(plan: Plan, pot: Bounds): Light | null {
   const zones = plan.shapes.filter(shape => shape.role === 'light' && shapeOverlapsPot(shape, pot));
-  const zone = zones.find(shape => contains(shape, pot));
+  const zone = zones.find(shape => containsPot(shape, pot));
   return zone && zones.every(shape => shape.light === zone.light) ? zone.light : null;
 }
 
 export function placementProblem(plan: Plan, pot: Pot): string | null {
   const boundaries = plan.shapes.filter(shape => shape.role === 'outline');
-  if (boundaries.length && !boundaries.some(shape => contains(shape, pot))) {
+  if (boundaries.length && !boundaries.some(shape => containsPot(shape, pot))) {
     return 'Move the whole pot inside a space boundary.';
   }
   const obstacle = plan.shapes.find(shape => shape.role === 'obstacle' && shapeOverlapsPot(shape, pot));
@@ -114,7 +114,7 @@ export function findPotSpot(plan: Plan, pot: Pot, light: Light, zone?: Shape): B
     for (let x = 0; x <= columns - pot.width; x++) {
       const candidate = { ...pot, x, y };
       const offset = (x - pot.x) ** 2 + (y - pot.y) ** 2;
-      if (offset < distance && (!zone || contains(zone, candidate)) &&
+      if (offset < distance && (!zone || containsPot(zone, candidate)) &&
           !placementProblem(plan, candidate) && lightAt(plan, candidate) === light) {
         best = candidate;
         distance = offset;
