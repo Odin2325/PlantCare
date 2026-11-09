@@ -181,6 +181,25 @@ export class PlannerPage {
     this.save([...this.plans(), plan]);
     this.switchPlan(plan.id);
   }
+  duplicatePlan(): void {
+    if (this.plans().length >= maxPlans) return;
+    const source = this.plan();
+    const suffix = ' (copy)';
+    const copy: Plan = {
+      ...source,
+      id: crypto.randomUUID(),
+      name: source.name.slice(0, 60 - suffix.length).trimEnd() + suffix,
+      shapes: source.shapes.map(shape => ({ ...shape, id: crypto.randomUUID() })),
+      pots: source.pots.map(pot => ({
+        ...pot,
+        id: crypto.randomUUID(),
+        plants: pot.plants.map(plant => ({ ...plant, id: crypto.randomUUID() })),
+      })),
+    };
+    this.save([...this.plans(), copy]);
+    this.switchPlan(copy.id);
+  }
+
   deletePlan(): void {
     if (!window.confirm('Delete this layout from this browser?')) return;
     const remaining = this.plans().filter(plan => plan.id !== this.plan().id);

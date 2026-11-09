@@ -115,6 +115,43 @@ describe('Space planner', () => {
     expect(page.selectedPot()?.plants).toHaveLength(1);
   });
 
+  it('duplicates a layout and saves its independent changes alongside the original', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.renamePlan('Balcony');
+    page.setSetting('outdoor');
+    page.addShape('rectangle');
+    page.setRole('light');
+    page.setLight('FullSun');
+    page.addPot();
+    page.addPlant('basil');
+    const original = page.plan();
+    const planting = original.pots[0].plants[0];
+    page.setMoisture(planting.id, 'moist');
+
+    fixture.detectChanges();
+    const duplicate = Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>)
+      .find(button => button.textContent?.trim() === 'Duplicate layout');
+    duplicate!.click();
+
+    const copy = page.plan();
+    expect(copy.name).toBe('Balcony (copy)');
+    expect(copy.id).not.toBe(original.id);
+    expect(copy.setting).toBe('outdoor');
+    expect(copy.shapes[0]).toEqual({ ...original.shapes[0], id: copy.shapes[0].id });
+    expect(copy.shapes[0].id).not.toBe(original.shapes[0].id);
+    expect(copy.pots[0].id).not.toBe(original.pots[0].id);
+    expect(copy.pots[0].plants[0].id).not.toBe(planting.id);
+    expect(copy.pots[0].plants[0]).toMatchObject({ speciesId: 'basil', moisture: 'moist' });
+    page.select('pot', copy.pots[0].id);
+    page.setMoisture(copy.pots[0].plants[0].id, 'dry');
+
+    fixture.destroy();
+    TestBed.resetTestingModule();
+    const saved = setup().componentInstance.plans();
+    expect(saved.map(plan => plan.pots[0].plants[0].moisture)).toEqual(['moist', 'dry']);
+  });
+
   it('restores layouts for the same account and keeps another account separate', () => {
     const first = setup();
     first.componentInstance.renamePlan('Balcony');

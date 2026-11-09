@@ -16,6 +16,7 @@
     </select></label>
     <div class="actions">
       <button type="button" (click)="addPlan()" [disabled]="plans().length >= maxPlans">New layout</button>
+      <button type="button" (click)="duplicatePlan()" [disabled]="plans().length >= maxPlans">Duplicate layout</button>
       <button type="button" (click)="deletePlan()">Delete layout</button>
     </div>
     <p class="storage">Layouts are saved in this browser for your account. {{ saveMessage() }}</p>
