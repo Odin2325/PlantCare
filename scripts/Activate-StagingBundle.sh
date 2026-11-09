@@ -60,9 +60,6 @@ trap rollback EXIT
 dc run -T --interactive=false --rm --no-deps --pull never migrate --migrate-database >/dev/null 2>&1
 dc run -T --interactive=false --rm --no-deps --pull never migrate --provision-runtime-users >/dev/null 2>&1
 
-# Add/update the reviewed shared catalog only; personal plants/schedules/history
-# retain their IDs and values. The operator import is atomic and repeatable.
-dc run -T --interactive=false --rm --no-deps --pull never migrate --upsert-catalog /operator/catalog.houseplants.json >/dev/null 2>&1
 dc up --no-build --pull never --no-deps --force-recreate -d --wait --wait-timeout 180 api worker >/dev/null 2>&1
 python3 - <<'PY'
 import json,subprocess
@@ -75,7 +72,10 @@ for i in $(seq 1 36); do
     if curl --fail --silent --max-time 10 https://staging.plantacare.org/health/ready >/dev/null && curl --fail --silent --max-time 10 https://staging.plantacare.org/health/operations >/dev/null; then
         docker exec plantcare-staging-api-1 dotnet PlantCare.Api.dll --check-runtime-access api >/dev/null 2>&1
         dc run -T --interactive=false --rm --no-deps --pull never worker-db-check >/dev/null 2>&1
-        printf 'PASS: pinned API/worker activation, readiness, operations and restricted runtime access.\n'
+        # Commit the catalog after runtime checks, so a failed startup can return
+        # to the previous images without publishing rows whose photos they lack.
+        dc run -T --interactive=false --rm --no-deps --pull never migrate --upsert-catalog /operator/catalog.houseplants.json >/dev/null 2>&1
+        printf 'PASS: pinned API/worker activation, readiness, operations, restricted runtime access and catalog import.\n'
         exit 0
     fi
     sleep 5

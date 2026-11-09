@@ -169,3 +169,42 @@ test('garden collection harvest overview filters complete per-unit totals and re
   await auditAccessibility(page, 'Garden harvest overview');
   expect(writes).toEqual([]);
 });
+
+test('space planner places a collection plant in a light zone and reloads it without API writes', async ({ page }) => {
+  const owner = { id: 'planner-smoke-owner', email: 'planner@example.test' };
+  const plant = { id: 'basil-1', plantSpeciesId: 'basil', nickname: 'Kitchen basil', speciesCommonName: 'Basil', isActive: true };
+  const species = { id: 'basil', commonName: 'Basil', scientificName: 'Ocimum basilicum', sunlightRequirement: 'FullSun' };
+  const writes: string[] = [];
+  await page.route('**/api/**', async route => {
+    const path = new URL(route.request().url()).pathname;
+    if (route.request().method() !== 'GET') {
+      writes.push(path);
+      return route.fulfill({ status: 405 });
+    }
+    if (path === '/api/account/me') return route.fulfill({ json: owner });
+    if (path === '/api/my-plants') return route.fulfill({ json: [plant] });
+    if (path === '/api/plant-species') return route.fulfill({ json: [species] });
+    if (path === '/api/antiforgery/token') return route.fulfill({ json: { requestToken: 'synthetic-token' } });
+    return route.fulfill({ status: 404, json: {} });
+  });
+
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.addInitScript(() => Object.defineProperty(navigator, 'onLine', { configurable: true, get: () => true }));
+  await page.goto('/garden/planner');
+  await page.getByRole('button', { name: 'Square', exact: true }).click();
+  await page.getByRole('combobox', { name: /^Use shape as/ }).selectOption('light');
+  await page.getByRole('combobox', { name: /^Observed light/ }).selectOption('FullSun');
+  const finder = page.getByRole('region', { name: 'Plants for this zone' });
+  await expect(finder.getByRole('button', { name: 'Plan Kitchen basil', exact: true })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await auditAccessibility(page, 'Space planner light zone at 320px');
+  await finder.getByRole('button', { name: 'Plan Kitchen basil', exact: true }).click();
+  const pot = page.getByRole('button', { name: 'Select pot Kitchen basil', exact: true });
+  await expect(pot).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByText('This spot matches the catalog light needs.', { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(pot).toBeVisible();
+  await pot.click();
+  await expect(page.getByText('This spot matches the catalog light needs.', { exact: true })).toBeVisible();
+  expect(writes).toEqual([]);
+});
