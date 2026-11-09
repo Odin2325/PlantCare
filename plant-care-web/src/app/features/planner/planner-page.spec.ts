@@ -8,6 +8,8 @@ import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
 import { PlannerPage } from './planner-page';
+import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
+import { UserPlant } from '../my-plants/models/user-plant.model';
 
 const basil: PlantSpecies = {
   id: 'basil', commonName: 'Basil', scientificName: 'Ocimum basilicum', description: '',
@@ -22,11 +24,12 @@ const cold: PlantSpecies = { ...basil, id: 'cold', commonName: 'Cold fixture',
   minimumTemperatureCelsius: null, maximumTemperatureCelsius: 8 };
 const unknown: PlantSpecies = { ...basil, id: 'unknown', commonName: 'Unknown fixture', sunlightRequirement: 'Unknown' };
 
-function setup(owner = 'planner-test-owner', species = [basil, fern, cold, unknown]) {
+function setup(owner = 'planner-test-owner', species = [basil, fern, cold, unknown], collection: UserPlant[] = []) {
   TestBed.configureTestingModule({ providers: [
     provideRouter([]),
     { provide: AuthService, useValue: { currentUser: () => ({ id: owner }) } },
     { provide: PlantSpeciesApiService, useValue: { getAll: () => of(species) } },
+    { provide: MyPlantsApiService, useValue: { getAll: () => of(collection) } },
   ] });
   return TestBed.createComponent(PlannerPage);
 }
@@ -160,6 +163,74 @@ describe('Space planner', () => {
     fixture.detectChanges();
     expect(checklist.querySelector('summary').textContent).toContain('0 to review');
     expect(checklist.querySelector('.layout-companion-issue')).toBeNull();
+  });
+
+  it('lists owned and unowned matches separately and plans each inside the selected zone', () => {
+    const collection = [
+      { id: 'mine-1', plantSpeciesId: 'basil', nickname: 'Kitchen basil', speciesCommonName: 'Basil', isActive: true },
+      { id: 'mine-2', plantSpeciesId: 'basil', nickname: 'Balcony basil', speciesCommonName: 'Basil', isActive: true },
+      { id: 'mine-3', plantSpeciesId: 'fern', nickname: 'Hall fern', speciesCommonName: 'Fern', isActive: true },
+      { id: 'archived', plantSpeciesId: 'cold', nickname: 'Old plant', speciesCommonName: 'Cold fixture', isActive: false },
+    ] as UserPlant[];
+    const fixture = setup(undefined, [basil, fern, cold, unknown], collection);
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    page.nudge(4, 0);
+    const zoneId = page.selectedZone()!.id;
+    fixture.detectChanges();
+
+    const finder = () => fixture.nativeElement.querySelector('.zone-plant-finder');
+    const buttons = () => Array.from(finder().querySelectorAll('.plant-list button') as NodeListOf<HTMLButtonElement>);
+    expect(buttons().map(button => button.textContent?.trim())).toEqual(['Plan Balcony basil', 'Plan Kitchen basil']);
+    buttons()[1].click();
+    expect(page.selectedPot()).toMatchObject({ name: 'Kitchen basil', x: 4, y: 0,
+      plants: [{ speciesId: 'basil', userPlantId: 'mine-1' }] });
+    expect(page.potLight()).toBe('FullSun');
+
+    page.select('shape', zoneId);
+    fixture.detectChanges();
+    expect(buttons()[1].disabled).toBe(true);
+    const mode = finder().querySelector('select') as HTMLSelectElement;
+    mode.value = 'catalog';
+    mode.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(buttons().map(button => button.textContent?.trim())).toEqual(['Plan Cold fixture']);
+    buttons()[0].click();
+    expect(page.selectedPot()?.plants[0].userPlantId).toBeUndefined();
+    expect(page.selectedPot()?.x).toBe(6);
+    expect(page.potPlacementProblem()).toBeNull();
+    expect(page.collection()).toEqual(collection.filter(plant => plant.isActive));
+
+    fixture.destroy();
+    TestBed.resetTestingModule();
+    const reopened = setup(undefined, [basil, fern, cold, unknown], collection).componentInstance;
+    expect(reopened.plan().pots.map(pot => pot.plants[0].userPlantId)).toEqual(['mine-1', undefined]);
+    expect(reopened.plan().pots.map(pot => pot.x)).toEqual([4, 6]);
+  });
+
+  it('keeps the plant ideas visible when the selected zone cannot fit a pot', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    const width = document.createElement('input');
+    width.type = 'number';
+    width.value = '1';
+    page.changeBounds('width', width);
+    page.browseCatalog.set(true);
+    fixture.detectChanges();
+
+    const finder = fixture.nativeElement.querySelector('.zone-plant-finder');
+    expect(finder.querySelector('.plant-list button').disabled).toBe(true);
+    expect(finder.textContent).toContain('no clear space');
+    page.planZonePlant('basil');
+    expect(page.plan().pots).toHaveLength(0);
   });
 
   it('explains why it cannot suggest a light zone', () => {

@@ -6,7 +6,10 @@ import { AuthService } from '../../core/auth/services/auth.service';
 import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
-import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, lightAt, lightLabel,
+import { normalizePlantSearch } from '../../shared/plant-search';
+import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
+import { UserPlant } from '../my-plants/models/user-plant.model';
+import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, findPotSpot, lightAt, lightLabel,
   lightOptions, placementAdvice, placementProblem, rows, sharing } from './planner-rules';
 
 const maxPlans = 12;
@@ -37,7 +40,8 @@ function validPlans(plans: Plan[]): boolean {
       named(pot) && validBounds(pot) && pot.width === pot.height &&
       Array.isArray(pot.plants) && pot.plants.length <= maxPlants && pot.plants.every(plant =>
         !!plant && typeof plant.id === 'string' && typeof plant.speciesId === 'string' &&
-        ['', 'dry', 'moderate', 'moist'].includes(plant.moisture))));
+        ['', 'dry', 'moderate', 'moist'].includes(plant.moisture) &&
+        (plant.userPlantId === undefined || typeof plant.userPlantId === 'string'))));
 }
 
 @Component({
@@ -51,6 +55,7 @@ export class PlannerPage {
   private readonly auth = inject(AuthService);
   private readonly owner = this.auth.currentUser()?.id;
   private readonly api = inject(PlantSpeciesApiService);
+  private readonly myPlantsApi = inject(MyPlantsApiService);
   private readonly destroyRef = inject(DestroyRef);
   private storedValue: string | null = null;
   readonly saveMessage = signal('');
@@ -107,6 +112,48 @@ export class PlannerPage {
     const start = this.choicePage() * choicePageSize;
     return this.choices().slice(start, start + choicePageSize);
   });
+  readonly collection = signal<UserPlant[]>([]);
+  readonly collectionLoading = signal(false);
+  readonly collectionError = signal(false);
+  readonly collectionById = computed(() => new Map(this.collection().map(plant => [plant.id, plant])));
+  readonly browseCatalog = signal(false);
+  readonly zoneQuery = signal('');
+  readonly selectedZone = computed(() => {
+    const shape = this.selectedShape();
+    return shape?.role === 'light' && shape.light ? { ...shape, light: shape.light } : null;
+  });
+  readonly plannedPlantIds = computed(() => new Set(
+    this.plan().pots.flatMap(pot => pot.plants.map(plant => plant.userPlantId)),
+  ));
+  readonly zoneChoices = computed(() => {
+    const zone = this.selectedZone();
+    if (!zone) return [];
+    const collection = this.collection();
+    const catalog = this.catalog();
+    const ownedSpecies = new Set(collection.map(plant => plant.plantSpeciesId));
+    const candidates = this.browseCatalog()
+      ? this.species().filter(plant => !ownedSpecies.has(plant.id))
+        .map(plant => ({ id: plant.id, name: plant.commonName, plant, owned: false }))
+      : collection.map(owned => ({ id: owned.id, name: owned.nickname.trim() || owned.speciesCommonName,
+        plant: catalog.get(owned.plantSpeciesId), owned: true }));
+    const query = normalizePlantSearch(this.zoneQuery());
+    return candidates.filter(({ name, plant }) => plant?.sunlightRequirement === zone.light &&
+      (!query || normalizePlantSearch([name, plant.commonName, plant.scientificName,
+        ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
+      .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+  });
+  readonly zonePage = linkedSignal({ source: this.zoneChoices, computation: () => 0 });
+  readonly zonePageCount = computed(() => Math.ceil(this.zoneChoices().length / choicePageSize));
+  readonly visibleZoneChoices = computed(() => {
+    const start = this.zonePage() * choicePageSize;
+    return this.zoneChoices().slice(start, start + choicePageSize);
+  });
+  readonly zoneSpot = computed(() => {
+    const zone = this.selectedZone();
+    return zone ? findPotSpot(this.plan(), {
+      id: '', name: '', x: zone.x, y: zone.y, width: 2, height: 2, plants: [],
+    }, zone.light, zone) : null;
+  });
   readonly layoutChecks = computed(() => {
     const plan = this.plan();
     const catalog = this.catalog();
@@ -148,7 +195,20 @@ export class PlannerPage {
   readonly maxPots = maxPots;
   readonly maxPlants = maxPlants;
 
-  constructor() { this.loadCatalog(); }
+  constructor() {
+    this.loadCatalog();
+    this.loadCollection();
+  }
+
+  loadCollection(): void {
+    if (this.collectionLoading()) return;
+    this.collectionLoading.set(true);
+    this.collectionError.set(false);
+    this.myPlantsApi.getAll().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: plants => { this.collection.set(plants.filter(plant => plant.isActive)); this.collectionLoading.set(false); },
+      error: () => { this.collectionError.set(true); this.collectionLoading.set(false); },
+    });
+  }
 
   loadCatalog(): void {
     if (this.loading()) return;
@@ -244,6 +304,8 @@ export class PlannerPage {
     this.companionsOnly.set(false);
     this.placing.set(false);
     this.query.set('');
+    this.zoneQuery.set('');
+    this.browseCatalog.set(false);
   }
   selectFromList(id: string): void {
     if (this.plan().shapes.some(shape => shape.id === id)) this.select('shape', id);
@@ -265,6 +327,23 @@ export class PlannerPage {
     this.update({ pots: [...this.plan().pots, pot] });
     this.select('pot', pot.id);
   }
+  planZonePlant(id: string): void {
+    const spot = this.zoneSpot();
+    const choice = this.zoneChoices().find(candidate => candidate.id === id);
+    if (this.loading() || this.catalogError() || this.collectionLoading() || this.collectionError() ||
+        !spot || !choice?.plant || this.plan().pots.length >= maxPots ||
+        (choice.owned && this.plannedPlantIds().has(id))) return;
+    const pot: Pot = {
+      ...spot,
+      id: crypto.randomUUID(),
+      name: choice.name.slice(0, 60),
+      plants: [{ id: crypto.randomUUID(), speciesId: choice.plant.id, moisture: '',
+        ...(choice.owned ? { userPlantId: id } : {}) }],
+    };
+    this.update({ pots: [...this.plan().pots, pot] });
+    this.select('pot', pot.id);
+  }
+
   removeItem(): void {
     const item = this.item();
     if (!item) return;

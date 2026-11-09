@@ -150,6 +150,63 @@
         }
       }
 
+      @if (selectedZone(); as zone) {
+        <section class="assessment zone-plant-finder" aria-labelledby="zone-plants-heading">
+          <h3 id="zone-plants-heading">Plants for this zone</h3>
+          <p>{{ lightLabel(zone.light) }} · Matches are based on catalog light needs.</p>
+          @if (loading() || collectionLoading()) {
+            <p role="status">Loading plant matches…</p>
+          } @else if (collectionError()) {
+            <p role="alert">Your plant collection could not be loaded.</p>
+            <button type="button" (click)="loadCollection()">Retry collection</button>
+          } @else if (catalogError()) {
+            <p role="alert">The catalog could not be loaded.</p>
+            <button type="button" (click)="loadCatalog()">Retry catalog</button>
+          } @else {
+            <label>Show plants from
+              <select [value]="browseCatalog() ? 'catalog' : 'collection'"
+                (change)="browseCatalog.set($any($event.target).value === 'catalog')">
+                <option value="collection">My plants</option>
+                <option value="catalog">Catalog plants I don’t own</option>
+              </select>
+            </label>
+            <label>Search zone matches
+              <input type="search" maxlength="100" [value]="zoneQuery()" (input)="zoneQuery.set($any($event.target).value)">
+            </label>
+            @if (plan().pots.length >= maxPots) {
+              <p role="status">This layout has reached its pot limit.</p>
+            } @else if (!zoneSpot()) {
+              <p role="status">There’s no clear space for a two-square pot in this zone.</p>
+            }
+            @if (zoneChoices().length) {
+              <ul class="plant-list">
+                @for (choice of visibleZoneChoices(); track choice.id) {
+                  @let planned = choice.owned && plannedPlantIds().has(choice.id);
+                  <li>
+                    <button type="button" [disabled]="planned || !zoneSpot() || plan().pots.length >= maxPots"
+                      (click)="planZonePlant(choice.id)">Plan {{ choice.name }}</button>
+                    @if (planned) { <small>Already in this layout</small> }
+                    @else if (choice.owned && choice.name !== choice.plant?.commonName) { <small>{{ choice.plant?.commonName }}</small> }
+                  </li>
+                }
+              </ul>
+              @if (zonePageCount() > 1) {
+                <div class="actions" role="group" aria-label="Zone result pages">
+                  <button type="button" [disabled]="zonePage() === 0"
+                    (click)="zonePage.set(zonePage() - 1)">Previous plants</button>
+                  <button type="button" [disabled]="zonePage() + 1 === zonePageCount()"
+                    (click)="zonePage.set(zonePage() + 1)">Next plants</button>
+                </div>
+                <small role="status">Page {{ zonePage() + 1 }} of {{ zonePageCount() }} · {{ zoneChoices().length }} matching plants</small>
+              }
+              <p>Planning adds a pot to this layout.</p>
+            } @else {
+              <p>No {{ browseCatalog() ? 'unowned catalog plants' : 'plants in your collection' }} match this light and search.</p>
+            }
+          }
+        </section>
+      }
+
       @if (selectedPot(); as pot) {
         <div class="assessment" aria-live="polite">
           <h3>Pot placement</h3>
@@ -202,8 +259,9 @@
         }
         @for (plant of pot.plants; track plant.id) {
           @let species = catalog().get(plant.speciesId);
+          @let owned = plant.userPlantId ? collectionById().get(plant.userPlantId) : null;
           <article class="plant-card">
-            <strong>{{ species?.commonName ?? 'Catalog plant unavailable' }}</strong>
+            <strong>{{ owned?.nickname?.trim() || species?.commonName || 'Catalog plant unavailable' }}</strong>
             @if (species) {
               <p>{{ lightLabel(species.sunlightRequirement) }}
                 @if (potLight() && species.sunlightRequirement !== 'Unknown') {

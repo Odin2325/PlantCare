@@ -17,7 +17,7 @@ export interface Shape extends Bounds {
   id: string; name: string; kind: 'rectangle' | 'square' | 'circle';
   role: 'outline' | 'obstacle' | 'light'; light: Light | null;
 }
-export interface Planting { id: string; speciesId: string; moisture: Moisture }
+export interface Planting { id: string; speciesId: string; moisture: Moisture; userPlantId?: string }
 export interface Pot extends Bounds { id: string; name: string; plants: Planting[] }
 export interface Plan { id: string; name: string; setting: 'indoor' | 'outdoor'; shapes: Shape[]; pots: Pot[] }
 
@@ -101,21 +101,27 @@ export function placementAdvice(plan: Plan, pot: Pot, catalog: ReadonlyMap<strin
   if (!plan.shapes.some(shape => shape.role === 'light' && shape.light === light)) {
     return { spot: null, problem: 'Mark a light zone for ' + lightLabel(light).toLowerCase() + '.' };
   }
+  const spot = findPotSpot(plan, pot, light);
+  return spot ? { spot, problem: null } : {
+    spot: null, problem: 'There is no clear space for the whole pot in the matching light zones. Try moving obstacles or making a zone larger.',
+  };
+}
+
+export function findPotSpot(plan: Plan, pot: Pot, light: Light, zone?: Shape): Bounds | null {
   let best: Bounds | null = null;
   let distance = Infinity;
   for (let y = 0; y <= rows - pot.height; y++) {
     for (let x = 0; x <= columns - pot.width; x++) {
       const candidate = { ...pot, x, y };
       const offset = (x - pot.x) ** 2 + (y - pot.y) ** 2;
-      if (offset < distance && !placementProblem(plan, candidate) && lightAt(plan, candidate) === light) {
+      if (offset < distance && (!zone || contains(zone, candidate)) &&
+          !placementProblem(plan, candidate) && lightAt(plan, candidate) === light) {
         best = candidate;
         distance = offset;
       }
     }
   }
-  return best ? { spot: best, problem: null } : {
-    spot: null, problem: 'There is no clear space for the whole pot in the matching light zones. Try moving obstacles or making a zone larger.',
-  };
+  return best;
 }
 
 export function sharing(
