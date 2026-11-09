@@ -119,12 +119,20 @@
           @if (potLight()) {
             <button type="button" [attr.aria-pressed]="matchLight()" (click)="matchLight.set(!matchLight())">Match this spot’s light</button>
           }
-          @if (query().trim() || (matchLight() && potLight())) {
+          @if (pot.plants.length) {
+            <button type="button" [attr.aria-pressed]="companionsOnly()" (click)="companionsOnly.set(!companionsOnly())">Find potential companions</button>
+          }
+          @if (query().trim() || (matchLight() && potLight()) || companionsOnly()) {
             <ul class="plant-list">
-              @for (plant of choices(); track plant.id) {
-                <li><button type="button" (click)="addPlant(plant.id)">Add {{ plant.commonName }} @if (plant.catalogProfile?.cultivarName; as cultivar) { · {{ cultivar }} }</button>
-                  <small>{{ lightLabel(plant.sunlightRequirement) }}</small></li>
-              } @empty { <li>No matching catalog plants.</li> }
+              @for (choice of choices(); track choice.plant.id) {
+                @let candidate = choice.plant;
+                <li>
+                  <button type="button" (click)="addPlant(candidate.id)">Add {{ candidate.commonName }} @if (candidate.catalogProfile?.cultivarName; as cultivar) { · {{ cultivar }} }</button>
+                  <small>{{ lightLabel(candidate.sunlightRequirement) }} @if (choice.preview) { · {{ choice.preview }} }</small>
+                </li>
+              } @empty {
+                <li>{{ companionsOnly() ? 'No candidates match the known needs and selected filters.' : 'No matching catalog plants.' }}</li>
+              }
             </ul>
           }
         }
@@ -144,6 +152,13 @@
               <option value="">Unknown</option><option value="dry">Dries out between watering</option>
               <option value="moderate">Moderate moisture</option><option value="moist">Stays evenly moist</option>
             </select></label>
+            @if (moveTargets().length) {
+              <label>Destination pot<select #destination>
+                <option value="">Choose another pot</option>
+                @for (target of moveTargets(); track target.id) { <option [value]="target.id">{{ target.name }}</option> }
+              </select></label>
+              <button type="button" (click)="movePlant(plant.id, destination.value)">Move plant</button>
+            }
             <button type="button" (click)="removePlant(plant.id)" [attr.aria-label]="'Remove ' + (species?.commonName ?? 'plant')">Remove plant</button>
           </article>
         } @empty { <p>Add plants from the catalog to check their light and shared-pot needs.</p> }

@@ -18,12 +18,15 @@ const basil: PlantSpecies = {
   minimumTemperatureCelsius: 12, maximumTemperatureCelsius: null, isToxicToPets: false,
 };
 const fern: PlantSpecies = { ...basil, id: 'fern', commonName: 'Fern', sunlightRequirement: 'LowLight' };
+const cold: PlantSpecies = { ...basil, id: 'cold', commonName: 'Cold fixture',
+  minimumTemperatureCelsius: null, maximumTemperatureCelsius: 8 };
+const unknown: PlantSpecies = { ...basil, id: 'unknown', commonName: 'Unknown fixture', sunlightRequirement: 'Unknown' };
 
 function setup(owner = 'planner-test-owner') {
   TestBed.configureTestingModule({ providers: [
     provideRouter([]),
     { provide: AuthService, useValue: { currentUser: () => ({ id: owner }) } },
-    { provide: PlantSpeciesApiService, useValue: { getAll: () => of([basil, fern]) } },
+    { provide: PlantSpeciesApiService, useValue: { getAll: () => of([basil, fern, cold, unknown]) } },
   ] });
   return TestBed.createComponent(PlannerPage);
 }
@@ -74,6 +77,39 @@ describe('Space planner', () => {
     expect(page.shared()?.detail).toContain('soil moisture');
     page.addPlant('fern');
     expect(page.shared()?.detail).toContain('light');
+  });
+
+  it('previews conflicts before adding and filters unknown and conflicting companions', () => {
+    const page = setup().componentInstance;
+    page.addPot();
+    page.addPlant('basil');
+    page.query.set('fern');
+    expect(page.choices()[0].preview).toContain('Different needs for light');
+    page.query.set('cold');
+    expect(page.choices()[0].preview).toContain('temperature');
+    page.query.set('');
+    page.companionsOnly.set(true);
+    expect(page.choices().map(choice => choice.plant.id)).toEqual(['basil']);
+    expect(page.choices()[0].preview).toContain('Check soil moisture');
+    expect(page.selectedPot()?.plants).toHaveLength(1);
+  });
+
+  it('moves a planting once, keeping its identity and moisture preference', () => {
+    const page = setup().componentInstance;
+    page.addPot();
+    const source = page.selectedPot()!.id;
+    page.addPlant('basil');
+    const original = page.selectedPot()!.plants[0];
+    page.setMoisture(original.id, 'moist');
+    page.addPot();
+    const destination = page.selectedPot()!.id;
+    page.select('pot', source);
+    page.movePlant(original.id, destination);
+    expect(page.selectedPot()?.id).toBe(destination);
+    expect(page.selectedPot()?.plants).toEqual([{ ...original, moisture: 'moist' }]);
+    expect(page.plan().pots.find(pot => pot.id === source)?.plants).toEqual([]);
+    page.movePlant(original.id, destination);
+    expect(page.selectedPot()?.plants).toHaveLength(1);
   });
 
   it('restores layouts for the same account and keeps another account separate', () => {

@@ -68,14 +68,32 @@ export class PlannerPage {
   readonly catalogError = signal(false);
   readonly query = signal('');
   readonly matchLight = signal(false);
+  readonly companionsOnly = signal(false);
   readonly catalog = computed(() => new Map(this.species().map(plant => [plant.id, plant])));
   readonly choices = computed(() => {
     const query = this.query().trim().toLowerCase();
     const light = this.matchLight() ? this.potLight() : null;
-    if (!query && !light) return [];
+    const existing = this.selectedPot()?.plants ?? [];
+    const companionsOnly = this.companionsOnly() && existing.length > 0;
+    if (!query && !light && !companionsOnly) return [];
+    const catalog = this.catalog();
     return this.species().filter(plant => (!light || plant.sunlightRequirement === light) &&
       (!query || [plant.commonName, plant.scientificName, plant.catalogProfile?.cultivarName,
-        ...(plant.catalogProfile?.commonNameAliases ?? [])].some(name => name?.toLowerCase().includes(query)))).slice(0, 12);
+        ...(plant.catalogProfile?.commonNameAliases ?? [])].some(name => name?.toLowerCase().includes(query))))
+      .map(plant => {
+        if (!existing.length) return { plant, potential: false, preview: '' };
+        const assessment = sharing([...existing, { speciesId: plant.id, moisture: '' }], catalog);
+        if (assessment?.status === 'conflict') return { plant, potential: false, preview: assessment.detail };
+        const allLightKnown = plant.sunlightRequirement !== 'Unknown' && existing.every(entry => {
+          const need = catalog.get(entry.speciesId)?.sunlightRequirement;
+          return !!need && need !== 'Unknown';
+        });
+        return { plant, potential: allLightKnown, preview: allLightKnown
+          ? 'Same catalog light needs. Check soil moisture and root space.'
+          : 'Some catalog light needs are unknown.' };
+      })
+      .filter(choice => !companionsOnly || choice.potential)
+      .slice(0, 12);
   });
   readonly potLight = computed(() => {
     const pot = this.selectedPot();
@@ -87,7 +105,11 @@ export class PlannerPage {
   });
   readonly shared = computed(() => {
     const pot = this.selectedPot();
-    return pot ? sharing(pot, this.catalog()) : null;
+    return pot ? sharing(pot.plants, this.catalog()) : null;
+  });
+  readonly moveTargets = computed(() => {
+    const source = this.selectedPot();
+    return source ? this.plan().pots.filter(pot => pot.id !== source.id && pot.plants.length < maxPlants) : [];
   });
   readonly potBlocked = computed(() => {
     const pot = this.selectedPot();
@@ -172,6 +194,7 @@ export class PlannerPage {
   select(kind: 'shape' | 'pot', id: string): void {
     this.selection.set({ kind, id });
     this.matchLight.set(false);
+    this.companionsOnly.set(false);
     this.placing.set(false);
     this.query.set('');
   }
@@ -180,7 +203,7 @@ export class PlannerPage {
     else if (this.plan().pots.some(pot => pot.id === id)) this.select('pot', id);
     else this.clearSelection();
   }
-  clearSelection(): void { this.selection.set(null); this.placing.set(false); this.query.set(''); this.matchLight.set(false); }
+  clearSelection(): void { this.selection.set(null); this.placing.set(false); this.query.set(''); this.matchLight.set(false); this.companionsOnly.set(false); }
   addShape(kind: Shape['kind']): void {
     if (this.plan().shapes.length >= maxShapes) return;
     const shape: Shape = { id: crypto.randomUUID(), name: 'New ' + kind, kind,
@@ -258,9 +281,24 @@ export class PlannerPage {
     this.updatePot({ plants: [...pot.plants, { id: crypto.randomUUID(), speciesId, moisture: '' }] });
     this.query.set('');
   }
+  movePlant(id: string, destinationId: string): void {
+    const source = this.selectedPot();
+    const destination = this.moveTargets().find(pot => pot.id === destinationId);
+    const plant = source?.plants.find(entry => entry.id === id);
+    if (!source || !destination || !plant) return;
+
+    this.update({ pots: this.plan().pots.map(pot => {
+      if (pot.id === source.id) return { ...pot, plants: pot.plants.filter(entry => entry.id !== id) };
+      if (pot.id === destination.id) return { ...pot, plants: [...pot.plants, plant] };
+      return pot;
+    }) });
+    this.select('pot', destination.id);
+  }
   removePlant(id: string): void {
     const pot = this.selectedPot();
-    if (pot) this.updatePot({ plants: pot.plants.filter(plant => plant.id !== id) });
+    if (!pot) return;
+    this.updatePot({ plants: pot.plants.filter(plant => plant.id !== id) });
+    if (pot.plants.length === 1) this.companionsOnly.set(false);
   }
   setMoisture(id: string, moisture: Moisture): void {
     const pot = this.selectedPot();

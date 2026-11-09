@@ -127,7 +127,9 @@ where a pot fits within a marked zone and matches the catalog light for each pla
 Shared-pot checks compare catalog light and temperature ranges alongside the soil
 moisture preferences entered by the user. A possible match still needs a check of
 mature size, potting mix, drainage and root space. The catalog supplies care notes
-and a light filter for choosing candidates. Layouts are saved per account in the
+and a light filter for choosing candidates. Preview light and temperature conflicts
+before adding a plant, filter for potential companions, or move a plant to another
+pot with its moisture preference intact. Layouts are saved per account in the
 current browser. The existing photo journal release checks remain a separate track.
 
 ## Later candidates and release boundary

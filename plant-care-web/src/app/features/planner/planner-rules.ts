@@ -83,11 +83,14 @@ export function placement(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, Pla
   return best;
 }
 
-export function sharing(pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>): { label: string; detail: string } | null {
-  if (pot.plants.length < 2) return null;
-  const species = pot.plants.map(plant => catalog.get(plant.speciesId));
+export function sharing(
+  plants: readonly Pick<Planting, 'speciesId' | 'moisture'>[],
+  catalog: ReadonlyMap<string, PlantSpecies>,
+): { status: 'conflict' | 'review' | 'possible'; label: string; detail: string } | null {
+  if (plants.length < 2) return null;
+  const species = plants.map(plant => catalog.get(plant.speciesId));
   const light = new Set(species.flatMap(plant => plant && plant.sunlightRequirement !== 'Unknown' ? [plant.sunlightRequirement] : []));
-  const moisture = new Set(pot.plants.map(plant => plant.moisture).filter(Boolean));
+  const moisture = new Set(plants.map(plant => plant.moisture).filter(Boolean));
   const minimum = Math.max(...species.map(plant => plant?.minimumTemperatureCelsius ?? -Infinity));
   const maximum = Math.min(...species.map(plant => plant?.maximumTemperatureCelsius ?? Infinity));
   const differences = [
@@ -95,10 +98,10 @@ export function sharing(pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>): {
     ...(moisture.size > 1 ? ['soil moisture'] : []),
     ...(minimum > maximum ? ['temperature'] : []),
   ];
-  if (differences.length) return { label: 'Separate pots suggested', detail: 'Different needs for ' + differences.join(', ') + '.' };
+  if (differences.length) return { status: 'conflict', label: 'Separate pots suggested', detail: 'Different needs for ' + differences.join(', ') + '.' };
   if (species.some(plant => !plant || plant.sunlightRequirement === 'Unknown') ||
-      pot.plants.some(plant => !plant.moisture)) {
-    return { label: 'More information needed', detail: 'Check catalog light needs and choose a soil moisture preference for each plant.' };
+      plants.some(plant => !plant.moisture)) {
+    return { status: 'review', label: 'More information needed', detail: 'Check catalog light needs and choose a soil moisture preference for each plant.' };
   }
-  return { label: 'Possible match', detail: 'Light and selected soil moisture agree. Check mature size, root space, potting mix and drainage before planting together.' };
+  return { status: 'possible', label: 'Possible match', detail: 'Light and selected soil moisture agree. Check mature size, root space, potting mix and drainage before planting together.' };
 }
