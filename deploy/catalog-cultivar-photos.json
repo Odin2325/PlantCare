@@ -1321,5 +1321,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Epipremnum aureum 'Marble Queen'",
+    "cultivarName": "Marble Queen",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-pothos-marble-queen.jpg",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/common-name/marble-queen/",
+    "identityEvidence": "The source photograph caption or description identifies this exact cultivar.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Epipremnum aureum 'Neon'",
+    "cultivarName": "Neon",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Dracaena trifasciata 'Moonshine'",
+    "cultivarName": "Moonshine",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-snake-plant-moonshine.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sansevieria_trifasciata_cv_Moonshine_pm.jpg",
+    "identityEvidence": "The source photograph caption or description identifies this exact cultivar.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Zamioculcas zamiifolia 'Dowon'",
+    "cultivarName": "Dowon",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-zz-dowon.jpg",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia-raventm-dowon/",
+    "identityEvidence": "The source photograph caption or description identifies this exact cultivar.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Ficus elastica 'Burgundy'",
+    "cultivarName": "Burgundy",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]

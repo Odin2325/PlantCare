@@ -10490,5 +10490,184 @@
         "Bright Lights leaf beet"
       ]
     }
+  },
+  {
+    "commonName": "Pothos (Marble Queen)",
+    "scientificName": "Epipremnum aureum 'Marble Queen'",
+    "description": "A trailing pothos with heart-shaped leaves marbled cream and green.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Filtered daylight supports good growth. Lower light is tolerated; avoid scorching direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the mix to dry between thorough waterings, and empty the outer pot. Growth slows in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a freely draining indoor potting mix in a pot with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is tolerated; protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/common-name/marble-queen/",
+      "reviewedOn": "2026-11-09",
+      "photo": {
+        "path": "/images/plants/cultivar-pothos-marble-queen.jpg",
+        "altText": "Cream and green marbling on Marble Queen pothos leaves",
+        "credit": "Hope Duckworth",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/common-name/marble-queen/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Epipremnum aureum 'Marble Queen'. Leaves Close-Up (Mecklenburg County, NC)-Spring"
+      },
+      "commonNameAliases": [
+        "Marble Queen pothos",
+        "Marble Queen epipremnum"
+      ],
+      "categories": [
+        "houseplant"
+      ],
+      "growingNotes": "Use bright, indirect light and let the top of the mix dry before watering. Let stems trail from a shelf or train them up a support.",
+      "cultivarName": "Marble Queen",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Pothos (Neon)",
+    "scientificName": "Epipremnum aureum 'Neon'",
+    "description": "A trailing pothos with bright chartreuse leaves.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Filtered daylight supports good growth. Lower light is tolerated; avoid scorching direct sun.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Allow the mix to dry between thorough waterings, and empty the outer pot. Growth slows in winter.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a freely draining indoor potting mix in a pot with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is tolerated; protect from cold drafts.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
+      "reviewedOn": "2026-11-09",
+      "photo": null,
+      "commonNameAliases": [
+        "Neon pothos",
+        "Neon epipremnum"
+      ],
+      "categories": [
+        "houseplant"
+      ],
+      "growingNotes": "Give the plant bright, indirect light and a pot that drains freely. Water when the surface starts to dry and trim long stems above a node to keep the plant compact.",
+      "cultivarName": "Neon",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Snake plant (Moonshine)",
+    "scientificName": "Dracaena trifasciata 'Moonshine'",
+    "description": "An upright snake plant with broad, pale silver-green leaves.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "A bright position is useful, but it tolerates lower light. Introduce stronger sun gradually.",
+    "defaultWateringIntervalDays": 21,
+    "wateringInstructions": "Let the potting mix dry before watering. In winter it may need water only every month or two; check first.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Use a very well-drained succulent mix and a pot that releases excess water.",
+    "humidityInstructions": "Tolerates dry room air. Keep out of frost and cold, wet conditions.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/66279/sansevieria-trifasciata-moonshine/details",
+      "reviewedOn": "2026-11-09",
+      "photo": {
+        "path": "/images/plants/cultivar-snake-plant-moonshine.jpg",
+        "altText": "Pale silver-green leaves of a Moonshine snake plant",
+        "credit": "Peter A. Mansfeld",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sansevieria_trifasciata_cv_Moonshine_pm.jpg",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "Sansevieria trifasciata cv Moonshine pm"
+      },
+      "commonNameAliases": [
+        "Moonshine snake plant",
+        "Moonshine sansevieria"
+      ],
+      "categories": [
+        "houseplant"
+      ],
+      "growingNotes": "Choose a bright spot out of harsh direct sun. Let the mix dry between waterings and avoid leaving the pot standing in water.",
+      "cultivarName": "Moonshine",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Raven ZZ plant",
+    "scientificName": "Zamioculcas zamiifolia 'Dowon'",
+    "description": "A ZZ cultivar sold as Raven. Its new leaves emerge green and darken to almost black as they mature.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Bright indirect daylight is ideal; lower light is tolerated. Protect from hot direct sun.",
+    "defaultWateringIntervalDays": 21,
+    "wateringInstructions": "Water only after the mix dries. Winter checks may be spaced further apart; do not water a still-damp pot.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only during active growth, following a suitable product label; reduce or pause when growth slows. Add and adjust a reminder if needed.",
+    "soilInstructions": "Choose a well-drained mix and a container with drainage holes.",
+    "humidityInstructions": "Ordinary indoor humidity is suitable. Keep in a warm room, away from cold windows.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia-raventm-dowon/",
+      "reviewedOn": "2026-11-09",
+      "photo": {
+        "path": "/images/plants/cultivar-zz-dowon.jpg",
+        "altText": "Glossy, nearly black leaflets on a Raven ZZ plant",
+        "credit": "Kathleen Moore",
+        "sourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia-raventm-dowon/",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Zamioculcas zamiifolia Raven™ 'Dowon'"
+      },
+      "commonNameAliases": [
+        "Raven ZZ",
+        "Dowon ZZ plant"
+      ],
+      "categories": [
+        "houseplant"
+      ],
+      "growingNotes": "Use a free-draining mix and let it dry between waterings. Keep the plant out of strong direct sun and water less often when growth is slow.",
+      "cultivarName": "Dowon",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Rubber plant (Burgundy)",
+    "scientificName": "Ficus elastica 'Burgundy'",
+    "description": "An upright rubber plant with broad, glossy, dark burgundy-green leaves.",
+    "sunlightRequirement": "BrightIndirectLight",
+    "sunlightInstructions": "Provide bright, filtered daylight and protect from scorching sun.",
+    "defaultWateringIntervalDays": 10,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://costafarms.com/products/ficus-burgundy-rubber-large",
+      "reviewedOn": "2026-11-09",
+      "photo": null,
+      "categories": [
+        "houseplant"
+      ],
+      "cultivarName": "Burgundy",
+      "photoIsSpeciesReference": false,
+      "growingNotes": "Choose a warm spot with bright, indirect light. Water when the upper mix dries and empty the saucer after watering.",
+      "commonNameAliases": [
+        "Burgundy rubber plant",
+        "Burgundy rubber tree"
+      ]
+    }
   }
 ]

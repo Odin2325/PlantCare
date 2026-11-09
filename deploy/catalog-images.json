@@ -2882,5 +2882,47 @@
     "bytes": 285644,
     "sourceFileName": "Red Russian Kale.jpg",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Cream and green marbling on Marble Queen pothos leaves",
+    "caption": "Epipremnum aureum 'Marble Queen'. Leaves Close-Up (Mecklenburg County, NC)-Spring",
+    "credit": "Hope Duckworth",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "cultivar-pothos-marble-queen",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/common-name/marble-queen/",
+    "path": "/images/plants/cultivar-pothos-marble-queen.jpg",
+    "sha256": "0b8f2d40d306bde9de792e9c3d732d7fe053f90ed5c16129ba3e23f6eb34ffda",
+    "bytes": 601077,
+    "sourceFileName": "epipremnum_aureum-ma_49RGrLIuDclr.jpg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Pale silver-green leaves of a Moonshine snake plant",
+    "caption": "Sansevieria trifasciata cv Moonshine pm",
+    "credit": "Peter A. Mansfeld",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "licenseName": "CC BY 3.0",
+    "slug": "cultivar-snake-plant-moonshine",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sansevieria_trifasciata_cv_Moonshine_pm.jpg",
+    "path": "/images/plants/cultivar-snake-plant-moonshine.jpg",
+    "sha256": "042e80131798e8ce6592eeeacaf755733f6818dcb71e83cb118caaa97c5c26f4",
+    "bytes": 536004,
+    "sourceFileName": "Sansevieria trifasciata cv Moonshine pm.jpg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
+  },
+  {
+    "alt": "Glossy, nearly black leaflets on a Raven ZZ plant",
+    "caption": "Zamioculcas zamiifolia Raven™ 'Dowon'",
+    "credit": "Kathleen Moore",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "cultivar-zz-dowon",
+    "sourceUrl": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia-raventm-dowon/",
+    "path": "/images/plants/cultivar-zz-dowon.jpg",
+    "sha256": "e2e2c43429374cf95b41ab7699e530ee014173ea749749bcc2f3b7150395d0f7",
+    "bytes": 574228,
+    "sourceFileName": "Form_Form_Kathleen_M_2haj9Mc385rt.jpeg",
+    "changes": "None; original downloaded image bytes. Displayed scaled to fit."
   }
 ]
