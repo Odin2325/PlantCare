@@ -2868,5 +2868,19 @@
     "bytes": 63817,
     "sourceFileName": "Rosmarinus officinalis 'Tuscan Blue'1.jpg",
     "changes": "Wikimedia-provided 500-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Red Russian kale growing in a garden",
+    "caption": "Red Russian Kale",
+    "credit": "Geo Lightspeed7",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-kale-red-russian",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red_Russian_Kale.jpg",
+    "path": "/images/plants/cultivar-kale-red-russian.jpg",
+    "sha256": "33b66e707938544703c4ad8d109fe69ce6a668f0853a56782155c6f979ae0d17",
+    "bytes": 285644,
+    "sourceFileName": "Red Russian Kale.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]

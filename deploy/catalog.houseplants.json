@@ -10323,5 +10323,172 @@
       "photo": null,
       "cultivarName": "Moroccan"
     }
+  },
+  {
+    "commonName": "Crisphead lettuce (Great Lakes 118)",
+    "scientificName": "Lactuca sativa 'Great Lakes 118'",
+    "description": "A crisphead lettuce traditionally sold as an iceberg type. Its head can be looser than modern iceberg varieties.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site; shelter and seasonal conditions matter. Follow the growing notes for this crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the soil moist with free drainage. Check often during dry weather because the roots are shallow.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, moisture-retentive, well-drained soil or a suitable container mix.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.seedway.com/product/great-lakes-118-crisphead-lettuce-not-treated/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in a cool spring or autumn window and leave enough room for each plant to form a head. Keep moisture steady while the inner leaves fill.",
+      "harvestInstructions": "Cut the whole head at soil level once it is well formed and before the plant sends up a flower stalk.",
+      "commonNameAliases": [
+        "Great Lakes 118 lettuce",
+        "Great Lakes 118 iceberg lettuce"
+      ],
+      "photo": null,
+      "cultivarName": "Great Lakes 118"
+    }
+  },
+  {
+    "commonName": "Lettuce (Winter Density)",
+    "scientificName": "Lactuca sativa 'Winter Density'",
+    "description": "A compact semi-cos lettuce with crisp hearts and good cold tolerance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site, with shelter appropriate to the crop.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture before watering; let excess water drain and adjust to season and weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow a suitable product label and the growing conditions; no feeding schedule is enabled.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Allow good air circulation and avoid persistently wet roots.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/143346/lactuca-sativa-winter-density/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Try an autumn sowing for an early spring harvest where winter conditions allow. In exposed spots, protect young plants with a cover and keep soil drained.",
+      "harvestInstructions": "Cut the heart at the base once it has filled. Use healthy outer leaves as well if they are still tender.",
+      "photo": null,
+      "cultivarName": "Winter Density",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Winter Density lettuce",
+        "Winter Density semi-cos lettuce"
+      ]
+    }
+  },
+  {
+    "commonName": "Kale (Red Russian)",
+    "scientificName": "Brassica napus (Pabularia Group) 'Red Russian'",
+    "description": "A Siberian kale with lobed green leaves and purple-toned stems and veins.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide a sunny growing site; some light shade is tolerated by leafy herbs. Follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering and adjust to rainfall, season and pot size. Let excess water drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use a fertile, moisture-retentive but well-drained growing medium.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/173056/brassica-napus-pabularia-group-red-russian/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in fertile, drained soil during cool weather. Sow more closely for baby leaves or thin to leave room for mature plants.",
+      "harvestInstructions": "Pick young leaves for a tender harvest or take mature outer leaves as needed. Leave the central growing point intact.",
+      "photo": {
+        "path": "/images/plants/cultivar-kale-red-russian.jpg",
+        "altText": "Red Russian kale growing in a garden",
+        "credit": "Geo Lightspeed7",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red_Russian_Kale.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Red Russian Kale"
+      },
+      "cultivarName": "Red Russian",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Russian kale",
+        "Red Russian Siberian kale"
+      ]
+    }
+  },
+  {
+    "commonName": "Spinach (Viroflay Giant)",
+    "scientificName": "Spinacia oleracea 'Viroflay Giant'",
+    "description": "A large-leaved spinach that needs room for its rosette to spread.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/199795/spinacia-oleracea-viroflay-giant/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow in a cool part of the growing season and thin seedlings for full-size leaves. Water evenly in dry spells.",
+      "harvestInstructions": "Pick outer leaves as they reach the size you want. Harvest before plants start to flower.",
+      "photo": null,
+      "cultivarName": "Viroflay Giant",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Viroflay Giant spinach",
+        "Giant of Viroflay spinach"
+      ]
+    }
+  },
+  {
+    "commonName": "Swiss chard (Bright Lights)",
+    "scientificName": "Beta vulgaris (Leaf Beet Group) 'Bright Lights'",
+    "description": "A Swiss chard with edible leaves and stalks that can be red, yellow, or orange.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Provide sun, with some light shade tolerated by leafy and root crops; follow the crop growing notes.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone before watering. Keep moisture consistent with free drainage and adjust to rainfall, season and container size.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Base feeding on soil or container needs and a suitable product label. Do not feed automatically during dormancy.",
+    "soilInstructions": "Use fertile, loose, moisture-retentive but well-drained soil.",
+    "humidityInstructions": "Provide air circulation and check outdoor weather or greenhouse conditions. Avoid leaving roots waterlogged.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/206888/beta-vulgaris-bright-lights/details",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Use a large drained container or a bed with room for the mature plants. Thin seedlings and water regularly while new leaves are forming.",
+      "harvestInstructions": "Cut older outer stalks near the base and leave the middle leaves to keep growing.",
+      "photo": null,
+      "cultivarName": "Bright Lights",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Bright Lights chard",
+        "Bright Lights leaf beet"
+      ]
+    }
   }
 ]

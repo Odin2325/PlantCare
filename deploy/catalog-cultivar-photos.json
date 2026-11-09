@@ -1276,5 +1276,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Great Lakes 118'",
+    "cultivarName": "Great Lakes 118",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Lactuca sativa 'Winter Density'",
+    "cultivarName": "Winter Density",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Brassica napus (Pabularia Group) 'Red Russian'",
+    "cultivarName": "Red Russian",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-kale-red-russian.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red_Russian_Kale.jpg",
+    "identityEvidence": "The original photograph title identifies the pictured kale as Red Russian.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Spinacia oleracea 'Viroflay Giant'",
+    "cultivarName": "Viroflay Giant",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Beta vulgaris (Leaf Beet Group) 'Bright Lights'",
+    "cultivarName": "Bright Lights",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]
