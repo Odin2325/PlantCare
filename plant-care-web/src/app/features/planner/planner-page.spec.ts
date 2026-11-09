@@ -117,6 +117,27 @@ describe('Space planner', () => {
     expect(page.plan().pots).toHaveLength(0);
   });
 
+  it('shows layout checks across pots and lets the user select one to review', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    page.addPot();
+    page.addPlant('basil');
+    page.addPot();
+    page.nudge(2, 0);
+    page.addPlant('fern');
+    fixture.detectChanges();
+
+    const checklist = fixture.nativeElement.querySelector('.layout-check');
+    expect(checklist.querySelector('summary').textContent).toContain('1 to review');
+    expect(checklist.textContent).toContain('Matches the catalog light needs.');
+    expect(checklist.textContent).toContain('Needs low light / shade.');
+    checklist.querySelectorAll('button')[0].click();
+    expect(page.selectedPot()?.name).toBe('Pot 1');
+  });
+
   it('explains why it cannot suggest a light zone', () => {
     const page = setup().componentInstance;
     page.addPot();

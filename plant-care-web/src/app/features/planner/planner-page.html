@@ -70,6 +70,20 @@
           <li><span class="legend-key zone" aria-hidden="true"></span>Light level unset</li>
         </ul>
       </details>
+      @if (plan().pots.length && !loading() && !catalogError()) {
+        <details class="layout-check">
+          <summary>Layout check · {{ layoutReviewCount() }} to review</summary>
+          <ul class="plant-list">
+            @for (check of layoutChecks(); track check.pot.id) {
+              <li>
+                <button type="button" [attr.aria-pressed]="selectedPot()?.id === check.pot.id"
+                  (click)="select('pot', check.pot.id)">{{ check.pot.name }}</button>
+                <span>{{ check.detail }}</span>
+              </li>
+            }
+          </ul>
+        </details>
+      }
       @if (placing()) { <p role="status">Tap where the selected item's top-left corner should go.</p> }
       @if (plan().shapes.length || plan().pots.length) {
         <label class="item-list">Edit map item<select [value]="selection()?.id ?? ''"

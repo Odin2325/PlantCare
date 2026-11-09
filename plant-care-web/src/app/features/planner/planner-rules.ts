@@ -68,16 +68,36 @@ export function placementProblem(plan: Plan, pot: Pot): string | null {
   return overlappingPot ? 'This pot overlaps “' + overlappingPot.name + '”.' : null;
 }
 
-export function placementAdvice(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
-  { spot: Bounds; problem: null } | { spot: null; problem: string } {
+function potLightRequirement(pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
+  { light: Light; problem: null } | { light: null; problem: string } {
   const needs = new Set(pot.plants.map(plant => catalog.get(plant.speciesId)?.sunlightRequirement));
   const light = needs.values().next().value;
-  if (!light || needs.has(undefined) || needs.has('Unknown')) {
-    return { spot: null, problem: 'Some plants are missing catalog light requirements.' };
+  if (!light || light === 'Unknown' || needs.has(undefined) || needs.has('Unknown')) {
+    return { light: null, problem: 'Some plants are missing catalog light requirements.' };
   }
   if (needs.size > 1) {
-    return { spot: null, problem: 'These plants need different light. Try placing them in separate pots.' };
+    return { light: null, problem: 'These plants need different light. Try placing them in separate pots.' };
   }
+  return { light, problem: null };
+}
+
+export function checkPotPosition(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
+  { status: 'review' | 'match' | 'empty'; detail: string } {
+  const placementIssue = placementProblem(plan, pot);
+  if (placementIssue) return { status: 'review', detail: placementIssue };
+  if (!pot.plants.length) return { status: 'empty', detail: 'No plants added yet.' };
+  const { light, problem } = potLightRequirement(pot, catalog);
+  if (!light) return { status: 'review', detail: problem };
+  const current = lightAt(plan, pot);
+  if (!current) return { status: 'review', detail: 'Place the whole pot in a marked light zone.' };
+  if (current !== light) return { status: 'review', detail: 'Needs ' + lightLabel(light).toLowerCase() + '.' };
+  return { status: 'match', detail: 'Matches the catalog light needs.' };
+}
+
+export function placementAdvice(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
+  { spot: Bounds; problem: null } | { spot: null; problem: string } {
+  const { light, problem } = potLightRequirement(pot, catalog);
+  if (!light) return { spot: null, problem };
   if (!plan.shapes.some(shape => shape.role === 'light' && shape.light === light)) {
     return { spot: null, problem: 'Mark a light zone for ' + lightLabel(light).toLowerCase() + '.' };
   }

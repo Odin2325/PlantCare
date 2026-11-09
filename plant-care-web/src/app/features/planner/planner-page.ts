@@ -6,7 +6,7 @@ import { AuthService } from '../../core/auth/services/auth.service';
 import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
-import { Bounds, Light, Moisture, Plan, Pot, Shape, columns, lightAt, lightLabel,
+import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, lightAt, lightLabel,
   lightOptions, placementAdvice, placementProblem, rows, sharing } from './planner-rules';
 
 const maxPlans = 12;
@@ -107,6 +107,12 @@ export class PlannerPage {
     const start = this.choicePage() * choicePageSize;
     return this.choices().slice(start, start + choicePageSize);
   });
+  readonly layoutChecks = computed(() => {
+    const plan = this.plan();
+    const catalog = this.catalog();
+    return plan.pots.map(pot => ({ pot, ...checkPotPosition(plan, pot, catalog) }));
+  });
+  readonly layoutReviewCount = computed(() => this.layoutChecks().filter(check => check.status === 'review').length);
   readonly potLight = computed(() => {
     const pot = this.selectedPot();
     return pot ? lightAt(this.plan(), pot) : null;
