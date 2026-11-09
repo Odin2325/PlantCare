@@ -1033,5 +1033,50 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_1981_Pinot_Noir_grapes_at_the_Main_Ridge_Estate.jpg",
     "identityEvidence": "Source file title and/or description identify this named cultivar: Pinot Noir. Main Ridge Estate vineyard, Mornington Peninsula Victoria, Australia.",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "scientificName": "Brassica rapa Chinensis Group 'Joi Choi'",
+    "cultivarName": "Joi Choi",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Brassica rapa Chinensis Group 'Little Shanghai'",
+    "cultivarName": "Little Shanghai",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Brassica rapa Pekinensis Group 'Bilko'",
+    "cultivarName": "Bilko",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Raphanus sativus var. longipinnatus 'Miyashige'",
+    "cultivarName": "Miyashige",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Abelmoschus esculentus 'Clemson Spineless'",
+    "cultivarName": "Clemson Spineless",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-09"
   }
 ]

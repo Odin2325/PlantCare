@@ -9144,5 +9144,433 @@
       "cultivarName": "Red Salad Bowl",
       "photoIsSpeciesReference": false
     }
+  },
+  {
+    "commonName": "Bok choy",
+    "scientificName": "Brassica rapa Chinensis Group",
+    "description": "Upright leafy brassica with juicy stalks. Grow baby leaves in a container or give plants room for larger bunches.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/pak-choi/grow-your-own",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow shallowly in small batches during mild weather. Thin for the harvest size you want. Cold stress and later heat can prompt flowering.",
+      "harvestInstructions": "Take outer leaves for a small harvest or cut the whole bunch at the base before flowering.",
+      "commonNameAliases": [
+        "Pak choi",
+        "Pac choi",
+        "Bok choi"
+      ],
+      "photo": {
+        "path": "/images/plants/bok-choy.jpg",
+        "altText": "Bok choy plant with broad green leaves and pale stalks",
+        "credit": "Rameshng",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brassica_rapa_subsp._chinensis_-_Pak_choi_from_lalbagh_2290.JPG",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Brassica rapa subsp. chinensis - Pak choi from lalbagh 2290"
+      }
+    }
+  },
+  {
+    "commonName": "Bok choy (Joi Choi)",
+    "scientificName": "Brassica rapa Chinensis Group 'Joi Choi'",
+    "description": "A full-size hybrid bok choy with white stems. Give it more room than miniature types.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/vegetables/greens/pac-choi-bok-choy/joi-choi-f1-green-seed-507.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Use a bed or a roomy container and thin for full-size heads. Keep the roots moist while the leaf stalks thicken.",
+      "harvestInstructions": "Cut the whole bunch at the base while the stems are crisp and before the flower stalk elongates.",
+      "commonNameAliases": [
+        "Joi Choi pak choi",
+        "Joi Choi F1"
+      ],
+      "photo": null,
+      "cultivarName": "Joi Choi",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Bok choy (Little Shanghai)",
+    "scientificName": "Brassica rapa Chinensis Group 'Little Shanghai'",
+    "description": "A miniature green-stemmed hybrid intended for harvesting as a small whole head.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/vegetables/greens/pac-choi-bok-choy/little-shanghai-f1-green-seed-4974.11.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "A trough with drainage works for several mini heads. Thin to the seed supplier's spacing and keep the mix moist during establishment.",
+      "harvestInstructions": "Cut compact mini heads at the base while the leaves are tender.",
+      "commonNameAliases": [
+        "Little Shanghai pak choi",
+        "Little Shanghai F1"
+      ],
+      "photo": null,
+      "cultivarName": "Little Shanghai",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Napa cabbage",
+    "scientificName": "Brassica rapa Pekinensis Group",
+    "description": "A heading brassica with pale ribs and crinkled upright leaves. Allow room for the head to fill.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/growing-chinese-cabbage-and-bok-choy",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a cool growing window that allows heads to form before hard frost. Space for the mature cultivar and keep water available during heading.",
+      "harvestInstructions": "Cut the head at soil level when the centre is firm and remove any damaged outer leaves.",
+      "commonNameAliases": [
+        "Chinese cabbage",
+        "Wombok"
+      ],
+      "photo": {
+        "path": "/images/plants/napa-cabbage.jpg",
+        "altText": "Napa cabbage showing its pale, tightly layered leaves",
+        "credit": "Fanghong",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:BrassicaPekinensis.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "BrassicaPekinensis"
+      }
+    }
+  },
+  {
+    "commonName": "Napa cabbage (Bilko)",
+    "scientificName": "Brassica rapa Pekinensis Group 'Bilko'",
+    "description": "A hybrid Napa cabbage grown for full-size heads.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/vegetables/chinese-cabbage/bilko-organic-f1-chinese-cabbage-seed-2814G.54.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Allow space for a full head and choose a cool finishing period. Transplant young seedlings before they become rootbound.",
+      "harvestInstructions": "Cut when the head is firm. Remove damaged outer leaves and cool promptly.",
+      "commonNameAliases": [
+        "Bilko Chinese cabbage",
+        "Bilko F1"
+      ],
+      "photo": null,
+      "cultivarName": "Bilko",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Tatsoi",
+    "scientificName": "Brassica rapa var. narinosa",
+    "description": "A leafy brassica with spoon-shaped leaves that form a low rosette.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/growers-library/vegetables/baby-leaf/baby-leaf-brassicas-key-growing-information.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow for baby leaves or thin to allow separate rosettes. Keep seed and seedlings evenly moist as they establish.",
+      "harvestInstructions": "Snip young leaves or cut a whole rosette when it reaches the size you want.",
+      "commonNameAliases": [
+        "Tat soi",
+        "Spoon mustard"
+      ],
+      "photo": {
+        "path": "/images/plants/tatsoi.jpg",
+        "altText": "Tatsoi with dark green spoon-shaped leaves",
+        "credit": "Idéalités",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brassica_rapa_subsp_narinosa.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Brassica rapa subsp narinosa"
+      }
+    }
+  },
+  {
+    "commonName": "Mizuna",
+    "scientificName": "Brassica rapa Japonica Group",
+    "description": "A Japanese leafy green with deeply divided leaves suited to successive picking.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/mizuna-mibuna/grow-your-own",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow small batches in a bed or container. Thin for larger plants or keep closer spacing for baby leaves.",
+      "harvestInstructions": "Pick outer leaves or snip young growth above the base to allow regrowth when conditions suit.",
+      "commonNameAliases": [
+        "Japanese mustard greens",
+        "Mizuna greens"
+      ],
+      "photo": {
+        "path": "/images/plants/mizuna.jpg",
+        "altText": "Mizuna plant with finely divided green leaves",
+        "credit": "Ping an Chang",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E4%BA%AC%E6%B0%B4%E8%8F%9C_20191121181034_01.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "京水菜 20191121181034 01"
+      }
+    }
+  },
+  {
+    "commonName": "Komatsuna",
+    "scientificName": "Brassica rapa var. perviridis",
+    "description": "A Japanese leafy brassica with broad leaves that can be grown for baby greens or larger bunches.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun in cool weather. A little afternoon shade can help keep the crop cooler in warm weather.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Keep the growing mix evenly moist and let excess water drain. Check containers more often in warm or windy weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, moisture-retentive soil or container mix with free drainage.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/growers-library/vegetables/baby-leaf/baby-leaf-brassicas-key-growing-information.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow into a fine, moist seedbed. Thin the crop early if you want larger individual plants and keep rows weeded.",
+      "harvestInstructions": "Cut baby leaves while tender or harvest larger leafy plants in bunches before flowering.",
+      "commonNameAliases": [
+        "Japanese mustard spinach",
+        "Komatsuna greens"
+      ],
+      "photo": {
+        "path": "/images/plants/komatsuna.jpg",
+        "altText": "Komatsuna showing its green leaves and stems",
+        "credit": "日陰猫Joga",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Komatsuna.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Komatsuna"
+      }
+    }
+  },
+  {
+    "commonName": "Daikon radish",
+    "scientificName": "Raphanus sativus var. longipinnatus",
+    "description": "A long-rooted Asian radish. Root size depends on cultivar and the depth of loose soil.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny spot and grow in a cool part of the season.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep moisture steady while roots swell. Avoid a dry spell followed by a heavy soaking.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use deep, loose, stone-free soil with free drainage. Choose a container deeper than the expected mature root.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/growing-radishes",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly where roots can develop undisturbed. Thin early and plan long-rooted types for deeply loosened soil.",
+      "harvestInstructions": "Loosen the soil below the root with a fork before lifting so it is less likely to snap.",
+      "commonNameAliases": [
+        "Daikon",
+        "Japanese white radish"
+      ],
+      "photo": {
+        "path": "/images/plants/daikon-radish.jpg",
+        "altText": "Long white daikon radishes displayed in a market",
+        "credit": "Chris 73 / Wikimedia Commons",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daikon.Japan.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Daikon.Japan"
+      }
+    }
+  },
+  {
+    "commonName": "Daikon radish (Miyashige)",
+    "scientificName": "Raphanus sativus var. longipinnatus 'Miyashige'",
+    "description": "A cylindrical white daikon with a pale green shoulder. This long cultivar needs considerable rooting depth.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny spot and grow in a cool part of the season.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep moisture steady while roots swell. Avoid a dry spell followed by a heavy soaking.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use deep, loose, stone-free soil with free drainage. Choose a container deeper than the expected mature root.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.johnnyseeds.com/vegetables/radishes/daikon-korean-radishes/miyashige-radish-seed-625.html",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Prefer a deep bed for the long roots. Time sowing for a cool finish and thin the plants so the roots can expand.",
+      "harvestInstructions": "Fork well below the root and lift it carefully. Harvest a sample root to judge readiness.",
+      "commonNameAliases": [
+        "Miyashige daikon",
+        "Miyashige white radish"
+      ],
+      "photo": null,
+      "cultivarName": "Miyashige",
+      "photoIsSpeciesReference": false
+    }
+  },
+  {
+    "commonName": "Okra",
+    "scientificName": "Abelmoschus esculentus",
+    "description": "A warm-season vegetable grown for tender young pods. It needs sustained warmth to crop well.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give it full sun in a warm, sheltered position. A greenhouse can help in cooler climates.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Water deeply when the root zone starts drying, especially during pod production. Check pots more often during hot weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, well-drained soil or a roomy container of well-drained growing mix.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://extension.illinois.edu/gardening/okra",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in warmth or sow when the soil is warm. Wait until frost risk has passed before putting plants outside. Give each plant room to grow.",
+      "harvestInstructions": "Pick young pods frequently while they are tender. Older pods become fibrous.",
+      "commonNameAliases": [
+        "Lady’s fingers",
+        "Gumbo plant"
+      ],
+      "photo": {
+        "path": "/images/plants/okra.jpg",
+        "altText": "Okra flower beside developing seed pods",
+        "credit": "jim evans",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Okra_--_Abelmoschus_esculentus.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Okra -- Abelmoschus esculentus"
+      }
+    }
+  },
+  {
+    "commonName": "Okra (Clemson Spineless)",
+    "scientificName": "Abelmoschus esculentus 'Clemson Spineless'",
+    "description": "An established green-podded okra cultivar from the South Carolina Experiment Station.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give it full sun in a warm, sheltered position. A greenhouse can help in cooler climates.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Water deeply when the root zone starts drying, especially during pod production. Check pots more often during hot weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Adjust feeding to the soil or container mix and follow the product label during active growth.",
+    "soilInstructions": "Use fertile, well-drained soil or a roomy container of well-drained growing mix.",
+    "humidityInstructions": null,
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://all-americaselections.org/product/okra-clemson-spineless/",
+      "reviewedOn": "2026-11-09",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in a warm sheltered bed or use a large container in a greenhouse if summers are cool. Harvest young pods regularly to keep plants producing.",
+      "harvestInstructions": "Clip young pods before they toughen. Check plants frequently during warm weather.",
+      "commonNameAliases": [
+        "Clemson Spineless okra"
+      ],
+      "photo": null,
+      "cultivarName": "Clemson Spineless",
+      "photoIsSpeciesReference": false
+    }
   }
 ]
