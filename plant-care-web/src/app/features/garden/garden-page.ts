@@ -12,6 +12,10 @@ import { HarvestOverview } from './harvest-overview';
 import { PlantingCalendar } from './planting-calendar';
 import { UpcomingWork } from './upcoming-work';
 
+const locationPrefix = 'location:';
+const locationKey = (plant: UserPlant): string => `${locationPrefix}${plant.location?.trim() ?? ''}`;
+const locationName = (key: string): string => key.slice(locationPrefix.length) || 'Location not set';
+
 @Component({
   selector: 'app-garden-page', standalone: true, imports: [DatePipe, RouterLink, PlantPhoto, PlantingCalendar, HarvestOverview, UpcomingWork],
   templateUrl: './garden-page.html', styleUrl: './garden-page.css',
@@ -26,14 +30,22 @@ export class GardenPage {
   readonly view = signal<'plants' | 'harvests' | 'upcoming'>('plants');
   readonly query = signal('');
   readonly category = signal<PlantCategory | ''>('');
+  readonly locationFilter = signal('');
   readonly planFilter = signal<'planned' | 'unplanned' | ''>('');
   hasPlan(plant: UserPlant): boolean { return Boolean(plant.plannedSowingOn || plant.plannedPlantingOutOn || plant.expectedHarvestOn); }
   readonly categories = plantCategoryOptions.filter(option => option.value !== 'houseplant');
   readonly gardenPlants = computed(() => this.plants().filter(plant => plant.isActive &&
     plant.speciesCatalogProfile?.categories?.some(category => category !== 'houseplant')));
+  readonly locationOptions = computed(() => {
+    const locations = new Set(this.gardenPlants().map(locationKey));
+    return [...locations].map(key => ({ key, name: key === locationPrefix ? 'No saved location' : locationName(key) }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+  });
   readonly visiblePlants = computed(() => {
     const query = normalizePlantSearch(this.query());
+    const location = this.locationFilter();
     return this.gardenPlants().filter(plant =>
+      (!location || locationKey(plant) === location) &&
       (!this.planFilter() || (this.planFilter() === 'planned' ? this.hasPlan(plant) : !this.hasPlan(plant))) &&
       (!this.category() || plant.speciesCatalogProfile?.categories?.includes(this.category() as PlantCategory)) &&
       (!query || normalizePlantSearch([plant.nickname, plant.speciesCommonName, plant.speciesScientificName,
@@ -43,10 +55,13 @@ export class GardenPage {
   readonly locations = computed(() => {
     const groups = new Map<string, UserPlant[]>();
     for (const plant of this.visiblePlants()) {
-      const location = plant.location?.trim() || 'Location not set';
-      groups.set(location, [...(groups.get(location) ?? []), plant]);
+      const key = locationKey(plant);
+      const group = groups.get(key);
+      if (group) group.push(plant);
+      else groups.set(key, [plant]);
     }
-    return [...groups].sort(([a], [b]) => a.localeCompare(b, 'en')).map(([name, plants]) => ({ name, plants }));
+    return [...groups].map(([key, plants]) => ({ key, name: locationName(key), plants }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'en'));
   });
   constructor() { this.load(); }
   load(): void {
@@ -59,7 +74,12 @@ export class GardenPage {
   setCategory(value: PlantCategory | ''): void {
     this.category.set(this.categories.some(option => option.value === value) ? value : '');
   }
-  clearFilters(): void { this.query.set(''); this.category.set(''); this.planFilter.set(''); }
+  clearFilters(): void {
+    this.query.set('');
+    this.category.set('');
+    this.planFilter.set('');
+    this.locationFilter.set('');
+  }
   nextCare(plant: UserPlant): CareSchedule | undefined {
     return plant.careSchedules.filter(schedule => schedule.isEnabled && schedule.nextDueAtUtc &&
       Number.isFinite(Date.parse(schedule.nextDueAtUtc)))

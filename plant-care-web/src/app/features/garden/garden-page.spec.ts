@@ -15,7 +15,8 @@ describe('Garden collection', () => {
     const getAll = vi.fn().mockReturnValue(of(plants));
     TestBed.configureTestingModule({ providers: [provideRouter([]),
       { provide: MyPlantsApiService, useValue: { getAll } }] });
-    return { page: TestBed.createComponent(GardenPage).componentInstance, getAll };
+    const fixture = TestBed.createComponent(GardenPage);
+    return { fixture, page: fixture.componentInstance, getAll };
   }
   afterEach(() => TestBed.resetTestingModule());
   it('groups active crops by trimmed location and excludes houseplants, legacy and archived plants', () => {
@@ -50,6 +51,40 @@ describe('Garden collection', () => {
     page.load(); expect(page.error()).toBe(false); expect(page.gardenPlants()).toHaveLength(1);
     expect(getAll).toHaveBeenCalledTimes(3);
   });
+  it('filters by exact saved location and keeps unassigned plants separate', () => {
+    const balconyCrop = { ...make('Tomato', ['vegetable'], ' Balcony '), plannedSowingOn: '2027-04-01' };
+    const balconyTree = make('Fig', ['tree'], 'Balcony');
+    const annex = make('Pepper', ['vegetable'], 'Balcony annex');
+    const unassigned = make('Lettuce', ['vegetable'], '  ');
+    const namedLocation = make('Carrot', ['vegetable'], 'Location not set');
+    const { fixture, page } = setup([balconyCrop, balconyTree, annex, unassigned, namedLocation]);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const select = element.querySelector<HTMLSelectElement>('#garden-location-filter')!;
+    const choose = (label: string) => {
+      select.value = Array.from(select.options).find(option => option.text === label)!.value;
+      select.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+    };
+
+    expect(Array.from(select.options).filter(option => option.text === 'Balcony')).toHaveLength(1);
+    choose('Balcony');
+    expect(page.visiblePlants()).toEqual([balconyTree, balconyCrop]);
+    expect(element.querySelectorAll('.garden-card')).toHaveLength(2);
+    page.planFilter.set('planned');
+    expect(page.visiblePlants()).toEqual([balconyCrop]);
+    page.planFilter.set('');
+
+    choose('No saved location');
+    expect(page.visiblePlants()).toEqual([unassigned]);
+    choose('Location not set');
+    expect(page.visiblePlants()).toEqual([namedLocation]);
+    page.clearFilters();
+    fixture.detectChanges();
+    expect(select.value).toBe('');
+    expect(page.visiblePlants()).toHaveLength(5);
+  });
+
   it('combines saved plan dates with category and search filters and clearing', () => {
     const crop = make('Tomato', ['vegetable']); crop.expectedHarvestOn = '2027-08-01';
     const { page } = setup([crop, make('Fig', ['tree'])]);
