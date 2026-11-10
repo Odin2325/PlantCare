@@ -19,6 +19,25 @@
       <button type="button" (click)="duplicatePlan()" [disabled]="plans().length >= maxPlans">Duplicate layout</button>
       <button type="button" (click)="deletePlan()">Delete layout</button>
     </div>
+    <details class="layout-starters">
+      <summary>Starter layouts</summary>
+      <p>Start a separate layout and adjust it to your space. Set each zone’s light after observing it.</p>
+      @if (plans().length >= maxPlans) {
+        <p>Delete a layout before starting another.</p>
+      }
+      <ul class="plant-list">
+        @for (starter of starterLayouts; track starter.name) {
+          <li>
+            <div class="actions">
+              <button type="button" (click)="addPlan(starter)" [disabled]="plans().length >= maxPlans">
+                Use {{ starter.name }}
+              </button>
+            </div>
+            <span>{{ starter.description }}</span>
+          </li>
+        }
+      </ul>
+    </details>
     <p class="storage">Layouts are saved in this browser for your account. {{ saveMessage() }}</p>
   </section>
 

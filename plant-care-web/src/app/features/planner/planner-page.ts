@@ -11,6 +11,7 @@ import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.servi
 import { UserPlant } from '../my-plants/models/user-plant.model';
 import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, containsPot, findPotSpot, lightAt, lightLabel,
   lightOptions, placementAdvice, placementProblem, rows, sharing } from './planner-rules';
+import { StarterLayout, starterLayouts } from './planner-starters';
 
 const maxPlans = 12;
 const maxShapes = 40;
@@ -210,6 +211,7 @@ export class PlannerPage {
   readonly lights = lightOptions;
   readonly lightLabel = lightLabel;
   readonly maxPlans = maxPlans;
+  readonly starterLayouts = starterLayouts;
   readonly maxShapes = maxShapes;
   readonly maxPots = maxPots;
   readonly maxPlants = maxPlants;
@@ -282,11 +284,19 @@ export class PlannerPage {
     this.planId.set(id);
     this.clearSelection();
   }
-  addPlan(): void {
+  addPlan(starter?: StarterLayout): void {
     if (this.plans().length >= maxPlans) return;
     const plan = newPlan();
+    if (starter) {
+      plan.name = starter.name;
+      plan.setting = starter.setting;
+      plan.shapes = starter.shapes.map(shape => ({ ...shape, id: crypto.randomUUID() }));
+      plan.pots = starter.pots.map(pot => ({ ...pot, id: crypto.randomUUID(), plants: [] }));
+    }
     this.save([...this.plans(), plan]);
     this.switchPlan(plan.id);
+    const firstZone = plan.shapes.find(shape => shape.role === 'light');
+    if (firstZone) this.select('shape', firstZone.id);
   }
   duplicatePlan(): void {
     if (this.plans().length >= maxPlans) return;

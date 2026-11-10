@@ -75,6 +75,37 @@ describe('Space planner', () => {
     expect(fixture.nativeElement.querySelector('.assessment').textContent).not.toContain('Shelf');
   });
 
+  it('starts a separate editable balcony layout with unmeasured light and persists both layouts', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.renamePlan('My room');
+    page.addShape('circle');
+    const original = page.plan();
+    fixture.detectChanges();
+
+    const starters = fixture.nativeElement.querySelector('.layout-starters') as HTMLDetailsElement;
+    starters.open = true;
+    const balcony = Array.from(starters.querySelectorAll('button'))
+      .find(button => button.textContent?.trim() === 'Use Balcony')!;
+    balcony.click();
+    fixture.detectChanges();
+
+    const starter = page.plan();
+    expect(starter).toMatchObject({ name: 'Balcony', setting: 'outdoor' });
+    expect(starter.pots).toHaveLength(2);
+    expect(starter.pots.every(pot => !pot.plants.length)).toBe(true);
+    expect(starter.shapes.filter(shape => shape.role === 'light').map(shape => shape.light)).toEqual([null, null]);
+    expect(page.selectedShape()?.name).toBe('Rail side');
+    page.setLight('FullSun');
+    expect(page.plans()[0]).toEqual(original);
+
+    fixture.destroy();
+    TestBed.resetTestingModule();
+    const saved = setup().componentInstance.plans();
+    expect(saved.map(plan => plan.name)).toEqual(['My room', 'Balcony']);
+    expect(saved[1].shapes.find(shape => shape.name === 'Rail side')?.light).toBe('FullSun');
+  });
+
   it('moves the selected item one square with the direction buttons', () => {
     const fixture = setup();
     const page = fixture.componentInstance;
