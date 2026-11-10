@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { interval } from 'rxjs';
 import { UserPlant } from '../my-plants/models/user-plant.model';
-import { validPlanDate } from './planting-calendar';
+import { plantingTargets, validPlanDate } from './planting-calendar';
 
 type WorkKind = 'care' | 'target';
 const workPageSize = 8;
@@ -18,12 +18,6 @@ export interface GardenWorkEntry {
   kind: WorkKind;
   status: string;
 }
-const targets = [
-  ['plannedSowingOn', 'Planned sowing'],
-  ['plannedPlantingOutOn', 'Planned planting out'],
-  ['expectedHarvestOn', 'Expected harvest'],
-] as const;
-
 export function localWorkDate(date: Date): string {
   return `${String(date.getFullYear()).padStart(4, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
@@ -38,7 +32,7 @@ export function gardenWorkEntries(plants: UserPlant[], now: Date, days: number,
   const entries: GardenWorkEntry[] = [];
   for (const plant of plants.filter(p => p.isActive)) {
     const name = plant.nickname?.trim() || plant.speciesCommonName;
-    for (const [field, action] of targets) {
+    for (const [field, action] of plantingTargets) {
       const date = plant[field];
       if (validPlanDate(date)) entries.push({ id: `${plant.id}:${field}`, plantId: plant.id,
         name, date, instant: null, action, kind: 'target',

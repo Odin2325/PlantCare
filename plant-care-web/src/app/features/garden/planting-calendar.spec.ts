@@ -29,6 +29,40 @@ describe('Planting calendar', () => {
     expect(calendar.days()).toEqual([]);
     expect(fixture.nativeElement.textContent).toContain('No planting dates in this month');
   });
+  it('filters target types and skips empty months in either direction', () => {
+    const { calendar, fixture } = setup([
+      { id: 'a', nickname: 'Patio tomato', isActive: true, plannedSowingOn: '2027-11-02',
+        plannedPlantingOutOn: '2028-02-12', expectedHarvestOn: '2028-06-01' },
+      { id: 'b', nickname: 'Balcony lettuce', isActive: true, plannedSowingOn: '2028-04-04' },
+      { id: 'archived', isActive: false, plannedSowingOn: '2028-03-01' },
+    ]);
+    calendar.setMonth('2028-01');
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const filter = element.querySelector('select')!;
+    const jump = (direction: string) => Array.from(element.querySelectorAll('button'))
+      .find(button => button.textContent?.trim() === direction + ' month with targets')!;
+
+    expect(calendar.nextTargetMonth()).toBe('2028-02');
+    filter.value = 'plannedSowingOn';
+    filter.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(calendar.nextTargetMonth()).toBe('2028-04');
+
+    jump('Next').click();
+    fixture.detectChanges();
+    expect(calendar.month()).toBe('2028-04');
+    expect(element.querySelector('.plan-day a')?.textContent).toContain('Balcony lettuce');
+    expect(element.querySelector('.plan-day a')?.getAttribute('href')).toBe('/my-plants/b');
+
+    calendar.setMonth('2028-01');
+    fixture.detectChanges();
+    jump('Previous').click();
+    fixture.detectChanges();
+    expect(calendar.month()).toBe('2027-11');
+    expect(element.querySelector('.plan-day a')?.textContent).toContain('Patio tomato');
+  });
+
   it('navigates year boundaries and rejects malformed months and impossible dates', () => {
     const { calendar } = setup([{ id: 'a', isActive: true, plannedSowingOn: '2027-02-29',
       expectedHarvestOn: '2027-02-28T23:00:00Z' }]);

@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, input, signal } from '@an
 import { RouterLink } from '@angular/router';
 import { UserPlant } from '../my-plants/models/user-plant.model';
 
-const actions = [
+export const plantingTargets = [
   ['plannedSowingOn', 'Planned sowing'],
   ['plannedPlantingOutOn', 'Planned planting out'],
   ['expectedHarvestOn', 'Expected harvest'],
 ] as const;
+
+type TargetField = typeof plantingTargets[number][0];
 
 // Calendar dates stay as strings. UTC is used only for formatting, never for comparing dates.
 export function validPlanDate(value: string | null | undefined): value is string {
@@ -26,17 +28,39 @@ export class PlantingCalendar {
   readonly monthTitle = computed(() => new Intl.DateTimeFormat('en', {
     month: 'long', year: 'numeric', timeZone: 'UTC',
   }).format(new Date(this.month() + '-01T00:00:00Z')));
-  readonly days = computed(() => {
-    const events = this.plants().filter(plant => plant.isActive).flatMap(plant => actions.flatMap(([field, action], order) => {
+  readonly targetOptions = plantingTargets;
+  readonly targetFilter = signal<TargetField | ''>('');
+  private readonly events = computed(() => {
+    const filter = this.targetFilter();
+    return this.plants().filter(plant => plant.isActive).flatMap(plant => plantingTargets.flatMap(([field, action], order) => {
       const date = plant[field];
-      return validPlanDate(date) && date.startsWith(this.month() + '-')
-        ? [{ date, action, plantId: plant.id, name: plant.nickname || plant.speciesCommonName, field, order }] : [];
+      return (!filter || field === filter) && validPlanDate(date)
+        ? [{ date, action, plantId: plant.id, name: plant.nickname?.trim() || plant.speciesCommonName, field, order }] : [];
     })).sort((a, b) => a.date.localeCompare(b.date) || a.name.localeCompare(b.name, 'en') || a.order - b.order);
-    const dates = [...new Set(events.map(event => event.date))];
-    return dates.map(date => ({ date, label: new Intl.DateTimeFormat('en', {
-      weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC',
-    }).format(new Date(date + 'T00:00:00Z')), events: events.filter(event => event.date === date) }));
   });
+  private readonly monthsWithTargets = computed(() => [...new Set(this.events().map(event => event.date.slice(0, 7)))]);
+  readonly previousTargetMonth = computed(() => this.monthsWithTargets().filter(month => month < this.month()).at(-1));
+  readonly nextTargetMonth = computed(() => this.monthsWithTargets().find(month => month > this.month()));
+  readonly days = computed(() => {
+    const grouped = new Map<string, ReturnType<typeof this.events>>();
+    const month = this.month();
+    for (const event of this.events()) {
+      if (!event.date.startsWith(month + '-')) continue;
+      const day = grouped.get(event.date);
+      if (day) day.push(event);
+      else grouped.set(event.date, [event]);
+    }
+    const format = new Intl.DateTimeFormat('en', {
+      weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC',
+    });
+    return [...grouped].map(([date, events]) => ({
+      date, label: format.format(new Date(date + 'T00:00:00Z')), events,
+    }));
+  });
+  setTargetFilter(value: string): void {
+    const target = plantingTargets.find(([field]) => field === value);
+    this.targetFilter.set(target?.[0] ?? '');
+  }
   setMonth(value: string): void { if (validPlanDate(value + '-01')) this.month.set(value); }
   moveMonth(offset: number): void {
     const [year, month] = this.month().split('-').map(Number);

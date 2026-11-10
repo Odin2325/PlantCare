@@ -7,7 +7,15 @@
     <button type="button" (click)="moveMonth(1)" [disabled]="month() === '9999-12'">Next month</button>
     <div><label for="planting-calendar-month">Go to month</label><input id="planting-calendar-month" type="month" min="0001-01" max="9999-12" [value]="month()" (input)="setMonth($any($event.target).value)"></div>
   </div>
-  <h3 aria-live="polite">{{ monthTitle() }}</h3>
+  <label class="target-filter">Target type
+    <select [value]="targetFilter()" (change)="setTargetFilter($any($event.target).value)">
+      <option value="">All planting targets</option>
+      @for (option of targetOptions; track option[0]) {
+        <option [value]="option[0]">{{ option[1] }}</option>
+      }
+    </select>
+  </label>
+  <h3 #monthHeading tabindex="-1" aria-live="polite">{{ monthTitle() }}</h3>
   @for (day of days(); track day.date) {
     <section class="plan-day" [attr.aria-label]="day.label">
       <h4><time [attr.datetime]="day.date">{{ day.label }}</time></h4>
@@ -15,5 +23,15 @@
         <li><a [routerLink]="['/my-plants', event.plantId]">{{ event.name }} · {{ event.action }}</a></li>
       }</ul>
     </section>
-  } @empty { <p role="status">No planting dates in this month for the current filters. Choose another month or add dates on a plant’s detail page.</p> }
+  } @empty {
+    <p role="status">No planting dates in this month for the current filters. Choose another month or add dates on a plant’s detail page.</p>
+    <div class="month-controls">
+      @if (previousTargetMonth(); as previous) {
+        <button type="button" (click)="setMonth(previous); monthHeading.focus()">Previous month with targets</button>
+      }
+      @if (nextTargetMonth(); as next) {
+        <button type="button" (click)="setMonth(next); monthHeading.focus()">Next month with targets</button>
+      }
+    </div>
+  }
 </section>
