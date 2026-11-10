@@ -258,6 +258,16 @@
           <p>{{ potLight() ? lightLabel(potLight()) : 'Place the whole pot in a marked light zone.' }}</p>
           @if (potPlacementProblem(); as problem) { <p>{{ problem }}</p> }
           @if (pot.plants.length && !loading() && !catalogError()) {
+            @if (matchingPotZones().length > 1) {
+              <label>Suggest a spot in
+                <select [value]="preferredZone()?.id ?? ''" (change)="preferredZoneId.set($any($event.target).value)">
+                  <option value="">Nearest matching zone</option>
+                  @for (zone of matchingPotZones(); track zone.id) {
+                    <option [value]="zone.id">{{ zone.name }}</option>
+                  }
+                </select>
+              </label>
+            }
             @if (suggestion(); as candidate) {
               @if (candidate.x === pot.x && candidate.y === pot.y) { <p>This spot matches the catalog light needs.</p> }
               @else {

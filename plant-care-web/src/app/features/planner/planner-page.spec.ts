@@ -75,6 +75,47 @@ describe('Space planner', () => {
     expect(fixture.nativeElement.querySelector('.assessment').textContent).not.toContain('Shelf');
   });
 
+  it('previews and moves a whole pot within the chosen zone, without falling back when it is blocked', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    for (const [name, x] of [['Near zone', 0], ['Window zone', 10], ['Blocked zone', 18]] as const) {
+      page.addShape('square');
+      page.renameItem(name);
+      page.setRole('light');
+      page.setLight('FullSun');
+      const width = document.createElement('input');
+      width.type = 'number';
+      width.value = '5';
+      page.changeBounds('width', width);
+      page.nudge(x, 0);
+    }
+    page.addShape('square');
+    page.setRole('obstacle');
+    page.nudge(18, 0);
+    page.addPot();
+    page.addPlant('basil');
+    const original = page.selectedPot()!;
+    fixture.detectChanges();
+
+    const placement = fixture.nativeElement.querySelector('.assessment');
+    const select = placement.querySelector('select') as HTMLSelectElement;
+    const choose = (name: string) => {
+      select.value = Array.from(select.options).find(option => option.text === name)!.value;
+      select.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+    };
+    expect(page.suggestion()?.x).toBe(0);
+    choose('Blocked zone');
+    expect(placement.textContent).toContain('There is no clear space for the whole pot in this zone.');
+    expect(fixture.nativeElement.querySelector('.suggestion-marker')).toBeNull();
+    choose('Window zone');
+    expect(page.suggestion()?.x).toBe(10);
+    expect(page.selectedPot()?.x).toBe(0);
+    expect(fixture.nativeElement.querySelector('.suggestion-marker')).not.toBeNull();
+    placement.querySelector('button').click();
+    expect(page.selectedPot()).toEqual({ ...original, x: 10 });
+  });
+
   it('starts a separate editable balcony layout with unmeasured light and persists both layouts', () => {
     const fixture = setup();
     const page = fixture.componentInstance;

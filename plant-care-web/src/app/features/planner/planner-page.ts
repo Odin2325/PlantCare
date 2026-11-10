@@ -10,7 +10,7 @@ import { normalizePlantSearch } from '../../shared/plant-search';
 import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
 import { UserPlant } from '../my-plants/models/user-plant.model';
 import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, containsPot, findPotSpot, lightAt, lightLabel,
-  lightOptions, placementAdvice, placementProblem, rows, sharing } from './planner-rules';
+  lightOptions, placementAdvice, placementProblem, potLightRequirement, rows, sharing } from './planner-rules';
 import { StarterLayout, starterLayouts } from './planner-starters';
 
 const maxPlans = 12;
@@ -189,9 +189,17 @@ export class PlannerPage {
     const pot = this.selectedPot();
     return pot ? lightAt(this.plan(), pot) : null;
   });
+  readonly preferredZoneId = signal('');
+  readonly matchingPotZones = computed(() => {
+    const pot = this.selectedPot();
+    if (!pot?.plants.length) return [];
+    const { light } = potLightRequirement(pot, this.catalog());
+    return light ? this.plan().shapes.filter(shape => shape.role === 'light' && shape.light === light) : [];
+  });
+  readonly preferredZone = computed(() => this.matchingPotZones().find(zone => zone.id === this.preferredZoneId()));
   readonly placementAdvice = computed(() => {
     const pot = this.selectedPot();
-    return pot?.plants.length ? placementAdvice(this.plan(), pot, this.catalog()) : null;
+    return pot?.plants.length ? placementAdvice(this.plan(), pot, this.catalog(), this.preferredZone()) : null;
   });
   readonly suggestion = computed(() => this.placementAdvice()?.spot);
   readonly shared = computed(() => {
@@ -337,6 +345,7 @@ export class PlannerPage {
     this.browseCatalog.set(false);
     this.zoneDestinationId.set('');
     this.hideZoneConflicts.set(false);
+    this.preferredZoneId.set('');
   }
   selectFromList(id: string): void {
     if (this.plan().shapes.some(shape => shape.id === id)) this.select('shape', id);

@@ -68,7 +68,7 @@ export function placementProblem(plan: Plan, pot: Pot): string | null {
   return overlappingPot ? 'This pot overlaps “' + overlappingPot.name + '”.' : null;
 }
 
-function potLightRequirement(pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
+export function potLightRequirement(pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
   { light: Light; problem: null } | { light: null; problem: string } {
   const needs = new Set(pot.plants.map(plant => catalog.get(plant.speciesId)?.sunlightRequirement));
   const light = needs.values().next().value;
@@ -94,16 +94,19 @@ export function checkPotPosition(plan: Plan, pot: Pot, catalog: ReadonlyMap<stri
   return { status: 'match', detail: 'Matches the catalog light needs.' };
 }
 
-export function placementAdvice(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>):
+export function placementAdvice(plan: Plan, pot: Pot, catalog: ReadonlyMap<string, PlantSpecies>, zone?: Shape):
   { spot: Bounds; problem: null } | { spot: null; problem: string } {
   const { light, problem } = potLightRequirement(pot, catalog);
   if (!light) return { spot: null, problem };
   if (!plan.shapes.some(shape => shape.role === 'light' && shape.light === light)) {
     return { spot: null, problem: 'Mark a light zone for ' + lightLabel(light).toLowerCase() + '.' };
   }
-  const spot = findPotSpot(plan, pot, light);
+  const spot = findPotSpot(plan, pot, light, zone);
   return spot ? { spot, problem: null } : {
-    spot: null, problem: 'There is no clear space for the whole pot in the matching light zones. Try moving obstacles or making a zone larger.',
+    spot: null,
+    problem: zone
+      ? 'There is no clear space for the whole pot in this zone.'
+      : 'There is no clear space for the whole pot in the matching light zones. Try moving obstacles or making a zone larger.',
   };
 }
 
