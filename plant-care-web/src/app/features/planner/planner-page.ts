@@ -12,12 +12,14 @@ import { UserPlant } from '../my-plants/models/user-plant.model';
 import { Bounds, Light, Moisture, Plan, Pot, Shape, checkPotPosition, columns, containsPot, findPotSpot, lightAt, lightLabel,
   lightOptions, placementAdvice, placementProblem, potLightRequirement, rows, sharing } from './planner-rules';
 import { StarterLayout, starterLayouts } from './planner-starters';
+import { portableLayout, serializeLayout } from './planner-layout-file';
 
 const maxPlans = 12;
 const maxShapes = 40;
 const maxPots = 40;
 const maxPlants = 8;
 const choicePageSize = 12;
+const maxLayoutFileBytes = 256 * 1024;
 const newPlan = (): Plan => ({ id: crypto.randomUUID(), name: 'My space', setting: 'indoor', shapes: [], pots: [] });
 
 function validBounds(value: Bounds): boolean {
@@ -60,6 +62,8 @@ export class PlannerPage {
   private readonly destroyRef = inject(DestroyRef);
   private storedValue: string | null = null;
   readonly saveMessage = signal('');
+  readonly layoutFileMessage = signal('');
+  readonly importingLayout = signal(false);
   readonly plans = signal(this.loadPlans());
   readonly planId = signal(this.plans()[0].id);
   readonly plan = computed(() => this.plans().find(plan => plan.id === this.planId()) ?? this.plans()[0]);
@@ -323,6 +327,48 @@ export class PlannerPage {
     };
     this.save([...this.plans(), copy]);
     this.switchPlan(copy.id);
+  }
+
+  downloadLayout(): void {
+    const data = new Blob([serializeLayout(this.plan())], { type: 'application/json' });
+    const url = URL.createObjectURL(data);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'plantcare-layout.json';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async importLayout(input: HTMLInputElement): Promise<void> {
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file || !this.owner || this.importingLayout() || this.plans().length >= maxPlans) return;
+    if (file.size > maxLayoutFileBytes) {
+      this.layoutFileMessage.set('Choose a PlantCare layout file up to 256 KB.');
+      return;
+    }
+    this.layoutFileMessage.set('');
+    this.importingLayout.set(true);
+    try {
+      const parsed = JSON.parse(await file.text());
+      if (this.destroyRef.destroyed || this.auth.currentUser()?.id !== this.owner) return;
+      if (parsed?.format !== 'plantcare-layout' || parsed.version !== 1 || !validPlans([parsed.layout])) {
+        this.layoutFileMessage.set('This file is not a supported PlantCare layout.');
+        return;
+      }
+      if (this.plans().length >= maxPlans) {
+        this.layoutFileMessage.set('Delete a layout before importing another.');
+        return;
+      }
+      const plan = portableLayout(parsed.layout, () => crypto.randomUUID());
+      this.save([...this.plans(), plan]);
+      this.switchPlan(plan.id);
+      this.layoutFileMessage.set('Opened a separate layout from the file.');
+    } catch {
+      this.layoutFileMessage.set('The layout file could not be read.');
+    } finally {
+      this.importingLayout.set(false);
+    }
   }
 
   deletePlan(): void {

@@ -8,6 +8,7 @@ import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
 import { PlannerPage } from './planner-page';
+import { serializeLayout } from './planner-layout-file';
 import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
 import { UserPlant } from '../my-plants/models/user-plant.model';
 
@@ -147,6 +148,38 @@ describe('Space planner', () => {
     expect(saved[1].shapes.find(shape => shape.name === 'Rail side')?.light).toBe('FullSun');
   });
 
+  it('imports a portable copy without collection links and rejects invalid bounds without changing layouts', async () => {
+    const page = setup().componentInstance;
+    page.addPot();
+    page.addPlant('basil');
+    const original = page.plan();
+    const owned = { ...original, pots: original.pots.map(pot => ({
+      ...pot, plants: pot.plants.map(plant => ({ ...plant, userPlantId: 'private-plant-id' })),
+    })) };
+    const json = serializeLayout(owned);
+    expect(json).not.toContain('private-plant-id');
+
+    const selectFile = (text: string) => ({
+      files: [{ size: text.length, text: async () => text }], value: 'layout.json',
+    }) as unknown as HTMLInputElement;
+    const invalid = JSON.parse(json);
+    invalid.layout.pots[0].x = -1;
+    await page.importLayout(selectFile(JSON.stringify(invalid)));
+    expect(page.layoutFileMessage()).toContain('not a supported');
+    expect(page.plans()).toEqual([original]);
+
+    // Even a file crafted with a private identifier cannot import that link.
+    const portable = JSON.parse(json);
+    portable.layout.pots[0].plants[0].userPlantId = 'forged-id';
+    await page.importLayout(selectFile(JSON.stringify(portable)));
+    expect(page.plans()).toHaveLength(2);
+    expect(page.plans()[0]).toEqual(original);
+    expect(page.plan().id).not.toBe(original.id);
+    expect(page.plan().pots[0].id).not.toBe(original.pots[0].id);
+    expect(page.plan().pots[0].plants[0]).toMatchObject({ speciesId: 'basil', moisture: '' });
+    expect(page.plan().pots[0].plants[0].userPlantId).toBeUndefined();
+  });
+
   it('moves the selected item one square with the direction buttons', () => {
     const fixture = setup();
     const page = fixture.componentInstance;
@@ -179,7 +212,7 @@ describe('Space planner', () => {
     action('Remove item')!.click();
     fixture.detectChanges();
     expect(page.plan().pots).toHaveLength(0);
-    expect(fixture.nativeElement.querySelector('[role="status"]').textContent).toContain('Removed Pot 1');
+    expect(fixture.nativeElement.querySelector('.inspector .assessment [role="status"]').textContent).toContain('Removed Pot 1');
     action('Undo removal')!.click();
     fixture.detectChanges();
     expect(page.selectedPot()).toEqual(original);

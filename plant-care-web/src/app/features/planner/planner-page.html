@@ -38,6 +38,19 @@
         }
       </ul>
     </details>
+    <details class="layout-starters">
+      <summary>Layout files</summary>
+      <p>Download the current layout or open a copy from another browser. Files include layout and item names, catalog plants, and moisture preferences.</p>
+      <div class="actions">
+        <button type="button" (click)="downloadLayout()">Download layout</button>
+      </div>
+      <label>Import layout
+        <input #layoutFile type="file" accept=".json,application/json"
+          [disabled]="importingLayout() || plans().length >= maxPlans" (change)="importLayout(layoutFile)">
+      </label>
+      @if (plans().length >= maxPlans) { <p>Delete a layout before importing another.</p> }
+      <p role="status">{{ layoutFileMessage() }}</p>
+    </details>
     <p class="storage">Layouts are saved in this browser for your account. {{ saveMessage() }}</p>
   </section>
 
