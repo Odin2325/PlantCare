@@ -5,6 +5,9 @@
 select { padding: .6rem; font: inherit; max-width: 100%; border: 1px solid var(--color-muted); border-radius: var(--radius-control); background: white; color: #243b2b; }
 .work-controls .past-toggle { flex-direction: row; align-items: center; padding-block: .6rem; }
 .past-toggle input { width: 1.2rem; height: 1.2rem; flex-shrink: 0; }
+.work-pages { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
+.work-pages button { min-height: 44px; padding: .5rem .8rem; border: 1px solid var(--color-input-border); border-radius: var(--radius-control); background: white; color: var(--color-primary); font: inherit; cursor: pointer; }
+.work-pages button:disabled { cursor: default; opacity: .6; }
 .work-day ul { padding: 0; list-style: none; }
 .work-item { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: baseline; padding: .8rem; margin-block: .5rem; border: 1px solid var(--color-input-border); border-radius: var(--radius-control); overflow-wrap: anywhere; }
 .work-item a { color: var(--color-primary); font-weight: 600; }

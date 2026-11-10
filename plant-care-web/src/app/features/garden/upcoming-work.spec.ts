@@ -61,6 +61,48 @@ describe('Upcoming garden work', () => {
     page.setKind('invalid'); expect(page.kind()).toBe('care');
     fixture.componentRef.setInput('plants', []); expect(page.entries()).toEqual([]);
   });
+  it('pages work in date order and returns to the first page when filters change', () => {
+    const plants = Array.from({ length: 9 }, (_, index) => plant({
+      id: String(index), nickname: 'Tomato ' + (index + 1),
+      plannedSowingOn: '2026-03-28', careSchedules: [care(date(29).toISOString())],
+    }));
+    const { fixture } = setup(plants);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const pager = element.querySelector('nav[aria-label="Upcoming work pages"]')!;
+    const [previous, next] = pager.querySelectorAll('button');
+    const links = () => Array.from(element.querySelectorAll('.work-item a')).map(link => link.textContent?.trim());
+
+    expect(previous.disabled).toBe(true);
+    expect(links()).toHaveLength(8);
+    expect(links()[0]).toBe('Tomato 1 · Planned sowing');
+
+    next.click();
+    fixture.detectChanges();
+    expect(element.querySelector('[role="status"]')?.textContent).toContain('Showing 9–16 of 18 work items');
+    expect(links()[0]).toBe('Tomato 9 · Planned sowing');
+    expect(element.querySelectorAll('.work-day')).toHaveLength(2);
+
+    next.click();
+    fixture.detectChanges();
+    expect(next.disabled).toBe(true);
+    expect(links()).toEqual(['Tomato 8 · Watering', 'Tomato 9 · Watering']);
+
+    const kind = element.querySelectorAll('select')[1];
+    kind.value = 'care';
+    kind.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(previous.disabled).toBe(true);
+    expect(links()[0]).toBe('Tomato 1 · Watering');
+
+    next.click();
+    fixture.detectChanges();
+    fixture.componentRef.setInput('plants', plants.slice(0, 8));
+    fixture.detectChanges();
+    expect(element.querySelector('.work-pages')).toBeNull();
+    expect(links()).toHaveLength(8);
+  });
+
   it('relabels dates at local midnight and disposes its clock when the view closes', () => {
     vi.useFakeTimers(); vi.setSystemTime(new Date(2026, 9, 24, 23, 59, 30));
     const { fixture, page } = setup([plant({ plannedSowingOn: '2026-10-24' })]);

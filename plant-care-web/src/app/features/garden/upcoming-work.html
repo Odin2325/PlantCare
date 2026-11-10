@@ -12,7 +12,20 @@
   </div>
   <p>Ranges include today. Care dates and times use this device's time zone; “Care today” includes times later today.
     Planting targets stay on the date you saved. Only the next due occurrence of each active care schedule is shown.</p>
-  <p role="status" aria-live="polite">{{ entries().length }} work items</p>
+  <p role="status">
+    @if (pageCount() > 1) {
+      Showing {{ pageStart() + 1 }}–{{ pageEnd() }} of {{ entries().length }} work items
+    } @else {
+      {{ entries().length }} {{ entries().length === 1 ? 'work item' : 'work items' }}
+    }
+  </p>
+  @if (pageCount() > 1) {
+    <nav class="work-pages" aria-label="Upcoming work pages">
+      <button type="button" [disabled]="page() === 1" (click)="changePage(-1)">Previous</button>
+      <span>Page {{ page() }} of {{ pageCount() }}</span>
+      <button type="button" [disabled]="page() === pageCount()" (click)="changePage(1)">Next</button>
+    </nav>
+  }
   @for (group of groups(); track group.date) {
     <section class="work-day" [attr.aria-label]="group.date">
       <h3>{{ (group.date + 'T00:00:00Z') | date:'fullDate':'UTC' }}</h3>

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, linkedSignal, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { interval } from 'rxjs';
@@ -7,6 +7,7 @@ import { UserPlant } from '../my-plants/models/user-plant.model';
 import { validPlanDate } from './planting-calendar';
 
 type WorkKind = 'care' | 'target';
+const workPageSize = 8;
 export interface GardenWorkEntry {
   id: string;
   plantId: string;
@@ -69,9 +70,17 @@ export class UpcomingWork {
   readonly includePast = signal(true);
   readonly kind = signal<WorkKind | ''>('');
   readonly entries = computed(() => gardenWorkEntries(this.plants(), this.now(), this.days(), this.includePast(), this.kind()));
+  private readonly requestedPage = linkedSignal({
+    source: () => ({ plants: this.plants(), days: this.days(), includePast: this.includePast(), kind: this.kind() }),
+    computation: () => 1,
+  });
+  readonly pageCount = computed(() => Math.max(1, Math.ceil(this.entries().length / workPageSize)));
+  readonly page = computed(() => Math.min(this.requestedPage(), this.pageCount()));
+  readonly pageStart = computed(() => (this.page() - 1) * workPageSize);
+  readonly pageEnd = computed(() => Math.min(this.pageStart() + workPageSize, this.entries().length));
   readonly groups = computed(() => {
     const groups = new Map<string, GardenWorkEntry[]>();
-    for (const entry of this.entries()) {
+    for (const entry of this.entries().slice(this.pageStart(), this.pageEnd())) {
       const group = groups.get(entry.date);
       if (group) group.push(entry); else groups.set(entry.date, [entry]);
     }
@@ -79,6 +88,9 @@ export class UpcomingWork {
   });
   constructor() {
     interval(60_000).pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(() => this.now.set(new Date()));
+  }
+  changePage(offset: number): void {
+    this.requestedPage.set(Math.max(1, Math.min(this.pageCount(), this.page() + offset)));
   }
   setDays(value: string): void { if (['7', '30', '90'].includes(value)) this.days.set(Number(value)); }
   setKind(value: string): void { if (['', 'care', 'target'].includes(value)) this.kind.set(value as WorkKind | ''); }
