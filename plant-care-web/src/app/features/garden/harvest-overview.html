@@ -4,8 +4,13 @@
   <form (submit)="$event.preventDefault(); load()">
     <div><label for="harvest-from">Harvest from</label><input id="harvest-from" type="date" [value]="from()" (input)="from.set($any($event.target).value)" required></div>
     <div><label for="harvest-to">Harvest to</label><input id="harvest-to" type="date" [value]="to()" (input)="to.set($any($event.target).value)" required></div>
-    <button type="submit">Apply harvest dates</button><button type="button" (click)="thisYear()">This year</button>
+    <button type="submit">Apply harvest dates</button>
   </form>
+  <div class="harvest-actions" role="group" aria-label="Quick harvest date ranges">
+    <button type="button" (click)="lastThirtyDays()">Last 30 days</button>
+    <button type="button" (click)="thisYear()">This year</button>
+    <button type="button" (click)="lastYear()">Last year</button>
+  </div>
   @if (loading()) { <p role="status">Loading harvest overview…</p> }
   @if (error()) { <div role="alert"><p>{{ error() }}</p><button type="button" (click)="load()">Retry harvest overview</button></div> }
   @if (data(); as overview) {
@@ -29,8 +34,15 @@
     @if (!count()) { <p>No harvests match these dates and garden filters. Add a harvest in your plant’s details.</p> }
     @else {
       <h3>Recent harvests</h3>
-      <p>Showing {{ rows().length }} of {{ count() }} matching records. This list uses the latest 100 records across your garden for these dates; totals include all matching records. Open a plant for its harvest log.</p>
-      <ul class="records">@for (row of rows(); track row.id) {
+      <p>Recent list includes {{ rows().length }} of {{ count() }} matching records. This list uses the latest 100 records across your garden for these dates; totals include all matching records. Open a plant for its harvest log.</p>
+      @if (recordPageCount() > 1) {
+        <nav class="harvest-actions" aria-label="Recent harvest pages">
+          <button type="button" [disabled]="recordPage() === 1" (click)="changeRecordPage(-1)">Previous</button>
+          <span aria-live="polite">Records {{ recordStart() + 1 }}–{{ recordEnd() }} of {{ rows().length }}</span>
+          <button type="button" [disabled]="recordPage() === recordPageCount()" (click)="changeRecordPage(1)">Next</button>
+        </nav>
+      }
+      <ul class="records">@for (row of visibleRows(); track row.id) {
         <li><a [routerLink]="['/my-plants', row.userPlantId]">{{ name(row.userPlantId) }}</a><span>{{ date(row.harvestedOn) }}</span>
           <span>{{ row.quantity === null ? 'Quantity not recorded' : row.quantity + ' ' + row.unit }}</span>@if (row.notes) { <p>{{ row.notes }}</p> }</li>
       }</ul>

@@ -19,7 +19,7 @@ describe('Garden harvest overview', () => {
     fixture.componentRef.setInput('plants', [{ id: 'a', nickname: 'My crop' }, { id: 'b', speciesCommonName: 'Fig' }] as unknown as UserPlant[]);
     return { fixture, page: fixture.componentInstance, getHarvestOverview };
   }
-  afterEach(() => TestBed.resetTestingModule());
+  afterEach(() => { TestBed.resetTestingModule(); vi.useRealTimers(); });
   it('totals every matching record by unit, even outside the recent row limit, and follows plant filters', () => {
     const { page, fixture } = setup();
     expect(page.count()).toBe(103); expect(page.unquantified()).toBe(1);
@@ -39,6 +39,50 @@ describe('Garden harvest overview', () => {
     page.from.set('2024-01-01'); page.to.set('2024-12-31'); page.load(); expect(getHarvestOverview).toHaveBeenCalledTimes(2);
     expect(page.date('2026-03-01')).toBe('Mar 1, 2026');
   });
+  it('applies quick local date ranges across month boundaries and leap years', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2025, 2, 15, 0, 30));
+    const { fixture, getHarvestOverview } = setup();
+    fixture.detectChanges();
+    const shortcuts = fixture.nativeElement.querySelector('[aria-label="Quick harvest date ranges"]') as HTMLElement;
+    const click = (label: string) => Array.from(shortcuts.querySelectorAll('button'))
+      .find(button => button.textContent?.trim() === label)!.click();
+
+    click('Last 30 days');
+    expect(getHarvestOverview).toHaveBeenLastCalledWith('2025-02-14', '2025-03-15');
+    click('Last year');
+    expect(getHarvestOverview).toHaveBeenLastCalledWith('2024-01-01', '2024-12-31');
+    click('This year');
+    expect(getHarvestOverview).toHaveBeenLastCalledWith('2025-01-01', '2025-03-15');
+  });
+
+  it('pages recent records without requesting data again or changing the totals', () => {
+    const { fixture, page, getHarvestOverview } = setup();
+    page.data.set({ ...result, rows: Array.from({ length: 10 }, (_, index) => ({
+      ...result.rows[0], id: String(index), userPlantId: index === 9 ? 'b' : 'a', notes: 'Harvest ' + (index + 1),
+    })) });
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const pager = element.querySelector('nav[aria-label="Recent harvest pages"]')!;
+    const [previous, next] = pager.querySelectorAll('button');
+    const notes = () => Array.from(element.querySelectorAll('.records p')).map(note => note.textContent);
+
+    expect(previous.disabled).toBe(true);
+    expect(notes()).toHaveLength(8);
+    next.click();
+    fixture.detectChanges();
+    expect(notes()).toEqual(['Harvest 9', 'Harvest 10']);
+    expect(next.disabled).toBe(true);
+    expect(page.count()).toBe(103);
+    expect(getHarvestOverview).toHaveBeenCalledTimes(1);
+
+    fixture.componentRef.setInput('plants', [{ id: 'b', speciesCommonName: 'Fig' }]);
+    fixture.detectChanges();
+    expect(element.querySelector('nav[aria-label="Recent harvest pages"]')).toBeNull();
+    expect(notes()).toEqual(['Harvest 10']);
+    expect(page.count()).toBe(1);
+  });
+
   it('retries failed reads and cancels older responses when applying dates', () => {
     const { page, getHarvestOverview } = setup();
     getHarvestOverview.mockReturnValueOnce(throwError(() => new Error('offline')));

@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, linkedSignal, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
 import { UserPlant } from '../my-plants/models/user-plant.model';
 import { HarvestOverview as Overview } from '../my-plants/models/harvest-overview.model';
 import { validPlanDate } from './planting-calendar';
+
+const harvestPageSize = 8;
 
 export function sumHarvestQuantities(values: string[]): string {
   const total = values.reduce((sum, value) => {
@@ -58,6 +60,13 @@ export class HarvestOverview {
   }
   monthTitle(value: string): string { return new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(value + '-01T00:00:00Z')); }
   readonly rows = computed(() => this.data()?.rows.filter(r => this.ids().has(r.userPlantId)) ?? []);
+  private readonly requestedPage = linkedSignal({ source: this.rows, computation: () => 1 });
+  readonly recordPageCount = computed(() => Math.max(1, Math.ceil(this.rows().length / harvestPageSize)));
+  readonly recordPage = this.requestedPage.asReadonly();
+  readonly recordStart = computed(() => (this.recordPage() - 1) * harvestPageSize);
+  readonly recordEnd = computed(() => Math.min(this.recordStart() + harvestPageSize, this.rows().length));
+  readonly visibleRows = computed(() => this.rows().slice(this.recordStart(), this.recordEnd()));
+
   constructor() { inject(DestroyRef).onDestroy(() => this.request?.unsubscribe()); this.load(); }
   load(): void {
     this.request?.unsubscribe(); this.data.set(null); this.error.set(''); this.loading.set(false);
@@ -72,8 +81,29 @@ export class HarvestOverview {
       error: () => { this.error.set('Your harvest overview could not be loaded. Please try again.'); this.loading.set(false); },
     });
   }
-  thisYear(): void { this.to.set(this.today()); this.from.set(this.today().slice(0, 4) + '-01-01'); this.load(); }
+  thisYear(): void {
+    const today = this.today();
+    this.applyRange(today.slice(0, 4) + '-01-01', today);
+  }
+  lastYear(): void {
+    const year = String(Number(this.today().slice(0, 4)) - 1).padStart(4, '0');
+    this.applyRange(year + '-01-01', year + '-12-31');
+  }
+  lastThirtyDays(): void {
+    const start = new Date();
+    const end = this.today(start);
+    start.setDate(start.getDate() - 29);
+    this.applyRange(this.today(start), end);
+  }
+  changeRecordPage(offset: number): void {
+    this.requestedPage.set(Math.max(1, Math.min(this.recordPageCount(), this.recordPage() + offset)));
+  }
+  private applyRange(from: string, to: string): void {
+    this.from.set(from);
+    this.to.set(to);
+    this.load();
+  }
   name(id: string): string { const plant = this.plants().find(p => p.id === id); return plant?.nickname || plant?.speciesCommonName || 'Plant'; }
   date(value: string): string { return new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(value + 'T00:00:00Z')); }
-  private today(): string { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+  private today(d = new Date()): string { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
 }
