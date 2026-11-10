@@ -24,6 +24,14 @@ dc() { docker compose --project-name plantcare-staging --env-file ../../.env --e
 for service in api worker database; do
     test "$(docker inspect --format '{{.State.Running}}' "plantcare-staging-$service-1")" = true
 done
+# The capture must restart the same runtime it stops. A stale workstation
+# candidate must fail before touching staging, especially around a deployment.
+for service in api worker; do
+    if test "$(docker inspect --format '{{.Config.Image}}' "plantcare-staging-$service-1")" != "plantcare-$service:$candidate"; then
+        printf 'VPS backup candidate does not match the active runtime.\n' >&2
+        exit 1
+    fi
+done
 install -d -o ubuntu -g ubuntu -m 0700 "$base/backup-scratch" "$scratch" "$scratch/config" "$scratch/config/deploy"
 stopped=false
 resume() {

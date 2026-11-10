@@ -1,6 +1,6 @@
 # Current milestone plan
 
-Reviewed 2026-11-04. This is the current work order; dated execution records retain
+Reviewed 2026-11-10. This is the current work order; dated execution records retain
 their original candidate and scope. No v1 release or production cutover is created
 by this plan. The public contact-address decision remains deferred by the owner.
 
@@ -45,7 +45,11 @@ plants, bringing that reviewed total to 105. The [Garden and cultivar increment]
 | Sharing emails and signup invitations | [Calendar-sharing acceptance](calendar-sharing-email.md): real Gmail inbox delivery, read-only access/revocation, isolated new-account signup and confirmation tests | Seven-day invitations; SMTP acceptance is not an inbox guarantee. No Google Calendar synchronization is enabled. |
 | Account controls and operations | [Account export/deletion](account-data.md), [retention and erasure-safe restore](retention-and-erasure-recovery.md), [VPS recovery](vps-application-recovery.md), [monitoring](worker-capacity.md) | Backups require the owner's PC/drive/access. Weekly email checks are not independent continuous monitoring. Replacement-host recovery remains open. |
 
-Latest deployed application: `d8ff22b2fc66e4444032796015cd58a1deade5a8`, with
+The [planner and catalog staging checkpoint](planner-staging-checkpoint.md)
+deployed `065c57bb2a264ac22e9faf1ad6a1f7bb88dc7e53` on 2026-11-10.
+It includes the browser-local Space planner and 316 reviewed profiles with 167 named cultivars.
+
+The previous deployed application was `d8ff22b2fc66e4444032796015cd58a1deade5a8`, with
 [successful full CI](https://github.com/Odin2325/PlantCare/actions/runs/41816795736)
 and [mobile checkpoint acceptance](mobile-checkpoint-acceptance.md). This adds
 saved shortlists and the shared phone/tablet redesign. Photo uploads remain off.
@@ -86,7 +90,7 @@ do not imply a new deployment.
 
 ## Feature lane
 
-[Garden and cultivar browsing](garden-catalog-expansion.md), [personal planting plans](planting-plan.md) and the [monthly planting calendar](planting-calendar.md) are accepted on staging. The catalog now has 257 entries and 115 cultivars. [Care-schedule previews](care-schedule-preview.md) show recurrence and estimated due-date impact before explicit application. [Seasonal care preferences](seasonal-care-preferences.md) save the owner-selected environment and season with general review prompts, preserving current care schedules. [Harvest trends](harvest-trends.md) compare recorded quantities by month and plant, including empty months and the existing Garden filters. The [Garden harvest overview](harvest-overview.md) adds date and collection filters with exact, separate quantity totals. Actual harvest records are also accepted on personal plant details, separately from target dates and care. Plan dates are editable on personal details and visible/filterable in Garden and its calendar. The migration/private write received full CI; catalog-only changes retain focused validation.
+[Garden and cultivar browsing](garden-catalog-expansion.md), [personal planting plans](planting-plan.md) and the [monthly planting calendar](planting-calendar.md) are accepted on staging. That staging checkpoint had 257 entries and 115 cultivars. [Care-schedule previews](care-schedule-preview.md) show recurrence and estimated due-date impact before explicit application. [Seasonal care preferences](seasonal-care-preferences.md) save the owner-selected environment and season with general review prompts, preserving current care schedules. [Harvest trends](harvest-trends.md) compare recorded quantities by month and plant, including empty months and the existing Garden filters. The [Garden harvest overview](harvest-overview.md) adds date and collection filters with exact, separate quantity totals. Actual harvest records are also accepted on personal plant details, separately from target dates and care. Plan dates are editable on personal details and visible/filterable in Garden and its calendar. The migration/private write received full CI; catalog-only changes retain focused validation.
 
 Feature work may continue during the deferred publication decisions, as the owner
 requested. Keep additions small and preserve the catalog/source/image validation,
@@ -109,7 +113,7 @@ backups for any deployment already in progress before returning to local work.
 ## Latest combined staging checkpoint
 
 The [2026-10-31 checkpoint](catalog-batch-checkpoint.md) delivered the eight
-accumulated commits together. Current deployed totals are **257 reviewed entries /
+accumulated commits together. That checkpoint deployed **257 reviewed entries /
 115 cultivars / 193 assets**, with **38 exact-cultivar photos and 77 pending**.
 Full candidate CI, live catalog/image checks, existing-worker update and fresh
 pre/post backups passed. Both backup-health checks and public readiness/operations

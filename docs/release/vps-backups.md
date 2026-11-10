@@ -29,7 +29,7 @@ Failed attempts preserve existing encrypted snapshots.
 
 Private settings are in ignored `.operations-local/vps-backup-config.json`:
 fixed host/user, the current runtime candidate, and an existing SSH identity path.
-Update the candidate deliberately when deploying a new bundle. The existing
+Hold the local backup lock from staging activation through the candidate pointer update. The capture rejects a pointer that differs from either running application image before pausing any writers. See the [planner checkpoint](planner-staging-checkpoint.md) for the verified handoff. The existing
 local backup configuration and DPAPI-protected password remain in use. Never
 commit configuration, credentials, keys or restored payloads.
 
