@@ -84,7 +84,7 @@ export class PlannerPage {
   readonly selectedPot = computed(() => this.selection()?.kind === 'pot'
     ? this.plan().pots.find(pot => pot.id === this.selection()?.id) : undefined);
   readonly item = computed(() => this.selectedShape() ?? this.selectedPot());
-  readonly placing = signal(false);
+  readonly placement = signal<{ preview: Bounds | null } | null>(null);
   readonly species = signal<PlantSpecies[]>([]);
   readonly loading = signal(false);
   readonly catalogError = signal(false);
@@ -404,7 +404,7 @@ export class PlannerPage {
     this.selection.set({ kind, id });
     this.matchLight.set(false);
     this.companionsOnly.set(false);
-    this.placing.set(false);
+    this.placement.set(null);
     this.query.set('');
     this.zoneQuery.set('');
     this.browseCatalog.set(false);
@@ -417,7 +417,7 @@ export class PlannerPage {
     else if (this.plan().pots.some(pot => pot.id === id)) this.select('pot', id);
     else this.clearSelection();
   }
-  clearSelection(): void { this.selection.set(null); this.placing.set(false); this.query.set(''); this.matchLight.set(false); this.companionsOnly.set(false); }
+  clearSelection(): void { this.selection.set(null); this.placement.set(null); this.query.set(''); this.matchLight.set(false); this.companionsOnly.set(false); }
   addShape(kind: Shape['kind']): void {
     if (this.plan().shapes.length >= maxShapes) return;
     const shape: Shape = { id: crypto.randomUUID(), name: 'New ' + kind, kind,
@@ -499,6 +499,7 @@ export class PlannerPage {
     if (selected) this.update({ pots: this.plan().pots.map(pot => pot.id === selected.id ? { ...pot, ...patch } : pot) });
   }
   private updateItem(patch: Partial<Bounds> & { name?: string }): void {
+    this.placement.set(null);
     if (this.selectedShape()) this.updateShape(patch);
     else this.updatePot(patch);
   }
@@ -517,29 +518,36 @@ export class PlannerPage {
     this.updateItem(next);
   }
 
-  private moveItem(item: Bounds, x: number, y: number): void {
-    this.updateItem({
+  private boundedPosition(item: Bounds, x: number, y: number): Pick<Bounds, 'x' | 'y'> {
+    return {
       x: Math.max(0, Math.min(columns - item.width, x)),
       y: Math.max(0, Math.min(rows - item.height, y)),
-    });
+    };
   }
 
   nudge(dx: number, dy: number): void {
     const item = this.item();
-    if (item) this.moveItem(item, item.x + dx, item.y + dy);
+    if (item) this.updateItem(this.boundedPosition(item, item.x + dx, item.y + dy));
   }
 
-  place(event: MouseEvent, surface: HTMLButtonElement): void {
+  previewPlacement(event: MouseEvent, surface: HTMLButtonElement): void {
     const item = this.item();
-    if (!item || event.detail === 0) return;
+    if (!item || !this.placement() || event.detail === 0) return;
     const rect = surface.getBoundingClientRect();
-    this.moveItem(item, Math.floor((event.clientX - rect.left) / rect.width * columns),
+    if (!rect.width || !rect.height) return;
+    const position = this.boundedPosition(item,
+      Math.floor((event.clientX - rect.left) / rect.width * columns),
       Math.floor((event.clientY - rect.top) / rect.height * rows));
-    this.placing.set(false);
+    this.placement.set({ preview: { ...position, width: item.width, height: item.height } });
+  }
+
+  applyPlacement(): void {
+    const preview = this.placement()?.preview;
+    if (preview) this.updateItem({ x: preview.x, y: preview.y });
   }
   applySuggestion(): void {
     const candidate = this.suggestion();
-    if (candidate) this.updatePot({ x: candidate.x, y: candidate.y });
+    if (candidate) this.updateItem({ x: candidate.x, y: candidate.y });
   }
   box(item: Bounds): Record<string, string> {
     return { left: item.x / columns * 100 + '%', top: item.y / rows * 100 + '%',

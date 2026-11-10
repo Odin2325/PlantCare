@@ -201,6 +201,47 @@ describe('Space planner', () => {
     expect(button('left').disabled).toBe(true);
   });
 
+  it('previews map taps and only saves the position after applying', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.addPot();
+    fixture.detectChanges();
+    const map = fixture.nativeElement.querySelector('.map-panel') as HTMLElement;
+    const action = (label: string) => Array.from(map.querySelectorAll('button'))
+      .find(button => button.textContent?.trim() === label)!;
+    const preview = (x: number, y: number) => {
+      const surface = map.querySelector<HTMLButtonElement>('.place-surface')!;
+      vi.spyOn(surface, 'getBoundingClientRect').mockReturnValue(new DOMRect(10, 20, 240, 160));
+      surface.dispatchEvent(new MouseEvent('click', { detail: 1, clientX: x, clientY: y }));
+      fixture.detectChanges();
+    };
+
+    action('Place on map').click();
+    fixture.detectChanges();
+    expect(action('Apply position').disabled).toBe(true);
+    preview(62, 51);
+    expect(map.querySelector('.placement-preview')).not.toBeNull();
+    expect(map.querySelector('[role="status"]')?.textContent).toContain('column 5, row 3');
+    expect(page.selectedPot()).toMatchObject({ x: 0, y: 0 });
+
+    action('Cancel placement').click();
+    fixture.detectChanges();
+    expect(map.querySelector('.placement-preview')).toBeNull();
+    expect(page.selectedPot()).toMatchObject({ x: 0, y: 0 });
+
+    action('Place on map').click();
+    fixture.detectChanges();
+    preview(249, 179);
+    expect(page.selectedPot()).toMatchObject({ x: 0, y: 0 });
+    action('Apply position').click();
+    fixture.detectChanges();
+
+    expect(map.querySelector('.placement-preview')).toBeNull();
+    expect(page.selectedPot()).toMatchObject({ x: 22, y: 14 });
+    const saved = JSON.parse(localStorage.getItem(plannerStorageKey('planner-test-owner'))!);
+    expect(saved[0].pots[0]).toMatchObject({ x: 22, y: 14 });
+  });
+
   it('restores the last removed pot with its plantings and clears undo when changing layouts', () => {
     const fixture = setup();
     const page = fixture.componentInstance;

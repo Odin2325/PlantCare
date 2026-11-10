@@ -36,6 +36,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .map-item.pot { z-index: 3; border: 1px solid #184830; background: #42785a; color: #fff; font-weight: 750; }
 .map-item.pot[aria-pressed="true"] { z-index: 4; box-shadow: inset 0 0 0 2px white; }
 .suggestion-marker { position: absolute; z-index: 4; pointer-events: none; box-sizing: border-box; border: 2px dashed #095938; background: #ffffff80; }
+.map-placement { overflow-wrap: anywhere; }
+.placement-preview { position: absolute; z-index: 4; pointer-events: none; box-sizing: border-box; border: 2px dashed #144b88; background: #b7d6fc80; }
 .place-surface { position: absolute; inset: 0; z-index: 5; width: 100%; background: #ffffff20; border: 0; cursor: crosshair; }
 .map-legend, .layout-check { margin-top: .65rem; font-size: .9rem; }
 .map-legend summary, .layout-check summary { min-height: 2.75rem; align-content: center; cursor: pointer; font-weight: 650; }

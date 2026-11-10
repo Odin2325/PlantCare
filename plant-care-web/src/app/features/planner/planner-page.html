@@ -76,6 +76,27 @@
         <button type="button" class="primary" (click)="addPot()" [disabled]="plan().pots.length >= maxPots">Add pot</button>
       </div>
       <p class="tip">Use shapes for boundaries, obstacles or light zones. Each grid square is one unit.</p>
+      @if (item(); as selected) {
+        <div class="map-placement">
+          <div class="actions" role="group" aria-label="Map placement">
+            <button #placeToggle type="button" [attr.aria-pressed]="placement() !== null"
+              (click)="placement.set(placement() ? null : { preview: null })">{{ placement() ? 'Cancel placement' : 'Place on map' }}</button>
+            @if (placement()) {
+              <button type="button" class="primary" [disabled]="!placement()?.preview"
+                (click)="applyPlacement(); placeToggle.focus()">Apply position</button>
+            }
+          </div>
+          <p class="tip" role="status">
+            @if (placement()?.preview; as preview) {
+              {{ selected.name }} preview at column {{ preview.x }}, row {{ preview.y }}. Tap again to adjust or apply the position.
+            } @else if (placement()) {
+              Tap the map to preview the top-left corner of {{ selected.name }}.
+            } @else {
+              Selected · {{ selected.name }}
+            }
+          </p>
+        </div>
+      }
       <div class="map" role="group" aria-label="Map items">
         @for (shape of plan().shapes; track shape.id) {
           <button type="button" class="map-item shape" [class.circle]="shape.kind === 'circle'"
@@ -96,9 +117,14 @@
             <div class="suggestion-marker circle" [style]="box(spot)" aria-hidden="true"></div>
           }
         }
-        @if (placing()) {
-          <button #surface type="button" class="place-surface" aria-label="Tap the map to place the selected item. Use coordinate fields for keyboard placement."
-            (click)="place($event, surface)"></button>
+        @if (placement(); as draft) {
+          @if (draft.preview; as preview) {
+            <div class="placement-preview" [class.circle]="selectedPot() || selectedShape()?.kind === 'circle'"
+              [style]="box(preview)" aria-hidden="true"></div>
+          }
+          <button #surface type="button" class="place-surface" tabindex="-1"
+            aria-label="Tap the map to preview a position. Use the coordinate fields for keyboard placement."
+            (click)="previewPlacement($event, surface)"></button>
         }
       </div>
       <details class="map-legend">
@@ -133,7 +159,6 @@
           </ul>
         </details>
       }
-      @if (placing()) { <p role="status">Tap where the selected item's top-left corner should go.</p> }
       @if (plan().shapes.length || plan().pots.length) {
         <label class="item-list">Edit map item<select [value]="selection()?.id ?? ''"
           (change)="selectFromList($any($event.target).value)">
@@ -177,7 +202,6 @@
           <button type="button" aria-label="Move down" [disabled]="selected.y + selected.height === rows" (click)="nudge(0, 1)">↓</button>
         </div>
         <div class="actions">
-          <button type="button" [attr.aria-pressed]="placing()" (click)="placing.set(!placing())">{{ placing() ? 'Cancel placement' : 'Place on map' }}</button>
           <button type="button" (click)="removeItem()">Remove item</button>
         </div>
       } @else { <p>Add or select a shape or pot to edit it.</p> }
