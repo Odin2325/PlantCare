@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { AuthService } from '../../core/auth/services/auth.service';
 import { plannerStorageKey } from '../../core/services/planner-storage-key';
@@ -36,6 +36,7 @@ function setup(owner = 'planner-test-owner', species = [basil, fern, cold, unkno
 }
 
 afterEach(() => {
+  vi.restoreAllMocks();
   TestBed.resetTestingModule();
   localStorage.removeItem(plannerStorageKey('planner-test-owner'));
   localStorage.removeItem(plannerStorageKey('planner-test-other'));
@@ -512,6 +513,44 @@ describe('Space planner', () => {
     TestBed.resetTestingModule();
     const saved = setup().componentInstance.plans();
     expect(saved.map(plan => plan.pots[0].plants[0].moisture)).toEqual(['moist', 'dry']);
+  });
+
+  it('undoes deletion of a layout with its plantings and persists the restored layout', () => {
+    const fixture = setup();
+    const page = fixture.componentInstance;
+    page.renamePlan('Balcony');
+    page.addPot();
+    page.addPlant('basil');
+    const balcony = page.plan();
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    page.deletePlan();
+
+    fixture.detectChanges();
+    expect(page.plan().pots).toHaveLength(0);
+    expect(fixture.nativeElement.querySelector('.layout-undo [role="status"]').textContent).toContain('Deleted Balcony.');
+    const button = fixture.nativeElement.querySelector('.layout-undo button') as HTMLButtonElement;
+    button.click();
+    fixture.detectChanges();
+
+    expect(page.plans()).toEqual([balcony]);
+    expect(page.plan()).toEqual(balcony);
+    expect(fixture.nativeElement.querySelector('.layout-undo button')).toBeNull();
+    expect(JSON.parse(localStorage.getItem(plannerStorageKey('planner-test-owner'))!)).toEqual([balcony]);
+  });
+
+  it('preserves edits made to the replacement layout before undo', () => {
+    const page = setup().componentInstance;
+    page.renamePlan('Balcony');
+    const balcony = page.plan();
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    page.deletePlan();
+    page.renamePlan('Kitchen');
+    const kitchen = page.plan();
+
+    page.undoLayoutDeletion();
+
+    expect(page.plans()).toEqual([balcony, kitchen]);
+    expect(page.plan()).toEqual(balcony);
   });
 
   it('restores layouts for the same account and keeps another account separate', () => {

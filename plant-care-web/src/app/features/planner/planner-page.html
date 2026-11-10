@@ -7,7 +7,7 @@
   </header>
 
   <section class="panel layout-settings" aria-label="Layout settings">
-    <label>Layout<select [value]="plan().id" (change)="switchPlan($any($event.target).value)">
+    <label>Layout<select #layoutSelect [value]="plan().id" (change)="switchPlan($any($event.target).value)">
       @for (layout of plans(); track layout.id) { <option [value]="layout.id" [selected]="layout.id === planId()">{{ layout.name }}</option> }
     </select></label>
     <label>Layout name<input maxlength="60" [value]="plan().name" (change)="renamePlan($any($event.target).value)"></label>
@@ -19,6 +19,18 @@
       <button type="button" (click)="duplicatePlan()" [disabled]="plans().length >= maxPlans">Duplicate layout</button>
       <button type="button" (click)="deletePlan()">Delete layout</button>
     </div>
+    @if (deletedLayout(); as deleted) {
+      <div class="layout-undo">
+        <p role="status">
+          Deleted {{ deleted.plan.name || 'Unnamed layout' }}.
+          @if (!canUndoLayoutDeletion()) { All layout slots are in use. }
+        </p>
+        <div class="actions">
+          <button type="button" [disabled]="!canUndoLayoutDeletion()"
+            (click)="undoLayoutDeletion(); layoutSelect.focus()">Undo layout deletion</button>
+        </div>
+      </div>
+    }
     <details class="layout-starters">
       <summary>Starter layouts</summary>
       <p>Start a separate layout and adjust it to your space. Set each zone’s light after observing it.</p>

@@ -6,7 +6,8 @@ h1, h2, h3 { margin: 0 0 .45rem; line-height: 1.15; }
 p { margin: .45rem 0 .85rem; }
 .panel { background: #fff; color: #1e3429; border: 1px solid #d7e4da; border-radius: 1rem; padding: clamp(.75rem, 2vw, 1.25rem); min-width: 0; }
 .layout-settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .65rem; align-items: end; margin-bottom: 1rem; }
-.storage, .layout-starters { grid-column: 1 / -1; margin: 0; font-size: .9rem; }
+.storage, .layout-starters, .layout-undo { grid-column: 1 / -1; margin: 0; font-size: .9rem; }
+.layout-undo { overflow-wrap: anywhere; }
 .layout-starters summary { min-height: 2.75rem; align-content: center; cursor: pointer; font-weight: 650; }
 .workspace { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; gap: 1rem; }
 label { display: grid; gap: .3rem; font-weight: 650; min-width: 0; }

@@ -66,6 +66,11 @@ export class PlannerPage {
   readonly importingLayout = signal(false);
   readonly plans = signal(this.loadPlans());
   readonly planId = signal(this.plans()[0].id);
+  protected readonly deletedLayout = signal<{ plan: Plan; index: number; placeholder?: Plan } | null>(null);
+  readonly canUndoLayoutDeletion = computed(() => {
+    const deleted = this.deletedLayout();
+    return !!deleted && (this.plans().length < maxPlans || this.plans().some(plan => plan === deleted.placeholder));
+  });
   readonly plan = computed(() => this.plans().find(plan => plan.id === this.planId()) ?? this.plans()[0]);
   readonly selection = signal<{ kind: 'shape' | 'pot'; id: string } | null>(null);
   readonly removedItem = signal<{ item: Shape | Pot; index: number } | null>(null);
@@ -372,11 +377,25 @@ export class PlannerPage {
   }
 
   deletePlan(): void {
-    if (!window.confirm('Delete this layout from this browser?')) return;
-    const remaining = this.plans().filter(plan => plan.id !== this.plan().id);
-    if (!remaining.length) remaining.push(newPlan());
+    const plan = this.plan();
+    if (!window.confirm(`Delete “${plan.name || 'Unnamed layout'}” from this browser?`)) return;
+    const index = this.plans().indexOf(plan);
+    const remaining = this.plans().filter(layout => layout.id !== plan.id);
+    const placeholder = remaining.length ? undefined : newPlan();
+    if (placeholder) remaining.push(placeholder);
     this.save(remaining);
     this.switchPlan(remaining[0].id);
+    this.deletedLayout.set({ plan, index, placeholder });
+  }
+
+  undoLayoutDeletion(): void {
+    const deleted = this.deletedLayout();
+    if (!deleted || !this.canUndoLayoutDeletion()) return;
+    const restored = this.plans().filter(plan => plan !== deleted.placeholder);
+    restored.splice(deleted.index, 0, deleted.plan);
+    this.save(restored);
+    this.switchPlan(deleted.plan.id);
+    this.deletedLayout.set(null);
   }
   renamePlan(name: string): void { this.update({ name: name.trim().slice(0, 60) || 'My space' }); }
   setSetting(setting: string): void { this.update({ setting: setting === 'outdoor' ? 'outdoor' : 'indoor' }); }
