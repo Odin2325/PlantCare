@@ -85,6 +85,20 @@ describe('Garden collection', () => {
     expect(page.visiblePlants()).toHaveLength(5);
   });
 
+  it('opens the catalog in the current Garden category', () => {
+    const { fixture, page } = setup([make('Dahlia', ['flower'])]);
+    fixture.detectChanges();
+    const link = fixture.nativeElement.querySelector('header a') as HTMLAnchorElement;
+    expect(link.getAttribute('href')).toBe('/plants');
+
+    page.setCategory('flower');
+    fixture.detectChanges();
+    expect(link.getAttribute('href')).toBe('/plants?category=flower');
+    page.clearFilters();
+    fixture.detectChanges();
+    expect(link.getAttribute('href')).toBe('/plants');
+  });
+
   it('combines saved plan dates with category and search filters and clearing', () => {
     const crop = make('Tomato', ['vegetable']); crop.expectedHarvestOn = '2027-08-01';
     const { page } = setup([crop, make('Fig', ['tree'])]);

@@ -1505,10 +1505,10 @@
   {
     "scientificName": "Solanum tuberosum 'Pink Fir Apple'",
     "cultivarName": "Pink Fir Apple",
-    "status": "pending",
-    "photoPath": null,
-    "sourceUrl": null,
-    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-potato-pink-fir-apple.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pink_Fir_Apple_Potato.jpg",
+    "identityEvidence": "The source file description identifies the exact cultivar.",
     "reviewedOn": "2026-11-15"
   },
   {
@@ -1532,6 +1532,24 @@
   {
     "scientificName": "Dahlia 'Bishop of Llandaff'",
     "cultivarName": "Bishop of Llandaff",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-dahlia-bishop-of-llandaff.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dahlia_%27Bishop_of_Llandaff%27_1.jpg",
+    "identityEvidence": "The source file description identifies the exact cultivar.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Dahlia 'David Howard'",
+    "cultivarName": "David Howard",
+    "status": "verified",
+    "photoPath": "/images/plants/cultivar-dahlia-david-howard.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:DAVID_HOWARDweb.jpg",
+    "identityEvidence": "The source file description identifies the exact cultivar.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Nadine'",
+    "cultivarName": "Nadine",
     "status": "pending",
     "photoPath": null,
     "sourceUrl": null,
@@ -1539,8 +1557,26 @@
     "reviewedOn": "2026-11-15"
   },
   {
-    "scientificName": "Dahlia 'David Howard'",
-    "cultivarName": "David Howard",
+    "scientificName": "Solanum tuberosum 'Maris Bard'",
+    "cultivarName": "Maris Bard",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Helianthus annuus 'Dwarf Sungold'",
+    "cultivarName": "Dwarf Sungold",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Calendula officinalis 'Indian Prince'",
+    "cultivarName": "Indian Prince",
     "status": "pending",
     "photoPath": null,
     "sourceUrl": null,

@@ -2966,5 +2966,47 @@
     "bytes": 301835,
     "sourceFileName": "Erdbeere Senga Sengana.JPG",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Red Bishop of Llandaff dahlia with a dark centre and yellow anthers",
+    "caption": "Dahlia 'Bishop of Llandaff' 1.jpg",
+    "credit": "Photograph by Mike Peel (www.mikepeel.net)",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "cultivar-dahlia-bishop-of-llandaff",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dahlia_%27Bishop_of_Llandaff%27_1.jpg",
+    "path": "/images/plants/cultivar-dahlia-bishop-of-llandaff.jpg",
+    "sha256": "6b82bbf7e3b29eddbcd6aa0bdcb2ff6a11bc17061945ac699fa130be11026451",
+    "bytes": 87361,
+    "sourceFileName": "Dahlia 'Bishop of Llandaff' 1.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Double orange David Howard dahlia in bloom",
+    "caption": "DAVID HOWARDweb.jpg",
+    "credit": "Marktee1",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "cultivar-dahlia-david-howard",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:DAVID_HOWARDweb.jpg",
+    "path": "/images/plants/cultivar-dahlia-david-howard.jpg",
+    "sha256": "17f7caf3768966750889771049213a73760c70840dcb7a278abfbf0691b26d85",
+    "bytes": 157490,
+    "sourceFileName": "DAVID HOWARDweb.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Freshly lifted Pink Fir Apple potato tubers",
+    "caption": "Pink Fir Apple Potato.jpg",
+    "credit": "Gordon Joly",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "licenseName": "CC BY-SA 2.0",
+    "slug": "cultivar-potato-pink-fir-apple",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pink_Fir_Apple_Potato.jpg",
+    "path": "/images/plants/cultivar-potato-pink-fir-apple.jpg",
+    "sha256": "9cda6875defc217333f7edcc1df0ec8f51efe84690dca60cb3e4441d6c25a816",
+    "bytes": 201643,
+    "sourceFileName": "Pink Fir Apple Potato.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]

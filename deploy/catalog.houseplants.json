@@ -11203,7 +11203,15 @@
       ],
       "growingNotes": "Give this late maincrop the longest frost-free growing window available. Keep developing tubers covered.",
       "harvestInstructions": "Lift carefully with a fork when the tops die back. The long, knobbly tubers can be easy to miss. Eat only sound, non-green tubers; keep foliage and berries away from pets.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/cultivar-potato-pink-fir-apple.jpg",
+        "altText": "Freshly lifted Pink Fir Apple potato tubers",
+        "credit": "Gordon Joly",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pink_Fir_Apple_Potato.jpg",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Pink Fir Apple Potato.jpg"
+      },
       "cultivarName": "Pink Fir Apple",
       "photoIsSpeciesReference": false,
       "commonNameAliases": [
@@ -11297,7 +11305,15 @@
         "flower"
       ],
       "growingNotes": "Support the stems if needed. Remove spent flowers to keep the display going through the growing season.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/cultivar-dahlia-bishop-of-llandaff.jpg",
+        "altText": "Red Bishop of Llandaff dahlia with a dark centre and yellow anthers",
+        "credit": "Photograph by Mike Peel (www.mikepeel.net)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dahlia_%27Bishop_of_Llandaff%27_1.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Dahlia 'Bishop of Llandaff' 1.jpg"
+      },
       "cultivarName": "Bishop of Llandaff",
       "photoIsSpeciesReference": false,
       "commonNameAliases": [
@@ -11327,7 +11343,15 @@
         "flower"
       ],
       "growingNotes": "Stake stems in exposed spots. In areas where the ground freezes, lift tubers in autumn and store them frost-free.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/cultivar-dahlia-david-howard.jpg",
+        "altText": "Double orange David Howard dahlia in bloom",
+        "credit": "Marktee1",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:DAVID_HOWARDweb.jpg",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "DAVID HOWARDweb.jpg"
+      },
       "cultivarName": "David Howard",
       "photoIsSpeciesReference": false,
       "commonNameAliases": [
@@ -11448,6 +11472,130 @@
       "photo": null,
       "commonNameAliases": [
         "Garden giant mushroom"
+      ]
+    }
+  },
+  {
+    "commonName": "Potato (Nadine)",
+    "scientificName": "Solanum tuberosum 'Nadine'",
+    "description": "A second-early potato with short oval tubers, smooth pale skin and firm flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture during dry spells, especially when tubers are swelling.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile, well-drained soil or a deep container with fresh compost.",
+    "humidityInstructions": "Leave room for air to circulate.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Plant certified seed potatoes and protect the emerging shoots from frost. Mound soil or compost around the stems to keep new tubers covered.",
+      "harvestInstructions": "Lift a test plant when the tubers are large enough to use. Choose sound, non-green tubers.",
+      "photo": null,
+      "cultivarName": "Nadine",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Nadine potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Potato (Maris Bard)",
+    "scientificName": "Solanum tuberosum 'Maris Bard'",
+    "description": "A first-early potato grown for a crop of new potatoes.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture during dry spells, especially when tubers are swelling.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile, well-drained soil or a deep container with fresh compost.",
+    "humidityInstructions": "Leave room for air to circulate.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Start with certified seed potatoes. Use a deep container with drainage if space is limited and keep new tubers covered as shoots grow.",
+      "harvestInstructions": "Lift a test plant to check tuber size before harvesting the rest. Choose sound, non-green tubers.",
+      "photo": null,
+      "cultivarName": "Maris Bard",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Maris Bard potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Sunflower (Dwarf Sungold)",
+    "scientificName": "Helianthus annuus 'Dwarf Sungold'",
+    "description": "A compact sunflower with rounded, double yellow blooms for pots or the front of a sunny border.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture as seedlings establish and during dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use moist, well-drained soil or potting mix.",
+    "humidityInstructions": "Leave room for air to circulate.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/165520/helianthus-annuus-dwarf-sungold/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "flower"
+      ],
+      "growingNotes": "Sow in spring. Grow in a sunny container or border and water during dry spells. Use a pot that drains freely.",
+      "photo": null,
+      "cultivarName": "Dwarf Sungold",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Teddy Bear sunflower"
+      ]
+    }
+  },
+  {
+    "commonName": "Pot marigold (Indian Prince)",
+    "scientificName": "Calendula officinalis 'Indian Prince'",
+    "description": "A pot marigold with deep orange daisy-like flowers and petals tinged with reddish brown.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose full sun or light shade.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture as seedlings establish and during dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Choose free-draining soil of low to moderate fertility.",
+    "humidityInstructions": "Leave room for air to circulate.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/177767/calendula-officinalis-indian-prince-prince-series/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "flower"
+      ],
+      "growingNotes": "Sow directly where it will grow. Give it free-draining soil and remove spent flowers to extend the display.",
+      "photo": null,
+      "cultivarName": "Indian Prince",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Indian Prince calendula"
       ]
     }
   }

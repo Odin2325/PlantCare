@@ -1,7 +1,7 @@
 <main id="main-content" tabindex="-1" class="garden-page">
   <header><p class="eyebrow">My garden</p><h1>Your garden collection</h1>
     <p>See your garden plants and cultivated mushrooms grouped by their saved location. Use locations such as a bed, balcony or greenhouse to organize them.</p>
-    <a routerLink="/plants" [queryParams]="{ category: 'vegetable' }">Browse crops to add</a>
+    <a routerLink="/plants" [queryParams]="{ category: category() || null }">Browse plant catalog</a>
     <a routerLink="/my-plants">Manage plants and locations</a>
     <a routerLink="/garden/planner">Open space planner</a>
   </header>
