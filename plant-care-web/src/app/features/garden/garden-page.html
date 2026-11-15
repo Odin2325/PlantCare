@@ -34,11 +34,13 @@
     </div>
     @if (query() || category() || planFilter() || locationFilter()) { <button type="button" (click)="clearFilters()">Clear garden filters</button> }
     <p role="status" aria-live="polite">{{ visiblePlants().length }} of {{ gardenPlants().length }} garden plants</p>
-    <div class="garden-tabs" role="group" aria-label="Garden view">
-      <button type="button" [attr.aria-pressed]="view() === 'plants'" (click)="view.set('plants')">Plants and plans</button>
-      <button type="button" [attr.aria-pressed]="view() === 'upcoming'" (click)="view.set('upcoming')">Upcoming work</button>
-      <button type="button" [attr.aria-pressed]="view() === 'harvests'" (click)="view.set('harvests')">Harvest overview</button>
-    </div>
+    <nav class="garden-tabs garden-views" aria-label="Garden view">
+      <a routerLink="/garden" [attr.aria-current]="view() === 'plants' ? 'page' : null">Plants and plans</a>
+      <a routerLink="/garden" [queryParams]="{ view: 'upcoming' }"
+        [attr.aria-current]="view() === 'upcoming' ? 'page' : null">Upcoming work</a>
+      <a routerLink="/garden" [queryParams]="{ view: 'harvests' }"
+        [attr.aria-current]="view() === 'harvests' ? 'page' : null">Harvest overview</a>
+    </nav>
     @if (view() === 'harvests') { <app-harvest-overview [plants]="visiblePlants()" /> }
     @else if (view() === 'upcoming') { <app-upcoming-work [plants]="visiblePlants()" /> } @else {
     <app-planting-calendar [plants]="visiblePlants()" />

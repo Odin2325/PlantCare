@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { map } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
 import { CareSchedule, UserPlant } from '../my-plants/models/user-plant.model';
 import { PlantCategory } from '../../models/plant-species.model';
@@ -27,7 +28,10 @@ export class GardenPage {
   readonly plants = signal<UserPlant[]>([]);
   readonly loading = signal(true);
   readonly error = signal(false);
-  readonly view = signal<'plants' | 'harvests' | 'upcoming'>('plants');
+  readonly view = toSignal(inject(ActivatedRoute).queryParamMap.pipe(map(params => {
+    const view = params.get('view');
+    return view === 'upcoming' || view === 'harvests' ? view : 'plants';
+  })), { initialValue: 'plants' });
   readonly query = signal('');
   readonly category = signal<PlantCategory | ''>('');
   readonly locationFilter = signal('');

@@ -28,7 +28,11 @@ test('garden upcoming work combines local care dates and literal targets with sh
     return route.fulfill({ json: path === '/api/my-plants' ? plants : path === '/api/my-plants/' + ids.crop ? crop : [] });
   });
   await page.goto('/garden');
-  await page.getByRole('button', { name: 'Upcoming work', exact: true }).click();
+  const upcoming = page.getByRole('link', { name: 'Upcoming work', exact: true });
+  await upcoming.click();
+  await expect(page).toHaveURL(/\/garden\?view=upcoming$/);
+  await page.reload();
+  await expect(upcoming).toHaveAttribute('aria-current', 'page');
   const work = page.getByRole('region', { name: 'Upcoming garden work', exact: true });
   await work.getByRole('combobox', { name: 'Work range', exact: true }).selectOption('7');
   await expect(work.locator('.work-item')).toHaveCount(5);
@@ -54,6 +58,9 @@ test('garden upcoming work combines local care dates and literal targets with sh
   await work.getByRole('link', { name: 'Balcony favourite · Expected harvest', exact: true }).click();
   await expect(page).toHaveURL(new RegExp('/my-plants/' + ids.crop + '$'));
   await expect(page.getByRole('heading', { name: 'Balcony favourite', exact: true })).toBeVisible();
+  await page.goBack();
+  await expect(work).toBeVisible();
+  await expect(upcoming).toHaveAttribute('aria-current', 'page');
   expect(writes).toEqual([]); expect(JSON.stringify(plants)).toBe(before);
 });
 
@@ -135,7 +142,7 @@ test('garden collection harvest overview filters complete per-unit totals and re
     return route.fulfill({ status: 404, json: {} });
   });
   await page.goto('/garden');
-  await page.getByRole('button', { name: 'Harvest overview', exact: true }).click();
+  await page.getByRole('link', { name: 'Harvest overview', exact: true }).click();
   const overview = page.getByRole('region', { name: 'Harvest overview', exact: true });
   await expect(overview.getByRole('alert')).toContainText('could not be loaded');
   fail = false; await overview.getByRole('button', { name: 'Retry harvest overview' }).click();
