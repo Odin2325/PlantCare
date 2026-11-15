@@ -43,7 +43,9 @@
 
   @if (plant.catalogProfile?.commonNameAliases?.length) {
     <p class="common-name-aliases">Also known as: {{ plant.catalogProfile!.commonNameAliases!.join(', ') }}.</p>
-    <p>Common names can refer to different plants. Check the scientific name and photo when choosing a species.</p>
+    @if (!plant.catalogProfile?.categories?.includes('mushroom')) {
+      <p>Common names can refer to different plants. Check the scientific name and photo when choosing a species.</p>
+    }
   }
 
   <p class="description">
@@ -83,11 +85,9 @@
     <article class="care-card">
       <h2>Watering</h2>
 
-      <strong>
-        Suggested check: every
-        {{ plant.defaultWateringIntervalDays }}
-        days
-      </strong>
+      @if (!plant.catalogProfile?.categories?.includes('mushroom')) {
+        <strong>Suggested check: every {{ plant.defaultWateringIntervalDays }} days</strong>
+      }
 
       <p>
         {{ plant.wateringInstructions }}
@@ -95,7 +95,7 @@
     </article>
 
     <article class="care-card">
-      <h2>Soil</h2>
+      <h2>{{ plant.catalogProfile?.categories?.includes('mushroom') ? 'Substrate' : 'Soil' }}</h2>
 
       <p>
         {{ plant.soilInstructions }}
@@ -275,10 +275,14 @@
 
       <fieldset class="care-schedule-fields">
         <legend>Watering schedule</legend>
+        @if (plant.catalogProfile?.categories?.includes('mushroom')) {
+          <p>Leave the interval blank to grow without watering reminders. Follow the kit or spawn instructions for moisture.</p>
+        }
 
         <div class="form-field">
           <label for="wateringIntervalDays">
             Water every (days)
+            @if (plant.catalogProfile?.categories?.includes('mushroom')) { <span>Optional</span> }
           </label>
 
           <input id="wateringIntervalDays"
@@ -308,7 +312,11 @@
                  formControlName="lastWateredAt">
 
           <p class="field-hint">
-            If left empty, the first reminder starts from today.
+            @if (plant.catalogProfile?.categories?.includes('mushroom')) {
+              Enter a watering interval above to record a last watered date.
+            } @else {
+              If left empty, the first reminder starts from today.
+            }
           </p>
         </div>
       </fieldset>

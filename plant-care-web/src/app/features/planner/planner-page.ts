@@ -253,7 +253,11 @@ export class PlannerPage {
     this.loading.set(true);
     this.catalogError.set(false);
     this.api.getAll().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: species => { this.species.set(species); this.loading.set(false); },
+      next: species => {
+        // Mushroom kits and beds need substrate guidance outside the shared-pot checks.
+        this.species.set(species.filter(plant => !plant.catalogProfile?.categories?.includes('mushroom')));
+        this.loading.set(false);
+      },
       error: () => { this.catalogError.set(true); this.loading.set(false); },
     });
   }

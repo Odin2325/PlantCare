@@ -185,9 +185,11 @@
         <div>
           <dt>Watering</dt>
           <dd>
-            Check about every
-            {{ plant.defaultWateringIntervalDays }}
-            days
+            @if (plant.catalogProfile?.categories?.includes('mushroom')) {
+              Follow kit or spawn instructions
+            } @else {
+              Check about every {{ plant.defaultWateringIntervalDays }} days
+            }
           </dd>
         </div>
 

@@ -11178,5 +11178,277 @@
         "Crystal Lemon round cucumber"
       ]
     }
+  },
+  {
+    "commonName": "Potato (Pink Fir Apple)",
+    "scientificName": "Solanum tuberosum 'Pink Fir Apple'",
+    "description": "A late maincrop salad potato with long, irregular pink-skinned tubers and waxy flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Grow in a sunny, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone during dry spells, especially as tubers swell. Containers may dry faster than beds.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only as appropriate to the crop and growing medium.",
+    "soilInstructions": "Use fertile, well-drained soil or a deep container with fresh compost.",
+    "humidityInstructions": "Allow airflow and avoid waterlogged soil.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Give this late maincrop the longest frost-free growing window available. Keep developing tubers covered.",
+      "harvestInstructions": "Lift carefully with a fork when the tops die back. The long, knobbly tubers can be easy to miss. Eat only sound, non-green tubers; keep foliage and berries away from pets.",
+      "photo": null,
+      "cultivarName": "Pink Fir Apple",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Pink Fir Apple potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Potato (Red Duke of York)",
+    "scientificName": "Solanum tuberosum 'Red Duke of York'",
+    "description": "A first-early potato with red skin and pale yellow flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Grow in a sunny, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone during dry spells, especially as tubers swell. Containers may dry faster than beds.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only as appropriate to the crop and growing medium.",
+    "soilInstructions": "Use fertile, well-drained soil or a deep container with fresh compost.",
+    "humidityInstructions": "Allow airflow and avoid waterlogged soil.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Protect emerging shoots from late frost and draw soil up around the stems as they grow.",
+      "harvestInstructions": "Check beneath one plant when the tubers should have reached the size you want for new potatoes. Eat only sound, non-green tubers; keep foliage and berries away from pets.",
+      "photo": null,
+      "cultivarName": "Red Duke of York",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Duke of York potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Potato (Jazzy)",
+    "scientificName": "Solanum tuberosum 'Jazzy'",
+    "description": "A second-early potato with small oval tubers and cream-coloured skin.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Grow in a sunny, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the root zone during dry spells, especially as tubers swell. Containers may dry faster than beds.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only as appropriate to the crop and growing medium.",
+    "soilInstructions": "Use fertile, well-drained soil or a deep container with fresh compost.",
+    "humidityInstructions": "Allow airflow and avoid waterlogged soil.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Use certified seed potatoes. In a container, use a deep pot with drainage and add compost around the growing stems.",
+      "harvestInstructions": "Lift a test plant once the tubers start to reach a useful size. Eat only sound, non-green tubers; keep foliage and berries away from pets.",
+      "photo": null,
+      "cultivarName": "Jazzy",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Jazzy potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Dahlia (Bishop of Llandaff)",
+    "scientificName": "Dahlia 'Bishop of Llandaff'",
+    "description": "A tuberous dahlia with bright red, semi-double flowers and dark foliage.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Grow in a sunny, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture while actively growing and water during dry spells. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only as appropriate to the crop and growing medium.",
+    "soilInstructions": "Plant in fertile soil with good drainage after the risk of frost has passed.",
+    "humidityInstructions": "Allow airflow and avoid waterlogged soil.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/96238/dahlia-bishop-of-llandaff-p/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "flower"
+      ],
+      "growingNotes": "Support the stems if needed. Remove spent flowers to keep the display going through the growing season.",
+      "photo": null,
+      "cultivarName": "Bishop of Llandaff",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Bishop of Llandaff dahlia"
+      ]
+    }
+  },
+  {
+    "commonName": "Dahlia (David Howard)",
+    "scientificName": "Dahlia 'David Howard'",
+    "description": "A decorative dahlia with double bronze-orange flowers and dark foliage.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Grow in a sunny, sheltered position.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture while actively growing and water during dry spells. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed only as appropriate to the crop and growing medium.",
+    "soilInstructions": "Plant in fertile soil with good drainage after the risk of frost has passed.",
+    "humidityInstructions": "Allow airflow and avoid waterlogged soil.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/57111/dahlia-david-howard-d/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "flower"
+      ],
+      "growingNotes": "Stake stems in exposed spots. In areas where the ground freezes, lift tubers in autumn and store them frost-free.",
+      "photo": null,
+      "cultivarName": "David Howard",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "David Howard dahlia"
+      ]
+    }
+  },
+  {
+    "commonName": "Oyster mushroom",
+    "scientificName": "Pleurotus ostreatus",
+    "description": "A cultivated oyster mushroom that can be grown from a ready-to-fruit kit.",
+    "sunlightRequirement": "LowLight",
+    "sunlightInstructions": "Follow the supplier's light instructions for the kit or outdoor method.",
+    "defaultWateringIntervalDays": 1,
+    "wateringInstructions": "Check substrate moisture as directed for the kit or bed. Follow the supplied misting or watering instructions for its current stage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use the recommended substrate for the strain. Follow the supplier's instructions for the block or spawn.",
+    "soilInstructions": "Use an oyster kit, prepared straw substrate or a suitable hardwood log with known spawn.",
+    "humidityInstructions": "Match humidity and fresh air to the growing method and stage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://smallfarms.cornell.edu/resources/methods-of-commercial-mushroom-cultivation-in-the-northeastern-united-states/4-four-methods-of-commercial-cultivation/",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "mushroom"
+      ],
+      "growingNotes": "Follow the strain instructions for fruiting temperature and airflow. Keep the kit out of direct sun.",
+      "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
+      "photo": null,
+      "commonNameAliases": [
+        "Pearl oyster mushroom"
+      ]
+    }
+  },
+  {
+    "commonName": "Shiitake mushroom",
+    "scientificName": "Lentinula edodes",
+    "description": "A cultivated mushroom commonly grown on hardwood logs or prepared fruiting blocks.",
+    "sunlightRequirement": "LowLight",
+    "sunlightInstructions": "Follow the supplier's light instructions for the kit or outdoor method.",
+    "defaultWateringIntervalDays": 1,
+    "wateringInstructions": "Check substrate moisture as directed for the kit or bed. Follow the supplied misting or watering instructions for its current stage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use the recommended substrate for the strain. Follow the supplier's instructions for the block or spawn.",
+    "soilInstructions": "Choose a ready-to-fruit block or use suitable hardwood logs and identified shiitake spawn.",
+    "humidityInstructions": "Match humidity and fresh air to the growing method and stage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://smallfarms.cornell.edu/resources/methods-of-commercial-mushroom-cultivation-in-the-northeastern-united-states/1-shiitake-mushroom-basics/",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "mushroom"
+      ],
+      "growingNotes": "Keep outdoor logs shaded and follow the supplier's instructions for incubation and fruiting.",
+      "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
+      "photo": null,
+      "commonNameAliases": [
+        "Shiitake"
+      ]
+    }
+  },
+  {
+    "commonName": "Lion's mane mushroom",
+    "scientificName": "Hericium erinaceus",
+    "description": "A cultivated fungus with a pale fruiting body covered in hanging teeth.",
+    "sunlightRequirement": "LowLight",
+    "sunlightInstructions": "Follow the supplier's light instructions for the kit or outdoor method.",
+    "defaultWateringIntervalDays": 1,
+    "wateringInstructions": "Check substrate moisture as directed for the kit or bed. Follow the supplied misting or watering instructions for its current stage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use the recommended substrate for the strain. Follow the supplier's instructions for the block or spawn.",
+    "soilInstructions": "Start with a prepared hardwood-based fruiting block or suitable inoculated hardwood.",
+    "humidityInstructions": "Match humidity and fresh air to the growing method and stage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://smallfarms.cornell.edu/resources/indoor-production/",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "mushroom"
+      ],
+      "growingNotes": "Use the supplier's fruiting instructions for humidity, temperature and air exchange.",
+      "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
+      "photo": null,
+      "commonNameAliases": [
+        "Lion's mane"
+      ]
+    }
+  },
+  {
+    "commonName": "Wine cap mushroom",
+    "scientificName": "Stropharia rugosoannulata",
+    "description": "A cultivated fungus suited to an outdoor mulch bed.",
+    "sunlightRequirement": "LowLight",
+    "sunlightInstructions": "Follow the supplier's light instructions for the kit or outdoor method.",
+    "defaultWateringIntervalDays": 1,
+    "wateringInstructions": "Check substrate moisture as directed for the kit or bed. Follow the supplied misting or watering instructions for its current stage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use the recommended substrate for the strain. Follow the supplier's instructions for the block or spawn.",
+    "soilInstructions": "Start with identified wine cap spawn in a bed of suitable hardwood chips.",
+    "humidityInstructions": "Match humidity and fresh air to the growing method and stage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://smallfarms.cornell.edu/resources/outdoor-production/",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "mushroom"
+      ],
+      "growingNotes": "Check the wood-chip bed during dry weather, particularly while the spawn is establishing.",
+      "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
+      "photo": null,
+      "commonNameAliases": [
+        "Garden giant mushroom"
+      ]
+    }
   }
 ]

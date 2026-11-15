@@ -24,8 +24,8 @@ public sealed record PlantCatalogProfile(
         if (ReviewedOn == default) throw new ArgumentException("A care review date is required.");
         if (Categories is { } categories)
         {
-            string[] allowed = ["houseplant", "fruit", "vegetable", "root-tuber", "herb", "tree"];
-            if (categories.Count is < 1 or > 6 || categories.Distinct().Count() != categories.Count ||
+            string[] allowed = ["houseplant", "fruit", "vegetable", "root-tuber", "herb", "tree", "mushroom", "flower"];
+            if (categories.Count < 1 || categories.Count > allowed.Length || categories.Distinct().Count() != categories.Count ||
                 categories.Any(category => !allowed.Contains(category)))
                 throw new ArgumentException("Use distinct supported catalog categories.");
         }

@@ -7,6 +7,8 @@ export const plantCategoryOptions: ReadonlyArray<{ value: PlantCategory; label: 
   { value: 'root-tuber', label: 'Roots & tubers' },
   { value: 'herb', label: 'Herbs' },
   { value: 'tree', label: 'Trees' },
+  { value: 'mushroom', label: 'Mushrooms' },
+  { value: 'flower', label: 'Flowers' },
 ];
 
 export function parsePlantCategory(value: string | null): PlantCategory | '' {

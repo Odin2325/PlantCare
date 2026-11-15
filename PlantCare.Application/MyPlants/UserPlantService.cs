@@ -85,12 +85,21 @@ internal sealed class UserPlantService(
 
         userPlant.ReplaceTags(command.Tags);
 
-        userPlant.AddCareSchedule(
-            CareActionType.Watering,
-            command.WateringIntervalDays ??
-                plantSpecies.DefaultWateringIntervalDays,
-            createdAtUtc,
-            command.LastWateredAtUtc);
+        var usesMushroomSubstrate = plantSpecies.CatalogProfile?.Categories?.Contains("mushroom") == true;
+        if (!usesMushroomSubstrate || command.WateringIntervalDays.HasValue)
+        {
+            userPlant.AddCareSchedule(
+                CareActionType.Watering,
+                command.WateringIntervalDays ?? plantSpecies.DefaultWateringIntervalDays,
+                createdAtUtc,
+                command.LastWateredAtUtc);
+        }
+        else if (command.LastWateredAtUtc.HasValue)
+        {
+            throw new ArgumentException(
+                "A watering interval is required when a last watered date is provided for a mushroom crop.",
+                nameof(command.WateringIntervalDays));
+        }
 
         var fertilizingIntervalDays =
             command.FertilizingIntervalDays ??

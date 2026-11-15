@@ -8,7 +8,7 @@ test('garden catalog categories combine with search and preserve navigation and 
   const species: { catalogProfile?: { categories?: string[]; cultivarName?: string } }[] = await response.json();
   const categoryCount = (category: string, cultivarsOnly = false) => species.filter(plant =>
     plant.catalogProfile?.categories?.includes(category) && (!cultivarsOnly || plant.catalogProfile.cultivarName)).length;
-  const categoryLabels: Record<string,string> = { '': 'All plants', houseplant: 'Houseplants', fruit: 'Fruit', vegetable: 'Vegetables', 'root-tuber': 'Roots & tubers', herb: 'Herbs', tree: 'Trees' };
+  const categoryLabels: Record<string,string> = { '': 'All plants', houseplant: 'Houseplants', fruit: 'Fruit', vegetable: 'Vegetables', 'root-tuber': 'Roots & tubers', herb: 'Herbs', tree: 'Trees', mushroom: 'Mushrooms', flower: 'Flowers' };
   const categoryLink = (value: string) => page.getByRole('navigation', { name: 'Catalog categories' }).getByRole('link', { name: categoryLabels[value], exact: true });
   await page.goto('/plants?category=tree&kind=general'); await openCatalogTools(page);
   await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
@@ -21,7 +21,7 @@ test('garden catalog categories combine with search and preserve navigation and 
   await expect(categoryLink('tree')).toHaveAttribute('aria-current', 'page');
   await expect(page.getByLabel('Entry type', { exact: true })).toHaveValue('general');
   await page.getByLabel('Entry type', { exact: true }).selectOption('');
-  for (const category of ['houseplant', 'fruit', 'vegetable', 'root-tuber', 'herb']) {
+  for (const category of ['houseplant', 'fruit', 'vegetable', 'root-tuber', 'herb', 'mushroom', 'flower']) {
     await categoryLink(category).click();
     await expect(page.locator('.plant-card')).toHaveCount(categoryCount(category));
   }
@@ -54,7 +54,7 @@ test('garden catalog categories combine with search and preserve navigation and 
 test('garden catalog crop profiles distinguish cultivars and show sourced harvest guidance', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   const garden = species.filter((p: any) => p.catalogProfile?.harvestInstructions);
-  expect(garden).toHaveLength(204);
+  expect(garden).toHaveLength(211);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(6);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(6);
   for (const plant of garden) {
@@ -62,7 +62,7 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
     expect(plant.catalogProfile.harvestInstructions.length).toBeGreaterThan(0);
     expect(plant.defaultFertilizingIntervalDays).toBeNull();
   }
-  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(167);
+  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(172);
   // Exercise this batch and representative regressions; API assertions above cover every profile.
   for (const name of ["Cherry tomato (Tiny Tim)", "Potato", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Strawberry (Senga Sengana)", "Cucumber (Crystal Lemon)"]) {
     const plant = species.find((p: any) => p.commonName === name);
@@ -91,12 +91,15 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: unknown }) => plant.catalogProfile);
-  expect(reviewed).toHaveLength(316);
+  expect(reviewed).toHaveLength(325);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {
     const photo = plant.catalogProfile.photo;
-    if (!photo) { expect(plant.catalogProfile.cultivarName).toBeTruthy(); continue; }
+    if (!photo) {
+      expect(!!plant.catalogProfile.cultivarName || plant.catalogProfile.categories?.includes('mushroom')).toBe(true);
+      continue;
+    }
     expect(photo.path).toMatch(/^\/images\/plants\/[a-z0-9-]+\.(jpg|png|jpeg|webp)$/);
     const image = await request.get(photo.path);
     expect(image.ok(), `Image for ${plant.commonName}`).toBe(true);

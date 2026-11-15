@@ -39,7 +39,7 @@ export interface PlantCatalogProfile {
   photo: PlantCatalogPhoto | null;
 }
 
-export type PlantCategory = 'houseplant' | 'fruit' | 'vegetable' | 'root-tuber' | 'herb' | 'tree';
+export type PlantCategory = 'houseplant' | 'fruit' | 'vegetable' | 'root-tuber' | 'herb' | 'tree' | 'mushroom' | 'flower';
 
 export interface PlantGrowthReference {
   title: string;

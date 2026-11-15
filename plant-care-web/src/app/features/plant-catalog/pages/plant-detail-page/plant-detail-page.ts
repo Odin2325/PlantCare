@@ -274,11 +274,16 @@ export class PlantDetailPage {
               plantSpecies.commonName,
             );
 
-          this.addPlantForm.controls
-            .wateringIntervalDays
-            .setValue(
-              plantSpecies.defaultWateringIntervalDays,
-            );
+          const watering = this.addPlantForm.controls.wateringIntervalDays;
+          if (plantSpecies.catalogProfile?.categories?.includes('mushroom')) {
+            watering.reset(null);
+            watering.removeValidators(Validators.required);
+            this.addPlantForm.controls.lastWateredAt.reset('');
+          } else {
+            watering.addValidators(Validators.required);
+            watering.setValue(plantSpecies.defaultWateringIntervalDays);
+          }
+          watering.updateValueAndValidity();
 
           this.addPlantForm.controls
             .fertilizingIntervalDays

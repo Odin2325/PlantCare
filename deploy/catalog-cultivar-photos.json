@@ -1501,5 +1501,50 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-09"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Pink Fir Apple'",
+    "cultivarName": "Pink Fir Apple",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Red Duke of York'",
+    "cultivarName": "Red Duke of York",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Jazzy'",
+    "cultivarName": "Jazzy",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Dahlia 'Bishop of Llandaff'",
+    "cultivarName": "Bishop of Llandaff",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Dahlia 'David Howard'",
+    "cultivarName": "David Howard",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
   }
 ]

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PlantCare.Application.MyPlants;
 using PlantCare.Api.IntegrationTests.Infrastructure;
 using PlantCare.Infrastructure.Identity;
 using PlantCare.Domain.Entities;
@@ -157,19 +159,21 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         await factory.SeedAsync(async database=>
         {
             var species=await database.PlantSpecies.ToListAsync();
-            Assert.Equal(316, species.Count);
-            Assert.Equal(167, species.Count(p => p.CatalogProfile?.CultivarName is not null));
+            Assert.Equal(325, species.Count);
+            Assert.Equal(172, species.Count(p => p.CatalogProfile?.CultivarName is not null));
             Assert.Equal(0, species.Count(p => p.CatalogProfile?.PhotoIsSpeciesReference == true));
             Assert.Equal(50, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is not null));
-            Assert.Equal(117, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is null));
+            Assert.Equal(122, species.Count(p => p.CatalogProfile?.CultivarName is not null && p.CatalogProfile.Photo is null));
             Assert.Equal(112, species.Count(p => p.CatalogProfile?.Categories?.Contains("houseplant") == true));
-            Assert.Equal(204, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
+            Assert.Equal(211, species.Count(p => p.CatalogProfile?.HarvestInstructions is not null));
             Assert.Equal(35, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
-            Assert.Equal(38, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
+            Assert.Equal(41, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
+            Assert.Equal(4, species.Count(p => p.CatalogProfile?.Categories?.Contains("mushroom") == true));
+            Assert.Equal(2, species.Count(p => p.CatalogProfile?.Categories?.Contains("flower") == true));
             Assert.Equal(12, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(24, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
-            Assert.Equal(209, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
-            Assert.Equal(418, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
+            Assert.Equal(218, species.Count(p => p.CatalogProfile?.CommonNameAliases?.Count > 0));
+            Assert.Equal(427, species.Sum(p => p.CatalogProfile?.CommonNameAliases?.Count ?? 0));
             Assert.Equal(13, species.Count(p => p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null));
             Assert.DoesNotContain(species, p => p.IsToxicToPets && p.CatalogProfile?.NonToxicToCatsAndDogsSourceUrl is not null);
             foreach(var plant in species)
@@ -181,7 +185,7 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
                     var image=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../../../../plant-care-web/public",photo.Path.TrimStart('/')));
                     Assert.True(File.Exists(image));
                 }
-                else Assert.NotNull(profile.CultivarName);
+                else if (profile.Categories?.Contains("mushroom") != true) Assert.NotNull(profile.CultivarName);
                 foreach (var reference in profile.GrowthReferences ?? [])
                 {
                     Assert.True(File.Exists(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
@@ -193,6 +197,19 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
         var catalog = await client.GetFromJsonAsync<PlantSpeciesDto[]>("/api/plant-species",
             new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)
             { Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() } });
+        var oyster = Assert.Single(catalog!, p => p.ScientificName == "Pleurotus ostreatus");
+        Assert.Equal(["mushroom"], oyster.CatalogProfile!.Categories);
+        await SeedAccountAsync(confirmed: true);
+        var ownerId = Guid.Empty;
+        await factory.SeedAsync(async database => ownerId = await database.Users.Select(user => user.Id).SingleAsync());
+        using var scope = factory.Services.CreateScope();
+        var userPlants = scope.ServiceProvider.GetRequiredService<IUserPlantService>();
+        var crop = new AddUserPlantCommand(oyster.Id, "Oyster kit", null, null, null, null, null, null, null, null);
+        Assert.Empty((await userPlants.AddAsync(ownerId, crop))!.CareSchedules);
+        var schedule = Assert.Single((await userPlants.AddAsync(ownerId, crop with { WateringIntervalDays = 4 }))!.CareSchedules);
+        Assert.Equal(CareActionType.Watering, schedule.ActionType);
+        Assert.Equal(4, schedule.IntervalDays);
+
         var monstera = Assert.Single(catalog!, p => p.ScientificName == "Monstera deliciosa");
         var tinyTim = Assert.Single(catalog!, p => p.ScientificName == "Solanum lycopersicum 'Tiny Tim'");
         Assert.Equal("Tiny Tim", tinyTim.CatalogProfile!.CultivarName);

@@ -29,7 +29,7 @@
           <app-plant-photo [profile]="plant.catalogProfile" />
           <dl>
             <div><dt>Light</dt><dd><strong>{{ lightLabel(plant.sunlightRequirement) }}</strong><p>{{ plant.sunlightInstructions || 'Not specified.' }}</p></dd></div>
-            <div><dt>Watering</dt><dd><strong>Suggested check: every {{ plant.defaultWateringIntervalDays }} days</strong><p>{{ plant.wateringInstructions || 'Not specified.' }}</p></dd></div>
+            <div><dt>Watering</dt><dd>@if (!plant.catalogProfile?.categories?.includes('mushroom')) { <strong>Suggested check: every {{ plant.defaultWateringIntervalDays }} days</strong> }<p>{{ plant.wateringInstructions || 'Not specified.' }}</p></dd></div>
             <div><dt>Soil and drainage</dt><dd>{{ plant.soilInstructions || 'Not specified.' }}</dd></div>
             <div><dt>Humidity and room conditions</dt><dd>{{ plant.humidityInstructions || 'Not specified.' }}</dd></div>
             <div><dt>Fertilizer</dt><dd>{{ plant.fertilizingInstructions || 'Not specified.' }}</dd></div>
