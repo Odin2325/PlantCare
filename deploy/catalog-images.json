@@ -3008,5 +3008,61 @@
     "bytes": 201643,
     "sourceFileName": "Pink Fir Apple Potato.jpg",
     "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Cluster of grey oyster mushrooms growing from a cultivated kit",
+    "caption": "20210719 Pleurotus ostreatus 098-127.jpg",
+    "credit": "Zinnmann",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseName": "CC BY-SA 3.0",
+    "slug": "pleurotus-ostreatus",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:20210719_Pleurotus_ostreatus_098-127.jpg",
+    "path": "/images/plants/pleurotus-ostreatus.jpg",
+    "sha256": "795d1ad4e116f6825034ae6117c0d6be7776e844f6082461a64eeb6fa95b02be",
+    "bytes": 105024,
+    "sourceFileName": "20210719 Pleurotus ostreatus 098-127.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Brown shiitake mushrooms fruiting from a log",
+    "caption": "Shiitakegrowing.jpg",
+    "credit": "frankenstoen",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "licenseName": "CC BY 2.0",
+    "slug": "lentinula-edodes",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shiitakegrowing.jpg",
+    "path": "/images/plants/lentinula-edodes.jpg",
+    "sha256": "fb4f0ef70ecf5d4c4b35f5e9efebe0961a1c819eabaf5a2bae762dfd62dfc950",
+    "bytes": 256792,
+    "sourceFileName": "Shiitakegrowing.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Cultivated lion's mane mushroom with hanging white teeth",
+    "caption": "Hericium erinaceus (cultivated) (48646657473).jpg",
+    "credit": "Dr. Hans-Günter Wagner",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "licenseName": "CC BY-SA 2.0",
+    "slug": "hericium-erinaceus",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hericium_erinaceus_%28cultivated%29_%2848646657473%29.jpg",
+    "path": "/images/plants/hericium-erinaceus.jpg",
+    "sha256": "a19872826a4345a86481b8a6caec6d32e28a90a8bfd1878daa31459bc91e0d0e",
+    "bytes": 121883,
+    "sourceFileName": "Hericium erinaceus (cultivated) (48646657473).jpg",
+    "changes": "Wikimedia-provided 1280-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Harvested king oyster mushrooms with thick pale stems and brown caps",
+    "caption": "Pleurotus eryngii 01.JPG",
+    "credit": "Eric Steinert",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseName": "CC BY-SA 3.0",
+    "slug": "pleurotus-eryngii",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pleurotus_eryngii_01.JPG",
+    "path": "/images/plants/pleurotus-eryngii.jpg",
+    "sha256": "fe8bfe6a39379c5128ffd32a54ca059ba9c050c16eb4a13de44b2f37f6c52746",
+    "bytes": 229887,
+    "sourceFileName": "Pleurotus eryngii 01.JPG",
+    "changes": "Original Wikimedia file; no edits. Displayed scaled to fit."
   }
 ]

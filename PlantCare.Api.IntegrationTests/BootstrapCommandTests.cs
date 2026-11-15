@@ -169,6 +169,8 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             Assert.Equal(36, species.Count(p => p.CatalogProfile?.Categories?.Contains("tree") == true));
             Assert.Equal(46, species.Count(p => p.CatalogProfile?.Categories?.Contains("root-tuber") == true));
             Assert.Equal(6, species.Count(p => p.CatalogProfile?.Categories?.Contains("mushroom") == true));
+            Assert.Equal(4, species.Count(p => p.CatalogProfile?.Categories?.Contains("mushroom") == true &&
+                p.CatalogProfile.Photo is not null));
             Assert.Equal(6, species.Count(p => p.CatalogProfile?.Categories?.Contains("flower") == true));
             Assert.Equal(12, species.Count(p => p.CatalogProfile?.GrowthReferences?.Count > 0));
             Assert.Equal(24, species.Sum(p => p.CatalogProfile?.GrowthReferences?.Count ?? 0));
@@ -199,6 +201,7 @@ public sealed class BootstrapCommandTests : IAsyncLifetime
             { Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() } });
         var oyster = Assert.Single(catalog!, p => p.ScientificName == "Pleurotus ostreatus");
         Assert.Equal(["mushroom"], oyster.CatalogProfile!.Categories);
+        Assert.Equal("/images/plants/pleurotus-ostreatus.jpg", oyster.CatalogProfile.Photo?.Path);
         await SeedAccountAsync(confirmed: true);
         var ownerId = Guid.Empty;
         await factory.SeedAsync(async database => ownerId = await database.Users.Select(user => user.Id).SingleAsync());

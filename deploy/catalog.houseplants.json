@@ -11382,7 +11382,15 @@
       ],
       "growingNotes": "Follow the strain instructions for fruiting temperature and airflow. Keep the kit out of direct sun.",
       "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/pleurotus-ostreatus.jpg",
+        "altText": "Cluster of grey oyster mushrooms growing from a cultivated kit",
+        "credit": "Zinnmann",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20210719_Pleurotus_ostreatus_098-127.jpg",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "20210719 Pleurotus ostreatus 098-127.jpg"
+      },
       "commonNameAliases": [
         "Pearl oyster mushroom"
       ]
@@ -11411,7 +11419,15 @@
       ],
       "growingNotes": "Keep outdoor logs shaded and follow the supplier's instructions for incubation and fruiting.",
       "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/lentinula-edodes.jpg",
+        "altText": "Brown shiitake mushrooms fruiting from a log",
+        "credit": "frankenstoen",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shiitakegrowing.jpg",
+        "licenseName": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "title": "Shiitakegrowing.jpg"
+      },
       "commonNameAliases": [
         "Shiitake"
       ]
@@ -11440,7 +11456,15 @@
       ],
       "growingNotes": "Use the supplier's fruiting instructions for humidity, temperature and air exchange.",
       "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/hericium-erinaceus.jpg",
+        "altText": "Cultivated lion's mane mushroom with hanging white teeth",
+        "credit": "Dr. Hans-Günter Wagner",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hericium_erinaceus_%28cultivated%29_%2848646657473%29.jpg",
+        "licenseName": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "title": "Hericium erinaceus (cultivated) (48646657473).jpg"
+      },
       "commonNameAliases": [
         "Lion's mane"
       ]
@@ -11622,7 +11646,15 @@
       ],
       "growingNotes": "Start with a ready-to-fruit king oyster block. Follow the strain instructions for temperature and fresh air as it starts fruiting.",
       "harvestInstructions": "Follow the supplier's harvest instructions. Harvest only fruiting bodies you can verify came from the labelled spawn. Seek expert identification for wild or unexpected mushrooms before eating.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/pleurotus-eryngii.jpg",
+        "altText": "Harvested king oyster mushrooms with thick pale stems and brown caps",
+        "credit": "Eric Steinert",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pleurotus_eryngii_01.JPG",
+        "licenseName": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "title": "Pleurotus eryngii 01.JPG"
+      },
       "commonNameAliases": [
         "King trumpet mushroom"
       ]
