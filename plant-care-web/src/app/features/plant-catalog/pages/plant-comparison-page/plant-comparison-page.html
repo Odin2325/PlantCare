@@ -27,6 +27,17 @@
         <button type="button" [attr.aria-pressed]="growingView()" (click)="growingView.set(true)">Growing and harvest</button>
       </div>
     }
+    @if (shortlist.signedIn() && plants().length) {
+      <div class="comparison-shortlist" aria-label="Shortlist feedback" role="region">
+        @if (shortlist.loading()) { <p role="status">Loading your shortlist...</p> }
+        @if (shortlist.error(); as error) {
+          <p role="alert">{{ error }}</p>
+          <button type="button" [disabled]="shortlist.loading() || !!shortlist.busy()"
+            (click)="shortlist.refresh()">Refresh shortlist</button>
+        }
+        @if (shortlist.message(); as message) { <p role="status">{{ message }}</p> }
+      </div>
+    }
     <div class="comparison-grid">
       @for (plant of plants(); track plant.id) {
         <article class="comparison-card" [attr.aria-label]="plant.commonName + ' comparison'">
@@ -63,7 +74,12 @@
             }
           </dl>
           @if (plant.catalogProfile; as profile) { <p class="source"><a [href]="profile.careSourceUrl" target="_blank" rel="noopener noreferrer">Care reference</a> · Reviewed {{ profile.reviewedOn }}</p> }
-          <div class="card-actions"><a [routerLink]="['/plants', plant.id]" queryParamsHandling="preserve">View details</a><button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'" (click)="remove(plant.id)">Remove</button></div>
+          <div class="card-actions">
+            <a [routerLink]="['/plants', plant.id]" queryParamsHandling="preserve">View details</a>
+            <button type="button" [attr.aria-label]="'Remove ' + plant.commonName + ' from comparison'"
+              (click)="remove(plant.id)">Remove from comparison</button>
+          </div>
+          <app-shortlist-button [plant]="plant" />
         </article>
       }
     </div>

@@ -6,9 +6,11 @@ import { PlantSpecies } from '../../../../models/plant-species.model';
 import { PlantPhoto } from '../../../../shared/plant-photo/plant-photo';
 import { parseComparisonIds } from '../../../../shared/plant-comparison';
 import { DOCUMENT } from '@angular/common';
+import { ShortlistService } from '../../../../core/services/shortlist.service';
+import { ShortlistButton } from '../../../../shared/plant-shortlist/plant-shortlist';
 
 @Component({
-  selector: 'app-plant-comparison-page', standalone: true, imports: [RouterLink, PlantPhoto],
+  selector: 'app-plant-comparison-page', standalone: true, imports: [RouterLink, PlantPhoto, ShortlistButton],
   templateUrl: './plant-comparison-page.html', styleUrl: './plant-comparison-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -17,6 +19,7 @@ export class PlantComparisonPage {
   private readonly router = inject(Router);
   private readonly api = inject(PlantSpeciesApiService);
   private readonly document = inject(DOCUMENT);
+  readonly shortlist = inject(ShortlistService);
   readonly ids = signal<string[]>([]);
   readonly catalog = signal<PlantSpecies[]>([]);
   readonly growingView = signal(false);

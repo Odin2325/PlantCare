@@ -1,3 +1,5 @@
+import { signal } from '@angular/core';
+import { AuthService } from '../../../../core/auth/services/auth.service';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
@@ -7,10 +9,11 @@ import { afterEach, expect, it, vi } from 'vitest';
 import { PlantComparisonPage } from './plant-comparison-page';
 const a='10000000-0000-0000-0000-000000000000',b='20000000-0000-0000-0000-000000000000';
 afterEach(() => vi.unstubAllGlobals());
-function setup(compare: string) {
+function setup(compare: string, signedIn = false) {
   const params=new BehaviorSubject(convertToParamMap({compare}));
   TestBed.configureTestingModule({providers:[provideRouter([]),provideHttpClient(),provideHttpClientTesting(),
-    {provide:ActivatedRoute,useValue:{queryParamMap:params}}]});
+    {provide:ActivatedRoute,useValue:{queryParamMap:params}},
+    {provide:AuthService,useValue:{currentUser:signal(signedIn ? {id:'test-owner'} : null)}}]});
   const fixture=TestBed.createComponent(PlantComparisonPage);return {fixture,http:TestBed.inject(HttpTestingController),params};
 }
 it('preserves selection order and distinguishes unknown pet assessment from a sourced non-toxic classification', () => {
@@ -85,6 +88,30 @@ it('copies only available public catalog identifiers in selection order and clea
   expect(fixture.nativeElement.querySelector('#comparison-share-link')).toBeNull();
   expect(fixture.componentInstance.copyStatus()).toBe('');http.verify();
 });
+it('saves a plant from comparison and reports status without changing the selection', () => {
+  const { fixture, http } = setup(`${a},${b}`, true);
+  http.expectOne('/api/plant-species').flush([
+    { id: a, commonName: 'Rosemary', sunlightRequirement: 'FullSun' },
+    { id: b, commonName: 'Thyme', sunlightRequirement: 'FullSun' },
+  ]);
+  fixture.detectChanges();
+  http.expectOne('/api/shortlist').flush([]);
+  fixture.detectChanges();
+  const element = fixture.nativeElement as HTMLElement;
+  const button = element.querySelector<HTMLButtonElement>('button[aria-label="Save Rosemary to shortlist"]')!;
+  button.click();
+  const request = http.expectOne('/api/shortlist/' + a);
+  expect(request.request.method).toBe('PUT');
+  request.flush(null);
+  fixture.detectChanges();
+
+  expect(button.getAttribute('aria-pressed')).toBe('true');
+  expect(element.querySelector('.comparison-shortlist [role="status"]')?.textContent).toContain('saved to your shortlist');
+  expect(fixture.componentInstance.ids()).toEqual([a, b]);
+  expect([...new URL(fixture.componentInstance.shareUrl()).searchParams.keys()]).toEqual(['compare']);
+  http.verify();
+});
+
 it('offers manual copying when clipboard permission fails and never copies stale unavailable selections', async () => {
   const missing='30000000-0000-0000-0000-000000000000';
   const {fixture,http,params}=setup(`${a},${missing},${b}`);
