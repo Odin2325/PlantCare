@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../../core/auth/services/auth.service';
+import { ShortlistService } from '../../core/services/shortlist.service';
 import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
@@ -126,7 +127,8 @@ export class PlannerPage {
   readonly collectionLoading = signal(false);
   readonly collectionError = signal(false);
   readonly collectionById = computed(() => new Map(this.collection().map(plant => [plant.id, plant])));
-  readonly browseCatalog = signal(false);
+  readonly shortlist = inject(ShortlistService);
+  readonly zoneSource = signal<'collection' | 'catalog' | 'shortlist'>('collection');
   readonly zoneQuery = signal('');
   readonly hideZoneConflicts = signal(false);
   readonly selectedZone = computed(() => {
@@ -142,8 +144,11 @@ export class PlannerPage {
     const collection = this.collection();
     const catalog = this.catalog();
     const ownedSpecies = new Set(collection.map(plant => plant.plantSpeciesId));
-    const candidates = this.browseCatalog()
-      ? this.species().filter(plant => !ownedSpecies.has(plant.id))
+    const source = this.zoneSource();
+    if (source === 'shortlist' && !this.shortlist.ready()) return [];
+    const saved = new Set(source === 'shortlist' ? this.shortlist.ids() : []);
+    const candidates = source !== 'collection'
+      ? this.species().filter(plant => !ownedSpecies.has(plant.id) && (source !== 'shortlist' || saved.has(plant.id)))
         .map(plant => ({ id: plant.id, name: plant.commonName, plant, owned: false }))
       : collection.map(owned => ({ id: owned.id, name: owned.nickname.trim() || owned.speciesCommonName,
         plant: catalog.get(owned.plantSpeciesId), owned: true }));
@@ -411,7 +416,7 @@ export class PlannerPage {
     this.placement.set(null);
     this.query.set('');
     this.zoneQuery.set('');
-    this.browseCatalog.set(false);
+    this.zoneSource.set('collection');
     this.zoneDestinationId.set('');
     this.hideZoneConflicts.set(false);
     this.preferredZoneId.set('');

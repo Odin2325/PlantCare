@@ -232,9 +232,9 @@
             <button type="button" (click)="loadCatalog()">Retry catalog</button>
           } @else {
             <label>Show plants from
-              <select [value]="browseCatalog() ? 'catalog' : 'collection'"
-                (change)="browseCatalog.set($any($event.target).value === 'catalog')">
+              <select [value]="zoneSource()" (change)="zoneSource.set($any($event.target).value)">
                 <option value="collection">My plants</option>
+                <option value="shortlist">Shortlisted plants I do not own</option>
                 <option value="catalog">Catalog plants I don’t own</option>
               </select>
             </label>
@@ -265,7 +265,12 @@
                 <p role="status">There’s no clear space for a pot two grid squares across in this zone.</p>
               }
             }
-            @if (zoneChoices().length) {
+            @if (zoneSource() === 'shortlist' && shortlist.error()) {
+              <p role="alert">{{ shortlist.error() }}</p>
+              <button type="button" (click)="shortlist.refresh()">Refresh shortlist</button>
+            } @else if (zoneSource() === 'shortlist' && !shortlist.ready()) {
+              <p role="status">Loading your shortlist…</p>
+            } @else if (zoneChoices().length) {
               <ul class="plant-list">
                 @for (choice of visibleZoneChoices(); track choice.id) {
                   @let planned = choice.owned && plannedPlantIds().has(choice.id);

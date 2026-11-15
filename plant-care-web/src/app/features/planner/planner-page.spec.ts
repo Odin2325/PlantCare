@@ -1,3 +1,5 @@
+import { signal } from '@angular/core';
+import { ShortlistService } from '../../core/services/shortlist.service';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
@@ -25,9 +27,10 @@ const cold: PlantSpecies = { ...basil, id: 'cold', commonName: 'Cold fixture',
   minimumTemperatureCelsius: null, maximumTemperatureCelsius: 8 };
 const unknown: PlantSpecies = { ...basil, id: 'unknown', commonName: 'Unknown fixture', sunlightRequirement: 'Unknown' };
 
-function setup(owner = 'planner-test-owner', species = [basil, fern, cold, unknown], collection: UserPlant[] = []) {
+function setup(owner = 'planner-test-owner', species = [basil, fern, cold, unknown], collection: UserPlant[] = [], shortlistIds: string[] = []) {
   TestBed.configureTestingModule({ providers: [
     provideRouter([]),
+    { provide: ShortlistService, useValue: { ids: signal(shortlistIds), ready: signal(true), error: signal(null) } },
     { provide: AuthService, useValue: { currentUser: () => ({ id: owner }) } },
     { provide: PlantSpeciesApiService, useValue: { getAll: () => of(species) } },
     { provide: MyPlantsApiService, useValue: { getAll: () => of(collection) } },
@@ -357,6 +360,29 @@ describe('Space planner', () => {
     expect(reopened.plan().pots.map(pot => pot.x)).toEqual([4, 6]);
   });
 
+  it('shows only matching unowned shortlist plants and plans them locally', () => {
+    const third = { ...basil, id: 'mint', commonName: 'Mint' };
+    const collection = [{ id: 'my-basil', plantSpeciesId: 'basil', nickname: 'Kitchen basil', isActive: true }] as UserPlant[];
+    const fixture = setup(undefined, [basil, fern, cold, third], collection, ['basil', 'fern', 'mint']);
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    fixture.detectChanges();
+
+    const finder = fixture.nativeElement.querySelector('.zone-plant-finder') as HTMLElement;
+    const source = finder.querySelector('select')!;
+    source.value = 'shortlist';
+    source.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    const results = finder.querySelectorAll<HTMLButtonElement>('.plant-list button');
+    expect(Array.from(results).map(button => button.textContent?.trim())).toEqual(['Plan Mint']);
+    results[0].click();
+    expect(page.plan().pots[0].plants[0].speciesId).toBe('mint');
+    expect(page.plan().pots[0].plants[0].userPlantId).toBeUndefined();
+  });
+
   it('lets a plant join an existing pot in the selected zone and warns about companion conflicts', () => {
     const fixture = setup();
     const page = fixture.componentInstance;
@@ -379,7 +405,7 @@ describe('Space planner', () => {
     page.nudge(4, 0);
 
     page.select('shape', zoneId);
-    page.browseCatalog.set(true);
+    page.zoneSource.set('catalog');
     fixture.detectChanges();
     const finder = fixture.nativeElement.querySelector('.zone-plant-finder');
     const select = finder.querySelectorAll('select')[1] as HTMLSelectElement;
@@ -419,7 +445,7 @@ describe('Space planner', () => {
     width.type = 'number';
     width.value = '1';
     page.changeBounds('width', width);
-    page.browseCatalog.set(true);
+    page.zoneSource.set('catalog');
     fixture.detectChanges();
 
     const finder = fixture.nativeElement.querySelector('.zone-plant-finder');
