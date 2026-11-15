@@ -85,6 +85,24 @@ describe('Catalog categories', () => {
     page.setCategory('vegetable'); page.setQuery('Tiny Tim');
     expect(page.visibleSpecies().map(p => p.commonName)).toEqual(['Cherry tomato (Tiny Tim)']);
   });
+  it('restores the harvest guidance filter and combines it with category and photo filters', () => {
+    const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
+    const crop = make('Snowball turnip', ['vegetable', 'root-tuber']);
+    crop.catalogProfile = { ...crop.catalogProfile!, harvestInstructions: 'Lift while the roots are small.' };
+    const mushroom = make('King oyster mushroom', ['mushroom']);
+    mushroom.catalogProfile = { ...mushroom.catalogProfile!, harvestInstructions: 'Follow kit instructions.' };
+    page.plantSpecies.set([...plants, crop, mushroom]);
+
+    params.next(convertToParamMap({ harvest: '1', category: 'root-tuber', cultivarPhoto: 'missing' }));
+    expect(page.visibleSpecies()).toEqual([crop]);
+    expect(page.filterQueryParams().harvest).toBe('1');
+    page.setCategory('mushroom');
+    expect(page.visibleSpecies()).toEqual([mushroom]);
+    page.clearFilters();
+    expect(page.harvestOnly()).toBe(false);
+    expect(page.filterQueryParams().harvest).toBeNull();
+  });
+
   it('finds general entries without a catalog photo, alongside pending cultivars', () => {
     const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
     const oyster = make('King oyster mushroom', ['mushroom']);

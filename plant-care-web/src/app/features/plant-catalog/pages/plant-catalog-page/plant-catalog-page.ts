@@ -49,7 +49,7 @@ export class PlantCatalogPage {
   readonly shortlist = inject(ShortlistService);
   readonly showShortlist = signal(false);
   readonly filtersExpanded = signal(false);
-  readonly advancedFilterCount = computed(() => [this.category(), this.kind(), this.light(), this.pets(), this.growth(), this.cultivarPhoto(), this.showShortlist(), this.sort() !== 'name-asc'].filter(Boolean).length);
+  readonly advancedFilterCount = computed(() => [this.category(), this.kind(), this.light(), this.pets(), this.growth(), this.harvestOnly(), this.cultivarPhoto(), this.showShortlist(), this.sort() !== 'name-asc'].filter(Boolean).length);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly plantSpeciesApi =
@@ -64,6 +64,7 @@ export class PlantCatalogPage {
   readonly light = signal<SunlightRequirement | ''>('');
   readonly pets = signal<'non-toxic' | 'warning' | 'unknown' | ''>('');
   readonly growth = signal<'available' | ''>('');
+  readonly harvestOnly = signal(false);
   readonly cultivarPhoto = signal<CatalogPhotoFilter>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
   readonly comparisonIds = signal<string[]>([]);
@@ -84,12 +85,13 @@ export class PlantCatalogPage {
     light: this.light() || null,
     pets: this.pets() || null,
     growth: this.growth() || null,
+    harvest: this.harvestOnly() ? '1' : null,
     cultivarPhoto: this.cultivarPhoto() || null,
     shortlisted: this.showShortlist() ? '1' : null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
     compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
-  readonly hasFilters = computed(() => Boolean(this.showShortlist() || this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
+  readonly hasFilters = computed(() => Boolean(this.showShortlist() || this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.harvestOnly() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
     // An exact scientific name identifies a species, rather than other plants
@@ -101,6 +103,7 @@ export class PlantCatalogPage {
       (!this.kind() || (this.kind() === 'cultivar' ? Boolean(plant.catalogProfile?.cultivarName) : !plant.catalogProfile?.cultivarName)) &&
       (!this.light() || plant.sunlightRequirement === this.light()) &&
       (!this.growth() || Boolean(plant.catalogProfile?.growthReferences?.length)) &&
+      (!this.harvestOnly() || Boolean(plant.catalogProfile?.harvestInstructions?.trim())) &&
       matchesPhotoFilter(plant, this.cultivarPhoto()) &&
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
         this.pets() === 'unknown' ? !plant.isToxicToPets && !plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl :
@@ -126,6 +129,7 @@ export class PlantCatalogPage {
       const pets = params.get('pets');
       this.pets.set(pets === 'non-toxic' || pets === 'warning' || pets === 'unknown' ? pets : '');
       this.growth.set(params.get('growth') === 'available' ? 'available' : '');
+      this.harvestOnly.set(params.get('harvest') === '1');
       this.cultivarPhoto.set(parseCatalogPhotoFilter(params.get('cultivarPhoto')));
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
       this.comparisonIds.set(parseComparisonIds(params.get('compare')));
@@ -184,6 +188,7 @@ export class PlantCatalogPage {
     this.light.set('');
     this.pets.set('');
     this.growth.set('');
+    this.harvestOnly.set(false);
     this.cultivarPhoto.set('');
     this.sort.set('name-asc');
     this.saveFilters();
@@ -191,6 +196,11 @@ export class PlantCatalogPage {
 
   setGrowth(value: string): void {
     this.growth.set(value === 'available' ? value : '');
+    this.saveFilters();
+  }
+
+  setHarvestOnly(value: boolean): void {
+    this.harvestOnly.set(value);
     this.saveFilters();
   }
 

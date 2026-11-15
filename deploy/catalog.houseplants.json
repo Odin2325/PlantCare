@@ -11748,5 +11748,131 @@
         "Casablanca potato"
       ]
     }
+  },
+  {
+    "commonName": "Winter squash (Delica)",
+    "scientificName": "Cucurbita maxima 'Delica'",
+    "description": "An early-maturing winter squash with rounded, flattened fruit.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture regularly during dry periods and while the crop is forming.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a feeding plan suited to the soil or container mix.",
+    "soilInstructions": "Choose fertile soil that holds moisture and drains freely.",
+    "humidityInstructions": "Allow air to circulate around the plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/279953/cucurbita-maxima-delica/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give the plant space to spread and wait until frost risk has passed before planting out.",
+      "harvestInstructions": "Let the squash ripen on the vine. Cut before frost, leaving a length of stem attached.",
+      "photo": null,
+      "cultivarName": "Delica",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Delica winter squash"
+      ]
+    }
+  },
+  {
+    "commonName": "Turnip (Snowball)",
+    "scientificName": "Brassica rapa (Rapifera Group) 'Snowball'",
+    "description": "A turnip cultivar grown for its rounded roots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed evenly moist and water during dry spells as the roots swell.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a feeding plan suited to the soil or container mix.",
+    "soilInstructions": "Choose fertile soil that holds moisture and drains freely.",
+    "humidityInstructions": "Allow air to circulate around the plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/215558/brassica-rapa-rapifera-group-snowball/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly into finely prepared ground and thin the seedlings. Small sowings spaced apart give more chances to harvest young roots.",
+      "harvestInstructions": "Lift while the roots are young and tender.",
+      "photo": null,
+      "cultivarName": "Snowball",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Snowball turnip"
+      ]
+    }
+  },
+  {
+    "commonName": "Turnip (Tokyo Cross)",
+    "scientificName": "Brassica rapa (Rapifera Group) 'Tokyo Cross'",
+    "description": "A fast-growing turnip with crisp white roots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Keep the seedbed evenly moist and water during dry spells as the roots swell.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a feeding plan suited to the soil or container mix.",
+    "soilInstructions": "Choose fertile soil that holds moisture and drains freely.",
+    "humidityInstructions": "Allow air to circulate around the plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/turnips/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow small batches directly in a sunny bed during cool growing weather. Thin seedlings so the roots have room to swell.",
+      "harvestInstructions": "Lift young roots before they become coarse.",
+      "photo": null,
+      "cultivarName": "Tokyo Cross",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Tokyo Cross turnip"
+      ]
+    }
+  },
+  {
+    "commonName": "Common bean (Golden Gate)",
+    "scientificName": "Phaseolus vulgaris 'Golden Gate'",
+    "description": "A climbing French bean with broad, flat yellow pods.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture regularly during dry periods and while the crop is forming.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a feeding plan suited to the soil or container mix.",
+    "soilInstructions": "Choose fertile soil that holds moisture and drains freely.",
+    "humidityInstructions": "Allow air to circulate around the plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/french-beans/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Set up a sturdy support and sow or plant out after frost risk has passed.",
+      "harvestInstructions": "Pick the pods regularly while they are young and tender. Cook the beans before eating.",
+      "photo": null,
+      "cultivarName": "Golden Gate",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Golden Gate French bean"
+      ]
+    }
   }
 ]

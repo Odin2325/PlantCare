@@ -86,6 +86,13 @@
       </select>
     </div>
     <div class="catalog-field">
+      <label for="plant-harvest">Harvest guidance</label>
+      <select id="plant-harvest" [ngModel]="harvestOnly() ? '1' : ''" (ngModelChange)="setHarvestOnly($event === '1')">
+        <option value="">All entries</option>
+        <option value="1">With harvest guidance</option>
+      </select>
+    </div>
+    <div class="catalog-field">
       <label for="plant-cultivar-photo">Catalog photos</label>
       <select id="plant-cultivar-photo" [ngModel]="cultivarPhoto()" (ngModelChange)="setCultivarPhoto($event)" aria-describedby="cultivar-photo-help">
         <option value="">All entries</option>

@@ -1609,5 +1609,41 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Cucurbita maxima 'Delica'",
+    "cultivarName": "Delica",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Brassica rapa (Rapifera Group) 'Snowball'",
+    "cultivarName": "Snowball",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Brassica rapa (Rapifera Group) 'Tokyo Cross'",
+    "cultivarName": "Tokyo Cross",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Phaseolus vulgaris 'Golden Gate'",
+    "cultivarName": "Golden Gate",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
   }
 ]
