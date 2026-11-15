@@ -21,18 +21,32 @@
         <p role="status">{{ copyStatus() }}</p>
       </section>
     }
+    @if (hasGrowingGuidance()) {
+      <div class="comparison-views" role="group" aria-label="Comparison view">
+        <button type="button" [attr.aria-pressed]="!growingView()" (click)="growingView.set(false)">All details</button>
+        <button type="button" [attr.aria-pressed]="growingView()" (click)="growingView.set(true)">Growing and harvest</button>
+      </div>
+    }
     <div class="comparison-grid">
       @for (plant of plants(); track plant.id) {
         <article class="comparison-card" [attr.aria-label]="plant.commonName + ' comparison'">
           <h2>{{ plant.commonName }}</h2>
           @if (plant.scientificName) { <p class="scientific-name">{{ plant.scientificName }}</p> }
-          <app-plant-photo [profile]="plant.catalogProfile" />
+          @if (!growingView()) {
+            <app-plant-photo [profile]="plant.catalogProfile" />
+          }
           <dl>
             <div><dt>Light</dt><dd><strong>{{ lightLabel(plant.sunlightRequirement) }}</strong><p>{{ plant.sunlightInstructions || 'Not specified.' }}</p></dd></div>
-            <div><dt>Watering</dt><dd>@if (!plant.catalogProfile?.categories?.includes('mushroom')) { <strong>Suggested check: every {{ plant.defaultWateringIntervalDays }} days</strong> }<p>{{ plant.wateringInstructions || 'Not specified.' }}</p></dd></div>
-            <div><dt>Soil and drainage</dt><dd>{{ plant.soilInstructions || 'Not specified.' }}</dd></div>
-            <div><dt>Humidity and room conditions</dt><dd>{{ plant.humidityInstructions || 'Not specified.' }}</dd></div>
-            <div><dt>Fertilizer</dt><dd>{{ plant.fertilizingInstructions || 'Not specified.' }}</dd></div>
+            @if (!growingView()) {
+              <div><dt>Watering</dt><dd>@if (!plant.catalogProfile?.categories?.includes('mushroom')) { <strong>Suggested check: every {{ plant.defaultWateringIntervalDays }} days</strong> }<p>{{ plant.wateringInstructions || 'Not specified.' }}</p></dd></div>
+            }
+            <div><dt>{{ plant.catalogProfile?.categories?.includes('mushroom') ? 'Substrate' : 'Soil and drainage' }}</dt>
+              <dd>{{ plant.soilInstructions || 'Not specified.' }}</dd>
+            </div>
+            @if (!growingView()) {
+              <div><dt>Humidity and room conditions</dt><dd>{{ plant.humidityInstructions || 'Not specified.' }}</dd></div>
+              <div><dt>Fertilizer</dt><dd>{{ plant.fertilizingInstructions || 'Not specified.' }}</dd></div>
+            }
             <div><dt>Cats and dogs</dt><dd>
               @if (plant.isToxicToPets) { <strong class="warning">Toxicity warning</strong><p>Keep out of reach of pets.</p> }
               @else if (plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl; as source) {
@@ -44,6 +58,8 @@
             }
             @if (plant.catalogProfile?.harvestInstructions; as harvest) {
               <div><dt>Harvest guidance</dt><dd>{{ harvest }}</dd></div>
+            } @else if (growingView()) {
+              <div><dt>Harvest guidance</dt><dd>None in the catalog.</dd></div>
             }
           </dl>
           @if (plant.catalogProfile; as profile) { <p class="source"><a [href]="profile.careSourceUrl" target="_blank" rel="noopener noreferrer">Care reference</a> · Reviewed {{ profile.reviewedOn }}</p> }

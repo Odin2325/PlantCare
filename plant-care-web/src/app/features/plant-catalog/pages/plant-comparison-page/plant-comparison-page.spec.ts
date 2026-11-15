@@ -51,6 +51,18 @@ it('keeps each plant growing and harvest guidance with its own source and omits 
   expect(cards[1].textContent).not.toContain('Harvest guidance');
   expect(cards[1].textContent).not.toContain('Pick young pods');
   expect(cards[1].querySelector('.source a').getAttribute('href')).toBe('https://example.org/houseplant');
+  const [all, growing] = (fixture.nativeElement as HTMLElement)
+    .querySelectorAll<HTMLButtonElement>('.comparison-views button');
+  growing.click();
+  fixture.detectChanges();
+  expect(growing.getAttribute('aria-pressed')).toBe('true');
+  expect(cards[0].textContent).toContain('Pick young pods and cook properly.');
+  expect(cards[0].textContent).toContain('Toxicity warning');
+  expect(cards[0].querySelector('app-plant-photo')).toBeNull();
+  expect(cards[1].textContent).toContain('None in the catalog.');
+  all.click();
+  fixture.detectChanges();
+  expect(cards[0].querySelector('app-plant-photo')).not.toBeNull();
   http.verify();
 });
 it('copies only available public catalog identifiers in selection order and clears status when selection changes', async () => {

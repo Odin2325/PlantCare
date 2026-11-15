@@ -19,10 +19,13 @@ export class PlantComparisonPage {
   private readonly document = inject(DOCUMENT);
   readonly ids = signal<string[]>([]);
   readonly catalog = signal<PlantSpecies[]>([]);
+  readonly growingView = signal(false);
   readonly loading = signal(true);
   readonly error = signal(false);
   readonly plants = computed(() => this.ids().map(id => this.catalog().find(p => p.id === id))
     .filter((p): p is PlantSpecies => Boolean(p)));
+  readonly hasGrowingGuidance = computed(() => this.plants().some(plant =>
+    plant.catalogProfile?.growingNotes || plant.catalogProfile?.harvestInstructions));
   readonly unavailable = computed(() => !this.loading() && !this.error() && this.plants().length < this.ids().length);
   readonly shareUrl = computed(() => {
     if (this.loading() || this.error() || this.plants().length < 2) return '';
@@ -37,6 +40,7 @@ export class PlantComparisonPage {
   constructor() {
     this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe(params => {
       this.ids.set(parseComparisonIds(params.get('compare')));
+      this.growingView.set(false);
       this.copyStatus.set('');
     });
     this.reload();

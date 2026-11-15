@@ -12061,5 +12061,129 @@
         "Blue Tit plum"
       ]
     }
+  },
+  {
+    "commonName": "Sage (Berggarten)",
+    "scientificName": "Salvia officinalis 'Berggarten'",
+    "description": "A compact culinary sage with broad, aromatic, grey-green leaves.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered growing site.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Check the growing medium before watering. Let excess water drain and check containers during dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use free-draining soil or a potting mix with good drainage.",
+    "humidityInstructions": "Leave space for airflow around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/68040/salvia-officinalis-berggarten/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Grow in a sunny pot or bed with good drainage. Protect the roots from prolonged winter wet.",
+      "harvestInstructions": "Pick a few leaves or soft tips as needed.",
+      "photo": null,
+      "cultivarName": "Berggarten",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Berggarten sage"
+      ]
+    }
+  },
+  {
+    "commonName": "Sage (Tricolor)",
+    "scientificName": "Salvia officinalis 'Tricolor'",
+    "description": "An evergreen culinary sage with cream-variegated leaves and purple-tinged young growth.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered growing site.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Check the growing medium before watering. Let excess water drain and check containers during dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use free-draining soil or a potting mix with good drainage.",
+    "humidityInstructions": "Leave space for airflow around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/92970/salvia-officinalis-tricolor-v/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Choose a sunny, sheltered spot and protect a container from prolonged winter wet.",
+      "harvestInstructions": "Pick individual leaves or short soft tips, leaving most of the foliage in place.",
+      "photo": null,
+      "cultivarName": "Tricolor",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Tricolor sage"
+      ]
+    }
+  },
+  {
+    "commonName": "Thyme (Silver Queen)",
+    "scientificName": "Thymus vulgaris 'Silver Queen'",
+    "description": "A dwarf thyme with cream-edged, lemon-scented leaves and small pink flowers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered growing site.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Check the growing medium before watering. Let excess water drain and check containers during dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use free-draining soil or a potting mix with good drainage.",
+    "humidityInstructions": "Leave space for airflow around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/255735/thymus-vulgaris-silver-queen/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Grow in sun in a free-draining pot or at the edge of a raised bed.",
+      "harvestInstructions": "Snip a few fresh sprigs as needed.",
+      "photo": null,
+      "cultivarName": "Silver Queen",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Silver Queen thyme"
+      ]
+    }
+  },
+  {
+    "commonName": "Rosemary (Capri)",
+    "scientificName": "Salvia rosmarinus 'Capri'",
+    "description": "A low, spreading rosemary with narrow leaves and blue flowers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered growing site.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Check the growing medium before watering. Let excess water drain and check containers during dry weather.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use free-draining soil or a potting mix with good drainage.",
+    "humidityInstructions": "Leave space for airflow around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/386335/salvia-rosmarinus-prostrata-group-capri-ro/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "herb"
+      ],
+      "growingNotes": "Let stems trail over a container edge or wall in a sunny, sheltered spot. Use a mix that drains freely.",
+      "harvestInstructions": "Clip short leafy tips for cooking, leaving established woody stems in place.",
+      "photo": null,
+      "cultivarName": "Capri",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Capri rosemary"
+      ]
+    }
   }
 ]
