@@ -11493,7 +11493,15 @@
       ],
       "growingNotes": "Check the wood-chip bed during dry weather, particularly while the spawn is establishing.",
       "harvestInstructions": "Follow the supplier's harvest guidance for your cultivated crop. Use only fruiting bodies you can verify came from the known spawn. For wild or unexpected mushrooms, seek expert identification before eating.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/stropharia-rugosoannulata.jpg",
+        "altText": "Wine cap mushrooms with reddish-brown caps and pale stems growing in a container",
+        "credit": "Holger Krisp",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kulturtr%C3%A4uschling_Stropharia_rugosoannulata.jpg",
+        "licenseName": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "title": "Kulturträuschling Stropharia rugosoannulata.jpg"
+      },
       "commonNameAliases": [
         "Garden giant mushroom"
       ]
@@ -11663,7 +11671,7 @@
   {
     "commonName": "Chestnut mushroom",
     "scientificName": "Pholiota adiposa",
-    "description": "A cultivated fungus grown in clusters on prepared wood-based substrate.",
+    "description": "A cultivated fungus grown in clusters on prepared wood-based substrate. The common name chestnut mushroom is also used for cremini (Agaricus bisporus). For this guide, choose a kit labelled Pholiota adiposa.",
     "sunlightRequirement": "LowLight",
     "sunlightInstructions": "Follow the kit instructions for light during fruiting.",
     "defaultWateringIntervalDays": 1,
@@ -11683,7 +11691,15 @@
       ],
       "growingNotes": "Choose a supplier that labels the kit Pholiota adiposa. Follow its instructions for opening the block and maintaining humidity as clusters form.",
       "harvestInstructions": "Follow the supplier's harvest instructions. Harvest only fruiting bodies you can verify came from the labelled spawn. Seek expert identification for wild or unexpected mushrooms before eating.",
-      "photo": null,
+      "photo": {
+        "path": "/images/plants/pholiota-adiposa.jpg",
+        "altText": "Cluster of cultivated chestnut mushrooms with golden scaly caps growing on a substrate block",
+        "credit": "Alan Rockefeller",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chestnut_mushrooms_cultivated_on_Cape_Cod.jpg",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "Chestnut mushrooms cultivated on Cape Cod.jpg"
+      },
       "commonNameAliases": [
         "Cultivated chestnut mushroom"
       ]

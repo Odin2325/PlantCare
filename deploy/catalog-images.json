@@ -3064,5 +3064,33 @@
     "bytes": 229887,
     "sourceFileName": "Pleurotus eryngii 01.JPG",
     "changes": "Original Wikimedia file; no edits. Displayed scaled to fit."
+  },
+  {
+    "alt": "Cluster of cultivated chestnut mushrooms with golden scaly caps growing on a substrate block",
+    "caption": "Chestnut mushrooms cultivated on Cape Cod.jpg",
+    "credit": "Alan Rockefeller",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "licenseName": "CC BY 4.0",
+    "slug": "pholiota-adiposa",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chestnut_mushrooms_cultivated_on_Cape_Cod.jpg",
+    "path": "/images/plants/pholiota-adiposa.jpg",
+    "sha256": "16d65a595df2231cca76db4c6bb70ca2164534fd550a20e8a6dab856567cafa1",
+    "bytes": 180803,
+    "sourceFileName": "Chestnut mushrooms cultivated on Cape Cod.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
+  },
+  {
+    "alt": "Wine cap mushrooms with reddish-brown caps and pale stems growing in a container",
+    "caption": "Kulturträuschling Stropharia rugosoannulata.jpg",
+    "credit": "Holger Krisp",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "licenseName": "CC BY 3.0",
+    "slug": "stropharia-rugosoannulata",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kulturtr%C3%A4uschling_Stropharia_rugosoannulata.jpg",
+    "path": "/images/plants/stropharia-rugosoannulata.jpg",
+    "sha256": "bc579dee3c5e40e5ebb53d242bb8c556fd8e94fc185da1a12817275b47156f9c",
+    "bytes": 171649,
+    "sourceFileName": "Kulturträuschling Stropharia rugosoannulata.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail; no further edits. Original available at source. Displayed scaled to fit."
   }
 ]
