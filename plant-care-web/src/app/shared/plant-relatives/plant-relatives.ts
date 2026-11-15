@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, linkedSignal, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
@@ -33,6 +33,8 @@ export function catalogVarietyGroup(plant: PlantSpecies): string | null {
   return groupAliases[name] ?? name;
 }
 
+const relativesPageSize = 4;
+
 @Component({
   selector: 'app-plant-relatives', standalone: true, imports: [RouterLink, PlantPhoto],
   template: `
@@ -43,9 +45,21 @@ export function catalogVarietyGroup(plant: PlantSpecies): string | null {
       @if (loading()) { <p role="status">Loading related varieties…</p> }
       @else if (error()) { <p role="alert">Related varieties could not be loaded.</p><button type="button" (click)="load()">Try related varieties again</button> }
       @else {
-        <p role="status">{{ relatives().length }} related entries</p>
+        <p role="status">
+          @if (pageCount() > 1) {
+            Showing {{ pageStart() + 1 }}–{{ pageEnd() }} of {{ relatives().length }} related entries
+          } @else {
+            {{ relatives().length }} {{ relatives().length === 1 ? 'related entry' : 'related entries' }}
+          }
+        </p>
+        @if (pageCount() > 1) {
+          <nav class="relatives-pages" aria-label="Related variety pages">
+            <button type="button" [disabled]="page() === 1" (click)="changePage(-1)">Previous</button>
+            <button type="button" [disabled]="page() === pageCount()" (click)="changePage(1)">Next</button>
+          </nav>
+        }
         <div class="relatives-grid">
-          @for (relative of relatives(); track relative.id) {
+          @for (relative of visibleRelatives(); track relative.id) {
             <article>
               <h3><a [routerLink]="['/plants', relative.id]" queryParamsHandling="preserve">{{ relative.commonName }}</a></h3>
               <p>{{ relative.catalogProfile?.cultivarName ? 'Cultivar: ' + relative.catalogProfile!.cultivarName : 'General entry' }}</p>
@@ -62,7 +76,8 @@ export function catalogVarietyGroup(plant: PlantSpecies): string | null {
   styles: `
     :host{display:block;margin-block:2rem;min-width:0}.relatives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
     article{padding:1rem;border:1px solid var(--color-input-border);border-radius:.65rem;min-width:0;overflow-wrap:anywhere}h3{margin-top:0}a{color:var(--color-primary)}
-    button{font:inherit;padding:.65rem;border:1px solid var(--color-primary);border-radius:var(--radius-control);background:white;color:var(--color-primary)}
+    .relatives-pages { display: flex; flex-wrap: wrap; gap: .55rem; margin-bottom: .8rem; }
+    button { min-height: 44px; font: inherit; padding: .65rem; border: 1px solid var(--color-primary); border-radius: var(--radius-control); background: white; color: var(--color-primary); }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -78,7 +93,18 @@ export class PlantRelatives {
     return group ? this.catalog().filter(p => p.id !== current.id && catalogVarietyGroup(p) === group)
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en')) : [];
   });
+  private readonly requestedPage = linkedSignal({ source: () => this.plant().id, computation: () => 1 });
+  readonly pageCount = computed(() => Math.max(1, Math.ceil(this.relatives().length / relativesPageSize)));
+  readonly page = computed(() => Math.min(this.requestedPage(), this.pageCount()));
+  readonly pageStart = computed(() => (this.page() - 1) * relativesPageSize);
+  readonly pageEnd = computed(() => Math.min(this.pageStart() + relativesPageSize, this.relatives().length));
+  readonly visibleRelatives = computed(() => this.relatives().slice(this.pageStart(), this.pageEnd()));
+
   constructor() { this.load(); }
+
+  changePage(offset: number): void {
+    this.requestedPage.set(Math.max(1, Math.min(this.pageCount(), this.page() + offset)));
+  }
   load(): void {
     this.loading.set(true); this.error.set(false);
     this.api.getAll().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({

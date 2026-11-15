@@ -1645,5 +1645,59 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Ribes uva-crispa 'Invicta'",
+    "cultivarName": "Invicta",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Ribes uva-crispa 'Greenfinch'",
+    "cultivarName": "Greenfinch",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Ribes uva-crispa 'Leveller'",
+    "cultivarName": "Leveller",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Ribes rubrum 'Jonkheer van Tets'",
+    "cultivarName": "Jonkheer van Tets",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Ribes rubrum 'Red Lake'",
+    "cultivarName": "Red Lake",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Prunus domestica 'Blue Tit'",
+    "cultivarName": "Blue Tit",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
   }
 ]

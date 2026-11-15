@@ -43,3 +43,29 @@ it('shows common-name links to other entries, updates on navigation and isolates
   expect(fixture.nativeElement.textContent).toContain('No other reviewed varieties');
   expect(getAll).toHaveBeenCalledTimes(2); expect(JSON.stringify(catalog)).toBe(before);
 });
+
+it('pages related varieties and returns to the first page when opening another entry', () => {
+  const current = plant('Tomato', 'Solanum lycopersicum');
+  const varieties = ['A', 'B', 'C', 'D', 'E', 'F'].map(name => plant(name, `Solanum lycopersicum '${name}'`, name));
+  const getAll = vi.fn().mockReturnValue(of([current, ...varieties]));
+  TestBed.configureTestingModule({ providers: [provideRouter([]), { provide: PlantSpeciesApiService, useValue: { getAll } }] });
+  const fixture = TestBed.createComponent(PlantRelatives);
+  fixture.componentRef.setInput('plant', current);
+  fixture.detectChanges();
+  const element = fixture.nativeElement as HTMLElement;
+  const [previous, next] = element.querySelectorAll<HTMLButtonElement>('nav button');
+  const names = () => Array.from(element.querySelectorAll('h3 a')).map(link => link.textContent);
+
+  expect(previous.disabled).toBe(true);
+  expect(names()).toEqual(['A', 'B', 'C', 'D']);
+  next.click();
+  fixture.detectChanges();
+  expect(names()).toEqual(['E', 'F']);
+  expect(next.disabled).toBe(true);
+
+  fixture.componentRef.setInput('plant', varieties[4]);
+  fixture.detectChanges();
+  expect(previous.disabled).toBe(true);
+  expect(names()).toEqual(['A', 'B', 'C', 'D']);
+  expect(getAll).toHaveBeenCalledTimes(1);
+});

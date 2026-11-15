@@ -11874,5 +11874,192 @@
         "Golden Gate French bean"
       ]
     }
+  },
+  {
+    "commonName": "Gooseberry (Invicta)",
+    "scientificName": "Ribes uva-crispa 'Invicta'",
+    "description": "A productive culinary gooseberry with some resistance to mildew.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun for ripening. Berry bushes can also grow in light shade.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while establishing or if grown in a container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use soil that holds moisture and drains freely.",
+    "humidityInstructions": "Leave space for air to circulate around the branches.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/gooseberries/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow in a ventilated site and prune to keep the centre open. Give a container-grown bush room for its roots.",
+      "harvestInstructions": "Pick firm berries for cooking or leave some to ripen further on the bush.",
+      "photo": null,
+      "cultivarName": "Invicta",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Invicta gooseberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Gooseberry (Greenfinch)",
+    "scientificName": "Ribes uva-crispa 'Greenfinch'",
+    "description": "A compact culinary gooseberry with relatively few spines and mildew resistance.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun for ripening. Berry bushes can also grow in light shade.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while establishing or if grown in a container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use soil that holds moisture and drains freely.",
+    "humidityInstructions": "Leave space for air to circulate around the branches.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/gooseberries/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow as a bush in a sunny or lightly shaded spot. Leave enough space between branches to reach the fruit.",
+      "harvestInstructions": "Pick firm berries for cooking, taking care around the spines.",
+      "photo": null,
+      "cultivarName": "Greenfinch",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Greenfinch gooseberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Gooseberry (Leveller)",
+    "scientificName": "Ribes uva-crispa 'Leveller'",
+    "description": "A dessert gooseberry with large yellow fruit.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun for ripening. Berry bushes can also grow in light shade.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while establishing or if grown in a container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use soil that holds moisture and drains freely.",
+    "humidityInstructions": "Leave space for air to circulate around the branches.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/gooseberries/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Give the bush an open, sunny site where possible. Water container-grown plants as the fruit swells.",
+      "harvestInstructions": "Pick the yellow berries once they are ripe for eating fresh.",
+      "photo": null,
+      "cultivarName": "Leveller",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Leveller gooseberry"
+      ]
+    }
+  },
+  {
+    "commonName": "Redcurrant (Jonkheer van Tets)",
+    "scientificName": "Ribes rubrum 'Jonkheer van Tets'",
+    "description": "An early redcurrant that bears its fruit on long clusters.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun for ripening. Berry bushes can also grow in light shade.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while establishing or if grown in a container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use soil that holds moisture and drains freely.",
+    "humidityInstructions": "Leave space for air to circulate around the branches.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/redcurrants/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Leave space to pick around the bush, or train it as a cordon if the growing area is narrow.",
+      "harvestInstructions": "Snip whole clusters once the berries are evenly ripe.",
+      "photo": null,
+      "cultivarName": "Jonkheer van Tets",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Jonkheer van Tets redcurrant"
+      ]
+    }
+  },
+  {
+    "commonName": "Redcurrant (Red Lake)",
+    "scientificName": "Ribes rubrum 'Red Lake'",
+    "description": "A redcurrant with large, juicy, dark-red berries.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose sun for ripening. Berry bushes can also grow in light shade.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while establishing or if grown in a container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use soil that holds moisture and drains freely.",
+    "humidityInstructions": "Leave space for air to circulate around the branches.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/redcurrants/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow as a bush in moisture-retentive ground. Keep the soil evenly moist in dry weather as the fruit develops.",
+      "harvestInstructions": "Pick whole clusters when the fruit has turned dark red.",
+      "photo": null,
+      "cultivarName": "Red Lake",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Lake redcurrant"
+      ]
+    }
+  },
+  {
+    "commonName": "Plum tree (Blue Tit)",
+    "scientificName": "Prunus domestica 'Blue Tit'",
+    "description": "A compact, self-fertile plum cultivar with blue-black fruit for eating or cooking.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site.",
+    "defaultWateringIntervalDays": 5,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while establishing or if grown in a container.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Feed according to the growing medium and the product label.",
+    "soilInstructions": "Use soil that holds moisture and drains freely.",
+    "humidityInstructions": "Leave space for air to circulate around the branches.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/plums/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "fruit",
+        "tree"
+      ],
+      "growingNotes": "Choose a sunny, sheltered site and check the rootstock and mature size before planting, especially for a large container.",
+      "harvestInstructions": "Pick ripe fruit gently for eating fresh. Check the tree regularly as fruits soften.",
+      "photo": null,
+      "cultivarName": "Blue Tit",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Blue Tit plum"
+      ]
+    }
   }
 ]
