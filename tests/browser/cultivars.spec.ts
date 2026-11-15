@@ -34,7 +34,7 @@ test('related cultivars: photo filters combine with search and preserve URL cont
   });
   await page.goto('/plants?category=vegetable&q=tomato&cultivarPhoto=available&compare=' + catalog[0].id); await openCatalogTools(page);
   const cards = page.locator('.plant-card');
-  const filter = page.getByRole('combobox', { name: 'Cultivar photos', exact: true });
+  const filter = page.getByRole('combobox', { name: 'Catalog photos', exact: true });
   await expect(filter).toHaveValue('available');
   await expect(cards.locator('h2')).toHaveText(['Tomato (Roma)']);
   await cards.getByRole('checkbox', { name: 'Compare Tomato (Roma)', exact: true }).check();

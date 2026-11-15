@@ -1582,5 +1582,32 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Tropaeolum majus 'Black Velvet'",
+    "cultivarName": "Black Velvet",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Zinnia elegans 'Queen Orange'",
+    "cultivarName": "Queen Orange",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
+  },
+  {
+    "scientificName": "Solanum tuberosum 'Casablanca'",
+    "cultivarName": "Casablanca",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-15"
   }
 ]

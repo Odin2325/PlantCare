@@ -86,11 +86,12 @@
       </select>
     </div>
     <div class="catalog-field">
-      <label for="plant-cultivar-photo">Cultivar photos</label>
+      <label for="plant-cultivar-photo">Catalog photos</label>
       <select id="plant-cultivar-photo" [ngModel]="cultivarPhoto()" (ngModelChange)="setCultivarPhoto($event)" aria-describedby="cultivar-photo-help">
         <option value="">All entries</option>
         <option value="available">With cultivar photo</option>
-        <option value="pending">Photo pending</option>
+        <option value="pending">Cultivar photo pending</option>
+        <option value="missing">Without a catalog photo</option>
       </select>
     </div>
     <div class="catalog-field">
@@ -104,7 +105,7 @@
   </div>
   <p>Categories describe common garden uses and can overlap. They do not mean that every part of a plant is edible. Check the growing and harvest guidance on its detail page.</p>
   <p id="pet-filter-help">The non-toxic filter includes only plants with a linked cat-and-dog toxicity reference. An absent warning is not a safety assessment. Non-toxic plants can still cause stomach upset if eaten.</p>
-  <p id="cultivar-photo-help">The cultivar photo choices show named varieties only. Pending means a suitable licensed photo is still being sourced; general species photos do not count as cultivar photos.</p>
+  <p id="cultivar-photo-help">Cultivar photo choices apply to named varieties. Choose Without a catalog photo to include general entries and mushrooms awaiting photos.</p>
   </section>
   <details class="catalog-extras"><summary>Shortlist &amp; comparison @if (comparisonPlants().length) { <span>{{ comparisonPlants().length }} selected</span> }</summary>
   <app-shortlist-notice />

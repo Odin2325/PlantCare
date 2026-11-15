@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { PlantCatalogPhoto, PlantCatalogProfile } from '../../models/plant-species.model';
 
+export function catalogPrimaryPhoto(profile: PlantCatalogProfile | null | undefined): PlantCatalogPhoto | null {
+  return profile?.cultivarName && profile.photoIsSpeciesReference ? null : profile?.photo ?? null;
+}
+
 @Component({
   selector: 'app-plant-photo', standalone: true,
   template: `
@@ -34,8 +38,7 @@ export class PlantPhoto {
   readonly profile = input<PlantCatalogProfile | null | undefined>(null);
   readonly photo = input<PlantCatalogPhoto | null | undefined>(null);
   readonly detail = input(false);
-  readonly selectedPhoto = computed(() => this.photo() ??
-    (this.profile()?.cultivarName && this.profile()?.photoIsSpeciesReference ? null : this.profile()?.photo ?? null));
+  readonly selectedPhoto = computed(() => this.photo() ?? catalogPrimaryPhoto(this.profile()));
   readonly cultivarPending = computed(() => !this.photo() && !!this.profile()?.cultivarName && !this.selectedPhoto());
   readonly failedPath = signal<string | null>(null);
 }

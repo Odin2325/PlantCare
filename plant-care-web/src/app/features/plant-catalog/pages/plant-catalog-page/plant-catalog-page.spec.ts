@@ -85,6 +85,26 @@ describe('Catalog categories', () => {
     page.setCategory('vegetable'); page.setQuery('Tiny Tim');
     expect(page.visibleSpecies().map(p => p.commonName)).toEqual(['Cherry tomato (Tiny Tim)']);
   });
+  it('finds general entries without a catalog photo, alongside pending cultivars', () => {
+    const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
+    const oyster = make('King oyster mushroom', ['mushroom']);
+    const legacy = { ...make('Legacy without profile'), catalogProfile: null };
+    page.plantSpecies.set([...plants, oyster, legacy]);
+
+    params.next(convertToParamMap({ cultivarPhoto: 'missing', category: 'mushroom' }));
+    expect(page.visibleSpecies()).toEqual([oyster]);
+    page.setCategory('');
+    expect(page.visibleSpecies()).toContain(legacy);
+    expect(page.visibleSpecies()).toContain(plants[3]);
+    page.setCultivarPhoto('pending');
+    expect(page.visibleSpecies()).toEqual([plants[3]]);
+
+    page.setCultivarPhoto('missing');
+    expect(TestBed.inject(Router).navigate).toHaveBeenLastCalledWith([], expect.objectContaining({
+      queryParams: expect.objectContaining({ cultivarPhoto: 'missing' }),
+    }));
+  });
+
   it('restores and saves the cultivar photo filter, ignoring unsupported URL and control values', () => {
     const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
     params.next(convertToParamMap({ cultivarPhoto: 'pending', category: 'vegetable', q: 'Tiny Tim' }));

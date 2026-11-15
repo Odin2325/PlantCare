@@ -11598,5 +11598,155 @@
         "Indian Prince calendula"
       ]
     }
+  },
+  {
+    "commonName": "King oyster mushroom",
+    "scientificName": "Pleurotus eryngii",
+    "description": "A cultivated oyster relative grown for its thick stems.",
+    "sunlightRequirement": "LowLight",
+    "sunlightInstructions": "Follow the kit instructions for light during fruiting.",
+    "defaultWateringIntervalDays": 1,
+    "wateringInstructions": "Check moisture at the interval recommended for the kit's current stage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use the substrate specified by the supplier.",
+    "soilInstructions": "Start with an identified, ready-to-fruit block on prepared wood-based substrate.",
+    "humidityInstructions": "Follow the kit's humidity and fresh-air guidance.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://smallfarms.cornell.edu/resources/indoor-production/",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "mushroom"
+      ],
+      "growingNotes": "Start with a ready-to-fruit king oyster block. Follow the strain instructions for temperature and fresh air as it starts fruiting.",
+      "harvestInstructions": "Follow the supplier's harvest instructions. Harvest only fruiting bodies you can verify came from the labelled spawn. Seek expert identification for wild or unexpected mushrooms before eating.",
+      "photo": null,
+      "commonNameAliases": [
+        "King trumpet mushroom"
+      ]
+    }
+  },
+  {
+    "commonName": "Chestnut mushroom",
+    "scientificName": "Pholiota adiposa",
+    "description": "A cultivated fungus grown in clusters on prepared wood-based substrate.",
+    "sunlightRequirement": "LowLight",
+    "sunlightInstructions": "Follow the kit instructions for light during fruiting.",
+    "defaultWateringIntervalDays": 1,
+    "wateringInstructions": "Check moisture at the interval recommended for the kit's current stage.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use the substrate specified by the supplier.",
+    "soilInstructions": "Start with an identified, ready-to-fruit block on prepared wood-based substrate.",
+    "humidityInstructions": "Follow the kit's humidity and fresh-air guidance.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://smallfarms.cornell.edu/resources/indoor-production/",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "mushroom"
+      ],
+      "growingNotes": "Choose a supplier that labels the kit Pholiota adiposa. Follow its instructions for opening the block and maintaining humidity as clusters form.",
+      "harvestInstructions": "Follow the supplier's harvest instructions. Harvest only fruiting bodies you can verify came from the labelled spawn. Seek expert identification for wild or unexpected mushrooms before eating.",
+      "photo": null,
+      "commonNameAliases": [
+        "Cultivated chestnut mushroom"
+      ]
+    }
+  },
+  {
+    "commonName": "Nasturtium (Black Velvet)",
+    "scientificName": "Tropaeolum majus 'Black Velvet'",
+    "description": "A compact nasturtium with round leaves and deep, velvety red flowers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture during dry spells, especially in containers.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use free-draining soil with low fertility.",
+    "humidityInstructions": "Leave space around plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/247150/tropaeolum-majus-black-velvet-tom-thumb-series/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "flower"
+      ],
+      "growingNotes": "Sow in spring after frost risk has eased. Give the plants a sunny spot and avoid rich soil that encourages leaves at the expense of flowers.",
+      "photo": null,
+      "cultivarName": "Black Velvet",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Black Velvet nasturtium"
+      ]
+    }
+  },
+  {
+    "commonName": "Zinnia (Queen Orange)",
+    "scientificName": "Zinnia elegans 'Queen Orange'",
+    "description": "An annual zinnia with rounded blooms that shade from lime at the centre into peach and orange.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture during dry spells, especially in containers.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use well-drained soil.",
+    "humidityInstructions": "Leave space around plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/359526/zinnia-elegans-queen-orange-queen-series-d/details",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "flower"
+      ],
+      "growingNotes": "Start in spring and plant out after frost risk passes. Leave room for airflow and cut or deadhead flowers regularly.",
+      "photo": null,
+      "cultivarName": "Queen Orange",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Queen Orange zinnia"
+      ]
+    }
+  },
+  {
+    "commonName": "Potato (Casablanca)",
+    "scientificName": "Solanum tuberosum 'Casablanca'",
+    "description": "A first-early potato grown for an early crop of white-skinned tubers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny growing site.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check moisture during dry spells, especially in containers.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Follow the feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile, well-drained soil or a deep container with fresh compost.",
+    "humidityInstructions": "Leave space around plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/potatoes/grow-your-own",
+      "reviewedOn": "2026-11-15",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Plant certified seed potatoes. Protect young shoots from frost and keep developing tubers covered with soil or compost.",
+      "harvestInstructions": "Lift one plant to check tuber size before harvesting the rest. Choose sound, non-green tubers.",
+      "photo": null,
+      "cultivarName": "Casablanca",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Casablanca potato"
+      ]
+    }
   }
 ]
