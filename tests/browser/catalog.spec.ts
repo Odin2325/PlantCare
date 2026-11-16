@@ -2,6 +2,8 @@ import { openCatalogTools } from './ui-controls';
 import { expect, test } from '@playwright/test';
 import { auditAccessibility } from './accessibility';
 
+const catalogPageSize = 24;
+
 test('garden catalog categories combine with search and preserve navigation and comparison', async ({ page, request }) => {
   const response = await request.get('/api/plant-species');
   expect(response.ok()).toBe(true);
@@ -23,12 +25,12 @@ test('garden catalog categories combine with search and preserve navigation and 
   await page.getByLabel('Entry type', { exact: true }).selectOption('');
   for (const category of ['houseplant', 'fruit', 'vegetable', 'root-tuber', 'herb', 'mushroom', 'flower']) {
     await categoryLink(category).click();
-    await expect(page.locator('.plant-card')).toHaveCount(categoryCount(category));
+    await expect(page.locator('.plant-card')).toHaveCount(Math.min(categoryCount(category), catalogPageSize));
   }
   await page.getByLabel('Entry type', { exact: true }).selectOption('cultivar');
   for (const category of ['houseplant', 'fruit', 'root-tuber']) {
     await categoryLink(category).click();
-    await expect(page.locator('.plant-card')).toHaveCount(categoryCount(category, true));
+    await expect(page.locator('.plant-card')).toHaveCount(Math.min(categoryCount(category, true), catalogPageSize));
   }
   await page.getByLabel('Entry type', { exact: true }).selectOption('general');
   await categoryLink('fruit').click();
@@ -197,9 +199,9 @@ test('sourced cat-and-dog filter excludes unknown plants and preserves combined 
   await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('');
   await page.getByLabel('Cats and dogs', { exact: true }).selectOption('warning');
   await expect(names).toHaveText(species.filter((p: any) => p.isToxicToPets).map((p: any) => p.commonName)
-    .sort((a: string, b: string) => a.localeCompare(b, 'en')));
+    .sort((a: string, b: string) => a.localeCompare(b, 'en', { sensitivity: 'base' })).slice(0, catalogPageSize));
   await page.goto('/plants?pets=invalid'); await openCatalogTools(page);
-  await expect(cards).toHaveCount(species.length);
+  await expect(cards).toHaveCount(Math.min(species.length, catalogPageSize));
   await expect(page.getByLabel('Cats and dogs', { exact: true })).toHaveValue('');
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -258,8 +260,12 @@ test('large houseplant batch has distinct common-name pages, source credits and 
 
 test('comparison selection survives filters, details and reload, limits three plants and shows sourced care', async ({ page }) => {
   await page.goto('/plants'); await openCatalogTools(page);
-  for (const name of ['Spider plant', 'Snake plant', 'ZZ plant'])
+  const search = page.getByRole('searchbox', { name: 'Find a plant' });
+  for (const name of ['Spider plant', 'Snake plant', 'ZZ plant']) {
+    await search.fill(name);
     await page.getByRole('checkbox', { name: 'Compare ' + name, exact: true }).check();
+  }
+  await search.fill('Golden pothos');
   await expect(page.getByRole('checkbox', { name: 'Compare Golden pothos', exact: true })).toBeDisabled();
   await page.getByRole('searchbox', { name: 'Find a plant' }).fill('Spider plant');
   await expect(page.locator('.plant-card')).toHaveCount(1);
@@ -281,7 +287,9 @@ test('comparison selection survives filters, details and reload, limits three pl
   await auditAccessibility(page,'Plant comparison at narrow width');
   await page.getByRole('link', { name: 'Back to plant catalog', exact: false }).click(); await openCatalogTools(page, true);
   await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await search.fill('Spider plant');
   await expect(page.getByRole('checkbox', { name: 'Compare Spider plant', exact: true })).toBeChecked();
+  await search.fill('ZZ plant');
   await expect(page.getByRole('checkbox', { name: 'Compare ZZ plant', exact: true })).not.toBeChecked();
   await page.getByRole('button', { name: 'Clear comparison', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Compare selected plants', exact: true })).toHaveCount(0);
@@ -373,14 +381,14 @@ test('growth photo discovery combines filters and preserves comparison through d
   await expect(page.getByText('No plants match your search. Try another name or clear the filters.')).toBeVisible();
   await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(filter).toHaveValue('');
-  await expect(page.locator('.plant-card')).toHaveCount(all.length);
+  await expect(page.locator('.plant-card')).toHaveCount(Math.min(all.length, catalogPageSize));
   await expect(page.getByRole('region', { name: 'Plant comparison selection' })).toContainText('2 of 3');
   await page.setViewportSize({ width: 320, height: 800 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await auditAccessibility(page, 'Growth reference discovery at narrow width');
   await page.goto('/plants?growth=invalid'); await openCatalogTools(page);
   await expect(filter).toHaveValue('');
-  await expect(page.locator('.plant-card')).toHaveCount(all.length);
+  await expect(page.locator('.plant-card')).toHaveCount(Math.min(all.length, catalogPageSize));
   await expect(page.getByRole('button', { name: 'Clear filters', exact: true })).toBeDisabled();
 });
 
@@ -449,7 +457,7 @@ test('familiar aliases tolerate punctuation, preserve navigation and keep ambigu
 test('unknown pet assessment stays distinct and combines with gallery, light and comparison navigation', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   const expected = species.filter((p: any) => !p.isToxicToPets && !p.catalogProfile?.nonToxicToCatsAndDogsSourceUrl)
-    .map((p: any) => p.commonName).sort((a: string, b: string) => a.localeCompare(b, 'en'));
+    .map((p: any) => p.commonName).sort((a: string, b: string) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
   expect(expected).toContain('Ripple peperomia');
   expect(expected).not.toContain('African violet');
   expect(expected).not.toContain('African milk tree');
@@ -457,11 +465,15 @@ test('unknown pet assessment stays distinct and combines with gallery, light and
   const cards = page.locator('.plant-card');
   const filter = page.getByLabel('Cats and dogs', { exact: true });
   await expect(filter).toHaveValue('unknown');
-  await expect(cards.locator('h2')).toHaveText(expected);
-  await expect(cards.locator('.unknown-badge')).toHaveCount(expected.length);
+  await expect(cards.locator('h2')).toHaveText(expected.slice(0, catalogPageSize));
+  await expect(cards.locator('.unknown-badge')).toHaveCount(Math.min(expected.length, catalogPageSize));
   await expect(cards.locator('.warning-badge, .pet-badge')).toHaveCount(0);
-  for (const name of ['Moth orchid', 'Thanksgiving cactus'])
+  const search = page.getByRole('searchbox', { name: 'Find a plant' });
+  for (const name of ['Moth orchid', 'Thanksgiving cactus']) {
+    await search.fill(name);
     await page.getByRole('checkbox', { name: 'Compare ' + name, exact: true }).check();
+  }
+  await search.clear();
   await page.getByLabel('Growth references', { exact: true }).selectOption('available');
   await expect(cards.locator('h2')).toHaveText(['Moth orchid', 'Thanksgiving cactus']);
   await page.getByLabel('Light requirement', { exact: true }).selectOption('BrightIndirectLight');
@@ -479,7 +491,7 @@ test('unknown pet assessment stays distinct and combines with gallery, light and
   await expect(filter).toHaveValue('unknown');
   await openCatalogTools(page, true);await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(filter).toHaveValue('');
-  await expect(cards).toHaveCount(species.length);
+  await expect(cards).toHaveCount(Math.min(species.length, catalogPageSize));
   await expect(page.getByRole('region', { name: 'Plant comparison selection' })).toContainText('2 of 3');
   await filter.selectOption('unknown');
   await page.setViewportSize({ width: 320, height: 800 });

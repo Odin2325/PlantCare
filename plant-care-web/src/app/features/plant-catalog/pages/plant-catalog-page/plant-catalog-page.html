@@ -129,7 +129,13 @@
     }
   </section>
   </details>
-  <p role="status">{{ visibleSpecies().length }} of {{ plantSpecies().length }} plants</p>
+  <p #results role="status" tabindex="-1">
+    @if (pageCount() > 1) {
+      Showing {{ pageStart() + 1 }}–{{ pageStart() + pageSpecies().length }} of {{ visibleSpecies().length }} matching plants
+    } @else {
+      {{ visibleSpecies().length }} of {{ plantSpecies().length }} plants
+    }
+  </p>
   @if (visibleSpecies().length === 0) {
     @if (showShortlist() && !shortlist.ready()) {
       <p class="status-message">Sign in or refresh your shortlist to display saved plants.</p>
@@ -140,7 +146,7 @@
     }
   }
   <div class="plant-grid">
-    @for (plant of visibleSpecies(); track plant.id) {
+    @for (plant of pageSpecies(); track plant.id) {
     <article class="plant-card">
       <app-plant-photo [profile]="plant.catalogProfile" />
       @if (plant.catalogProfile?.cultivarName; as cultivar) { <p class="category-labels">Cultivar: {{ cultivar }}</p> }
@@ -217,5 +223,14 @@
     </article>
     }
   </div>
+  @if (pageCount() > 1) {
+    <nav class="catalog-pagination" aria-label="Catalog pages">
+      <button type="button" [disabled]="currentPage() === 1"
+        (click)="goToPage(currentPage() - 1, results)">Previous</button>
+      <span>Page {{ currentPage() }} of {{ pageCount() }}</span>
+      <button type="button" [disabled]="currentPage() === pageCount()"
+        (click)="goToPage(currentPage() + 1, results)">Next</button>
+    </nav>
+  }
   }
 </main>

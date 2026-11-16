@@ -68,6 +68,8 @@ export class PlantCatalogPage {
   readonly cultivarPhoto = signal<CatalogPhotoFilter>('');
   readonly sort = signal<'name-asc' | 'name-desc'>('name-asc');
   readonly comparisonIds = signal<string[]>([]);
+  private readonly pageSize = 24;
+  private readonly requestedPage = signal(1);
   readonly comparisonPlants = computed(() => this.comparisonIds().map(id => this.plantSpecies().find(p => p.id === id))
     .filter((p): p is PlantSpecies => Boolean(p)));
   readonly lightOptions: { value: SunlightRequirement; label: string }[] = [
@@ -89,6 +91,7 @@ export class PlantCatalogPage {
     cultivarPhoto: this.cultivarPhoto() || null,
     shortlisted: this.showShortlist() ? '1' : null,
     sort: this.sort() === 'name-desc' ? 'name-desc' : null,
+    page: this.currentPage() > 1 ? this.currentPage() : null,
     compare: this.comparisonIds().length ? this.comparisonIds().join(',') : null,
   }));
   readonly hasFilters = computed(() => Boolean(this.showShortlist() || this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.harvestOnly() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
@@ -114,6 +117,10 @@ export class PlantCatalogPage {
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en', { sensitivity: 'base' }) *
         (this.sort() === 'name-desc' ? -1 : 1));
   });
+  readonly pageCount = computed(() => Math.max(1, Math.ceil(this.visibleSpecies().length / this.pageSize)));
+  readonly currentPage = computed(() => Math.min(this.requestedPage(), this.pageCount()));
+  readonly pageStart = computed(() => (this.currentPage() - 1) * this.pageSize);
+  readonly pageSpecies = computed(() => this.visibleSpecies().slice(this.pageStart(), this.pageStart() + this.pageSize));
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
 
@@ -133,6 +140,9 @@ export class PlantCatalogPage {
       this.cultivarPhoto.set(parseCatalogPhotoFilter(params.get('cultivarPhoto')));
       this.sort.set(params.get('sort') === 'name-desc' ? 'name-desc' : 'name-asc');
       this.comparisonIds.set(parseComparisonIds(params.get('compare')));
+      const page = params.get('page') ?? '';
+      const pageNumber = Number(page);
+      this.requestedPage.set(/^[1-9]\d*$/.test(page) && Number.isSafeInteger(pageNumber) ? pageNumber : 1);
     });
     this.loadPlantSpecies();
   }
@@ -148,7 +158,7 @@ export class PlantCatalogPage {
   }
 
   categoryQueryParams(value: PlantCategory | '') {
-    return { ...this.filterQueryParams(), category: value || null };
+    return { ...this.filterQueryParams(), category: value || null, page: null };
   }
 
   setKind(value: string): void {
@@ -160,10 +170,10 @@ export class PlantCatalogPage {
     const ids = this.comparisonPlants().map(p => p.id);
     if (ids.includes(plant.id)) this.comparisonIds.set(ids.filter(id => id !== plant.id));
     else if (ids.length < 3) this.comparisonIds.set([...ids, plant.id]);
-    this.saveFilters();
+    this.saveFilters(this.currentPage());
   }
 
-  clearComparison(): void { this.comparisonIds.set([]); this.saveFilters(); }
+  clearComparison(): void { this.comparisonIds.set([]); this.saveFilters(this.currentPage()); }
 
   setLight(value: string): void {
     this.light.set(this.lightOptions.find(option => option.value === value)?.value ?? '');
@@ -210,9 +220,16 @@ export class PlantCatalogPage {
   }
   setShowShortlist(value: boolean): void { this.showShortlist.set(value); this.saveFilters(); }
 
-  private saveFilters(): void {
+  goToPage(page: number, results: HTMLElement): void {
+    if (page < 1 || page > this.pageCount() || page === this.currentPage()) return;
+    this.saveFilters(page, false);
+    results.focus();
+  }
+
+  private saveFilters(page = 1, replaceUrl = true): void {
+    this.requestedPage.set(page);
     void this.router.navigate([], {
-      relativeTo: this.route, queryParams: this.filterQueryParams(), replaceUrl: true,
+      relativeTo: this.route, queryParams: this.filterQueryParams(), replaceUrl,
     });
   }
 

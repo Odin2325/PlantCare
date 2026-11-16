@@ -27,11 +27,59 @@ describe('Catalog categories', () => {
       { provide: ActivatedRoute, useValue: { queryParamMap: params } },
       { provide: PlantSpeciesApiService, useValue: { getAll: () => of(plants) } },
       { provide: ShortlistService, useValue: { ids:signal(['Fig tree','Cherry tomato (Tiny Tim)']), ready:signal(true),
-        has: (id:string) => ['Fig tree','Cherry tomato (Tiny Tim)'].includes(id) } }],
+        signedIn: signal(false), has: (id:string) => ['Fig tree','Cherry tomato (Tiny Tim)'].includes(id) } }],
     });
     vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
   });
   afterEach(() => TestBed.resetTestingModule());
+  it('pages the rendered cards and keeps comparisons when changing pages', () => {
+    const fixture = TestBed.createComponent(PlantCatalogPage);
+    const page = fixture.componentInstance;
+    const cropList = Array.from({ length: 50 }, (_, index) =>
+      make('Crop ' + String(index + 1).padStart(2, '0'), ['vegetable']));
+    page.plantSpecies.set(cropList);
+    params.next(convertToParamMap({ page: '2' }));
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const cards = () => [...element.querySelectorAll('.plant-card h2')].map(heading => heading.textContent);
+    expect(cards()).toEqual(cropList.slice(24, 48).map(plant => plant.commonName));
+    const next = element.querySelectorAll<HTMLButtonElement>('.catalog-pagination button')[1];
+    const results = element.querySelector<HTMLElement>('p[tabindex="-1"]')!;
+    const focus = vi.spyOn(results, 'focus');
+    next.click();
+    fixture.detectChanges();
+    expect(focus).toHaveBeenCalledOnce();
+    expect(cards()).toEqual(['Crop 49', 'Crop 50']);
+    expect(next.disabled).toBe(true);
+    expect(TestBed.inject(Router).navigate).toHaveBeenLastCalledWith([], expect.objectContaining({
+      queryParams: expect.objectContaining({ page: 3 }),
+      replaceUrl: false,
+    }));
+
+    page.toggleComparison(cropList[49]);
+    expect(page.filterQueryParams().page).toBe(3);
+    page.setQuery('Crop 01');
+    fixture.detectChanges();
+    expect(cards()).toEqual(['Crop 01']);
+    expect(page.filterQueryParams().page).toBeNull();
+    expect(page.comparisonPlants()).toEqual([cropList[49]]);
+    expect(element.querySelector('.catalog-pagination')).toBeNull();
+  });
+
+  it('clamps out-of-range pages and ignores malformed page parameters', () => {
+    const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
+    page.plantSpecies.set(Array.from({ length: 25 }, (_, i) => make('Crop ' + i)));
+    params.next(convertToParamMap({ page: '999' }));
+    expect(page.currentPage()).toBe(2);
+    expect(page.pageSpecies()).toHaveLength(1);
+    expect(page.categoryQueryParams('vegetable').page).toBeNull();
+    for (const invalid of ['0', '-1', '2.5', '2e1', '9007199254740992']) {
+      params.next(convertToParamMap({ page: invalid }));
+      expect(page.currentPage()).toBe(1);
+      expect(page.pageSpecies()).toHaveLength(24);
+    }
+  });
+
   it('supports overlapping garden groups without guessing a legacy category', () => {
     const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
     page.setCategory('tree'); expect(page.visibleSpecies().map(p => p.commonName)).toEqual(['Fig tree']);

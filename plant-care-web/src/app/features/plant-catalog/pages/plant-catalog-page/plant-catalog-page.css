@@ -10,23 +10,18 @@
   padding: 3rem 0;
 }
 
-.catalog-header {
-  margin-bottom: 2rem;
-}
-
 .catalog-tools { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
 .category-labels { color: var(--color-primary); font-size: .875rem; font-weight: 650; }
 .category-labels span + span::before { content: ' · '; }
-.category-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0}
+.category-tabs{display:flex;flex-wrap:wrap;gap:.5rem}
 .category-tabs a{display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box;padding:.65rem 1rem;border:1px solid var(--color-input-border);border-radius:var(--radius-control);color:var(--color-primary);text-decoration:none;background:white}
 .category-tabs a[aria-current="page"]{background:var(--color-primary);color:white;border-color:var(--color-primary);font-weight:700}
 .catalog-field { flex: 1 1 12rem; min-width: 0; }
 .catalog-tools label { display: block; font-weight: 600; }
-.catalog-tools .catalog-search { flex: 2 1 20rem; }
 .catalog-tools input, .catalog-tools select { display: block; width: 100%; box-sizing: border-box; margin-top: .4rem; padding: .8rem; border: 1px solid var(--color-input-border); border-radius: var(--radius-control); font: inherit; background: white; color: var(--color-text); }
-.clear-filters { padding: .8rem; border: 1px solid var(--color-primary); border-radius: var(--radius-control); background: white; color: var(--color-primary); font: inherit; cursor: pointer; }
-.clear-filters:disabled { opacity: .55; cursor: default; }
-.catalog-tools :is(input, select, button):focus-visible, .details-link:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+.clear-filters, .catalog-pagination button { padding: .8rem; border: 1px solid var(--color-primary); border-radius: var(--radius-control); background: white; color: var(--color-primary); font: inherit; cursor: pointer; }
+.clear-filters:disabled, .catalog-pagination button:disabled { opacity: .55; cursor: default; }
+.catalog-tools :is(input, select, button):focus-visible, .details-link:focus-visible, .catalog-pagination button:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
 
 .eyebrow {
   margin: 0 0 0.4rem;
@@ -88,7 +83,6 @@ h1 {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 1.5rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   background: white;
@@ -105,7 +99,6 @@ h1 {
 
 .plant-card h2 {
   margin: 0;
-  font-size: 1.5rem;
   overflow-wrap: anywhere;
 }
 
@@ -141,7 +134,6 @@ h1 {
 
 .description {
   flex-grow: 1;
-  margin: 1.25rem 0;
   line-height: 1.6;
 }
 
@@ -181,7 +173,6 @@ h1 {
 }
 
 .details-link {
-  display: inline-block;
   margin-top: auto;
   align-self: flex-start;
   padding: 0.7rem 1rem;
@@ -205,3 +196,14 @@ h1 {
 @media(max-width:767px){.catalog-page{padding-top:1.5rem}.plant-grid{gap:1rem}.catalog-tools{gap:.8rem}.catalog-tools .catalog-field{flex-basis:100%}.catalog-searchbar{align-items:end}.filter-toggle{padding:.7rem .8rem}}
 
 @media(max-width:767px){.catalog-header .eyebrow{display:none}.catalog-header .intro{font-size:.875rem;margin:.5rem 0}.catalog-header .intro:last-child{font-size:.75rem}.catalog-searchbar{margin-top:1rem}.plant-card .description{display:none}.plant-card .care-details{grid-template-columns:repeat(2,minmax(0,1fr));font-size:.8rem}.plant-card .category-labels{margin:.4rem 0}.plant-card .scientific-name{font-size:.85rem}.plant-card .plant-card__heading{gap:.6rem}}
+
+.catalog-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin-block: 1.5rem;
+}
+
+.catalog-pagination button { min-height: 44px; }
