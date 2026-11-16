@@ -3,7 +3,7 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, provideRouter, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { afterEach, expect, it, vi } from 'vitest';
 import { PlantComparisonPage } from './plant-comparison-page';
@@ -36,7 +36,9 @@ it('shows unavailable selections and a recoverable API failure without silently 
   expect(fixture.nativeElement.textContent).toContain('Choose at least two plants');http.verify();
 });
 it('keeps each plant growing and harvest guidance with its own source and omits missing guidance', () => {
-  const {fixture,http}=setup(`${a},${b}`);
+  const {fixture,http,params}=setup(`${a},${b}`);
+  const router = TestBed.inject(Router);
+  const navigate = vi.spyOn(router, 'navigate').mockResolvedValue(true);
   http.expectOne('/api/plant-species').flush([
     {id:a,commonName:'Climbing bean',sunlightRequirement:'FullSun',isToxicToPets:true,
       catalogProfile:{careSourceUrl:'https://example.org/bean',reviewedOn:'2026-10-31',photo:null,
@@ -57,20 +59,34 @@ it('keeps each plant growing and harvest guidance with its own source and omits 
   const [all, growing] = (fixture.nativeElement as HTMLElement)
     .querySelectorAll<HTMLButtonElement>('.comparison-views button');
   growing.click();
+  expect(navigate).toHaveBeenCalledWith([], expect.objectContaining({
+    queryParamsHandling: 'merge',
+    queryParams: { view: 'growing' },
+    replaceUrl: true,
+  }));
+  params.next(convertToParamMap({ compare: `${a},${b}`, view: 'growing', q: 'private search' }));
   fixture.detectChanges();
+  const shared = new URL(fixture.componentInstance.shareUrl());
+  expect([...shared.searchParams.entries()]).toEqual([['compare', `${a},${b}`], ['view', 'growing']]);
   expect(growing.getAttribute('aria-pressed')).toBe('true');
   expect(cards[0].textContent).toContain('Pick young pods and cook properly.');
   expect(cards[0].textContent).toContain('Toxicity warning');
   expect(cards[0].querySelector('app-plant-photo')).toBeNull();
   expect(cards[1].textContent).toContain('None in the catalog.');
   all.click();
+  expect(navigate).toHaveBeenLastCalledWith([], expect.objectContaining({
+    queryParamsHandling: 'merge',
+    queryParams: { view: null },
+    replaceUrl: true,
+  }));
+  params.next(convertToParamMap({ compare: `${a},${b}` }));
   fixture.detectChanges();
   expect(cards[0].querySelector('app-plant-photo')).not.toBeNull();
   http.verify();
 });
 it('copies only available public catalog identifiers in selection order and clears status when selection changes', async () => {
   const {fixture,http,params}=setup(`${b},${a}`);
-  params.next(convertToParamMap({compare:`${b},${a}`,q:'private search',category:'fruit',token:'not-for-sharing'}));
+  params.next(convertToParamMap({compare:`${b},${a}`,q:'private search',category:'fruit',token:'not-for-sharing',view:'growing'}));
   http.expectOne('/api/plant-species').flush([
     {id:a,commonName:'A',sunlightRequirement:'Unknown',defaultWateringIntervalDays:7,isToxicToPets:false},
     {id:b,commonName:'B',sunlightRequirement:'Unknown',defaultWateringIntervalDays:7,isToxicToPets:false},

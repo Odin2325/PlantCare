@@ -22,18 +22,22 @@ export class PlantComparisonPage {
   readonly shortlist = inject(ShortlistService);
   readonly ids = signal<string[]>([]);
   readonly catalog = signal<PlantSpecies[]>([]);
-  readonly growingView = signal(false);
+  private readonly growingViewRequested = signal(false);
   readonly loading = signal(true);
   readonly error = signal(false);
   readonly plants = computed(() => this.ids().map(id => this.catalog().find(p => p.id === id))
     .filter((p): p is PlantSpecies => Boolean(p)));
   readonly hasGrowingGuidance = computed(() => this.plants().some(plant =>
     plant.catalogProfile?.growingNotes || plant.catalogProfile?.harvestInstructions));
+  readonly growingView = computed(() => this.growingViewRequested() && this.hasGrowingGuidance());
   readonly unavailable = computed(() => !this.loading() && !this.error() && this.plants().length < this.ids().length);
   readonly shareUrl = computed(() => {
     if (this.loading() || this.error() || this.plants().length < 2) return '';
     const path = this.router.serializeUrl(this.router.createUrlTree(['/plants/compare'], {
-      queryParams: { compare: this.plants().map(plant => plant.id).join(',') },
+      queryParams: {
+        compare: this.plants().map(plant => plant.id).join(','),
+        ...(this.growingView() ? { view: 'growing' } : {}),
+      },
     }));
     return new URL(path, this.document.baseURI).href;
   });
@@ -43,7 +47,7 @@ export class PlantComparisonPage {
   constructor() {
     this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe(params => {
       this.ids.set(parseComparisonIds(params.get('compare')));
-      this.growingView.set(false);
+      this.growingViewRequested.set(params.get('view') === 'growing');
       this.copyStatus.set('');
     });
     this.reload();
@@ -52,6 +56,15 @@ export class PlantComparisonPage {
     this.loading.set(true); this.error.set(false); this.copyStatus.set('');
     this.api.getAll().subscribe({next: plants => {this.catalog.set(plants);this.loading.set(false);},
       error: () => {this.error.set(true);this.loading.set(false);}});
+  }
+  setGrowingView(showGrowing: boolean): void {
+    if (showGrowing === this.growingView()) return;
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParamsHandling: 'merge',
+      queryParams: { view: showGrowing ? 'growing' : null },
+      replaceUrl: true,
+    });
   }
   remove(id: string): void {
     const ids = this.ids().filter(value => value !== id);

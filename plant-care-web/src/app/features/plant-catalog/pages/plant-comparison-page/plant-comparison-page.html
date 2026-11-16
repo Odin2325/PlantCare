@@ -23,8 +23,8 @@
     }
     @if (hasGrowingGuidance()) {
       <div class="comparison-views" role="group" aria-label="Comparison view">
-        <button type="button" [attr.aria-pressed]="!growingView()" (click)="growingView.set(false)">All details</button>
-        <button type="button" [attr.aria-pressed]="growingView()" (click)="growingView.set(true)">Growing and harvest</button>
+        <button type="button" [attr.aria-pressed]="!growingView()" (click)="setGrowingView(false)">All details</button>
+        <button type="button" [attr.aria-pressed]="growingView()" (click)="setGrowingView(true)">Growing and harvest</button>
       </div>
     }
     @if (shortlist.signedIn() && plants().length) {
