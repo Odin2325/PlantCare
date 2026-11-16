@@ -135,6 +135,12 @@ export class PlannerPage {
   readonly zoneCategoryOptions = plantCategoryOptions;
   readonly hideZoneConflicts = signal(false);
   readonly hidePlannedZonePlants = signal(false);
+  private readonly originatingZoneId = signal<string | null>(null);
+  readonly originatingZone = computed(() => {
+    const zoneId = this.originatingZoneId();
+    if (!zoneId || !this.selectedPot()) return undefined;
+    return this.plan().shapes.find(shape => shape.id === zoneId && shape.role === 'light' && shape.light);
+  });
   readonly selectedZone = computed(() => {
     const shape = this.selectedShape();
     return shape?.role === 'light' && shape.light ? { ...shape, light: shape.light } : null;
@@ -418,19 +424,34 @@ export class PlannerPage {
   setSetting(setting: string): void { this.update({ setting: setting === 'outdoor' ? 'outdoor' : 'indoor' }); }
 
   select(kind: 'shape' | 'pot', id: string): void {
-    this.selection.set({ kind, id });
-    this.matchLight.set(false);
-    this.companionsOnly.set(false);
-    this.placement.set(null);
-    this.query.set('');
+    this.originatingZoneId.set(null);
+    this.selectItem(kind, id);
     this.zoneQuery.set('');
     this.zoneCategory.set('');
     this.zoneSource.set('collection');
     this.zoneDestinationId.set('');
     this.hideZoneConflicts.set(false);
     this.hidePlannedZonePlants.set(false);
+  }
+
+  private selectItem(kind: 'shape' | 'pot', id: string): void {
+    this.selection.set({ kind, id });
+    this.matchLight.set(false);
+    this.companionsOnly.set(false);
+    this.placement.set(null);
+    this.query.set('');
     this.preferredZoneId.set('');
   }
+
+  returnToZoneSuggestions(): void {
+    const zone = this.originatingZone();
+    if (!zone) return;
+    this.originatingZoneId.set(null);
+    this.selectItem('shape', zone.id);
+    if (!this.zoneDestination()) this.zoneDestinationId.set('');
+    this.zonePage.set(0);
+  }
+
   setZoneCategory(value: string): void {
     this.zoneCategory.set(parsePlantCategory(value));
   }
@@ -440,7 +461,14 @@ export class PlannerPage {
     else if (this.plan().pots.some(pot => pot.id === id)) this.select('pot', id);
     else this.clearSelection();
   }
-  clearSelection(): void { this.selection.set(null); this.placement.set(null); this.query.set(''); this.matchLight.set(false); this.companionsOnly.set(false); }
+  clearSelection(): void {
+    this.selection.set(null);
+    this.originatingZoneId.set(null);
+    this.placement.set(null);
+    this.query.set('');
+    this.matchLight.set(false);
+    this.companionsOnly.set(false);
+  }
   addShape(kind: Shape['kind']): void {
     if (this.plan().shapes.length >= maxShapes) return;
     const shape: Shape = { id: crypto.randomUUID(), name: 'New ' + kind, kind,
@@ -456,8 +484,9 @@ export class PlannerPage {
     this.select('pot', pot.id);
   }
   planZonePlant(id: string): void {
+    const zone = this.selectedZone();
     const choice = this.zoneChoices().find(candidate => candidate.id === id);
-    if (this.loading() || this.catalogError() || this.collectionLoading() || this.collectionError() ||
+    if (!zone || this.loading() || this.catalogError() || this.collectionLoading() || this.collectionError() ||
         !choice?.plant || (choice.owned && this.plannedPlantIds().has(id))) return;
     const planting: Pot['plants'][number] = {
       id: crypto.randomUUID(), speciesId: choice.plant.id, moisture: '',
@@ -467,14 +496,16 @@ export class PlannerPage {
     if (destination) {
       this.update({ pots: this.plan().pots.map(pot => pot.id === destination.id
         ? { ...pot, plants: [...pot.plants, planting] } : pot) });
-      this.select('pot', destination.id);
+      this.originatingZoneId.set(zone.id);
+      this.selectItem('pot', destination.id);
       return;
     }
     const spot = this.zoneSpot();
     if (!spot || this.plan().pots.length >= maxPots) return;
     const pot: Pot = { ...spot, id: crypto.randomUUID(), name: choice.name.slice(0, 60), plants: [planting] };
     this.update({ pots: [...this.plan().pots, pot] });
-    this.select('pot', pot.id);
+    this.originatingZoneId.set(zone.id);
+    this.selectItem('pot', pot.id);
   }
 
   removeItem(): void {

@@ -343,6 +343,10 @@
       @if (selectedPot(); as pot) {
         <div class="assessment" aria-live="polite">
           <h3>Pot placement</h3>
+          @if (originatingZone(); as zone) {
+            <button type="button" [attr.aria-label]="'Back to zone suggestions for ' + zone.name"
+              (click)="returnToZoneSuggestions()">Back to zone suggestions</button>
+          }
           <p>{{ potLight() ? lightLabel(potLight()) : 'Place the whole pot in a marked light zone.' }}</p>
           @if (potPlacementProblem(); as problem) { <p>{{ problem }}</p> }
           @if (pot.plants.length && !loading() && !catalogError()) {

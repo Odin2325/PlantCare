@@ -347,8 +347,12 @@ describe('Space planner', () => {
       plants: [{ speciesId: 'basil', userPlantId: 'mine-1' }] });
     expect(page.potLight()).toBe('FullSun');
 
-    page.select('shape', zoneId);
     fixture.detectChanges();
+    const backToZone = () => fixture.nativeElement.querySelector('button[aria-label^="Back to zone suggestions for "]') as HTMLButtonElement;
+    expect(backToZone()).not.toBeNull();
+    backToZone().click();
+    fixture.detectChanges();
+    expect(page.selectedZone()?.id).toBe(zoneId);
     expect(buttons()[1].disabled).toBe(true);
     const hidePlanned = finder().querySelector('input[type="checkbox"]') as HTMLInputElement;
     hidePlanned.click();
@@ -361,12 +365,25 @@ describe('Space planner', () => {
     mode.value = 'catalog';
     mode.dispatchEvent(new Event('change'));
     fixture.detectChanges();
+    page.zoneQuery.set('Cold');
+    fixture.detectChanges();
     expect(buttons().map(button => button.textContent?.trim())).toEqual(['Plan Cold fixture']);
     buttons()[0].click();
     expect(page.selectedPot()?.plants[0].userPlantId).toBeUndefined();
     expect(page.selectedPot()?.x).toBe(6);
     expect(page.potPlacementProblem()).toBeNull();
     expect(page.collection()).toEqual(collection.filter(plant => plant.isActive));
+
+    fixture.detectChanges();
+    backToZone().click();
+    fixture.detectChanges();
+    expect(page.zoneSource()).toBe('catalog');
+    expect(page.zoneQuery()).toBe('Cold');
+    expect(page.hidePlannedZonePlants()).toBe(true);
+    expect(buttons().map(button => button.textContent?.trim())).toEqual(['Plan Cold fixture']);
+    page.select('pot', page.plan().pots[0].id);
+    fixture.detectChanges();
+    expect(backToZone()).toBeNull();
 
     fixture.destroy();
     TestBed.resetTestingModule();
@@ -491,6 +508,10 @@ describe('Space planner', () => {
     expect(page.plan().pots).toHaveLength(2);
     expect(page.selectedPot()?.id).toBe(destination.id);
     expect(page.selectedPot()?.plants.map(plant => plant.speciesId)).toEqual(['basil', 'cold']);
+    page.returnToZoneSuggestions();
+    expect(page.selectedZone()?.id).toBe(zoneId);
+    expect(page.zoneDestination()?.id).toBe(destination.id);
+    expect(page.zoneSource()).toBe('catalog');
   });
 
   it('keeps the plant ideas visible when the selected zone cannot fit a pot', () => {
