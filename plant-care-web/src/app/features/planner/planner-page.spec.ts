@@ -383,6 +383,52 @@ describe('Space planner', () => {
     expect(page.plan().pots[0].plants[0].userPlantId).toBeUndefined();
   });
 
+  it('filters zone matches by category and light across collection, shortlist and catalog', () => {
+    const herb: PlantSpecies = { ...basil, catalogProfile: {
+      categories: ['herb'], careSourceUrl: 'https://example.org/basil', reviewedOn: '2026-11-16', photo: null,
+    } };
+    const crop: PlantSpecies = { ...cold, commonName: 'Tomato', scientificName: 'Solanum lycopersicum', catalogProfile: {
+      categories: ['vegetable'], careSourceUrl: 'https://example.org/tomato', reviewedOn: '2026-11-16', photo: null,
+    } };
+    const shadeCrop: PlantSpecies = { ...crop, id: 'shade-crop', sunlightRequirement: 'LowLight' };
+    const collection = [{ id: 'mine', plantSpeciesId: 'basil', nickname: 'Kitchen basil', isActive: true }] as UserPlant[];
+    const fixture = setup(undefined, [herb, crop, shadeCrop, { ...basil, id: 'untagged' }], collection,
+      ['cold', 'shade-crop']);
+    const page = fixture.componentInstance;
+    page.addShape('square');
+    page.setRole('light');
+    page.setLight('FullSun');
+    fixture.detectChanges();
+    const finder = fixture.nativeElement.querySelector('.zone-plant-finder') as HTMLElement;
+    const source = finder.querySelector<HTMLSelectElement>('#zone-plant-source')!;
+    const category = finder.querySelector<HTMLSelectElement>('#zone-plant-category')!;
+    const choose = (select: HTMLSelectElement, value: string) => {
+      select.value = value;
+      select.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+    };
+    const names = () => page.zoneChoices().map(choice => choice.name);
+
+    choose(category, 'herb');
+    expect(names()).toEqual(['Kitchen basil']);
+    choose(source, 'catalog');
+    expect(names()).toEqual([]);
+    choose(category, 'vegetable');
+    expect(names()).toEqual(['Tomato']);
+    choose(source, 'shortlist');
+    expect(names()).toEqual(['Tomato']);
+    page.zoneQuery.set('basil');
+    expect(names()).toEqual([]);
+    page.zoneQuery.set('');
+
+    const zoneId = page.selectedZone()!.id;
+    page.select('shape', zoneId);
+    fixture.detectChanges();
+    expect(category.value).toBe('');
+    expect(names()).toEqual(['Kitchen basil']);
+    expect(page.plan().pots).toEqual([]);
+  });
+
   it('lets a plant join an existing pot in the selected zone and warns about companion conflicts', () => {
     const fixture = setup();
     const page = fixture.componentInstance;
@@ -408,7 +454,7 @@ describe('Space planner', () => {
     page.zoneSource.set('catalog');
     fixture.detectChanges();
     const finder = fixture.nativeElement.querySelector('.zone-plant-finder');
-    const select = finder.querySelectorAll('select')[1] as HTMLSelectElement;
+    const select = finder.querySelector('#zone-plant-destination') as HTMLSelectElement;
     expect(Array.from(select.options).map(option => option.value)).toEqual(['', destination.id]);
     expect(page.zoneSpot()).toBeNull();
     expect(page.canPlanInZone()).toBe(false);

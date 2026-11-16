@@ -232,10 +232,18 @@
             <button type="button" (click)="loadCatalog()">Retry catalog</button>
           } @else {
             <label>Show plants from
-              <select [value]="zoneSource()" (change)="zoneSource.set($any($event.target).value)">
+              <select id="zone-plant-source" [value]="zoneSource()" (change)="zoneSource.set($any($event.target).value)">
                 <option value="collection">My plants</option>
                 <option value="shortlist">Shortlisted plants I do not own</option>
                 <option value="catalog">Catalog plants I don’t own</option>
+              </select>
+            </label>
+            <label>Plant category
+              <select id="zone-plant-category" [value]="zoneCategory()" (change)="setZoneCategory($any($event.target).value)">
+                <option value="">All categories</option>
+                @for (category of zoneCategoryOptions; track category.value) {
+                  <option [value]="category.value">{{ category.label }}</option>
+                }
               </select>
             </label>
             <label>Search zone matches
@@ -243,7 +251,7 @@
             </label>
             @if (zonePots().length) {
               <label>Plan in
-                <select [value]="zoneDestination()?.id ?? ''" (change)="zoneDestinationId.set($any($event.target).value)">
+                <select id="zone-plant-destination" [value]="zoneDestination()?.id ?? ''" (change)="zoneDestinationId.set($any($event.target).value)">
                   <option value="">New pot</option>
                   @for (pot of zonePots(); track pot.id) {
                     <option [value]="pot.id">{{ pot.name }} · {{ pot.plants.length }} planted</option>

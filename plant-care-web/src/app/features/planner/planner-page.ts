@@ -6,7 +6,8 @@ import { AuthService } from '../../core/auth/services/auth.service';
 import { ShortlistService } from '../../core/services/shortlist.service';
 import { plannerStorageKey } from '../../core/services/planner-storage-key';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
-import { PlantSpecies } from '../../models/plant-species.model';
+import { PlantCategory, PlantSpecies } from '../../models/plant-species.model';
+import { parsePlantCategory, plantCategoryOptions } from '../../shared/plant-categories';
 import { normalizePlantSearch } from '../../shared/plant-search';
 import { MyPlantsApiService } from '../my-plants/data-access/my-plants-api.service';
 import { UserPlant } from '../my-plants/models/user-plant.model';
@@ -130,6 +131,8 @@ export class PlannerPage {
   readonly shortlist = inject(ShortlistService);
   readonly zoneSource = signal<'collection' | 'catalog' | 'shortlist'>('collection');
   readonly zoneQuery = signal('');
+  readonly zoneCategory = signal<PlantCategory | ''>('');
+  readonly zoneCategoryOptions = plantCategoryOptions;
   readonly hideZoneConflicts = signal(false);
   readonly selectedZone = computed(() => {
     const shape = this.selectedShape();
@@ -153,9 +156,11 @@ export class PlannerPage {
       : collection.map(owned => ({ id: owned.id, name: owned.nickname.trim() || owned.speciesCommonName,
         plant: catalog.get(owned.plantSpeciesId), owned: true }));
     const query = normalizePlantSearch(this.zoneQuery());
+    const category = this.zoneCategory();
     const existing = this.zoneDestination()?.plants ?? [];
     const hideConflicts = this.hideZoneConflicts();
     return candidates.filter(({ name, plant }) => plant?.sunlightRequirement === zone.light &&
+      (!category || plant.catalogProfile?.categories?.includes(category)) &&
       (!query || normalizePlantSearch([name, plant.commonName, plant.scientificName,
         ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
       .map(choice => {
@@ -416,11 +421,16 @@ export class PlannerPage {
     this.placement.set(null);
     this.query.set('');
     this.zoneQuery.set('');
+    this.zoneCategory.set('');
     this.zoneSource.set('collection');
     this.zoneDestinationId.set('');
     this.hideZoneConflicts.set(false);
     this.preferredZoneId.set('');
   }
+  setZoneCategory(value: string): void {
+    this.zoneCategory.set(parsePlantCategory(value));
+  }
+
   selectFromList(id: string): void {
     if (this.plan().shapes.some(shape => shape.id === id)) this.select('shape', id);
     else if (this.plan().pots.some(pot => pot.id === id)) this.select('pot', id);
