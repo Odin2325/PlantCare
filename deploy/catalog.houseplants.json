@@ -13253,5 +13253,261 @@
         "Fernor walnut"
       ]
     }
+  },
+  {
+    "commonName": "Melon (Alvaro)",
+    "scientificName": "Cucumis melo 'Alvaro'",
+    "description": "An orange-fleshed cantaloupe that can crop outdoors in a warm, sheltered bed.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/293239/cucumis-melo-alvaro/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Start under cover and plant out after frost. Use a low cover early on if the site is cool, and open it at flowering for pollinators.",
+      "harvestInstructions": "Check for a sweet fragrance and the start of cracking around the stalk. Pick when ripe.",
+      "photo": null,
+      "cultivarName": "Alvaro",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Alvaro melon"
+      ]
+    }
+  },
+  {
+    "commonName": "Melon (Emir)",
+    "scientificName": "Cucumis melo 'Emir'",
+    "description": "A netted cantaloupe with aromatic orange flesh, suited to cooler summers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/293236/cucumis-melo-emir/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow in a greenhouse for reliable warmth. Train the shoots up a support if ground space is limited.",
+      "harvestInstructions": "Check for a sweet fragrance and the start of cracking around the stalk. Pick when ripe.",
+      "photo": null,
+      "cultivarName": "Emir",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Emir melon"
+      ]
+    }
+  },
+  {
+    "commonName": "Melon (Ogen)",
+    "scientificName": "Cucumis melo 'Ogen'",
+    "description": "A greenhouse melon with striped skin and pale green flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/112426/cucumis-melo-ogen/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow under cover with good light. Support developing fruit with a sling if trained upwards.",
+      "harvestInstructions": "Look for the rind to yellow and the fruit to smell sweet. Check near the stalk for the first signs of separation.",
+      "photo": null,
+      "cultivarName": "Ogen",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Ogen melon"
+      ]
+    }
+  },
+  {
+    "commonName": "Melon (Sweetheart)",
+    "scientificName": "Cucumis melo 'Sweetheart'",
+    "description": "An early melon with rounded, cream-colored fruit and orange flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/pdfs/agm-lists/agmasparagus_chard_pak_rhubarb_melon.pdf",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Start in warmth. Grow under cover in cooler areas and give pollinators access when flowers open.",
+      "harvestInstructions": "Check for a sweet fragrance and the start of cracking around the stalk. Pick when ripe.",
+      "photo": null,
+      "cultivarName": "Sweetheart",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Sweetheart melon"
+      ]
+    }
+  },
+  {
+    "commonName": "Watermelon (Sugar Baby)",
+    "scientificName": "Citrullus lanatus 'Sugar Baby'",
+    "description": "A compact, relatively early watermelon with round fruit and red flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/get-involved/your-space-your-story/growing-watermelons-in-lancashire",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Start under cover and transplant once the bed is warm. Use a greenhouse or polytunnel where summer warmth is limited.",
+      "harvestInstructions": "Check for a dry tendril nearest the fruit and a creamy ground spot. Cut ripe fruit from the vine.",
+      "photo": {
+        "path": "/images/plants/citrullus-lanatus-sugar-baby.jpg",
+        "altText": "A cut Sugar Baby watermelon showing its pink-red flesh and thin dark rind",
+        "credit": "JFVelasquez Floro",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:1643Sugar_Baby_Watermelon_01.jpg",
+        "licenseName": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "title": "1643Sugar Baby Watermelon 01.jpg"
+      },
+      "cultivarName": "Sugar Baby",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Sugar Baby watermelon"
+      ]
+    }
+  },
+  {
+    "commonName": "Watermelon (Little Darling)",
+    "scientificName": "Citrullus lanatus 'Little Darling'",
+    "description": "A compact watermelon for gardeners with limited space under cover.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/fruit/melons/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Give it the warmest spot available. Keep enough room for the vines and open the greenhouse for pollinators.",
+      "harvestInstructions": "Check for a dry tendril nearest the fruit and a creamy ground spot. Cut ripe fruit from the vine.",
+      "photo": null,
+      "cultivarName": "Little Darling",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Little Darling watermelon"
+      ]
+    }
+  },
+  {
+    "commonName": "Watermelon (Crimson Sweet)",
+    "scientificName": "Citrullus lanatus 'Crimson Sweet'",
+    "description": "A large, striped watermelon with red flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://extension.usu.edu/yardandgarden/research/watermelon-in-the-garden",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Give the vines a spacious bed and a long, warm season. In cool areas, start under cover and let the soil warm before planting.",
+      "harvestInstructions": "Check for a dry tendril nearest the fruit and a creamy ground spot. Cut ripe fruit from the vine.",
+      "photo": null,
+      "cultivarName": "Crimson Sweet",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Crimson Sweet watermelon"
+      ]
+    }
+  },
+  {
+    "commonName": "Watermelon (Blacktail Mountain)",
+    "scientificName": "Citrullus lanatus 'Blacktail Mountain'",
+    "description": "A short-season watermelon with dark round fruit and red flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Give vines full sun and shelter, with cover in cooler sites.",
+    "defaultWateringIntervalDays": 2,
+    "wateringInstructions": "Check moisture regularly, especially during flowering and fruit development. Water the soil when it starts to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and follow feeding guidance for your growing medium.",
+    "soilInstructions": "Use fertile soil that holds moisture while draining freely.",
+    "humidityInstructions": "Ventilate protected spaces and leave room for air to circulate around vines.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://shop.seedsavers.org/product/29097",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Start in warmth and plant out after frost. Protect young plants from cold nights and leave space for vines to spread.",
+      "harvestInstructions": "Check for a dry tendril nearest the fruit and a creamy ground spot. Cut ripe fruit from the vine.",
+      "photo": null,
+      "cultivarName": "Blacktail Mountain",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Blacktail Mountain watermelon"
+      ]
+    }
   }
 ]

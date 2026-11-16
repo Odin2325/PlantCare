@@ -2023,5 +2023,77 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Cucumis melo 'Alvaro'",
+    "cultivarName": "Alvaro",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Cucumis melo 'Emir'",
+    "cultivarName": "Emir",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Cucumis melo 'Ogen'",
+    "cultivarName": "Ogen",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Cucumis melo 'Sweetheart'",
+    "cultivarName": "Sweetheart",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Citrullus lanatus 'Sugar Baby'",
+    "cultivarName": "Sugar Baby",
+    "status": "verified",
+    "photoPath": "/images/plants/citrullus-lanatus-sugar-baby.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:1643Sugar_Baby_Watermelon_01.jpg",
+    "identityEvidence": "The photographer's file title and caption identify the cut fruit as Sugar Baby watermelon.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Citrullus lanatus 'Little Darling'",
+    "cultivarName": "Little Darling",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Citrullus lanatus 'Crimson Sweet'",
+    "cultivarName": "Crimson Sweet",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Citrullus lanatus 'Blacktail Mountain'",
+    "cultivarName": "Blacktail Mountain",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
   }
 ]
