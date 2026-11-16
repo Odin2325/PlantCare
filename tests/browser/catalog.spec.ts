@@ -56,7 +56,7 @@ test('garden catalog categories combine with search and preserve navigation and 
 test('garden catalog crop profiles distinguish cultivars and show sourced harvest guidance', async ({ page, request }) => {
   const species = await (await request.get('/api/plant-species')).json();
   const garden = species.filter((p: any) => p.catalogProfile?.harvestInstructions);
-  expect(garden).toHaveLength(286);
+  expect(garden).toHaveLength(294);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Solanum lycopersicum'))).toHaveLength(6);
   expect(garden.filter((p: any) => p.scientificName.startsWith('Capsicum annuum'))).toHaveLength(6);
   for (const plant of garden) {
@@ -64,9 +64,9 @@ test('garden catalog crop profiles distinguish cultivars and show sourced harves
     expect(plant.catalogProfile.harvestInstructions.length).toBeGreaterThan(0);
     expect(plant.defaultFertilizingIntervalDays).toBeNull();
   }
-  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(249);
+  expect(species.filter((p: any) => p.catalogProfile?.cultivarName)).toHaveLength(257);
   // Exercise this batch and representative regressions; API assertions above cover every profile.
-  for (const name of ["Cabbage (Tundra)", "Brussels sprouts (Red Bull)", "Sweet potato (Beauregard)", "Jerusalem artichoke (Fuseau)", "Watermelon (Sugar Baby)", "Melon (Alvaro)", "Hazel (Red Majestic)", "Walnut tree (Broadview)", "Popcorn (Glass Gem)", "Baby corn (Minipop)", "Asparagus (Gijnlim)", "Globe artichoke (Purple Globe)", "Leek (Stamford)", "Parsnip (Gladiator)", "Cherry tomato (Tiny Tim)", "Potato", "Potato (Pink Fir Apple)", "Dahlia (David Howard)", "Sunflower (Dwarf Sungold)", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Strawberry (Senga Sengana)", "Cucumber (Crystal Lemon)"]) {
+  for (const name of ["Broccoli (Green Magic)", "Purple sprouting broccoli (Cardinal)", "Cabbage (Tundra)", "Brussels sprouts (Red Bull)", "Sweet potato (Beauregard)", "Jerusalem artichoke (Fuseau)", "Watermelon (Sugar Baby)", "Melon (Alvaro)", "Hazel (Red Majestic)", "Walnut tree (Broadview)", "Popcorn (Glass Gem)", "Baby corn (Minipop)", "Asparagus (Gijnlim)", "Globe artichoke (Purple Globe)", "Leek (Stamford)", "Parsnip (Gladiator)", "Cherry tomato (Tiny Tim)", "Potato", "Potato (Pink Fir Apple)", "Dahlia (David Howard)", "Sunflower (Dwarf Sungold)", "Grape vine (Pinot Noir)", "Beetroot (Chioggia)", "Carrot (Purple Haze)", "Radish (Rudi)", "Lettuce (Red Salad Bowl)", "Strawberry (Senga Sengana)", "Cucumber (Crystal Lemon)"]) {
     const plant = species.find((p: any) => p.commonName === name);
     expect(plant).toBeTruthy();
     await page.goto('/plants/' + plant.id + '?category=' + plant.catalogProfile.categories[0]); await openCatalogTools(page);
@@ -93,7 +93,7 @@ test('English houseplants have working local photos, attribution and searchable 
   expect(response.ok()).toBe(true);
   const species = await response.json();
   const reviewed = species.filter((plant: { catalogProfile?: unknown }) => plant.catalogProfile);
-  expect(reviewed).toHaveLength(404);
+  expect(reviewed).toHaveLength(412);
   expect(reviewed.filter((plant: { commonName: string }) => plant.commonName === 'African mask plant'))
     .toHaveLength(1);
   for (const plant of reviewed) {

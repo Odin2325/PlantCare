@@ -14021,5 +14021,261 @@
         "Red Bull brussels sprouts"
       ]
     }
+  },
+  {
+    "commonName": "Broccoli (Fiesta)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Fiesta'",
+    "description": "Produces large, rounded green heads in summer and autumn.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/119158/brassica-oleracea-italica-group-fiesta/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow in spring with room for the main head to develop and keep soil moisture steady.",
+      "harvestInstructions": "Cut the firm main head before the buds open. Leave the plant in place to check for smaller side shoots.",
+      "photo": null,
+      "cultivarName": "Fiesta",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Fiesta broccoli",
+        "Fiesta calabrese"
+      ]
+    }
+  },
+  {
+    "commonName": "Broccoli (Green Magic)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Green Magic'",
+    "description": "An early broccoli with dense green heads followed by side shoots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/269246/brassica-oleracea-italica-group-green-magic/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in modules and avoid letting the bed dry out as the heads form.",
+      "harvestInstructions": "Cut the firm main head before the buds open. Leave the plant in place to check for smaller side shoots.",
+      "photo": null,
+      "cultivarName": "Green Magic",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Green Magic broccoli",
+        "Green Magic calabrese"
+      ]
+    }
+  },
+  {
+    "commonName": "Broccoli (Kabuki)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Kabuki'",
+    "description": "A compact broccoli with a dense blue-green head, suited to autumn harvests.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/207339/brassica-oleracea-italica-group-kabuki/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a smaller plot if space is limited and transplant into a sunny bed.",
+      "harvestInstructions": "Cut the firm main head before the buds open. Leave the plant in place to check for smaller side shoots.",
+      "photo": null,
+      "cultivarName": "Kabuki",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Kabuki broccoli",
+        "Kabuki calabrese"
+      ]
+    }
+  },
+  {
+    "commonName": "Broccoli (Marathon)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Marathon'",
+    "description": "A summer-cropping broccoli with firm, blue-green heads.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/233030/brassica-oleracea-italica-group-marathon/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give the plants space and keep the soil evenly moist as the main heads fill.",
+      "harvestInstructions": "Cut the firm main head before the buds open. Leave the plant in place to check for smaller side shoots.",
+      "photo": null,
+      "cultivarName": "Marathon",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Marathon broccoli",
+        "Marathon calabrese"
+      ]
+    }
+  },
+  {
+    "commonName": "Purple sprouting broccoli (Cardinal)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Cardinal'",
+    "description": "A hardy cultivar with large, deep-purple spears and a long harvest period.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/217909/brassica-oleracea-italica-group-cardinal/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give the plants a permanent spot for the season and support their stems in windy beds.",
+      "harvestInstructions": "Cut the central spear while the buds are closed, then pick tender side shoots as they develop.",
+      "photo": null,
+      "cultivarName": "Cardinal",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Cardinal broccoli",
+        "Cardinal sprouting broccoli"
+      ]
+    }
+  },
+  {
+    "commonName": "Purple sprouting broccoli (Claret)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Claret'",
+    "description": "A vigorous cultivar with large, tender shoots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/119135/brassica-oleracea-italica-group-claret/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Allow plenty of room for the plants to size up before harvesting.",
+      "harvestInstructions": "Cut the central spear while the buds are closed, then pick tender side shoots as they develop.",
+      "photo": null,
+      "cultivarName": "Claret",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Claret broccoli",
+        "Claret sprouting broccoli"
+      ]
+    }
+  },
+  {
+    "commonName": "Purple sprouting broccoli (Mendocino)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Mendocino'",
+    "description": "A sprouting cultivar selected for uniform purple spears.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/337996/brassica-oleracea-italica-group-mendocino/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Space plants for airflow and check for new spears regularly once cropping starts.",
+      "harvestInstructions": "Cut the central spear while the buds are closed, then pick tender side shoots as they develop.",
+      "photo": null,
+      "cultivarName": "Mendocino",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Mendocino broccoli",
+        "Mendocino sprouting broccoli"
+      ]
+    }
+  },
+  {
+    "commonName": "Purple sprouting broccoli (Red Fire)",
+    "scientificName": "Brassica oleracea (Italica Group) 'Red Fire'",
+    "description": "An upright cultivar for late-winter and early-spring harvests.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially after transplanting and as buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space for air to move around the leaves.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/337997/brassica-oleracea-italica-group-red-fire/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Establish plants ahead of winter in well-drained soil and support them if the site is exposed.",
+      "harvestInstructions": "Cut the central spear while the buds are closed, then pick tender side shoots as they develop.",
+      "photo": null,
+      "cultivarName": "Red Fire",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Fire broccoli",
+        "Red Fire sprouting broccoli"
+      ]
+    }
   }
 ]
