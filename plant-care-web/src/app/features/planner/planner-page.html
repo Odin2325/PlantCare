@@ -259,6 +259,13 @@
                 </select>
               </label>
             }
+            @if (zoneSource() === 'collection') {
+              <label class="zone-conflict-toggle">
+                <input type="checkbox" [checked]="hidePlannedZonePlants()"
+                  (change)="hidePlannedZonePlants.set($any($event.target).checked)">
+                Hide plants already in this layout
+              </label>
+            }
             @if (zoneDestination()?.plants?.length) {
               <label class="zone-conflict-toggle">
                 <input type="checkbox" [checked]="hideZoneConflicts()"

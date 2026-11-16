@@ -350,6 +350,13 @@ describe('Space planner', () => {
     page.select('shape', zoneId);
     fixture.detectChanges();
     expect(buttons()[1].disabled).toBe(true);
+    const hidePlanned = finder().querySelector('input[type="checkbox"]') as HTMLInputElement;
+    hidePlanned.click();
+    fixture.detectChanges();
+    expect(hidePlanned.checked).toBe(true);
+    expect(buttons().map(button => button.textContent?.trim())).toEqual(['Plan Balcony basil']);
+    expect(buttons()[0].disabled).toBe(false);
+
     const mode = finder().querySelector('select') as HTMLSelectElement;
     mode.value = 'catalog';
     mode.dispatchEvent(new Event('change'));

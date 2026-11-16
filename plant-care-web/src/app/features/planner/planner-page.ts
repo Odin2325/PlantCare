@@ -134,6 +134,7 @@ export class PlannerPage {
   readonly zoneCategory = signal<PlantCategory | ''>('');
   readonly zoneCategoryOptions = plantCategoryOptions;
   readonly hideZoneConflicts = signal(false);
+  readonly hidePlannedZonePlants = signal(false);
   readonly selectedZone = computed(() => {
     const shape = this.selectedShape();
     return shape?.role === 'light' && shape.light ? { ...shape, light: shape.light } : null;
@@ -157,9 +158,11 @@ export class PlannerPage {
         plant: catalog.get(owned.plantSpeciesId), owned: true }));
     const query = normalizePlantSearch(this.zoneQuery());
     const category = this.zoneCategory();
+    const hiddenPlantIds = source === 'collection' && this.hidePlannedZonePlants() ? this.plannedPlantIds() : null;
     const existing = this.zoneDestination()?.plants ?? [];
     const hideConflicts = this.hideZoneConflicts();
-    return candidates.filter(({ name, plant }) => plant?.sunlightRequirement === zone.light &&
+    return candidates.filter(({ id, name, plant }) => plant?.sunlightRequirement === zone.light &&
+      !hiddenPlantIds?.has(id) &&
       (!category || plant.catalogProfile?.categories?.includes(category)) &&
       (!query || normalizePlantSearch([name, plant.commonName, plant.scientificName,
         ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
@@ -425,6 +428,7 @@ export class PlannerPage {
     this.zoneSource.set('collection');
     this.zoneDestinationId.set('');
     this.hideZoneConflicts.set(false);
+    this.hidePlannedZonePlants.set(false);
     this.preferredZoneId.set('');
   }
   setZoneCategory(value: string): void {
