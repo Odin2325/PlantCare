@@ -7,6 +7,7 @@ import { UserPlant } from '../my-plants/models/user-plant.model';
 import { plantingTargets, validPlanDate } from './planting-calendar';
 
 type WorkKind = 'care' | 'target';
+type WorkFilter = WorkKind | 'due-care' | '';
 const workPageSize = 8;
 export interface GardenWorkEntry {
   id: string;
@@ -23,7 +24,7 @@ export function localWorkDate(date: Date): string {
 }
 
 export function gardenWorkEntries(plants: UserPlant[], now: Date, days: number,
-  includePast: boolean, kind: WorkKind | ''): GardenWorkEntry[] {
+  includePast: boolean, kind: WorkFilter): GardenWorkEntry[] {
   if (!Number.isFinite(now.getTime()) || ![7, 30, 90].includes(days)) return [];
   const today = localWorkDate(now);
   // Calendar arithmetic keeps the range correct across daylight-saving changes.
@@ -47,7 +48,9 @@ export function gardenWorkEntries(plants: UserPlant[], now: Date, days: number,
         status: date < today ? 'Overdue care' : date === today ? 'Care today' : 'Upcoming care' });
     }
   }
-  return entries.filter(e => e.date <= last && (includePast || e.date >= today) && (!kind || e.kind === kind))
+  return entries.filter(entry => kind === 'due-care'
+    ? entry.kind === 'care' && entry.date <= today
+    : entry.date <= last && (includePast || entry.date >= today) && (!kind || entry.kind === kind))
     .sort((a, b) => a.date.localeCompare(b.date) || a.name.localeCompare(b.name, 'en') ||
       a.kind.localeCompare(b.kind) || a.action.localeCompare(b.action, 'en') || a.id.localeCompare(b.id));
 }
@@ -62,7 +65,7 @@ export class UpcomingWork {
   readonly now = signal(new Date());
   readonly days = signal(30);
   readonly includePast = signal(true);
-  readonly kind = signal<WorkKind | ''>('');
+  readonly kind = signal<WorkFilter>('');
   readonly entries = computed(() => gardenWorkEntries(this.plants(), this.now(), this.days(), this.includePast(), this.kind()));
   private readonly requestedPage = linkedSignal({
     source: () => ({ plants: this.plants(), days: this.days(), includePast: this.includePast(), kind: this.kind() }),
@@ -87,5 +90,7 @@ export class UpcomingWork {
     this.requestedPage.set(Math.max(1, Math.min(this.pageCount(), this.page() + offset)));
   }
   setDays(value: string): void { if (['7', '30', '90'].includes(value)) this.days.set(Number(value)); }
-  setKind(value: string): void { if (['', 'care', 'target'].includes(value)) this.kind.set(value as WorkKind | ''); }
+  setKind(value: string): void {
+    if (value === '' || value === 'care' || value === 'target' || value === 'due-care') this.kind.set(value);
+  }
 }

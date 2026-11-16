@@ -61,6 +61,39 @@ describe('Upcoming garden work', () => {
     page.setKind('invalid'); expect(page.kind()).toBe('care');
     fixture.componentRef.setInput('plants', []); expect(page.entries()).toEqual([]);
   });
+  it('shows only care due today or overdue and restores range controls when switching back', () => {
+    const { fixture, page } = setup([plant({
+      plannedSowingOn: '2026-03-27', expectedHarvestOn: '2026-03-28',
+      careSchedules: [
+        care(date(27).toISOString()),
+        care(date(28, 20).toISOString(), { id: 'feed', actionType: 'Fertilizing' }),
+        care(date(29).toISOString(), { id: 'repot', actionType: 'Repotting' }),
+        care(date(26).toISOString(), { id: 'paused', isEnabled: false }),
+      ],
+    })]);
+    page.includePast.set(false);
+    page.setDays('7');
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const kind = element.querySelectorAll('select')[1];
+    kind.value = 'due-care';
+    kind.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(page.entries().map(entry => entry.status)).toEqual(['Overdue care', 'Care today']);
+    expect(element.querySelectorAll('select')).toHaveLength(1);
+    expect(element.querySelector('.past-toggle')).toBeNull();
+    fixture.componentRef.setInput('plants', []);
+    fixture.detectChanges();
+    expect(element.textContent).toContain('No care is due today or overdue for the plants shown.');
+
+    kind.value = 'care';
+    kind.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(element.querySelector<HTMLSelectElement>('select')?.value).toBe('7');
+    expect(element.querySelector<HTMLInputElement>('.past-toggle input')?.checked).toBe(false);
+  });
+
   it('pages work in date order and returns to the first page when filters change', () => {
     const plants = Array.from({ length: 9 }, (_, index) => plant({
       id: String(index), nickname: 'Tomato ' + (index + 1),
