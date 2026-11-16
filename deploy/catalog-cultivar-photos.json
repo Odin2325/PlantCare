@@ -1879,5 +1879,77 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Earlibird'",
+    "cultivarName": "Earlibird",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Swift'",
+    "cultivarName": "Swift",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Lark'",
+    "cultivarName": "Lark",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Mirai 003Y'",
+    "cultivarName": "Mirai 003Y",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Golden Bantam'",
+    "cultivarName": "Golden Bantam",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays var. rugosa 'Minipop'",
+    "cultivarName": "Minipop",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Britpop'",
+    "cultivarName": "Britpop",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Zea mays 'Glass Gem'",
+    "cultivarName": "Glass Gem",
+    "status": "verified",
+    "photoPath": "/images/plants/zea-mays-glass-gem.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZeaGG1.jpg",
+    "identityEvidence": "Douglas Goldman's file description identifies the cob as Zea mays 'Glass Gem'.",
+    "reviewedOn": "2026-11-16"
   }
 ]

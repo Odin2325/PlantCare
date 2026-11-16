@@ -12734,5 +12734,261 @@
         "Green Globe artichoke"
       ]
     }
+  },
+  {
+    "commonName": "Sweetcorn (Earlibird)",
+    "scientificName": "Zea mays 'Earlibird'",
+    "description": "An early supersweet cultivar for gardens with a shorter summer.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/209818/zea-mays-earlibird/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start under cover and plant out after frost. Keep it away from other corn types flowering at the same time.",
+      "harvestInstructions": "When the silks turn brown, pierce a kernel. Pick when the juice is milky and cook soon after picking.",
+      "photo": null,
+      "cultivarName": "Earlibird",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Earlibird sweet corn"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweetcorn (Swift)",
+    "scientificName": "Zea mays 'Swift'",
+    "description": "A fast-growing tendersweet cultivar with relatively short plants.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/209824/zea-mays-swift/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant in a block after frost. The shorter stems can help in a breezier plot, but choose shelter where possible.",
+      "harvestInstructions": "When the silks turn brown, pierce a kernel. Pick when the juice is milky and cook soon after picking.",
+      "photo": null,
+      "cultivarName": "Swift",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Swift sweet corn"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweetcorn (Lark)",
+    "scientificName": "Zea mays 'Lark'",
+    "description": "An early tendersweet cultivar with tender kernels.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/209820/zea-mays-lark/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Set hardened-off seedlings out in a block once the soil has warmed.",
+      "harvestInstructions": "When the silks turn brown, pierce a kernel. Pick when the juice is milky and cook soon after picking.",
+      "photo": null,
+      "cultivarName": "Lark",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Lark sweet corn"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweetcorn (Mirai Picnic)",
+    "scientificName": "Zea mays 'Mirai 003Y'",
+    "description": "An early supersweet cultivar sold as Mirai Picnic.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/353670/zea-mays-mirai-picnic-mirai-003y/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in modules. Plant out after frost and separate from other corn types that would flower at the same time.",
+      "harvestInstructions": "When the silks turn brown, pierce a kernel. Pick when the juice is milky and cook soon after picking.",
+      "photo": null,
+      "cultivarName": "Mirai 003Y",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Mirai Picnic sweet corn"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweetcorn (Golden Bantam)",
+    "scientificName": "Zea mays 'Golden Bantam'",
+    "description": "A heritage sweetcorn cultivar with yellow kernels.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/120586/zea-mays-golden-bantam/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant several together to help pollination and keep the bed evenly moist around flowering.",
+      "harvestInstructions": "When the silks turn brown, pierce a kernel. Pick when the juice is milky and cook soon after picking.",
+      "photo": null,
+      "cultivarName": "Golden Bantam",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Golden Bantam sweet corn"
+      ]
+    }
+  },
+  {
+    "commonName": "Baby corn (Minipop)",
+    "scientificName": "Zea mays var. rugosa 'Minipop'",
+    "description": "A cultivar grown for small, tender cobs eaten whole.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/307252/zea-mays-var-rugosa-minipop/details/",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Set plants out after frost. Check them often once silk starts to appear so the cobs stay small.",
+      "harvestInstructions": "Pick the slender, finger-sized cobs while they are immature. Remove the husk and silks before cooking.",
+      "photo": null,
+      "cultivarName": "Minipop",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Minipop baby corn"
+      ]
+    }
+  },
+  {
+    "commonName": "Popcorn (Britpop)",
+    "scientificName": "Zea mays 'Britpop'",
+    "description": "A popcorn cultivar grown for mature, dry kernels.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/307251/zea-mays-britpop-popcorn/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a warm site and start under cover in cool regions. Plant in a block where pollen can reach the silks.",
+      "harvestInstructions": "Leave the ears to mature and dry. Finish drying with airflow before shelling and storing the kernels.",
+      "photo": null,
+      "cultivarName": "Britpop",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Britpop popcorn"
+      ]
+    }
+  },
+  {
+    "commonName": "Popcorn (Glass Gem)",
+    "scientificName": "Zea mays 'Glass Gem'",
+    "description": "A flint corn with translucent, multicolored kernels that can be popped or ground into meal.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, warm site sheltered from strong wind.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially as silks and cobs form.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that holds moisture and drains well.",
+    "humidityInstructions": "Leave space between stems for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.nativeseeds.org/pages/glass-gem-corn",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a warm site with a long growing season. Grow in a block and separate from sweetcorn flowering at the same time.",
+      "harvestInstructions": "Pick when the husks have browned and dried. Finish drying the cobs with airflow before shelling.",
+      "photo": {
+        "path": "/images/plants/zea-mays-glass-gem.jpg",
+        "altText": "A dried Glass Gem corn cob with red, yellow, purple and blue kernels",
+        "credit": "Douglas Goldman",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZeaGG1.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "ZeaGG1.jpg"
+      },
+      "cultivarName": "Glass Gem",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Glass Gem popcorn"
+      ]
+    }
   }
 ]
