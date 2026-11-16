@@ -18,6 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AuthService } from './core/auth/services/auth.service';
 import { PwaUpdateService } from './core/pwa/pwa-update.service';
+import { WelcomeTour } from './features/welcome-tour/welcome-tour';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { PwaUpdateService } from './core/pwa/pwa-update.service';
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
+    WelcomeTour,
   ],
   host: { '[class.signed-in]': 'authService.isAuthenticated()' },
   templateUrl: './app.html',
@@ -40,6 +42,8 @@ export class App {
 
   readonly isLoggingOut = signal(false);
   readonly secondaryRoute = signal(false);
+  readonly tourRouteReady = signal(false);
+  readonly deferredTourOwner = signal<string | null>(null);
 
   constructor() {
     const injector = inject(Injector);
@@ -49,7 +53,11 @@ export class App {
       takeUntilDestroyed(),
     ).subscribe(event => {
       document.querySelectorAll<HTMLDetailsElement>('.app-more[open]').forEach(menu => menu.open = false);
+      const url = this.router.parseUrl(event.urlAfterRedirects);
       const path = event.urlAfterRedirects.split(/[?#]/, 1)[0];
+      const openingSharedCalendar = path === '/calendar' &&
+        (url.queryParamMap.has('invitation') || url.queryParamMap.has('share'));
+      this.tourRouteReady.set(path !== '/login' && !openingSharedCalendar);
       this.secondaryRoute.set(['/garden', '/notifications', '/account'].includes(path));
       // Updating a page's filters must retain focus in the active control.
       if (path === previousPath) return;

@@ -55,3 +55,9 @@
 </header>
 
 <router-outlet />
+
+@if (authService.currentUser(); as user) {
+  @if (tourRouteReady() && user.needsWelcomeTour && deferredTourOwner() !== user.id) {
+    <app-welcome-tour (deferred)="deferredTourOwner.set(user.id)" />
+  }
+}

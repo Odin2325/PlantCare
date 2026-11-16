@@ -37,7 +37,22 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
             return Unauthorized();
         }
 
-        return Ok(new CurrentUserResponse(Id: user.Id, Email: user.Email));
+        return Ok(new CurrentUserResponse(user.Id, user.Email, user.NeedsWelcomeTour));
+    }
+
+    [HttpPost("welcome-tour/dismiss")]
+    public async Task<IActionResult> DismissWelcomeTour(CancellationToken ct)
+    {
+        if (!Guid.TryParse(userManager.GetUserId(User), out var userId))
+            return Unauthorized();
+
+        // Change the concurrency stamp so an overlapping Identity update cannot restore the old flag.
+        var concurrencyStamp = Guid.NewGuid().ToString();
+        await db.Users.Where(user => user.Id == userId && user.NeedsWelcomeTour)
+            .ExecuteUpdateAsync(setters => setters
+                .SetProperty(user => user.NeedsWelcomeTour, false)
+                .SetProperty(user => user.ConcurrencyStamp, concurrencyStamp), ct);
+        return NoContent();
     }
 
     [HttpPost("export")]
@@ -56,7 +71,7 @@ public sealed class AccountController(UserManager<ApplicationUser> userManager,
         var data = new
         {
             schemaVersion = 1, exportedAtUtc = DateTimeOffset.UtcNow,
-            account = new { user.Id, user.Email, user.UserName, user.PhoneNumber, user.EmailConfirmed, user.TwoFactorEnabled, user.CreatedAtUtc },
+            account = new { user.Id, user.Email, user.UserName, user.PhoneNumber, user.EmailConfirmed, user.TwoFactorEnabled, user.CreatedAtUtc, user.NeedsWelcomeTour },
             plants = await plants.Select(p => new { p.Id, p.PlantSpeciesId, p.Nickname, p.Location, p.Notes, p.AcquiredOn, p.PlannedSowingOn, p.PlannedPlantingOutOn, p.ExpectedHarvestOn, p.GrowingEnvironment, p.CareSeason, p.IsActive, p.CreatedAtUtc }).ToListAsync(ct),
             tags = await db.UserPlantTags.AsNoTracking().Where(t => plants.Select(p => p.Id).Contains(t.UserPlantId)).Select(t => new { t.UserPlantId, t.Name }).ToListAsync(ct),
             shortlist = await db.ShortlistedPlants.AsNoTracking().Where(p => p.UserId == id).Select(p => new { p.PlantSpeciesId, p.SavedAtUtc }).ToListAsync(ct),

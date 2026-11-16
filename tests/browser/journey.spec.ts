@@ -91,9 +91,15 @@ test('register, confirm, care for a plant, recover password and log out', async 
     await page.goto('/my-plants');
     await login(page, email, password);
     await expect(page).toHaveURL(`${origin}/my-plants`);
+    const tour = page.getByRole('dialog', { name: 'Welcome to PlantCare' });
+    await expect(tour).toBeVisible();
+    await auditAccessibility(page, 'First sign-in welcome tour');
+    await tour.getByRole('button', { name: 'Skip tour' }).click();
+    await expect(tour).toHaveCount(0);
     await expect(page.getByRole('heading', { name: 'No plants yet' })).toBeVisible();
     await page.reload();
     await expect(page.getByRole('heading', { name: 'Your plant collection' })).toBeVisible();
+    await expect(tour).toHaveCount(0);
   });
 
   await step('Catalog, plant creation, schedule and persisted tags', page, async () => {

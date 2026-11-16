@@ -1,0 +1,33 @@
+<dialog #dialog aria-labelledby="welcome-tour-title" aria-describedby="welcome-tour-text" (cancel)="cancel($event)">
+  <div class="tour">
+    <div class="tour-top">
+      <img src="/plantcare-icon.svg" alt="" width="36" height="36" />
+      <button class="tour-quiet" type="button" (click)="finish(false)" [disabled]="saving()">Skip tour</button>
+    </div>
+
+    <div class="tour-content">
+      <p class="tour-position">Step {{ index() + 1 }} of {{ stepCount }}</p>
+      <h2 #heading id="welcome-tour-title" tabindex="-1">{{ step().title }}</h2>
+      <p id="welcome-tour-text">{{ step().text }}</p>
+    </div>
+
+    @if (failedAction()) {
+      <p class="tour-error" role="alert">We couldn’t save your choice. Try again or close the tour for now.</p>
+    }
+
+    <div class="tour-actions">
+      @if (failedAction(); as action) {
+        <button class="tour-quiet" type="button" (click)="closeForNow()">Close for now</button>
+        <button class="tour-primary" type="button" (click)="finish(action === 'browse')">Try again</button>
+      } @else if (index() + 1 === stepCount) {
+        <button class="tour-quiet" type="button" (click)="move(-1)" [disabled]="saving()">Back</button>
+        <button class="tour-primary" type="button" (click)="finish(true)" [disabled]="saving()">Browse plants</button>
+      } @else {
+        @if (index() > 0) {
+          <button class="tour-quiet" type="button" (click)="move(-1)" [disabled]="saving()">Back</button>
+        }
+        <button class="tour-primary" type="button" (click)="move(1)" [disabled]="saving()">Next</button>
+      }
+    </div>
+  </div>
+</dialog>

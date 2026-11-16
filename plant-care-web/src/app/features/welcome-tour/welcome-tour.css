@@ -1,0 +1,91 @@
+dialog {
+  inline-size: min(28rem, calc(100% - 2rem));
+  max-block-size: calc(100% - 2rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 16px 60px rgb(20 43 33 / 24%);
+}
+
+dialog::backdrop {
+  background: rgb(20 43 33 / 55%);
+}
+
+.tour {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1rem, 5vw, 1.75rem);
+}
+
+.tour-top, .tour-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.tour-content {
+  padding: 1rem;
+  border-radius: var(--radius-control);
+  background: var(--color-tint);
+}
+
+.tour-content h2 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(1.3rem, 5vw, 1.65rem);
+  line-height: 1.2;
+}
+
+.tour-content p, .tour-error {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tour-position {
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.tour-error {
+  color: var(--color-danger);
+}
+
+button {
+  min-block-size: 44px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.tour-quiet {
+  border-color: var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.tour-quiet:hover:not(:disabled) {
+  background: var(--color-tint);
+}
+
+.tour-primary {
+  margin-inline-start: auto;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.tour-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}

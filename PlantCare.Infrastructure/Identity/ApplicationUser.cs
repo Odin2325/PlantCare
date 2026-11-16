@@ -5,4 +5,5 @@ namespace PlantCare.Infrastructure.Identity;
 public sealed class ApplicationUser : IdentityUser<Guid>
 {
     public DateTimeOffset CreatedAtUtc { get; private set; } = DateTimeOffset.UtcNow;
+    public bool NeedsWelcomeTour { get; set; } = true;
 }

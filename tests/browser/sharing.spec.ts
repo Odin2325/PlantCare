@@ -63,6 +63,9 @@ test('calendar sharing sends mail and opens only the invited account calendar', 
     await page.getByLabel('Email address', { exact: true }).fill(owner);
     await page.getByLabel('Password', { exact: true }).fill(password);
     await auth(page, 'Log in', 'login');
+    const tour = page.getByRole('dialog', { name: 'Welcome to PlantCare' });
+    await tour.getByRole('button', { name: 'Skip tour' }).click();
+    await expect(tour).toHaveCount(0);
     await page.goto(origin + '/calendar');
     await openCalendarTools(page);
     await page.getByLabel('Recipient email', { exact: true }).fill(recipient);
@@ -82,6 +85,7 @@ test('calendar sharing sends mail and opens only the invited account calendar', 
     expect(await invited.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Read-only calendar fits the viewport').toBe(true);
     await auditAccessibility(invited, 'Invited read-only calendar');
     await expect.poll(() => new URL(invited.url()).searchParams.has('share')).toBe(true);
+    await expect(invited.getByRole('dialog', { name: 'Welcome to PlantCare' })).toHaveCount(0);
     await page.reload();
     await openCalendarTools(page);
     await page.getByRole('button', { name: 'Send sharing email to ' + recipient, exact: true }).click();

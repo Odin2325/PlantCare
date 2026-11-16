@@ -150,6 +150,15 @@ export class AuthService {
       );
   }
 
+  dismissWelcomeTour(): Observable<void> {
+    const userId = this.currentUserState()?.id;
+    return this.httpClient.post<void>('/api/account/welcome-tour/dismiss', {}).pipe(
+      tap(() => this.currentUserState.update(user =>
+        user && user.id === userId ? { ...user, needsWelcomeTour: false } : user,
+      )),
+    );
+  }
+
   logout(): Observable<void> {
     return this.httpClient
       .post<void>(

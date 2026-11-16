@@ -1,6 +1,7 @@
 export interface CurrentUser {
   id: string;
   email: string;
+  needsWelcomeTour?: boolean;
 }
 
 export interface Credentials {

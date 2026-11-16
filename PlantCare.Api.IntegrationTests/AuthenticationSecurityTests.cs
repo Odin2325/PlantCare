@@ -47,6 +47,37 @@ public sealed class AuthenticationSecurityTests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task WelcomeTourDismissalPersistsAcrossSessionsAndIsScopedToTheSignedInAccount()
+    {
+        const string dismiss = "/api/account/welcome-tour/dismiss";
+        var (email, _) = await CreateUserAsync();
+        var (otherEmail, _) = await CreateUserAsync();
+        using var firstBrowser = Client();
+        using var secondBrowser = Client();
+        using var otherBrowser = Client();
+
+        Assert.Equal(HttpStatusCode.Unauthorized, (await firstBrowser.PostAsJsonAsync(dismiss, new { })).StatusCode);
+        await LoginAsync(firstBrowser, email, OriginalPassword);
+        Assert.True(await NeedsWelcomeTourAsync(firstBrowser));
+        firstBrowser.DefaultRequestHeaders.Remove("X-XSRF-TOKEN");
+        Assert.Equal(HttpStatusCode.BadRequest, (await firstBrowser.PostAsJsonAsync(dismiss, new { })).StatusCode);
+        await firstBrowser.AddAntiforgeryTokenAsync();
+        Assert.Equal(HttpStatusCode.NoContent, (await firstBrowser.PostAsJsonAsync(dismiss, new { })).StatusCode);
+        Assert.Equal(HttpStatusCode.NoContent, (await firstBrowser.PostAsJsonAsync(dismiss, new { })).StatusCode);
+
+        await LoginAsync(secondBrowser, email, OriginalPassword);
+        Assert.False(await NeedsWelcomeTourAsync(secondBrowser));
+        await LoginAsync(otherBrowser, otherEmail, OriginalPassword);
+        Assert.True(await NeedsWelcomeTourAsync(otherBrowser));
+    }
+
+    private static async Task<bool> NeedsWelcomeTourAsync(HttpClient client)
+    {
+        var account = await client.GetFromJsonAsync<JsonElement>("/api/account/me");
+        return account.GetProperty("needsWelcomeTour").GetBoolean();
+    }
+
+    [Fact]
     public async Task BogusBearerHeaderDoesNotBypassAnonymousAntiforgery()
     {
         using var client = Client();
