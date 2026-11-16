@@ -12233,5 +12233,257 @@
         "Capri rosemary"
       ]
     }
+  },
+  {
+    "commonName": "Leek (Stamford)",
+    "scientificName": "Allium porrum 'Stamford'",
+    "description": "An early hybrid that quickly develops even-sized stems.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check moisture while plants establish. In established beds, water during dry spells. Check pots more often.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost.",
+    "soilInstructions": "Use fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/349980/allium-porrum-stamford/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start seedlings in spring and transplant into a sunny bed when they are established.",
+      "harvestInstructions": "Lift from late summer or autumn once the stems reach the size you want.",
+      "photo": null,
+      "cultivarName": "Stamford",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Stamford leek"
+      ]
+    }
+  },
+  {
+    "commonName": "Leek (Porbella)",
+    "scientificName": "Allium porrum 'Porbella'",
+    "description": "A leek with thick white shanks and an extended harvest season.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check moisture while plants establish. In established beds, water during dry spells. Check pots more often.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost.",
+    "soilInstructions": "Use fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/349979/allium-porrum-porbella/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in spring. Transplant into deep planting holes if you want a longer white shank.",
+      "harvestInstructions": "Use a fork to lift individual plants and spread the harvest over the cooler months.",
+      "photo": null,
+      "cultivarName": "Porbella",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Porbella leek"
+      ]
+    }
+  },
+  {
+    "commonName": "Leek (Krypton)",
+    "scientificName": "Allium porrum 'Krypton'",
+    "description": "An upright, compact leek suited to winter harvests.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check moisture while plants establish. In established beds, water during dry spells. Check pots more often.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost.",
+    "soilInstructions": "Use fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/312577/allium-porrum-krypton/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow in spring and leave room between transplants for their stems to fill out before winter.",
+      "harvestInstructions": "Lift mature stems as needed in winter when the ground is workable.",
+      "photo": null,
+      "cultivarName": "Krypton",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Krypton leek"
+      ]
+    }
+  },
+  {
+    "commonName": "Leek (Oarsman)",
+    "scientificName": "Allium porrum 'Oarsman'",
+    "description": "A winter leek bred for resistance to rust.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check moisture while plants establish. In established beds, water during dry spells. Check pots more often.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost.",
+    "soilInstructions": "Use fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/leeks/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Sow in spring and transplant into a sunny bed. Water at soil level when the plants need it.",
+      "harvestInstructions": "Lift stems during winter as needed, before any overwintered plants send up flower stalks.",
+      "photo": null,
+      "cultivarName": "Oarsman",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Oarsman leek"
+      ]
+    }
+  },
+  {
+    "commonName": "Parsnip (Albion)",
+    "scientificName": "Pastinaca sativa 'Albion'",
+    "description": "A canker-resistant parsnip with uniformly tapered white roots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny bed. Light shade is also suitable.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the seedbed evenly moist. Water during dry spells to reduce sharp changes in soil moisture.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a bed prepared ahead of sowing and avoid freshly manured soil.",
+    "soilInstructions": "Use deep, loose, free-draining soil and remove large stones before sowing.",
+    "humidityInstructions": "Thin seedlings to leave space around each plant.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/293182/pastinaca-sativa-albion/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow fresh seed directly in spring in deep soil where the roots can lengthen. Wear gloves when handling foliage. Sap can irritate skin in sunlight, including in dogs.",
+      "harvestInstructions": "Ease mature roots out with a fork when the foliage begins to die back.",
+      "photo": null,
+      "cultivarName": "Albion",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Albion parsnip"
+      ]
+    }
+  },
+  {
+    "commonName": "Parsnip (Gladiator)",
+    "scientificName": "Pastinaca sativa 'Gladiator'",
+    "description": "A canker-resistant parsnip with long, slender cream roots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny bed. Light shade is also suitable.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the seedbed evenly moist. Water during dry spells to reduce sharp changes in soil moisture.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a bed prepared ahead of sowing and avoid freshly manured soil.",
+    "soilInstructions": "Use deep, loose, free-draining soil and remove large stones before sowing.",
+    "humidityInstructions": "Thin seedlings to leave space around each plant.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/139331/pastinaca-sativa-gladiator/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Direct-sow in spring and thin the seedlings to give the roots room. Water during dry spells. Wear gloves when handling foliage. Sap can irritate skin in sunlight, including in dogs.",
+      "harvestInstructions": "Loosen the soil alongside the row before lifting the long roots.",
+      "photo": null,
+      "cultivarName": "Gladiator",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Gladiator parsnip"
+      ]
+    }
+  },
+  {
+    "commonName": "Parsnip (Pearl)",
+    "scientificName": "Pastinaca sativa 'Pearl'",
+    "description": "A slender white parsnip that keeps well in the ground over winter.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny bed. Light shade is also suitable.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the seedbed evenly moist. Water during dry spells to reduce sharp changes in soil moisture.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a bed prepared ahead of sowing and avoid freshly manured soil.",
+    "soilInstructions": "Use deep, loose, free-draining soil and remove large stones before sowing.",
+    "humidityInstructions": "Thin seedlings to leave space around each plant.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/362434/pastinaca-sativa-pearl/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Direct-sow in spring. Mark the row before the leaves die back so you can find the roots in winter. Wear gloves when handling foliage. Sap can irritate skin in sunlight, including in dogs.",
+      "harvestInstructions": "Lift roots as needed when the ground is workable. Set some aside before a prolonged freeze.",
+      "photo": null,
+      "cultivarName": "Pearl",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Pearl parsnip"
+      ]
+    }
+  },
+  {
+    "commonName": "Parsnip (Picador)",
+    "scientificName": "Pastinaca sativa 'Picador'",
+    "description": "A vigorous hybrid that benefits from a long growing season.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny bed. Light shade is also suitable.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Keep the seedbed evenly moist. Water during dry spells to reduce sharp changes in soil moisture.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use a bed prepared ahead of sowing and avoid freshly manured soil.",
+    "soilInstructions": "Use deep, loose, free-draining soil and remove large stones before sowing.",
+    "humidityInstructions": "Thin seedlings to leave space around each plant.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": true,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/298135/pastinaca-sativa-picador/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Sow directly once the soil is warm enough in spring and leave time for the roots to develop through summer. Wear gloves when handling foliage. Sap can irritate skin in sunlight, including in dogs.",
+      "harvestInstructions": "Lift developed roots in autumn or leave some in the ground for winter picking.",
+      "photo": null,
+      "cultivarName": "Picador",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Picador parsnip"
+      ]
+    }
   }
 ]
