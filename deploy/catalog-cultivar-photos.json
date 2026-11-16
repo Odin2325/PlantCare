@@ -2095,5 +2095,77 @@
     "sourceUrl": null,
     "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
     "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Ipomoea batatas 'Beauregard'",
+    "cultivarName": "Beauregard",
+    "status": "verified",
+    "photoPath": "/images/plants/ipomoea-batatas-beauregard.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:20230227_161110_Ipomoea_batatas_%27Beauregard%27.jpg",
+    "identityEvidence": "The source description and the produce label identify the photographed roots as Beauregard.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Ipomoea batatas 'Bonita'",
+    "cultivarName": "Bonita",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Ipomoea batatas 'Evangeline'",
+    "cultivarName": "Evangeline",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Ipomoea batatas 'Orleans'",
+    "cultivarName": "Orleans",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Ipomoea batatas 'Murasaki-29'",
+    "cultivarName": "Murasaki-29",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Ipomoea batatas 'Bayou Belle'",
+    "cultivarName": "Bayou Belle",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Helianthus tuberosus 'Fuseau'",
+    "cultivarName": "Fuseau",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Helianthus tuberosus 'Dwarf Sunray'",
+    "cultivarName": "Dwarf Sunray",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
   }
 ]

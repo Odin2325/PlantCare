@@ -13509,5 +13509,269 @@
         "Blacktail Mountain watermelon"
       ]
     }
+  },
+  {
+    "commonName": "Sweet potato (Beauregard)",
+    "scientificName": "Ipomoea batatas 'Beauregard'",
+    "description": "An orange-fleshed sweet potato suitable for a warm outdoor bed in favorable summers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a warm, sunny site or use a greenhouse in cooler areas.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the soil regularly and water when it starts to dry. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/sweet-potatoes/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Start from slips and wait until the soil warms before transplanting. Use a greenhouse or tunnel in a cool site.",
+      "harvestInstructions": "Lift once the foliage starts to yellow, before frost. Loosen the soil carefully so the roots do not bruise or split.",
+      "photo": {
+        "path": "/images/plants/ipomoea-batatas-beauregard.jpg",
+        "altText": "Harvested Beauregard sweet potatoes in a labeled basket",
+        "credit": "Prosperosity",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20230227_161110_Ipomoea_batatas_%27Beauregard%27.jpg",
+        "licenseName": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "title": "20230227 161110 Ipomoea batatas 'Beauregard'.jpg"
+      },
+      "cultivarName": "Beauregard",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Beauregard sweet potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet potato (Bonita)",
+    "scientificName": "Ipomoea batatas 'Bonita'",
+    "description": "A pale-skinned sweet potato with cream-colored flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a warm, sunny site or use a greenhouse in cooler areas.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the soil regularly and water when it starts to dry. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.lsuagcenter.com/portals/our_offices/research_stations/sweetpotato/features/varieties/sweet-potato-variety-descriptions",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Grow slips in a warm raised bed or large container. Keep the soil evenly moist while the plants establish.",
+      "harvestInstructions": "Lift once the foliage starts to yellow, before frost. Loosen the soil carefully so the roots do not bruise or split.",
+      "photo": null,
+      "cultivarName": "Bonita",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Bonita sweet potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet potato (Evangeline)",
+    "scientificName": "Ipomoea batatas 'Evangeline'",
+    "description": "A sweet cultivar with deep orange flesh that benefits from a long, hot growing season.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a warm, sunny site or use a greenhouse in cooler areas.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the soil regularly and water when it starts to dry. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/290849/ipomoea-batatas-evangeline/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Start in warmth and use a greenhouse or tunnel where the outdoor season is short.",
+      "harvestInstructions": "Lift once the foliage starts to yellow, before frost. Loosen the soil carefully so the roots do not bruise or split.",
+      "photo": null,
+      "cultivarName": "Evangeline",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Evangeline sweet potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet potato (Orleans)",
+    "scientificName": "Ipomoea batatas 'Orleans'",
+    "description": "An orange-fleshed cultivar with light rose skin.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a warm, sunny site or use a greenhouse in cooler areas.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the soil regularly and water when it starts to dry. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.lsuagcenter.com/portals/our_offices/research_stations/sweetpotato/features/varieties/sweet-potato-variety-descriptions",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Transplant slips into loose, warm soil after frost and leave space for the vines to spread.",
+      "harvestInstructions": "Lift once the foliage starts to yellow, before frost. Loosen the soil carefully so the roots do not bruise or split.",
+      "photo": null,
+      "cultivarName": "Orleans",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Orleans sweet potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet potato (Murasaki-29)",
+    "scientificName": "Ipomoea batatas 'Murasaki-29'",
+    "description": "A sweet potato with dark purple skin and white flesh.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a warm, sunny site or use a greenhouse in cooler areas.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the soil regularly and water when it starts to dry. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.lsuagcenter.com/portals/our_offices/research_stations/sweetpotato/features/varieties/sweet-potato-variety-descriptions",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Choose a well-drained bed in a warm site. Keep soil moisture steady through root development.",
+      "harvestInstructions": "Lift once the foliage starts to yellow, before frost. Loosen the soil carefully so the roots do not bruise or split.",
+      "photo": null,
+      "cultivarName": "Murasaki-29",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Murasaki-29 sweet potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Sweet potato (Bayou Belle)",
+    "scientificName": "Ipomoea batatas 'Bayou Belle'",
+    "description": "An early-developing cultivar with blocky storage roots.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a warm, sunny site or use a greenhouse in cooler areas.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check the soil regularly and water when it starts to dry. Allow excess water to drain.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.lsuagcenter.com/profiles/rbogren/articles/page1600370302202",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Give the slips warm soil and room to spread. Earlier root development still depends on growing conditions.",
+      "harvestInstructions": "Lift once the foliage starts to yellow, before frost. Loosen the soil carefully so the roots do not bruise or split.",
+      "photo": null,
+      "cultivarName": "Bayou Belle",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Bayou Belle sweet potato"
+      ]
+    }
+  },
+  {
+    "commonName": "Jerusalem artichoke (Fuseau)",
+    "scientificName": "Helianthus tuberosus 'Fuseau'",
+    "description": "A Jerusalem artichoke with large, smooth-skinned tubers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site. Light shade is also possible.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, particularly as the tubers swell.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/133682/helianthus-tuberosus-fuseau/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Plant tubers in spring. Give the tall stems room and support them in windy sites so they do not shade or fall onto nearby crops.",
+      "harvestInstructions": "Lift the tubers as needed from late autumn while the ground is workable. Remove any remaining tubers if you want to clear the bed.",
+      "photo": null,
+      "cultivarName": "Fuseau",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Fuseau sunchoke"
+      ]
+    }
+  },
+  {
+    "commonName": "Jerusalem artichoke (Dwarf Sunray)",
+    "scientificName": "Helianthus tuberosus 'Dwarf Sunray'",
+    "description": "A shorter Jerusalem artichoke with long, smooth, pale tubers.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site. Light shade is also possible.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, particularly as the tubers swell.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use loose, well-drained soil with room for the underground crop.",
+    "humidityInstructions": "Leave room for air circulation around the foliage.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/jerusalem-artichokes/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable",
+        "root-tuber"
+      ],
+      "growingNotes": "Plant in a sunny bed or a large container. Check container moisture regularly in hot weather.",
+      "harvestInstructions": "Lift the tubers as needed from late autumn while the ground is workable. Remove any remaining tubers if you want to clear the bed.",
+      "photo": null,
+      "cultivarName": "Dwarf Sunray",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Dwarf Sunray sunchoke"
+      ]
+    }
   }
 ]
