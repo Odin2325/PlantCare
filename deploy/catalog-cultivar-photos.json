@@ -1951,5 +1951,77 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZeaGG1.jpg",
     "identityEvidence": "Douglas Goldman's file description identifies the cob as Zea mays 'Glass Gem'.",
     "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Corylus maxima 'Kentish Cob'",
+    "cultivarName": "Kentish Cob",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Corylus avellana 'Webb's Prize Cob'",
+    "cultivarName": "Webb's Prize Cob",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Corylus maxima 'Halle'sche Riesennuss'",
+    "cultivarName": "Halle'sche Riesennuss",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Corylus avellana 'Red Majestic'",
+    "cultivarName": "Red Majestic",
+    "status": "verified",
+    "photoPath": "/images/plants/corylus-avellana-red-majestic.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corylus_avellana_Red_Majestic_0zz.jpg",
+    "identityEvidence": "David J. Stang's source description identifies the plant as Corylus avellana 'Red Majestic'.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Juglans regia 'Broadview'",
+    "cultivarName": "Broadview",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Juglans regia 'Lara'",
+    "cultivarName": "Lara",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Juglans regia 'Franquette'",
+    "cultivarName": "Franquette",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
+  },
+  {
+    "scientificName": "Juglans regia 'Fernor'",
+    "cultivarName": "Fernor",
+    "status": "pending",
+    "photoPath": null,
+    "sourceUrl": null,
+    "identityEvidence": "A licensed photograph identifying this exact cultivar has not yet been approved.",
+    "reviewedOn": "2026-11-16"
   }
 ]

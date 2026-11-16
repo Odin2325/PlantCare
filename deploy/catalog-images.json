@@ -3106,5 +3106,19 @@
     "bytes": 373684,
     "sourceFileName": "ZeaGG1.jpg",
     "changes": "Original file from Wikimedia Commons. No edits. Displayed scaled to fit."
+  },
+  {
+    "alt": "Red Majestic hazel with purple and copper leaves in a garden",
+    "caption": "Corylus avellana Red Majestic 0zz.jpg",
+    "credit": "Photo by David J. Stang",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseName": "CC BY-SA 4.0",
+    "slug": "corylus-avellana-red-majestic",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corylus_avellana_Red_Majestic_0zz.jpg",
+    "path": "/images/plants/corylus-avellana-red-majestic.jpg",
+    "sha256": "b376ae7f7894c67288fdedff3b629b6b4a5384f1df8750b1966f852cb15fa202",
+    "bytes": 156782,
+    "sourceFileName": "Corylus avellana Red Majestic 0zz.jpg",
+    "changes": "Wikimedia-provided 960-pixel thumbnail. No further edits. Displayed scaled to fit."
   }
 ]

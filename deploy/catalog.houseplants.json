@@ -12990,5 +12990,268 @@
         "Glass Gem popcorn"
       ]
     }
+  },
+  {
+    "commonName": "Hazelnut (Kentish Cob)",
+    "scientificName": "Corylus maxima 'Kentish Cob'",
+    "description": "A reliable filbert with fine-textured nuts.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use well-drained soil and keep the base clear of weeds during establishment.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/79628/corylus-maxima-kentish-cob-f/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Grow in a sheltered spot near a compatible hazel such as Halle Giant.",
+      "harvestInstructions": "Pick in autumn as the husks start to yellow. Spread sound nuts in a shallow layer in a dry, airy place.",
+      "photo": null,
+      "cultivarName": "Kentish Cob",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Kentish Cob hazelnut",
+        "Lambert's Filbert"
+      ]
+    }
+  },
+  {
+    "commonName": "Hazelnut (Webb's Prize Cob)",
+    "scientificName": "Corylus avellana 'Webb's Prize Cob'",
+    "description": "A named cobnut grown as a bush for its edible nuts.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use well-drained soil and keep the base clear of weeds during establishment.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/59651/corylus-avellana-webbs-prize-cob-f/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Allow room for an open, rounded bush and choose a companion hazel with overlapping flowering.",
+      "harvestInstructions": "Pick in autumn as the husks start to yellow. Spread sound nuts in a shallow layer in a dry, airy place.",
+      "photo": null,
+      "cultivarName": "Webb's Prize Cob",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Webb's Prize Cob hazelnut"
+      ]
+    }
+  },
+  {
+    "commonName": "Hazelnut (Halle'sche Riesennuss)",
+    "scientificName": "Corylus maxima 'Halle'sche Riesennuss'",
+    "description": "A vigorous filbert, sold as Halle Giant, with large autumn nuts.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use well-drained soil and keep the base clear of weeds during establishment.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/117727/corylus-maxima-halle-giant/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "fruit"
+      ],
+      "growingNotes": "Give the bush room to spread. Kentish Cob can provide compatible pollen.",
+      "harvestInstructions": "Pick in autumn as the husks start to yellow. Spread sound nuts in a shallow layer in a dry, airy place.",
+      "photo": null,
+      "cultivarName": "Halle'sche Riesennuss",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Halle'sche Riesennuss hazelnut",
+        "Halle Giant hazelnut"
+      ]
+    }
+  },
+  {
+    "commonName": "Hazel (Red Majestic)",
+    "scientificName": "Corylus avellana 'Red Majestic'",
+    "description": "A compact ornamental hazel with twisted branches, purple foliage and pinkish catkins.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use well-drained soil and keep the base clear of weeds during establishment.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/172191/corylus-avellana-red-majestic/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "tree",
+        "fruit"
+      ],
+      "growingNotes": "Grow in sun for the strongest leaf color and leave space for its spreading branches.",
+      "harvestInstructions": "If nuts set, gather them as the husks begin to yellow. This cultivar is primarily grown for its foliage and branches.",
+      "photo": {
+        "path": "/images/plants/corylus-avellana-red-majestic.jpg",
+        "altText": "Red Majestic hazel with purple and copper leaves in a garden",
+        "credit": "Photo by David J. Stang",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Corylus_avellana_Red_Majestic_0zz.jpg",
+        "licenseName": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "Corylus avellana Red Majestic 0zz.jpg"
+      },
+      "cultivarName": "Red Majestic",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Majestic hazel"
+      ]
+    }
+  },
+  {
+    "commonName": "Walnut tree (Broadview)",
+    "scientificName": "Juglans regia 'Broadview'",
+    "description": "A relatively compact walnut with medium-sized nuts and late leaf emergence.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use deep, fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/69022/juglans-regia-broadview-f/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "tree",
+        "fruit"
+      ],
+      "growingNotes": "Choose an open site. It can set some nuts alone, and a compatible pollen partner can improve cropping.",
+      "harvestInstructions": "Gather fallen nuts as the outer husks split. Wear gloves to remove husks, discard moldy nuts, and dry sound nuts with airflow.",
+      "photo": null,
+      "cultivarName": "Broadview",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Broadview walnut"
+      ]
+    }
+  },
+  {
+    "commonName": "Walnut tree (Lara)",
+    "scientificName": "Juglans regia 'Lara'",
+    "description": "A named walnut grown for its edible nuts.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use deep, fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/59459/juglans-regia-lara-f/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "tree",
+        "fruit"
+      ],
+      "growingNotes": "Give the canopy room to spread and check local flowering overlap when choosing a pollination partner.",
+      "harvestInstructions": "Gather fallen nuts as the outer husks split. Wear gloves to remove husks, discard moldy nuts, and dry sound nuts with airflow.",
+      "photo": null,
+      "cultivarName": "Lara",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Lara walnut"
+      ]
+    }
+  },
+  {
+    "commonName": "Walnut tree (Franquette)",
+    "scientificName": "Juglans regia 'Franquette'",
+    "description": "A broad-growing walnut for large gardens and orchards.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use deep, fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/85325/juglans-regia-franquette-f/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "tree",
+        "fruit"
+      ],
+      "growingNotes": "Allow generous clearance from buildings and other trees, and choose an open site with deep soil.",
+      "harvestInstructions": "Gather fallen nuts as the outer husks split. Wear gloves to remove husks, discard moldy nuts, and dry sound nuts with airflow.",
+      "photo": null,
+      "cultivarName": "Franquette",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Franquette walnut"
+      ]
+    }
+  },
+  {
+    "commonName": "Walnut tree (Fernor)",
+    "scientificName": "Juglans regia 'Fernor'",
+    "description": "A cultivated walnut grown for its edible kernels.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered site with room for the mature plant.",
+    "defaultWateringIntervalDays": 7,
+    "wateringInstructions": "Check soil moisture during establishment and dry spells. Water deeply if the soil is drying.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Consider soil fertility and plant growth before feeding.",
+    "soilInstructions": "Use deep, fertile soil that drains well.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/146689/juglans-regia-fernor-f/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "tree",
+        "fruit"
+      ],
+      "growingNotes": "Plant away from frost pockets. Ask your nursery for a compatible pollen partner for your growing area.",
+      "harvestInstructions": "Gather fallen nuts as the outer husks split. Wear gloves to remove husks, discard moldy nuts, and dry sound nuts with airflow.",
+      "photo": null,
+      "cultivarName": "Fernor",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Fernor walnut"
+      ]
+    }
   }
 ]
