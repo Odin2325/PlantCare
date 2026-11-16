@@ -13773,5 +13773,253 @@
         "Dwarf Sunray sunchoke"
       ]
     }
+  },
+  {
+    "commonName": "Cabbage (Hispi)",
+    "scientificName": "Brassica oleracea (Capitata Group) 'Hispi'",
+    "description": "A compact summer cabbage with a pointed head and smooth green leaves.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/107315/brassica-oleracea-capitata-group-hispi/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in a sunny bed and keep moisture steady as the pointed heads fill.",
+      "harvestInstructions": "Cut the head at the base when it feels firm.",
+      "photo": null,
+      "cultivarName": "Hispi",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Hispi cabbage"
+      ]
+    }
+  },
+  {
+    "commonName": "Cabbage (Spring Hero)",
+    "scientificName": "Brassica oleracea (Capitata Group) 'Spring Hero'",
+    "description": "A spring cabbage with a round green head and a crisp pale heart.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/139297/brassica-oleracea-capitata-group-spring-hero/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in late summer for overwintering where the site is sheltered and drains well.",
+      "harvestInstructions": "Harvest the firm round heads in spring, before they split or send up a flower stalk.",
+      "photo": null,
+      "cultivarName": "Spring Hero",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Spring Hero cabbage"
+      ]
+    }
+  },
+  {
+    "commonName": "Cabbage (Tundra)",
+    "scientificName": "Brassica oleracea (Capitata Group) 'Tundra'",
+    "description": "A hardy Savoy-type winter cabbage with round, dense heads.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/139298/brassica-oleracea-capitata-group-tundra/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start early enough for heads to develop before winter and avoid ground that stays saturated.",
+      "harvestInstructions": "Cut mature heads as needed in late autumn or winter while they remain firm.",
+      "photo": null,
+      "cultivarName": "Tundra",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Tundra cabbage"
+      ]
+    }
+  },
+  {
+    "commonName": "Cabbage (Red Jewel)",
+    "scientificName": "Brassica oleracea (Capitata Group) 'Red Jewel'",
+    "description": "A red cabbage with a firm, round head that stores well after harvest.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/293290/brassica-oleracea-capitata-group-red-jewel/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give plants enough room for their heads to fill and keep watering even in dry spells.",
+      "harvestInstructions": "Cut mature heads in summer or autumn. Keep sound heads for storage.",
+      "photo": null,
+      "cultivarName": "Red Jewel",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Jewel cabbage"
+      ]
+    }
+  },
+  {
+    "commonName": "Brussels sprouts (Igor)",
+    "scientificName": "Brassica oleracea (Gemmifera Group) 'Igor'",
+    "description": "A mid- to late-season cultivar with uniform sprouts on a sturdy stem.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/brussels-sprouts/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in spring and set plants into firm soil. Support stems if the garden is windy.",
+      "harvestInstructions": "Pick tight sprouts from the bottom of the stalk upwards as they reach usable size.",
+      "photo": null,
+      "cultivarName": "Igor",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Igor brussels sprouts"
+      ]
+    }
+  },
+  {
+    "commonName": "Brussels sprouts (Crispus)",
+    "scientificName": "Brassica oleracea (Gemmifera Group) 'Crispus'",
+    "description": "A Brussels sprout cultivar bred for resistance to clubroot.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/brussels-sprouts/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant into firm soil with space for airflow. Rotate brassica crops between beds.",
+      "harvestInstructions": "Pick firm sprouts from the base upwards before they begin to open.",
+      "photo": null,
+      "cultivarName": "Crispus",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Crispus brussels sprouts"
+      ]
+    }
+  },
+  {
+    "commonName": "Brussels sprouts (Maximus)",
+    "scientificName": "Brassica oleracea (Gemmifera Group) 'Maximus'",
+    "description": "An early to mid-season cultivar with smooth sprouts spaced along the stalk.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/brussels-sprouts/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Start in spring and keep young plants watered until established.",
+      "harvestInstructions": "Start checking lower sprouts in autumn. Snap them off while they are firm and closed.",
+      "photo": null,
+      "cultivarName": "Maximus",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Maximus brussels sprouts"
+      ]
+    }
+  },
+  {
+    "commonName": "Brussels sprouts (Red Bull)",
+    "scientificName": "Brassica oleracea (Gemmifera Group) 'Red Bull'",
+    "description": "A purple Brussels sprout cultivar with a nutty flavor.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, open outdoor bed.",
+    "defaultWateringIntervalDays": 3,
+    "wateringInstructions": "Check soil moisture before watering, especially while plants establish and the crop fills.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Prepare the bed with well-rotted compost and adjust feeding to the soil conditions.",
+    "soilInstructions": "Use fertile, firm soil that retains moisture and drains well.",
+    "humidityInstructions": "Leave enough space for air to move between plants.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/brussels-sprouts/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a sunny, sheltered bed and leave room for the stems to develop.",
+      "harvestInstructions": "Pick the lowest firm purple sprouts first. Continue upwards as the smaller sprouts mature.",
+      "photo": null,
+      "cultivarName": "Red Bull",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Red Bull brussels sprouts"
+      ]
+    }
   }
 ]
