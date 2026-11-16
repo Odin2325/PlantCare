@@ -334,6 +334,14 @@ describe('Space planner', () => {
     const finder = () => fixture.nativeElement.querySelector('.zone-plant-finder');
     const buttons = () => Array.from(finder().querySelectorAll('.plant-list button') as NodeListOf<HTMLButtonElement>);
     expect(buttons().map(button => button.textContent?.trim())).toEqual(['Plan Balcony basil', 'Plan Kitchen basil']);
+    const careNotes = finder().querySelector('summary[aria-label="Care notes for Kitchen basil"]') as HTMLElement;
+    const preview = careNotes.closest('details')!;
+    expect(preview.open).toBe(false);
+    careNotes.click();
+    expect(preview.open).toBe(true);
+    expect(preview.querySelector('dl')?.textContent).toContain('Keep the mix evenly moist.');
+    expect(preview.querySelector('dl')?.textContent).toContain('Well-drained mix.');
+    expect(page.plan().pots).toEqual([]);
     buttons()[1].click();
     expect(page.selectedPot()).toMatchObject({ name: 'Kitchen basil', x: 4, y: 0,
       plants: [{ speciesId: 'basil', userPlantId: 'mine-1' }] });

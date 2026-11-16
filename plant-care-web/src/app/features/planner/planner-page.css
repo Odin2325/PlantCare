@@ -40,7 +40,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .placement-preview { position: absolute; z-index: 4; pointer-events: none; box-sizing: border-box; border: 2px dashed #144b88; background: #b7d6fc80; }
 .place-surface { position: absolute; inset: 0; z-index: 5; width: 100%; background: #ffffff20; border: 0; cursor: crosshair; }
 .map-legend, .layout-check { margin-top: .65rem; font-size: .9rem; }
-.map-legend summary, .layout-check summary { min-height: 2.75rem; align-content: center; cursor: pointer; font-weight: 650; }
+.map-legend summary, .layout-check summary, .zone-care-preview summary { min-height: 2.75rem; align-content: center; cursor: pointer; font-weight: 650; }
 .layout-check button[aria-pressed="true"] { border-color: #22573e; background: #e3f0e7; }
 .layout-companion-issue { display: block; margin-top: .2rem; }
 .map-legend ul { display: flex; flex-wrap: wrap; gap: .45rem .85rem; list-style: none; padding: 0; margin: .25rem 0 .75rem; }
@@ -56,4 +56,9 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .zone-conflict-toggle input { width: 1.25rem; height: 1.25rem; min-height: 0; flex: none; }
 .plant-list { padding: 0; margin: 0; list-style: none; display: grid; gap: .4rem; }
 .plant-list li { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .55rem; }
+.zone-care-preview { max-width: 100%; color: var(--color-primary); }
+.zone-care-preview[open] { flex-basis: 100%; }
+.zone-care-preview dl { margin: 0 0 .75rem; color: var(--color-text); overflow-wrap: anywhere; }
+.zone-care-preview dt { font-weight: 650; }
+.zone-care-preview dd { margin: 0 0 .45rem; }
 @media (max-width: 55rem) { .workspace { grid-template-columns: minmax(0, 1fr); } }

@@ -290,6 +290,25 @@
                     @if (!planned && choice.conflict) {
                       <small>{{ choice.conflict }}</small>
                     }
+                    @if (choice.plant; as species) {
+                      @if (species.sunlightInstructions || species.wateringInstructions || species.soilInstructions) {
+                        <details class="zone-care-preview" name="zone-care-preview">
+                          <summary [attr.aria-label]="'Care notes for ' + choice.name">Care notes</summary>
+                          <dl>
+                            @if (species.sunlightInstructions; as light) {
+                              <dt>Light</dt><dd>{{ light }}</dd>
+                            }
+                            @if (species.wateringInstructions; as watering) {
+                              <dt>Watering</dt><dd>{{ watering }}</dd>
+                            }
+                            @if (species.soilInstructions; as soil) {
+                              <dt>{{ species.catalogProfile?.categories?.includes('mushroom') ? 'Substrate' : 'Soil' }}</dt>
+                              <dd>{{ soil }}</dd>
+                            }
+                          </dl>
+                        </details>
+                      }
+                    }
                   </li>
                 }
               </ul>
