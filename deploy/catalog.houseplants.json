@@ -12485,5 +12485,254 @@
         "Picador parsnip"
       ]
     }
+  },
+  {
+    "commonName": "Asparagus (Gijnlim)",
+    "scientificName": "Asparagus officinalis 'Gijnlim'",
+    "description": "An early asparagus cultivar suited to starting the spring cutting season.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check new crowns during dry spells and water when the soil begins to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use deep, loose soil with good drainage, especially in winter.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/asparagus/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Plant crowns in a permanent bed. Leave the feathery summer growth standing until it yellows. Give newly planted crowns two growing seasons before harvesting.",
+      "harvestInstructions": "Once established, cut young spears while their tips are still tight. Leave later shoots to rebuild the crowns.",
+      "photo": null,
+      "cultivarName": "Gijnlim",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Gijnlim asparagus"
+      ]
+    }
+  },
+  {
+    "commonName": "Asparagus (Backlim)",
+    "scientificName": "Asparagus officinalis 'Backlim'",
+    "description": "An asparagus cultivar that crops in the middle to later part of the season.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check new crowns during dry spells and water when the soil begins to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use deep, loose soil with good drainage, especially in winter.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/vegetables/asparagus/grow-your-own",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Give crowns a sheltered, well-drained bed and keep weeds from competing around them. Give newly planted crowns two growing seasons before harvesting.",
+      "harvestInstructions": "Cut tender spears from established plants. Grow alongside an early cultivar to spread the harvest.",
+      "photo": null,
+      "cultivarName": "Backlim",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Backlim asparagus"
+      ]
+    }
+  },
+  {
+    "commonName": "Asparagus (Guelph Millennium)",
+    "scientificName": "Asparagus officinalis 'Guelph Millennium'",
+    "description": "A cold-tolerant Canadian cultivar with green spears and purple tips.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check new crowns during dry spells and water when the soil begins to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use deep, loose soil with good drainage, especially in winter.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/239707/asparagus-officinalis-guelph-millennium/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a sunny spot with good winter drainage. Leave healthy summer growth to feed the crowns. Give newly planted crowns two growing seasons before harvesting.",
+      "harvestInstructions": "Cut young spears on established plants. Allow shoots to grow on after the spring harvest.",
+      "photo": null,
+      "cultivarName": "Guelph Millennium",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Guelph Millennium asparagus"
+      ]
+    }
+  },
+  {
+    "commonName": "Asparagus (Mondeo)",
+    "scientificName": "Asparagus officinalis 'Mondeo'",
+    "description": "A hybrid that produces green spears with purple tips in late spring.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check new crowns during dry spells and water when the soil begins to dry.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use deep, loose soil with good drainage, especially in winter.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/319393/asparagus-officinalis-mondeo/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Use a dedicated bed with loose soil and keep it evenly moist while new crowns establish. Give newly planted crowns two growing seasons before harvesting.",
+      "harvestInstructions": "Once crowns are established, cut tender late-spring spears before the tips open.",
+      "photo": null,
+      "cultivarName": "Mondeo",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Mondeo asparagus"
+      ]
+    }
+  },
+  {
+    "commonName": "Globe artichoke (Green Globe Improved)",
+    "scientificName": "Cynara cardunculus (Scolymus Group) 'Green Globe Improved'",
+    "description": "A selection bred for large green buds and fewer sharp spines.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that drains freely and avoid low spots where water pools.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/523198/cynara-cardunculus-scolymus-group-green-globe-improved/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Choose a warm, sunny bed with room for the broad leaves. Mulch over the crown in cold winters once growth dies back.",
+      "harvestInstructions": "Cut the large main bud with a short section of stem while it is still firm and closed.",
+      "photo": null,
+      "cultivarName": "Green Globe Improved",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Green Globe Improved globe artichoke"
+      ]
+    }
+  },
+  {
+    "commonName": "Globe artichoke (Purple Globe)",
+    "scientificName": "Cynara cardunculus (Scolymus Group) 'Purple Globe'",
+    "description": "A globe artichoke with purple buds and a nutty-tasting heart.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that drains freely and avoid low spots where water pools.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/79573/cynara-cardunculus-scolymus-group-purple-globe/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Leave ample room between plants. Protect the crown from hard frost and avoid winter waterlogging.",
+      "harvestInstructions": "Pick tight buds before the outer scales separate. Check the smaller side buds after cutting the main one.",
+      "photo": null,
+      "cultivarName": "Purple Globe",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Purple Globe globe artichoke"
+      ]
+    }
+  },
+  {
+    "commonName": "Globe artichoke (Tavor)",
+    "scientificName": "Cynara cardunculus (Scolymus Group) 'Tavor'",
+    "description": "A globe artichoke with rounded green buds and relatively few spines.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that drains freely and avoid low spots where water pools.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/317547/cynara-cardunculus-scolymus-group-tavor/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Grow in a sunny, sheltered spot and water during dry spells as the buds form.",
+      "harvestInstructions": "Harvest closed green buds before their purple flowers emerge.",
+      "photo": null,
+      "cultivarName": "Tavor",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Tavor globe artichoke"
+      ]
+    }
+  },
+  {
+    "commonName": "Globe artichoke (Vert Globe)",
+    "scientificName": "Cynara cardunculus (Scolymus Group) 'Vert Globe'",
+    "description": "A green-budded globe artichoke also sold as Green Globe.",
+    "sunlightRequirement": "FullSun",
+    "sunlightInstructions": "Choose a sunny, sheltered outdoor bed.",
+    "defaultWateringIntervalDays": 4,
+    "wateringInstructions": "Check soil moisture during dry spells, especially while buds develop.",
+    "defaultFertilizingIntervalDays": null,
+    "fertilizingInstructions": "Use well-rotted compost to prepare the bed and adjust feeding to soil conditions.",
+    "soilInstructions": "Use fertile soil that drains freely and avoid low spots where water pools.",
+    "humidityInstructions": "Leave room between plants for airflow.",
+    "minimumTemperatureCelsius": null,
+    "maximumTemperatureCelsius": null,
+    "isToxicToPets": false,
+    "catalogProfile": {
+      "careSourceUrl": "https://www.rhs.org.uk/plants/243411/cynara-cardunculus-scolymus-group-vert-globe/details",
+      "reviewedOn": "2026-11-16",
+      "categories": [
+        "vegetable"
+      ],
+      "growingNotes": "Set plants in a roomy bed and protect the crowns over winter in colder gardens.",
+      "harvestInstructions": "Start with the large central bud, then cut smaller side buds before they open.",
+      "photo": null,
+      "cultivarName": "Vert Globe",
+      "photoIsSpeciesReference": false,
+      "commonNameAliases": [
+        "Vert Globe globe artichoke",
+        "Green Globe artichoke"
+      ]
+    }
   }
 ]
