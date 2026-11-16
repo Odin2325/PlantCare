@@ -32,6 +32,25 @@ function matchesPhotoFilter(plant: PlantSpecies, filter: CatalogPhotoFilter): bo
   return Boolean(profile?.cultivarName) && (filter === 'available' ? hasPrimaryPhoto : !hasPrimaryPhoto);
 }
 
+function searchWords(value: string): string[] {
+  return value.match(/[\p{L}\p{N}]+/gu) ?? [];
+}
+
+function matchesCatalogSearch(plant: PlantSpecies, query: string, words: string[]): boolean {
+  if (!query) return true;
+  const alternativeNames = [plant.catalogProfile?.cultivarName, ...(plant.catalogProfile?.commonNameAliases ?? [])];
+  const searchable = normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
+    ...alternativeNames].join(' '));
+  if (searchable.includes(query)) return true;
+  if (words.length < 2) return false;
+
+  // Allow reordered terms and unfinished words across names, without drawing
+  // individual terms from the much broader description text.
+  const nameWords = searchWords(normalizePlantSearch(
+    [plant.commonName, plant.scientificName, ...alternativeNames].join(' ')));
+  return words.every(word => nameWords.some(nameWord => nameWord.startsWith(word)));
+}
+
 @Component({
   selector: 'app-plant-catalog-page',
   standalone: true,
@@ -97,6 +116,7 @@ export class PlantCatalogPage {
   readonly hasFilters = computed(() => Boolean(this.showShortlist() || this.query() || this.category() || this.kind() || this.light() || this.pets() || this.growth() || this.harvestOnly() || this.cultivarPhoto() || this.sort() !== 'name-asc'));
   readonly visibleSpecies = computed(() => {
     const query = normalizePlantSearch(this.query());
+    const words = searchWords(query);
     // An exact scientific name identifies a species, rather than other plants
     // whose descriptions mention it. Common-name searches retain ambiguity.
     const exactScientific = query ? this.plantSpecies().filter(plant => normalizePlantSearch(plant.scientificName ?? '') === query) : [];
@@ -111,9 +131,7 @@ export class PlantCatalogPage {
       (!this.pets() || (this.pets() === 'warning' ? plant.isToxicToPets :
         this.pets() === 'unknown' ? !plant.isToxicToPets && !plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl :
         !plant.isToxicToPets && Boolean(plant.catalogProfile?.nonToxicToCatsAndDogsSourceUrl))) &&
-      (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.description,
-        plant.catalogProfile?.cultivarName,
-        ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)))
+      matchesCatalogSearch(plant, query, words))
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en', { sensitivity: 'base' }) *
         (this.sort() === 'name-desc' ? -1 : 1));
   });

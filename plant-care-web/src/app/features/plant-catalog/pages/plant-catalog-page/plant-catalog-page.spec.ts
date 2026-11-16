@@ -97,6 +97,29 @@ describe('Catalog categories', () => {
     page.clearFilters(); expect(page.visibleSpecies()).toHaveLength(5);
     expect(page.comparisonIds()).toEqual(['Fig tree']); expect(page.hasFilters()).toBe(false);
   });
+  it('finds cultivar and alias words out of order while retaining filters and exact scientific names', () => {
+    const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
+    const artichoke = make('Globe artichoke (Vert Globe)', ['vegetable'], "Cynara cardunculus 'Vert Globe'");
+    artichoke.catalogProfile!.cultivarName = 'Vert Globe';
+    artichoke.catalogProfile!.commonNameAliases = ['Green Globe artichoke'];
+    const unrelated = make('Golden beetroot', ['root-tuber']);
+    unrelated.description = 'This crop matures alongside green globe artichokes.';
+    page.plantSpecies.set([...plants, artichoke, unrelated]);
+
+    page.setQuery('tim, tomato tiny');
+    expect(page.visibleSpecies()).toEqual([plants[3]]);
+    page.setQuery('artichoke green glo');
+    expect(page.visibleSpecies()).toEqual([artichoke]);
+    page.setCategory('root-tuber');
+    expect(page.visibleSpecies()).toEqual([]);
+
+    page.setCategory('');
+    page.setQuery('matures alongside');
+    expect(page.visibleSpecies()).toEqual([unrelated]);
+    page.setQuery('Solanum lycopersicum');
+    expect(page.visibleSpecies()).toEqual([plants[2]]);
+  });
+
   it('restores valid URL categories and ignores malformed values', () => {
     const page = TestBed.createComponent(PlantCatalogPage).componentInstance;
     params.next(convertToParamMap({ category: 'vegetable', light: 'FullSun', pets: 'unknown' }));
