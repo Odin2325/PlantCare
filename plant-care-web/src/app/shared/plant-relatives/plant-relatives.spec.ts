@@ -69,3 +69,50 @@ it('pages related varieties and returns to the first page when opening another e
   expect(names()).toEqual(['A', 'B', 'C', 'D']);
   expect(getAll).toHaveBeenCalledTimes(1);
 });
+
+it('filters by alias and verified photo, and resets filters and page when switching plants', () => {
+  const current = plant('Tomato', 'Solanum lycopersicum');
+  const varieties = ['A', 'B', 'C', 'D', 'E', 'F'].map(name => plant(name, `Solanum lycopersicum '${name}'`, name));
+  const photo = {
+    path: '/images/plants/tomato.jpg', altText: 'A tomato', credit: 'Photographer',
+    sourceUrl: 'https://example.org/photo', licenseName: 'CC0 1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  };
+  varieties[0].catalogProfile!.photo = photo;
+  varieties[1].catalogProfile!.photo = photo;
+  varieties[1].catalogProfile!.photoIsSpeciesReference = true;
+  varieties[4].catalogProfile!.commonNameAliases = ['Étoile tomato'];
+
+  TestBed.configureTestingModule({ providers: [provideRouter([]), {
+    provide: PlantSpeciesApiService, useValue: { getAll: () => of([current, ...varieties]) },
+  }] });
+  const fixture = TestBed.createComponent(PlantRelatives);
+  fixture.componentRef.setInput('plant', current);
+  fixture.detectChanges();
+  const element = fixture.nativeElement as HTMLElement;
+  const search = element.querySelector<HTMLInputElement>('input[type="search"]')!;
+  const photosOnly = element.querySelector<HTMLInputElement>('input[type="checkbox"]')!;
+  const names = () => [...element.querySelectorAll('h3 a')].map(link => link.textContent);
+
+  fixture.componentInstance.changePage(1);
+  fixture.detectChanges();
+  expect(names()).toEqual(['E', 'F']);
+  photosOnly.click();
+  fixture.detectChanges();
+  expect(fixture.componentInstance.page()).toBe(1);
+  expect(names()).toEqual(['A']);
+
+  search.value = 'etoile';
+  search.dispatchEvent(new Event('input'));
+  fixture.detectChanges();
+  expect(element.textContent).toContain('No related varieties match these filters.');
+  photosOnly.click();
+  fixture.detectChanges();
+  expect(names()).toEqual(['E']);
+
+  fixture.componentRef.setInput('plant', varieties[5]);
+  fixture.detectChanges();
+  expect(search.value).toBe('');
+  expect(photosOnly.checked).toBe(false);
+  expect(names()).toEqual(['A', 'B', 'C', 'D']);
+});

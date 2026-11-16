@@ -3,7 +3,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { PlantSpeciesApiService } from '../../core/services/plant-species-api.service';
 import { PlantSpecies } from '../../models/plant-species.model';
-import { PlantPhoto } from '../plant-photo/plant-photo';
+import { catalogPrimaryPhoto, PlantPhoto } from '../plant-photo/plant-photo';
+import { normalizePlantSearch } from '../plant-search';
 
 // These aliases reconcile the names already reviewed in this catalog. Keep
 // horticultural groups distinct instead of guessing from a common name.
@@ -45,11 +46,25 @@ const relativesPageSize = 4;
       @if (loading()) { <p role="status">Loading related varieties…</p> }
       @else if (error()) { <p role="alert">Related varieties could not be loaded.</p><button type="button" (click)="load()">Try related varieties again</button> }
       @else {
+        @if (canSearch() || canFilterByPhoto()) {
+          <div class="relatives-filters">
+            @if (canSearch()) {
+              <label>Search related varieties
+                <input #search type="search" maxlength="100" [value]="query()" (input)="query.set(search.value)">
+              </label>
+            }
+            @if (canFilterByPhoto()) {
+              <label><input #photoFilter type="checkbox" [checked]="withPhoto()" (change)="withPhoto.set(photoFilter.checked)">
+                With a catalog photo
+              </label>
+            }
+          </div>
+        }
         <p role="status">
           @if (pageCount() > 1) {
-            Showing {{ pageStart() + 1 }}–{{ pageEnd() }} of {{ relatives().length }} related entries
+            Showing {{ pageStart() + 1 }}–{{ pageEnd() }} of {{ filteredRelatives().length }} related entries
           } @else {
-            {{ relatives().length }} {{ relatives().length === 1 ? 'related entry' : 'related entries' }}
+            {{ filteredRelatives().length }} {{ filteredRelatives().length === 1 ? 'related entry' : 'related entries' }}
           }
         </p>
         @if (pageCount() > 1) {
@@ -68,7 +83,14 @@ const relativesPageSize = 4;
                 [queryParams]="{compare: plant().id + ',' + relative.id}"
                 [attr.aria-label]="'Compare ' + plant().commonName + ' with ' + relative.commonName">Compare care</a>
             </article>
-          } @empty { <p>No other reviewed varieties in this catalog group yet.</p> }
+          } @empty {
+            @if (relatives().length) {
+              <p>No related varieties match these filters.</p>
+              <button type="button" (click)="clearFilters()">Clear filters</button>
+            } @else {
+              <p>No other reviewed varieties in this catalog group yet.</p>
+            }
+          }
         </div>
       }
     </section>
@@ -76,6 +98,9 @@ const relativesPageSize = 4;
   styles: `
     :host{display:block;margin-block:2rem;min-width:0}.relatives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
     article{padding:1rem;border:1px solid var(--color-input-border);border-radius:.65rem;min-width:0;overflow-wrap:anywhere}h3{margin-top:0}a{color:var(--color-primary)}
+    .relatives-filters { display: flex; flex-wrap: wrap; align-items: end; gap: .5rem 1rem; }
+    .relatives-filters label { min-height: 44px; align-content: center; }
+    .relatives-filters input[type=search] { display: block; width: 100%; margin-top: .25rem; }
     .relatives-pages { display: flex; flex-wrap: wrap; gap: .55rem; margin-bottom: .8rem; }
     button { min-height: 44px; font: inherit; padding: .65rem; border: 1px solid var(--color-primary); border-radius: var(--radius-control); background: white; color: var(--color-primary); }
   `,
@@ -93,15 +118,35 @@ export class PlantRelatives {
     return group ? this.catalog().filter(p => p.id !== current.id && catalogVarietyGroup(p) === group)
       .sort((a, b) => a.commonName.localeCompare(b.commonName, 'en')) : [];
   });
-  private readonly requestedPage = linkedSignal({ source: () => this.plant().id, computation: () => 1 });
-  readonly pageCount = computed(() => Math.max(1, Math.ceil(this.relatives().length / relativesPageSize)));
+  readonly query = linkedSignal({ source: () => this.plant().id, computation: () => '' });
+  readonly withPhoto = linkedSignal({ source: () => this.plant().id, computation: () => false });
+  private readonly photographedCount = computed(() =>
+    this.relatives().filter(plant => catalogPrimaryPhoto(plant.catalogProfile)).length);
+  readonly canSearch = computed(() => this.relatives().length > relativesPageSize);
+  readonly canFilterByPhoto = computed(() => this.photographedCount() > 0 && this.photographedCount() < this.relatives().length);
+  readonly filteredRelatives = computed(() => {
+    const query = normalizePlantSearch(this.query());
+    return this.relatives().filter(plant =>
+      (!this.withPhoto() || catalogPrimaryPhoto(plant.catalogProfile)) &&
+      (!query || normalizePlantSearch([plant.commonName, plant.scientificName, plant.catalogProfile?.cultivarName,
+        ...(plant.catalogProfile?.commonNameAliases ?? [])].join(' ')).includes(query)));
+  });
+  private readonly requestedPage = linkedSignal({
+    source: () => [this.plant().id, this.query(), this.withPhoto()],
+    computation: () => 1,
+  });
+  readonly pageCount = computed(() => Math.max(1, Math.ceil(this.filteredRelatives().length / relativesPageSize)));
   readonly page = computed(() => Math.min(this.requestedPage(), this.pageCount()));
   readonly pageStart = computed(() => (this.page() - 1) * relativesPageSize);
-  readonly pageEnd = computed(() => Math.min(this.pageStart() + relativesPageSize, this.relatives().length));
-  readonly visibleRelatives = computed(() => this.relatives().slice(this.pageStart(), this.pageEnd()));
+  readonly pageEnd = computed(() => Math.min(this.pageStart() + relativesPageSize, this.filteredRelatives().length));
+  readonly visibleRelatives = computed(() => this.filteredRelatives().slice(this.pageStart(), this.pageEnd()));
 
   constructor() { this.load(); }
 
+  clearFilters(): void {
+    this.query.set('');
+    this.withPhoto.set(false);
+  }
   changePage(offset: number): void {
     this.requestedPage.set(Math.max(1, Math.min(this.pageCount(), this.page() + offset)));
   }
